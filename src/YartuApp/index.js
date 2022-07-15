@@ -29,7 +29,7 @@ class YartuApp {
     if (yartu_token) {
       try {
         const user_data = jwt_decode(yartu_token);
-        if (user_data.exp < Date.now() / 1000) {
+        if (user_data.exp !== 0 && user_data.exp < Date.now() / 1000) {
           // User token expired, remove token from localstorage
           window.localStorage.removeItem(yartu_token);
         } else {
