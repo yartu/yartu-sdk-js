@@ -1,5 +1,5 @@
-const { LoginRequest } = require('./service-pb.cjs');
-const { YAuthClient } = require('./service-grpc-web-pb.cjs');
+import { LoginRequest } from './service-pb.cjs';
+import { YAuthClient } from './service-grpc-web-pb.cjs';
 
 const Client = new YAuthClient('http://localhost:8080', '', '');
 
