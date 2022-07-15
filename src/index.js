@@ -1,0 +1,1 @@
+export { initializeYartuApp } from './YartuApp';

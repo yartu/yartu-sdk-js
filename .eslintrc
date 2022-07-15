@@ -9,6 +9,7 @@
   ],
   "rules": {
     "node/no-unpublished-require": "off",
-    "unicorn/prefer-module": "off"
+    "unicorn/prefer-module": "off",
+    "unicorn/no-abusive-eslint-disable": "off"
   }
 }
