@@ -314,4 +314,3 @@ proto.yartu.YAuthPromiseClient.prototype.me =
 
 
 module.exports = proto.yartu;
-
