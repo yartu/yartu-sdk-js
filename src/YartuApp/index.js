@@ -1,6 +1,6 @@
 /* global windows */
 import jwt_decode from 'jwt-decode';
-import * as Auth from '../Auth';
+import Auth from '../Auth';
 
 class User {
   user_id = undefined;
@@ -17,14 +17,18 @@ class User {
 }
 
 class YartuApp {
+  grpcEndpoint = 'http://localhost:5001/';
   user = undefined;
-  Auth = Auth;
 
   constructor(config) {
     this.initialize(config);
+    
+    this.Auth = new (Auth())(config);
   }
 
   initialize(config) {
+    this.grpcEndpoint = config.endpoint;
+
     const yartu_token = window.localStorage.getItem('yartu-token');
     if (yartu_token) {
       try {
