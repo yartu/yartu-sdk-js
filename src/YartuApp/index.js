@@ -1,6 +1,7 @@
 /* global windows */
 import jwt_decode from 'jwt-decode';
 import Auth from '../Auth';
+import Contact from '../Contact';
 
 class User {
   user_id = undefined;
@@ -22,8 +23,9 @@ class YartuApp {
 
   constructor(config) {
     this.initialize(config);
-    
+
     this.Auth = new (Auth())(config);
+    this.Contact = new (Contact())(config);
   }
 
   initialize(config) {
