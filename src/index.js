@@ -1,1 +1,1 @@
-export { initializeYartuApp } from './YartuApp';
+export { initializeYartuApp, installYartuApp, useYartuSdk } from './YartuApp';

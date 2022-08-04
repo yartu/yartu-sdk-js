@@ -3,6 +3,9 @@ import jwt_decode from 'jwt-decode';
 import Auth from '../Auth';
 import Contact from '../Contact';
 
+// TODO :: Check if Vue project
+import { inject } from 'vue';
+
 class User {
   user_id = undefined;
   name = undefined;
@@ -51,4 +54,25 @@ const initializeYartuApp = (config) => {
   return new YartuApp(config);
 };
 
-export { initializeYartuApp };
+const YartuSdkSymbol = Symbol();
+
+const useYartuSdk = () => {
+  const yartuSdk = inject(YartuSdkSymbol);
+  if (!yartuSdk) {
+    throw new Error('No Yartu SDK provided!');
+  }
+  return yartuSdk;
+}
+
+const installYartuApp = {
+  install: (Vue, config = {}) => {
+    const yartuSdk = new YartuApp(config);
+    Vue.config.globalProperties.$yartuSdk = yartuSdk;
+    if (typeof window !== 'undefined') {
+      window.$yartuSdk = yartuSdk;
+    }
+    Vue.provide(YartuSdkSymbol, yartuSdk);
+  },
+};
+
+export { initializeYartuApp, installYartuApp, useYartuSdk };
