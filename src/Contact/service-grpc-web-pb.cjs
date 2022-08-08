@@ -6,8 +6,11 @@
 
 // GENERATED CODE -- DO NOT EDIT!
 
+
 /* eslint-disable */
 // @ts-nocheck
+
+
 
 const grpc = {};
 grpc.web = require('grpc-web');
@@ -924,6 +927,189 @@ proto.yartu.YContactPromiseClient.prototype.listEmailContact =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.ListPublicContactRequest,
+ *   !proto.yartu.ListPublicContactResponse>}
+ */
+const methodDescriptor_YContact_listPublicContact = new grpc.web.MethodDescriptor(
+  '/yartu.YContact/listPublicContact',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.ListPublicContactRequest,
+  proto.yartu.ListPublicContactResponse,
+  /**
+   * @param {!proto.yartu.ListPublicContactRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.ListPublicContactResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.ListPublicContactRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ListPublicContactResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ListPublicContactResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YContactClient.prototype.listPublicContact =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YContact/listPublicContact',
+      request,
+      metadata || {},
+      methodDescriptor_YContact_listPublicContact,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.ListPublicContactRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.ListPublicContactResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YContactPromiseClient.prototype.listPublicContact =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YContact/listPublicContact',
+      request,
+      metadata || {},
+      methodDescriptor_YContact_listPublicContact);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.ListDuplicateContactRequest,
+ *   !proto.yartu.ListDuplicateContactResponse>}
+ */
+const methodDescriptor_YContact_listDuplicateContact = new grpc.web.MethodDescriptor(
+  '/yartu.YContact/listDuplicateContact',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.ListDuplicateContactRequest,
+  proto.yartu.ListDuplicateContactResponse,
+  /**
+   * @param {!proto.yartu.ListDuplicateContactRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.ListDuplicateContactResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.ListDuplicateContactRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ListDuplicateContactResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ListDuplicateContactResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YContactClient.prototype.listDuplicateContact =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YContact/listDuplicateContact',
+      request,
+      metadata || {},
+      methodDescriptor_YContact_listDuplicateContact,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.ListDuplicateContactRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.ListDuplicateContactResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YContactPromiseClient.prototype.listDuplicateContact =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YContact/listDuplicateContact',
+      request,
+      metadata || {},
+      methodDescriptor_YContact_listDuplicateContact);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.UpsertMergeContactRequest,
+ *   !proto.yartu.UpsertMergeContactResponse>}
+ */
+const methodDescriptor_YContact_upsertMergeContact = new grpc.web.MethodDescriptor(
+  '/yartu.YContact/upsertMergeContact',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.UpsertMergeContactRequest,
+  proto.yartu.UpsertMergeContactResponse,
+  /**
+   * @param {!proto.yartu.UpsertMergeContactRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.UpsertMergeContactResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.UpsertMergeContactRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.UpsertMergeContactResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.UpsertMergeContactResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YContactClient.prototype.upsertMergeContact =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YContact/upsertMergeContact',
+      request,
+      metadata || {},
+      methodDescriptor_YContact_upsertMergeContact,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.UpsertMergeContactRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.UpsertMergeContactResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YContactPromiseClient.prototype.upsertMergeContact =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YContact/upsertMergeContact',
+      request,
+      metadata || {},
+      methodDescriptor_YContact_upsertMergeContact);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.ListFavoriteContactRequest,
  *   !proto.yartu.ListFavoriteContactResponse>}
  */
@@ -1040,67 +1226,6 @@ proto.yartu.YContactPromiseClient.prototype.upsertFavoriteContact =
       request,
       metadata || {},
       methodDescriptor_YContact_upsertFavoriteContact);
-};
-
-
-/**
- * @const
- * @type {!grpc.web.MethodDescriptor<
- *   !proto.yartu.ListPublicContactRequest,
- *   !proto.yartu.ListPublicContactResponse>}
- */
-const methodDescriptor_YContact_listPublicContact = new grpc.web.MethodDescriptor(
-  '/yartu.YContact/listPublicContact',
-  grpc.web.MethodType.UNARY,
-  proto.yartu.ListPublicContactRequest,
-  proto.yartu.ListPublicContactResponse,
-  /**
-   * @param {!proto.yartu.ListPublicContactRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.yartu.ListPublicContactResponse.deserializeBinary
-);
-
-
-/**
- * @param {!proto.yartu.ListPublicContactRequest} request The
- *     request proto
- * @param {?Object<string, string>} metadata User defined
- *     call metadata
- * @param {function(?grpc.web.RpcError, ?proto.yartu.ListPublicContactResponse)}
- *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.yartu.ListPublicContactResponse>|undefined}
- *     The XHR Node Readable Stream
- */
-proto.yartu.YContactClient.prototype.listPublicContact =
-    function(request, metadata, callback) {
-  return this.client_.rpcCall(this.hostname_ +
-      '/yartu.YContact/listPublicContact',
-      request,
-      metadata || {},
-      methodDescriptor_YContact_listPublicContact,
-      callback);
-};
-
-
-/**
- * @param {!proto.yartu.ListPublicContactRequest} request The
- *     request proto
- * @param {?Object<string, string>=} metadata User defined
- *     call metadata
- * @return {!Promise<!proto.yartu.ListPublicContactResponse>}
- *     Promise that resolves to the response
- */
-proto.yartu.YContactPromiseClient.prototype.listPublicContact =
-    function(request, metadata) {
-  return this.client_.unaryCall(this.hostname_ +
-      '/yartu.YContact/listPublicContact',
-      request,
-      metadata || {},
-      methodDescriptor_YContact_listPublicContact);
 };
 
 
