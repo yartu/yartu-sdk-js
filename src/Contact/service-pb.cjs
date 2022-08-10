@@ -2538,7 +2538,8 @@ proto.yartu.davType.prototype.toObject = function(opt_includeInstance) {
 proto.yartu.davType.toObject = function(includeInstance, msg) {
   var f, obj = {
     type: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    value: jspb.Message.getFieldWithDefault(msg, 2, "")
+    value: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    pb_default: jspb.Message.getBooleanFieldWithDefault(msg, 3, false)
   };
 
   if (includeInstance) {
@@ -2583,6 +2584,10 @@ proto.yartu.davType.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {string} */ (reader.readString());
       msg.setValue(value);
       break;
+    case 3:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setDefault(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -2626,6 +2631,13 @@ proto.yartu.davType.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
+  f = message.getDefault();
+  if (f) {
+    writer.writeBool(
+      3,
+      f
+    );
+  }
 };
 
 
@@ -2665,13 +2677,31 @@ proto.yartu.davType.prototype.setValue = function(value) {
 };
 
 
+/**
+ * optional bool default = 3;
+ * @return {boolean}
+ */
+proto.yartu.davType.prototype.getDefault = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 3, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.yartu.davType} returns this
+ */
+proto.yartu.davType.prototype.setDefault = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 3, value);
+};
+
+
 
 /**
  * List of repeated fields within this message type.
  * @private {!Array<number>}
  * @const
  */
-proto.yartu.Contact.repeatedFields_ = [9,18,19,20,21];
+proto.yartu.Contact.repeatedFields_ = [9,19,20,21,22];
 
 
 
@@ -2722,6 +2752,7 @@ proto.yartu.Contact.toObject = function(includeInstance, msg) {
     name: jspb.Message.getFieldWithDefault(msg, 15, ""),
     middleName: jspb.Message.getFieldWithDefault(msg, 16, ""),
     surname: jspb.Message.getFieldWithDefault(msg, 17, ""),
+    birthday: jspb.Message.getFieldWithDefault(msg, 18, 0),
     emailList: jspb.Message.toObjectList(msg.getEmailList(),
     proto.yartu.davType.toObject, includeInstance),
     phoneList: jspb.Message.toObjectList(msg.getPhoneList(),
@@ -2730,7 +2761,7 @@ proto.yartu.Contact.toObject = function(includeInstance, msg) {
     proto.yartu.davType.toObject, includeInstance),
     addressList: jspb.Message.toObjectList(msg.getAddressList(),
     proto.yartu.davType.toObject, includeInstance),
-    note: jspb.Message.getFieldWithDefault(msg, 22, "")
+    note: jspb.Message.getFieldWithDefault(msg, 23, "")
   };
 
   if (includeInstance) {
@@ -2838,26 +2869,30 @@ proto.yartu.Contact.deserializeBinaryFromReader = function(msg, reader) {
       msg.setSurname(value);
       break;
     case 18:
-      var value = new proto.yartu.davType;
-      reader.readMessage(value,proto.yartu.davType.deserializeBinaryFromReader);
-      msg.addEmail(value);
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setBirthday(value);
       break;
     case 19:
       var value = new proto.yartu.davType;
       reader.readMessage(value,proto.yartu.davType.deserializeBinaryFromReader);
-      msg.addPhone(value);
+      msg.addEmail(value);
       break;
     case 20:
       var value = new proto.yartu.davType;
       reader.readMessage(value,proto.yartu.davType.deserializeBinaryFromReader);
-      msg.addWeb(value);
+      msg.addPhone(value);
       break;
     case 21:
       var value = new proto.yartu.davType;
       reader.readMessage(value,proto.yartu.davType.deserializeBinaryFromReader);
-      msg.addAddress(value);
+      msg.addWeb(value);
       break;
     case 22:
+      var value = new proto.yartu.davType;
+      reader.readMessage(value,proto.yartu.davType.deserializeBinaryFromReader);
+      msg.addAddress(value);
+      break;
+    case 23:
       var value = /** @type {string} */ (reader.readString());
       msg.setNote(value);
       break;
@@ -3011,15 +3046,14 @@ proto.yartu.Contact.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getEmailList();
-  if (f.length > 0) {
-    writer.writeRepeatedMessage(
+  f = /** @type {number} */ (jspb.Message.getField(message, 18));
+  if (f != null) {
+    writer.writeInt64(
       18,
-      f,
-      proto.yartu.davType.serializeBinaryToWriter
+      f
     );
   }
-  f = message.getPhoneList();
+  f = message.getEmailList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
       19,
@@ -3027,7 +3061,7 @@ proto.yartu.Contact.serializeBinaryToWriter = function(message, writer) {
       proto.yartu.davType.serializeBinaryToWriter
     );
   }
-  f = message.getWebList();
+  f = message.getPhoneList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
       20,
@@ -3035,7 +3069,7 @@ proto.yartu.Contact.serializeBinaryToWriter = function(message, writer) {
       proto.yartu.davType.serializeBinaryToWriter
     );
   }
-  f = message.getAddressList();
+  f = message.getWebList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
       21,
@@ -3043,10 +3077,18 @@ proto.yartu.Contact.serializeBinaryToWriter = function(message, writer) {
       proto.yartu.davType.serializeBinaryToWriter
     );
   }
-  f = /** @type {string} */ (jspb.Message.getField(message, 22));
+  f = message.getAddressList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      22,
+      f,
+      proto.yartu.davType.serializeBinaryToWriter
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 23));
   if (f != null) {
     writer.writeString(
-      22,
+      23,
       f
     );
   }
@@ -3525,12 +3567,48 @@ proto.yartu.Contact.prototype.hasSurname = function() {
 
 
 /**
- * repeated davType email = 18;
+ * optional int64 birthday = 18;
+ * @return {number}
+ */
+proto.yartu.Contact.prototype.getBirthday = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 18, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu.Contact} returns this
+ */
+proto.yartu.Contact.prototype.setBirthday = function(value) {
+  return jspb.Message.setField(this, 18, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.Contact} returns this
+ */
+proto.yartu.Contact.prototype.clearBirthday = function() {
+  return jspb.Message.setField(this, 18, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.Contact.prototype.hasBirthday = function() {
+  return jspb.Message.getField(this, 18) != null;
+};
+
+
+/**
+ * repeated davType email = 19;
  * @return {!Array<!proto.yartu.davType>}
  */
 proto.yartu.Contact.prototype.getEmailList = function() {
   return /** @type{!Array<!proto.yartu.davType>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.yartu.davType, 18));
+    jspb.Message.getRepeatedWrapperField(this, proto.yartu.davType, 19));
 };
 
 
@@ -3539,7 +3617,7 @@ proto.yartu.Contact.prototype.getEmailList = function() {
  * @return {!proto.yartu.Contact} returns this
 */
 proto.yartu.Contact.prototype.setEmailList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 18, value);
+  return jspb.Message.setRepeatedWrapperField(this, 19, value);
 };
 
 
@@ -3549,7 +3627,7 @@ proto.yartu.Contact.prototype.setEmailList = function(value) {
  * @return {!proto.yartu.davType}
  */
 proto.yartu.Contact.prototype.addEmail = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 18, opt_value, proto.yartu.davType, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 19, opt_value, proto.yartu.davType, opt_index);
 };
 
 
@@ -3563,12 +3641,12 @@ proto.yartu.Contact.prototype.clearEmailList = function() {
 
 
 /**
- * repeated davType phone = 19;
+ * repeated davType phone = 20;
  * @return {!Array<!proto.yartu.davType>}
  */
 proto.yartu.Contact.prototype.getPhoneList = function() {
   return /** @type{!Array<!proto.yartu.davType>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.yartu.davType, 19));
+    jspb.Message.getRepeatedWrapperField(this, proto.yartu.davType, 20));
 };
 
 
@@ -3577,7 +3655,7 @@ proto.yartu.Contact.prototype.getPhoneList = function() {
  * @return {!proto.yartu.Contact} returns this
 */
 proto.yartu.Contact.prototype.setPhoneList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 19, value);
+  return jspb.Message.setRepeatedWrapperField(this, 20, value);
 };
 
 
@@ -3587,7 +3665,7 @@ proto.yartu.Contact.prototype.setPhoneList = function(value) {
  * @return {!proto.yartu.davType}
  */
 proto.yartu.Contact.prototype.addPhone = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 19, opt_value, proto.yartu.davType, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 20, opt_value, proto.yartu.davType, opt_index);
 };
 
 
@@ -3601,12 +3679,12 @@ proto.yartu.Contact.prototype.clearPhoneList = function() {
 
 
 /**
- * repeated davType web = 20;
+ * repeated davType web = 21;
  * @return {!Array<!proto.yartu.davType>}
  */
 proto.yartu.Contact.prototype.getWebList = function() {
   return /** @type{!Array<!proto.yartu.davType>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.yartu.davType, 20));
+    jspb.Message.getRepeatedWrapperField(this, proto.yartu.davType, 21));
 };
 
 
@@ -3615,7 +3693,7 @@ proto.yartu.Contact.prototype.getWebList = function() {
  * @return {!proto.yartu.Contact} returns this
 */
 proto.yartu.Contact.prototype.setWebList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 20, value);
+  return jspb.Message.setRepeatedWrapperField(this, 21, value);
 };
 
 
@@ -3625,7 +3703,7 @@ proto.yartu.Contact.prototype.setWebList = function(value) {
  * @return {!proto.yartu.davType}
  */
 proto.yartu.Contact.prototype.addWeb = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 20, opt_value, proto.yartu.davType, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 21, opt_value, proto.yartu.davType, opt_index);
 };
 
 
@@ -3639,12 +3717,12 @@ proto.yartu.Contact.prototype.clearWebList = function() {
 
 
 /**
- * repeated davType address = 21;
+ * repeated davType address = 22;
  * @return {!Array<!proto.yartu.davType>}
  */
 proto.yartu.Contact.prototype.getAddressList = function() {
   return /** @type{!Array<!proto.yartu.davType>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.yartu.davType, 21));
+    jspb.Message.getRepeatedWrapperField(this, proto.yartu.davType, 22));
 };
 
 
@@ -3653,7 +3731,7 @@ proto.yartu.Contact.prototype.getAddressList = function() {
  * @return {!proto.yartu.Contact} returns this
 */
 proto.yartu.Contact.prototype.setAddressList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 21, value);
+  return jspb.Message.setRepeatedWrapperField(this, 22, value);
 };
 
 
@@ -3663,7 +3741,7 @@ proto.yartu.Contact.prototype.setAddressList = function(value) {
  * @return {!proto.yartu.davType}
  */
 proto.yartu.Contact.prototype.addAddress = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 21, opt_value, proto.yartu.davType, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 22, opt_value, proto.yartu.davType, opt_index);
 };
 
 
@@ -3677,11 +3755,11 @@ proto.yartu.Contact.prototype.clearAddressList = function() {
 
 
 /**
- * optional string note = 22;
+ * optional string note = 23;
  * @return {string}
  */
 proto.yartu.Contact.prototype.getNote = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 22, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 23, ""));
 };
 
 
@@ -3690,7 +3768,7 @@ proto.yartu.Contact.prototype.getNote = function() {
  * @return {!proto.yartu.Contact} returns this
  */
 proto.yartu.Contact.prototype.setNote = function(value) {
-  return jspb.Message.setField(this, 22, value);
+  return jspb.Message.setField(this, 23, value);
 };
 
 
@@ -3699,7 +3777,7 @@ proto.yartu.Contact.prototype.setNote = function(value) {
  * @return {!proto.yartu.Contact} returns this
  */
 proto.yartu.Contact.prototype.clearNote = function() {
-  return jspb.Message.setField(this, 22, undefined);
+  return jspb.Message.setField(this, 23, undefined);
 };
 
 
@@ -3708,7 +3786,7 @@ proto.yartu.Contact.prototype.clearNote = function() {
  * @return {boolean}
  */
 proto.yartu.Contact.prototype.hasNote = function() {
-  return jspb.Message.getField(this, 22) != null;
+  return jspb.Message.getField(this, 23) != null;
 };
 
 
