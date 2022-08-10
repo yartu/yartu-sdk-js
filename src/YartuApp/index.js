@@ -66,7 +66,12 @@ const useYartuSdk = () => {
 
 const installYartuApp = {
   install: (Vue, config = {}) => {
-    const yartuSdk = new YartuApp(config);
+    let yartuSdk = null;
+    if (config.initalizedYartuSdk) {
+      yartuSdk = config.initalizedYartuSdk;
+    } else {
+      yartuSdk = new YartuApp(config);
+    }
     Vue.config.globalProperties.$yartuSdk = yartuSdk;
     if (typeof window !== 'undefined') {
       window.$yartuSdk = yartuSdk;
