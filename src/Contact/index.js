@@ -1,4 +1,16 @@
-import { ListAddressBookRequest, ListContactRequest, UpsertContactRequest, AddressBook, Contact, davType } from './service-pb.cjs';
+import {
+  ListAddressBookRequest,
+  ListContactRequest,
+  UpsertAddressBookRequest,
+  UpsertContactRequest,
+  AddressBook,
+  Contact,
+  davType,
+  GetContactRequest,
+  DeleteContactRequest,
+  DeleteAddressBookRequest,
+} from './service-pb.cjs';
+
 import { YContactClient } from './service-grpc-web-pb.cjs';
 
 export default (config) =>
@@ -89,6 +101,43 @@ export default (config) =>
       });
     };
 
+    upsertAddressBook = (addressBookId, addressBookData) => {
+      return new Promise((resolve, reject) => {
+        const request = new UpsertAddressBookRequest();
+        request.setId(addressBookId);
+        request.setName(addressBookData.name);
+        request.setDescription(addressBookData.description);
+
+        this.client.upsertAddressBook(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              reject({
+                code: -1,
+                message: error.message
+              });
+            } else {
+              const code = response.getCode();
+
+              if (code == 0) {
+                resolve({
+                  code: 0,
+                  message: 'successfully',
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+
+      });
+    };
+
     upsertContact = (addressBookId, contactData) => {
       return new Promise((resolve, reject) => {
         const request = new UpsertContactRequest();
@@ -173,4 +222,104 @@ export default (config) =>
         );
       });
     };
+
+    getContact = (contactId) => {
+      return new Promise((resolve, reject) => {
+        const request = new GetContactRequest();
+        request.setId(contactId);
+        this.client.getContact(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              reject({
+                code: -1,
+                message: error.message
+              });
+            } else {
+              const code = response.getCode();
+
+              if (code == 0) {
+                const data = response.getData().toObject()
+                resolve({
+                  data: data,
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
+    deleteContact = (contactId) => {
+      return new Promise((resolve, reject) => {
+        const request = new DeleteContactRequest();
+        console.log('deleteContact', contactId);
+        request.setId(contactId);
+        this.client.deleteContact(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              reject({
+                code: -1,
+                message: error.message
+              });
+            } else {
+              const code = response.getCode();
+
+              if (code == 0) {
+                resolve({
+                  message: response.getMessage(),
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
+    deleteAddressBook = (addressBookId) => {
+      return new Promise((resolve, reject) => {
+        const request = new DeleteAddressBookRequest();
+        console.log('addressBookId', addressBookId);
+        request.setId(addressBookId);
+        this.client.deleteAddressBook(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              reject({
+                code: -1,
+                message: error.message
+              });
+            } else {
+              const code = response.getCode();
+
+              if (code == 0) {
+                resolve({
+                  message: response.getMessage(),
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
   };
