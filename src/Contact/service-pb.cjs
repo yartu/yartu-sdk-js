@@ -13028,7 +13028,9 @@ proto.yartu.ExportContactResponse.prototype.toObject = function(opt_includeInsta
  */
 proto.yartu.ExportContactResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    file: msg.getFile_asB64()
+    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    file: msg.getFile_asB64(),
+    message: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -13066,8 +13068,16 @@ proto.yartu.ExportContactResponse.deserializeBinaryFromReader = function(msg, re
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setCode(value);
+      break;
+    case 2:
       var value = /** @type {!Uint8Array} */ (reader.readBytes());
       msg.setFile(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setMessage(value);
       break;
     default:
       reader.skipField();
@@ -13098,10 +13108,24 @@ proto.yartu.ExportContactResponse.prototype.serializeBinary = function() {
  */
 proto.yartu.ExportContactResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getFile_asU8();
-  if (f.length > 0) {
-    writer.writeBytes(
+  f = message.getCode();
+  if (f !== 0) {
+    writer.writeInt64(
       1,
+      f
+    );
+  }
+  f = /** @type {!(string|Uint8Array)} */ (jspb.Message.getField(message, 2));
+  if (f != null) {
+    writer.writeBytes(
+      2,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 3));
+  if (f != null) {
+    writer.writeString(
+      3,
       f
     );
   }
@@ -13109,16 +13133,34 @@ proto.yartu.ExportContactResponse.serializeBinaryToWriter = function(message, wr
 
 
 /**
- * optional bytes file = 1;
- * @return {string}
+ * optional int64 code = 1;
+ * @return {number}
  */
-proto.yartu.ExportContactResponse.prototype.getFile = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+proto.yartu.ExportContactResponse.prototype.getCode = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
 /**
- * optional bytes file = 1;
+ * @param {number} value
+ * @return {!proto.yartu.ExportContactResponse} returns this
+ */
+proto.yartu.ExportContactResponse.prototype.setCode = function(value) {
+  return jspb.Message.setProto3IntField(this, 1, value);
+};
+
+
+/**
+ * optional bytes file = 2;
+ * @return {string}
+ */
+proto.yartu.ExportContactResponse.prototype.getFile = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * optional bytes file = 2;
  * This is a type-conversion wrapper around `getFile()`
  * @return {string}
  */
@@ -13129,7 +13171,7 @@ proto.yartu.ExportContactResponse.prototype.getFile_asB64 = function() {
 
 
 /**
- * optional bytes file = 1;
+ * optional bytes file = 2;
  * Note that Uint8Array is not supported on all browsers.
  * @see http://caniuse.com/Uint8Array
  * This is a type-conversion wrapper around `getFile()`
@@ -13146,7 +13188,61 @@ proto.yartu.ExportContactResponse.prototype.getFile_asU8 = function() {
  * @return {!proto.yartu.ExportContactResponse} returns this
  */
 proto.yartu.ExportContactResponse.prototype.setFile = function(value) {
-  return jspb.Message.setProto3BytesField(this, 1, value);
+  return jspb.Message.setField(this, 2, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.ExportContactResponse} returns this
+ */
+proto.yartu.ExportContactResponse.prototype.clearFile = function() {
+  return jspb.Message.setField(this, 2, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.ExportContactResponse.prototype.hasFile = function() {
+  return jspb.Message.getField(this, 2) != null;
+};
+
+
+/**
+ * optional string message = 3;
+ * @return {string}
+ */
+proto.yartu.ExportContactResponse.prototype.getMessage = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.ExportContactResponse} returns this
+ */
+proto.yartu.ExportContactResponse.prototype.setMessage = function(value) {
+  return jspb.Message.setField(this, 3, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.ExportContactResponse} returns this
+ */
+proto.yartu.ExportContactResponse.prototype.clearMessage = function() {
+  return jspb.Message.setField(this, 3, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.ExportContactResponse.prototype.hasMessage = function() {
+  return jspb.Message.getField(this, 3) != null;
 };
 
 

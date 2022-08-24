@@ -17,6 +17,7 @@ import {
   ListLabelRequest,
   UpsertContactLabelRequest,
   UpsertContactStarRequest,
+  ExportContactRequest,
 } from './service-pb.cjs';
 
 import { YContactClient } from './service-grpc-web-pb.cjs';
@@ -483,6 +484,48 @@ export default (config) =>
                 resolve({
                   code: 0,
                   message: response.getMessage(),
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
+    exportContact = (addressBookId, mode, contactList = []) => {
+      return new Promise((resolve, reject) => {
+        const request = new ExportContactRequest();
+        // request.setId(contactId);
+        // request.setStarred(starred);
+
+        console.log('CONTAT LIST FOR EXPORT', contactList);
+
+        request.setAddressBookId(addressBookId);
+        // TOOD :: Change this method name @akucuk
+        request.setContactListList(contactList);
+        request.setMode(mode);
+
+        this.client.exportContact(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              reject({
+                code: -1,
+                message: error.message
+              });
+            } else {
+              const code = response.getCode();
+
+              if (code == 0) {
+                resolve({
+                  code: 0,
+                  file: response.getFile_asB64(),
                 });
               } else {
                 reject({
