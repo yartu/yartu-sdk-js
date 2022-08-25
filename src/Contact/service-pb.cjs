@@ -548,7 +548,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.yartu.UpsertContactRequest = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.yartu.UpsertContactRequest.repeatedFields_, null);
 };
 goog.inherits(proto.yartu.UpsertContactRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -632,7 +632,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.yartu.DeleteContactRequest = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.yartu.DeleteContactRequest.repeatedFields_, null);
 };
 goog.inherits(proto.yartu.DeleteContactRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -7131,6 +7131,13 @@ proto.yartu.UnshareAddressBookResponse.prototype.hasMessage = function() {
 
 
 
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.yartu.UpsertContactRequest.repeatedFields_ = [2];
+
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -7162,7 +7169,8 @@ proto.yartu.UpsertContactRequest.prototype.toObject = function(opt_includeInstan
  */
 proto.yartu.UpsertContactRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    contact: (f = msg.getContact()) && proto.yartu.Contact.toObject(includeInstance, f)
+    contact: (f = msg.getContact()) && proto.yartu.Contact.toObject(includeInstance, f),
+    labelsList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -7204,6 +7212,12 @@ proto.yartu.UpsertContactRequest.deserializeBinaryFromReader = function(msg, rea
       reader.readMessage(value,proto.yartu.Contact.deserializeBinaryFromReader);
       msg.setContact(value);
       break;
+    case 2:
+      var values = /** @type {!Array<number>} */ (reader.isDelimited() ? reader.readPackedInt64() : [reader.readInt64()]);
+      for (var i = 0; i < values.length; i++) {
+        msg.addLabels(values[i]);
+      }
+      break;
     default:
       reader.skipField();
       break;
@@ -7239,6 +7253,13 @@ proto.yartu.UpsertContactRequest.serializeBinaryToWriter = function(message, wri
       1,
       f,
       proto.yartu.Contact.serializeBinaryToWriter
+    );
+  }
+  f = message.getLabelsList();
+  if (f.length > 0) {
+    writer.writePackedInt64(
+      2,
+      f
     );
   }
 };
@@ -7278,6 +7299,43 @@ proto.yartu.UpsertContactRequest.prototype.clearContact = function() {
  */
 proto.yartu.UpsertContactRequest.prototype.hasContact = function() {
   return jspb.Message.getField(this, 1) != null;
+};
+
+
+/**
+ * repeated int64 labels = 2;
+ * @return {!Array<number>}
+ */
+proto.yartu.UpsertContactRequest.prototype.getLabelsList = function() {
+  return /** @type {!Array<number>} */ (jspb.Message.getRepeatedField(this, 2));
+};
+
+
+/**
+ * @param {!Array<number>} value
+ * @return {!proto.yartu.UpsertContactRequest} returns this
+ */
+proto.yartu.UpsertContactRequest.prototype.setLabelsList = function(value) {
+  return jspb.Message.setField(this, 2, value || []);
+};
+
+
+/**
+ * @param {number} value
+ * @param {number=} opt_index
+ * @return {!proto.yartu.UpsertContactRequest} returns this
+ */
+proto.yartu.UpsertContactRequest.prototype.addLabels = function(value, opt_index) {
+  return jspb.Message.addToRepeatedField(this, 2, value, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.yartu.UpsertContactRequest} returns this
+ */
+proto.yartu.UpsertContactRequest.prototype.clearLabelsList = function() {
+  return this.setLabelsList([]);
 };
 
 
@@ -7870,6 +7928,13 @@ proto.yartu.GetContactResponse.prototype.hasData = function() {
 
 
 
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.yartu.DeleteContactRequest.repeatedFields_ = [2];
+
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -7901,7 +7966,8 @@ proto.yartu.DeleteContactRequest.prototype.toObject = function(opt_includeInstan
  */
 proto.yartu.DeleteContactRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0)
+    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    idsList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -7942,6 +8008,12 @@ proto.yartu.DeleteContactRequest.deserializeBinaryFromReader = function(msg, rea
       var value = /** @type {number} */ (reader.readInt64());
       msg.setId(value);
       break;
+    case 2:
+      var values = /** @type {!Array<number>} */ (reader.isDelimited() ? reader.readPackedInt64() : [reader.readInt64()]);
+      for (var i = 0; i < values.length; i++) {
+        msg.addIds(values[i]);
+      }
+      break;
     default:
       reader.skipField();
       break;
@@ -7978,6 +8050,13 @@ proto.yartu.DeleteContactRequest.serializeBinaryToWriter = function(message, wri
       f
     );
   }
+  f = message.getIdsList();
+  if (f.length > 0) {
+    writer.writePackedInt64(
+      2,
+      f
+    );
+  }
 };
 
 
@@ -7996,6 +8075,43 @@ proto.yartu.DeleteContactRequest.prototype.getId = function() {
  */
 proto.yartu.DeleteContactRequest.prototype.setId = function(value) {
   return jspb.Message.setProto3IntField(this, 1, value);
+};
+
+
+/**
+ * repeated int64 ids = 2;
+ * @return {!Array<number>}
+ */
+proto.yartu.DeleteContactRequest.prototype.getIdsList = function() {
+  return /** @type {!Array<number>} */ (jspb.Message.getRepeatedField(this, 2));
+};
+
+
+/**
+ * @param {!Array<number>} value
+ * @return {!proto.yartu.DeleteContactRequest} returns this
+ */
+proto.yartu.DeleteContactRequest.prototype.setIdsList = function(value) {
+  return jspb.Message.setField(this, 2, value || []);
+};
+
+
+/**
+ * @param {number} value
+ * @param {number=} opt_index
+ * @return {!proto.yartu.DeleteContactRequest} returns this
+ */
+proto.yartu.DeleteContactRequest.prototype.addIds = function(value, opt_index) {
+  return jspb.Message.addToRepeatedField(this, 2, value, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.yartu.DeleteContactRequest} returns this
+ */
+proto.yartu.DeleteContactRequest.prototype.clearIdsList = function() {
+  return this.setIdsList([]);
 };
 
 

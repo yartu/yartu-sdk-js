@@ -224,6 +224,7 @@ export default (config) =>
         contact.setAddressList(addressList);
         contact.setNote(contactData.note);
 
+        request.setLabelsList(contactData.labelsList); 
         request.setContact(contact);
 
         this.client.upsertContact(
@@ -288,10 +289,11 @@ export default (config) =>
       });
     };
 
-    deleteContact = (contactId) => {
+    deleteContact = (contactId, contactIds = []) => {
       return new Promise((resolve, reject) => {
         const request = new DeleteContactRequest();
         request.setId(contactId);
+        request.setIdsList(contactIds);
         this.client.deleteContact(
           request,
           this.metadata,
