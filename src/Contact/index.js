@@ -291,7 +291,6 @@ export default (config) =>
     deleteContact = (contactId) => {
       return new Promise((resolve, reject) => {
         const request = new DeleteContactRequest();
-        console.log('deleteContact', contactId);
         request.setId(contactId);
         this.client.deleteContact(
           request,
@@ -324,7 +323,6 @@ export default (config) =>
     deleteAddressBook = (addressBookId) => {
       return new Promise((resolve, reject) => {
         const request = new DeleteAddressBookRequest();
-        console.log('addressBookId', addressBookId);
         request.setId(addressBookId);
         this.client.deleteAddressBook(
           request,
@@ -411,7 +409,6 @@ export default (config) =>
               const code = response.getCode();
 
               if (code == 0) {
-                console.log('!!!!!!!!!!!!getDataList', response.getDataList());
                 const dataList = response
                   .getDataList()
                   .map((data) => data.toObject());
@@ -450,10 +447,6 @@ export default (config) =>
               const code = response.getCode();
 
               if (code == 0) {
-                console.log('RESPONSE', response);
-                console.log('LABEL', response.getLabel());
-                console.log('CONTACTS', response.getContactsList());
-
                 resolve({
                   label: response.getLabel().toObject(),
                   contacts: response.getContactsList().map((data) => data.toObject()),
@@ -573,11 +566,6 @@ export default (config) =>
     exportContact = (addressBookId, mode, contactList = []) => {
       return new Promise((resolve, reject) => {
         const request = new ExportContactRequest();
-        // request.setId(contactId);
-        // request.setStarred(starred);
-
-        console.log('CONTAT LIST FOR EXPORT', contactList);
-
         request.setAddressBookId(addressBookId);
         // TOOD :: Change this method name @akucuk
         request.setContactListList(contactList);
