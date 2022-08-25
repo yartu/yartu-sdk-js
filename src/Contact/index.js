@@ -15,6 +15,8 @@ import {
   DeleteAddressBookRequest,
   UpsertLabelRequest,
   ListLabelRequest,
+  GetLabelRequest,
+  DeleteLabelRequest,
   UpsertContactLabelRequest,
   UpsertContactStarRequest,
   ExportContactRequest,
@@ -416,6 +418,77 @@ export default (config) =>
                 resolve({
                   data: dataList,
                   pagination: response.getPagination().toObject()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
+    getLabel = (labelId, hasContacts) => {
+      return new Promise((resolve, reject) => {
+        const request = new GetLabelRequest();
+        request.setId(labelId);
+        request.setHasContacts(hasContacts);
+
+        this.client.getLabel(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              reject({
+                code: -1,
+                message: error.message
+              });
+            } else {
+              const code = response.getCode();
+
+              if (code == 0) {
+                console.log('RESPONSE', response);
+                console.log('LABEL', response.getLabel());
+                console.log('CONTACTS', response.getContactsList());
+
+                resolve({
+                  label: response.getLabel().toObject(),
+                  contacts: response.getContactsList().map((data) => data.toObject()),
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
+    deleteLabel = (labelId) => {
+      return new Promise((resolve, reject) => {
+        const request = new DeleteLabelRequest();
+        request.setId(labelId);
+
+        this.client.deleteLabel(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              reject({
+                code: -1,
+                message: error.message
+              });
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  message: response.getMessage()
                 });
               } else {
                 reject({

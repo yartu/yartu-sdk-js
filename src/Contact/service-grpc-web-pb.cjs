@@ -683,6 +683,67 @@ proto.yartu.YContactPromiseClient.prototype.listContact =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.GetLabelRequest,
+ *   !proto.yartu.GetLabelResponse>}
+ */
+const methodDescriptor_YContact_getLabel = new grpc.web.MethodDescriptor(
+  '/yartu.YContact/getLabel',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.GetLabelRequest,
+  proto.yartu.GetLabelResponse,
+  /**
+   * @param {!proto.yartu.GetLabelRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.GetLabelResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.GetLabelRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.GetLabelResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.GetLabelResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YContactClient.prototype.getLabel =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YContact/getLabel',
+      request,
+      metadata || {},
+      methodDescriptor_YContact_getLabel,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.GetLabelRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.GetLabelResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YContactPromiseClient.prototype.getLabel =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YContact/getLabel',
+      request,
+      metadata || {},
+      methodDescriptor_YContact_getLabel);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.UpsertLabelRequest,
  *   !proto.yartu.UpsertLabelResponse>}
  */
