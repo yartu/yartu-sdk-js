@@ -2,6 +2,8 @@
 import jwt_decode from 'jwt-decode';
 import Auth from '../Auth';
 import Contact from '../Contact';
+import Email from '../Email';
+import Search from '../Search';
 
 // TODO :: Check if Vue project
 import { inject } from 'vue';
@@ -26,9 +28,10 @@ class YartuApp {
 
   constructor(config) {
     this.initialize(config);
-
     this.Auth = new (Auth())(config);
     this.Contact = new (Contact())(config);
+    this.Search = new (Search())(config);
+    this.Email = new (Email())(config);
   }
 
   initialize(config) {
