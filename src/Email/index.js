@@ -1,3 +1,10 @@
+import {
+  ListFolderRequest,
+  ListFolderResponse,
+  ListMessageRequest
+} from './service-pb.cjs';
+import { YEmailClient } from './service-grpc-web-pb.cjs';
+
 export default (config) =>
   class Email {
     endpoint = 'http://localhost:5001';
@@ -5,130 +12,85 @@ export default (config) =>
 
     constructor(config) {
       this.endpoint = config.endpoint;
-      // this.client = new YSearchClient(this.endpoint, '', '');
+      this.client = new YEmailClient(this.endpoint + '/mail', '', '');
       const yartu_token = window.localStorage.getItem('yartu-token');
       this.metadata = { Authentication: yartu_token };
     }
 
-    listMessages(folder, filter, pagination={}) {
+    listMessages(folder, filter, pagination = {}) {
       return new Promise((resolve, reject) => {
-        resolve({
-          messages: [
-            {
-              id: 0,
-              subject: 'Bu fırsatlr kaçmaz!',
-              from: [{ email: 'ahmet@yartu.io', name: 'Ahmet', surname: 'Küçük' }],
-              to: [],
-              cc: [],
-              bcc: [],
-              snippet: 'Bu fırsatlr kaçmaz! 1',
-              date: new Date(),
-              starred: false,
-              read: true,
-              attachments: [],
-              events: [],
-              folder: 'inbox',
-            },
-            {
-              id: 2,
-              subject: 'Bu fırsatlr kaçmaz!',
-              from: [{ email: 'ahmet@yartu.io', name: 'Ahmet', surname: 'Küçük' }],
-              to: [],
-              cc: [],
-              bcc: [],
-              snippet: 'Bu fırsatlr kaçmaz!',
-              starred: true,
-              date: new Date(),
-              read: true,
-              attachments: ['file_1'],
-              events: [],
-              folder: 'inbox',
-            },
-            {
-              id: 3,
-              subject: 'Bu fırsatlr kaçmaz!',
-              from: [{ email:  'ramazan@yartu.io', name: 'Ramazan', surname: 'Tarakçı' }],
-              to: [],
-              cc: [],
-              bcc: [],
-              snippet: 'Bu fırsatlr kaçmaz!',
-              date: new Date(),
-              starred: false,
-              read: true,
-              attachments: [],
-              events: [],
-              folder: 'inbox',
-            },
-            {
-              id: 4,
-              subject: 'Bu fırsatlr kaçmaz!',
-              from: [{ email:  'aziz@yartu.io', name: 'Aziz', surname: 'Şahin' }],
-              to: [],
-              cc: [],
-              bcc: [],
-              snippet: 'Bu fırsatlr kaçmaz!',
-              date: new Date(),
-              starred: false,
-              read: true,
-              attachments: [],
-              events: [],
-              folder: 'inbox',
-            },
-          ]
-        })
-      })
+        const request = new ListMessageRequest();
+        request.setFolder(folder);
+        console.log(folder, request, request.toObject());
+
+        this.client.listMessage(request, this.metadata, (error, response) => {
+          if (error) {
+            reject({
+              code: -1,
+              message: error.message
+            });
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              console.log(response);
+              const dataList = response
+                .getEmailsList()
+                .map((data) => data.toObject());
+              resolve({
+                emails: dataList,
+                pagination: {} // response.getPagination().toObject()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
     }
-    
+
     listFolders() {
       return new Promise((resolve, reject) => {
-        resolve({
-          folders: [
-            {
-              id: 0,
-              displayname: 'Inbox',
-              isDefault: true,
-            },
-            {
-              id: 1,
-              displayname: 'Sent',
-              isDefault: true,
-            },
-            {
-              id: 2,
-              displayname: 'Trash',
-              isDefault: true,
-            },
-            {
-              id: 3,
-              displayname: 'Archive',
-              isDefault: true,
-            },
-            {
-              id: 4,
-              displayname: 'Draft',
-              isDefault: true,
-            },
-            {
-              id: 5,
-              displayname: 'Spam',
-              isDefault: true,
-            },
-            {
-              id: 6,
-              displayname: 'Ahmet Küçük',
-              isDefault: false,
-            },
-          ]
-        })
-      })
+        const request = new ListFolderRequest();
+        // request.setQuery()
+        this.client.listFolder(request, this.metadata, (error, response) => {
+          if (error) {
+            reject({
+              code: -1,
+              message: error.message
+            });
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              console.log(response);
+              const dataList = response
+                .getFoldersList()
+                .map((data) => data.toObject());
+              resolve({
+                folders: dataList,
+                pagination: {} // response.getPagination().toObject()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
     }
 
     upsertEmailFolder(folderId, folderData) {
       return new Promise((resolve, reject) => {
         resolve({
           code: 0,
-          message: 'Successfully',
-        })
+          message: 'Successfully'
+        });
       });
     }
-  }
+  };
