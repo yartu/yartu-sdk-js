@@ -14,8 +14,6 @@ var jspb = require('google-protobuf');
 var goog = jspb;
 var global = Function('return this')();
 
-var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js');
-goog.object.extend(proto, google_protobuf_timestamp_pb);
 goog.exportSymbol('proto.yartu_mail.ChangeMessageFlagRequest', null, global);
 goog.exportSymbol('proto.yartu_mail.ChangeMessageFlagResponse', null, global);
 goog.exportSymbol('proto.yartu_mail.DeleteFolderRequest', null, global);
@@ -1300,7 +1298,7 @@ proto.yartu_mail.MailMessage.toObject = function(includeInstance, msg) {
     folder: jspb.Message.getFieldWithDefault(msg, 6, ""),
     subject: jspb.Message.getFieldWithDefault(msg, 7, ""),
     snippet: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    recievedat: (f = msg.getRecievedat()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+    recievedat: jspb.Message.getFieldWithDefault(msg, 9, ""),
     isseen: jspb.Message.getBooleanFieldWithDefault(msg, 10, false),
     isstarred: jspb.Message.getBooleanFieldWithDefault(msg, 11, false),
     isjunk: jspb.Message.getBooleanFieldWithDefault(msg, 12, false),
@@ -1383,8 +1381,7 @@ proto.yartu_mail.MailMessage.deserializeBinaryFromReader = function(msg, reader)
       msg.setSnippet(value);
       break;
     case 9:
-      var value = new google_protobuf_timestamp_pb.Timestamp;
-      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
+      var value = /** @type {string} */ (reader.readString());
       msg.setRecievedat(value);
       break;
     case 10:
@@ -1510,11 +1507,10 @@ proto.yartu_mail.MailMessage.serializeBinaryToWriter = function(message, writer)
     );
   }
   f = message.getRecievedat();
-  if (f != null) {
-    writer.writeMessage(
+  if (f.length > 0) {
+    writer.writeString(
       9,
-      f,
-      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
+      f
     );
   }
   f = message.getIsseen();
@@ -1801,39 +1797,20 @@ proto.yartu_mail.MailMessage.prototype.setSnippet = function(value) {
 
 
 /**
- * optional google.protobuf.Timestamp recievedAt = 9;
- * @return {?proto.google.protobuf.Timestamp}
+ * optional string recievedAt = 9;
+ * @return {string}
  */
 proto.yartu_mail.MailMessage.prototype.getRecievedat = function() {
-  return /** @type{?proto.google.protobuf.Timestamp} */ (
-    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 9));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 9, ""));
 };
 
 
 /**
- * @param {?proto.google.protobuf.Timestamp|undefined} value
+ * @param {string} value
  * @return {!proto.yartu_mail.MailMessage} returns this
-*/
+ */
 proto.yartu_mail.MailMessage.prototype.setRecievedat = function(value) {
-  return jspb.Message.setWrapperField(this, 9, value);
-};
-
-
-/**
- * Clears the message field making it undefined.
- * @return {!proto.yartu_mail.MailMessage} returns this
- */
-proto.yartu_mail.MailMessage.prototype.clearRecievedat = function() {
-  return this.setRecievedat(undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {boolean}
- */
-proto.yartu_mail.MailMessage.prototype.hasRecievedat = function() {
-  return jspb.Message.getField(this, 9) != null;
+  return jspb.Message.setProto3StringField(this, 9, value);
 };
 
 
