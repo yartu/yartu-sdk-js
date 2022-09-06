@@ -1,7 +1,9 @@
 import {
   ListFolderRequest,
   ListFolderResponse,
-  ListMessageRequest
+  ListMessageRequest,
+  SendMessageRequest,
+  MailAddress
 } from './service-pb.cjs';
 import { YEmailClient } from './service-grpc-web-pb.cjs';
 
@@ -9,6 +11,7 @@ export default (config) =>
   class Email {
     endpoint = 'http://localhost:5001';
     client = undefined;
+    yartuSdk = undefined;
 
     constructor(config) {
       this.endpoint = config.endpoint;
@@ -90,6 +93,59 @@ export default (config) =>
         resolve({
           code: 0,
           message: 'Successfully'
+        });
+      });
+    }
+
+    sendEmail(data) {
+      return new Promise((resolve, reject) => {
+        const request = new SendMessageRequest();
+        request.setFrom(
+          this.yartuSdk.user.name + ' ' + this.yartuSdk.user.surname
+        );
+        request.setSubject(data.subject);
+        request.setBody(data.body);
+        request.setTextbody(data.textBody);
+
+        const toList = [];
+        for (const to of data.to) {
+          toList.push(to.email);
+        }
+        request.setToList(toList);
+
+        const ccList = [];
+        for (const cc of data.cc) {
+          ccList.push(cc.email);
+        }
+        request.setCcList(ccList);
+
+        const bccList = [];
+        for (const bcc of data.bcc) {
+          bccList.push(bcc.email);
+        }
+        request.setBccList(bccList);
+
+        this.client.sendMessage(request, this.metadata, (error, response) => {
+          if (error) {
+            reject({
+              code: -1,
+              message: error.message
+            });
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code: 0,
+                message: 'successfully'
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
         });
       });
     }

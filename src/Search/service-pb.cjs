@@ -2,7 +2,6 @@
 /**
  * @fileoverview
  * @enhanceable
- * @suppress {missingRequire} reports error on implicit type usages.
  * @suppress {messageConventions} JS Compiler reports an error if a variable or
  *     field starts with 'MSG_' and isn't a translatable message.
  * @public
@@ -13,7 +12,7 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = (function() { return this || window || global || self || Function('return this')(); }).call(null);
+var global = Function('return this')();
 
 goog.exportSymbol('proto.yartu.ListSearchShareablePeopleRequest', null, global);
 goog.exportSymbol('proto.yartu.ListSearchShareablePeopleResponse', null, global);
@@ -142,8 +141,9 @@ proto.yartu.SharablePeople.toObject = function(includeInstance, msg) {
     photo: jspb.Message.getFieldWithDefault(msg, 5, ""),
     name: jspb.Message.getFieldWithDefault(msg, 6, ""),
     surname: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    text: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    subtext: jspb.Message.getFieldWithDefault(msg, 9, "")
+    email: jspb.Message.getFieldWithDefault(msg, 8, ""),
+    text: jspb.Message.getFieldWithDefault(msg, 9, ""),
+    subtext: jspb.Message.getFieldWithDefault(msg, 10, "")
   };
 
   if (includeInstance) {
@@ -210,9 +210,13 @@ proto.yartu.SharablePeople.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 8:
       var value = /** @type {string} */ (reader.readString());
-      msg.setText(value);
+      msg.setEmail(value);
       break;
     case 9:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setText(value);
+      break;
+    case 10:
       var value = /** @type {string} */ (reader.readString());
       msg.setSubtext(value);
       break;
@@ -305,6 +309,13 @@ proto.yartu.SharablePeople.serializeBinaryToWriter = function(message, writer) {
   if (f != null) {
     writer.writeString(
       9,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 10));
+  if (f != null) {
+    writer.writeString(
+      10,
       f
     );
   }
@@ -492,10 +503,10 @@ proto.yartu.SharablePeople.prototype.hasSurname = function() {
 
 
 /**
- * optional string text = 8;
+ * optional string email = 8;
  * @return {string}
  */
-proto.yartu.SharablePeople.prototype.getText = function() {
+proto.yartu.SharablePeople.prototype.getEmail = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
 };
 
@@ -504,7 +515,7 @@ proto.yartu.SharablePeople.prototype.getText = function() {
  * @param {string} value
  * @return {!proto.yartu.SharablePeople} returns this
  */
-proto.yartu.SharablePeople.prototype.setText = function(value) {
+proto.yartu.SharablePeople.prototype.setEmail = function(value) {
   return jspb.Message.setField(this, 8, value);
 };
 
@@ -513,7 +524,7 @@ proto.yartu.SharablePeople.prototype.setText = function(value) {
  * Clears the field making it undefined.
  * @return {!proto.yartu.SharablePeople} returns this
  */
-proto.yartu.SharablePeople.prototype.clearText = function() {
+proto.yartu.SharablePeople.prototype.clearEmail = function() {
   return jspb.Message.setField(this, 8, undefined);
 };
 
@@ -522,16 +533,16 @@ proto.yartu.SharablePeople.prototype.clearText = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu.SharablePeople.prototype.hasText = function() {
+proto.yartu.SharablePeople.prototype.hasEmail = function() {
   return jspb.Message.getField(this, 8) != null;
 };
 
 
 /**
- * optional string subtext = 9;
+ * optional string text = 9;
  * @return {string}
  */
-proto.yartu.SharablePeople.prototype.getSubtext = function() {
+proto.yartu.SharablePeople.prototype.getText = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 9, ""));
 };
 
@@ -540,7 +551,7 @@ proto.yartu.SharablePeople.prototype.getSubtext = function() {
  * @param {string} value
  * @return {!proto.yartu.SharablePeople} returns this
  */
-proto.yartu.SharablePeople.prototype.setSubtext = function(value) {
+proto.yartu.SharablePeople.prototype.setText = function(value) {
   return jspb.Message.setField(this, 9, value);
 };
 
@@ -549,7 +560,7 @@ proto.yartu.SharablePeople.prototype.setSubtext = function(value) {
  * Clears the field making it undefined.
  * @return {!proto.yartu.SharablePeople} returns this
  */
-proto.yartu.SharablePeople.prototype.clearSubtext = function() {
+proto.yartu.SharablePeople.prototype.clearText = function() {
   return jspb.Message.setField(this, 9, undefined);
 };
 
@@ -558,8 +569,44 @@ proto.yartu.SharablePeople.prototype.clearSubtext = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu.SharablePeople.prototype.hasSubtext = function() {
+proto.yartu.SharablePeople.prototype.hasText = function() {
   return jspb.Message.getField(this, 9) != null;
+};
+
+
+/**
+ * optional string subtext = 10;
+ * @return {string}
+ */
+proto.yartu.SharablePeople.prototype.getSubtext = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 10, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.SharablePeople} returns this
+ */
+proto.yartu.SharablePeople.prototype.setSubtext = function(value) {
+  return jspb.Message.setField(this, 10, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.SharablePeople} returns this
+ */
+proto.yartu.SharablePeople.prototype.clearSubtext = function() {
+  return jspb.Message.setField(this, 10, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.SharablePeople.prototype.hasSubtext = function() {
+  return jspb.Message.getField(this, 10) != null;
 };
 
 
