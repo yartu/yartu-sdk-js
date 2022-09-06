@@ -43,7 +43,10 @@ export default (config) =>
 
             if (code == 0) {
               window.localStorage.setItem('yartu-token', token);
-              resolve({ status: status_AUTH_OK, token: token });
+              resolve({
+                status: status_AUTH_OK,
+                token: token
+              });
             } else if (code == code_AUTH_TWO_FA_FORCE) {
               resolve({
                 status: status_AUTH_TWO_FA_FORCE,
@@ -107,9 +110,6 @@ export default (config) =>
       if (yartu_token) {
         try {
           const userData = jwt_decode(yartu_token);
-          console.log(userData);
-
-          console.log(userData.exp);
           if (userData.exp !== 0 && userData.exp < Date.now() / 1000) {
             // User token expired, remove token from localstorage
             window.localStorage.removeItem(yartu_token);
@@ -122,5 +122,9 @@ export default (config) =>
       }
 
       return false;
+    };
+
+    logout = () => {
+      localStorage.clear();
     };
   };

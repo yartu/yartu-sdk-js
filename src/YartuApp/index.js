@@ -36,7 +36,10 @@ class YartuApp {
 
   initialize(config) {
     this.grpcEndpoint = config.endpoint;
+    this.refreshUser();
+  }
 
+  refreshUser() {
     const yartu_token = window.localStorage.getItem('yartu-token');
     if (yartu_token) {
       try {
@@ -65,7 +68,7 @@ const useYartuSdk = () => {
     throw new Error('No Yartu SDK provided!');
   }
   return yartuSdk;
-}
+};
 
 const installYartuApp = {
   install: (Vue, config = {}) => {
@@ -80,7 +83,7 @@ const installYartuApp = {
       window.$yartuSdk = yartuSdk;
     }
     Vue.provide(YartuSdkSymbol, yartuSdk);
-  },
+  }
 };
 
 export { initializeYartuApp, installYartuApp, useYartuSdk };
