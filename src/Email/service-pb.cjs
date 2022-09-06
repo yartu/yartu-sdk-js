@@ -1254,7 +1254,7 @@ proto.yartu_mail.MailAttachment.prototype.setFilename = function(value) {
  * @private {!Array<number>}
  * @const
  */
-proto.yartu_mail.MailMessage.repeatedFields_ = [3,4,5,14,15];
+proto.yartu_mail.MailMessage.repeatedFields_ = [2,3,4,5,14,15];
 
 
 
@@ -1288,7 +1288,8 @@ proto.yartu_mail.MailMessage.prototype.toObject = function(opt_includeInstance) 
 proto.yartu_mail.MailMessage.toObject = function(includeInstance, msg) {
   var f, obj = {
     uuid: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    from: (f = msg.getFrom()) && proto.yartu_mail.MailAddress.toObject(includeInstance, f),
+    fromList: jspb.Message.toObjectList(msg.getFromList(),
+    proto.yartu_mail.MailAddress.toObject, includeInstance),
     toList: jspb.Message.toObjectList(msg.getToList(),
     proto.yartu_mail.MailAddress.toObject, includeInstance),
     ccList: jspb.Message.toObjectList(msg.getCcList(),
@@ -1351,7 +1352,7 @@ proto.yartu_mail.MailMessage.deserializeBinaryFromReader = function(msg, reader)
     case 2:
       var value = new proto.yartu_mail.MailAddress;
       reader.readMessage(value,proto.yartu_mail.MailAddress.deserializeBinaryFromReader);
-      msg.setFrom(value);
+      msg.addFrom(value);
       break;
     case 3:
       var value = new proto.yartu_mail.MailAddress;
@@ -1453,9 +1454,9 @@ proto.yartu_mail.MailMessage.serializeBinaryToWriter = function(message, writer)
       f
     );
   }
-  f = message.getFrom();
-  if (f != null) {
-    writer.writeMessage(
+  f = message.getFromList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
       2,
       f,
       proto.yartu_mail.MailAddress.serializeBinaryToWriter
@@ -1592,39 +1593,40 @@ proto.yartu_mail.MailMessage.prototype.setUuid = function(value) {
 
 
 /**
- * optional MailAddress from = 2;
- * @return {?proto.yartu_mail.MailAddress}
+ * repeated MailAddress from = 2;
+ * @return {!Array<!proto.yartu_mail.MailAddress>}
  */
-proto.yartu_mail.MailMessage.prototype.getFrom = function() {
-  return /** @type{?proto.yartu_mail.MailAddress} */ (
-    jspb.Message.getWrapperField(this, proto.yartu_mail.MailAddress, 2));
+proto.yartu_mail.MailMessage.prototype.getFromList = function() {
+  return /** @type{!Array<!proto.yartu_mail.MailAddress>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.yartu_mail.MailAddress, 2));
 };
 
 
 /**
- * @param {?proto.yartu_mail.MailAddress|undefined} value
+ * @param {!Array<!proto.yartu_mail.MailAddress>} value
  * @return {!proto.yartu_mail.MailMessage} returns this
 */
-proto.yartu_mail.MailMessage.prototype.setFrom = function(value) {
-  return jspb.Message.setWrapperField(this, 2, value);
+proto.yartu_mail.MailMessage.prototype.setFromList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 2, value);
 };
 
 
 /**
- * Clears the message field making it undefined.
+ * @param {!proto.yartu_mail.MailAddress=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.yartu_mail.MailAddress}
+ */
+proto.yartu_mail.MailMessage.prototype.addFrom = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.yartu_mail.MailAddress, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
  * @return {!proto.yartu_mail.MailMessage} returns this
  */
-proto.yartu_mail.MailMessage.prototype.clearFrom = function() {
-  return this.setFrom(undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {boolean}
- */
-proto.yartu_mail.MailMessage.prototype.hasFrom = function() {
-  return jspb.Message.getField(this, 2) != null;
+proto.yartu_mail.MailMessage.prototype.clearFromList = function() {
+  return this.setFromList([]);
 };
 
 
