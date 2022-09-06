@@ -15,7 +15,7 @@ const grpc = {};
 grpc.web = require('grpc-web');
 
 const proto = {};
-proto.yartu_mail = require('./mail_pb.js');
+proto.yartu_mail = require('./service-pb.cjs');
 
 /**
  * @param {string} hostname
