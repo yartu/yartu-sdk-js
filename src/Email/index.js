@@ -71,7 +71,7 @@ export default (config) =>
             if (code == 0) {
               console.log(response);
               const dataList = response
-                .getFoldersList()
+                .getFolderList()
                 .map((data) => data.toObject());
               resolve({
                 folders: dataList,

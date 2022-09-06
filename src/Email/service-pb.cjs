@@ -540,7 +540,7 @@ proto.yartu_mail.Folder.toObject = function(includeInstance, msg) {
     uuid: jspb.Message.getFieldWithDefault(msg, 1, ""),
     name: jspb.Message.getFieldWithDefault(msg, 2, ""),
     constantname: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    subfoldersList: jspb.Message.toObjectList(msg.getSubfoldersList(),
+    subfolderList: jspb.Message.toObjectList(msg.getSubfolderList(),
     proto.yartu_mail.Folder.toObject, includeInstance),
     path: jspb.Message.getFieldWithDefault(msg, 5, ""),
     isdefault: jspb.Message.getBooleanFieldWithDefault(msg, 6, false)
@@ -595,7 +595,7 @@ proto.yartu_mail.Folder.deserializeBinaryFromReader = function(msg, reader) {
     case 4:
       var value = new proto.yartu_mail.Folder;
       reader.readMessage(value,proto.yartu_mail.Folder.deserializeBinaryFromReader);
-      msg.addSubfolders(value);
+      msg.addSubfolder(value);
       break;
     case 5:
       var value = /** @type {string} */ (reader.readString());
@@ -655,7 +655,7 @@ proto.yartu_mail.Folder.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getSubfoldersList();
+  f = message.getSubfolderList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
       4,
@@ -735,10 +735,10 @@ proto.yartu_mail.Folder.prototype.setConstantname = function(value) {
 
 
 /**
- * repeated Folder subFolders = 4;
+ * repeated Folder subFolder = 4;
  * @return {!Array<!proto.yartu_mail.Folder>}
  */
-proto.yartu_mail.Folder.prototype.getSubfoldersList = function() {
+proto.yartu_mail.Folder.prototype.getSubfolderList = function() {
   return /** @type{!Array<!proto.yartu_mail.Folder>} */ (
     jspb.Message.getRepeatedWrapperField(this, proto.yartu_mail.Folder, 4));
 };
@@ -748,7 +748,7 @@ proto.yartu_mail.Folder.prototype.getSubfoldersList = function() {
  * @param {!Array<!proto.yartu_mail.Folder>} value
  * @return {!proto.yartu_mail.Folder} returns this
 */
-proto.yartu_mail.Folder.prototype.setSubfoldersList = function(value) {
+proto.yartu_mail.Folder.prototype.setSubfolderList = function(value) {
   return jspb.Message.setRepeatedWrapperField(this, 4, value);
 };
 
@@ -758,7 +758,7 @@ proto.yartu_mail.Folder.prototype.setSubfoldersList = function(value) {
  * @param {number=} opt_index
  * @return {!proto.yartu_mail.Folder}
  */
-proto.yartu_mail.Folder.prototype.addSubfolders = function(opt_value, opt_index) {
+proto.yartu_mail.Folder.prototype.addSubfolder = function(opt_value, opt_index) {
   return jspb.Message.addToRepeatedWrapperField(this, 4, opt_value, proto.yartu_mail.Folder, opt_index);
 };
 
@@ -767,8 +767,8 @@ proto.yartu_mail.Folder.prototype.addSubfolders = function(opt_value, opt_index)
  * Clears the list making it empty but non-null.
  * @return {!proto.yartu_mail.Folder} returns this
  */
-proto.yartu_mail.Folder.prototype.clearSubfoldersList = function() {
-  return this.setSubfoldersList([]);
+proto.yartu_mail.Folder.prototype.clearSubfolderList = function() {
+  return this.setSubfolderList([]);
 };
 
 
@@ -1304,9 +1304,9 @@ proto.yartu_mail.MailMessage.toObject = function(includeInstance, msg) {
     isstarred: jspb.Message.getBooleanFieldWithDefault(msg, 11, false),
     isjunk: jspb.Message.getBooleanFieldWithDefault(msg, 12, false),
     isdraft: jspb.Message.getBooleanFieldWithDefault(msg, 13, false),
-    attachmentsList: jspb.Message.toObjectList(msg.getAttachmentsList(),
+    attachmentList: jspb.Message.toObjectList(msg.getAttachmentList(),
     proto.yartu_mail.MailAttachment.toObject, includeInstance),
-    eventsList: (f = jspb.Message.getRepeatedField(msg, 15)) == null ? undefined : f,
+    eventList: (f = jspb.Message.getRepeatedField(msg, 15)) == null ? undefined : f,
     threadid: jspb.Message.getFieldWithDefault(msg, 16, ""),
     body: jspb.Message.getFieldWithDefault(msg, 17, "")
   };
@@ -1404,11 +1404,11 @@ proto.yartu_mail.MailMessage.deserializeBinaryFromReader = function(msg, reader)
     case 14:
       var value = new proto.yartu_mail.MailAttachment;
       reader.readMessage(value,proto.yartu_mail.MailAttachment.deserializeBinaryFromReader);
-      msg.addAttachments(value);
+      msg.addAttachment(value);
       break;
     case 15:
       var value = /** @type {string} */ (reader.readString());
-      msg.addEvents(value);
+      msg.addEvent(value);
       break;
     case 16:
       var value = /** @type {string} */ (reader.readString());
@@ -1542,7 +1542,7 @@ proto.yartu_mail.MailMessage.serializeBinaryToWriter = function(message, writer)
       f
     );
   }
-  f = message.getAttachmentsList();
+  f = message.getAttachmentList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
       14,
@@ -1550,7 +1550,7 @@ proto.yartu_mail.MailMessage.serializeBinaryToWriter = function(message, writer)
       proto.yartu_mail.MailAttachment.serializeBinaryToWriter
     );
   }
-  f = message.getEventsList();
+  f = message.getEventList();
   if (f.length > 0) {
     writer.writeRepeatedString(
       15,
@@ -1889,10 +1889,10 @@ proto.yartu_mail.MailMessage.prototype.setIsdraft = function(value) {
 
 
 /**
- * repeated MailAttachment attachments = 14;
+ * repeated MailAttachment attachment = 14;
  * @return {!Array<!proto.yartu_mail.MailAttachment>}
  */
-proto.yartu_mail.MailMessage.prototype.getAttachmentsList = function() {
+proto.yartu_mail.MailMessage.prototype.getAttachmentList = function() {
   return /** @type{!Array<!proto.yartu_mail.MailAttachment>} */ (
     jspb.Message.getRepeatedWrapperField(this, proto.yartu_mail.MailAttachment, 14));
 };
@@ -1902,7 +1902,7 @@ proto.yartu_mail.MailMessage.prototype.getAttachmentsList = function() {
  * @param {!Array<!proto.yartu_mail.MailAttachment>} value
  * @return {!proto.yartu_mail.MailMessage} returns this
 */
-proto.yartu_mail.MailMessage.prototype.setAttachmentsList = function(value) {
+proto.yartu_mail.MailMessage.prototype.setAttachmentList = function(value) {
   return jspb.Message.setRepeatedWrapperField(this, 14, value);
 };
 
@@ -1912,7 +1912,7 @@ proto.yartu_mail.MailMessage.prototype.setAttachmentsList = function(value) {
  * @param {number=} opt_index
  * @return {!proto.yartu_mail.MailAttachment}
  */
-proto.yartu_mail.MailMessage.prototype.addAttachments = function(opt_value, opt_index) {
+proto.yartu_mail.MailMessage.prototype.addAttachment = function(opt_value, opt_index) {
   return jspb.Message.addToRepeatedWrapperField(this, 14, opt_value, proto.yartu_mail.MailAttachment, opt_index);
 };
 
@@ -1921,16 +1921,16 @@ proto.yartu_mail.MailMessage.prototype.addAttachments = function(opt_value, opt_
  * Clears the list making it empty but non-null.
  * @return {!proto.yartu_mail.MailMessage} returns this
  */
-proto.yartu_mail.MailMessage.prototype.clearAttachmentsList = function() {
-  return this.setAttachmentsList([]);
+proto.yartu_mail.MailMessage.prototype.clearAttachmentList = function() {
+  return this.setAttachmentList([]);
 };
 
 
 /**
- * repeated string events = 15;
+ * repeated string event = 15;
  * @return {!Array<string>}
  */
-proto.yartu_mail.MailMessage.prototype.getEventsList = function() {
+proto.yartu_mail.MailMessage.prototype.getEventList = function() {
   return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 15));
 };
 
@@ -1939,7 +1939,7 @@ proto.yartu_mail.MailMessage.prototype.getEventsList = function() {
  * @param {!Array<string>} value
  * @return {!proto.yartu_mail.MailMessage} returns this
  */
-proto.yartu_mail.MailMessage.prototype.setEventsList = function(value) {
+proto.yartu_mail.MailMessage.prototype.setEventList = function(value) {
   return jspb.Message.setField(this, 15, value || []);
 };
 
@@ -1949,7 +1949,7 @@ proto.yartu_mail.MailMessage.prototype.setEventsList = function(value) {
  * @param {number=} opt_index
  * @return {!proto.yartu_mail.MailMessage} returns this
  */
-proto.yartu_mail.MailMessage.prototype.addEvents = function(value, opt_index) {
+proto.yartu_mail.MailMessage.prototype.addEvent = function(value, opt_index) {
   return jspb.Message.addToRepeatedField(this, 15, value, opt_index);
 };
 
@@ -1958,8 +1958,8 @@ proto.yartu_mail.MailMessage.prototype.addEvents = function(value, opt_index) {
  * Clears the list making it empty but non-null.
  * @return {!proto.yartu_mail.MailMessage} returns this
  */
-proto.yartu_mail.MailMessage.prototype.clearEventsList = function() {
-  return this.setEventsList([]);
+proto.yartu_mail.MailMessage.prototype.clearEventList = function() {
+  return this.setEventList([]);
 };
 
 
