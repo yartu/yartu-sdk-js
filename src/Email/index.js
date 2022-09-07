@@ -1,9 +1,9 @@
 import {
   ListFolderRequest,
-  ListFolderResponse,
   ListMessageRequest,
   GetMessageRequest,
   SendMessageRequest,
+  UpsertFolderRequest,
   MailAddress
 } from './service-pb.cjs';
 import { YEmailClient } from './service-grpc-web-pb.cjs';
@@ -118,11 +118,35 @@ export default (config) =>
       });
     }
 
-    upsertEmailFolder(folderId, folderData) {
+    upsertEmailFolder(folderUuid, folderName, folderParent) {
       return new Promise((resolve, reject) => {
-        resolve({
-          code: 0,
-          message: 'Successfully'
+        const request = new UpsertFolderRequest();
+
+        request.setUuid(folderUuid);
+        request.setName(folderName);
+        request.setParentfolder(folderParent);
+
+        this.client.upsertFolder(request, this.metadata, (error, response) => {
+          if (error) {
+            reject({
+              code: -1,
+              message: error.message
+            });
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code: 0,
+                message: 'success'
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
         });
       });
     }
