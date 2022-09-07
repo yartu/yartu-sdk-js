@@ -2,6 +2,7 @@ import {
   ListFolderRequest,
   ListFolderResponse,
   ListMessageRequest,
+  GetMessageRequest,
   SendMessageRequest,
   MailAddress
 } from './service-pb.cjs';
@@ -43,6 +44,35 @@ export default (config) =>
               resolve({
                 emails: dataList,
                 pagination: {} // response.getPagination().toObject()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    getMessage(emailUuid) {
+      return new Promise((resolve, reject) => {
+        const request = new GetMessageRequest();
+        request.setUuid(emailUuid);
+        this.client.getMessage(request, this.metadata, (error, response) => {
+          if (error) {
+            reject({
+              code: -1,
+              message: error.message
+            });
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              const data = response.getEmail().toObject();
+              resolve({
+                data: data
               });
             } else {
               reject({
