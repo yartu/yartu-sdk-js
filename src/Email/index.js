@@ -1,8 +1,9 @@
 import {
-  ListFolderRequest,
   ListMessageRequest,
   GetMessageRequest,
   SendMessageRequest,
+  ChangeMessageFlagRequest,
+  ListFolderRequest,
   UpsertFolderRequest,
   MailAddress
 } from './service-pb.cjs';
@@ -85,6 +86,33 @@ export default (config) =>
       });
     }
 
+    changeMessageFlag(emailUuid, flagName, status = true) {
+      return new Promise((resolve, reject) => {
+        const request = new ChangeMessageFlagRequest();
+        request.setUuid(emailUuid);
+        request.setFlag(flagName);
+        request.setStatus(status);
+        this.client.changeMessageFlag(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              reject({
+                code: -1,
+                message: error.message
+              });
+            } else {
+              const code = response.getCode();
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        );
+      });
+    }
+
     listFolders() {
       return new Promise((resolve, reject) => {
         const request = new ListFolderRequest();
@@ -101,7 +129,7 @@ export default (config) =>
             if (code == 0) {
               console.log(response);
               const dataList = response
-                .getFoldersList()
+                .getFolderList()
                 .map((data) => data.toObject());
               resolve({
                 folders: dataList,

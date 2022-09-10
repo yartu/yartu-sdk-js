@@ -1301,7 +1301,7 @@ proto.yartu_mail.MailMessage.toObject = function(includeInstance, msg) {
     snippet: jspb.Message.getFieldWithDefault(msg, 8, ""),
     recievedat: jspb.Message.getFieldWithDefault(msg, 9, ""),
     isseen: jspb.Message.getBooleanFieldWithDefault(msg, 10, false),
-    isstarred: jspb.Message.getBooleanFieldWithDefault(msg, 11, false),
+    isflagged: jspb.Message.getBooleanFieldWithDefault(msg, 11, false),
     isjunk: jspb.Message.getBooleanFieldWithDefault(msg, 12, false),
     isdraft: jspb.Message.getBooleanFieldWithDefault(msg, 13, false),
     attachmentList: jspb.Message.toObjectList(msg.getAttachmentList(),
@@ -1391,7 +1391,7 @@ proto.yartu_mail.MailMessage.deserializeBinaryFromReader = function(msg, reader)
       break;
     case 11:
       var value = /** @type {boolean} */ (reader.readBool());
-      msg.setIsstarred(value);
+      msg.setIsflagged(value);
       break;
     case 12:
       var value = /** @type {boolean} */ (reader.readBool());
@@ -1521,7 +1521,7 @@ proto.yartu_mail.MailMessage.serializeBinaryToWriter = function(message, writer)
       f
     );
   }
-  f = message.getIsstarred();
+  f = message.getIsflagged();
   if (f) {
     writer.writeBool(
       11,
@@ -1835,10 +1835,10 @@ proto.yartu_mail.MailMessage.prototype.setIsseen = function(value) {
 
 
 /**
- * optional bool isStarred = 11;
+ * optional bool isFlagged = 11;
  * @return {boolean}
  */
-proto.yartu_mail.MailMessage.prototype.getIsstarred = function() {
+proto.yartu_mail.MailMessage.prototype.getIsflagged = function() {
   return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 11, false));
 };
 
@@ -1847,7 +1847,7 @@ proto.yartu_mail.MailMessage.prototype.getIsstarred = function() {
  * @param {boolean} value
  * @return {!proto.yartu_mail.MailMessage} returns this
  */
-proto.yartu_mail.MailMessage.prototype.setIsstarred = function(value) {
+proto.yartu_mail.MailMessage.prototype.setIsflagged = function(value) {
   return jspb.Message.setProto3BooleanField(this, 11, value);
 };
 
@@ -2223,7 +2223,7 @@ proto.yartu_mail.ListFolderResponse.prototype.toObject = function(opt_includeIns
 proto.yartu_mail.ListFolderResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    foldersList: jspb.Message.toObjectList(msg.getFoldersList(),
+    folderList: jspb.Message.toObjectList(msg.getFolderList(),
     proto.yartu_mail.Folder.toObject, includeInstance),
     message: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
@@ -2269,7 +2269,7 @@ proto.yartu_mail.ListFolderResponse.deserializeBinaryFromReader = function(msg, 
     case 2:
       var value = new proto.yartu_mail.Folder;
       reader.readMessage(value,proto.yartu_mail.Folder.deserializeBinaryFromReader);
-      msg.addFolders(value);
+      msg.addFolder(value);
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
@@ -2311,7 +2311,7 @@ proto.yartu_mail.ListFolderResponse.serializeBinaryToWriter = function(message, 
       f
     );
   }
-  f = message.getFoldersList();
+  f = message.getFolderList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
       2,
@@ -2348,10 +2348,10 @@ proto.yartu_mail.ListFolderResponse.prototype.setCode = function(value) {
 
 
 /**
- * repeated Folder folders = 2;
+ * repeated Folder folder = 2;
  * @return {!Array<!proto.yartu_mail.Folder>}
  */
-proto.yartu_mail.ListFolderResponse.prototype.getFoldersList = function() {
+proto.yartu_mail.ListFolderResponse.prototype.getFolderList = function() {
   return /** @type{!Array<!proto.yartu_mail.Folder>} */ (
     jspb.Message.getRepeatedWrapperField(this, proto.yartu_mail.Folder, 2));
 };
@@ -2361,7 +2361,7 @@ proto.yartu_mail.ListFolderResponse.prototype.getFoldersList = function() {
  * @param {!Array<!proto.yartu_mail.Folder>} value
  * @return {!proto.yartu_mail.ListFolderResponse} returns this
 */
-proto.yartu_mail.ListFolderResponse.prototype.setFoldersList = function(value) {
+proto.yartu_mail.ListFolderResponse.prototype.setFolderList = function(value) {
   return jspb.Message.setRepeatedWrapperField(this, 2, value);
 };
 
@@ -2371,7 +2371,7 @@ proto.yartu_mail.ListFolderResponse.prototype.setFoldersList = function(value) {
  * @param {number=} opt_index
  * @return {!proto.yartu_mail.Folder}
  */
-proto.yartu_mail.ListFolderResponse.prototype.addFolders = function(opt_value, opt_index) {
+proto.yartu_mail.ListFolderResponse.prototype.addFolder = function(opt_value, opt_index) {
   return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.yartu_mail.Folder, opt_index);
 };
 
@@ -2380,8 +2380,8 @@ proto.yartu_mail.ListFolderResponse.prototype.addFolders = function(opt_value, o
  * Clears the list making it empty but non-null.
  * @return {!proto.yartu_mail.ListFolderResponse} returns this
  */
-proto.yartu_mail.ListFolderResponse.prototype.clearFoldersList = function() {
-  return this.setFoldersList([]);
+proto.yartu_mail.ListFolderResponse.prototype.clearFolderList = function() {
+  return this.setFolderList([]);
 };
 
 
