@@ -103,10 +103,17 @@ export default (config) =>
               });
             } else {
               const code = response.getCode();
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+
+              if (code == 0) {
+                resolve({
+                  code: 0
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
         );
