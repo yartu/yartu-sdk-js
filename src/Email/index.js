@@ -3,6 +3,7 @@ import {
   GetMessageRequest,
   SendMessageRequest,
   ChangeMessageFlagRequest,
+  MoveMessageRequest,
   ListFolderRequest,
   UpsertFolderRequest,
   MailAddress
@@ -86,10 +87,10 @@ export default (config) =>
       });
     }
 
-    changeMessageFlag(emailUuid, flagName, status = true) {
+    changeMessageFlag(emailUuidList, flagName, status = true) {
       return new Promise((resolve, reject) => {
         const request = new ChangeMessageFlagRequest();
-        request.setUuid(emailUuid);
+        request.setUuidList(emailUuidList);
         request.setFlag(flagName);
         request.setStatus(status);
         this.client.changeMessageFlag(
@@ -117,6 +118,35 @@ export default (config) =>
             }
           }
         );
+      });
+    }
+
+    moveMessage(emailUuidList, folderUuid) {
+      return new Promise((resolve, reject) => {
+        const request = new MoveMessageRequest();
+        request.setUuidList(emailUuidList);
+        request.setFolder(folderUuid);
+        this.client.moveMessage(request, this.metadata, (error, response) => {
+          if (error) {
+            reject({
+              code: -1,
+              message: error.message
+            });
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code: 0
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
       });
     }
 

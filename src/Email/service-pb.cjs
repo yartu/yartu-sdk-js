@@ -383,7 +383,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.yartu_mail.ChangeMessageFlagRequest = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.yartu_mail.ChangeMessageFlagRequest.repeatedFields_, null);
 };
 goog.inherits(proto.yartu_mail.ChangeMessageFlagRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -425,7 +425,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.yartu_mail.MoveMessageRequest = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.yartu_mail.MoveMessageRequest.repeatedFields_, null);
 };
 goog.inherits(proto.yartu_mail.MoveMessageRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -4537,6 +4537,13 @@ proto.yartu_mail.SendMessageResponse.prototype.hasMessage = function() {
 
 
 
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.yartu_mail.ChangeMessageFlagRequest.repeatedFields_ = [1];
+
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -4568,7 +4575,7 @@ proto.yartu_mail.ChangeMessageFlagRequest.prototype.toObject = function(opt_incl
  */
 proto.yartu_mail.ChangeMessageFlagRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    uuid: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    uuidList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
     flag: jspb.Message.getFieldWithDefault(msg, 2, ""),
     status: jspb.Message.getBooleanFieldWithDefault(msg, 3, false)
   };
@@ -4609,7 +4616,7 @@ proto.yartu_mail.ChangeMessageFlagRequest.deserializeBinaryFromReader = function
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setUuid(value);
+      msg.addUuid(value);
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
@@ -4648,9 +4655,9 @@ proto.yartu_mail.ChangeMessageFlagRequest.prototype.serializeBinary = function()
  */
 proto.yartu_mail.ChangeMessageFlagRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getUuid();
+  f = message.getUuidList();
   if (f.length > 0) {
-    writer.writeString(
+    writer.writeRepeatedString(
       1,
       f
     );
@@ -4673,20 +4680,39 @@ proto.yartu_mail.ChangeMessageFlagRequest.serializeBinaryToWriter = function(mes
 
 
 /**
- * optional string uuid = 1;
- * @return {string}
+ * repeated string uuid = 1;
+ * @return {!Array<string>}
  */
-proto.yartu_mail.ChangeMessageFlagRequest.prototype.getUuid = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+proto.yartu_mail.ChangeMessageFlagRequest.prototype.getUuidList = function() {
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 1));
+};
+
+
+/**
+ * @param {!Array<string>} value
+ * @return {!proto.yartu_mail.ChangeMessageFlagRequest} returns this
+ */
+proto.yartu_mail.ChangeMessageFlagRequest.prototype.setUuidList = function(value) {
+  return jspb.Message.setField(this, 1, value || []);
 };
 
 
 /**
  * @param {string} value
+ * @param {number=} opt_index
  * @return {!proto.yartu_mail.ChangeMessageFlagRequest} returns this
  */
-proto.yartu_mail.ChangeMessageFlagRequest.prototype.setUuid = function(value) {
-  return jspb.Message.setProto3StringField(this, 1, value);
+proto.yartu_mail.ChangeMessageFlagRequest.prototype.addUuid = function(value, opt_index) {
+  return jspb.Message.addToRepeatedField(this, 1, value, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.yartu_mail.ChangeMessageFlagRequest} returns this
+ */
+proto.yartu_mail.ChangeMessageFlagRequest.prototype.clearUuidList = function() {
+  return this.setUuidList([]);
 };
 
 
@@ -4905,6 +4931,13 @@ proto.yartu_mail.ChangeMessageFlagResponse.prototype.hasMessage = function() {
 
 
 
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.yartu_mail.MoveMessageRequest.repeatedFields_ = [1];
+
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -4936,7 +4969,7 @@ proto.yartu_mail.MoveMessageRequest.prototype.toObject = function(opt_includeIns
  */
 proto.yartu_mail.MoveMessageRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    uuid: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    uuidList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
     folder: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
@@ -4976,7 +5009,7 @@ proto.yartu_mail.MoveMessageRequest.deserializeBinaryFromReader = function(msg, 
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setUuid(value);
+      msg.addUuid(value);
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
@@ -5011,9 +5044,9 @@ proto.yartu_mail.MoveMessageRequest.prototype.serializeBinary = function() {
  */
 proto.yartu_mail.MoveMessageRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getUuid();
+  f = message.getUuidList();
   if (f.length > 0) {
-    writer.writeString(
+    writer.writeRepeatedString(
       1,
       f
     );
@@ -5029,20 +5062,39 @@ proto.yartu_mail.MoveMessageRequest.serializeBinaryToWriter = function(message, 
 
 
 /**
- * optional string uuid = 1;
- * @return {string}
+ * repeated string uuid = 1;
+ * @return {!Array<string>}
  */
-proto.yartu_mail.MoveMessageRequest.prototype.getUuid = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+proto.yartu_mail.MoveMessageRequest.prototype.getUuidList = function() {
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 1));
+};
+
+
+/**
+ * @param {!Array<string>} value
+ * @return {!proto.yartu_mail.MoveMessageRequest} returns this
+ */
+proto.yartu_mail.MoveMessageRequest.prototype.setUuidList = function(value) {
+  return jspb.Message.setField(this, 1, value || []);
 };
 
 
 /**
  * @param {string} value
+ * @param {number=} opt_index
  * @return {!proto.yartu_mail.MoveMessageRequest} returns this
  */
-proto.yartu_mail.MoveMessageRequest.prototype.setUuid = function(value) {
-  return jspb.Message.setProto3StringField(this, 1, value);
+proto.yartu_mail.MoveMessageRequest.prototype.addUuid = function(value, opt_index) {
+  return jspb.Message.addToRepeatedField(this, 1, value, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.yartu_mail.MoveMessageRequest} returns this
+ */
+proto.yartu_mail.MoveMessageRequest.prototype.clearUuidList = function() {
+  return this.setUuidList([]);
 };
 
 
