@@ -57,6 +57,10 @@ class YartuApp {
     } else {
       this.user = undefined;
     }
+
+    this.Contact.metadata = { Authentication: yartu_token };
+    this.Search.metadata = { Authentication: yartu_token };
+    this.Email.metadata = { Authentication: yartu_token };
   }
 }
 
