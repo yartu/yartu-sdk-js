@@ -32,6 +32,7 @@ class YartuApp {
     this.Contact = new (Contact())(config);
     this.Search = new (Search())(config);
     this.Email = new (Email())(config);
+    this.Auth.yartuSdk = this;
     this.Email.yartuSdk = this;
   }
 
@@ -53,6 +54,8 @@ class YartuApp {
           this.user = new User(user_data);
         }
       } catch {}
+    } else {
+      this.user = undefined;
     }
   }
 }

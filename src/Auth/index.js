@@ -16,6 +16,7 @@ export default (config) =>
   class Auth {
     endpoint = 'http://localhost:5001';
     client = undefined;
+    yartuSdk = undefined;
     loginStatus = 'login-needed';
 
     constructor(config) {
@@ -43,6 +44,7 @@ export default (config) =>
 
             if (code == 0) {
               window.localStorage.setItem('yartu-token', token);
+              this.yartuSdk.refreshUser();
               resolve({
                 status: status_AUTH_OK,
                 token: token
@@ -126,5 +128,6 @@ export default (config) =>
 
     logout = () => {
       localStorage.clear();
+      this.yartuSdk.refreshUser();
     };
   };
