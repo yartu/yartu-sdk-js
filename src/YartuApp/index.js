@@ -34,11 +34,11 @@ class YartuApp {
     this.Email = new (Email())(config);
     this.Auth.yartuSdk = this;
     this.Email.yartuSdk = this;
+    this.refreshUser();
   }
 
   initialize(config) {
     this.grpcEndpoint = config.endpoint;
-    this.refreshUser();
   }
 
   refreshUser() {
