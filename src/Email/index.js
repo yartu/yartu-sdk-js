@@ -32,13 +32,13 @@ export default (config) =>
         if (filter['getAllMessages']) {
           request.setAllmessages(true);
         } else if (filter['getFlaggedMessages']) {
-          request.setFlaggedMessages(true);
+          request.setFlaggedmessages(true);
         }
 
         const queryData = new Query();
         queryData.setPage(pagination.page || 1);
-        queryData.setPerPage(pagination.perPage || 20);
-        queryData.setSortBy(pagination.sortBy || '');
+        queryData.setPerpage(pagination.perPage || 20);
+        queryData.setSortby(pagination.sortBy || '');
 
         request.SetQuery(queryData);
 
