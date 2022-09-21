@@ -1,4 +1,5 @@
 import {
+  Query,
   ListMessageRequest,
   GetMessageRequest,
   SendMessageRequest,
@@ -23,11 +24,23 @@ export default (config) =>
       this.metadata = { Authentication: yartu_token };
     }
 
-    listMessages(folder, filter, pagination = {}) {
+    listMessages(folder, filter = {}, pagination = {}) {
       return new Promise((resolve, reject) => {
         const request = new ListMessageRequest();
         request.setFolder(folder);
-        console.log(folder, request, request.toObject());
+
+        if (filter['getAllMessages']) {
+          request.setAllmessages(true);
+        } else if (filter['getFlaggedMessages']) {
+          request.setFlaggedMessages(true);
+        }
+
+        const queryData = new Query();
+        queryData.setPage(pagination.page || 1);
+        queryData.setPerPage(pagination.perPage || 20);
+        queryData.setSortBy(pagination.sortBy || '');
+
+        request.SetQuery(queryData);
 
         this.client.listMessage(request, this.metadata, (error, response) => {
           if (error) {
