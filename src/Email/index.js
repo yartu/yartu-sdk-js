@@ -67,7 +67,7 @@ export default (config) =>
                 .map((data) => data.toObject());
               resolve({
                 emails: dataList,
-                pagination: {} // response.getPagination().toObject()
+                pagination: response.getPagination().toObject()
               });
             } else {
               reject({
