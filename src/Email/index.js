@@ -32,16 +32,25 @@ export default (config) =>
 
         if (filter['getAllMessages']) {
           request.setAllmessages(true);
-        } else if (filter['getFlaggedMessages']) {
+        } else if (filter['getFlaggedMessages']) { // Starred
           request.setFlaggedmessages(true);
+        }
+
+        if (filter.setSeenonly) {
+          request.setSeenonly(true);
+        } else if (filter.setUnseenonly) {
+          request.setUnseenonly(true);
+        }
+
+        if (filter['setHasattachmentonly']) {
+          request.setHasattachmentonly(true);
         }
 
         const queryData = new Query();
         queryData.setPage(pagination.page || 1);
         queryData.setPerpage(pagination.perPage || 20);
-        queryData.setSortby(pagination.sortBy || '');
-
-        request.SetQuery(queryData);
+        queryData.setSortby(pagination.sortBy || ''); // from, size, revieved_at,
+        request.setQuery(queryData);
 
         this.client.listMessage(request, this.metadata, (error, response) => {
           if (error) {
@@ -59,7 +68,7 @@ export default (config) =>
                 .map((data) => data.toObject());
               resolve({
                 emails: dataList,
-                pagination: {} // response.getPagination().toObject()
+                pagination: response.getPagination().toObject()
               });
             } else {
               reject({
@@ -271,8 +280,8 @@ export default (config) =>
           this.yartuSdk.user.name + ' ' + this.yartuSdk.user.surname
         );
         request.setSubject(data.subject);
-        request.setBody(data.body);
-        request.setTextbody(data.textBody);
+        request.setBody(data.body); // html
+        request.setTextbody(data.textBody); // text
 
         const toList = [];
         for (const to of data.to) {
