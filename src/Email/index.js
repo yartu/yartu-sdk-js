@@ -2,6 +2,7 @@ import {
   Query,
   ListMessageRequest,
   GetMessageRequest,
+  DownloadAttachmentRequest,
   SendMessageRequest,
   ChangeMessageFlagRequest,
   MoveMessageRequest,
@@ -97,6 +98,40 @@ export default (config) =>
             }
           }
         });
+      });
+    }
+
+    downloadAttachment(emailUuid, place, name) {
+      return new Promise((resolve, reject) => {
+        const request = new DownloadAttachmentRequest();
+        request.setMailuuid(emailUuid);
+        request.setPlace(place);
+        this.client.downloadAttacment(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              reject({
+                code: -1,
+                message: error.message
+              });
+            } else {
+              const code = response.getCode();
+
+              if (code == 0) {
+                const data = response.getData();
+                resolve({
+                  data: data
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
       });
     }
 

@@ -618,5 +618,66 @@ proto.yartu_mail.YEmailPromiseClient.prototype.uploadAttachment =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu_mail.DownloadAttachmentRequest,
+ *   !proto.yartu_mail.DownloadAttachmentResponse>}
+ */
+const methodDescriptor_YEmail_downloadAttachment = new grpc.web.MethodDescriptor(
+  '/yartu_mail.YEmail/downloadAttachment',
+  grpc.web.MethodType.UNARY,
+  proto.yartu_mail.DownloadAttachmentRequest,
+  proto.yartu_mail.DownloadAttachmentResponse,
+  /**
+   * @param {!proto.yartu_mail.DownloadAttachmentRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu_mail.DownloadAttachmentResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu_mail.DownloadAttachmentRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu_mail.DownloadAttachmentResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu_mail.DownloadAttachmentResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu_mail.YEmailClient.prototype.downloadAttachment =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu_mail.YEmail/downloadAttachment',
+      request,
+      metadata || {},
+      methodDescriptor_YEmail_downloadAttachment,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu_mail.DownloadAttachmentRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu_mail.DownloadAttachmentResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu_mail.YEmailPromiseClient.prototype.downloadAttachment =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu_mail.YEmail/downloadAttachment',
+      request,
+      metadata || {},
+      methodDescriptor_YEmail_downloadAttachment);
+};
+
+
 module.exports = proto.yartu_mail;
 
