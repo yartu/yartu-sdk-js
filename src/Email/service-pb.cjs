@@ -1097,7 +1097,8 @@ proto.yartu_mail.Folder.toObject = function(includeInstance, msg) {
     subfolderList: jspb.Message.toObjectList(msg.getSubfolderList(),
     proto.yartu_mail.Folder.toObject, includeInstance),
     path: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    isdefault: jspb.Message.getBooleanFieldWithDefault(msg, 6, false)
+    isdefault: jspb.Message.getBooleanFieldWithDefault(msg, 6, false),
+    unreadcount: jspb.Message.getFieldWithDefault(msg, 7, 0)
   };
 
   if (includeInstance) {
@@ -1158,6 +1159,10 @@ proto.yartu_mail.Folder.deserializeBinaryFromReader = function(msg, reader) {
     case 6:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setIsdefault(value);
+      break;
+    case 7:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setUnreadcount(value);
       break;
     default:
       reader.skipField();
@@ -1228,6 +1233,13 @@ proto.yartu_mail.Folder.serializeBinaryToWriter = function(message, writer) {
   if (f) {
     writer.writeBool(
       6,
+      f
+    );
+  }
+  f = message.getUnreadcount();
+  if (f !== 0) {
+    writer.writeInt64(
+      7,
       f
     );
   }
@@ -1359,6 +1371,24 @@ proto.yartu_mail.Folder.prototype.getIsdefault = function() {
  */
 proto.yartu_mail.Folder.prototype.setIsdefault = function(value) {
   return jspb.Message.setProto3BooleanField(this, 6, value);
+};
+
+
+/**
+ * optional int64 unreadCount = 7;
+ * @return {number}
+ */
+proto.yartu_mail.Folder.prototype.getUnreadcount = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 7, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu_mail.Folder} returns this
+ */
+proto.yartu_mail.Folder.prototype.setUnreadcount = function(value) {
+  return jspb.Message.setProto3IntField(this, 7, value);
 };
 
 
