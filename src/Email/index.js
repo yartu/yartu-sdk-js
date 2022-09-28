@@ -8,6 +8,7 @@ import {
   MoveMessageRequest,
   ListFolderRequest,
   UpsertFolderRequest,
+  UploadAttachmentRequest,
   MailAddress
 } from './service-pb.cjs';
 import { YEmailClient } from './service-grpc-web-pb.cjs';
@@ -28,11 +29,13 @@ export default (config) =>
     listMessages(folder, filter = {}, pagination = {}) {
       return new Promise((resolve, reject) => {
         const request = new ListMessageRequest();
+        const queryData = new Query();
+
         request.setFolder(folder);
 
-        if (filter['getAllMessages']) {
+        if (filter.getAllMessages) {
           request.setAllmessages(true);
-        } else if (filter['getFlaggedMessages']) { // Starred
+        } else if (filter.getFlaggedMessages) { // Starred
           request.setFlaggedmessages(true);
         }
 
@@ -42,14 +45,17 @@ export default (config) =>
           request.setUnseenonly(true);
         }
 
-        if (filter['setHasattachmentonly']) {
+        if (filter.setHasattachmentonly) {
           request.setHasattachmentonly(true);
         }
 
-        const queryData = new Query();
         queryData.setPage(pagination.page || 1);
         queryData.setPerpage(pagination.perPage || 20);
-        queryData.setSortby(pagination.sortBy || ''); // from, size, revieved_at,
+
+        if (filter.sortBy) {
+          queryData.setSortby(filter.sortBy || ''); // from, size, revieved_at,
+        }
+
         request.setQuery(queryData);
 
         this.client.listMessage(request, this.metadata, (error, response) => {
@@ -115,7 +121,7 @@ export default (config) =>
         const request = new DownloadAttachmentRequest();
         request.setMailuuid(emailUuid);
         request.setPlace(place);
-        this.client.downloadAttacment(
+        this.client.downloadAttachment(
           request,
           this.metadata,
           (error, response) => {
@@ -136,6 +142,42 @@ export default (config) =>
                 reject({
                   code: code,
                   message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    }
+
+    uploadAttachment(dataBytes, name) {
+      return new Promise((resolve, reject) => {
+        const request = new UploadAttachmentRequest();
+        request.setName(name);
+        request.setData(dataBytes);
+        this.client.uploadAttachment(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              reject({
+                code: -1,
+                message: error.message
+              });
+            } else {
+              const code = response.getCode();
+              const message = response.getMessage();
+
+              if (code == 0) {
+                const uuid = response.getUuid();
+                resolve({
+                  uuid,
+                  message,
+                });
+              } else {
+                reject({
+                  code: code,
+                  message,
                 });
               }
             }
@@ -279,9 +321,10 @@ export default (config) =>
         request.setFrom(
           this.yartuSdk.user.name + ' ' + this.yartuSdk.user.surname
         );
+
         request.setSubject(data.subject);
         request.setBody(data.body); // html
-        request.setTextbody(data.textBody); // text
+        request.setTextbody(data.bodyText); // text
 
         const toList = [];
         for (const to of data.to) {
@@ -300,6 +343,8 @@ export default (config) =>
           bccList.push(bcc.email);
         }
         request.setBccList(bccList);
+
+        request.setAttachmentsList(data.attachments);
 
         this.client.sendMessage(request, this.metadata, (error, response) => {
           if (error) {
