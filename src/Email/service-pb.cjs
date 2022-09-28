@@ -4757,7 +4757,8 @@ proto.yartu_mail.SendMessageRequest.toObject = function(includeInstance, msg) {
     subject: jspb.Message.getFieldWithDefault(msg, 5, ""),
     body: jspb.Message.getFieldWithDefault(msg, 6, ""),
     textbody: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    attachmentsList: (f = jspb.Message.getRepeatedField(msg, 8)) == null ? undefined : f
+    attachmentsList: (f = jspb.Message.getRepeatedField(msg, 8)) == null ? undefined : f,
+    inreplyto: jspb.Message.getFieldWithDefault(msg, 9, "")
   };
 
   if (includeInstance) {
@@ -4825,6 +4826,10 @@ proto.yartu_mail.SendMessageRequest.deserializeBinaryFromReader = function(msg, 
     case 8:
       var value = /** @type {string} */ (reader.readString());
       msg.addAttachments(value);
+      break;
+    case 9:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setInreplyto(value);
       break;
     default:
       reader.skipField();
@@ -4908,6 +4913,13 @@ proto.yartu_mail.SendMessageRequest.serializeBinaryToWriter = function(message, 
   if (f.length > 0) {
     writer.writeRepeatedString(
       8,
+      f
+    );
+  }
+  f = message.getInreplyto();
+  if (f.length > 0) {
+    writer.writeString(
+      9,
       f
     );
   }
@@ -5131,6 +5143,24 @@ proto.yartu_mail.SendMessageRequest.prototype.addAttachments = function(value, o
  */
 proto.yartu_mail.SendMessageRequest.prototype.clearAttachmentsList = function() {
   return this.setAttachmentsList([]);
+};
+
+
+/**
+ * optional string inReplyTo = 9;
+ * @return {string}
+ */
+proto.yartu_mail.SendMessageRequest.prototype.getInreplyto = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 9, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu_mail.SendMessageRequest} returns this
+ */
+proto.yartu_mail.SendMessageRequest.prototype.setInreplyto = function(value) {
+  return jspb.Message.setProto3StringField(this, 9, value);
 };
 
 
