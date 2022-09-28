@@ -560,67 +560,6 @@ proto.yartu_mail.YEmailPromiseClient.prototype.moveMessage =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
- *   !proto.yartu_mail.UploadAttachmentRequest,
- *   !proto.yartu_mail.UploadAttachmentResponse>}
- */
-const methodDescriptor_YEmail_uploadAttachment = new grpc.web.MethodDescriptor(
-  '/yartu_mail.YEmail/uploadAttachment',
-  grpc.web.MethodType.UNARY,
-  proto.yartu_mail.UploadAttachmentRequest,
-  proto.yartu_mail.UploadAttachmentResponse,
-  /**
-   * @param {!proto.yartu_mail.UploadAttachmentRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.yartu_mail.UploadAttachmentResponse.deserializeBinary
-);
-
-
-/**
- * @param {!proto.yartu_mail.UploadAttachmentRequest} request The
- *     request proto
- * @param {?Object<string, string>} metadata User defined
- *     call metadata
- * @param {function(?grpc.web.RpcError, ?proto.yartu_mail.UploadAttachmentResponse)}
- *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.yartu_mail.UploadAttachmentResponse>|undefined}
- *     The XHR Node Readable Stream
- */
-proto.yartu_mail.YEmailClient.prototype.uploadAttachment =
-    function(request, metadata, callback) {
-  return this.client_.rpcCall(this.hostname_ +
-      '/yartu_mail.YEmail/uploadAttachment',
-      request,
-      metadata || {},
-      methodDescriptor_YEmail_uploadAttachment,
-      callback);
-};
-
-
-/**
- * @param {!proto.yartu_mail.UploadAttachmentRequest} request The
- *     request proto
- * @param {?Object<string, string>=} metadata User defined
- *     call metadata
- * @return {!Promise<!proto.yartu_mail.UploadAttachmentResponse>}
- *     Promise that resolves to the response
- */
-proto.yartu_mail.YEmailPromiseClient.prototype.uploadAttachment =
-    function(request, metadata) {
-  return this.client_.unaryCall(this.hostname_ +
-      '/yartu_mail.YEmail/uploadAttachment',
-      request,
-      metadata || {},
-      methodDescriptor_YEmail_uploadAttachment);
-};
-
-
-/**
- * @const
- * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu_mail.DownloadAttachmentRequest,
  *   !proto.yartu_mail.DownloadAttachmentResponse>}
  */
