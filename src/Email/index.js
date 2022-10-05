@@ -10,6 +10,8 @@ import {
   ListFolderRequest,
   UpsertFolderRequest,
   UploadAttachmentRequest,
+  DeleteFolderRequest,
+  EmptyFolderRequest,
   MailAddress
 } from './service-pb.cjs';
 import { YEmailClient } from './service-grpc-web-pb.cjs';
@@ -344,9 +346,39 @@ export default (config) =>
       });
     }
 
+    deleteFolder(folderUuid) {
+      return new Promise((resolve, reject) => {
+        const request = new DeleteFolderRequest();
+
+        request.setUuid(folderUuid);
+        this.client.deleteFolder(request, this.metadata, (error, response) => {
+          if (error) {
+            reject({
+              code: -1,
+              message: error.message
+            });
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code: 0,
+                message: 'success'
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
     emptyFolder(folderUuid) {
       return new Promise((resolve, reject) => {
-        const request = new UpsertFolderRequest();
+        const request = new EmptyFolderRequest();
 
         request.setUuid(folderUuid);
         this.client.emptyFolder(request, this.metadata, (error, response) => {
