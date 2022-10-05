@@ -250,6 +250,34 @@ export default (config) =>
       });
     }
 
+    deleteMessage(emailUuidList) {
+      return new Promise((resolve, reject) => {
+        const request = new MoveMessageRequest();
+        request.setUuidList(emailUuidList);
+        this.client.deleteMessage(request, this.metadata, (error, response) => {
+          if (error) {
+            reject({
+              code: -1,
+              message: error.message
+            });
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code: 0
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
     listFolders() {
       return new Promise((resolve, reject) => {
         const request = new ListFolderRequest();
@@ -292,6 +320,36 @@ export default (config) =>
         request.setParentfolder(folderParent);
 
         this.client.upsertFolder(request, this.metadata, (error, response) => {
+          if (error) {
+            reject({
+              code: -1,
+              message: error.message
+            });
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code: 0,
+                message: 'success'
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    emptyFolder(folderUuid) {
+      return new Promise((resolve, reject) => {
+        const request = new UpsertFolderRequest();
+
+        request.setUuid(folderUuid);
+        this.client.emptyFolder(request, this.metadata, (error, response) => {
           if (error) {
             reject({
               code: -1,
