@@ -343,6 +343,11 @@ export default (config) =>
       }
       request.setBccList(bccList);
       request.setAttachmentsList(data.attachments);
+
+      if (data.replyTo) {
+        request.setInreplyto(data.replyTo);
+      }
+
       return request;
     }
 

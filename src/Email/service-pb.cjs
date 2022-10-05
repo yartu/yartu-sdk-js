@@ -2009,8 +2009,9 @@ proto.yartu_mail.MailMessage.toObject = function(includeInstance, msg) {
     attachmentList: jspb.Message.toObjectList(msg.getAttachmentList(),
     proto.yartu_mail.MailAttachment.toObject, includeInstance),
     eventList: (f = jspb.Message.getRepeatedField(msg, 15)) == null ? undefined : f,
-    threadid: jspb.Message.getFieldWithDefault(msg, 16, ""),
-    body: jspb.Message.getFieldWithDefault(msg, 17, "")
+    messageid: jspb.Message.getFieldWithDefault(msg, 16, ""),
+    threadid: jspb.Message.getFieldWithDefault(msg, 17, ""),
+    body: jspb.Message.getFieldWithDefault(msg, 18, "")
   };
 
   if (includeInstance) {
@@ -2114,9 +2115,13 @@ proto.yartu_mail.MailMessage.deserializeBinaryFromReader = function(msg, reader)
       break;
     case 16:
       var value = /** @type {string} */ (reader.readString());
-      msg.setThreadid(value);
+      msg.setMessageid(value);
       break;
     case 17:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setThreadid(value);
+      break;
+    case 18:
       var value = /** @type {string} */ (reader.readString());
       msg.setBody(value);
       break;
@@ -2259,8 +2264,8 @@ proto.yartu_mail.MailMessage.serializeBinaryToWriter = function(message, writer)
       f
     );
   }
-  f = /** @type {string} */ (jspb.Message.getField(message, 16));
-  if (f != null) {
+  f = message.getMessageid();
+  if (f.length > 0) {
     writer.writeString(
       16,
       f
@@ -2270,6 +2275,13 @@ proto.yartu_mail.MailMessage.serializeBinaryToWriter = function(message, writer)
   if (f != null) {
     writer.writeString(
       17,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 18));
+  if (f != null) {
+    writer.writeString(
+      18,
       f
     );
   }
@@ -2666,10 +2678,10 @@ proto.yartu_mail.MailMessage.prototype.clearEventList = function() {
 
 
 /**
- * optional string threadId = 16;
+ * optional string messageId = 16;
  * @return {string}
  */
-proto.yartu_mail.MailMessage.prototype.getThreadid = function() {
+proto.yartu_mail.MailMessage.prototype.getMessageid = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 16, ""));
 };
 
@@ -2678,34 +2690,16 @@ proto.yartu_mail.MailMessage.prototype.getThreadid = function() {
  * @param {string} value
  * @return {!proto.yartu_mail.MailMessage} returns this
  */
-proto.yartu_mail.MailMessage.prototype.setThreadid = function(value) {
-  return jspb.Message.setField(this, 16, value);
+proto.yartu_mail.MailMessage.prototype.setMessageid = function(value) {
+  return jspb.Message.setProto3StringField(this, 16, value);
 };
 
 
 /**
- * Clears the field making it undefined.
- * @return {!proto.yartu_mail.MailMessage} returns this
- */
-proto.yartu_mail.MailMessage.prototype.clearThreadid = function() {
-  return jspb.Message.setField(this, 16, undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {boolean}
- */
-proto.yartu_mail.MailMessage.prototype.hasThreadid = function() {
-  return jspb.Message.getField(this, 16) != null;
-};
-
-
-/**
- * optional string body = 17;
+ * optional string threadId = 17;
  * @return {string}
  */
-proto.yartu_mail.MailMessage.prototype.getBody = function() {
+proto.yartu_mail.MailMessage.prototype.getThreadid = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 17, ""));
 };
 
@@ -2714,7 +2708,7 @@ proto.yartu_mail.MailMessage.prototype.getBody = function() {
  * @param {string} value
  * @return {!proto.yartu_mail.MailMessage} returns this
  */
-proto.yartu_mail.MailMessage.prototype.setBody = function(value) {
+proto.yartu_mail.MailMessage.prototype.setThreadid = function(value) {
   return jspb.Message.setField(this, 17, value);
 };
 
@@ -2723,7 +2717,7 @@ proto.yartu_mail.MailMessage.prototype.setBody = function(value) {
  * Clears the field making it undefined.
  * @return {!proto.yartu_mail.MailMessage} returns this
  */
-proto.yartu_mail.MailMessage.prototype.clearBody = function() {
+proto.yartu_mail.MailMessage.prototype.clearThreadid = function() {
   return jspb.Message.setField(this, 17, undefined);
 };
 
@@ -2732,8 +2726,44 @@ proto.yartu_mail.MailMessage.prototype.clearBody = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu_mail.MailMessage.prototype.hasBody = function() {
+proto.yartu_mail.MailMessage.prototype.hasThreadid = function() {
   return jspb.Message.getField(this, 17) != null;
+};
+
+
+/**
+ * optional string body = 18;
+ * @return {string}
+ */
+proto.yartu_mail.MailMessage.prototype.getBody = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 18, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu_mail.MailMessage} returns this
+ */
+proto.yartu_mail.MailMessage.prototype.setBody = function(value) {
+  return jspb.Message.setField(this, 18, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu_mail.MailMessage} returns this
+ */
+proto.yartu_mail.MailMessage.prototype.clearBody = function() {
+  return jspb.Message.setField(this, 18, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu_mail.MailMessage.prototype.hasBody = function() {
+  return jspb.Message.getField(this, 18) != null;
 };
 
 
