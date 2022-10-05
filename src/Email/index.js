@@ -360,7 +360,7 @@ export default (config) =>
 
     sendEmail(data) {
       return new Promise((resolve, reject) => {
-        const request = new SendMessageRequest();
+        let request = new SendMessageRequest();
         request = this.prepareEmail(data, request);
 
         this.client.sendMessage(request, this.metadata, (error, response) => {
@@ -390,7 +390,7 @@ export default (config) =>
 
     saveDraft(data, uid = false) {
       return new Promise((resolve, reject) => {
-        const request = new SaveDraftRequest();
+        let request = new SaveDraftRequest();
         request = this.prepareEmail(data, request);
         if (uid) {
           request.setUid(uid);
