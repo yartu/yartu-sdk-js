@@ -326,22 +326,29 @@ export default (config) =>
       request.setTextbody(data.bodyText); // text
 
       const toList = [];
-      for (const to of data.to) {
-        toList.push(to.email);
+      if (!!data.bcc[Symbol.iterator]) {
+        for (const to of data.to) {
+          toList.push(to.email);
+        }
+        request.setToList(toList);
       }
-      request.setToList(toList);
 
       const ccList = [];
-      for (const cc of data.cc) {
-        ccList.push(cc.email);
+      if (!!data.bcc[Symbol.iterator]) {
+        for (const cc of data.cc) {
+          ccList.push(cc.email);
+        }
+        request.setCcList(ccList);
       }
-      request.setCcList(ccList);
 
       const bccList = [];
-      for (const bcc of data.bcc) {
-        bccList.push(bcc.email);
+      if (!!data.bcc[Symbol.iterator]) {
+        for (const bcc of data.bcc) {
+          bccList.push(bcc.email);
+        }
+        request.setBccList(bccList);
       }
-      request.setBccList(bccList);
+
       request.setAttachmentsList(data.attachments);
 
       if (data.replyTo) {
