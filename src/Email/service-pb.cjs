@@ -1513,7 +1513,7 @@ proto.yartu_mail.MailAddress.prototype.toObject = function(opt_includeInstance) 
 proto.yartu_mail.MailAddress.toObject = function(includeInstance, msg) {
   var f, obj = {
     name: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    address: jspb.Message.getFieldWithDefault(msg, 2, "")
+    email: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -1556,7 +1556,7 @@ proto.yartu_mail.MailAddress.deserializeBinaryFromReader = function(msg, reader)
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setAddress(value);
+      msg.setEmail(value);
       break;
     default:
       reader.skipField();
@@ -1594,7 +1594,7 @@ proto.yartu_mail.MailAddress.serializeBinaryToWriter = function(message, writer)
       f
     );
   }
-  f = message.getAddress();
+  f = message.getEmail();
   if (f.length > 0) {
     writer.writeString(
       2,
@@ -1623,10 +1623,10 @@ proto.yartu_mail.MailAddress.prototype.setName = function(value) {
 
 
 /**
- * optional string address = 2;
+ * optional string email = 2;
  * @return {string}
  */
-proto.yartu_mail.MailAddress.prototype.getAddress = function() {
+proto.yartu_mail.MailAddress.prototype.getEmail = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -1635,7 +1635,7 @@ proto.yartu_mail.MailAddress.prototype.getAddress = function() {
  * @param {string} value
  * @return {!proto.yartu_mail.MailAddress} returns this
  */
-proto.yartu_mail.MailAddress.prototype.setAddress = function(value) {
+proto.yartu_mail.MailAddress.prototype.setEmail = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
