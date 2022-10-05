@@ -326,7 +326,7 @@ export default (config) =>
       request.setTextbody(data.bodyText); // text
 
       const toList = [];
-      if (!!data.to[Symbol.iterator]) {
+      if (!!data.to && !!data.to[Symbol.iterator]) {
         for (const to of data.to) {
           toList.push(to.email);
         }
@@ -334,7 +334,7 @@ export default (config) =>
       }
 
       const ccList = [];
-      if (!!data.cc[Symbol.iterator]) {
+      if (!!data.cc && !!data.cc[Symbol.iterator]) {
         for (const cc of data.cc) {
           ccList.push(cc.email);
         }
@@ -342,7 +342,7 @@ export default (config) =>
       }
 
       const bccList = [];
-      if (!!data.bcc[Symbol.iterator]) {
+      if (!!data.bcc && !!data.bcc[Symbol.iterator]) {
         for (const bcc of data.bcc) {
           bccList.push(bcc.email);
         }
