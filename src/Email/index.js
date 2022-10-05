@@ -4,6 +4,7 @@ import {
   GetMessageRequest,
   DownloadAttachmentRequest,
   SendMessageRequest,
+  SaveDraftRequest,
   ChangeMessageFlagRequest,
   MoveMessageRequest,
   ListFolderRequest,
@@ -315,38 +316,75 @@ export default (config) =>
       });
     }
 
+    prepareEmail(data, request) {
+      request.setFrom(
+        this.yartuSdk.user.name + ' ' + this.yartuSdk.user.surname
+      );
+
+      request.setSubject(data.subject);
+      request.setBody(data.body); // html
+      request.setTextbody(data.bodyText); // text
+
+      const toList = [];
+      for (const to of data.to) {
+        toList.push(to.email);
+      }
+      request.setToList(toList);
+
+      const ccList = [];
+      for (const cc of data.cc) {
+        ccList.push(cc.email);
+      }
+      request.setCcList(ccList);
+
+      const bccList = [];
+      for (const bcc of data.bcc) {
+        bccList.push(bcc.email);
+      }
+      request.setBccList(bccList);
+      request.setAttachmentsList(data.attachments);
+      return request;
+    }
+
     sendEmail(data) {
       return new Promise((resolve, reject) => {
         const request = new SendMessageRequest();
-        request.setFrom(
-          this.yartuSdk.user.name + ' ' + this.yartuSdk.user.surname
-        );
-
-        request.setSubject(data.subject);
-        request.setBody(data.body); // html
-        request.setTextbody(data.bodyText); // text
-
-        const toList = [];
-        for (const to of data.to) {
-          toList.push(to.email);
-        }
-        request.setToList(toList);
-
-        const ccList = [];
-        for (const cc of data.cc) {
-          ccList.push(cc.email);
-        }
-        request.setCcList(ccList);
-
-        const bccList = [];
-        for (const bcc of data.bcc) {
-          bccList.push(bcc.email);
-        }
-        request.setBccList(bccList);
-
-        request.setAttachmentsList(data.attachments);
+        request = this.prepareEmail(data, request);
 
         this.client.sendMessage(request, this.metadata, (error, response) => {
+          if (error) {
+            reject({
+              code: -1,
+              message: error.message
+            });
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code: 0,
+                message: 'successfully'
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    saveDraft(data, uid = false) {
+      return new Promise((resolve, reject) => {
+        const request = new SaveDraftRequest();
+        request = this.prepareEmail(data, request);
+        if (uid) {
+          request.setUid(uid);
+        }
+
+        this.client.saveDraft(request, this.metadata, (error, response) => {
           if (error) {
             reject({
               code: -1,
