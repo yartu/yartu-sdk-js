@@ -1,3 +1,12 @@
 export default (config) => {
-  class Calendar {}
+  class Calendar {
+    endpoint = 'http://localhost:5001';
+    client = undefined;
+    yartuSdk = undefined;
+
+    constructor(config) {
+      this.endpoint = config.endpoint;
+      this.client = new YAuthClient(this.endpoint, '', '');
+    }
+  }
 };
