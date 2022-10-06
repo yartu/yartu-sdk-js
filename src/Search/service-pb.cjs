@@ -2,6 +2,7 @@
 /**
  * @fileoverview
  * @enhanceable
+ * @suppress {missingRequire} reports error on implicit type usages.
  * @suppress {messageConventions} JS Compiler reports an error if a variable or
  *     field starts with 'MSG_' and isn't a translatable message.
  * @public
@@ -12,7 +13,7 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = Function('return this')();
+var global = (function() { return this || window || global || self || Function('return this')(); }).call(null);
 
 goog.exportSymbol('proto.yartu.ListSearchShareablePeopleRequest', null, global);
 goog.exportSymbol('proto.yartu.ListSearchShareablePeopleResponse', null, global);
@@ -1249,4 +1250,4 @@ proto.yartu.ListSearchShareablePeopleResponse.prototype.hasMessage = function() 
 };
 
 
-goog.object.extend(exports, proto.yartu);
+goog.object.extend(module.exports, proto.yartu);

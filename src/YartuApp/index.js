@@ -3,6 +3,7 @@ import jwt_decode from 'jwt-decode';
 import Auth from '../Auth';
 import Contact from '../Contact';
 import Email from '../Email';
+import Calendar from '../Calendar';
 import Search from '../Search';
 
 // TODO :: Check if Vue project
@@ -32,8 +33,10 @@ class YartuApp {
     this.Contact = new (Contact())(config);
     this.Search = new (Search())(config);
     this.Email = new (Email())(config);
+    this,Calendar = new(Calendar())(config);
     this.Auth.yartuSdk = this;
     this.Email.yartuSdk = this;
+    this.Calendar.yartuSdk = this;
     this.refreshUser();
   }
 
