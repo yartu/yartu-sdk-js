@@ -1,1 +1,3 @@
-export default (config) => {};
+export default (config) => {
+  class Calendar {}
+};

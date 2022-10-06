@@ -33,7 +33,7 @@ class YartuApp {
     this.Contact = new (Contact())(config);
     this.Search = new (Search())(config);
     this.Email = new (Email())(config);
-    this,Calendar = new(Calendar())(config);
+    this.Calendar = new(Calendar())(config);
     this.Auth.yartuSdk = this;
     this.Email.yartuSdk = this;
     this.Calendar.yartuSdk = this;
