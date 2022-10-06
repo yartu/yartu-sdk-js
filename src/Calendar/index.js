@@ -1,4 +1,4 @@
-export default (config) => {
+export default (config) =>
   class Calendar {
     endpoint = 'http://localhost:5001';
     client = undefined;
@@ -6,7 +6,5 @@ export default (config) => {
 
     constructor(config) {
       this.endpoint = config.endpoint;
-      this.client = new YAuthClient(this.endpoint, '', '');
     }
-  }
 };
