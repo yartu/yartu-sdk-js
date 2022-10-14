@@ -9,7 +9,7 @@ import {
   status_AUTH_TWO_FA_FORCE
 } from '../utils/codes';
 
-import { LoginRequest, TwoFaLoginRequest } from './service-pb.cjs';
+import { LoginRequest, OtpLoginRequest } from './service-pb.cjs';
 import { YAuthClient } from './service-grpc-web-pb.cjs';
 
 export default (config) =>
@@ -23,6 +23,36 @@ export default (config) =>
       this.endpoint = config.endpoint;
       this.client = new YAuthClient(this.endpoint, '', '');
     }
+
+    getCapabilities = () => {
+      return new Promise((resolve, reject) => {
+        const request = new GetCapabilitiesRequest();
+
+        this.client.getCapabilities(request, {}, (error, response) => {
+          if (error) {
+            reject({
+              code: -1,
+              message: error.message
+            });
+          } else {
+            const code = response.getCode();
+            const capabilities = response.getCapabilities();
+
+            if (code == 0) {
+              resolve({
+                capabilities,
+                code
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
 
     login = (username, password, remember = false) => {
       return new Promise((resolve, reject) => {
@@ -53,7 +83,7 @@ export default (config) =>
               resolve({
                 status: status_AUTH_TWO_FA_FORCE,
                 token: token,
-                two_fa_image: response.getTwoFaImage()
+                two_fa_image: response.getOtpImage()
               });
             } else if (code == code_AUTH_TWO_FA_NEEDED) {
               resolve({ status: status_AUTH_TWO_FA_NEEDED, token: token });
@@ -68,22 +98,49 @@ export default (config) =>
       });
     };
 
-    twoFaLogin = (
-      username,
-      password,
-      twoFaToken,
-      twoFaCode,
-      twoFaType = false
-    ) => {
+    challenge = (username, chellengeType) => {
       return new Promise((resolve, reject) => {
-        const request = new TwoFaLoginRequest();
+        const request = new ChallengeRequest();
+        request.setUsername(username);
+        request.setType(chellengeType);
+        request.setTimestamp(Date.parse(new Date()) / 1000);
+
+        this.client.challenge(request, {}, (error, response) => {
+          if (error) {
+            reject({
+              code: -1,
+              message: error.message
+            });
+          } else {
+            const code = response.getCode();
+            const secret = response.getSecret();
+
+            if (code == 0) {
+              resolve({
+                code: code,
+                secret: secret
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
+    otpLogin = (username, password, OtpToken, OtpCode, OtpType = false) => {
+      return new Promise((resolve, reject) => {
+        const request = new OtpLoginRequest();
         request.setUsername(username);
         request.setPassword(password);
-        request.setTwoFaToken(twoFaToken);
-        request.setTwoFaCode(twoFaCode);
-        request.setTwoFaType(twoFaType);
+        request.setOtpToken(OtpToken);
+        request.setOtpCode(OtpCode);
+        request.setOtpType(OtpType);
 
-        this.client.twoFaLogin(request, {}, (error, response) => {
+        this.client.OtpLogin(request, {}, (error, response) => {
           if (error) {
             reject({
               code: -1,
