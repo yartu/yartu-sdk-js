@@ -41,7 +41,7 @@ export default (config) =>
             });
           } else {
             const code = response.getCode();
-            const capabilities = response.getCapabilities();
+            const capabilities = response.getCapabilitiesList();
 
             if (code == 0) {
               resolve({
