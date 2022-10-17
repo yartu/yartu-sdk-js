@@ -9,7 +9,12 @@ import {
   status_AUTH_TWO_FA_FORCE
 } from '../utils/codes';
 
-import { LoginRequest, OtpLoginRequest } from './service-pb.cjs';
+import {
+  ChallengeRequest,
+  GetCapabilitiesRequest,
+  LoginRequest,
+  OtpLoginRequest
+} from './service-pb.cjs';
 import { YAuthClient } from './service-grpc-web-pb.cjs';
 
 export default (config) =>
