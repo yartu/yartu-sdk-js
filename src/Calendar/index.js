@@ -238,4 +238,33 @@ export default (config) =>
       });
     }
 
+    deleteCalendarObject(calendarObjectId) {
+      return new Promise((resolve, reject) => {
+        const request = new GetCalendarObjectRequest();
+        request.setId(calendarObjectId);
+
+        this.client.deleteCalendarObject(request, this.metadata, (error, response) => {
+          if (error) {
+            reject({
+              code: -1,
+              message: error.message
+            });
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code: 0,
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
 };
