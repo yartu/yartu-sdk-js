@@ -680,5 +680,66 @@ proto.yartu.YCalendarPromiseClient.prototype.listCalendarObject =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.UpsertCalendarObjectDatesRequest,
+ *   !proto.yartu.UpsertCalendarObjectDatesResponse>}
+ */
+const methodDescriptor_YCalendar_UpsertCalendarObjectDates = new grpc.web.MethodDescriptor(
+  '/yartu.YCalendar/UpsertCalendarObjectDates',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.UpsertCalendarObjectDatesRequest,
+  proto.yartu.UpsertCalendarObjectDatesResponse,
+  /**
+   * @param {!proto.yartu.UpsertCalendarObjectDatesRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.UpsertCalendarObjectDatesResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.UpsertCalendarObjectDatesRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.UpsertCalendarObjectDatesResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.UpsertCalendarObjectDatesResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YCalendarClient.prototype.upsertCalendarObjectDates =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YCalendar/UpsertCalendarObjectDates',
+      request,
+      metadata || {},
+      methodDescriptor_YCalendar_UpsertCalendarObjectDates,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.UpsertCalendarObjectDatesRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.UpsertCalendarObjectDatesResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YCalendarPromiseClient.prototype.upsertCalendarObjectDates =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YCalendar/UpsertCalendarObjectDates',
+      request,
+      metadata || {},
+      methodDescriptor_YCalendar_UpsertCalendarObjectDates);
+};
+
+
 module.exports = proto.yartu;
 
