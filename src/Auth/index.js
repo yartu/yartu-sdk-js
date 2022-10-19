@@ -76,12 +76,14 @@ export default (config) =>
           } else {
             const code = response.getCode();
             const token = response.getToken();
+            const services = response.getServicesList();
 
             if (code == 0) {
               window.localStorage.setItem('yartu-token', token);
               this.yartuSdk.refreshUser();
               resolve({
                 status: status_AUTH_OK,
+                services: services,
                 token: token
               });
             } else if (code == code_AUTH_TWO_FA_FORCE) {
@@ -158,6 +160,36 @@ export default (config) =>
             if (code == 0) {
               window.localStorage.setItem('yartu-token', token);
               resolve(token);
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
+    getServices = () => {
+      return new Promise((resolve, reject) => {
+        const request = new GetServicesRequest();
+
+        this.client.getServices(request, {}, (error, response) => {
+          if (error) {
+            reject({
+              code: -1,
+              message: error.message
+            });
+          } else {
+            const code = response.getCode();
+            const services = response.getServicesList();
+
+            if (code == 0) {
+              resolve({
+                code: code,
+                services: services
+              });
             } else {
               reject({
                 code: code,

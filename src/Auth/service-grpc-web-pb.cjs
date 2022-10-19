@@ -440,5 +440,66 @@ proto.yartu.YAuthPromiseClient.prototype.me =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.GetServicesRequest,
+ *   !proto.yartu.GetServicesResponse>}
+ */
+const methodDescriptor_YAuth_getServices = new grpc.web.MethodDescriptor(
+  '/yartu.YAuth/getServices',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.GetServicesRequest,
+  proto.yartu.GetServicesResponse,
+  /**
+   * @param {!proto.yartu.GetServicesRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.GetServicesResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.GetServicesRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.GetServicesResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.GetServicesResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YAuthClient.prototype.getServices =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YAuth/getServices',
+      request,
+      metadata || {},
+      methodDescriptor_YAuth_getServices,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.GetServicesRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.GetServicesResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YAuthPromiseClient.prototype.getServices =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YAuth/getServices',
+      request,
+      metadata || {},
+      methodDescriptor_YAuth_getServices);
+};
+
+
 module.exports = proto.yartu;
 
