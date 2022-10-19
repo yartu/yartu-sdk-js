@@ -1,5 +1,6 @@
 import {
   ListCalendarRequest,
+  DeleteCalendarRequest,
   ListCalendarObjectRequest,
   UpsertCalendarRequest,
   dateRange,
@@ -8,6 +9,8 @@ import {
   Attendee,
   GetCalendarObjectRequest,
   UpsertCalendarObjectDatesRequest,
+  ShareCalendarRequest,
+  CalendarUserSharePermissionMeta,
 } from './service-pb.cjs';
 
 import { YCalendarClient } from './service-grpc-web-pb.cjs';
@@ -40,6 +43,33 @@ export default (config) =>
               const dataList = response.getDataList().map((data) => data.toObject());
               resolve({
                 calendars: dataList,
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    deleteCalendar(calendarId) {
+      return new Promise((resolve, reject) => {
+        const request = new DeleteCalendarRequest();
+        request.setId(calendarId)
+        this.client.deleteCalendar(request, this.metadata, (error, response) => {
+          if (error) {
+            reject({
+              code: -1,
+              message: error.message
+            });
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code: 0,
               });
             } else {
               reject({
@@ -256,6 +286,79 @@ export default (config) =>
               resolve({
                 code: 0,
                 message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    shareCalendar(calendarId, usersList) {
+      return new Promise((resolve, reject) => {
+        const request = new ShareCalendarRequest();
+        request.setId(calendarId);
+        console.log('CAL', calendarId);
+        console.log('usersList', usersList);
+        const UserSharePermissionsList = [];
+        usersList.forEach(user => {
+          const meta = new CalendarUserSharePermissionMeta();
+          meta.setUsername(user.username);
+          meta.setPermission(user.permission);
+          UserSharePermissionsList.push(meta);
+        });
+
+        request.setPermissionsList(UserSharePermissionsList)
+
+        this.client.shareCalendar(request, this.metadata, (error, response) => {
+          if (error) {
+            reject({
+              code: -1,
+              message: error.message
+            });
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code: 0,
+                success: response.getSuccessList().map((data) => data.toObject()),
+                error: response.getErrorList().map((data) => data.toObject()),
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    listCalendarSharedList(calendarId) {
+      return new Promise((resolve, reject) => {
+        const request = new ShareCalendarRequest();
+        request.setId(calendarId);
+
+        this.client.listCalendarSharedList(request, this.metadata, (error, response) => {
+          if (error) {
+            reject({
+              code: -1,
+              message: error.message
+            });
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              const dataList = response.getDataList().map((data) => data.toObject());
+              resolve({
+                users: dataList,
               });
             } else {
               reject({

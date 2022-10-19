@@ -439,6 +439,67 @@ proto.yartu.YCalendarPromiseClient.prototype.unshareCalendar =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.ListCalendarSharedListRequest,
+ *   !proto.yartu.ListCalendarSharedListResponse>}
+ */
+const methodDescriptor_YCalendar_listCalendarSharedList = new grpc.web.MethodDescriptor(
+  '/yartu.YCalendar/listCalendarSharedList',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.ListCalendarSharedListRequest,
+  proto.yartu.ListCalendarSharedListResponse,
+  /**
+   * @param {!proto.yartu.ListCalendarSharedListRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.ListCalendarSharedListResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.ListCalendarSharedListRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ListCalendarSharedListResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ListCalendarSharedListResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YCalendarClient.prototype.listCalendarSharedList =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YCalendar/listCalendarSharedList',
+      request,
+      metadata || {},
+      methodDescriptor_YCalendar_listCalendarSharedList,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.ListCalendarSharedListRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.ListCalendarSharedListResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YCalendarPromiseClient.prototype.listCalendarSharedList =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YCalendar/listCalendarSharedList',
+      request,
+      metadata || {},
+      methodDescriptor_YCalendar_listCalendarSharedList);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.GetCalendarObjectRequest,
  *   !proto.yartu.GetCalendarObjectResponse>}
  */
