@@ -23,6 +23,7 @@ class User {
   }
 }
 
+
 class YartuApp {
   grpcEndpoint = 'http://localhost:5001/';
   user = undefined;
@@ -64,6 +65,7 @@ class YartuApp {
     this.Contact.metadata = { Authentication: yartu_token };
     this.Search.metadata = { Authentication: yartu_token };
     this.Email.metadata = { Authentication: yartu_token };
+    this.Calendar.metadata = { Authentication: yartu_token };
   }
 }
 

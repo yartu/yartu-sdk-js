@@ -1961,7 +1961,8 @@ proto.yartu.Calendar.toObject = function(includeInstance, msg) {
     caldav: jspb.Message.getBooleanFieldWithDefault(msg, 14, false),
     pb_default: jspb.Message.getBooleanFieldWithDefault(msg, 15, false),
     email: jspb.Message.getFieldWithDefault(msg, 16, ""),
-    permission: jspb.Message.getFieldWithDefault(msg, 17, "")
+    permission: jspb.Message.getFieldWithDefault(msg, 17, ""),
+    owner: jspb.Message.getFieldWithDefault(msg, 18, "")
   };
 
   if (includeInstance) {
@@ -2065,6 +2066,10 @@ proto.yartu.Calendar.deserializeBinaryFromReader = function(msg, reader) {
     case 17:
       var value = /** @type {string} */ (reader.readString());
       msg.setPermission(value);
+      break;
+    case 18:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOwner(value);
       break;
     default:
       reader.skipField();
@@ -2211,6 +2216,13 @@ proto.yartu.Calendar.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writeString(
       17,
+      f
+    );
+  }
+  f = message.getOwner();
+  if (f.length > 0) {
+    writer.writeString(
+      18,
       f
     );
   }
@@ -2520,6 +2532,24 @@ proto.yartu.Calendar.prototype.getPermission = function() {
  */
 proto.yartu.Calendar.prototype.setPermission = function(value) {
   return jspb.Message.setProto3StringField(this, 17, value);
+};
+
+
+/**
+ * optional string owner = 18;
+ * @return {string}
+ */
+proto.yartu.Calendar.prototype.getOwner = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 18, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.Calendar} returns this
+ */
+proto.yartu.Calendar.prototype.setOwner = function(value) {
+  return jspb.Message.setProto3StringField(this, 18, value);
 };
 
 
