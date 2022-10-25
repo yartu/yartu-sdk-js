@@ -2884,8 +2884,8 @@ proto.yartu.CalendarObject.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getRrule();
-  if (f.length > 0) {
+  f = /** @type {string} */ (jspb.Message.getField(message, 17));
+  if (f != null) {
     writer.writeString(
       17,
       f
@@ -3276,7 +3276,25 @@ proto.yartu.CalendarObject.prototype.getRrule = function() {
  * @return {!proto.yartu.CalendarObject} returns this
  */
 proto.yartu.CalendarObject.prototype.setRrule = function(value) {
-  return jspb.Message.setProto3StringField(this, 17, value);
+  return jspb.Message.setField(this, 17, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.CalendarObject} returns this
+ */
+proto.yartu.CalendarObject.prototype.clearRrule = function() {
+  return jspb.Message.setField(this, 17, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.CalendarObject.prototype.hasRrule = function() {
+  return jspb.Message.getField(this, 17) != null;
 };
 
 

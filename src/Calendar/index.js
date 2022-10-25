@@ -101,7 +101,12 @@ export default (config) =>
             const code = response.getCode();
 
             if (code == 0) {
-              const dataList = response.getDataList().map((data) => data.toObject());
+              const dataList = response.getDataList().map((data) => {
+                const result = data.toObject();
+                result.rrule = data.hasRrule() ? data.getRrule() : null;
+                return result;
+              });
+
               resolve({
                 calendarObjects: dataList,
               });
