@@ -1,5 +1,6 @@
 const handleError = (error, reject) => {
-  if (error.code === 100) {
+  // UNAUTHENTICATED
+  if (error.code === 16) {
     localStorage.removeItem('yartu-token');
     document.dispatchEvent(new CustomEvent('go-login'));
   }
