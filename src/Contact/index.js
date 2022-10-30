@@ -49,7 +49,7 @@ export default (config) =>
           this.metadata,
           (error, response) => {
             if (error) {
-              handleError(error);
+              handleError(error, reject);
             } else {
               const code = response.getCode();
 
@@ -96,7 +96,7 @@ export default (config) =>
 
         this.client.listContact(request, this.metadata, (error, response) => {
           if (error) {
-            handleError(error);
+            handleError(error, reject);
           } else {
             const code = response.getCode();
 
@@ -131,7 +131,7 @@ export default (config) =>
           this.metadata,
           (error, response) => {
             if (error) {
-              handleError(error);
+              handleError(error, reject);
             } else {
               const code = response.getCode();
 
@@ -217,7 +217,7 @@ export default (config) =>
 
         this.client.upsertContact(request, this.metadata, (error, response) => {
           if (error) {
-            handleError(error);
+            handleError(error, reject);
           } else {
             const code = response.getCode();
 
@@ -243,7 +243,7 @@ export default (config) =>
         request.setId(contactId);
         this.client.getContact(request, this.metadata, (error, response) => {
           if (error) {
-            handleError(error);
+            handleError(error, reject);
           } else {
             const code = response.getCode();
 
@@ -270,7 +270,7 @@ export default (config) =>
         request.setIdsList(contactIds);
         this.client.deleteContact(request, this.metadata, (error, response) => {
           if (error) {
-            handleError(error);
+            handleError(error, reject);
           } else {
             const code = response.getCode();
 
@@ -298,7 +298,7 @@ export default (config) =>
           this.metadata,
           (error, response) => {
             if (error) {
-              handleError(error);
+              handleError(error, reject);
             } else {
               const code = response.getCode();
 
@@ -330,7 +330,7 @@ export default (config) =>
 
         this.client.upsertLabel(request, this.metadata, (error, response) => {
           if (error) {
-            handleError(error);
+            handleError(error, reject);
           } else {
             const code = response.getCode();
 
@@ -357,7 +357,7 @@ export default (config) =>
 
         this.client.listLabel(request, this.metadata, (error, response) => {
           if (error) {
-            handleError(error);
+            handleError(error, reject);
           } else {
             const code = response.getCode();
 
@@ -388,7 +388,7 @@ export default (config) =>
 
         this.client.getLabel(request, this.metadata, (error, response) => {
           if (error) {
-            handleError(error);
+            handleError(error, reject);
           } else {
             const code = response.getCode();
 
@@ -417,7 +417,7 @@ export default (config) =>
 
         this.client.deleteLabel(request, this.metadata, (error, response) => {
           if (error) {
-            handleError(error);
+            handleError(error, reject);
           } else {
             const code = response.getCode();
             if (code == 0) {
@@ -445,7 +445,7 @@ export default (config) =>
           this.metadata,
           (error, response) => {
             if (error) {
-              handleError(error);
+              handleError(error, reject);
             } else {
               const code = response.getCode();
 
@@ -476,7 +476,7 @@ export default (config) =>
           this.metadata,
           (error, response) => {
             if (error) {
-              handleError(error);
+              handleError(error, reject);
             } else {
               const code = response.getCode();
 
@@ -507,7 +507,7 @@ export default (config) =>
 
         this.client.exportContact(request, this.metadata, (error, response) => {
           if (error) {
-            handleError(error);
+            handleError(error, reject);
           } else {
             const code = response.getCode();
 

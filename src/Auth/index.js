@@ -37,7 +37,7 @@ export default (config) =>
 
         this.client.getCapabilities(request, {}, (error, response) => {
           if (error) {
-            handleError(error);
+            handleError(error, reject);
           } else {
             const code = response.getCode();
             const capabilities = response.getCapabilitiesList();
@@ -68,7 +68,7 @@ export default (config) =>
 
         this.client.login(request, {}, (error, response) => {
           if (error) {
-            handleError(error);
+            handleError(error, reject);
           } else {
             const code = response.getCode();
             const token = response.getToken();
@@ -110,7 +110,7 @@ export default (config) =>
 
         this.client.challenge(request, {}, (error, response) => {
           if (error) {
-            handleError(error);
+            handleError(error, reject);
           } else {
             const code = response.getCode();
             const secret = response.getSecret();
@@ -142,7 +142,7 @@ export default (config) =>
 
         this.client.OtpLogin(request, {}, (error, response) => {
           if (error) {
-            handleError(error);
+            handleError(error, reject);
           } else {
             const code = response.getCode();
             const token = response.getToken();
@@ -167,7 +167,7 @@ export default (config) =>
 
         this.client.getServices(request, {}, (error, response) => {
           if (error) {
-            handleError(error);
+            handleError(error, reject);
           } else {
             const code = response.getCode();
             const services = response.getServicesList();

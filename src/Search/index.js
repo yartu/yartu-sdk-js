@@ -40,7 +40,7 @@ export default (config) =>
           this.metadata,
           (error, response) => {
             if (error) {
-            handleError(error);
+            handleError(error, reject);
             } else {
               const code = response.getCode();
 

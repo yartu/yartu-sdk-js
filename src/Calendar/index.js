@@ -34,7 +34,7 @@ export default (config) =>
         const request = new ListCalendarRequest();
         this.client.listCalendar(request, this.metadata, (error, response) => {
           if (error) {
-            handleError(error);
+            handleError(error, reject);
           } else {
             const code = response.getCode();
             if (code == 0) {
@@ -59,7 +59,7 @@ export default (config) =>
         request.setId(calendarId)
         this.client.deleteCalendar(request, this.metadata, (error, response) => {
           if (error) {
-            handleError(error);
+            handleError(error, reject);
           } else {
             const code = response.getCode();
             if (code == 0) {
@@ -88,7 +88,7 @@ export default (config) =>
 
         this.client.listCalendarObject(request, this.metadata, (error, response) => {
           if (error) {
-            handleError(error);
+            handleError(error, reject);
           } else {
             const code = response.getCode();
 
@@ -124,7 +124,7 @@ export default (config) =>
 
         this.client.upsertCalendar(request, this.metadata, (error, response) => {
           if (error) {
-            handleError(error);
+            handleError(error, reject);
           } else {
             const code = response.getCode();
 
@@ -178,7 +178,7 @@ export default (config) =>
 
         this.client.upsertCalendarObject(request, this.metadata, (error, response) => {
           if (error) {
-            handleError(error);
+            handleError(error, reject);
           } else {
             const code = response.getCode();
 
@@ -205,7 +205,7 @@ export default (config) =>
 
         this.client.getCalendarObject(request, this.metadata, (error, response) => {
           if (error) {
-            handleError(error);
+            handleError(error, reject);
           } else {
             const code = response.getCode();
 
@@ -234,7 +234,7 @@ export default (config) =>
 
         this.client.upsertCalendarObjectDates(request, this.metadata, (error, response) => {
           if (error) {
-            handleError(error);
+            handleError(error, reject);
           } else {
             const code = response.getCode();
             if (code == 0) {
@@ -260,7 +260,7 @@ export default (config) =>
 
         this.client.deleteCalendarObject(request, this.metadata, (error, response) => {
           if (error) {
-            handleError(error);
+            handleError(error, reject);
           } else {
             const code = response.getCode();
 
@@ -298,7 +298,7 @@ export default (config) =>
 
         this.client.shareCalendar(request, this.metadata, (error, response) => {
           if (error) {
-            handleError(error);
+            handleError(error, reject);
           } else {
             const code = response.getCode();
 
@@ -327,7 +327,7 @@ export default (config) =>
 
         this.client.listCalendarSharedList(request, this.metadata, (error, response) => {
           if (error) {
-            handleError(error);
+            handleError(error, reject);
           } else {
             const code = response.getCode();
 
