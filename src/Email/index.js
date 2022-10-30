@@ -15,6 +15,7 @@ import {
   MailAddress
 } from './service-pb.cjs';
 import { YEmailClient } from './service-grpc-web-pb.cjs';
+import { handleError } from '../utils/helper';
 
 export default (config) =>
   class Email {
@@ -63,10 +64,7 @@ export default (config) =>
 
         this.client.listMessage(request, this.metadata, (error, response) => {
           if (error) {
-            reject({
-              code: -1,
-              message: error.message
-            });
+            handleError(error);
           } else {
             const code = response.getCode();
 
@@ -96,10 +94,7 @@ export default (config) =>
         request.setUuid(emailUuid);
         this.client.getMessage(request, this.metadata, (error, response) => {
           if (error) {
-            reject({
-              code: -1,
-              message: error.message
-            });
+            handleError(error);
           } else {
             const code = response.getCode();
 
@@ -129,10 +124,7 @@ export default (config) =>
           this.metadata,
           (error, response) => {
             if (error) {
-              reject({
-                code: -1,
-                message: error.message
-              });
+            handleError(error);
             } else {
               const code = response.getCode();
 
@@ -163,10 +155,7 @@ export default (config) =>
           this.metadata,
           (error, response) => {
             if (error) {
-              reject({
-                code: -1,
-                message: error.message
-              });
+            handleError(error);
             } else {
               const code = response.getCode();
               const message = response.getMessage();
@@ -200,10 +189,7 @@ export default (config) =>
           this.metadata,
           (error, response) => {
             if (error) {
-              reject({
-                code: -1,
-                message: error.message
-              });
+            handleError(error);
             } else {
               const code = response.getCode();
 
@@ -230,10 +216,7 @@ export default (config) =>
         request.setFolder(folderUuid);
         this.client.moveMessage(request, this.metadata, (error, response) => {
           if (error) {
-            reject({
-              code: -1,
-              message: error.message
-            });
+            handleError(error);
           } else {
             const code = response.getCode();
 
@@ -258,10 +241,7 @@ export default (config) =>
         request.setUuidList(emailUuidList);
         this.client.deleteMessage(request, this.metadata, (error, response) => {
           if (error) {
-            reject({
-              code: -1,
-              message: error.message
-            });
+            handleError(error);
           } else {
             const code = response.getCode();
 
@@ -286,10 +266,7 @@ export default (config) =>
         // request.setQuery()
         this.client.listFolder(request, this.metadata, (error, response) => {
           if (error) {
-            reject({
-              code: -1,
-              message: error.message
-            });
+            handleError(error);
           } else {
             const code = response.getCode();
 
@@ -323,10 +300,7 @@ export default (config) =>
 
         this.client.upsertFolder(request, this.metadata, (error, response) => {
           if (error) {
-            reject({
-              code: -1,
-              message: error.message
-            });
+            handleError(error);
           } else {
             const code = response.getCode();
 
@@ -353,10 +327,7 @@ export default (config) =>
         request.setUuid(folderUuid);
         this.client.deleteFolder(request, this.metadata, (error, response) => {
           if (error) {
-            reject({
-              code: -1,
-              message: error.message
-            });
+            handleError(error);
           } else {
             const code = response.getCode();
 
@@ -383,10 +354,7 @@ export default (config) =>
         request.setUuid(folderUuid);
         this.client.emptyFolder(request, this.metadata, (error, response) => {
           if (error) {
-            reject({
-              code: -1,
-              message: error.message
-            });
+            handleError(error);
           } else {
             const code = response.getCode();
 
@@ -455,10 +423,7 @@ export default (config) =>
 
         this.client.sendMessage(request, this.metadata, (error, response) => {
           if (error) {
-            reject({
-              code: -1,
-              message: error.message
-            });
+            handleError(error);
           } else {
             const code = response.getCode();
 
@@ -488,10 +453,7 @@ export default (config) =>
 
         this.client.saveDraft(request, this.metadata, (error, response) => {
           if (error) {
-            reject({
-              code: -1,
-              message: error.message
-            });
+            handleError(error);
           } else {
             const code = response.getCode();
 

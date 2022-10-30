@@ -19,10 +19,12 @@ import {
   DeleteLabelRequest,
   UpsertContactLabelRequest,
   UpsertContactStarRequest,
-  ExportContactRequest,
+  ExportContactRequest
 } from './service-pb.cjs';
 
 import { YContactClient } from './service-grpc-web-pb.cjs';
+
+import { handleError } from '../utils/helper';
 
 export default (config) =>
   class Contact {
@@ -47,10 +49,7 @@ export default (config) =>
           this.metadata,
           (error, response) => {
             if (error) {
-              reject({
-                code: -1,
-                message: error.message
-              });
+              handleError(error);
             } else {
               const code = response.getCode();
 
@@ -74,56 +73,49 @@ export default (config) =>
       });
     };
 
-    listContact = (addressBookId, queryReq = {}) => {
+    listContact = (addressBookId, queryRequest = {}) => {
       return new Promise((resolve, reject) => {
         const request = new ListContactRequest();
         // request.setQuery([]);
 
         const query = new Query();
-        query.setQuery(queryReq.query);
-        query.setPage(queryReq.page);
-        query.setPerPage(queryReq.perPage);
-        query.setSearchFieldsList(queryReq.searchFields);
+        query.setQuery(queryRequest.query);
+        query.setPage(queryRequest.page);
+        query.setPerPage(queryRequest.perPage);
+        query.setSearchFieldsList(queryRequest.searchFields);
 
         const meta = new ContactMetaQuery();
-        meta.setLabel(queryReq.label);
-        meta.setStarred(queryReq.starred);
-        meta.setFrequently(queryReq.frequently);
+        meta.setLabel(queryRequest.label);
+        meta.setStarred(queryRequest.starred);
+        meta.setFrequently(queryRequest.frequently);
 
         request.setQuery(query);
         request.setMeta(meta);
 
         request.setAddressBookId(addressBookId);
 
-        this.client.listContact(
-          request,
-          this.metadata,
-          (error, response) => {
-            if (error) {
-              reject({
-                code: -1,
-                message: error.message
+        this.client.listContact(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              const dataList = response
+                .getDataList()
+                .map((data) => data.toObject());
+              resolve({
+                data: dataList,
+                pagination: response.getPagination().toObject()
               });
             } else {
-              const code = response.getCode();
-
-              if (code == 0) {
-                const dataList = response
-                  .getDataList()
-                  .map((data) => data.toObject());
-                resolve({
-                  data: dataList,
-                  pagination: response.getPagination().toObject()
-                });
-              } else {
-                reject({
-                  code: code,
-                  message: response.getMessage()
-                });
-              }
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
             }
           }
-        );
+        });
       });
     };
 
@@ -139,17 +131,14 @@ export default (config) =>
           this.metadata,
           (error, response) => {
             if (error) {
-              reject({
-                code: -1,
-                message: error.message
-              });
+              handleError(error);
             } else {
               const code = response.getCode();
 
               if (code == 0) {
                 resolve({
                   code: 0,
-                  message: 'successfully',
+                  message: 'successfully'
                 });
               } else {
                 reject({
@@ -160,7 +149,6 @@ export default (config) =>
             }
           }
         );
-
       });
     };
 
@@ -224,35 +212,28 @@ export default (config) =>
         contact.setAddressList(addressList);
         contact.setNote(contactData.note);
 
-        request.setLabelsList(contactData.labelsList); 
+        request.setLabelsList(contactData.labelsList);
         request.setContact(contact);
 
-        this.client.upsertContact(
-          request,
-          this.metadata,
-          (error, response) => {
-            if (error) {
-              reject({
-                code: -1,
-                message: error.message
+        this.client.upsertContact(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code: 0,
+                message: 'successfully'
               });
             } else {
-              const code = response.getCode();
-
-              if (code == 0) {
-                resolve({
-                  code: 0,
-                  message: 'successfully',
-                });
-              } else {
-                reject({
-                  code: code,
-                  message: response.getMessage()
-                });
-              }
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
             }
           }
-        );
+        });
       });
     };
 
@@ -260,32 +241,25 @@ export default (config) =>
       return new Promise((resolve, reject) => {
         const request = new GetContactRequest();
         request.setId(contactId);
-        this.client.getContact(
-          request,
-          this.metadata,
-          (error, response) => {
-            if (error) {
-              reject({
-                code: -1,
-                message: error.message
+        this.client.getContact(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              const data = response.getData().toObject();
+              resolve({
+                data: data
               });
             } else {
-              const code = response.getCode();
-
-              if (code == 0) {
-                const data = response.getData().toObject()
-                resolve({
-                  data: data,
-                });
-              } else {
-                reject({
-                  code: code,
-                  message: response.getMessage()
-                });
-              }
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
             }
           }
-        );
+        });
       });
     };
 
@@ -294,31 +268,24 @@ export default (config) =>
         const request = new DeleteContactRequest();
         request.setId(contactId);
         request.setIdsList(contactIds);
-        this.client.deleteContact(
-          request,
-          this.metadata,
-          (error, response) => {
-            if (error) {
-              reject({
-                code: -1,
-                message: error.message
+        this.client.deleteContact(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                message: response.getMessage()
               });
             } else {
-              const code = response.getCode();
-
-              if (code == 0) {
-                resolve({
-                  message: response.getMessage(),
-                });
-              } else {
-                reject({
-                  code: code,
-                  message: response.getMessage()
-                });
-              }
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
             }
           }
-        );
+        });
       });
     };
 
@@ -331,16 +298,13 @@ export default (config) =>
           this.metadata,
           (error, response) => {
             if (error) {
-              reject({
-                code: -1,
-                message: error.message
-              });
+              handleError(error);
             } else {
               const code = response.getCode();
 
               if (code == 0) {
                 resolve({
-                  message: response.getMessage(),
+                  message: response.getMessage()
                 });
               } else {
                 reject({
@@ -364,32 +328,25 @@ export default (config) =>
         request.setLabel(label);
         request.setContacsList(lablelData.contacts);
 
-        this.client.upsertLabel(
-          request,
-          this.metadata,
-          (error, response) => {
-            if (error) {
-              reject({
-                code: -1,
-                message: error.message
+        this.client.upsertLabel(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code: 0,
+                message: 'successfully'
               });
             } else {
-              const code = response.getCode();
-
-              if (code == 0) {
-                resolve({
-                  code: 0,
-                  message: 'successfully',
-                });
-              } else {
-                reject({
-                  code: code,
-                  message: response.getMessage()
-                });
-              }
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
             }
           }
-        );
+        });
       });
     };
 
@@ -398,35 +355,28 @@ export default (config) =>
         const request = new ListLabelRequest();
         request.setAddressBookId(addressBookId);
 
-        this.client.listLabel(
-          request,
-          this.metadata,
-          (error, response) => {
-            if (error) {
-              reject({
-                code: -1,
-                message: error.message
+        this.client.listLabel(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              const dataList = response
+                .getDataList()
+                .map((data) => data.toObject());
+              resolve({
+                data: dataList,
+                pagination: response.getPagination().toObject()
               });
             } else {
-              const code = response.getCode();
-
-              if (code == 0) {
-                const dataList = response
-                  .getDataList()
-                  .map((data) => data.toObject());
-                resolve({
-                  data: dataList,
-                  pagination: response.getPagination().toObject()
-                });
-              } else {
-                reject({
-                  code: code,
-                  message: response.getMessage()
-                });
-              }
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
             }
           }
-        );
+        });
       });
     };
 
@@ -436,32 +386,27 @@ export default (config) =>
         request.setId(labelId);
         request.setHasContacts(hasContacts);
 
-        this.client.getLabel(
-          request,
-          this.metadata,
-          (error, response) => {
-            if (error) {
-              reject({
-                code: -1,
-                message: error.message
+        this.client.getLabel(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                label: response.getLabel().toObject(),
+                contacts: response
+                  .getContactsList()
+                  .map((data) => data.toObject())
               });
             } else {
-              const code = response.getCode();
-
-              if (code == 0) {
-                resolve({
-                  label: response.getLabel().toObject(),
-                  contacts: response.getContactsList().map((data) => data.toObject()),
-                });
-              } else {
-                reject({
-                  code: code,
-                  message: response.getMessage()
-                });
-              }
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
             }
           }
-        );
+        });
       });
     };
 
@@ -470,30 +415,23 @@ export default (config) =>
         const request = new DeleteLabelRequest();
         request.setId(labelId);
 
-        this.client.deleteLabel(
-          request,
-          this.metadata,
-          (error, response) => {
-            if (error) {
-              reject({
-                code: -1,
-                message: error.message
+        this.client.deleteLabel(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                message: response.getMessage()
               });
             } else {
-              const code = response.getCode();
-              if (code == 0) {
-                resolve({
-                  message: response.getMessage()
-                });
-              } else {
-                reject({
-                  code: code,
-                  message: response.getMessage()
-                });
-              }
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
             }
           }
-        );
+        });
       });
     };
 
@@ -507,17 +445,14 @@ export default (config) =>
           this.metadata,
           (error, response) => {
             if (error) {
-              reject({
-                code: -1,
-                message: error.message
-              });
+              handleError(error);
             } else {
               const code = response.getCode();
 
               if (code == 0) {
                 resolve({
                   code: 0,
-                  message: 'successfully',
+                  message: 'successfully'
                 });
               } else {
                 reject({
@@ -541,17 +476,14 @@ export default (config) =>
           this.metadata,
           (error, response) => {
             if (error) {
-              reject({
-                code: -1,
-                message: error.message
-              });
+              handleError(error);
             } else {
               const code = response.getCode();
 
               if (code == 0) {
                 resolve({
                   code: 0,
-                  message: response.getMessage(),
+                  message: response.getMessage()
                 });
               } else {
                 reject({
@@ -573,33 +505,25 @@ export default (config) =>
         request.setContactListList(contactList);
         request.setMode(mode);
 
-        this.client.exportContact(
-          request,
-          this.metadata,
-          (error, response) => {
-            if (error) {
-              reject({
-                code: -1,
-                message: error.message
+        this.client.exportContact(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code: 0,
+                file: response.getFile_asB64()
               });
             } else {
-              const code = response.getCode();
-
-              if (code == 0) {
-                resolve({
-                  code: 0,
-                  file: response.getFile_asB64(),
-                });
-              } else {
-                reject({
-                  code: code,
-                  message: response.getMessage()
-                });
-              }
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
             }
           }
-        );
+        });
       });
     };
-
   };

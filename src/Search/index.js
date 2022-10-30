@@ -11,6 +11,7 @@ import {
 
 import { ListSearchShareablePeopleRequest, SharableQuery } from './service-pb.cjs';
 import {YSearchClient } from './service-grpc-web-pb.cjs';
+import { handleError } from '../utils/helper';
 
 export default (config) =>
   class Search {
@@ -39,10 +40,7 @@ export default (config) =>
           this.metadata,
           (error, response) => {
             if (error) {
-              reject({
-                code: -1,
-                message: error.message
-              });
+            handleError(error);
             } else {
               const code = response.getCode();
 

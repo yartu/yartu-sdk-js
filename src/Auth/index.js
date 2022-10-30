@@ -9,6 +9,8 @@ import {
   status_AUTH_TWO_FA_FORCE
 } from '../utils/codes';
 
+import { handleError } from '../utils/helper';
+
 import {
   ChallengeRequest,
   GetCapabilitiesRequest,
@@ -35,10 +37,7 @@ export default (config) =>
 
         this.client.getCapabilities(request, {}, (error, response) => {
           if (error) {
-            reject({
-              code: -1,
-              message: error.message
-            });
+            handleError(error);
           } else {
             const code = response.getCode();
             const capabilities = response.getCapabilitiesList();
@@ -69,10 +68,7 @@ export default (config) =>
 
         this.client.login(request, {}, (error, response) => {
           if (error) {
-            reject({
-              code: -1,
-              message: error.message
-            });
+            handleError(error);
           } else {
             const code = response.getCode();
             const token = response.getToken();
@@ -114,10 +110,7 @@ export default (config) =>
 
         this.client.challenge(request, {}, (error, response) => {
           if (error) {
-            reject({
-              code: -1,
-              message: error.message
-            });
+            handleError(error);
           } else {
             const code = response.getCode();
             const secret = response.getSecret();
@@ -149,10 +142,7 @@ export default (config) =>
 
         this.client.OtpLogin(request, {}, (error, response) => {
           if (error) {
-            reject({
-              code: -1,
-              message: error.message
-            });
+            handleError(error);
           } else {
             const code = response.getCode();
             const token = response.getToken();
@@ -177,10 +167,7 @@ export default (config) =>
 
         this.client.getServices(request, {}, (error, response) => {
           if (error) {
-            reject({
-              code: -1,
-              message: error.message
-            });
+            handleError(error);
           } else {
             const code = response.getCode();
             const services = response.getServicesList();
