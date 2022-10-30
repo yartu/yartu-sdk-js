@@ -39,7 +39,8 @@ export default (config) =>
 
         if (filter.getAllMessages) {
           request.setAllmessages(true);
-        } else if (filter.getFlaggedMessages) { // Starred
+        } else if (filter.getFlaggedMessages) {
+          // Starred
           request.setFlaggedmessages(true);
         }
 
@@ -124,7 +125,7 @@ export default (config) =>
           this.metadata,
           (error, response) => {
             if (error) {
-            handleError(error, reject);
+              handleError(error, reject);
             } else {
               const code = response.getCode();
 
@@ -155,7 +156,7 @@ export default (config) =>
           this.metadata,
           (error, response) => {
             if (error) {
-            handleError(error, reject);
+              handleError(error, reject);
             } else {
               const code = response.getCode();
               const message = response.getMessage();
@@ -164,12 +165,12 @@ export default (config) =>
                 const uuid = response.getUuid();
                 resolve({
                   uuid,
-                  message,
+                  message
                 });
               } else {
                 reject({
                   code: code,
-                  message,
+                  message
                 });
               }
             }
@@ -189,7 +190,7 @@ export default (config) =>
           this.metadata,
           (error, response) => {
             if (error) {
-            handleError(error, reject);
+              handleError(error, reject);
             } else {
               const code = response.getCode();
 
@@ -462,6 +463,30 @@ export default (config) =>
                 code: 0,
                 message: 'successfully'
               });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    getInfo() {
+      return new Promise((resolve, reject) => {
+        const request = new GetInfoRequest();
+        this.client.getInfo(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            const data = response.toObject();
+            data.code = code;
+
+            if (code == 0) {
+              resolve(data);
             } else {
               reject({
                 code: code,
