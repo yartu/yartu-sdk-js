@@ -751,8 +751,8 @@ proto.yartu.YCalendarPromiseClient.prototype.listCalendarObject =
  *   !proto.yartu.UpsertCalendarObjectDatesRequest,
  *   !proto.yartu.UpsertCalendarObjectDatesResponse>}
  */
-const methodDescriptor_YCalendar_UpsertCalendarObjectDates = new grpc.web.MethodDescriptor(
-  '/yartu.YCalendar/UpsertCalendarObjectDates',
+const methodDescriptor_YCalendar_upsertCalendarObjectDates = new grpc.web.MethodDescriptor(
+  '/yartu.YCalendar/upsertCalendarObjectDates',
   grpc.web.MethodType.UNARY,
   proto.yartu.UpsertCalendarObjectDatesRequest,
   proto.yartu.UpsertCalendarObjectDatesResponse,
@@ -780,10 +780,10 @@ const methodDescriptor_YCalendar_UpsertCalendarObjectDates = new grpc.web.Method
 proto.yartu.YCalendarClient.prototype.upsertCalendarObjectDates =
     function(request, metadata, callback) {
   return this.client_.rpcCall(this.hostname_ +
-      '/yartu.YCalendar/UpsertCalendarObjectDates',
+      '/yartu.YCalendar/upsertCalendarObjectDates',
       request,
       metadata || {},
-      methodDescriptor_YCalendar_UpsertCalendarObjectDates,
+      methodDescriptor_YCalendar_upsertCalendarObjectDates,
       callback);
 };
 
@@ -799,10 +799,71 @@ proto.yartu.YCalendarClient.prototype.upsertCalendarObjectDates =
 proto.yartu.YCalendarPromiseClient.prototype.upsertCalendarObjectDates =
     function(request, metadata) {
   return this.client_.unaryCall(this.hostname_ +
-      '/yartu.YCalendar/UpsertCalendarObjectDates',
+      '/yartu.YCalendar/upsertCalendarObjectDates',
       request,
       metadata || {},
-      methodDescriptor_YCalendar_UpsertCalendarObjectDates);
+      methodDescriptor_YCalendar_upsertCalendarObjectDates);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.UpsertCalendarObjectSplitRequest,
+ *   !proto.yartu.UpsertCalendarObjectSplitResponse>}
+ */
+const methodDescriptor_YCalendar_upsertCalendarObjectSplit = new grpc.web.MethodDescriptor(
+  '/yartu.YCalendar/upsertCalendarObjectSplit',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.UpsertCalendarObjectSplitRequest,
+  proto.yartu.UpsertCalendarObjectSplitResponse,
+  /**
+   * @param {!proto.yartu.UpsertCalendarObjectSplitRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.UpsertCalendarObjectSplitResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.UpsertCalendarObjectSplitRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.UpsertCalendarObjectSplitResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.UpsertCalendarObjectSplitResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YCalendarClient.prototype.upsertCalendarObjectSplit =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YCalendar/upsertCalendarObjectSplit',
+      request,
+      metadata || {},
+      methodDescriptor_YCalendar_upsertCalendarObjectSplit,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.UpsertCalendarObjectSplitRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.UpsertCalendarObjectSplitResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YCalendarPromiseClient.prototype.upsertCalendarObjectSplit =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YCalendar/upsertCalendarObjectSplit',
+      request,
+      metadata || {},
+      methodDescriptor_YCalendar_upsertCalendarObjectSplit);
 };
 
 

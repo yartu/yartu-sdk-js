@@ -11,6 +11,7 @@ import {
   UpsertCalendarObjectDatesRequest,
   ShareCalendarRequest,
   CalendarUserSharePermissionMeta,
+  UpsertCalendarObjectSplitRequest,
 } from './service-pb.cjs';
 
 import { YCalendarClient } from './service-grpc-web-pb.cjs';
@@ -96,6 +97,8 @@ export default (config) =>
               const dataList = response.getDataList().map((data) => {
                 const result = data.toObject();
                 result.rrule = data.hasRrule() ? data.getRrule() : null;
+                result.exdate = result.exdateList;
+                result.groupId = data.getGroupid();
                 return result;
               });
 
@@ -153,7 +156,7 @@ export default (config) =>
         request.setSummary(calendarObjectData.summary);
         request.setLocation(calendarObjectData.location);
         request.setDescription(calendarObjectData.description);
-        request.setRrule(calendarObjectData.rrule);
+        request.setFreq(calendarObjectData.freq);
         request.setComponenttype(calendarObjectData.componenttype);
 
         const attendes = [];
@@ -235,6 +238,40 @@ export default (config) =>
         this.client.upsertCalendarObjectDates(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code: 0,
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    upsertCalendarObjectSplit(calendarObjectId, date) {
+      return new Promise((resolve, reject) => {
+        const request = new UpsertCalendarObjectSplitRequest();
+        // request.setDate(date);
+        
+        request.setId(calendarObjectId);
+        request.setOldDate(date.oldDate);
+        request.setNewDateStart(date.newStart);
+        request.setNewDateEnd(date.newEnd);
+
+        this.client.upsertCalendarObjectSplit(request, this.metadata, (error, response) => {
+          if (error) {
+            reject({
+              code: -1,
+              message: error.message
+            });
           } else {
             const code = response.getCode();
             if (code == 0) {
