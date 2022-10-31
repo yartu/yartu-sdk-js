@@ -12,6 +12,7 @@ import {
   UploadAttachmentRequest,
   DeleteFolderRequest,
   EmptyFolderRequest,
+  GetInfoRequest,
   MailAddress
 } from './service-pb.cjs';
 import { YEmailClient } from './service-grpc-web-pb.cjs';
