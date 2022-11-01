@@ -1944,19 +1944,20 @@ proto.yartu.GetInfoResponse.prototype.toObject = function(opt_includeInstance) {
  */
 proto.yartu.GetInfoResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    username: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
     onlineStatus: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    data: (f = msg.getData()) && common_grpc_definitions_pb.User.toObject(includeInstance, f),
-    servertype: jspb.Message.getBooleanFieldWithDefault(msg, 5, false),
-    personalPhone: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    personalEmail: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    secondaryPhone: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    secondaryEmail: jspb.Message.getFieldWithDefault(msg, 9, ""),
-    language: jspb.Message.getFieldWithDefault(msg, 10, ""),
-    country: jspb.Message.getFieldWithDefault(msg, 11, ""),
-    timezone: jspb.Message.getFieldWithDefault(msg, 12, ""),
-    timedateFormat: jspb.Message.getFieldWithDefault(msg, 13, ""),
-    city: jspb.Message.getFieldWithDefault(msg, 14, "")
+    user: (f = msg.getUser()) && common_grpc_definitions_pb.User.toObject(includeInstance, f),
+    servertype: jspb.Message.getBooleanFieldWithDefault(msg, 4, false),
+    personalPhone: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    personalEmail: jspb.Message.getFieldWithDefault(msg, 6, ""),
+    secondaryPhone: jspb.Message.getFieldWithDefault(msg, 7, ""),
+    secondaryEmail: jspb.Message.getFieldWithDefault(msg, 8, ""),
+    language: jspb.Message.getFieldWithDefault(msg, 9, ""),
+    country: jspb.Message.getFieldWithDefault(msg, 10, ""),
+    timezone: jspb.Message.getFieldWithDefault(msg, 11, ""),
+    timeformat: jspb.Message.getFieldWithDefault(msg, 12, ""),
+    city: jspb.Message.getFieldWithDefault(msg, 13, ""),
+    message: jspb.Message.getFieldWithDefault(msg, 14, "")
   };
 
   if (includeInstance) {
@@ -1994,57 +1995,61 @@ proto.yartu.GetInfoResponse.deserializeBinaryFromReader = function(msg, reader) 
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setUsername(value);
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setCode(value);
       break;
     case 2:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setOnlineStatus(value);
       break;
-    case 4:
+    case 3:
       var value = new common_grpc_definitions_pb.User;
       reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
-      msg.setData(value);
+      msg.setUser(value);
       break;
-    case 5:
+    case 4:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setServertype(value);
       break;
-    case 6:
+    case 5:
       var value = /** @type {string} */ (reader.readString());
       msg.setPersonalPhone(value);
       break;
-    case 7:
+    case 6:
       var value = /** @type {string} */ (reader.readString());
       msg.setPersonalEmail(value);
       break;
-    case 8:
+    case 7:
       var value = /** @type {string} */ (reader.readString());
       msg.setSecondaryPhone(value);
       break;
-    case 9:
+    case 8:
       var value = /** @type {string} */ (reader.readString());
       msg.setSecondaryEmail(value);
       break;
-    case 10:
+    case 9:
       var value = /** @type {string} */ (reader.readString());
       msg.setLanguage(value);
       break;
-    case 11:
+    case 10:
       var value = /** @type {string} */ (reader.readString());
       msg.setCountry(value);
       break;
-    case 12:
+    case 11:
       var value = /** @type {string} */ (reader.readString());
       msg.setTimezone(value);
       break;
+    case 12:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setTimeformat(value);
+      break;
     case 13:
       var value = /** @type {string} */ (reader.readString());
-      msg.setTimedateFormat(value);
+      msg.setCity(value);
       break;
     case 14:
       var value = /** @type {string} */ (reader.readString());
-      msg.setCity(value);
+      msg.setMessage(value);
       break;
     default:
       reader.skipField();
@@ -2075,9 +2080,9 @@ proto.yartu.GetInfoResponse.prototype.serializeBinary = function() {
  */
 proto.yartu.GetInfoResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getUsername();
-  if (f.length > 0) {
-    writer.writeString(
+  f = message.getCode();
+  if (f !== 0) {
+    writer.writeInt64(
       1,
       f
     );
@@ -2089,10 +2094,10 @@ proto.yartu.GetInfoResponse.serializeBinaryToWriter = function(message, writer) 
       f
     );
   }
-  f = message.getData();
+  f = message.getUser();
   if (f != null) {
     writer.writeMessage(
-      4,
+      3,
       f,
       common_grpc_definitions_pb.User.serializeBinaryToWriter
     );
@@ -2100,68 +2105,75 @@ proto.yartu.GetInfoResponse.serializeBinaryToWriter = function(message, writer) 
   f = message.getServertype();
   if (f) {
     writer.writeBool(
-      5,
+      4,
       f
     );
   }
   f = message.getPersonalPhone();
   if (f.length > 0) {
     writer.writeString(
-      6,
+      5,
       f
     );
   }
   f = message.getPersonalEmail();
   if (f.length > 0) {
     writer.writeString(
-      7,
+      6,
       f
     );
   }
   f = message.getSecondaryPhone();
   if (f.length > 0) {
     writer.writeString(
-      8,
+      7,
       f
     );
   }
   f = message.getSecondaryEmail();
   if (f.length > 0) {
     writer.writeString(
-      9,
+      8,
       f
     );
   }
   f = message.getLanguage();
   if (f.length > 0) {
     writer.writeString(
-      10,
+      9,
       f
     );
   }
   f = message.getCountry();
   if (f.length > 0) {
     writer.writeString(
-      11,
+      10,
       f
     );
   }
   f = message.getTimezone();
   if (f.length > 0) {
     writer.writeString(
+      11,
+      f
+    );
+  }
+  f = message.getTimeformat();
+  if (f.length > 0) {
+    writer.writeString(
       12,
       f
     );
   }
-  f = message.getTimedateFormat();
+  f = message.getCity();
   if (f.length > 0) {
     writer.writeString(
       13,
       f
     );
   }
-  f = message.getCity();
-  if (f.length > 0) {
+  f = /** @type {string} */ (jspb.Message.getField(message, 14));
+  if (f != null) {
     writer.writeString(
       14,
       f
@@ -2171,20 +2183,20 @@ proto.yartu.GetInfoResponse.serializeBinaryToWriter = function(message, writer) 
 
 
 /**
- * optional string username = 1;
- * @return {string}
+ * optional int64 code = 1;
+ * @return {number}
  */
-proto.yartu.GetInfoResponse.prototype.getUsername = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+proto.yartu.GetInfoResponse.prototype.getCode = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
 /**
- * @param {string} value
+ * @param {number} value
  * @return {!proto.yartu.GetInfoResponse} returns this
  */
-proto.yartu.GetInfoResponse.prototype.setUsername = function(value) {
-  return jspb.Message.setProto3StringField(this, 1, value);
+proto.yartu.GetInfoResponse.prototype.setCode = function(value) {
+  return jspb.Message.setProto3IntField(this, 1, value);
 };
 
 
@@ -2207,12 +2219,12 @@ proto.yartu.GetInfoResponse.prototype.setOnlineStatus = function(value) {
 
 
 /**
- * optional User data = 4;
+ * optional User user = 3;
  * @return {?proto.User}
  */
-proto.yartu.GetInfoResponse.prototype.getData = function() {
+proto.yartu.GetInfoResponse.prototype.getUser = function() {
   return /** @type{?proto.User} */ (
-    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.User, 4));
+    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.User, 3));
 };
 
 
@@ -2220,8 +2232,8 @@ proto.yartu.GetInfoResponse.prototype.getData = function() {
  * @param {?proto.User|undefined} value
  * @return {!proto.yartu.GetInfoResponse} returns this
 */
-proto.yartu.GetInfoResponse.prototype.setData = function(value) {
-  return jspb.Message.setWrapperField(this, 4, value);
+proto.yartu.GetInfoResponse.prototype.setUser = function(value) {
+  return jspb.Message.setWrapperField(this, 3, value);
 };
 
 
@@ -2229,8 +2241,8 @@ proto.yartu.GetInfoResponse.prototype.setData = function(value) {
  * Clears the message field making it undefined.
  * @return {!proto.yartu.GetInfoResponse} returns this
  */
-proto.yartu.GetInfoResponse.prototype.clearData = function() {
-  return this.setData(undefined);
+proto.yartu.GetInfoResponse.prototype.clearUser = function() {
+  return this.setUser(undefined);
 };
 
 
@@ -2238,17 +2250,17 @@ proto.yartu.GetInfoResponse.prototype.clearData = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu.GetInfoResponse.prototype.hasData = function() {
-  return jspb.Message.getField(this, 4) != null;
+proto.yartu.GetInfoResponse.prototype.hasUser = function() {
+  return jspb.Message.getField(this, 3) != null;
 };
 
 
 /**
- * optional bool serverType = 5;
+ * optional bool serverType = 4;
  * @return {boolean}
  */
 proto.yartu.GetInfoResponse.prototype.getServertype = function() {
-  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 5, false));
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 4, false));
 };
 
 
@@ -2257,16 +2269,16 @@ proto.yartu.GetInfoResponse.prototype.getServertype = function() {
  * @return {!proto.yartu.GetInfoResponse} returns this
  */
 proto.yartu.GetInfoResponse.prototype.setServertype = function(value) {
-  return jspb.Message.setProto3BooleanField(this, 5, value);
+  return jspb.Message.setProto3BooleanField(this, 4, value);
 };
 
 
 /**
- * optional string personal_phone = 6;
+ * optional string personal_phone = 5;
  * @return {string}
  */
 proto.yartu.GetInfoResponse.prototype.getPersonalPhone = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
 };
 
 
@@ -2275,16 +2287,16 @@ proto.yartu.GetInfoResponse.prototype.getPersonalPhone = function() {
  * @return {!proto.yartu.GetInfoResponse} returns this
  */
 proto.yartu.GetInfoResponse.prototype.setPersonalPhone = function(value) {
-  return jspb.Message.setProto3StringField(this, 6, value);
+  return jspb.Message.setProto3StringField(this, 5, value);
 };
 
 
 /**
- * optional string personal_email = 7;
+ * optional string personal_email = 6;
  * @return {string}
  */
 proto.yartu.GetInfoResponse.prototype.getPersonalEmail = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
 };
 
 
@@ -2293,16 +2305,16 @@ proto.yartu.GetInfoResponse.prototype.getPersonalEmail = function() {
  * @return {!proto.yartu.GetInfoResponse} returns this
  */
 proto.yartu.GetInfoResponse.prototype.setPersonalEmail = function(value) {
-  return jspb.Message.setProto3StringField(this, 7, value);
+  return jspb.Message.setProto3StringField(this, 6, value);
 };
 
 
 /**
- * optional string secondary_phone = 8;
+ * optional string secondary_phone = 7;
  * @return {string}
  */
 proto.yartu.GetInfoResponse.prototype.getSecondaryPhone = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
 };
 
 
@@ -2311,16 +2323,16 @@ proto.yartu.GetInfoResponse.prototype.getSecondaryPhone = function() {
  * @return {!proto.yartu.GetInfoResponse} returns this
  */
 proto.yartu.GetInfoResponse.prototype.setSecondaryPhone = function(value) {
-  return jspb.Message.setProto3StringField(this, 8, value);
+  return jspb.Message.setProto3StringField(this, 7, value);
 };
 
 
 /**
- * optional string secondary_email = 9;
+ * optional string secondary_email = 8;
  * @return {string}
  */
 proto.yartu.GetInfoResponse.prototype.getSecondaryEmail = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 9, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
 };
 
 
@@ -2329,16 +2341,16 @@ proto.yartu.GetInfoResponse.prototype.getSecondaryEmail = function() {
  * @return {!proto.yartu.GetInfoResponse} returns this
  */
 proto.yartu.GetInfoResponse.prototype.setSecondaryEmail = function(value) {
-  return jspb.Message.setProto3StringField(this, 9, value);
+  return jspb.Message.setProto3StringField(this, 8, value);
 };
 
 
 /**
- * optional string language = 10;
+ * optional string language = 9;
  * @return {string}
  */
 proto.yartu.GetInfoResponse.prototype.getLanguage = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 10, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 9, ""));
 };
 
 
@@ -2347,16 +2359,16 @@ proto.yartu.GetInfoResponse.prototype.getLanguage = function() {
  * @return {!proto.yartu.GetInfoResponse} returns this
  */
 proto.yartu.GetInfoResponse.prototype.setLanguage = function(value) {
-  return jspb.Message.setProto3StringField(this, 10, value);
+  return jspb.Message.setProto3StringField(this, 9, value);
 };
 
 
 /**
- * optional string country = 11;
+ * optional string country = 10;
  * @return {string}
  */
 proto.yartu.GetInfoResponse.prototype.getCountry = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 11, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 10, ""));
 };
 
 
@@ -2365,16 +2377,16 @@ proto.yartu.GetInfoResponse.prototype.getCountry = function() {
  * @return {!proto.yartu.GetInfoResponse} returns this
  */
 proto.yartu.GetInfoResponse.prototype.setCountry = function(value) {
-  return jspb.Message.setProto3StringField(this, 11, value);
+  return jspb.Message.setProto3StringField(this, 10, value);
 };
 
 
 /**
- * optional string timezone = 12;
+ * optional string timezone = 11;
  * @return {string}
  */
 proto.yartu.GetInfoResponse.prototype.getTimezone = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 12, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 11, ""));
 };
 
 
@@ -2383,15 +2395,33 @@ proto.yartu.GetInfoResponse.prototype.getTimezone = function() {
  * @return {!proto.yartu.GetInfoResponse} returns this
  */
 proto.yartu.GetInfoResponse.prototype.setTimezone = function(value) {
+  return jspb.Message.setProto3StringField(this, 11, value);
+};
+
+
+/**
+ * optional string timeformat = 12;
+ * @return {string}
+ */
+proto.yartu.GetInfoResponse.prototype.getTimeformat = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 12, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.GetInfoResponse} returns this
+ */
+proto.yartu.GetInfoResponse.prototype.setTimeformat = function(value) {
   return jspb.Message.setProto3StringField(this, 12, value);
 };
 
 
 /**
- * optional string timedate_format = 13;
+ * optional string city = 13;
  * @return {string}
  */
-proto.yartu.GetInfoResponse.prototype.getTimedateFormat = function() {
+proto.yartu.GetInfoResponse.prototype.getCity = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 13, ""));
 };
 
@@ -2400,16 +2430,16 @@ proto.yartu.GetInfoResponse.prototype.getTimedateFormat = function() {
  * @param {string} value
  * @return {!proto.yartu.GetInfoResponse} returns this
  */
-proto.yartu.GetInfoResponse.prototype.setTimedateFormat = function(value) {
+proto.yartu.GetInfoResponse.prototype.setCity = function(value) {
   return jspb.Message.setProto3StringField(this, 13, value);
 };
 
 
 /**
- * optional string city = 14;
+ * optional string message = 14;
  * @return {string}
  */
-proto.yartu.GetInfoResponse.prototype.getCity = function() {
+proto.yartu.GetInfoResponse.prototype.getMessage = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 14, ""));
 };
 
@@ -2418,8 +2448,26 @@ proto.yartu.GetInfoResponse.prototype.getCity = function() {
  * @param {string} value
  * @return {!proto.yartu.GetInfoResponse} returns this
  */
-proto.yartu.GetInfoResponse.prototype.setCity = function(value) {
-  return jspb.Message.setProto3StringField(this, 14, value);
+proto.yartu.GetInfoResponse.prototype.setMessage = function(value) {
+  return jspb.Message.setField(this, 14, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.GetInfoResponse} returns this
+ */
+proto.yartu.GetInfoResponse.prototype.clearMessage = function() {
+  return jspb.Message.setField(this, 14, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.GetInfoResponse.prototype.hasMessage = function() {
+  return jspb.Message.getField(this, 14) != null;
 };
 
 
@@ -2455,16 +2503,17 @@ proto.yartu.UpsertAccountRequest.prototype.toObject = function(opt_includeInstan
  */
 proto.yartu.UpsertAccountRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    onlineStatus: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    personalPhone: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    personalEmail: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    secondaryPhone: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    secondaryEmail: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    language: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    country: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    timezone: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    timedateFormat: jspb.Message.getFieldWithDefault(msg, 9, ""),
-    city: jspb.Message.getFieldWithDefault(msg, 10, "")
+    password: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    onlineStatus: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    personalPhone: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    personalEmail: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    secondaryPhone: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    secondaryEmail: jspb.Message.getFieldWithDefault(msg, 6, ""),
+    language: jspb.Message.getFieldWithDefault(msg, 7, ""),
+    country: jspb.Message.getFieldWithDefault(msg, 8, ""),
+    timezone: jspb.Message.getFieldWithDefault(msg, 9, ""),
+    timeformat: jspb.Message.getFieldWithDefault(msg, 10, ""),
+    city: jspb.Message.getFieldWithDefault(msg, 11, "")
   };
 
   if (includeInstance) {
@@ -2502,42 +2551,46 @@ proto.yartu.UpsertAccountRequest.deserializeBinaryFromReader = function(msg, rea
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setPassword(value);
+      break;
+    case 2:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setOnlineStatus(value);
       break;
-    case 2:
+    case 3:
       var value = /** @type {string} */ (reader.readString());
       msg.setPersonalPhone(value);
       break;
-    case 3:
+    case 4:
       var value = /** @type {string} */ (reader.readString());
       msg.setPersonalEmail(value);
       break;
-    case 4:
+    case 5:
       var value = /** @type {string} */ (reader.readString());
       msg.setSecondaryPhone(value);
       break;
-    case 5:
+    case 6:
       var value = /** @type {string} */ (reader.readString());
       msg.setSecondaryEmail(value);
       break;
-    case 6:
+    case 7:
       var value = /** @type {string} */ (reader.readString());
       msg.setLanguage(value);
       break;
-    case 7:
+    case 8:
       var value = /** @type {string} */ (reader.readString());
       msg.setCountry(value);
       break;
-    case 8:
+    case 9:
       var value = /** @type {string} */ (reader.readString());
       msg.setTimezone(value);
       break;
-    case 9:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setTimedateFormat(value);
-      break;
     case 10:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setTimeformat(value);
+      break;
+    case 11:
       var value = /** @type {string} */ (reader.readString());
       msg.setCity(value);
       break;
@@ -2570,16 +2623,16 @@ proto.yartu.UpsertAccountRequest.prototype.serializeBinary = function() {
  */
 proto.yartu.UpsertAccountRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = /** @type {number} */ (jspb.Message.getField(message, 1));
+  f = /** @type {string} */ (jspb.Message.getField(message, 1));
   if (f != null) {
-    writer.writeInt64(
+    writer.writeString(
       1,
       f
     );
   }
-  f = /** @type {string} */ (jspb.Message.getField(message, 2));
+  f = /** @type {number} */ (jspb.Message.getField(message, 2));
   if (f != null) {
-    writer.writeString(
+    writer.writeInt64(
       2,
       f
     );
@@ -2640,23 +2693,30 @@ proto.yartu.UpsertAccountRequest.serializeBinaryToWriter = function(message, wri
       f
     );
   }
+  f = /** @type {string} */ (jspb.Message.getField(message, 11));
+  if (f != null) {
+    writer.writeString(
+      11,
+      f
+    );
+  }
 };
 
 
 /**
- * optional int64 online_status = 1;
- * @return {number}
+ * optional string password = 1;
+ * @return {string}
  */
-proto.yartu.UpsertAccountRequest.prototype.getOnlineStatus = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+proto.yartu.UpsertAccountRequest.prototype.getPassword = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /**
- * @param {number} value
+ * @param {string} value
  * @return {!proto.yartu.UpsertAccountRequest} returns this
  */
-proto.yartu.UpsertAccountRequest.prototype.setOnlineStatus = function(value) {
+proto.yartu.UpsertAccountRequest.prototype.setPassword = function(value) {
   return jspb.Message.setField(this, 1, value);
 };
 
@@ -2665,7 +2725,7 @@ proto.yartu.UpsertAccountRequest.prototype.setOnlineStatus = function(value) {
  * Clears the field making it undefined.
  * @return {!proto.yartu.UpsertAccountRequest} returns this
  */
-proto.yartu.UpsertAccountRequest.prototype.clearOnlineStatus = function() {
+proto.yartu.UpsertAccountRequest.prototype.clearPassword = function() {
   return jspb.Message.setField(this, 1, undefined);
 };
 
@@ -2674,25 +2734,25 @@ proto.yartu.UpsertAccountRequest.prototype.clearOnlineStatus = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu.UpsertAccountRequest.prototype.hasOnlineStatus = function() {
+proto.yartu.UpsertAccountRequest.prototype.hasPassword = function() {
   return jspb.Message.getField(this, 1) != null;
 };
 
 
 /**
- * optional string personal_phone = 2;
- * @return {string}
+ * optional int64 online_status = 2;
+ * @return {number}
  */
-proto.yartu.UpsertAccountRequest.prototype.getPersonalPhone = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+proto.yartu.UpsertAccountRequest.prototype.getOnlineStatus = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
 };
 
 
 /**
- * @param {string} value
+ * @param {number} value
  * @return {!proto.yartu.UpsertAccountRequest} returns this
  */
-proto.yartu.UpsertAccountRequest.prototype.setPersonalPhone = function(value) {
+proto.yartu.UpsertAccountRequest.prototype.setOnlineStatus = function(value) {
   return jspb.Message.setField(this, 2, value);
 };
 
@@ -2701,7 +2761,7 @@ proto.yartu.UpsertAccountRequest.prototype.setPersonalPhone = function(value) {
  * Clears the field making it undefined.
  * @return {!proto.yartu.UpsertAccountRequest} returns this
  */
-proto.yartu.UpsertAccountRequest.prototype.clearPersonalPhone = function() {
+proto.yartu.UpsertAccountRequest.prototype.clearOnlineStatus = function() {
   return jspb.Message.setField(this, 2, undefined);
 };
 
@@ -2710,16 +2770,16 @@ proto.yartu.UpsertAccountRequest.prototype.clearPersonalPhone = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu.UpsertAccountRequest.prototype.hasPersonalPhone = function() {
+proto.yartu.UpsertAccountRequest.prototype.hasOnlineStatus = function() {
   return jspb.Message.getField(this, 2) != null;
 };
 
 
 /**
- * optional string personal_email = 3;
+ * optional string personal_phone = 3;
  * @return {string}
  */
-proto.yartu.UpsertAccountRequest.prototype.getPersonalEmail = function() {
+proto.yartu.UpsertAccountRequest.prototype.getPersonalPhone = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
@@ -2728,7 +2788,7 @@ proto.yartu.UpsertAccountRequest.prototype.getPersonalEmail = function() {
  * @param {string} value
  * @return {!proto.yartu.UpsertAccountRequest} returns this
  */
-proto.yartu.UpsertAccountRequest.prototype.setPersonalEmail = function(value) {
+proto.yartu.UpsertAccountRequest.prototype.setPersonalPhone = function(value) {
   return jspb.Message.setField(this, 3, value);
 };
 
@@ -2737,7 +2797,7 @@ proto.yartu.UpsertAccountRequest.prototype.setPersonalEmail = function(value) {
  * Clears the field making it undefined.
  * @return {!proto.yartu.UpsertAccountRequest} returns this
  */
-proto.yartu.UpsertAccountRequest.prototype.clearPersonalEmail = function() {
+proto.yartu.UpsertAccountRequest.prototype.clearPersonalPhone = function() {
   return jspb.Message.setField(this, 3, undefined);
 };
 
@@ -2746,16 +2806,16 @@ proto.yartu.UpsertAccountRequest.prototype.clearPersonalEmail = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu.UpsertAccountRequest.prototype.hasPersonalEmail = function() {
+proto.yartu.UpsertAccountRequest.prototype.hasPersonalPhone = function() {
   return jspb.Message.getField(this, 3) != null;
 };
 
 
 /**
- * optional string secondary_phone = 4;
+ * optional string personal_email = 4;
  * @return {string}
  */
-proto.yartu.UpsertAccountRequest.prototype.getSecondaryPhone = function() {
+proto.yartu.UpsertAccountRequest.prototype.getPersonalEmail = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
 };
 
@@ -2764,7 +2824,7 @@ proto.yartu.UpsertAccountRequest.prototype.getSecondaryPhone = function() {
  * @param {string} value
  * @return {!proto.yartu.UpsertAccountRequest} returns this
  */
-proto.yartu.UpsertAccountRequest.prototype.setSecondaryPhone = function(value) {
+proto.yartu.UpsertAccountRequest.prototype.setPersonalEmail = function(value) {
   return jspb.Message.setField(this, 4, value);
 };
 
@@ -2773,7 +2833,7 @@ proto.yartu.UpsertAccountRequest.prototype.setSecondaryPhone = function(value) {
  * Clears the field making it undefined.
  * @return {!proto.yartu.UpsertAccountRequest} returns this
  */
-proto.yartu.UpsertAccountRequest.prototype.clearSecondaryPhone = function() {
+proto.yartu.UpsertAccountRequest.prototype.clearPersonalEmail = function() {
   return jspb.Message.setField(this, 4, undefined);
 };
 
@@ -2782,16 +2842,16 @@ proto.yartu.UpsertAccountRequest.prototype.clearSecondaryPhone = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu.UpsertAccountRequest.prototype.hasSecondaryPhone = function() {
+proto.yartu.UpsertAccountRequest.prototype.hasPersonalEmail = function() {
   return jspb.Message.getField(this, 4) != null;
 };
 
 
 /**
- * optional string secondary_email = 5;
+ * optional string secondary_phone = 5;
  * @return {string}
  */
-proto.yartu.UpsertAccountRequest.prototype.getSecondaryEmail = function() {
+proto.yartu.UpsertAccountRequest.prototype.getSecondaryPhone = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
 };
 
@@ -2800,7 +2860,7 @@ proto.yartu.UpsertAccountRequest.prototype.getSecondaryEmail = function() {
  * @param {string} value
  * @return {!proto.yartu.UpsertAccountRequest} returns this
  */
-proto.yartu.UpsertAccountRequest.prototype.setSecondaryEmail = function(value) {
+proto.yartu.UpsertAccountRequest.prototype.setSecondaryPhone = function(value) {
   return jspb.Message.setField(this, 5, value);
 };
 
@@ -2809,7 +2869,7 @@ proto.yartu.UpsertAccountRequest.prototype.setSecondaryEmail = function(value) {
  * Clears the field making it undefined.
  * @return {!proto.yartu.UpsertAccountRequest} returns this
  */
-proto.yartu.UpsertAccountRequest.prototype.clearSecondaryEmail = function() {
+proto.yartu.UpsertAccountRequest.prototype.clearSecondaryPhone = function() {
   return jspb.Message.setField(this, 5, undefined);
 };
 
@@ -2818,16 +2878,16 @@ proto.yartu.UpsertAccountRequest.prototype.clearSecondaryEmail = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu.UpsertAccountRequest.prototype.hasSecondaryEmail = function() {
+proto.yartu.UpsertAccountRequest.prototype.hasSecondaryPhone = function() {
   return jspb.Message.getField(this, 5) != null;
 };
 
 
 /**
- * optional string language = 6;
+ * optional string secondary_email = 6;
  * @return {string}
  */
-proto.yartu.UpsertAccountRequest.prototype.getLanguage = function() {
+proto.yartu.UpsertAccountRequest.prototype.getSecondaryEmail = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
 };
 
@@ -2836,7 +2896,7 @@ proto.yartu.UpsertAccountRequest.prototype.getLanguage = function() {
  * @param {string} value
  * @return {!proto.yartu.UpsertAccountRequest} returns this
  */
-proto.yartu.UpsertAccountRequest.prototype.setLanguage = function(value) {
+proto.yartu.UpsertAccountRequest.prototype.setSecondaryEmail = function(value) {
   return jspb.Message.setField(this, 6, value);
 };
 
@@ -2845,7 +2905,7 @@ proto.yartu.UpsertAccountRequest.prototype.setLanguage = function(value) {
  * Clears the field making it undefined.
  * @return {!proto.yartu.UpsertAccountRequest} returns this
  */
-proto.yartu.UpsertAccountRequest.prototype.clearLanguage = function() {
+proto.yartu.UpsertAccountRequest.prototype.clearSecondaryEmail = function() {
   return jspb.Message.setField(this, 6, undefined);
 };
 
@@ -2854,16 +2914,16 @@ proto.yartu.UpsertAccountRequest.prototype.clearLanguage = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu.UpsertAccountRequest.prototype.hasLanguage = function() {
+proto.yartu.UpsertAccountRequest.prototype.hasSecondaryEmail = function() {
   return jspb.Message.getField(this, 6) != null;
 };
 
 
 /**
- * optional string country = 7;
+ * optional string language = 7;
  * @return {string}
  */
-proto.yartu.UpsertAccountRequest.prototype.getCountry = function() {
+proto.yartu.UpsertAccountRequest.prototype.getLanguage = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
 };
 
@@ -2872,7 +2932,7 @@ proto.yartu.UpsertAccountRequest.prototype.getCountry = function() {
  * @param {string} value
  * @return {!proto.yartu.UpsertAccountRequest} returns this
  */
-proto.yartu.UpsertAccountRequest.prototype.setCountry = function(value) {
+proto.yartu.UpsertAccountRequest.prototype.setLanguage = function(value) {
   return jspb.Message.setField(this, 7, value);
 };
 
@@ -2881,7 +2941,7 @@ proto.yartu.UpsertAccountRequest.prototype.setCountry = function(value) {
  * Clears the field making it undefined.
  * @return {!proto.yartu.UpsertAccountRequest} returns this
  */
-proto.yartu.UpsertAccountRequest.prototype.clearCountry = function() {
+proto.yartu.UpsertAccountRequest.prototype.clearLanguage = function() {
   return jspb.Message.setField(this, 7, undefined);
 };
 
@@ -2890,16 +2950,16 @@ proto.yartu.UpsertAccountRequest.prototype.clearCountry = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu.UpsertAccountRequest.prototype.hasCountry = function() {
+proto.yartu.UpsertAccountRequest.prototype.hasLanguage = function() {
   return jspb.Message.getField(this, 7) != null;
 };
 
 
 /**
- * optional string timezone = 8;
+ * optional string country = 8;
  * @return {string}
  */
-proto.yartu.UpsertAccountRequest.prototype.getTimezone = function() {
+proto.yartu.UpsertAccountRequest.prototype.getCountry = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
 };
 
@@ -2908,7 +2968,7 @@ proto.yartu.UpsertAccountRequest.prototype.getTimezone = function() {
  * @param {string} value
  * @return {!proto.yartu.UpsertAccountRequest} returns this
  */
-proto.yartu.UpsertAccountRequest.prototype.setTimezone = function(value) {
+proto.yartu.UpsertAccountRequest.prototype.setCountry = function(value) {
   return jspb.Message.setField(this, 8, value);
 };
 
@@ -2917,7 +2977,7 @@ proto.yartu.UpsertAccountRequest.prototype.setTimezone = function(value) {
  * Clears the field making it undefined.
  * @return {!proto.yartu.UpsertAccountRequest} returns this
  */
-proto.yartu.UpsertAccountRequest.prototype.clearTimezone = function() {
+proto.yartu.UpsertAccountRequest.prototype.clearCountry = function() {
   return jspb.Message.setField(this, 8, undefined);
 };
 
@@ -2926,16 +2986,16 @@ proto.yartu.UpsertAccountRequest.prototype.clearTimezone = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu.UpsertAccountRequest.prototype.hasTimezone = function() {
+proto.yartu.UpsertAccountRequest.prototype.hasCountry = function() {
   return jspb.Message.getField(this, 8) != null;
 };
 
 
 /**
- * optional string timedate_format = 9;
+ * optional string timezone = 9;
  * @return {string}
  */
-proto.yartu.UpsertAccountRequest.prototype.getTimedateFormat = function() {
+proto.yartu.UpsertAccountRequest.prototype.getTimezone = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 9, ""));
 };
 
@@ -2944,7 +3004,7 @@ proto.yartu.UpsertAccountRequest.prototype.getTimedateFormat = function() {
  * @param {string} value
  * @return {!proto.yartu.UpsertAccountRequest} returns this
  */
-proto.yartu.UpsertAccountRequest.prototype.setTimedateFormat = function(value) {
+proto.yartu.UpsertAccountRequest.prototype.setTimezone = function(value) {
   return jspb.Message.setField(this, 9, value);
 };
 
@@ -2953,7 +3013,7 @@ proto.yartu.UpsertAccountRequest.prototype.setTimedateFormat = function(value) {
  * Clears the field making it undefined.
  * @return {!proto.yartu.UpsertAccountRequest} returns this
  */
-proto.yartu.UpsertAccountRequest.prototype.clearTimedateFormat = function() {
+proto.yartu.UpsertAccountRequest.prototype.clearTimezone = function() {
   return jspb.Message.setField(this, 9, undefined);
 };
 
@@ -2962,16 +3022,16 @@ proto.yartu.UpsertAccountRequest.prototype.clearTimedateFormat = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu.UpsertAccountRequest.prototype.hasTimedateFormat = function() {
+proto.yartu.UpsertAccountRequest.prototype.hasTimezone = function() {
   return jspb.Message.getField(this, 9) != null;
 };
 
 
 /**
- * optional string city = 10;
+ * optional string timeformat = 10;
  * @return {string}
  */
-proto.yartu.UpsertAccountRequest.prototype.getCity = function() {
+proto.yartu.UpsertAccountRequest.prototype.getTimeformat = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 10, ""));
 };
 
@@ -2980,7 +3040,7 @@ proto.yartu.UpsertAccountRequest.prototype.getCity = function() {
  * @param {string} value
  * @return {!proto.yartu.UpsertAccountRequest} returns this
  */
-proto.yartu.UpsertAccountRequest.prototype.setCity = function(value) {
+proto.yartu.UpsertAccountRequest.prototype.setTimeformat = function(value) {
   return jspb.Message.setField(this, 10, value);
 };
 
@@ -2989,7 +3049,7 @@ proto.yartu.UpsertAccountRequest.prototype.setCity = function(value) {
  * Clears the field making it undefined.
  * @return {!proto.yartu.UpsertAccountRequest} returns this
  */
-proto.yartu.UpsertAccountRequest.prototype.clearCity = function() {
+proto.yartu.UpsertAccountRequest.prototype.clearTimeformat = function() {
   return jspb.Message.setField(this, 10, undefined);
 };
 
@@ -2998,8 +3058,44 @@ proto.yartu.UpsertAccountRequest.prototype.clearCity = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu.UpsertAccountRequest.prototype.hasCity = function() {
+proto.yartu.UpsertAccountRequest.prototype.hasTimeformat = function() {
   return jspb.Message.getField(this, 10) != null;
+};
+
+
+/**
+ * optional string city = 11;
+ * @return {string}
+ */
+proto.yartu.UpsertAccountRequest.prototype.getCity = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 11, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.UpsertAccountRequest} returns this
+ */
+proto.yartu.UpsertAccountRequest.prototype.setCity = function(value) {
+  return jspb.Message.setField(this, 11, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.UpsertAccountRequest} returns this
+ */
+proto.yartu.UpsertAccountRequest.prototype.clearCity = function() {
+  return jspb.Message.setField(this, 11, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.UpsertAccountRequest.prototype.hasCity = function() {
+  return jspb.Message.getField(this, 11) != null;
 };
 
 
