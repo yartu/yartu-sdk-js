@@ -79,6 +79,7 @@ export default (config) =>
               this.yartuSdk.refreshUser();
               resolve({
                 status: status_AUTH_OK,
+                working_status: response.getWorkingStatus(),
                 services: services,
                 token: token
               });
