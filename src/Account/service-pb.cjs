@@ -1945,7 +1945,7 @@ proto.yartu.GetInfoResponse.prototype.toObject = function(opt_includeInstance) {
 proto.yartu.GetInfoResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    onlineStatus: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    workingStatus: jspb.Message.getFieldWithDefault(msg, 2, ""),
     user: (f = msg.getUser()) && common_grpc_definitions_pb.User.toObject(includeInstance, f),
     servertype: jspb.Message.getBooleanFieldWithDefault(msg, 4, false),
     personalPhone: jspb.Message.getFieldWithDefault(msg, 5, ""),
@@ -1999,8 +1999,8 @@ proto.yartu.GetInfoResponse.deserializeBinaryFromReader = function(msg, reader) 
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {number} */ (reader.readInt64());
-      msg.setOnlineStatus(value);
+      var value = /** @type {string} */ (reader.readString());
+      msg.setWorkingStatus(value);
       break;
     case 3:
       var value = new common_grpc_definitions_pb.User;
@@ -2087,9 +2087,9 @@ proto.yartu.GetInfoResponse.serializeBinaryToWriter = function(message, writer) 
       f
     );
   }
-  f = message.getOnlineStatus();
-  if (f !== 0) {
-    writer.writeInt64(
+  f = message.getWorkingStatus();
+  if (f.length > 0) {
+    writer.writeString(
       2,
       f
     );
@@ -2201,20 +2201,20 @@ proto.yartu.GetInfoResponse.prototype.setCode = function(value) {
 
 
 /**
- * optional int64 online_status = 2;
- * @return {number}
+ * optional string working_status = 2;
+ * @return {string}
  */
-proto.yartu.GetInfoResponse.prototype.getOnlineStatus = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+proto.yartu.GetInfoResponse.prototype.getWorkingStatus = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
 /**
- * @param {number} value
+ * @param {string} value
  * @return {!proto.yartu.GetInfoResponse} returns this
  */
-proto.yartu.GetInfoResponse.prototype.setOnlineStatus = function(value) {
-  return jspb.Message.setProto3IntField(this, 2, value);
+proto.yartu.GetInfoResponse.prototype.setWorkingStatus = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
@@ -2504,7 +2504,7 @@ proto.yartu.UpsertAccountRequest.prototype.toObject = function(opt_includeInstan
 proto.yartu.UpsertAccountRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     password: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    onlineStatus: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    workingStatus: jspb.Message.getFieldWithDefault(msg, 2, ""),
     personalPhone: jspb.Message.getFieldWithDefault(msg, 3, ""),
     personalEmail: jspb.Message.getFieldWithDefault(msg, 4, ""),
     secondaryPhone: jspb.Message.getFieldWithDefault(msg, 5, ""),
@@ -2555,8 +2555,8 @@ proto.yartu.UpsertAccountRequest.deserializeBinaryFromReader = function(msg, rea
       msg.setPassword(value);
       break;
     case 2:
-      var value = /** @type {number} */ (reader.readInt64());
-      msg.setOnlineStatus(value);
+      var value = /** @type {string} */ (reader.readString());
+      msg.setWorkingStatus(value);
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
@@ -2630,9 +2630,9 @@ proto.yartu.UpsertAccountRequest.serializeBinaryToWriter = function(message, wri
       f
     );
   }
-  f = /** @type {number} */ (jspb.Message.getField(message, 2));
+  f = /** @type {string} */ (jspb.Message.getField(message, 2));
   if (f != null) {
-    writer.writeInt64(
+    writer.writeString(
       2,
       f
     );
@@ -2740,19 +2740,19 @@ proto.yartu.UpsertAccountRequest.prototype.hasPassword = function() {
 
 
 /**
- * optional int64 online_status = 2;
- * @return {number}
+ * optional string working_status = 2;
+ * @return {string}
  */
-proto.yartu.UpsertAccountRequest.prototype.getOnlineStatus = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+proto.yartu.UpsertAccountRequest.prototype.getWorkingStatus = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
 /**
- * @param {number} value
+ * @param {string} value
  * @return {!proto.yartu.UpsertAccountRequest} returns this
  */
-proto.yartu.UpsertAccountRequest.prototype.setOnlineStatus = function(value) {
+proto.yartu.UpsertAccountRequest.prototype.setWorkingStatus = function(value) {
   return jspb.Message.setField(this, 2, value);
 };
 
@@ -2761,7 +2761,7 @@ proto.yartu.UpsertAccountRequest.prototype.setOnlineStatus = function(value) {
  * Clears the field making it undefined.
  * @return {!proto.yartu.UpsertAccountRequest} returns this
  */
-proto.yartu.UpsertAccountRequest.prototype.clearOnlineStatus = function() {
+proto.yartu.UpsertAccountRequest.prototype.clearWorkingStatus = function() {
   return jspb.Message.setField(this, 2, undefined);
 };
 
@@ -2770,7 +2770,7 @@ proto.yartu.UpsertAccountRequest.prototype.clearOnlineStatus = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu.UpsertAccountRequest.prototype.hasOnlineStatus = function() {
+proto.yartu.UpsertAccountRequest.prototype.hasWorkingStatus = function() {
   return jspb.Message.getField(this, 2) != null;
 };
 
