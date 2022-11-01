@@ -19,6 +19,8 @@
 const grpc = {};
 grpc.web = require('grpc-web');
 
+
+var common_grpc_definitions_pb = require('../../common/grpc/definitions_pb.js')
 const proto = {};
 proto.yartu = require('./service-pb.cjs');
 

@@ -326,7 +326,7 @@ export default (config) =>
         label.setName(lablelData.name);
         label.setColor(lablelData.color);
         request.setLabel(label);
-        request.setContacsList(lablelData.contacts);
+        request.setContactsList(lablelData.contacts);
 
         this.client.upsertLabel(request, this.metadata, (error, response) => {
           if (error) {

@@ -3617,7 +3617,7 @@ proto.yartu.ListEmailSignatureRequest.prototype.toObject = function(opt_includeI
  */
 proto.yartu.ListEmailSignatureRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-
+    query: (f = msg.getQuery()) && common_grpc_definitions_pb.Query.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -3654,6 +3654,11 @@ proto.yartu.ListEmailSignatureRequest.deserializeBinaryFromReader = function(msg
     }
     var field = reader.getFieldNumber();
     switch (field) {
+    case 1:
+      var value = new common_grpc_definitions_pb.Query;
+      reader.readMessage(value,common_grpc_definitions_pb.Query.deserializeBinaryFromReader);
+      msg.setQuery(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -3683,6 +3688,51 @@ proto.yartu.ListEmailSignatureRequest.prototype.serializeBinary = function() {
  */
 proto.yartu.ListEmailSignatureRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getQuery();
+  if (f != null) {
+    writer.writeMessage(
+      1,
+      f,
+      common_grpc_definitions_pb.Query.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * optional Query query = 1;
+ * @return {?proto.Query}
+ */
+proto.yartu.ListEmailSignatureRequest.prototype.getQuery = function() {
+  return /** @type{?proto.Query} */ (
+    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.Query, 1));
+};
+
+
+/**
+ * @param {?proto.Query|undefined} value
+ * @return {!proto.yartu.ListEmailSignatureRequest} returns this
+*/
+proto.yartu.ListEmailSignatureRequest.prototype.setQuery = function(value) {
+  return jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.yartu.ListEmailSignatureRequest} returns this
+ */
+proto.yartu.ListEmailSignatureRequest.prototype.clearQuery = function() {
+  return this.setQuery(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.ListEmailSignatureRequest.prototype.hasQuery = function() {
+  return jspb.Message.getField(this, 1) != null;
 };
 
 
@@ -5102,7 +5152,7 @@ proto.yartu.ListEmailRuleRequest.prototype.toObject = function(opt_includeInstan
  */
 proto.yartu.ListEmailRuleRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-
+    query: (f = msg.getQuery()) && common_grpc_definitions_pb.Query.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -5139,6 +5189,11 @@ proto.yartu.ListEmailRuleRequest.deserializeBinaryFromReader = function(msg, rea
     }
     var field = reader.getFieldNumber();
     switch (field) {
+    case 1:
+      var value = new common_grpc_definitions_pb.Query;
+      reader.readMessage(value,common_grpc_definitions_pb.Query.deserializeBinaryFromReader);
+      msg.setQuery(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -5168,6 +5223,51 @@ proto.yartu.ListEmailRuleRequest.prototype.serializeBinary = function() {
  */
 proto.yartu.ListEmailRuleRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getQuery();
+  if (f != null) {
+    writer.writeMessage(
+      1,
+      f,
+      common_grpc_definitions_pb.Query.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * optional Query query = 1;
+ * @return {?proto.Query}
+ */
+proto.yartu.ListEmailRuleRequest.prototype.getQuery = function() {
+  return /** @type{?proto.Query} */ (
+    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.Query, 1));
+};
+
+
+/**
+ * @param {?proto.Query|undefined} value
+ * @return {!proto.yartu.ListEmailRuleRequest} returns this
+*/
+proto.yartu.ListEmailRuleRequest.prototype.setQuery = function(value) {
+  return jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.yartu.ListEmailRuleRequest} returns this
+ */
+proto.yartu.ListEmailRuleRequest.prototype.clearQuery = function() {
+  return this.setQuery(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.ListEmailRuleRequest.prototype.hasQuery = function() {
+  return jspb.Message.getField(this, 1) != null;
 };
 
 
