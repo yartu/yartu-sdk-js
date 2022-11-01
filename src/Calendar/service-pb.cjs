@@ -6560,7 +6560,8 @@ proto.yartu.UpsertCalendarObjectRequest.toObject = function(includeInstance, msg
     conference: jspb.Message.getFieldWithDefault(msg, 12, 0),
     busy: jspb.Message.getFieldWithDefault(msg, 13, 0),
     status: jspb.Message.getFieldWithDefault(msg, 14, 0),
-    componenttype: jspb.Message.getFieldWithDefault(msg, 15, "")
+    componenttype: jspb.Message.getFieldWithDefault(msg, 15, ""),
+    order: jspb.Message.getFieldWithDefault(msg, 16, 0)
   };
 
   if (includeInstance) {
@@ -6658,6 +6659,10 @@ proto.yartu.UpsertCalendarObjectRequest.deserializeBinaryFromReader = function(m
     case 15:
       var value = /** @type {string} */ (reader.readString());
       msg.setComponenttype(value);
+      break;
+    case 16:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setOrder(value);
       break;
     default:
       reader.skipField();
@@ -6792,6 +6797,13 @@ proto.yartu.UpsertCalendarObjectRequest.serializeBinaryToWriter = function(messa
   if (f.length > 0) {
     writer.writeString(
       15,
+      f
+    );
+  }
+  f = message.getOrder();
+  if (f !== 0) {
+    writer.writeInt64(
+      16,
       f
     );
   }
@@ -7108,6 +7120,24 @@ proto.yartu.UpsertCalendarObjectRequest.prototype.setComponenttype = function(va
 };
 
 
+/**
+ * optional int64 order = 16;
+ * @return {number}
+ */
+proto.yartu.UpsertCalendarObjectRequest.prototype.getOrder = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 16, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu.UpsertCalendarObjectRequest} returns this
+ */
+proto.yartu.UpsertCalendarObjectRequest.prototype.setOrder = function(value) {
+  return jspb.Message.setProto3IntField(this, 16, value);
+};
+
+
 
 
 
@@ -7320,7 +7350,8 @@ proto.yartu.UpsertCalendarObjectDatesRequest.toObject = function(includeInstance
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, 0),
     start: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    end: jspb.Message.getFieldWithDefault(msg, 3, "")
+    end: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    order: jspb.Message.getFieldWithDefault(msg, 4, 0)
   };
 
   if (includeInstance) {
@@ -7369,6 +7400,10 @@ proto.yartu.UpsertCalendarObjectDatesRequest.deserializeBinaryFromReader = funct
       var value = /** @type {string} */ (reader.readString());
       msg.setEnd(value);
       break;
+    case 4:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setOrder(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -7416,6 +7451,13 @@ proto.yartu.UpsertCalendarObjectDatesRequest.serializeBinaryToWriter = function(
   if (f.length > 0) {
     writer.writeString(
       3,
+      f
+    );
+  }
+  f = message.getOrder();
+  if (f !== 0) {
+    writer.writeInt64(
+      4,
       f
     );
   }
@@ -7473,6 +7515,24 @@ proto.yartu.UpsertCalendarObjectDatesRequest.prototype.getEnd = function() {
  */
 proto.yartu.UpsertCalendarObjectDatesRequest.prototype.setEnd = function(value) {
   return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional int64 order = 4;
+ * @return {number}
+ */
+proto.yartu.UpsertCalendarObjectDatesRequest.prototype.getOrder = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu.UpsertCalendarObjectDatesRequest} returns this
+ */
+proto.yartu.UpsertCalendarObjectDatesRequest.prototype.setOrder = function(value) {
+  return jspb.Message.setProto3IntField(this, 4, value);
 };
 
 
@@ -7671,7 +7731,8 @@ proto.yartu.UpsertCalendarObjectSplitRequest.toObject = function(includeInstance
     id: jspb.Message.getFieldWithDefault(msg, 1, 0),
     oldDate: jspb.Message.getFieldWithDefault(msg, 2, ""),
     newDateStart: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    newDateEnd: jspb.Message.getFieldWithDefault(msg, 4, "")
+    newDateEnd: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    order: jspb.Message.getFieldWithDefault(msg, 5, 0)
   };
 
   if (includeInstance) {
@@ -7723,6 +7784,10 @@ proto.yartu.UpsertCalendarObjectSplitRequest.deserializeBinaryFromReader = funct
     case 4:
       var value = /** @type {string} */ (reader.readString());
       msg.setNewDateEnd(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setOrder(value);
       break;
     default:
       reader.skipField();
@@ -7778,6 +7843,13 @@ proto.yartu.UpsertCalendarObjectSplitRequest.serializeBinaryToWriter = function(
   if (f.length > 0) {
     writer.writeString(
       4,
+      f
+    );
+  }
+  f = message.getOrder();
+  if (f !== 0) {
+    writer.writeInt64(
+      5,
       f
     );
   }
@@ -7853,6 +7925,24 @@ proto.yartu.UpsertCalendarObjectSplitRequest.prototype.getNewDateEnd = function(
  */
 proto.yartu.UpsertCalendarObjectSplitRequest.prototype.setNewDateEnd = function(value) {
   return jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional int64 order = 5;
+ * @return {number}
+ */
+proto.yartu.UpsertCalendarObjectSplitRequest.prototype.getOrder = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu.UpsertCalendarObjectSplitRequest} returns this
+ */
+proto.yartu.UpsertCalendarObjectSplitRequest.prototype.setOrder = function(value) {
+  return jspb.Message.setProto3IntField(this, 5, value);
 };
 
 
