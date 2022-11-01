@@ -5951,6 +5951,7 @@ proto.yartu.UpsertEmailRuleRequest.prototype.toObject = function(opt_includeInst
  */
 proto.yartu.UpsertEmailRuleRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
+    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
     rule: (f = msg.getRule()) && proto.yartu.EmailRule.toObject(includeInstance, f)
   };
 
@@ -5989,6 +5990,10 @@ proto.yartu.UpsertEmailRuleRequest.deserializeBinaryFromReader = function(msg, r
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setId(value);
+      break;
+    case 2:
       var value = new proto.yartu.EmailRule;
       reader.readMessage(value,proto.yartu.EmailRule.deserializeBinaryFromReader);
       msg.setRule(value);
@@ -6022,10 +6027,17 @@ proto.yartu.UpsertEmailRuleRequest.prototype.serializeBinary = function() {
  */
 proto.yartu.UpsertEmailRuleRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getId();
+  if (f !== 0) {
+    writer.writeInt64(
+      1,
+      f
+    );
+  }
   f = message.getRule();
   if (f != null) {
     writer.writeMessage(
-      1,
+      2,
       f,
       proto.yartu.EmailRule.serializeBinaryToWriter
     );
@@ -6034,12 +6046,30 @@ proto.yartu.UpsertEmailRuleRequest.serializeBinaryToWriter = function(message, w
 
 
 /**
- * optional EmailRule rule = 1;
+ * optional int64 id = 1;
+ * @return {number}
+ */
+proto.yartu.UpsertEmailRuleRequest.prototype.getId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu.UpsertEmailRuleRequest} returns this
+ */
+proto.yartu.UpsertEmailRuleRequest.prototype.setId = function(value) {
+  return jspb.Message.setProto3IntField(this, 1, value);
+};
+
+
+/**
+ * optional EmailRule rule = 2;
  * @return {?proto.yartu.EmailRule}
  */
 proto.yartu.UpsertEmailRuleRequest.prototype.getRule = function() {
   return /** @type{?proto.yartu.EmailRule} */ (
-    jspb.Message.getWrapperField(this, proto.yartu.EmailRule, 1));
+    jspb.Message.getWrapperField(this, proto.yartu.EmailRule, 2));
 };
 
 
@@ -6048,7 +6078,7 @@ proto.yartu.UpsertEmailRuleRequest.prototype.getRule = function() {
  * @return {!proto.yartu.UpsertEmailRuleRequest} returns this
 */
 proto.yartu.UpsertEmailRuleRequest.prototype.setRule = function(value) {
-  return jspb.Message.setWrapperField(this, 1, value);
+  return jspb.Message.setWrapperField(this, 2, value);
 };
 
 
@@ -6066,7 +6096,7 @@ proto.yartu.UpsertEmailRuleRequest.prototype.clearRule = function() {
  * @return {boolean}
  */
 proto.yartu.UpsertEmailRuleRequest.prototype.hasRule = function() {
-  return jspb.Message.getField(this, 1) != null;
+  return jspb.Message.getField(this, 2) != null;
 };
 
 
