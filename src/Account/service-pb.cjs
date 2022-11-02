@@ -719,7 +719,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.yartu.GetEmailAutoReplyResponse = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.yartu.GetEmailAutoReplyResponse.repeatedFields_, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
 goog.inherits(proto.yartu.GetEmailAutoReplyResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -7477,13 +7477,6 @@ proto.yartu.GetEmailAutoReplyRequest.serializeBinaryToWriter = function(message,
 
 
 
-/**
- * List of repeated fields within this message type.
- * @private {!Array<number>}
- * @const
- */
-proto.yartu.GetEmailAutoReplyResponse.repeatedFields_ = [3];
-
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -7517,9 +7510,12 @@ proto.yartu.GetEmailAutoReplyResponse.toObject = function(includeInstance, msg) 
   var f, obj = {
     code: jspb.Message.getFieldWithDefault(msg, 1, 0),
     isActive: jspb.Message.getBooleanFieldWithDefault(msg, 2, false),
-    addressList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f,
-    keepCopy: jspb.Message.getBooleanFieldWithDefault(msg, 4, false),
-    message: jspb.Message.getFieldWithDefault(msg, 5, "")
+    subject: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    replyMessage: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    startDate: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    endDate: jspb.Message.getFieldWithDefault(msg, 6, ""),
+    dontReplyList: jspb.Message.getBooleanFieldWithDefault(msg, 7, false),
+    message: jspb.Message.getFieldWithDefault(msg, 8, "")
   };
 
   if (includeInstance) {
@@ -7566,13 +7562,25 @@ proto.yartu.GetEmailAutoReplyResponse.deserializeBinaryFromReader = function(msg
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
-      msg.addAddress(value);
+      msg.setSubject(value);
       break;
     case 4:
-      var value = /** @type {boolean} */ (reader.readBool());
-      msg.setKeepCopy(value);
+      var value = /** @type {string} */ (reader.readString());
+      msg.setReplyMessage(value);
       break;
     case 5:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setStartDate(value);
+      break;
+    case 6:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setEndDate(value);
+      break;
+    case 7:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setDontReplyList(value);
+      break;
+    case 8:
       var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
@@ -7619,24 +7627,45 @@ proto.yartu.GetEmailAutoReplyResponse.serializeBinaryToWriter = function(message
       f
     );
   }
-  f = message.getAddressList();
+  f = message.getSubject();
   if (f.length > 0) {
-    writer.writeRepeatedString(
+    writer.writeString(
       3,
       f
     );
   }
-  f = message.getKeepCopy();
-  if (f) {
-    writer.writeBool(
+  f = message.getReplyMessage();
+  if (f.length > 0) {
+    writer.writeString(
       4,
       f
     );
   }
-  f = /** @type {string} */ (jspb.Message.getField(message, 5));
-  if (f != null) {
+  f = message.getStartDate();
+  if (f.length > 0) {
     writer.writeString(
       5,
+      f
+    );
+  }
+  f = message.getEndDate();
+  if (f.length > 0) {
+    writer.writeString(
+      6,
+      f
+    );
+  }
+  f = message.getDontReplyList();
+  if (f) {
+    writer.writeBool(
+      7,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 8));
+  if (f != null) {
+    writer.writeString(
+      8,
       f
     );
   }
@@ -7680,65 +7709,46 @@ proto.yartu.GetEmailAutoReplyResponse.prototype.setIsActive = function(value) {
 
 
 /**
- * repeated string address = 3;
- * @return {!Array<string>}
+ * optional string subject = 3;
+ * @return {string}
  */
-proto.yartu.GetEmailAutoReplyResponse.prototype.getAddressList = function() {
-  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 3));
-};
-
-
-/**
- * @param {!Array<string>} value
- * @return {!proto.yartu.GetEmailAutoReplyResponse} returns this
- */
-proto.yartu.GetEmailAutoReplyResponse.prototype.setAddressList = function(value) {
-  return jspb.Message.setField(this, 3, value || []);
+proto.yartu.GetEmailAutoReplyResponse.prototype.getSubject = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
 
 /**
  * @param {string} value
- * @param {number=} opt_index
  * @return {!proto.yartu.GetEmailAutoReplyResponse} returns this
  */
-proto.yartu.GetEmailAutoReplyResponse.prototype.addAddress = function(value, opt_index) {
-  return jspb.Message.addToRepeatedField(this, 3, value, opt_index);
+proto.yartu.GetEmailAutoReplyResponse.prototype.setSubject = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 
 /**
- * Clears the list making it empty but non-null.
- * @return {!proto.yartu.GetEmailAutoReplyResponse} returns this
- */
-proto.yartu.GetEmailAutoReplyResponse.prototype.clearAddressList = function() {
-  return this.setAddressList([]);
-};
-
-
-/**
- * optional bool keep_copy = 4;
- * @return {boolean}
- */
-proto.yartu.GetEmailAutoReplyResponse.prototype.getKeepCopy = function() {
-  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 4, false));
-};
-
-
-/**
- * @param {boolean} value
- * @return {!proto.yartu.GetEmailAutoReplyResponse} returns this
- */
-proto.yartu.GetEmailAutoReplyResponse.prototype.setKeepCopy = function(value) {
-  return jspb.Message.setProto3BooleanField(this, 4, value);
-};
-
-
-/**
- * optional string message = 5;
+ * optional string reply_message = 4;
  * @return {string}
  */
-proto.yartu.GetEmailAutoReplyResponse.prototype.getMessage = function() {
+proto.yartu.GetEmailAutoReplyResponse.prototype.getReplyMessage = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.GetEmailAutoReplyResponse} returns this
+ */
+proto.yartu.GetEmailAutoReplyResponse.prototype.setReplyMessage = function(value) {
+  return jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional string start_date = 5;
+ * @return {string}
+ */
+proto.yartu.GetEmailAutoReplyResponse.prototype.getStartDate = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
 };
 
@@ -7747,8 +7757,62 @@ proto.yartu.GetEmailAutoReplyResponse.prototype.getMessage = function() {
  * @param {string} value
  * @return {!proto.yartu.GetEmailAutoReplyResponse} returns this
  */
+proto.yartu.GetEmailAutoReplyResponse.prototype.setStartDate = function(value) {
+  return jspb.Message.setProto3StringField(this, 5, value);
+};
+
+
+/**
+ * optional string end_date = 6;
+ * @return {string}
+ */
+proto.yartu.GetEmailAutoReplyResponse.prototype.getEndDate = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.GetEmailAutoReplyResponse} returns this
+ */
+proto.yartu.GetEmailAutoReplyResponse.prototype.setEndDate = function(value) {
+  return jspb.Message.setProto3StringField(this, 6, value);
+};
+
+
+/**
+ * optional bool dont_reply_list = 7;
+ * @return {boolean}
+ */
+proto.yartu.GetEmailAutoReplyResponse.prototype.getDontReplyList = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 7, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.yartu.GetEmailAutoReplyResponse} returns this
+ */
+proto.yartu.GetEmailAutoReplyResponse.prototype.setDontReplyList = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 7, value);
+};
+
+
+/**
+ * optional string message = 8;
+ * @return {string}
+ */
+proto.yartu.GetEmailAutoReplyResponse.prototype.getMessage = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.GetEmailAutoReplyResponse} returns this
+ */
 proto.yartu.GetEmailAutoReplyResponse.prototype.setMessage = function(value) {
-  return jspb.Message.setField(this, 5, value);
+  return jspb.Message.setField(this, 8, value);
 };
 
 
@@ -7757,7 +7821,7 @@ proto.yartu.GetEmailAutoReplyResponse.prototype.setMessage = function(value) {
  * @return {!proto.yartu.GetEmailAutoReplyResponse} returns this
  */
 proto.yartu.GetEmailAutoReplyResponse.prototype.clearMessage = function() {
-  return jspb.Message.setField(this, 5, undefined);
+  return jspb.Message.setField(this, 8, undefined);
 };
 
 
@@ -7766,7 +7830,7 @@ proto.yartu.GetEmailAutoReplyResponse.prototype.clearMessage = function() {
  * @return {boolean}
  */
 proto.yartu.GetEmailAutoReplyResponse.prototype.hasMessage = function() {
-  return jspb.Message.getField(this, 5) != null;
+  return jspb.Message.getField(this, 8) != null;
 };
 
 
@@ -7802,7 +7866,12 @@ proto.yartu.SetEmailAutoReplyRequest.prototype.toObject = function(opt_includeIn
  */
 proto.yartu.SetEmailAutoReplyRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-
+    isActive: jspb.Message.getBooleanFieldWithDefault(msg, 1, false),
+    subject: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    message: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    startDate: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    endDate: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    dontReplyList: jspb.Message.getBooleanFieldWithDefault(msg, 6, false)
   };
 
   if (includeInstance) {
@@ -7839,6 +7908,30 @@ proto.yartu.SetEmailAutoReplyRequest.deserializeBinaryFromReader = function(msg,
     }
     var field = reader.getFieldNumber();
     switch (field) {
+    case 1:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setIsActive(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setSubject(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setMessage(value);
+      break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setStartDate(value);
+      break;
+    case 5:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setEndDate(value);
+      break;
+    case 6:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setDontReplyList(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -7868,6 +7961,156 @@ proto.yartu.SetEmailAutoReplyRequest.prototype.serializeBinary = function() {
  */
 proto.yartu.SetEmailAutoReplyRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getIsActive();
+  if (f) {
+    writer.writeBool(
+      1,
+      f
+    );
+  }
+  f = message.getSubject();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getMessage();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
+  f = message.getStartDate();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
+      f
+    );
+  }
+  f = message.getEndDate();
+  if (f.length > 0) {
+    writer.writeString(
+      5,
+      f
+    );
+  }
+  f = message.getDontReplyList();
+  if (f) {
+    writer.writeBool(
+      6,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional bool is_active = 1;
+ * @return {boolean}
+ */
+proto.yartu.SetEmailAutoReplyRequest.prototype.getIsActive = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 1, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.yartu.SetEmailAutoReplyRequest} returns this
+ */
+proto.yartu.SetEmailAutoReplyRequest.prototype.setIsActive = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 1, value);
+};
+
+
+/**
+ * optional string subject = 2;
+ * @return {string}
+ */
+proto.yartu.SetEmailAutoReplyRequest.prototype.getSubject = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.SetEmailAutoReplyRequest} returns this
+ */
+proto.yartu.SetEmailAutoReplyRequest.prototype.setSubject = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional string message = 3;
+ * @return {string}
+ */
+proto.yartu.SetEmailAutoReplyRequest.prototype.getMessage = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.SetEmailAutoReplyRequest} returns this
+ */
+proto.yartu.SetEmailAutoReplyRequest.prototype.setMessage = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional string start_date = 4;
+ * @return {string}
+ */
+proto.yartu.SetEmailAutoReplyRequest.prototype.getStartDate = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.SetEmailAutoReplyRequest} returns this
+ */
+proto.yartu.SetEmailAutoReplyRequest.prototype.setStartDate = function(value) {
+  return jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional string end_date = 5;
+ * @return {string}
+ */
+proto.yartu.SetEmailAutoReplyRequest.prototype.getEndDate = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.SetEmailAutoReplyRequest} returns this
+ */
+proto.yartu.SetEmailAutoReplyRequest.prototype.setEndDate = function(value) {
+  return jspb.Message.setProto3StringField(this, 5, value);
+};
+
+
+/**
+ * optional bool dont_reply_list = 6;
+ * @return {boolean}
+ */
+proto.yartu.SetEmailAutoReplyRequest.prototype.getDontReplyList = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 6, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.yartu.SetEmailAutoReplyRequest} returns this
+ */
+proto.yartu.SetEmailAutoReplyRequest.prototype.setDontReplyList = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 6, value);
 };
 
 
@@ -7903,7 +8146,8 @@ proto.yartu.SetEmailAutoReplyResponse.prototype.toObject = function(opt_includeI
  */
 proto.yartu.SetEmailAutoReplyResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-
+    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    message: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -7940,6 +8184,14 @@ proto.yartu.SetEmailAutoReplyResponse.deserializeBinaryFromReader = function(msg
     }
     var field = reader.getFieldNumber();
     switch (field) {
+    case 1:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setCode(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setMessage(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -7969,6 +8221,74 @@ proto.yartu.SetEmailAutoReplyResponse.prototype.serializeBinary = function() {
  */
 proto.yartu.SetEmailAutoReplyResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getCode();
+  if (f !== 0) {
+    writer.writeInt64(
+      1,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 2));
+  if (f != null) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional int64 code = 1;
+ * @return {number}
+ */
+proto.yartu.SetEmailAutoReplyResponse.prototype.getCode = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu.SetEmailAutoReplyResponse} returns this
+ */
+proto.yartu.SetEmailAutoReplyResponse.prototype.setCode = function(value) {
+  return jspb.Message.setProto3IntField(this, 1, value);
+};
+
+
+/**
+ * optional string message = 2;
+ * @return {string}
+ */
+proto.yartu.SetEmailAutoReplyResponse.prototype.getMessage = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.SetEmailAutoReplyResponse} returns this
+ */
+proto.yartu.SetEmailAutoReplyResponse.prototype.setMessage = function(value) {
+  return jspb.Message.setField(this, 2, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.SetEmailAutoReplyResponse} returns this
+ */
+proto.yartu.SetEmailAutoReplyResponse.prototype.clearMessage = function() {
+  return jspb.Message.setField(this, 2, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.SetEmailAutoReplyResponse.prototype.hasMessage = function() {
+  return jspb.Message.getField(this, 2) != null;
 };
 
 
