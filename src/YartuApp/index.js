@@ -5,6 +5,7 @@ import Contact from '../Contact';
 import Email from '../Email';
 import Calendar from '../Calendar';
 import Search from '../Search';
+import Account from '../Account';
 
 // TODO :: Check if Vue project
 import { inject } from 'vue';
@@ -35,9 +36,11 @@ class YartuApp {
     this.Search = new (Search())(config);
     this.Email = new (Email())(config);
     this.Calendar = new(Calendar())(config);
+    this.Account = new(Account())(config);
     this.Auth.yartuSdk = this;
     this.Email.yartuSdk = this;
     this.Calendar.yartuSdk = this;
+    this.Account.yartuSdk = this;
     this.refreshUser();
   }
 
@@ -66,6 +69,7 @@ class YartuApp {
     this.Search.metadata = { Authentication: yartu_token };
     this.Email.metadata = { Authentication: yartu_token };
     this.Calendar.metadata = { Authentication: yartu_token };
+    this.Account.metadata = { Authentication: yartu_token };
   }
 }
 
