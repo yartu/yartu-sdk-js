@@ -23,12 +23,23 @@ export default (config) =>
     endpoint = 'http://localhost:5001';
     client = undefined;
     yartuSdk = undefined;
+    shareUuid = undefined;
 
     constructor(config) {
       this.endpoint = config.endpoint;
       this.client = new YEmailClient(this.endpoint + '/mail', '', '');
       const yartu_token = window.localStorage.getItem('yartu-token');
       this.metadata = { Authentication: yartu_token };
+    }
+
+    setSharedMailboxUuid(uuid) {
+      this.shareUuid = uuid;
+      this.metadata['x-shared-mailbox'] = uuid;
+    }
+
+    clearSharedMailboxUuid() {
+      this.shareUuid = undefined;
+      delete this.metadata['x-shared-mailbox'];
     }
 
     listMessages(folder, filter = {}, pagination = {}) {
