@@ -54,11 +54,8 @@ class Account {
   upsertAccount = (data) => {
     return new Promise((resolve, reject) => {
       const request = new UpsertAccountRequest();
-
       request.setPassword(data.password);
-
-      console.log('DATA', data);
-      console.log('personalPhone', data.personalPhone);
+      request.setOldPassword(data.oldPassword);
 
       if (!data.password) {
         request.setWorkingStatus(data.workingStatus);
@@ -77,8 +74,6 @@ class Account {
         }
         request.setLanguage(lang);
       }
-
-      console.log('REQ', request);
 
       this.client.upsertAccount(
         request,
