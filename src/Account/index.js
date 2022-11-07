@@ -4,6 +4,10 @@ import {
   ListEmailSignatureRequest,
   UpsertEmailSignatureRequest,
   DeleteEmailSignatureRequest,
+  SetEmailForwardingRequest,
+  GetEmailForwardingRequest,
+  GetEmailAutoReplyRequest,
+  SetEmailAutoReplyRequest,
 } from './service-pb.cjs';
   
 import { YAccountClient } from './service-grpc-web-pb.cjs';
@@ -172,6 +176,129 @@ class Account {
       request.setId(signatureId);
 
       this.client.deleteEmailSignature(
+        request,
+        this.metadata,
+        (error, response) => {
+          const code = response.getCode();
+          if (error) {
+            handleError(error, reject);
+          } else {
+            if (code == 0) {
+              resolve({
+                code: code,
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        }
+      );
+    });
+  };
+
+  getEmailForwarding() {
+    return new Promise((resolve, reject) => {
+      const request = new GetEmailForwardingRequest();
+
+      this.client.getEmailForwarding(request, this.metadata, (error, response) => {
+        if (error) {
+          handleError(error, reject);
+        } else {
+          const code = response.getCode();
+
+          if (code == 0) {
+            resolve({
+              data: response.toObject(),
+              code: 0,
+            });
+          } else {
+            reject({
+              code: code,
+              message: response.getMessage()
+            });
+          }
+        }
+      });
+    });
+  };
+
+  setEmailForwarding = (data) => {
+    return new Promise((resolve, reject) => {
+      const request = new SetEmailForwardingRequest();
+
+      request.setAddressList(data.addressList);
+      request.setIsActive(data.isActive);
+      request.setKeepCopy(data.keepCopy);
+
+      this.client.setEmailForwarding(
+        request,
+        this.metadata,
+        (error, response) => {
+          const code = response.getCode();
+          if (error) {
+            handleError(error, reject);
+          } else {
+            if (code == 0) {
+              resolve({
+                code: code,
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        }
+      );
+    });
+  };
+
+  getEmailAutoReply() {
+    return new Promise((resolve, reject) => {
+      const request = new GetEmailAutoReplyRequest();
+
+      this.client.getEmailAutoReply(request, this.metadata, (error, response) => {
+        if (error) {
+          handleError(error, reject);
+        } else {
+          const code = response.getCode();
+
+          if (code == 0) {
+            resolve({
+              data: response.toObject(),
+              code: 0,
+            });
+          } else {
+            reject({
+              code: code,
+              message: response.getMessage()
+            });
+          }
+        }
+      });
+    });
+  };
+
+  setEmailAutoReply = (data) => {
+    return new Promise((resolve, reject) => {
+      const request = new SetEmailAutoReplyRequest();
+
+      request.setIsActive(data.isActive);
+      request.setSubject(data.subject);
+      request.setMessage(data.replyMessage);
+      if (data.dateRange) {
+        request.setStartDate(data.startDate.toISOString());
+        request.setEndDate(data.endDate.toISOString());
+      }
+      request.setDontReplyList(data.dontReplyList);
+
+      this.client.setEmailAutoReply(
         request,
         this.metadata,
         (error, response) => {
