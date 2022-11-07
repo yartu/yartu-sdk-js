@@ -1,6 +1,9 @@
 import {
   GetInfoRequest,
   UpsertAccountRequest,
+  ListEmailSignatureRequest,
+  UpsertEmailSignatureRequest,
+  DeleteEmailSignatureRequest,
 } from './service-pb.cjs';
   
 import { YAccountClient } from './service-grpc-web-pb.cjs';
@@ -99,4 +102,97 @@ class Account {
     });
   };
 
+  listEmailSignature() {
+    return new Promise((resolve, reject) => {
+      const request = new ListEmailSignatureRequest();
+
+      this.client.listEmailSignature(request, this.metadata, (error, response) => {
+        if (error) {
+          handleError(error, reject);
+        } else {
+          const code = response.getCode();
+
+          if (code == 0) {
+            const dataList = response.getDataList().map((data) => data.toObject());
+            resolve({
+              signatures: dataList,
+              code: 0,
+              message: response.getMessage(),
+            });
+          } else {
+            reject({
+              code: code,
+              message: response.getMessage()
+            });
+          }
+        }
+      });
+    });
+  }
+
+  upsertEmailSignature = (data) => {
+    return new Promise((resolve, reject) => {
+      const request = new UpsertEmailSignatureRequest();
+
+      request.setId(data.id);
+      request.setName(data.name);
+      request.setSignature(data.signature);
+      request.setIsActive(data.isActive);
+      request.setIsDefault(data.isDefault);
+
+      this.client.upsertEmailSignature(
+        request,
+        this.metadata,
+        (error, response) => {
+          const code = response.getCode();
+          if (error) {
+            handleError(error, reject);
+          } else {
+            if (code == 0) {
+              resolve({
+                code: code,
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        }
+      );
+    });
+  };
+
+  deleteEmailSignature = (signatureId) => {
+    return new Promise((resolve, reject) => {
+      const request = new DeleteEmailSignatureRequest();
+
+      request.setId(signatureId);
+
+      this.client.deleteEmailSignature(
+        request,
+        this.metadata,
+        (error, response) => {
+          const code = response.getCode();
+          if (error) {
+            handleError(error, reject);
+          } else {
+            if (code == 0) {
+              resolve({
+                code: code,
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        }
+      );
+    });
+  };
 };
