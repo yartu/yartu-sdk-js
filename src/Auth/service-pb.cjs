@@ -1097,9 +1097,10 @@ proto.yartu.LoginRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     username: jspb.Message.getFieldWithDefault(msg, 1, ""),
     password: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    redirectTo: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    remember: jspb.Message.getBooleanFieldWithDefault(msg, 4, false),
-    deviceId: jspb.Message.getFieldWithDefault(msg, 5, "")
+    secret: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    redirectTo: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    remember: jspb.Message.getBooleanFieldWithDefault(msg, 5, false),
+    deviceId: jspb.Message.getFieldWithDefault(msg, 6, "")
   };
 
   if (includeInstance) {
@@ -1146,13 +1147,17 @@ proto.yartu.LoginRequest.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
-      msg.setRedirectTo(value);
+      msg.setSecret(value);
       break;
     case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setRedirectTo(value);
+      break;
+    case 5:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setRemember(value);
       break;
-    case 5:
+    case 6:
       var value = /** @type {string} */ (reader.readString());
       msg.setDeviceId(value);
       break;
@@ -1199,24 +1204,31 @@ proto.yartu.LoginRequest.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getRedirectTo();
+  f = message.getSecret();
   if (f.length > 0) {
     writer.writeString(
       3,
       f
     );
   }
-  f = message.getRemember();
-  if (f) {
-    writer.writeBool(
+  f = message.getRedirectTo();
+  if (f.length > 0) {
+    writer.writeString(
       4,
       f
     );
   }
-  f = /** @type {string} */ (jspb.Message.getField(message, 5));
+  f = message.getRemember();
+  if (f) {
+    writer.writeBool(
+      5,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 6));
   if (f != null) {
     writer.writeString(
-      5,
+      6,
       f
     );
   }
@@ -1260,10 +1272,10 @@ proto.yartu.LoginRequest.prototype.setPassword = function(value) {
 
 
 /**
- * optional string redirect_to = 3;
+ * optional string secret = 3;
  * @return {string}
  */
-proto.yartu.LoginRequest.prototype.getRedirectTo = function() {
+proto.yartu.LoginRequest.prototype.getSecret = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
@@ -1272,17 +1284,35 @@ proto.yartu.LoginRequest.prototype.getRedirectTo = function() {
  * @param {string} value
  * @return {!proto.yartu.LoginRequest} returns this
  */
-proto.yartu.LoginRequest.prototype.setRedirectTo = function(value) {
+proto.yartu.LoginRequest.prototype.setSecret = function(value) {
   return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 
 /**
- * optional bool remember = 4;
+ * optional string redirect_to = 4;
+ * @return {string}
+ */
+proto.yartu.LoginRequest.prototype.getRedirectTo = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.LoginRequest} returns this
+ */
+proto.yartu.LoginRequest.prototype.setRedirectTo = function(value) {
+  return jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional bool remember = 5;
  * @return {boolean}
  */
 proto.yartu.LoginRequest.prototype.getRemember = function() {
-  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 4, false));
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 5, false));
 };
 
 
@@ -1291,16 +1321,16 @@ proto.yartu.LoginRequest.prototype.getRemember = function() {
  * @return {!proto.yartu.LoginRequest} returns this
  */
 proto.yartu.LoginRequest.prototype.setRemember = function(value) {
-  return jspb.Message.setProto3BooleanField(this, 4, value);
+  return jspb.Message.setProto3BooleanField(this, 5, value);
 };
 
 
 /**
- * optional string device_id = 5;
+ * optional string device_id = 6;
  * @return {string}
  */
 proto.yartu.LoginRequest.prototype.getDeviceId = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
 };
 
 
@@ -1309,7 +1339,7 @@ proto.yartu.LoginRequest.prototype.getDeviceId = function() {
  * @return {!proto.yartu.LoginRequest} returns this
  */
 proto.yartu.LoginRequest.prototype.setDeviceId = function(value) {
-  return jspb.Message.setField(this, 5, value);
+  return jspb.Message.setField(this, 6, value);
 };
 
 
@@ -1318,7 +1348,7 @@ proto.yartu.LoginRequest.prototype.setDeviceId = function(value) {
  * @return {!proto.yartu.LoginRequest} returns this
  */
 proto.yartu.LoginRequest.prototype.clearDeviceId = function() {
-  return jspb.Message.setField(this, 5, undefined);
+  return jspb.Message.setField(this, 6, undefined);
 };
 
 
@@ -1327,7 +1357,7 @@ proto.yartu.LoginRequest.prototype.clearDeviceId = function() {
  * @return {boolean}
  */
 proto.yartu.LoginRequest.prototype.hasDeviceId = function() {
-  return jspb.Message.getField(this, 5) != null;
+  return jspb.Message.getField(this, 6) != null;
 };
 
 

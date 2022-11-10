@@ -58,11 +58,12 @@ export default (config) =>
       });
     };
 
-    login = (username, password, remember = false) => {
+    login = (username, password, secret = '', remember = false) => {
       return new Promise((resolve, reject) => {
         const request = new LoginRequest();
         request.setUsername(username);
         request.setPassword(password);
+        request.setSecret(secret);
         request.setRemember(remember);
         request.setDeviceId('df5aed00-7f89-4fb9-8efb-58add9e99323');
 
