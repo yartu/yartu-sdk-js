@@ -1,4 +1,5 @@
 import {
+  User,
   GetInfoRequest,
   UpsertAccountRequest,
   ListEmailSignatureRequest,
@@ -8,8 +9,20 @@ import {
   GetEmailForwardingRequest,
   GetEmailAutoReplyRequest,
   SetEmailAutoReplyRequest,
+  GetEmailRuleRequest,
+  ListEmailRuleRequest,
+  UpsertEmailRuleRequest,
+  DeleteEmailRuleRequest,
+  EmailRule,
+  EmailRuleInstance,
+  EmailRuleAction,
+  ListSharedMailBoxRequest,
+  GetSharedMailBoxRequest,
+  ListSharedMailBoxUsersRequest,
+  UpsertSharedMailBoxRequest,
+  DeleteSharedMailBoxRequest
 } from './service-pb.cjs';
-  
+
 import { YAccountClient } from './service-grpc-web-pb.cjs';
 import { handleError } from '../utils/helper';
 
@@ -292,9 +305,11 @@ class Account {
       request.setIsActive(data.isActive);
       request.setSubject(data.subject);
       request.setMessage(data.replyMessage);
-      if (data.dateRange) {
-        request.setStartDate(data.startDate.toISOString());
-        request.setEndDate(data.endDate.toISOString());
+      if (data.hasStart) {
+        request.setStartDate(data.startDate.format('YYYY-MM-DD'));
+      }
+      if (data.hasEnd) {
+        request.setEndDate(data.endDate.format('YYYY-MM-DD'));
       }
       request.setDontReplyList(data.dontReplyList);
 
@@ -322,4 +337,287 @@ class Account {
       );
     });
   };
+
+  getEmailRule(ruleId) {
+    return new Promise((resolve, reject) => {
+      const request = new GetEmailRuleRequest();
+
+      request.setId(ruleId);
+
+      this.client.getEmailRule(request, this.metadata, (error, response) => {
+        if (error) {
+          handleError(error, reject);
+        } else {
+          const code = response.getCode();
+
+          if (code == 0) {
+            resolve({
+              data: response.toObject(),
+              code: 0,
+            });
+          } else {
+            reject({
+              code: code,
+              message: response.getMessage()
+            });
+          }
+        }
+      });
+    });
+  };
+
+  listEmailRule() {
+    return new Promise((resolve, reject) => {
+      const request = new ListEmailRuleRequest();
+
+      this.client.listEmailRule(request, this.metadata, (error, response) => {
+        if (error) {
+          handleError(error, reject);
+        } else {
+          const code = response.getCode();
+
+          if (code == 0) {
+            resolve({
+              data: response.toObject(),
+              code: 0,
+            });
+          } else {
+            reject({
+              code: code,
+              message: response.getMessage()
+            });
+          }
+        }
+      });
+    });
+  };
+
+  upsertEmailRule = (data) => {
+    return new Promise((resolve, reject) => {
+ 
+      const request = new UpsertEmailRuleRequest();
+      const emailRule = new EmailRule();
+
+      const rulesList = [];
+      for (const condition of data.rulesList) {
+        const con = new EmailRuleInstance();
+        con.setName(condition.name);
+        con.setCondition("");
+        con.setValue(condition.value);
+        con.setOrder(condition.order);
+        rulesList.push(con);
+      }
+
+      const actionsList = [];
+      for (const action of data.actionsList) {
+        const act = new EmailRuleAction();
+        act.setName(action.name);
+        act.setValue(action.value);
+        act.setOrder(action.order);
+        actionsList.push(act);
+      }
+
+      emailRule.setId(data.id);
+      emailRule.setName(data.name);
+      emailRule.setConditionType(data.conditionType);
+      emailRule.setOrder(data.order);
+      emailRule.setIsActive(data.isActive);
+      emailRule.setRulesList(rulesList);
+      emailRule.setActionsList(actionsList);
+
+      request.setId(data.id);
+      request.setRule(emailRule);
+
+      this.client.upsertEmailRule(
+        request,
+        this.metadata,
+        (error, response) => {
+          const code = response.getCode();
+          if (error) {
+            handleError(error, reject);
+          } else {
+            if (code == 0) {
+              resolve({
+                code: code,
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        }
+      );
+    });
+  };
+
+  deleteEmailRule = (ruleId) => {
+    return new Promise((resolve, reject) => {
+      const request = new DeleteEmailRuleRequest();
+      request.setId(ruleId);
+      this.client.deleteEmailRule(request, this.metadata, (error, response) => {
+        if (error) {
+          handleError(error, reject);
+        } else {
+          const code = response.getCode();
+
+          if (code == 0) {
+            resolve({
+              data: response.toObject(),
+              code: 0,
+            });
+          } else {
+            reject({
+              code: code,
+              message: response.getMessage()
+            });
+          }
+        }
+      });
+    });
+  };
+
+  listSharedMailBox = () => {
+    return new Promise((resolve, reject) => {
+      const request = new ListSharedMailBoxRequest();
+
+      this.client.listSharedMailBox(request, this.metadata, (error, response) => {
+        if (error) {
+          handleError(error, reject);
+        } else {
+          const code = response.getCode();
+
+          if (code == 0) {
+            const dataList = response.getDataList().map((data) => data.toObject());
+            resolve({
+              sharedMailBoxs: dataList,
+              code: 0,
+              message: response.getMessage(),
+            });
+          } else {
+            reject({
+              code: code,
+              message: response.getMessage()
+            });
+          }
+        }
+      });
+    });
+  };
+
+  getSharedMailBox = (sharedMailBoxId) => {
+    return new Promise((resolve, reject) => {
+      const request = new GetSharedMailBoxRequest();
+      request.setId(sharedMailBoxId);
+      this.client.getSharedMailBox(request, this.metadata, (error, response) => {
+        if (error) {
+          handleError(error, reject);
+        } else {
+          const code = response.getCode();
+
+          if (code == 0) {
+            resolve({
+              data: response.toObject(),
+              code: 0,
+            });
+          } else {
+            reject({
+              code: code,
+              message: response.getMessage()
+            });
+          }
+        }
+      });
+    });
+  };
+
+  listSharedMailBoxUsers = (sharedMailBoxId) => {
+    return new Promise((resolve, reject) => {
+      const request = new ListSharedMailBoxUsersRequest();
+      request.setId(sharedMailBoxId);
+      this.client.listSharedMailBoxUsers(request, this.metadata, (error, response) => {
+        if (error) {
+          handleError(error, reject);
+        } else {
+          const code = response.getCode();
+
+          if (code == 0) {
+            resolve({
+              usersList: response.toObject().usersList,
+              code: 0,
+            });
+          } else {
+            reject({
+              code: code,
+              message: response.getMessage()
+            });
+          }
+        }
+      });
+    });
+  };
+
+  upsertSharedMailBox = (data) => {
+    return new Promise((resolve, reject) => {
+      const request = new UpsertSharedMailBoxRequest();
+
+      request.setId(data.id);
+      request.setToUser(data.username);
+      request.setPermission(data.permission);
+      request.setUniqueId(data.uniqueId);
+
+      this.client.upsertSharedMailBox(request, this.metadata, (error, response) => {
+        if (error) {
+          handleError(error, reject);
+        } else {
+          const code = response.getCode();
+
+          if (code == 0) {
+            resolve({
+              data: response.toObject(),
+              code: 0,
+            });
+          } else {
+            reject({
+              code: code,
+              message: response.getMessage()
+            });
+          }
+        }
+      });
+    });
+  };
+
+  deleteSharedMailBox = (data) => {
+    return new Promise((resolve, reject) => {
+      const request = new DeleteSharedMailBoxRequest();
+
+      request.setId(data.id);
+      request.setToUser(data.username);
+      request.setUniqueId(data.uniqueId);
+
+      this.client.deleteSharedMailBox(request, this.metadata, (error, response) => {
+        if (error) {
+          handleError(error, reject);
+        } else {
+          const code = response.getCode();
+
+          if (code == 0) {
+            resolve({
+              data: response.toObject(),
+              code: 0,
+            });
+          } else {
+            reject({
+              code: code,
+              message: response.getMessage()
+            });
+          }
+        }
+      });
+    });
+  };
+
 };
