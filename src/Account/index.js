@@ -444,7 +444,13 @@ class Account {
       for (const action of data.actionsList) {
         const act = new EmailRuleAction();
         act.setName(action.name);
-        act.setValue(action.value);
+
+        let value = action.value;
+        if (action.name === 'moveTo' || action.name === 'copyTo') {
+          value = action.value.path;
+        }
+
+        act.setValue(value);
         act.setOrder(action.order);
         actionsList.push(act);
       }

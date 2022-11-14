@@ -35,6 +35,7 @@ export default (config) =>
     setSharedMailboxUuid(uuid) {
       this.shareUuid = uuid;
       this.metadata['x-shared-mailbox'] = uuid;
+      return true;
     }
 
     clearSharedMailboxUuid() {
@@ -82,7 +83,6 @@ export default (config) =>
             const code = response.getCode();
 
             if (code == 0) {
-              console.log(response);
               const dataList = response
                 .getEmailsList()
                 .map((data) => data.toObject());
@@ -284,7 +284,6 @@ export default (config) =>
             const code = response.getCode();
 
             if (code == 0) {
-              console.log(response);
               const dataList = response
                 .getFolderList()
                 .map((data) => data.toObject());
