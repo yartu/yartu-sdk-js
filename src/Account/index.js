@@ -20,7 +20,8 @@ import {
   GetSharedMailBoxRequest,
   ListSharedMailBoxUsersRequest,
   UpsertSharedMailBoxRequest,
-  DeleteSharedMailBoxRequest
+  DeleteSharedMailBoxRequest,
+  GetEmailSignatureRequest,
 } from './service-pb.cjs';
 
 import { YAccountClient } from './service-grpc-web-pb.cjs';
@@ -181,13 +182,13 @@ class Account {
       );
     });
   };
-
+  
   deleteEmailSignature = (signatureId) => {
     return new Promise((resolve, reject) => {
       const request = new DeleteEmailSignatureRequest();
-
+      
       request.setId(signatureId);
-
+      
       this.client.deleteEmailSignature(
         request,
         this.metadata,
@@ -200,6 +201,37 @@ class Account {
               resolve({
                 code: code,
                 message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        }
+      );
+    });
+  };
+
+  getEmailSignature = (signatureId) => {
+    return new Promise((resolve, reject) => {
+      const request = new GetEmailSignatureRequest();
+      
+      request.setId(signatureId);
+      
+      this.client.getEmailSignature(
+        request,
+        this.metadata,
+        (error, response) => {
+          const code = response.getCode();
+          if (error) {
+            handleError(error, reject);
+          } else {
+            if (code == 0) {
+              resolve({
+                code: code,
+                signature: response.toObject()
               });
             } else {
               reject({
