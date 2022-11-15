@@ -1339,7 +1339,7 @@ proto.yartu.AddressBook.toObject = function(includeInstance, msg) {
     uri: jspb.Message.getFieldWithDefault(msg, 6, ""),
     description: jspb.Message.getFieldWithDefault(msg, 7, ""),
     synctoken: jspb.Message.getFieldWithDefault(msg, 8, 0),
-    pb_default: jspb.Message.getFieldWithDefault(msg, 9, 0)
+    isDefault: jspb.Message.getFieldWithDefault(msg, 9, 0)
   };
 
   if (includeInstance) {
@@ -1410,7 +1410,7 @@ proto.yartu.AddressBook.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 9:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setDefault(value);
+      msg.setIsDefault(value);
       break;
     default:
       reader.skipField();
@@ -1497,7 +1497,7 @@ proto.yartu.AddressBook.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getDefault();
+  f = message.getIsDefault();
   if (f !== 0) {
     writer.writeInt64(
       9,
@@ -1652,10 +1652,10 @@ proto.yartu.AddressBook.prototype.setSynctoken = function(value) {
 
 
 /**
- * optional int64 default = 9;
+ * optional int64 is_default = 9;
  * @return {number}
  */
-proto.yartu.AddressBook.prototype.getDefault = function() {
+proto.yartu.AddressBook.prototype.getIsDefault = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 9, 0));
 };
 
@@ -1664,7 +1664,7 @@ proto.yartu.AddressBook.prototype.getDefault = function() {
  * @param {number} value
  * @return {!proto.yartu.AddressBook} returns this
  */
-proto.yartu.AddressBook.prototype.setDefault = function(value) {
+proto.yartu.AddressBook.prototype.setIsDefault = function(value) {
   return jspb.Message.setProto3IntField(this, 9, value);
 };
 
@@ -1897,7 +1897,7 @@ proto.yartu.Address.toObject = function(includeInstance, msg) {
     region: jspb.Message.getFieldWithDefault(msg, 4, ""),
     postalcode: jspb.Message.getFieldWithDefault(msg, 5, ""),
     country: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    pb_default: jspb.Message.getBooleanFieldWithDefault(msg, 7, false)
+    isDefault: jspb.Message.getBooleanFieldWithDefault(msg, 7, false)
   };
 
   if (includeInstance) {
@@ -1960,7 +1960,7 @@ proto.yartu.Address.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 7:
       var value = /** @type {boolean} */ (reader.readBool());
-      msg.setDefault(value);
+      msg.setIsDefault(value);
       break;
     default:
       reader.skipField();
@@ -2033,7 +2033,7 @@ proto.yartu.Address.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getDefault();
+  f = message.getIsDefault();
   if (f) {
     writer.writeBool(
       7,
@@ -2242,10 +2242,10 @@ proto.yartu.Address.prototype.hasCountry = function() {
 
 
 /**
- * optional bool default = 7;
+ * optional bool is_default = 7;
  * @return {boolean}
  */
-proto.yartu.Address.prototype.getDefault = function() {
+proto.yartu.Address.prototype.getIsDefault = function() {
   return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 7, false));
 };
 
@@ -2254,7 +2254,7 @@ proto.yartu.Address.prototype.getDefault = function() {
  * @param {boolean} value
  * @return {!proto.yartu.Address} returns this
  */
-proto.yartu.Address.prototype.setDefault = function(value) {
+proto.yartu.Address.prototype.setIsDefault = function(value) {
   return jspb.Message.setProto3BooleanField(this, 7, value);
 };
 
@@ -2293,7 +2293,7 @@ proto.yartu.davType.toObject = function(includeInstance, msg) {
   var f, obj = {
     type: jspb.Message.getFieldWithDefault(msg, 1, ""),
     value: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    pb_default: jspb.Message.getBooleanFieldWithDefault(msg, 3, false)
+    isDefault: jspb.Message.getBooleanFieldWithDefault(msg, 3, false)
   };
 
   if (includeInstance) {
@@ -2340,7 +2340,7 @@ proto.yartu.davType.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 3:
       var value = /** @type {boolean} */ (reader.readBool());
-      msg.setDefault(value);
+      msg.setIsDefault(value);
       break;
     default:
       reader.skipField();
@@ -2385,7 +2385,7 @@ proto.yartu.davType.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getDefault();
+  f = message.getIsDefault();
   if (f) {
     writer.writeBool(
       3,
@@ -2432,10 +2432,10 @@ proto.yartu.davType.prototype.setValue = function(value) {
 
 
 /**
- * optional bool default = 3;
+ * optional bool is_default = 3;
  * @return {boolean}
  */
-proto.yartu.davType.prototype.getDefault = function() {
+proto.yartu.davType.prototype.getIsDefault = function() {
   return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 3, false));
 };
 
@@ -2444,7 +2444,7 @@ proto.yartu.davType.prototype.getDefault = function() {
  * @param {boolean} value
  * @return {!proto.yartu.davType} returns this
  */
-proto.yartu.davType.prototype.setDefault = function(value) {
+proto.yartu.davType.prototype.setIsDefault = function(value) {
   return jspb.Message.setProto3BooleanField(this, 3, value);
 };
 

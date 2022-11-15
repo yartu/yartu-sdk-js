@@ -2009,7 +2009,7 @@ proto.yartu.Calendar.toObject = function(includeInstance, msg) {
     shareHref: jspb.Message.getFieldWithDefault(msg, 12, ""),
     shareInvitestatus: jspb.Message.getFieldWithDefault(msg, 13, 0),
     caldav: jspb.Message.getBooleanFieldWithDefault(msg, 14, false),
-    pb_default: jspb.Message.getBooleanFieldWithDefault(msg, 15, false),
+    isDefault: jspb.Message.getBooleanFieldWithDefault(msg, 15, false),
     email: jspb.Message.getFieldWithDefault(msg, 16, ""),
     permission: jspb.Message.getFieldWithDefault(msg, 17, ""),
     owner: jspb.Message.getFieldWithDefault(msg, 18, "")
@@ -2107,7 +2107,7 @@ proto.yartu.Calendar.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 15:
       var value = /** @type {boolean} */ (reader.readBool());
-      msg.setDefault(value);
+      msg.setIsDefault(value);
       break;
     case 16:
       var value = /** @type {string} */ (reader.readString());
@@ -2248,7 +2248,7 @@ proto.yartu.Calendar.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getDefault();
+  f = message.getIsDefault();
   if (f) {
     writer.writeBool(
       15,
@@ -2532,10 +2532,10 @@ proto.yartu.Calendar.prototype.setCaldav = function(value) {
 
 
 /**
- * optional bool default = 15;
+ * optional bool is_default = 15;
  * @return {boolean}
  */
-proto.yartu.Calendar.prototype.getDefault = function() {
+proto.yartu.Calendar.prototype.getIsDefault = function() {
   return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 15, false));
 };
 
@@ -2544,7 +2544,7 @@ proto.yartu.Calendar.prototype.getDefault = function() {
  * @param {boolean} value
  * @return {!proto.yartu.Calendar} returns this
  */
-proto.yartu.Calendar.prototype.setDefault = function(value) {
+proto.yartu.Calendar.prototype.setIsDefault = function(value) {
   return jspb.Message.setProto3BooleanField(this, 15, value);
 };
 
