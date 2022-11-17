@@ -185,7 +185,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.yartu.GetInfoResponse = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.yartu.GetInfoResponse.repeatedFields_, null);
 };
 goog.inherits(proto.yartu.GetInfoResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -2207,6 +2207,13 @@ proto.yartu.GetInfoRequest.prototype.hasUsername = function() {
 
 
 
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.yartu.GetInfoResponse.repeatedFields_ = [15];
+
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -2241,7 +2248,7 @@ proto.yartu.GetInfoResponse.toObject = function(includeInstance, msg) {
     code: jspb.Message.getFieldWithDefault(msg, 1, 0),
     workingStatus: jspb.Message.getFieldWithDefault(msg, 2, ""),
     user: (f = msg.getUser()) && common_grpc_definitions_pb.User.toObject(includeInstance, f),
-    servertype: jspb.Message.getBooleanFieldWithDefault(msg, 4, false),
+    serverType: jspb.Message.getFieldWithDefault(msg, 4, ""),
     personalPhone: jspb.Message.getFieldWithDefault(msg, 5, ""),
     personalEmail: jspb.Message.getFieldWithDefault(msg, 6, ""),
     secondaryPhone: jspb.Message.getFieldWithDefault(msg, 7, ""),
@@ -2251,7 +2258,9 @@ proto.yartu.GetInfoResponse.toObject = function(includeInstance, msg) {
     timezone: jspb.Message.getFieldWithDefault(msg, 11, ""),
     timeformat: jspb.Message.getFieldWithDefault(msg, 12, ""),
     city: jspb.Message.getFieldWithDefault(msg, 13, ""),
-    message: jspb.Message.getFieldWithDefault(msg, 14, "")
+    roleName: jspb.Message.getFieldWithDefault(msg, 14, ""),
+    permissionList: (f = jspb.Message.getRepeatedField(msg, 15)) == null ? undefined : f,
+    message: jspb.Message.getFieldWithDefault(msg, 16, "")
   };
 
   if (includeInstance) {
@@ -2302,8 +2311,8 @@ proto.yartu.GetInfoResponse.deserializeBinaryFromReader = function(msg, reader) 
       msg.setUser(value);
       break;
     case 4:
-      var value = /** @type {boolean} */ (reader.readBool());
-      msg.setServertype(value);
+      var value = /** @type {string} */ (reader.readString());
+      msg.setServerType(value);
       break;
     case 5:
       var value = /** @type {string} */ (reader.readString());
@@ -2342,6 +2351,14 @@ proto.yartu.GetInfoResponse.deserializeBinaryFromReader = function(msg, reader) 
       msg.setCity(value);
       break;
     case 14:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setRoleName(value);
+      break;
+    case 15:
+      var value = /** @type {string} */ (reader.readString());
+      msg.addPermission(value);
+      break;
+    case 16:
       var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
@@ -2396,9 +2413,9 @@ proto.yartu.GetInfoResponse.serializeBinaryToWriter = function(message, writer) 
       common_grpc_definitions_pb.User.serializeBinaryToWriter
     );
   }
-  f = message.getServertype();
-  if (f) {
-    writer.writeBool(
+  f = message.getServerType();
+  if (f.length > 0) {
+    writer.writeString(
       4,
       f
     );
@@ -2466,10 +2483,24 @@ proto.yartu.GetInfoResponse.serializeBinaryToWriter = function(message, writer) 
       f
     );
   }
-  f = /** @type {string} */ (jspb.Message.getField(message, 14));
-  if (f != null) {
+  f = message.getRoleName();
+  if (f.length > 0) {
     writer.writeString(
       14,
+      f
+    );
+  }
+  f = message.getPermissionList();
+  if (f.length > 0) {
+    writer.writeRepeatedString(
+      15,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 16));
+  if (f != null) {
+    writer.writeString(
+      16,
       f
     );
   }
@@ -2550,20 +2581,20 @@ proto.yartu.GetInfoResponse.prototype.hasUser = function() {
 
 
 /**
- * optional bool serverType = 4;
- * @return {boolean}
+ * optional string server_type = 4;
+ * @return {string}
  */
-proto.yartu.GetInfoResponse.prototype.getServertype = function() {
-  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 4, false));
+proto.yartu.GetInfoResponse.prototype.getServerType = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
 };
 
 
 /**
- * @param {boolean} value
+ * @param {string} value
  * @return {!proto.yartu.GetInfoResponse} returns this
  */
-proto.yartu.GetInfoResponse.prototype.setServertype = function(value) {
-  return jspb.Message.setProto3BooleanField(this, 4, value);
+proto.yartu.GetInfoResponse.prototype.setServerType = function(value) {
+  return jspb.Message.setProto3StringField(this, 4, value);
 };
 
 
@@ -2730,10 +2761,10 @@ proto.yartu.GetInfoResponse.prototype.setCity = function(value) {
 
 
 /**
- * optional string message = 14;
+ * optional string role_name = 14;
  * @return {string}
  */
-proto.yartu.GetInfoResponse.prototype.getMessage = function() {
+proto.yartu.GetInfoResponse.prototype.getRoleName = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 14, ""));
 };
 
@@ -2742,8 +2773,63 @@ proto.yartu.GetInfoResponse.prototype.getMessage = function() {
  * @param {string} value
  * @return {!proto.yartu.GetInfoResponse} returns this
  */
+proto.yartu.GetInfoResponse.prototype.setRoleName = function(value) {
+  return jspb.Message.setProto3StringField(this, 14, value);
+};
+
+
+/**
+ * repeated string permission = 15;
+ * @return {!Array<string>}
+ */
+proto.yartu.GetInfoResponse.prototype.getPermissionList = function() {
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 15));
+};
+
+
+/**
+ * @param {!Array<string>} value
+ * @return {!proto.yartu.GetInfoResponse} returns this
+ */
+proto.yartu.GetInfoResponse.prototype.setPermissionList = function(value) {
+  return jspb.Message.setField(this, 15, value || []);
+};
+
+
+/**
+ * @param {string} value
+ * @param {number=} opt_index
+ * @return {!proto.yartu.GetInfoResponse} returns this
+ */
+proto.yartu.GetInfoResponse.prototype.addPermission = function(value, opt_index) {
+  return jspb.Message.addToRepeatedField(this, 15, value, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.yartu.GetInfoResponse} returns this
+ */
+proto.yartu.GetInfoResponse.prototype.clearPermissionList = function() {
+  return this.setPermissionList([]);
+};
+
+
+/**
+ * optional string message = 16;
+ * @return {string}
+ */
+proto.yartu.GetInfoResponse.prototype.getMessage = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 16, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.GetInfoResponse} returns this
+ */
 proto.yartu.GetInfoResponse.prototype.setMessage = function(value) {
-  return jspb.Message.setField(this, 14, value);
+  return jspb.Message.setField(this, 16, value);
 };
 
 
@@ -2752,7 +2838,7 @@ proto.yartu.GetInfoResponse.prototype.setMessage = function(value) {
  * @return {!proto.yartu.GetInfoResponse} returns this
  */
 proto.yartu.GetInfoResponse.prototype.clearMessage = function() {
-  return jspb.Message.setField(this, 14, undefined);
+  return jspb.Message.setField(this, 16, undefined);
 };
 
 
@@ -2761,7 +2847,7 @@ proto.yartu.GetInfoResponse.prototype.clearMessage = function() {
  * @return {boolean}
  */
 proto.yartu.GetInfoResponse.prototype.hasMessage = function() {
-  return jspb.Message.getField(this, 14) != null;
+  return jspb.Message.getField(this, 16) != null;
 };
 
 

@@ -1367,7 +1367,7 @@ proto.yartu.LoginRequest.prototype.hasDeviceId = function() {
  * @private {!Array<number>}
  * @const
  */
-proto.yartu.LoginResponse.repeatedFields_ = [3];
+proto.yartu.LoginResponse.repeatedFields_ = [3,7];
 
 
 
@@ -1402,10 +1402,12 @@ proto.yartu.LoginResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     code: jspb.Message.getFieldWithDefault(msg, 1, 0),
     token: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    servicesList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f,
+    serviceList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f,
     twoFaImage: jspb.Message.getFieldWithDefault(msg, 4, ""),
     workingStatus: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    message: jspb.Message.getFieldWithDefault(msg, 6, "")
+    roleName: jspb.Message.getFieldWithDefault(msg, 6, ""),
+    permissionList: (f = jspb.Message.getRepeatedField(msg, 7)) == null ? undefined : f,
+    message: jspb.Message.getFieldWithDefault(msg, 8, "")
   };
 
   if (includeInstance) {
@@ -1452,7 +1454,7 @@ proto.yartu.LoginResponse.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
-      msg.addServices(value);
+      msg.addService(value);
       break;
     case 4:
       var value = /** @type {string} */ (reader.readString());
@@ -1463,6 +1465,14 @@ proto.yartu.LoginResponse.deserializeBinaryFromReader = function(msg, reader) {
       msg.setWorkingStatus(value);
       break;
     case 6:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setRoleName(value);
+      break;
+    case 7:
+      var value = /** @type {string} */ (reader.readString());
+      msg.addPermission(value);
+      break;
+    case 8:
       var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
@@ -1509,7 +1519,7 @@ proto.yartu.LoginResponse.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getServicesList();
+  f = message.getServiceList();
   if (f.length > 0) {
     writer.writeRepeatedString(
       3,
@@ -1530,10 +1540,24 @@ proto.yartu.LoginResponse.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = /** @type {string} */ (jspb.Message.getField(message, 6));
-  if (f != null) {
+  f = message.getRoleName();
+  if (f.length > 0) {
     writer.writeString(
       6,
+      f
+    );
+  }
+  f = message.getPermissionList();
+  if (f.length > 0) {
+    writer.writeRepeatedString(
+      7,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 8));
+  if (f != null) {
+    writer.writeString(
+      8,
       f
     );
   }
@@ -1595,10 +1619,10 @@ proto.yartu.LoginResponse.prototype.hasToken = function() {
 
 
 /**
- * repeated string services = 3;
+ * repeated string service = 3;
  * @return {!Array<string>}
  */
-proto.yartu.LoginResponse.prototype.getServicesList = function() {
+proto.yartu.LoginResponse.prototype.getServiceList = function() {
   return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 3));
 };
 
@@ -1607,7 +1631,7 @@ proto.yartu.LoginResponse.prototype.getServicesList = function() {
  * @param {!Array<string>} value
  * @return {!proto.yartu.LoginResponse} returns this
  */
-proto.yartu.LoginResponse.prototype.setServicesList = function(value) {
+proto.yartu.LoginResponse.prototype.setServiceList = function(value) {
   return jspb.Message.setField(this, 3, value || []);
 };
 
@@ -1617,7 +1641,7 @@ proto.yartu.LoginResponse.prototype.setServicesList = function(value) {
  * @param {number=} opt_index
  * @return {!proto.yartu.LoginResponse} returns this
  */
-proto.yartu.LoginResponse.prototype.addServices = function(value, opt_index) {
+proto.yartu.LoginResponse.prototype.addService = function(value, opt_index) {
   return jspb.Message.addToRepeatedField(this, 3, value, opt_index);
 };
 
@@ -1626,8 +1650,8 @@ proto.yartu.LoginResponse.prototype.addServices = function(value, opt_index) {
  * Clears the list making it empty but non-null.
  * @return {!proto.yartu.LoginResponse} returns this
  */
-proto.yartu.LoginResponse.prototype.clearServicesList = function() {
-  return this.setServicesList([]);
+proto.yartu.LoginResponse.prototype.clearServiceList = function() {
+  return this.setServiceList([]);
 };
 
 
@@ -1686,10 +1710,10 @@ proto.yartu.LoginResponse.prototype.setWorkingStatus = function(value) {
 
 
 /**
- * optional string message = 6;
+ * optional string role_name = 6;
  * @return {string}
  */
-proto.yartu.LoginResponse.prototype.getMessage = function() {
+proto.yartu.LoginResponse.prototype.getRoleName = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
 };
 
@@ -1698,8 +1722,63 @@ proto.yartu.LoginResponse.prototype.getMessage = function() {
  * @param {string} value
  * @return {!proto.yartu.LoginResponse} returns this
  */
+proto.yartu.LoginResponse.prototype.setRoleName = function(value) {
+  return jspb.Message.setProto3StringField(this, 6, value);
+};
+
+
+/**
+ * repeated string permission = 7;
+ * @return {!Array<string>}
+ */
+proto.yartu.LoginResponse.prototype.getPermissionList = function() {
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 7));
+};
+
+
+/**
+ * @param {!Array<string>} value
+ * @return {!proto.yartu.LoginResponse} returns this
+ */
+proto.yartu.LoginResponse.prototype.setPermissionList = function(value) {
+  return jspb.Message.setField(this, 7, value || []);
+};
+
+
+/**
+ * @param {string} value
+ * @param {number=} opt_index
+ * @return {!proto.yartu.LoginResponse} returns this
+ */
+proto.yartu.LoginResponse.prototype.addPermission = function(value, opt_index) {
+  return jspb.Message.addToRepeatedField(this, 7, value, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.yartu.LoginResponse} returns this
+ */
+proto.yartu.LoginResponse.prototype.clearPermissionList = function() {
+  return this.setPermissionList([]);
+};
+
+
+/**
+ * optional string message = 8;
+ * @return {string}
+ */
+proto.yartu.LoginResponse.prototype.getMessage = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.LoginResponse} returns this
+ */
 proto.yartu.LoginResponse.prototype.setMessage = function(value) {
-  return jspb.Message.setField(this, 6, value);
+  return jspb.Message.setField(this, 8, value);
 };
 
 
@@ -1708,7 +1787,7 @@ proto.yartu.LoginResponse.prototype.setMessage = function(value) {
  * @return {!proto.yartu.LoginResponse} returns this
  */
 proto.yartu.LoginResponse.prototype.clearMessage = function() {
-  return jspb.Message.setField(this, 6, undefined);
+  return jspb.Message.setField(this, 8, undefined);
 };
 
 
@@ -1717,7 +1796,7 @@ proto.yartu.LoginResponse.prototype.clearMessage = function() {
  * @return {boolean}
  */
 proto.yartu.LoginResponse.prototype.hasMessage = function() {
-  return jspb.Message.getField(this, 6) != null;
+  return jspb.Message.getField(this, 8) != null;
 };
 
 
