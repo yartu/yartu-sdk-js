@@ -2100,7 +2100,7 @@ proto.yartu.OtpLoginResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     code: jspb.Message.getFieldWithDefault(msg, 1, 0),
     token: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    servicesList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f,
+    serviceList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f,
     message: jspb.Message.getFieldWithDefault(msg, 4, "")
   };
 
@@ -2148,7 +2148,7 @@ proto.yartu.OtpLoginResponse.deserializeBinaryFromReader = function(msg, reader)
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
-      msg.addServices(value);
+      msg.addService(value);
       break;
     case 4:
       var value = /** @type {string} */ (reader.readString());
@@ -2197,7 +2197,7 @@ proto.yartu.OtpLoginResponse.serializeBinaryToWriter = function(message, writer)
       f
     );
   }
-  f = message.getServicesList();
+  f = message.getServiceList();
   if (f.length > 0) {
     writer.writeRepeatedString(
       3,
@@ -2269,10 +2269,10 @@ proto.yartu.OtpLoginResponse.prototype.hasToken = function() {
 
 
 /**
- * repeated string services = 3;
+ * repeated string service = 3;
  * @return {!Array<string>}
  */
-proto.yartu.OtpLoginResponse.prototype.getServicesList = function() {
+proto.yartu.OtpLoginResponse.prototype.getServiceList = function() {
   return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 3));
 };
 
@@ -2281,7 +2281,7 @@ proto.yartu.OtpLoginResponse.prototype.getServicesList = function() {
  * @param {!Array<string>} value
  * @return {!proto.yartu.OtpLoginResponse} returns this
  */
-proto.yartu.OtpLoginResponse.prototype.setServicesList = function(value) {
+proto.yartu.OtpLoginResponse.prototype.setServiceList = function(value) {
   return jspb.Message.setField(this, 3, value || []);
 };
 
@@ -2291,7 +2291,7 @@ proto.yartu.OtpLoginResponse.prototype.setServicesList = function(value) {
  * @param {number=} opt_index
  * @return {!proto.yartu.OtpLoginResponse} returns this
  */
-proto.yartu.OtpLoginResponse.prototype.addServices = function(value, opt_index) {
+proto.yartu.OtpLoginResponse.prototype.addService = function(value, opt_index) {
   return jspb.Message.addToRepeatedField(this, 3, value, opt_index);
 };
 
@@ -2300,8 +2300,8 @@ proto.yartu.OtpLoginResponse.prototype.addServices = function(value, opt_index) 
  * Clears the list making it empty but non-null.
  * @return {!proto.yartu.OtpLoginResponse} returns this
  */
-proto.yartu.OtpLoginResponse.prototype.clearServicesList = function() {
-  return this.setServicesList([]);
+proto.yartu.OtpLoginResponse.prototype.clearServiceList = function() {
+  return this.setServiceList([]);
 };
 
 
@@ -3005,7 +3005,7 @@ proto.yartu.GetServicesResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     code: jspb.Message.getFieldWithDefault(msg, 1, 0),
     message: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    servicesList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f
+    serviceList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -3052,7 +3052,7 @@ proto.yartu.GetServicesResponse.deserializeBinaryFromReader = function(msg, read
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
-      msg.addServices(value);
+      msg.addService(value);
       break;
     default:
       reader.skipField();
@@ -3097,7 +3097,7 @@ proto.yartu.GetServicesResponse.serializeBinaryToWriter = function(message, writ
       f
     );
   }
-  f = message.getServicesList();
+  f = message.getServiceList();
   if (f.length > 0) {
     writer.writeRepeatedString(
       3,
@@ -3144,10 +3144,10 @@ proto.yartu.GetServicesResponse.prototype.setMessage = function(value) {
 
 
 /**
- * repeated string services = 3;
+ * repeated string service = 3;
  * @return {!Array<string>}
  */
-proto.yartu.GetServicesResponse.prototype.getServicesList = function() {
+proto.yartu.GetServicesResponse.prototype.getServiceList = function() {
   return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 3));
 };
 
@@ -3156,7 +3156,7 @@ proto.yartu.GetServicesResponse.prototype.getServicesList = function() {
  * @param {!Array<string>} value
  * @return {!proto.yartu.GetServicesResponse} returns this
  */
-proto.yartu.GetServicesResponse.prototype.setServicesList = function(value) {
+proto.yartu.GetServicesResponse.prototype.setServiceList = function(value) {
   return jspb.Message.setField(this, 3, value || []);
 };
 
@@ -3166,7 +3166,7 @@ proto.yartu.GetServicesResponse.prototype.setServicesList = function(value) {
  * @param {number=} opt_index
  * @return {!proto.yartu.GetServicesResponse} returns this
  */
-proto.yartu.GetServicesResponse.prototype.addServices = function(value, opt_index) {
+proto.yartu.GetServicesResponse.prototype.addService = function(value, opt_index) {
   return jspb.Message.addToRepeatedField(this, 3, value, opt_index);
 };
 
@@ -3175,8 +3175,8 @@ proto.yartu.GetServicesResponse.prototype.addServices = function(value, opt_inde
  * Clears the list making it empty but non-null.
  * @return {!proto.yartu.GetServicesResponse} returns this
  */
-proto.yartu.GetServicesResponse.prototype.clearServicesList = function() {
-  return this.setServicesList([]);
+proto.yartu.GetServicesResponse.prototype.clearServiceList = function() {
+  return this.setServiceList([]);
 };
 
 
