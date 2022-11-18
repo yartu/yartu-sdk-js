@@ -73,7 +73,7 @@ export default (config) =>
           } else {
             const code = response.getCode();
             const token = response.getToken();
-            const services = response.getServicesList();
+            const services = response.getServiceList();
 
             if (code == 0) {
               window.localStorage.setItem('yartu-token', token);
@@ -172,7 +172,7 @@ export default (config) =>
             handleError(error, reject);
           } else {
             const code = response.getCode();
-            const services = response.getServicesList();
+            const services = response.getServiceList();
 
             if (code == 0) {
               resolve({
