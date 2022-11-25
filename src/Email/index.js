@@ -158,11 +158,10 @@ export default (config) =>
       });
     }
 
-    uploadAttachment(dataBytes, name) {
+    uploadAttachment(name) {
       return new Promise((resolve, reject) => {
         const request = new UploadAttachmentRequest();
         request.setName(name);
-        request.setData(dataBytes);
         this.client.uploadAttachment(
           request,
           this.metadata,
