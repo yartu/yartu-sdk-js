@@ -1603,11 +1603,19 @@ proto.User.toObject = function(includeInstance, msg) {
     uniqueId: jspb.Message.getFieldWithDefault(msg, 7, ""),
     oid: jspb.Message.getFieldWithDefault(msg, 8, ""),
     serviceList: (f = jspb.Message.getRepeatedField(msg, 9)) == null ? undefined : f,
-    emailQuota: jspb.Message.getFieldWithDefault(msg, 10, 0),
-    driveQuota: jspb.Message.getFieldWithDefault(msg, 11, 0),
-    isActive: jspb.Message.getBooleanFieldWithDefault(msg, 12, false),
-    isPrivate: jspb.Message.getBooleanFieldWithDefault(msg, 13, false),
-    workingStatus: jspb.Message.getFieldWithDefault(msg, 14, "")
+    role: jspb.Message.getFieldWithDefault(msg, 10, 0),
+    realm: jspb.Message.getFieldWithDefault(msg, 11, 0),
+    department: jspb.Message.getFieldWithDefault(msg, 12, 0),
+    comment: jspb.Message.getFieldWithDefault(msg, 13, ""),
+    isActive: jspb.Message.getBooleanFieldWithDefault(msg, 14, false),
+    isPrivate: jspb.Message.getBooleanFieldWithDefault(msg, 15, false),
+    workingStatus: jspb.Message.getFieldWithDefault(msg, 16, ""),
+    lastLoginAt: jspb.Message.getFieldWithDefault(msg, 17, ""),
+    createdAt: jspb.Message.getFieldWithDefault(msg, 18, ""),
+    updatedAt: jspb.Message.getFieldWithDefault(msg, 19, ""),
+    quotas: (f = msg.getQuotas()) && proto.JSON.toObject(includeInstance, f),
+    serviceSettings: (f = msg.getServiceSettings()) && proto.JSON.toObject(includeInstance, f),
+    loginTypes: (f = msg.getLoginTypes()) && proto.JSON.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -1682,23 +1690,58 @@ proto.User.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 10:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setEmailQuota(value);
+      msg.setRole(value);
       break;
     case 11:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setDriveQuota(value);
+      msg.setRealm(value);
       break;
     case 12:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setDepartment(value);
+      break;
+    case 13:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setComment(value);
+      break;
+    case 14:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setIsActive(value);
       break;
-    case 13:
+    case 15:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setIsPrivate(value);
       break;
-    case 14:
+    case 16:
       var value = /** @type {string} */ (reader.readString());
       msg.setWorkingStatus(value);
+      break;
+    case 17:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setLastLoginAt(value);
+      break;
+    case 18:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setCreatedAt(value);
+      break;
+    case 19:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setUpdatedAt(value);
+      break;
+    case 20:
+      var value = new proto.JSON;
+      reader.readMessage(value,proto.JSON.deserializeBinaryFromReader);
+      msg.setQuotas(value);
+      break;
+    case 21:
+      var value = new proto.JSON;
+      reader.readMessage(value,proto.JSON.deserializeBinaryFromReader);
+      msg.setServiceSettings(value);
+      break;
+    case 22:
+      var value = new proto.JSON;
+      reader.readMessage(value,proto.JSON.deserializeBinaryFromReader);
+      msg.setLoginTypes(value);
       break;
     default:
       reader.skipField();
@@ -1792,39 +1835,98 @@ proto.User.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getEmailQuota();
-  if (f !== 0) {
+  f = /** @type {number} */ (jspb.Message.getField(message, 10));
+  if (f != null) {
     writer.writeInt64(
       10,
       f
     );
   }
-  f = message.getDriveQuota();
-  if (f !== 0) {
+  f = /** @type {number} */ (jspb.Message.getField(message, 11));
+  if (f != null) {
     writer.writeInt64(
       11,
+      f
+    );
+  }
+  f = /** @type {number} */ (jspb.Message.getField(message, 12));
+  if (f != null) {
+    writer.writeInt64(
+      12,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 13));
+  if (f != null) {
+    writer.writeString(
+      13,
       f
     );
   }
   f = message.getIsActive();
   if (f) {
     writer.writeBool(
-      12,
+      14,
       f
     );
   }
   f = message.getIsPrivate();
   if (f) {
     writer.writeBool(
-      13,
+      15,
       f
     );
   }
   f = message.getWorkingStatus();
   if (f.length > 0) {
     writer.writeString(
-      14,
+      16,
       f
+    );
+  }
+  f = message.getLastLoginAt();
+  if (f.length > 0) {
+    writer.writeString(
+      17,
+      f
+    );
+  }
+  f = message.getCreatedAt();
+  if (f.length > 0) {
+    writer.writeString(
+      18,
+      f
+    );
+  }
+  f = message.getUpdatedAt();
+  if (f.length > 0) {
+    writer.writeString(
+      19,
+      f
+    );
+  }
+  f = message.getQuotas();
+  if (f != null) {
+    writer.writeMessage(
+      20,
+      f,
+      proto.JSON.serializeBinaryToWriter
+    );
+  }
+  f = message.getServiceSettings();
+  if (f != null) {
+    writer.writeMessage(
+      21,
+      f,
+      proto.JSON.serializeBinaryToWriter
+    );
+  }
+  f = message.getLoginTypes();
+  if (f != null) {
+    writer.writeMessage(
+      22,
+      f,
+      proto.JSON.serializeBinaryToWriter
     );
   }
 };
@@ -2012,10 +2114,10 @@ proto.User.prototype.clearServiceList = function() {
 
 
 /**
- * optional int64 email_quota = 10;
+ * optional int64 role = 10;
  * @return {number}
  */
-proto.User.prototype.getEmailQuota = function() {
+proto.User.prototype.getRole = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 10, 0));
 };
 
@@ -2024,16 +2126,34 @@ proto.User.prototype.getEmailQuota = function() {
  * @param {number} value
  * @return {!proto.User} returns this
  */
-proto.User.prototype.setEmailQuota = function(value) {
-  return jspb.Message.setProto3IntField(this, 10, value);
+proto.User.prototype.setRole = function(value) {
+  return jspb.Message.setField(this, 10, value);
 };
 
 
 /**
- * optional int64 drive_quota = 11;
+ * Clears the field making it undefined.
+ * @return {!proto.User} returns this
+ */
+proto.User.prototype.clearRole = function() {
+  return jspb.Message.setField(this, 10, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.User.prototype.hasRole = function() {
+  return jspb.Message.getField(this, 10) != null;
+};
+
+
+/**
+ * optional int64 realm = 11;
  * @return {number}
  */
-proto.User.prototype.getDriveQuota = function() {
+proto.User.prototype.getRealm = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 11, 0));
 };
 
@@ -2042,17 +2162,107 @@ proto.User.prototype.getDriveQuota = function() {
  * @param {number} value
  * @return {!proto.User} returns this
  */
-proto.User.prototype.setDriveQuota = function(value) {
-  return jspb.Message.setProto3IntField(this, 11, value);
+proto.User.prototype.setRealm = function(value) {
+  return jspb.Message.setField(this, 11, value);
 };
 
 
 /**
- * optional bool is_active = 12;
+ * Clears the field making it undefined.
+ * @return {!proto.User} returns this
+ */
+proto.User.prototype.clearRealm = function() {
+  return jspb.Message.setField(this, 11, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.User.prototype.hasRealm = function() {
+  return jspb.Message.getField(this, 11) != null;
+};
+
+
+/**
+ * optional int64 department = 12;
+ * @return {number}
+ */
+proto.User.prototype.getDepartment = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 12, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.User} returns this
+ */
+proto.User.prototype.setDepartment = function(value) {
+  return jspb.Message.setField(this, 12, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.User} returns this
+ */
+proto.User.prototype.clearDepartment = function() {
+  return jspb.Message.setField(this, 12, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.User.prototype.hasDepartment = function() {
+  return jspb.Message.getField(this, 12) != null;
+};
+
+
+/**
+ * optional string comment = 13;
+ * @return {string}
+ */
+proto.User.prototype.getComment = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 13, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.User} returns this
+ */
+proto.User.prototype.setComment = function(value) {
+  return jspb.Message.setField(this, 13, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.User} returns this
+ */
+proto.User.prototype.clearComment = function() {
+  return jspb.Message.setField(this, 13, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.User.prototype.hasComment = function() {
+  return jspb.Message.getField(this, 13) != null;
+};
+
+
+/**
+ * optional bool is_active = 14;
  * @return {boolean}
  */
 proto.User.prototype.getIsActive = function() {
-  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 12, false));
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 14, false));
 };
 
 
@@ -2061,16 +2271,16 @@ proto.User.prototype.getIsActive = function() {
  * @return {!proto.User} returns this
  */
 proto.User.prototype.setIsActive = function(value) {
-  return jspb.Message.setProto3BooleanField(this, 12, value);
+  return jspb.Message.setProto3BooleanField(this, 14, value);
 };
 
 
 /**
- * optional bool is_private = 13;
+ * optional bool is_private = 15;
  * @return {boolean}
  */
 proto.User.prototype.getIsPrivate = function() {
-  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 13, false));
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 15, false));
 };
 
 
@@ -2079,16 +2289,16 @@ proto.User.prototype.getIsPrivate = function() {
  * @return {!proto.User} returns this
  */
 proto.User.prototype.setIsPrivate = function(value) {
-  return jspb.Message.setProto3BooleanField(this, 13, value);
+  return jspb.Message.setProto3BooleanField(this, 15, value);
 };
 
 
 /**
- * optional string working_status = 14;
+ * optional string working_status = 16;
  * @return {string}
  */
 proto.User.prototype.getWorkingStatus = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 14, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 16, ""));
 };
 
 
@@ -2097,7 +2307,172 @@ proto.User.prototype.getWorkingStatus = function() {
  * @return {!proto.User} returns this
  */
 proto.User.prototype.setWorkingStatus = function(value) {
-  return jspb.Message.setProto3StringField(this, 14, value);
+  return jspb.Message.setProto3StringField(this, 16, value);
+};
+
+
+/**
+ * optional string last_login_at = 17;
+ * @return {string}
+ */
+proto.User.prototype.getLastLoginAt = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 17, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.User} returns this
+ */
+proto.User.prototype.setLastLoginAt = function(value) {
+  return jspb.Message.setProto3StringField(this, 17, value);
+};
+
+
+/**
+ * optional string created_at = 18;
+ * @return {string}
+ */
+proto.User.prototype.getCreatedAt = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 18, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.User} returns this
+ */
+proto.User.prototype.setCreatedAt = function(value) {
+  return jspb.Message.setProto3StringField(this, 18, value);
+};
+
+
+/**
+ * optional string updated_at = 19;
+ * @return {string}
+ */
+proto.User.prototype.getUpdatedAt = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 19, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.User} returns this
+ */
+proto.User.prototype.setUpdatedAt = function(value) {
+  return jspb.Message.setProto3StringField(this, 19, value);
+};
+
+
+/**
+ * optional JSON quotas = 20;
+ * @return {?proto.JSON}
+ */
+proto.User.prototype.getQuotas = function() {
+  return /** @type{?proto.JSON} */ (
+    jspb.Message.getWrapperField(this, proto.JSON, 20));
+};
+
+
+/**
+ * @param {?proto.JSON|undefined} value
+ * @return {!proto.User} returns this
+*/
+proto.User.prototype.setQuotas = function(value) {
+  return jspb.Message.setWrapperField(this, 20, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.User} returns this
+ */
+proto.User.prototype.clearQuotas = function() {
+  return this.setQuotas(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.User.prototype.hasQuotas = function() {
+  return jspb.Message.getField(this, 20) != null;
+};
+
+
+/**
+ * optional JSON service_settings = 21;
+ * @return {?proto.JSON}
+ */
+proto.User.prototype.getServiceSettings = function() {
+  return /** @type{?proto.JSON} */ (
+    jspb.Message.getWrapperField(this, proto.JSON, 21));
+};
+
+
+/**
+ * @param {?proto.JSON|undefined} value
+ * @return {!proto.User} returns this
+*/
+proto.User.prototype.setServiceSettings = function(value) {
+  return jspb.Message.setWrapperField(this, 21, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.User} returns this
+ */
+proto.User.prototype.clearServiceSettings = function() {
+  return this.setServiceSettings(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.User.prototype.hasServiceSettings = function() {
+  return jspb.Message.getField(this, 21) != null;
+};
+
+
+/**
+ * optional JSON login_types = 22;
+ * @return {?proto.JSON}
+ */
+proto.User.prototype.getLoginTypes = function() {
+  return /** @type{?proto.JSON} */ (
+    jspb.Message.getWrapperField(this, proto.JSON, 22));
+};
+
+
+/**
+ * @param {?proto.JSON|undefined} value
+ * @return {!proto.User} returns this
+*/
+proto.User.prototype.setLoginTypes = function(value) {
+  return jspb.Message.setWrapperField(this, 22, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.User} returns this
+ */
+proto.User.prototype.clearLoginTypes = function() {
+  return this.setLoginTypes(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.User.prototype.hasLoginTypes = function() {
+  return jspb.Message.getField(this, 22) != null;
 };
 
 
