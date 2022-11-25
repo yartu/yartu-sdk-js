@@ -8595,8 +8595,7 @@ proto.yartu_mail.UploadAttachmentRequest.prototype.toObject = function(opt_inclu
  */
 proto.yartu_mail.UploadAttachmentRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    data: msg.getData_asB64()
+    name: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -8637,10 +8636,6 @@ proto.yartu_mail.UploadAttachmentRequest.deserializeBinaryFromReader = function(
       var value = /** @type {string} */ (reader.readString());
       msg.setName(value);
       break;
-    case 2:
-      var value = /** @type {!Uint8Array} */ (reader.readBytes());
-      msg.setData(value);
-      break;
     default:
       reader.skipField();
       break;
@@ -8677,13 +8672,6 @@ proto.yartu_mail.UploadAttachmentRequest.serializeBinaryToWriter = function(mess
       f
     );
   }
-  f = message.getData_asU8();
-  if (f.length > 0) {
-    writer.writeBytes(
-      2,
-      f
-    );
-  }
 };
 
 
@@ -8702,48 +8690,6 @@ proto.yartu_mail.UploadAttachmentRequest.prototype.getName = function() {
  */
 proto.yartu_mail.UploadAttachmentRequest.prototype.setName = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
-};
-
-
-/**
- * optional bytes data = 2;
- * @return {string}
- */
-proto.yartu_mail.UploadAttachmentRequest.prototype.getData = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
-};
-
-
-/**
- * optional bytes data = 2;
- * This is a type-conversion wrapper around `getData()`
- * @return {string}
- */
-proto.yartu_mail.UploadAttachmentRequest.prototype.getData_asB64 = function() {
-  return /** @type {string} */ (jspb.Message.bytesAsB64(
-      this.getData()));
-};
-
-
-/**
- * optional bytes data = 2;
- * Note that Uint8Array is not supported on all browsers.
- * @see http://caniuse.com/Uint8Array
- * This is a type-conversion wrapper around `getData()`
- * @return {!Uint8Array}
- */
-proto.yartu_mail.UploadAttachmentRequest.prototype.getData_asU8 = function() {
-  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
-      this.getData()));
-};
-
-
-/**
- * @param {!(string|Uint8Array)} value
- * @return {!proto.yartu_mail.UploadAttachmentRequest} returns this
- */
-proto.yartu_mail.UploadAttachmentRequest.prototype.setData = function(value) {
-  return jspb.Message.setProto3BytesField(this, 2, value);
 };
 
 
@@ -8866,8 +8812,8 @@ proto.yartu_mail.UploadAttachmentResponse.serializeBinaryToWriter = function(mes
       f
     );
   }
-  f = /** @type {string} */ (jspb.Message.getField(message, 2));
-  if (f != null) {
+  f = message.getUuid();
+  if (f.length > 0) {
     writer.writeString(
       2,
       f
@@ -8915,25 +8861,7 @@ proto.yartu_mail.UploadAttachmentResponse.prototype.getUuid = function() {
  * @return {!proto.yartu_mail.UploadAttachmentResponse} returns this
  */
 proto.yartu_mail.UploadAttachmentResponse.prototype.setUuid = function(value) {
-  return jspb.Message.setField(this, 2, value);
-};
-
-
-/**
- * Clears the field making it undefined.
- * @return {!proto.yartu_mail.UploadAttachmentResponse} returns this
- */
-proto.yartu_mail.UploadAttachmentResponse.prototype.clearUuid = function() {
-  return jspb.Message.setField(this, 2, undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {boolean}
- */
-proto.yartu_mail.UploadAttachmentResponse.prototype.hasUuid = function() {
-  return jspb.Message.getField(this, 2) != null;
+  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
@@ -9824,4 +9752,4 @@ proto.yartu_mail.GetInfoResponse.prototype.hasMessage = function() {
 };
 
 
-goog.object.extend(module.exports, proto.yartu_mail);
+goog.object.extend(exports, proto.yartu_mail);
