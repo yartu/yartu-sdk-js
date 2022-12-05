@@ -175,12 +175,13 @@ export default (config) =>
               if (code == 0) {
                 const uuid = response.getUuid();
                 resolve({
+                  code,
                   uuid,
                   message
                 });
               } else {
                 reject({
-                  code: code,
+                  code,
                   message
                 });
               }
