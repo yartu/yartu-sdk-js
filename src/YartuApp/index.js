@@ -1,12 +1,13 @@
 /* global windows */
 import jwt_decode from 'jwt-decode';
-import Auth from '../Auth';
-import Contact from '../Contact';
-import Email from '../Email';
-import Conference from '../Conference';
-import Calendar from '../Calendar';
-import Search from '../Search';
 import Account from '../Account';
+import Auth from '../Auth';
+import Calendar from '../Calendar';
+import Conference from '../Conference';
+import Contact from '../Contact';
+import Drive from '../Drive';
+import Email from '../Email';
+import Search from '../Search';
 
 // TODO :: Check if Vue project
 import { inject } from 'vue';
@@ -31,18 +32,21 @@ class YartuApp {
 
   constructor(config) {
     this.initialize(config);
+    this.Account = new (Account())(config);
     this.Auth = new (Auth())(config);
-    this.Contact = new (Contact())(config);
+    this.Calendar = new (Calendar())(config);
     this.Conference = new (Conference())(config);
-    this.Search = new (Search())(config);
+    this.Contact = new (Contact())(config);
+    this.Drive = new (Drive())(config);
     this.Email = new (Email())(config);
-    this.Calendar = new(Calendar())(config);
-    this.Account = new(Account())(config);
+    this.Search = new (Search())(config);
+
+    this.Account.yartuSdk = this;
     this.Auth.yartuSdk = this;
-    this.Email.yartuSdk = this;
     this.Calendar.yartuSdk = this;
     this.Conference.yartuSdk = this;
-    this.Account.yartuSdk = this;
+    this.Drive.yartuSdk = this;
+    this.Email.yartuSdk = this;
     this.refreshUser();
   }
 
@@ -67,12 +71,13 @@ class YartuApp {
       this.user = undefined;
     }
 
-    this.Contact.metadata = { Authentication: yartu_token };
-    this.Search.metadata = { Authentication: yartu_token };
-    this.Email.metadata = { Authentication: yartu_token };
-    this.Calendar.metadata = { Authentication: yartu_token };
     this.Account.metadata = { Authentication: yartu_token };
+    this.Calendar.metadata = { Authentication: yartu_token };
     this.Conference.metadata = { Authentication: yartu_token };
+    this.Contact.metadata = { Authentication: yartu_token };
+    this.Drive.metadata = { Authentication: yartu_token };
+    this.Email.metadata = { Authentication: yartu_token };
+    this.Search.metadata = { Authentication: yartu_token };
   }
 }
 
@@ -92,12 +97,9 @@ const useYartuSdk = () => {
 
 const installYartuApp = {
   install: (Vue, config = {}) => {
-    let yartuSdk = null;
-    if (config.initalizedYartuSdk) {
-      yartuSdk = config.initalizedYartuSdk;
-    } else {
-      yartuSdk = new YartuApp(config);
-    }
+    let yartuSdk = config.initalizedYartuSdk
+      ? config.initalizedYartuSdk
+      : new YartuApp(config);
     Vue.config.globalProperties.$yartuSdk = yartuSdk;
     if (typeof window !== 'undefined') {
       window.$yartuSdk = yartuSdk;
