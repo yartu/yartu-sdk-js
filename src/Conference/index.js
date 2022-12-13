@@ -7,7 +7,8 @@ import {
   DeleteConferenceRequest,
   ShareConferenceRequest,
   UnshareConferenceRequest,
-  ConferenceUser,
+  UpsertConferenceRequest,
+  ConferenceParticipant,
 } from './service-pb.cjs';
 
 import { Query } from '../utils/definitions_pb.cjs';
@@ -30,13 +31,10 @@ export default (config) =>
 
     listConference(query = {}) {
       return new Promise((resolve, reject) => {
-        console.log('REQ');
         const request = new ListConferenceRequest();
         const queryData = new Query();
 
         request.setQuery(queryData);
-
-        console.log('CLIENT..', this.client);
 
         this.client.listConference(request, this.metadata, (error, response) => {
           if (error) {
@@ -209,11 +207,11 @@ export default (config) =>
 
         const shareableList = [];
         for (const shared of sharedData.sharable) {
-          const conferenceUser = new ConferenceUser();
-          conferenceUser.setEmail(shared.email);
-          conferenceUser.setType(shared.type);
-          conferenceUser.setIsGroup(shared.isGroup);
-          shareableList.push(conferenceUser);
+          const conferenceParticipant = new ConferenceParticipant();
+          conferenceParticipant.setEmail(shared.email);
+          conferenceParticipant.setType(shared.type);
+          conferenceParticipant.setIsGroup(shared.isGroup);
+          shareableList.push(conferenceParticipant);
         }
         
         request.setShareableList(shareableList);
@@ -249,16 +247,66 @@ export default (config) =>
 
         const shareableList = [];
         for (const shared of sharedData.sharable) {
-          const conferenceUser = new ConferenceUser();
-          conferenceUser.setEmail(shared.email);
-          conferenceUser.setType(shared.type);
-          conferenceUser.setIsGroup(shared.isGroup);
-          shareableList.push(conferenceUser);
+          const conferenceParticipant = new ConferenceParticipant();
+          conferenceParticipant.setEmail(shared.email);
+          conferenceParticipant.setType(shared.type);
+          conferenceParticipant.setIsGroup(shared.isGroup);
+          shareableList.push(conferenceParticipant);
         }
         
         request.setShareableList(shareableList);
 
         this.client.deleteConference(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage(),
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    upsertConference(conferenceData) {
+      return new Promise((resolve, reject) => {
+        const request = new UpsertConferenceRequest();
+        request.setId(conferenceData.id);
+        request.setName(conferenceData.name);
+        request.setAllDay(conferenceData.allDay);
+        request.setRrule(conferenceData.rrule);
+        request.setFromDate(conferenceData.start);
+        request.setToDate(conferenceData.end);
+
+        request.setTimezoneFrom(conferenceData.timezoneFrom);
+        request.setTimezoneTo(conferenceData.timezoneTo);
+        
+        if (conferenceData.hasPassword) {
+          request.setPasssword(conferenceData.password);
+        }
+
+        for (const participant of conferenceData.participants) {
+          const conferenceParticipant = new ConferenceParticipant();
+          conferenceParticipant.setEmail(participant.email);
+          conferenceParticipant.setIsGroup(participant.isGroup);
+          conferenceParticipant.setType(participant.type);
+          request.addParticipants(conferenceParticipant);
+        }
+        
+        const reminders = conferenceData.reminders.map((r) => r.value);
+        request.setRemindersList(reminders);
+
+        this.client.upsertConference(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
           } else {
