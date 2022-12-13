@@ -1,5 +1,4 @@
 import {
-  Query,
   ListMessageRequest,
   GetMessageRequest,
   DownloadAttachmentRequest,
@@ -17,6 +16,7 @@ import {
 } from './service-pb.cjs';
 import { YEmailClient } from './service-grpc-web-pb.cjs';
 import { handleError } from '../utils/helper';
+import { Query } from '../utils/definations_pb.cjs';
 
 export default (config) =>
   class Email {
@@ -158,10 +158,11 @@ export default (config) =>
       });
     }
 
-    uploadAttachment(name) {
+    uploadAttachment(name, type = 'attachment') {
       return new Promise((resolve, reject) => {
         const request = new UploadAttachmentRequest();
         request.setName(name);
+        // request.setType(type);
         this.client.uploadAttachment(
           request,
           this.metadata,

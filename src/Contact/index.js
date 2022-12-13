@@ -6,7 +6,6 @@ import {
   AddressBook,
   Contact,
   Label,
-  Query,
   davType,
   Address,
   GetContactRequest,
@@ -23,7 +22,7 @@ import {
 } from './service-pb.cjs';
 
 import { YContactClient } from './service-grpc-web-pb.cjs';
-
+import { Query } from '../utils/definations_pb.cjs';
 import { handleError } from '../utils/helper';
 
 export default (config) =>
@@ -43,7 +42,6 @@ export default (config) =>
     listAddressBook = () => {
       return new Promise((resolve, reject) => {
         const request = new ListAddressBookRequest();
-        // request.setQuery()
         this.client.listAddressBook(
           request,
           this.metadata,

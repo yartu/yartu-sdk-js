@@ -3,6 +3,7 @@ import jwt_decode from 'jwt-decode';
 import Auth from '../Auth';
 import Contact from '../Contact';
 import Email from '../Email';
+import Conference from '../Conference';
 import Calendar from '../Calendar';
 import Search from '../Search';
 import Account from '../Account';
@@ -24,7 +25,6 @@ class User {
   }
 }
 
-
 class YartuApp {
   grpcEndpoint = 'http://localhost:5001/';
   user = undefined;
@@ -33,6 +33,7 @@ class YartuApp {
     this.initialize(config);
     this.Auth = new (Auth())(config);
     this.Contact = new (Contact())(config);
+    this.Conference = new (Conference())(config);
     this.Search = new (Search())(config);
     this.Email = new (Email())(config);
     this.Calendar = new(Calendar())(config);
@@ -40,6 +41,7 @@ class YartuApp {
     this.Auth.yartuSdk = this;
     this.Email.yartuSdk = this;
     this.Calendar.yartuSdk = this;
+    this.Conference.yartuSdk = this;
     this.Account.yartuSdk = this;
     this.refreshUser();
   }
@@ -70,6 +72,7 @@ class YartuApp {
     this.Email.metadata = { Authentication: yartu_token };
     this.Calendar.metadata = { Authentication: yartu_token };
     this.Account.metadata = { Authentication: yartu_token };
+    this.Conference.metadata = { Authentication: yartu_token };
   }
 }
 
