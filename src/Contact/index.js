@@ -22,7 +22,7 @@ import {
 } from './service-pb.cjs';
 
 import { YContactClient } from './service-grpc-web-pb.cjs';
-import { Query } from '../utils/definations_pb.cjs';
+import { Query } from '../utils/definitions_pb.cjs';
 import { handleError } from '../utils/helper';
 
 export default (config) =>
