@@ -68,7 +68,7 @@ export default (config) =>
         }
 
         queryData.setPage(pagination.page || 1);
-        queryData.setPerpage(pagination.perPage || 20);
+        queryData.setPerPage(pagination.perPage || 20);
 
         if (filter.sortBy) {
           queryData.setSortby(filter.sortBy || ''); // from, size, revieved_at,
