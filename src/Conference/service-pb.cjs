@@ -973,7 +973,7 @@ proto.yartu.ConferenceParticipant.prototype.setType = function(value) {
  * @private {!Array<number>}
  * @const
  */
-proto.yartu.Session.repeatedFields_ = [16,17];
+proto.yartu.Session.repeatedFields_ = [17,18];
 
 
 
@@ -1018,13 +1018,14 @@ proto.yartu.Session.toObject = function(includeInstance, msg) {
     duration: jspb.Message.getFieldWithDefault(msg, 10, 0),
     status: jspb.Message.getFieldWithDefault(msg, 11, 0),
     usersCount: jspb.Message.getFieldWithDefault(msg, 12, 0),
-    isLocked: jspb.Message.getBooleanFieldWithDefault(msg, 13, false),
-    isRecording: jspb.Message.getBooleanFieldWithDefault(msg, 14, false),
-    hasPasswrod: jspb.Message.getBooleanFieldWithDefault(msg, 15, false),
+    recordsCount: jspb.Message.getFieldWithDefault(msg, 13, 0),
+    isLocked: jspb.Message.getBooleanFieldWithDefault(msg, 14, false),
+    isRecording: jspb.Message.getBooleanFieldWithDefault(msg, 15, false),
+    hasPasswrod: jspb.Message.getBooleanFieldWithDefault(msg, 16, false),
     usersList: jspb.Message.toObjectList(msg.getUsersList(),
     proto.yartu.SessionUser.toObject, includeInstance),
-    externalUserList: (f = jspb.Message.getRepeatedField(msg, 17)) == null ? undefined : f,
-    jwt: jspb.Message.getFieldWithDefault(msg, 18, "")
+    externalUserList: (f = jspb.Message.getRepeatedField(msg, 18)) == null ? undefined : f,
+    jwt: jspb.Message.getFieldWithDefault(msg, 19, "")
   };
 
   if (includeInstance) {
@@ -1111,27 +1112,31 @@ proto.yartu.Session.deserializeBinaryFromReader = function(msg, reader) {
       msg.setUsersCount(value);
       break;
     case 13:
-      var value = /** @type {boolean} */ (reader.readBool());
-      msg.setIsLocked(value);
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setRecordsCount(value);
       break;
     case 14:
       var value = /** @type {boolean} */ (reader.readBool());
-      msg.setIsRecording(value);
+      msg.setIsLocked(value);
       break;
     case 15:
       var value = /** @type {boolean} */ (reader.readBool());
-      msg.setHasPasswrod(value);
+      msg.setIsRecording(value);
       break;
     case 16:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setHasPasswrod(value);
+      break;
+    case 17:
       var value = new proto.yartu.SessionUser;
       reader.readMessage(value,proto.yartu.SessionUser.deserializeBinaryFromReader);
       msg.addUsers(value);
       break;
-    case 17:
+    case 18:
       var value = /** @type {string} */ (reader.readString());
       msg.addExternalUser(value);
       break;
-    case 18:
+    case 19:
       var value = /** @type {string} */ (reader.readString());
       msg.setJwt(value);
       break;
@@ -1249,31 +1254,38 @@ proto.yartu.Session.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getIsLocked();
-  if (f) {
-    writer.writeBool(
+  f = message.getRecordsCount();
+  if (f !== 0) {
+    writer.writeInt64(
       13,
       f
     );
   }
-  f = message.getIsRecording();
+  f = message.getIsLocked();
   if (f) {
     writer.writeBool(
       14,
       f
     );
   }
-  f = message.getHasPasswrod();
+  f = message.getIsRecording();
   if (f) {
     writer.writeBool(
       15,
       f
     );
   }
+  f = message.getHasPasswrod();
+  if (f) {
+    writer.writeBool(
+      16,
+      f
+    );
+  }
   f = message.getUsersList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
-      16,
+      17,
       f,
       proto.yartu.SessionUser.serializeBinaryToWriter
     );
@@ -1281,14 +1293,14 @@ proto.yartu.Session.serializeBinaryToWriter = function(message, writer) {
   f = message.getExternalUserList();
   if (f.length > 0) {
     writer.writeRepeatedString(
-      17,
+      18,
       f
     );
   }
-  f = /** @type {string} */ (jspb.Message.getField(message, 18));
+  f = /** @type {string} */ (jspb.Message.getField(message, 19));
   if (f != null) {
     writer.writeString(
-      18,
+      19,
       f
     );
   }
@@ -1531,28 +1543,28 @@ proto.yartu.Session.prototype.setUsersCount = function(value) {
 
 
 /**
- * optional bool is_locked = 13;
+ * optional int64 records_count = 13;
+ * @return {number}
+ */
+proto.yartu.Session.prototype.getRecordsCount = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 13, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu.Session} returns this
+ */
+proto.yartu.Session.prototype.setRecordsCount = function(value) {
+  return jspb.Message.setProto3IntField(this, 13, value);
+};
+
+
+/**
+ * optional bool is_locked = 14;
  * @return {boolean}
  */
 proto.yartu.Session.prototype.getIsLocked = function() {
-  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 13, false));
-};
-
-
-/**
- * @param {boolean} value
- * @return {!proto.yartu.Session} returns this
- */
-proto.yartu.Session.prototype.setIsLocked = function(value) {
-  return jspb.Message.setProto3BooleanField(this, 13, value);
-};
-
-
-/**
- * optional bool is_recording = 14;
- * @return {boolean}
- */
-proto.yartu.Session.prototype.getIsRecording = function() {
   return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 14, false));
 };
 
@@ -1561,16 +1573,16 @@ proto.yartu.Session.prototype.getIsRecording = function() {
  * @param {boolean} value
  * @return {!proto.yartu.Session} returns this
  */
-proto.yartu.Session.prototype.setIsRecording = function(value) {
+proto.yartu.Session.prototype.setIsLocked = function(value) {
   return jspb.Message.setProto3BooleanField(this, 14, value);
 };
 
 
 /**
- * optional bool has_passwrod = 15;
+ * optional bool is_recording = 15;
  * @return {boolean}
  */
-proto.yartu.Session.prototype.getHasPasswrod = function() {
+proto.yartu.Session.prototype.getIsRecording = function() {
   return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 15, false));
 };
 
@@ -1579,18 +1591,36 @@ proto.yartu.Session.prototype.getHasPasswrod = function() {
  * @param {boolean} value
  * @return {!proto.yartu.Session} returns this
  */
-proto.yartu.Session.prototype.setHasPasswrod = function(value) {
+proto.yartu.Session.prototype.setIsRecording = function(value) {
   return jspb.Message.setProto3BooleanField(this, 15, value);
 };
 
 
 /**
- * repeated SessionUser users = 16;
+ * optional bool has_passwrod = 16;
+ * @return {boolean}
+ */
+proto.yartu.Session.prototype.getHasPasswrod = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 16, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.yartu.Session} returns this
+ */
+proto.yartu.Session.prototype.setHasPasswrod = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 16, value);
+};
+
+
+/**
+ * repeated SessionUser users = 17;
  * @return {!Array<!proto.yartu.SessionUser>}
  */
 proto.yartu.Session.prototype.getUsersList = function() {
   return /** @type{!Array<!proto.yartu.SessionUser>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.yartu.SessionUser, 16));
+    jspb.Message.getRepeatedWrapperField(this, proto.yartu.SessionUser, 17));
 };
 
 
@@ -1599,7 +1629,7 @@ proto.yartu.Session.prototype.getUsersList = function() {
  * @return {!proto.yartu.Session} returns this
 */
 proto.yartu.Session.prototype.setUsersList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 16, value);
+  return jspb.Message.setRepeatedWrapperField(this, 17, value);
 };
 
 
@@ -1609,7 +1639,7 @@ proto.yartu.Session.prototype.setUsersList = function(value) {
  * @return {!proto.yartu.SessionUser}
  */
 proto.yartu.Session.prototype.addUsers = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 16, opt_value, proto.yartu.SessionUser, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 17, opt_value, proto.yartu.SessionUser, opt_index);
 };
 
 
@@ -1623,11 +1653,11 @@ proto.yartu.Session.prototype.clearUsersList = function() {
 
 
 /**
- * repeated string external_user = 17;
+ * repeated string external_user = 18;
  * @return {!Array<string>}
  */
 proto.yartu.Session.prototype.getExternalUserList = function() {
-  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 17));
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 18));
 };
 
 
@@ -1636,7 +1666,7 @@ proto.yartu.Session.prototype.getExternalUserList = function() {
  * @return {!proto.yartu.Session} returns this
  */
 proto.yartu.Session.prototype.setExternalUserList = function(value) {
-  return jspb.Message.setField(this, 17, value || []);
+  return jspb.Message.setField(this, 18, value || []);
 };
 
 
@@ -1646,7 +1676,7 @@ proto.yartu.Session.prototype.setExternalUserList = function(value) {
  * @return {!proto.yartu.Session} returns this
  */
 proto.yartu.Session.prototype.addExternalUser = function(value, opt_index) {
-  return jspb.Message.addToRepeatedField(this, 17, value, opt_index);
+  return jspb.Message.addToRepeatedField(this, 18, value, opt_index);
 };
 
 
@@ -1660,11 +1690,11 @@ proto.yartu.Session.prototype.clearExternalUserList = function() {
 
 
 /**
- * optional string jwt = 18;
+ * optional string jwt = 19;
  * @return {string}
  */
 proto.yartu.Session.prototype.getJwt = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 18, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 19, ""));
 };
 
 
@@ -1673,7 +1703,7 @@ proto.yartu.Session.prototype.getJwt = function() {
  * @return {!proto.yartu.Session} returns this
  */
 proto.yartu.Session.prototype.setJwt = function(value) {
-  return jspb.Message.setField(this, 18, value);
+  return jspb.Message.setField(this, 19, value);
 };
 
 
@@ -1682,7 +1712,7 @@ proto.yartu.Session.prototype.setJwt = function(value) {
  * @return {!proto.yartu.Session} returns this
  */
 proto.yartu.Session.prototype.clearJwt = function() {
-  return jspb.Message.setField(this, 18, undefined);
+  return jspb.Message.setField(this, 19, undefined);
 };
 
 
@@ -1691,7 +1721,7 @@ proto.yartu.Session.prototype.clearJwt = function() {
  * @return {boolean}
  */
 proto.yartu.Session.prototype.hasJwt = function() {
-  return jspb.Message.getField(this, 18) != null;
+  return jspb.Message.getField(this, 19) != null;
 };
 
 
@@ -3132,7 +3162,8 @@ proto.yartu.UpsertConferenceResponse.prototype.toObject = function(opt_includeIn
 proto.yartu.UpsertConferenceResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, "")
+    uuid: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    message: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -3175,6 +3206,10 @@ proto.yartu.UpsertConferenceResponse.deserializeBinaryFromReader = function(msg,
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
+      msg.setUuid(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -3213,10 +3248,17 @@ proto.yartu.UpsertConferenceResponse.serializeBinaryToWriter = function(message,
       f
     );
   }
-  f = message.getMessage();
+  f = message.getUuid();
   if (f.length > 0) {
     writer.writeString(
       2,
+      f
+    );
+  }
+  f = message.getMessage();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
       f
     );
   }
@@ -3242,10 +3284,10 @@ proto.yartu.UpsertConferenceResponse.prototype.setCode = function(value) {
 
 
 /**
- * optional string message = 2;
+ * optional string uuid = 2;
  * @return {string}
  */
-proto.yartu.UpsertConferenceResponse.prototype.getMessage = function() {
+proto.yartu.UpsertConferenceResponse.prototype.getUuid = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -3254,8 +3296,26 @@ proto.yartu.UpsertConferenceResponse.prototype.getMessage = function() {
  * @param {string} value
  * @return {!proto.yartu.UpsertConferenceResponse} returns this
  */
-proto.yartu.UpsertConferenceResponse.prototype.setMessage = function(value) {
+proto.yartu.UpsertConferenceResponse.prototype.setUuid = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional string message = 3;
+ * @return {string}
+ */
+proto.yartu.UpsertConferenceResponse.prototype.getMessage = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.UpsertConferenceResponse} returns this
+ */
+proto.yartu.UpsertConferenceResponse.prototype.setMessage = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 

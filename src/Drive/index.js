@@ -1,4 +1,4 @@
-import { ListRepoRequest } from './service-pb.cjs';
+import { GetRecentRequest, ListRepoRequest } from './service-pb.cjs';
 
 import { YDriveClient } from './service-grpc-web-pb.cjs';
 import { handleError } from '../utils/helper';
@@ -17,6 +17,41 @@ export default (config) =>
       this.metadata = { Authentication: yartu_token };
     }
 
+    getRecent = () => {
+      return new Promise((resolve, reject) => {
+        const request = new GetRecentRequest();
+        this.client.getRecent(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              const viewedList = response
+                .getViewedList()
+                .map((data) => data.toObject());
+              const updatedList = response
+                .getUpdatedList()
+                .map((data) => data.toObject());
+              const starredList = response
+                .getStarredList()
+                .map((data) => data.toObject());
+              resolve({
+                viewed: viewedList,
+                updated: updatedList,
+                starred: starredList
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
     listRepo = () => {
       return new Promise((resolve, reject) => {
         const request = new ListRepoRequest();
@@ -25,7 +60,6 @@ export default (config) =>
             handleError(error, reject);
           } else {
             const code = response.getCode();
-            console.log(response);
 
             if (code == 0) {
               const dataList = response
