@@ -1564,15 +1564,16 @@ proto.yartu.Repo.toObject = function(includeInstance, msg) {
     modifier: (f = msg.getModifier()) && proto.yartu.UserBasic.toObject(includeInstance, f),
     permission: jspb.Message.getFieldWithDefault(msg, 11, ""),
     root: jspb.Message.getFieldWithDefault(msg, 12, ""),
-    isVirtual: jspb.Message.getBooleanFieldWithDefault(msg, 13, false),
-    isDefault: jspb.Message.getBooleanFieldWithDefault(msg, 14, false),
+    isDefault: jspb.Message.getBooleanFieldWithDefault(msg, 13, false),
+    isVirtual: jspb.Message.getBooleanFieldWithDefault(msg, 14, false),
     isEncrypted: jspb.Message.getBooleanFieldWithDefault(msg, 15, false),
-    type: jspb.Message.getFieldWithDefault(msg, 16, ""),
-    shareFrom: jspb.Message.getFieldWithDefault(msg, 17, ""),
-    shareType: jspb.Message.getFieldWithDefault(msg, 18, ""),
-    salt: jspb.Message.getFieldWithDefault(msg, 19, ""),
-    groupId: jspb.Message.getFieldWithDefault(msg, 20, 0),
-    groupName: jspb.Message.getFieldWithDefault(msg, 21, "")
+    isStarred: jspb.Message.getBooleanFieldWithDefault(msg, 16, false),
+    type: jspb.Message.getFieldWithDefault(msg, 17, ""),
+    shareFrom: jspb.Message.getFieldWithDefault(msg, 18, ""),
+    shareType: jspb.Message.getFieldWithDefault(msg, 19, ""),
+    salt: jspb.Message.getFieldWithDefault(msg, 20, ""),
+    groupId: jspb.Message.getFieldWithDefault(msg, 21, 0),
+    groupName: jspb.Message.getFieldWithDefault(msg, 22, "")
   };
 
   if (includeInstance) {
@@ -1662,37 +1663,41 @@ proto.yartu.Repo.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 13:
       var value = /** @type {boolean} */ (reader.readBool());
-      msg.setIsVirtual(value);
+      msg.setIsDefault(value);
       break;
     case 14:
       var value = /** @type {boolean} */ (reader.readBool());
-      msg.setIsDefault(value);
+      msg.setIsVirtual(value);
       break;
     case 15:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setIsEncrypted(value);
       break;
     case 16:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setType(value);
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setIsStarred(value);
       break;
     case 17:
       var value = /** @type {string} */ (reader.readString());
-      msg.setShareFrom(value);
+      msg.setType(value);
       break;
     case 18:
       var value = /** @type {string} */ (reader.readString());
-      msg.setShareType(value);
+      msg.setShareFrom(value);
       break;
     case 19:
       var value = /** @type {string} */ (reader.readString());
-      msg.setSalt(value);
+      msg.setShareType(value);
       break;
     case 20:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setSalt(value);
+      break;
+    case 21:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setGroupId(value);
       break;
-    case 21:
+    case 22:
       var value = /** @type {string} */ (reader.readString());
       msg.setGroupName(value);
       break;
@@ -1812,14 +1817,14 @@ proto.yartu.Repo.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getIsVirtual();
+  f = message.getIsDefault();
   if (f) {
     writer.writeBool(
       13,
       f
     );
   }
-  f = message.getIsDefault();
+  f = message.getIsVirtual();
   if (f) {
     writer.writeBool(
       14,
@@ -1833,45 +1838,52 @@ proto.yartu.Repo.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getType();
-  if (f.length > 0) {
-    writer.writeString(
+  f = message.getIsStarred();
+  if (f) {
+    writer.writeBool(
       16,
       f
     );
   }
-  f = message.getShareFrom();
+  f = message.getType();
   if (f.length > 0) {
     writer.writeString(
       17,
       f
     );
   }
-  f = message.getShareType();
+  f = message.getShareFrom();
   if (f.length > 0) {
     writer.writeString(
       18,
       f
     );
   }
-  f = message.getSalt();
+  f = message.getShareType();
   if (f.length > 0) {
     writer.writeString(
       19,
       f
     );
   }
+  f = message.getSalt();
+  if (f.length > 0) {
+    writer.writeString(
+      20,
+      f
+    );
+  }
   f = message.getGroupId();
   if (f !== 0) {
     writer.writeInt64(
-      20,
+      21,
       f
     );
   }
   f = message.getGroupName();
   if (f.length > 0) {
     writer.writeString(
-      21,
+      22,
       f
     );
   }
@@ -2152,10 +2164,10 @@ proto.yartu.Repo.prototype.setRoot = function(value) {
 
 
 /**
- * optional bool is_virtual = 13;
+ * optional bool is_default = 13;
  * @return {boolean}
  */
-proto.yartu.Repo.prototype.getIsVirtual = function() {
+proto.yartu.Repo.prototype.getIsDefault = function() {
   return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 13, false));
 };
 
@@ -2164,16 +2176,16 @@ proto.yartu.Repo.prototype.getIsVirtual = function() {
  * @param {boolean} value
  * @return {!proto.yartu.Repo} returns this
  */
-proto.yartu.Repo.prototype.setIsVirtual = function(value) {
+proto.yartu.Repo.prototype.setIsDefault = function(value) {
   return jspb.Message.setProto3BooleanField(this, 13, value);
 };
 
 
 /**
- * optional bool is_default = 14;
+ * optional bool is_virtual = 14;
  * @return {boolean}
  */
-proto.yartu.Repo.prototype.getIsDefault = function() {
+proto.yartu.Repo.prototype.getIsVirtual = function() {
   return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 14, false));
 };
 
@@ -2182,7 +2194,7 @@ proto.yartu.Repo.prototype.getIsDefault = function() {
  * @param {boolean} value
  * @return {!proto.yartu.Repo} returns this
  */
-proto.yartu.Repo.prototype.setIsDefault = function(value) {
+proto.yartu.Repo.prototype.setIsVirtual = function(value) {
   return jspb.Message.setProto3BooleanField(this, 14, value);
 };
 
@@ -2206,28 +2218,28 @@ proto.yartu.Repo.prototype.setIsEncrypted = function(value) {
 
 
 /**
- * optional string type = 16;
+ * optional bool is_starred = 16;
+ * @return {boolean}
+ */
+proto.yartu.Repo.prototype.getIsStarred = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 16, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.yartu.Repo} returns this
+ */
+proto.yartu.Repo.prototype.setIsStarred = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 16, value);
+};
+
+
+/**
+ * optional string type = 17;
  * @return {string}
  */
 proto.yartu.Repo.prototype.getType = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 16, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.yartu.Repo} returns this
- */
-proto.yartu.Repo.prototype.setType = function(value) {
-  return jspb.Message.setProto3StringField(this, 16, value);
-};
-
-
-/**
- * optional string share_from = 17;
- * @return {string}
- */
-proto.yartu.Repo.prototype.getShareFrom = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 17, ""));
 };
 
@@ -2236,16 +2248,16 @@ proto.yartu.Repo.prototype.getShareFrom = function() {
  * @param {string} value
  * @return {!proto.yartu.Repo} returns this
  */
-proto.yartu.Repo.prototype.setShareFrom = function(value) {
+proto.yartu.Repo.prototype.setType = function(value) {
   return jspb.Message.setProto3StringField(this, 17, value);
 };
 
 
 /**
- * optional string share_type = 18;
+ * optional string share_from = 18;
  * @return {string}
  */
-proto.yartu.Repo.prototype.getShareType = function() {
+proto.yartu.Repo.prototype.getShareFrom = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 18, ""));
 };
 
@@ -2254,16 +2266,16 @@ proto.yartu.Repo.prototype.getShareType = function() {
  * @param {string} value
  * @return {!proto.yartu.Repo} returns this
  */
-proto.yartu.Repo.prototype.setShareType = function(value) {
+proto.yartu.Repo.prototype.setShareFrom = function(value) {
   return jspb.Message.setProto3StringField(this, 18, value);
 };
 
 
 /**
- * optional string salt = 19;
+ * optional string share_type = 19;
  * @return {string}
  */
-proto.yartu.Repo.prototype.getSalt = function() {
+proto.yartu.Repo.prototype.getShareType = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 19, ""));
 };
 
@@ -2272,17 +2284,35 @@ proto.yartu.Repo.prototype.getSalt = function() {
  * @param {string} value
  * @return {!proto.yartu.Repo} returns this
  */
-proto.yartu.Repo.prototype.setSalt = function(value) {
+proto.yartu.Repo.prototype.setShareType = function(value) {
   return jspb.Message.setProto3StringField(this, 19, value);
 };
 
 
 /**
- * optional int64 group_id = 20;
+ * optional string salt = 20;
+ * @return {string}
+ */
+proto.yartu.Repo.prototype.getSalt = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 20, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.Repo} returns this
+ */
+proto.yartu.Repo.prototype.setSalt = function(value) {
+  return jspb.Message.setProto3StringField(this, 20, value);
+};
+
+
+/**
+ * optional int64 group_id = 21;
  * @return {number}
  */
 proto.yartu.Repo.prototype.getGroupId = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 20, 0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 21, 0));
 };
 
 
@@ -2291,16 +2321,16 @@ proto.yartu.Repo.prototype.getGroupId = function() {
  * @return {!proto.yartu.Repo} returns this
  */
 proto.yartu.Repo.prototype.setGroupId = function(value) {
-  return jspb.Message.setProto3IntField(this, 20, value);
+  return jspb.Message.setProto3IntField(this, 21, value);
 };
 
 
 /**
- * optional string group_name = 21;
+ * optional string group_name = 22;
  * @return {string}
  */
 proto.yartu.Repo.prototype.getGroupName = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 21, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 22, ""));
 };
 
 
@@ -2309,7 +2339,7 @@ proto.yartu.Repo.prototype.getGroupName = function() {
  * @return {!proto.yartu.Repo} returns this
  */
 proto.yartu.Repo.prototype.setGroupName = function(value) {
-  return jspb.Message.setProto3StringField(this, 21, value);
+  return jspb.Message.setProto3StringField(this, 22, value);
 };
 
 
