@@ -9,6 +9,7 @@ import {
   UnshareConferenceRequest,
   UpsertConferenceRequest,
   ConferenceParticipant,
+  UpsertSessionUserRequest,
 } from './service-pb.cjs';
 
 import { Query } from '../utils/definitions_pb.cjs';
@@ -201,22 +202,24 @@ export default (config) =>
     shareConference(sharedData) {
       return new Promise((resolve, reject) => {
 
+        console.log('IN SDK', sharedData);
+
         const request = new ShareConferenceRequest();
         request.setUuid(sharedData.uuid);
-        request.set(sharedData.uuid);
 
         const shareableList = [];
         for (const shared of sharedData.sharable) {
+          console.log('ITEM', shared);
           const conferenceParticipant = new ConferenceParticipant();
-          conferenceParticipant.setEmail(shared.email);
-          conferenceParticipant.setType(shared.type);
+          conferenceParticipant.setEmail(shared.username);
+          conferenceParticipant.setType(1);
           conferenceParticipant.setIsGroup(shared.isGroup);
           shareableList.push(conferenceParticipant);
         }
-        
+
         request.setShareableList(shareableList);
 
-        this.client.deleteConference(request, this.metadata, (error, response) => {
+        this.client.shareConference(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
           } else {
@@ -256,7 +259,7 @@ export default (config) =>
         
         request.setShareableList(shareableList);
 
-        this.client.deleteConference(request, this.metadata, (error, response) => {
+        this.client.unshareConference(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
           } else {
@@ -281,18 +284,20 @@ export default (config) =>
     upsertConference(conferenceData) {
       return new Promise((resolve, reject) => {
         const request = new UpsertConferenceRequest();
+
         request.setId(conferenceData.id);
         request.setName(conferenceData.name);
         request.setAllDay(conferenceData.allDay);
         request.setRrule(conferenceData.rrule);
         request.setFromDate(conferenceData.start);
-        request.setToDate(conferenceData.end);
-
         request.setTimezoneFrom(conferenceData.timezoneFrom);
-        request.setTimezoneTo(conferenceData.timezoneTo);
+
+        if (conferenceData.hasDuration) {
+          request.setDuration(conferenceData.duration);
+        }
         
         if (conferenceData.hasPassword) {
-          request.setPasssword(conferenceData.password);
+          request.setPassword(conferenceData.password);
         }
 
         for (const participant of conferenceData.participants) {
@@ -302,11 +307,43 @@ export default (config) =>
           conferenceParticipant.setType(participant.type);
           request.addParticipants(conferenceParticipant);
         }
-        
+
         const reminders = conferenceData.reminders.map((r) => r.value);
         request.setRemindersList(reminders);
 
         this.client.upsertConference(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage(),
+                uuid: response.getUuid(),
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage(),
+                uuid: null,
+              });
+            }
+          }
+        });
+      });
+    }
+
+    upsertSessionUser(sharedData) {
+      return new Promise((resolve, reject) => {
+
+        const request = new UpsertSessionUserRequest();
+        request.setId(sharedData.id);
+        request.setEmail(sharedData.email);
+        request.setUserType(sharedData.userType);
+
+        this.client.upsertSessionUser(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
           } else {
