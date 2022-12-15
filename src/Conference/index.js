@@ -8,7 +8,7 @@ import {
   ShareConferenceRequest,
   UnshareConferenceRequest,
   UpsertConferenceRequest,
-  ConferenceParticipant,
+  ConferenceParticipantUser,
   UpsertSessionUserRequest,
 } from './service-pb.cjs';
 
@@ -210,7 +210,7 @@ export default (config) =>
         const shareableList = [];
         for (const shared of sharedData.sharable) {
           console.log('ITEM', shared);
-          const conferenceParticipant = new ConferenceParticipant();
+          const conferenceParticipant = new ConferenceParticipantUser();
           conferenceParticipant.setEmail(shared.username);
           conferenceParticipant.setType(1);
           conferenceParticipant.setIsGroup(shared.isGroup);
@@ -250,7 +250,7 @@ export default (config) =>
 
         const shareableList = [];
         for (const shared of sharedData.sharable) {
-          const conferenceParticipant = new ConferenceParticipant();
+          const conferenceParticipant = new ConferenceParticipantUser();
           conferenceParticipant.setEmail(shared.email);
           conferenceParticipant.setType(shared.type);
           conferenceParticipant.setIsGroup(shared.isGroup);
@@ -287,10 +287,9 @@ export default (config) =>
 
         request.setId(conferenceData.id);
         request.setName(conferenceData.name);
-        request.setAllDay(conferenceData.allDay);
         request.setRrule(conferenceData.rrule);
-        request.setFromDate(conferenceData.start);
-        request.setTimezoneFrom(conferenceData.timezoneFrom);
+        request.setScheduledToStartAt(conferenceData.scheduledToStartAt);
+        request.setTimezone(conferenceData.timezone);
 
         if (conferenceData.hasDuration) {
           request.setDuration(conferenceData.duration);
@@ -300,16 +299,16 @@ export default (config) =>
           request.setPassword(conferenceData.password);
         }
 
-        for (const participant of conferenceData.participants) {
-          const conferenceParticipant = new ConferenceParticipant();
-          conferenceParticipant.setEmail(participant.email);
-          conferenceParticipant.setIsGroup(participant.isGroup);
-          conferenceParticipant.setType(participant.type);
-          request.addParticipants(conferenceParticipant);
+        for (const user of conferenceData.usersList) {
+          const conferenceParticipant = new ConferenceParticipantUser();
+          conferenceParticipant.setEmail(user.email);
+          conferenceParticipant.setIsGroup(user.isGroup);
+          conferenceParticipant.setType(user.type);
+          request.addUsers(conferenceParticipant);
         }
 
-        const reminders = conferenceData.reminders.map((r) => r.value);
-        request.setRemindersList(reminders);
+        const reminderList = conferenceData.reminderList.map((r) => r.value);
+        request.setReminderList(reminderList);
 
         this.client.upsertConference(request, this.metadata, (error, response) => {
           if (error) {
