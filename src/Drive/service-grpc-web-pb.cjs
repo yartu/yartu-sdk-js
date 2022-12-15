@@ -79,6 +79,67 @@ proto.yartu.YDrivePromiseClient =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.GetRecentRequest,
+ *   !proto.yartu.GetRecentResponse>}
+ */
+const methodDescriptor_YDrive_getRecent = new grpc.web.MethodDescriptor(
+  '/yartu.YDrive/getRecent',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.GetRecentRequest,
+  proto.yartu.GetRecentResponse,
+  /**
+   * @param {!proto.yartu.GetRecentRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.GetRecentResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.GetRecentRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.GetRecentResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.GetRecentResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YDriveClient.prototype.getRecent =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YDrive/getRecent',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_getRecent,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.GetRecentRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.GetRecentResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YDrivePromiseClient.prototype.getRecent =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YDrive/getRecent',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_getRecent);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.GetRepoRequest,
  *   !proto.yartu.GetRepoResponse>}
  */
@@ -378,6 +439,128 @@ proto.yartu.YDrivePromiseClient.prototype.getDirEntries =
       request,
       metadata || {},
       methodDescriptor_YDrive_getDirEntries);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.UpsertDirectoryRequest,
+ *   !proto.yartu.UpsertDirectoryResponse>}
+ */
+const methodDescriptor_YDrive_upsertDirectory = new grpc.web.MethodDescriptor(
+  '/yartu.YDrive/upsertDirectory',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.UpsertDirectoryRequest,
+  proto.yartu.UpsertDirectoryResponse,
+  /**
+   * @param {!proto.yartu.UpsertDirectoryRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.UpsertDirectoryResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.UpsertDirectoryRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.UpsertDirectoryResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.UpsertDirectoryResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YDriveClient.prototype.upsertDirectory =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YDrive/upsertDirectory',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_upsertDirectory,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.UpsertDirectoryRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.UpsertDirectoryResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YDrivePromiseClient.prototype.upsertDirectory =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YDrive/upsertDirectory',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_upsertDirectory);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.UpsertFileRequest,
+ *   !proto.yartu.UpsertFileResponse>}
+ */
+const methodDescriptor_YDrive_upsertFile = new grpc.web.MethodDescriptor(
+  '/yartu.YDrive/upsertFile',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.UpsertFileRequest,
+  proto.yartu.UpsertFileResponse,
+  /**
+   * @param {!proto.yartu.UpsertFileRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.UpsertFileResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.UpsertFileRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.UpsertFileResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.UpsertFileResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YDriveClient.prototype.upsertFile =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YDrive/upsertFile',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_upsertFile,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.UpsertFileRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.UpsertFileResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YDrivePromiseClient.prototype.upsertFile =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YDrive/upsertFile',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_upsertFile);
 };
 
 
