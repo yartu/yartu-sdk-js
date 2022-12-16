@@ -8,8 +8,8 @@ import {
   ShareConferenceRequest,
   UnshareConferenceRequest,
   UpsertConferenceRequest,
-  ConferenceParticipantUser,
-  UpsertSessionUserRequest,
+  SessionParticipant,
+  UpsertSessionParticipantRequest,
 } from './service-pb.cjs';
 
 import { Query } from '../utils/definitions_pb.cjs';
@@ -65,8 +65,38 @@ export default (config) =>
 
         const request = new GetConferenceRequest();
         request.setUuid(conferenceUuid);
+        console.log('conferenceUuid', conferenceUuid);
 
         this.client.getConference(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code,
+                conference: response.toObject().session,
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    getPublicConference(conferenceUuid) {
+      return new Promise((resolve, reject) => {
+
+        const request = new GetConferenceRequest();
+        request.setUuid(conferenceUuid);
+        console.log('conferenceUuid', conferenceUuid);
+
+        this.client.getConference(request, {}, (error, response) => {
           if (error) {
             handleError(error, reject);
           } else {
@@ -130,11 +160,13 @@ export default (config) =>
             if (code == 0) {
               resolve({
                 code,
+                key: response.getKey(),
                 message: response.getMessage(),
               });
             } else {
               reject({
                 code: code,
+                key: '',
                 message: response.getMessage()
               });
             }
@@ -207,17 +239,17 @@ export default (config) =>
         const request = new ShareConferenceRequest();
         request.setUuid(sharedData.uuid);
 
-        const shareableList = [];
-        for (const shared of sharedData.sharable) {
-          console.log('ITEM', shared);
-          const conferenceParticipant = new ConferenceParticipantUser();
-          conferenceParticipant.setEmail(shared.username);
-          conferenceParticipant.setType(1);
-          conferenceParticipant.setIsGroup(shared.isGroup);
-          shareableList.push(conferenceParticipant);
+        const participantsList = [];
+        for (const participant of sharedData.participantsList) {
+          console.log('ITEM-participant', participant);
+          const sessionParticipant = new SessionParticipant();
+          sessionParticipant.setEmail(participant.username);
+          sessionParticipant.setParticipantType(1);
+          sessionParticipant.setIsGroup(participant.isGroup);
+          participantsList.push(sessionParticipant);
         }
 
-        request.setShareableList(shareableList);
+        request.setParticipantsList(participantsList);
 
         this.client.shareConference(request, this.metadata, (error, response) => {
           if (error) {
@@ -246,18 +278,17 @@ export default (config) =>
 
         const request = new UnshareConferenceRequest();
         request.setUuid(sharedData.uuid);
-        request.set(sharedData.uuid);
 
-        const shareableList = [];
-        for (const shared of sharedData.sharable) {
-          const conferenceParticipant = new ConferenceParticipantUser();
-          conferenceParticipant.setEmail(shared.email);
-          conferenceParticipant.setType(shared.type);
-          conferenceParticipant.setIsGroup(shared.isGroup);
-          shareableList.push(conferenceParticipant);
+        const participantsList = [];
+        for (const participant of sharedData.participantsList) {
+          const sessionParticipant = new SessionParticipant();
+          sessionParticipant.setEmail(participant.username);
+          sessionParticipant.setParticipantType(participant.type);
+          sessionParticipant.setIsGroup(participant.isGroup);
+          participantsList.push(sessionParticipant);
         }
         
-        request.setShareableList(shareableList);
+        request.setParticipantsList(participantsList);
 
         this.client.unshareConference(request, this.metadata, (error, response) => {
           if (error) {
@@ -285,6 +316,8 @@ export default (config) =>
       return new Promise((resolve, reject) => {
         const request = new UpsertConferenceRequest();
 
+        console.log('....conferenceData', conferenceData);
+        
         request.setId(conferenceData.id);
         request.setName(conferenceData.name);
         request.setRrule(conferenceData.rrule);
@@ -299,12 +332,12 @@ export default (config) =>
           request.setPassword(conferenceData.password);
         }
 
-        for (const user of conferenceData.usersList) {
-          const conferenceParticipant = new ConferenceParticipantUser();
-          conferenceParticipant.setEmail(user.email);
-          conferenceParticipant.setIsGroup(user.isGroup);
-          conferenceParticipant.setType(user.type);
-          request.addUsers(conferenceParticipant);
+        for (const participant of conferenceData.participantsList) {
+          const sessionParticipant = new SessionParticipant();
+          sessionParticipant.setUsername(participant.username);
+          sessionParticipant.setIsGroup(participant.isGroup);
+          sessionParticipant.setParticipantType(participant.participant_type);
+          request.addParticipants(sessionParticipant);
         }
 
         const reminderList = conferenceData.reminderList.map((r) => r.value);
@@ -337,7 +370,7 @@ export default (config) =>
     upsertSessionUser(sharedData) {
       return new Promise((resolve, reject) => {
 
-        const request = new UpsertSessionUserRequest();
+        const request = new UpsertSessionParticipantRequest();
         request.setId(sharedData.id);
         request.setEmail(sharedData.email);
         request.setUserType(sharedData.userType);
