@@ -696,8 +696,10 @@ proto.yartu.SessionParticipant.toObject = function(includeInstance, msg) {
     id: jspb.Message.getFieldWithDefault(msg, 1, 0),
     isGroup: jspb.Message.getBooleanFieldWithDefault(msg, 2, false),
     username: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    participantType: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    isExternal: jspb.Message.getBooleanFieldWithDefault(msg, 5, false)
+    name: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    surname: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    participantType: jspb.Message.getFieldWithDefault(msg, 6, 0),
+    isExternal: jspb.Message.getBooleanFieldWithDefault(msg, 7, false)
   };
 
   if (includeInstance) {
@@ -747,10 +749,18 @@ proto.yartu.SessionParticipant.deserializeBinaryFromReader = function(msg, reade
       msg.setUsername(value);
       break;
     case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setName(value);
+      break;
+    case 5:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setSurname(value);
+      break;
+    case 6:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setParticipantType(value);
       break;
-    case 5:
+    case 7:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setIsExternal(value);
       break;
@@ -804,17 +814,31 @@ proto.yartu.SessionParticipant.serializeBinaryToWriter = function(message, write
       f
     );
   }
+  f = /** @type {string} */ (jspb.Message.getField(message, 4));
+  if (f != null) {
+    writer.writeString(
+      4,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 5));
+  if (f != null) {
+    writer.writeString(
+      5,
+      f
+    );
+  }
   f = message.getParticipantType();
   if (f !== 0) {
     writer.writeInt64(
-      4,
+      6,
       f
     );
   }
   f = message.getIsExternal();
   if (f) {
     writer.writeBool(
-      5,
+      7,
       f
     );
   }
@@ -876,11 +900,83 @@ proto.yartu.SessionParticipant.prototype.setUsername = function(value) {
 
 
 /**
- * optional int64 participant_type = 4;
+ * optional string name = 4;
+ * @return {string}
+ */
+proto.yartu.SessionParticipant.prototype.getName = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.SessionParticipant} returns this
+ */
+proto.yartu.SessionParticipant.prototype.setName = function(value) {
+  return jspb.Message.setField(this, 4, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.SessionParticipant} returns this
+ */
+proto.yartu.SessionParticipant.prototype.clearName = function() {
+  return jspb.Message.setField(this, 4, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.SessionParticipant.prototype.hasName = function() {
+  return jspb.Message.getField(this, 4) != null;
+};
+
+
+/**
+ * optional string surname = 5;
+ * @return {string}
+ */
+proto.yartu.SessionParticipant.prototype.getSurname = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.SessionParticipant} returns this
+ */
+proto.yartu.SessionParticipant.prototype.setSurname = function(value) {
+  return jspb.Message.setField(this, 5, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.SessionParticipant} returns this
+ */
+proto.yartu.SessionParticipant.prototype.clearSurname = function() {
+  return jspb.Message.setField(this, 5, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.SessionParticipant.prototype.hasSurname = function() {
+  return jspb.Message.getField(this, 5) != null;
+};
+
+
+/**
+ * optional int64 participant_type = 6;
  * @return {number}
  */
 proto.yartu.SessionParticipant.prototype.getParticipantType = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
 };
 
 
@@ -889,16 +985,16 @@ proto.yartu.SessionParticipant.prototype.getParticipantType = function() {
  * @return {!proto.yartu.SessionParticipant} returns this
  */
 proto.yartu.SessionParticipant.prototype.setParticipantType = function(value) {
-  return jspb.Message.setProto3IntField(this, 4, value);
+  return jspb.Message.setProto3IntField(this, 6, value);
 };
 
 
 /**
- * optional bool is_external = 5;
+ * optional bool is_external = 7;
  * @return {boolean}
  */
 proto.yartu.SessionParticipant.prototype.getIsExternal = function() {
-  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 5, false));
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 7, false));
 };
 
 
@@ -907,7 +1003,7 @@ proto.yartu.SessionParticipant.prototype.getIsExternal = function() {
  * @return {!proto.yartu.SessionParticipant} returns this
  */
 proto.yartu.SessionParticipant.prototype.setIsExternal = function(value) {
-  return jspb.Message.setProto3BooleanField(this, 5, value);
+  return jspb.Message.setProto3BooleanField(this, 7, value);
 };
 
 

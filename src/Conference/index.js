@@ -11,7 +11,8 @@ import {
   SessionParticipant,
   UpsertSessionParticipantRequest,
   ListConferenceRecordsRequest,
-  DeleteRecordRequest
+  DeleteRecordRequest,
+  ListSessionParticipantRequest,
 } from './service-pb.cjs';
 
 import { Query } from '../utils/definitions_pb.cjs';
@@ -245,13 +246,13 @@ export default (config) =>
         for (const participant of sharedData.participantsList) {
           console.log('ITEM-participant', participant);
           const sessionParticipant = new SessionParticipant();
-          sessionParticipant.setEmail(participant.username);
+          sessionParticipant.setUsername(participant.username);
           sessionParticipant.setParticipantType(1);
           sessionParticipant.setIsGroup(participant.isGroup);
           participantsList.push(sessionParticipant);
         }
-
-        request.setParticipantsList(participantsList);
+        console.log('****', participantsList);
+        request.setParticipantListList(participantsList);
 
         this.client.shareConference(request, this.metadata, (error, response) => {
           if (error) {
@@ -284,13 +285,12 @@ export default (config) =>
         const participantsList = [];
         for (const participant of sharedData.participantsList) {
           const sessionParticipant = new SessionParticipant();
-          sessionParticipant.setEmail(participant.username);
-          sessionParticipant.setParticipantType(participant.type);
-          sessionParticipant.setIsGroup(participant.isGroup);
+          sessionParticipant.setId(participant.id);
+          sessionParticipant.setUsername(participant.username);
           participantsList.push(sessionParticipant);
         }
         
-        request.setParticipantsList(participantsList);
+        request.setParticipantListList(participantsList);
 
         this.client.unshareConference(request, this.metadata, (error, response) => {
           if (error) {
@@ -443,6 +443,35 @@ export default (config) =>
             if (code == 0) {
               resolve({
                 code,
+                message: response.getMessage(),
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    listSessionParticipant(conferenceUuid) {
+      return new Promise((resolve, reject) => {
+
+        const request = new ListSessionParticipantRequest();
+        request.setUuid(conferenceUuid);
+
+        this.client.listSessionParticipant(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code,
+                data: response.toObject(),
                 message: response.getMessage(),
               });
             } else {
