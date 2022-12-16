@@ -380,67 +380,6 @@ proto.yartu.YDrivePromiseClient.prototype.listRepo =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
- *   !proto.yartu.GetRepoHistoryRequest,
- *   !proto.yartu.GetRepoHistoryResponse>}
- */
-const methodDescriptor_YDrive_getRepoHistory = new grpc.web.MethodDescriptor(
-  '/yartu.YDrive/getRepoHistory',
-  grpc.web.MethodType.UNARY,
-  proto.yartu.GetRepoHistoryRequest,
-  proto.yartu.GetRepoHistoryResponse,
-  /**
-   * @param {!proto.yartu.GetRepoHistoryRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.yartu.GetRepoHistoryResponse.deserializeBinary
-);
-
-
-/**
- * @param {!proto.yartu.GetRepoHistoryRequest} request The
- *     request proto
- * @param {?Object<string, string>} metadata User defined
- *     call metadata
- * @param {function(?grpc.web.RpcError, ?proto.yartu.GetRepoHistoryResponse)}
- *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.yartu.GetRepoHistoryResponse>|undefined}
- *     The XHR Node Readable Stream
- */
-proto.yartu.YDriveClient.prototype.getRepoHistory =
-    function(request, metadata, callback) {
-  return this.client_.rpcCall(this.hostname_ +
-      '/yartu.YDrive/getRepoHistory',
-      request,
-      metadata || {},
-      methodDescriptor_YDrive_getRepoHistory,
-      callback);
-};
-
-
-/**
- * @param {!proto.yartu.GetRepoHistoryRequest} request The
- *     request proto
- * @param {?Object<string, string>=} metadata User defined
- *     call metadata
- * @return {!Promise<!proto.yartu.GetRepoHistoryResponse>}
- *     Promise that resolves to the response
- */
-proto.yartu.YDrivePromiseClient.prototype.getRepoHistory =
-    function(request, metadata) {
-  return this.client_.unaryCall(this.hostname_ +
-      '/yartu.YDrive/getRepoHistory',
-      request,
-      metadata || {},
-      methodDescriptor_YDrive_getRepoHistory);
-};
-
-
-/**
- * @const
- * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.GetDirEntriesRequest,
  *   !proto.yartu.GetDirEntriesResponse>}
  */

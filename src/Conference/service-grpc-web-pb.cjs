@@ -441,6 +441,128 @@ proto.yartu.YConferencePromiseClient.prototype.finishConference =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.ListConferenceRecordsRequest,
+ *   !proto.yartu.ListConferenceRecordsResponse>}
+ */
+const methodDescriptor_YConference_listConfereceRecords = new grpc.web.MethodDescriptor(
+  '/yartu.YConference/listConfereceRecords',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.ListConferenceRecordsRequest,
+  proto.yartu.ListConferenceRecordsResponse,
+  /**
+   * @param {!proto.yartu.ListConferenceRecordsRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.ListConferenceRecordsResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.ListConferenceRecordsRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ListConferenceRecordsResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ListConferenceRecordsResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YConferenceClient.prototype.listConfereceRecords =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YConference/listConfereceRecords',
+      request,
+      metadata || {},
+      methodDescriptor_YConference_listConfereceRecords,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.ListConferenceRecordsRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.ListConferenceRecordsResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YConferencePromiseClient.prototype.listConfereceRecords =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YConference/listConfereceRecords',
+      request,
+      metadata || {},
+      methodDescriptor_YConference_listConfereceRecords);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.DeleteRecordRequest,
+ *   !proto.yartu.DeleteRecordResponse>}
+ */
+const methodDescriptor_YConference_deleteRecord = new grpc.web.MethodDescriptor(
+  '/yartu.YConference/deleteRecord',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.DeleteRecordRequest,
+  proto.yartu.DeleteRecordResponse,
+  /**
+   * @param {!proto.yartu.DeleteRecordRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.DeleteRecordResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.DeleteRecordRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.DeleteRecordResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.DeleteRecordResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YConferenceClient.prototype.deleteRecord =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YConference/deleteRecord',
+      request,
+      metadata || {},
+      methodDescriptor_YConference_deleteRecord,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.DeleteRecordRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.DeleteRecordResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YConferencePromiseClient.prototype.deleteRecord =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YConference/deleteRecord',
+      request,
+      metadata || {},
+      methodDescriptor_YConference_deleteRecord);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.DeleteConferenceRequest,
  *   !proto.yartu.DeleteConferenceResponse>}
  */

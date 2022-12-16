@@ -10,6 +10,8 @@ import {
   UpsertConferenceRequest,
   SessionParticipant,
   UpsertSessionParticipantRequest,
+  ListConferenceRecordsRequest,
+  DeleteRecordRequest
 } from './service-pb.cjs';
 
 import { Query } from '../utils/definitions_pb.cjs';
@@ -397,4 +399,61 @@ export default (config) =>
       });
     }
 
+    listConfereceRecords(confenreceUuid = null) {
+      return new Promise((resolve, reject) => {
+
+        const request = new ListConferenceRecordsRequest();
+        request.setUuid(confenreceUuid);
+
+        this.client.listConfereceRecords(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code,
+                data: response.toObject(),
+                message: response.getMessage(),
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    deleteRecord(recordId) {
+      return new Promise((resolve, reject) => {
+
+        const request = new DeleteRecordRequest();
+        request.setId(recordId);
+
+        this.client.deleteRecord(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage(),
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+    
   };
