@@ -1,4 +1,9 @@
-import { GetRecentRequest, ListRepoRequest } from './service-pb.cjs';
+import {
+  GetRecentRequest,
+  ListRepoRequest,
+  // eslint-disable-next-line unicorn/prevent-abbreviations
+  GetDirEntriesRequest
+} from './service-pb.cjs';
 
 import { YDriveClient } from './service-grpc-web-pb.cjs';
 import { handleError } from '../utils/helper';
@@ -78,4 +83,48 @@ export default (config) =>
         });
       });
     };
+
+    getDirEntries = (repoId, path, query, recursive = false) => {
+      return new Promise((resolve, reject) => {
+        const request = new GetDirEntriesRequest();
+        request.setRepoId(repoId);
+        request.setPath(path);
+        request.setRecursive(recursive);
+
+        this.client.getDirEntries(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            console.log(response);
+
+            if (code == 0) {
+              const dataList = response
+                .getDataList()
+                .map((data) => data.toObject());
+              resolve({
+                data: dataList
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
+    /*
+      "query": {
+        "query": "Hello",
+        "page": 20,
+        "per_page": 20,
+        "sort_by": "Hello",
+        "search_fields": [
+          "Hello"
+        ]
+      }
+    */
   };
