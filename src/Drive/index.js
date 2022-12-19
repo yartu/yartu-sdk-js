@@ -85,6 +85,43 @@ export default (config) =>
       });
     };
 
+    upsertRepo = (name, description, password = false, repoId = false) => {
+      return new Promise((resolve, reject) => {
+        const request = new UpsertRepoRequest();
+        if (repoId) {
+          request.setRepoId(repoId);
+        } else {
+          request.setIsNew(true);
+        }
+        request.setName(name);
+        request.setDescription(description || '');
+
+        if (password) {
+          request.setPassword(password);
+        }
+
+        this.client.upsertRepo(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code: 0,
+                repo: response.getRepo().toObject()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
     getDirEntries = (repoId, path, query, recursive = false) => {
       return new Promise((resolve, reject) => {
         const request = new GetDirEntriesRequest();
@@ -113,43 +150,6 @@ export default (config) =>
               resolve({
                 files: fileList,
                 dirs: dirList
-              });
-            } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
-            }
-          }
-        });
-      });
-    };
-
-    upsertRepo = (name, description, password = false, repoId = false) => {
-      return new Promise((resolve, reject) => {
-        const request = new UpsertRepoRequest();
-        if (repoId) {
-          request.setRepoId(repoId);
-        } else {
-          request.setIsNew(true);
-        }
-        request.setName(name);
-        request.setDescription(description || '');
-
-        if (password) {
-          request.setPassword(password);
-        }
-
-        this.client.upsertRepo(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-
-            if (code == 0) {
-              resolve({
-                code: 0,
-                repo: response.getRepo().toObject()
               });
             } else {
               reject({
