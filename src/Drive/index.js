@@ -2,6 +2,7 @@
 import {
   GetRecentRequest,
   ListRepoRequest,
+  UpsertRepoRequest,
   GetDirEntriesRequest
 } from './service-pb.cjs';
 
@@ -124,15 +125,40 @@ export default (config) =>
       });
     };
 
-    /*
-      "query": {
-        "query": "Hello",
-        "page": 20,
-        "per_page": 20,
-        "sort_by": "Hello",
-        "search_fields": [
-          "Hello"
-        ]
-      }
-    */
+    upsertRepo = (name, description, password = false, repoId = false) => {
+      return new Promise((resolve, reject) => {
+        const request = new UpsertRepoRequest();
+        if (repoId) {
+          request.setRepoId(repoId);
+        } else {
+          request.setIsNew(true);
+        }
+        request.setName(name);
+        request.setDescription(description || '');
+
+        if (password) {
+          request.setPassword(password);
+        }
+
+        this.client.upsertRepo(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code: 0,
+                repo: response.getRepo().toObject()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
   };
