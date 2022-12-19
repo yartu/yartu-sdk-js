@@ -3,7 +3,9 @@ import {
   GetRecentRequest,
   ListRepoRequest,
   UpsertRepoRequest,
-  GetDirEntriesRequest
+  GetDirEntriesRequest,
+  UpsertDirectoryRequest,
+  UpsertFileRequest
 } from './service-pb.cjs';
 
 import { YDriveClient } from './service-grpc-web-pb.cjs';
@@ -141,6 +143,7 @@ export default (config) =>
             if (code == 0) {
               const dataList = response.getDataList().map((data) => {
                 let dirent = data.toObject();
+                dirent.path = `${dirent.parentDir}${dirent.name}`;
                 if (dirent.type === 'file') {
                   fileList.push(dirent);
                 } else {
@@ -150,6 +153,109 @@ export default (config) =>
               resolve({
                 files: fileList,
                 dirs: dirList
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
+    upsertDirectory = (repoId, path, name, operation) => {
+      return new Promise((resolve, reject) => {
+        const request = new UpsertDirectoryRequest();
+
+        if (!['create', 'rename', 'move', 'delete'].includes(operation)) {
+          reject({
+            code: 100
+          });
+        }
+        request.setRepoId(repoId);
+        request.setPath(path);
+        request.setNewName(name);
+        request.setOperation(operation);
+
+        this.client.upsertDirectory(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                let data = {};
+                if (operation !== 'delete') {
+                  data = response.getData().toObject();
+                }
+
+                resolve({
+                  code,
+                  data
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
+    upsertFile = (
+      repoId,
+      path,
+      name,
+      operation,
+      dstRepoId,
+      dstDir,
+      expire,
+      isDraft = false
+    ) => {
+      return new Promise((resolve, reject) => {
+        const request = new UpsertFileRequest();
+
+        if (
+          !['create', 'rename', 'move', 'copy', 'delete'].includes(operation)
+        ) {
+          reject({
+            code: 100
+          });
+        }
+        request.setRepoId(repoId);
+        request.setPath(path);
+        request.setNewName(name);
+        request.setOperation(operation);
+        request.setIsDraft(isDraft);
+
+        if (operation == 'copy') {
+          request.setDstRepoId(dstRepoId);
+          request.setDstDir(dstDir);
+        } else if (operation == 'lock') {
+          request.setExpire(expire);
+        }
+
+        this.client.upsertFile(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              let data = {};
+              if (operation !== 'delete') {
+                data = response.getData().toObject();
+              }
+
+              resolve({
+                code,
+                data
               });
             } else {
               reject({
