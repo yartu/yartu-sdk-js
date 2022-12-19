@@ -1,7 +1,7 @@
+/* eslint-disable unicorn/prevent-abbreviations */
 import {
   GetRecentRequest,
   ListRepoRequest,
-  // eslint-disable-next-line unicorn/prevent-abbreviations
   GetDirEntriesRequest
 } from './service-pb.cjs';
 
@@ -96,14 +96,22 @@ export default (config) =>
             handleError(error, reject);
           } else {
             const code = response.getCode();
+            const fileList = [];
+            const dirList = [];
             console.log(response);
 
             if (code == 0) {
-              const dataList = response
-                .getDataList()
-                .map((data) => data.toObject());
+              const dataList = response.getDataList().map((data) => {
+                let dirent = data.toObject();
+                if (dirent.type === 'file') {
+                  fileList.push(dirent);
+                } else {
+                  dirList.push(dirent);
+                }
+              });
               resolve({
-                data: dataList
+                files: fileList,
+                dirs: dirList
               });
             } else {
               reject({
