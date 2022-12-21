@@ -4,6 +4,7 @@ import {
   ListRepoRequest,
   UpsertRepoRequest,
   ListDirentRequest,
+  StarDirentRequest,
   UpsertDirectoryRequest,
   UpsertFileRequest,
   UploadFileRequest
@@ -154,6 +155,33 @@ export default (config) =>
               resolve({
                 files: fileList,
                 dirs: dirList
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
+    starDirent = (repoId, path, star = true) => {
+      return new Promise((resolve, reject) => {
+        const request = new StarDirentRequest();
+        request.setRepoId(repoId);
+        request.setPath(path);
+        request.setStar(star);
+
+        this.client.starDirent(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code
               });
             } else {
               reject({
