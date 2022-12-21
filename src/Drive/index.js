@@ -7,7 +7,8 @@ import {
   StarDirentRequest,
   UpsertDirectoryRequest,
   UpsertFileRequest,
-  UploadFileRequest
+  UploadFileRequest,
+  DownloadFileRequest
 } from './service-pb.cjs';
 
 import { YDriveClient } from './service-grpc-web-pb.cjs';
@@ -317,6 +318,35 @@ export default (config) =>
               resolve({
                 code: code,
                 tokens: tokenList
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
+    downloadFile = (repoId, path, preview = false) => {
+      return new Promise((resolve, reject) => {
+        const request = new DownloadFileRequest();
+        request.setRepoId(repoId);
+        request.setPath(path);
+
+        this.client.downloadFile(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              const token = response.getToken();
+
+              resolve({
+                code: code,
+                token: token
               });
             } else {
               reject({
