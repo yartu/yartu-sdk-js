@@ -2506,15 +2506,15 @@ proto.yartu.Repo.prototype.setGroupName = function(value) {
  * @private {!Array<!Array<number>>}
  * @const
  */
-proto.yartu.Dirent.oneofGroups_ = [[13,14],[15,16]];
+proto.yartu.Dirent.oneofGroups_ = [[14,15],[16,17]];
 
 /**
  * @enum {number}
  */
 proto.yartu.Dirent.OwnerCase = {
   OWNER_NOT_SET: 0,
-  OWNER_USER: 13,
-  OWNER_GROUP: 14
+  OWNER_USER: 14,
+  OWNER_GROUP: 15
 };
 
 /**
@@ -2529,8 +2529,8 @@ proto.yartu.Dirent.prototype.getOwnerCase = function() {
  */
 proto.yartu.Dirent.InfoCase = {
   INFO_NOT_SET: 0,
-  DIR_INFO: 15,
-  FILE_INFO: 16
+  DIR_INFO: 16,
+  FILE_INFO: 17
 };
 
 /**
@@ -2581,16 +2581,17 @@ proto.yartu.Dirent.toObject = function(includeInstance, msg) {
     ctime: jspb.Message.getFieldWithDefault(msg, 8, 0),
     encVersion: jspb.Message.getFieldWithDefault(msg, 9, 0),
     isShared: jspb.Message.getBooleanFieldWithDefault(msg, 10, false),
-    permission: jspb.Message.getFieldWithDefault(msg, 11, ""),
+    isStarred: jspb.Message.getBooleanFieldWithDefault(msg, 11, false),
+    permission: jspb.Message.getFieldWithDefault(msg, 12, ""),
     modifier: (f = msg.getModifier()) && proto.yartu.UserBasic.toObject(includeInstance, f),
     ownerUser: (f = msg.getOwnerUser()) && proto.yartu.UserBasic.toObject(includeInstance, f),
     ownerGroup: (f = msg.getOwnerGroup()) && proto.yartu.GroupBasic.toObject(includeInstance, f),
     dirInfo: (f = msg.getDirInfo()) && proto.yartu.DirInfo.toObject(includeInstance, f),
     fileInfo: (f = msg.getFileInfo()) && proto.yartu.FileInfo.toObject(includeInstance, f),
     lock: (f = msg.getLock()) && proto.yartu.LockInfo.toObject(includeInstance, f),
-    deletedTime: jspb.Message.getFieldWithDefault(msg, 18, 0),
-    scanStat: jspb.Message.getFieldWithDefault(msg, 19, ""),
-    commitId: jspb.Message.getFieldWithDefault(msg, 20, "")
+    deletedTime: jspb.Message.getFieldWithDefault(msg, 19, 0),
+    scanStat: jspb.Message.getFieldWithDefault(msg, 20, ""),
+    commitId: jspb.Message.getFieldWithDefault(msg, 21, "")
   };
 
   if (includeInstance) {
@@ -2668,48 +2669,52 @@ proto.yartu.Dirent.deserializeBinaryFromReader = function(msg, reader) {
       msg.setIsShared(value);
       break;
     case 11:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setPermission(value);
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setIsStarred(value);
       break;
     case 12:
-      var value = new proto.yartu.UserBasic;
-      reader.readMessage(value,proto.yartu.UserBasic.deserializeBinaryFromReader);
-      msg.setModifier(value);
+      var value = /** @type {string} */ (reader.readString());
+      msg.setPermission(value);
       break;
     case 13:
       var value = new proto.yartu.UserBasic;
       reader.readMessage(value,proto.yartu.UserBasic.deserializeBinaryFromReader);
-      msg.setOwnerUser(value);
+      msg.setModifier(value);
       break;
     case 14:
+      var value = new proto.yartu.UserBasic;
+      reader.readMessage(value,proto.yartu.UserBasic.deserializeBinaryFromReader);
+      msg.setOwnerUser(value);
+      break;
+    case 15:
       var value = new proto.yartu.GroupBasic;
       reader.readMessage(value,proto.yartu.GroupBasic.deserializeBinaryFromReader);
       msg.setOwnerGroup(value);
       break;
-    case 15:
+    case 16:
       var value = new proto.yartu.DirInfo;
       reader.readMessage(value,proto.yartu.DirInfo.deserializeBinaryFromReader);
       msg.setDirInfo(value);
       break;
-    case 16:
+    case 17:
       var value = new proto.yartu.FileInfo;
       reader.readMessage(value,proto.yartu.FileInfo.deserializeBinaryFromReader);
       msg.setFileInfo(value);
       break;
-    case 17:
+    case 18:
       var value = new proto.yartu.LockInfo;
       reader.readMessage(value,proto.yartu.LockInfo.deserializeBinaryFromReader);
       msg.setLock(value);
       break;
-    case 18:
+    case 19:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setDeletedTime(value);
       break;
-    case 19:
+    case 20:
       var value = /** @type {string} */ (reader.readString());
       msg.setScanStat(value);
       break;
-    case 20:
+    case 21:
       var value = /** @type {string} */ (reader.readString());
       msg.setCommitId(value);
       break;
@@ -2812,22 +2817,21 @@ proto.yartu.Dirent.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getPermission();
-  if (f.length > 0) {
-    writer.writeString(
+  f = message.getIsStarred();
+  if (f) {
+    writer.writeBool(
       11,
       f
     );
   }
-  f = message.getModifier();
-  if (f != null) {
-    writer.writeMessage(
+  f = message.getPermission();
+  if (f.length > 0) {
+    writer.writeString(
       12,
-      f,
-      proto.yartu.UserBasic.serializeBinaryToWriter
+      f
     );
   }
-  f = message.getOwnerUser();
+  f = message.getModifier();
   if (f != null) {
     writer.writeMessage(
       13,
@@ -2835,10 +2839,18 @@ proto.yartu.Dirent.serializeBinaryToWriter = function(message, writer) {
       proto.yartu.UserBasic.serializeBinaryToWriter
     );
   }
-  f = message.getOwnerGroup();
+  f = message.getOwnerUser();
   if (f != null) {
     writer.writeMessage(
       14,
+      f,
+      proto.yartu.UserBasic.serializeBinaryToWriter
+    );
+  }
+  f = message.getOwnerGroup();
+  if (f != null) {
+    writer.writeMessage(
+      15,
       f,
       proto.yartu.GroupBasic.serializeBinaryToWriter
     );
@@ -2846,7 +2858,7 @@ proto.yartu.Dirent.serializeBinaryToWriter = function(message, writer) {
   f = message.getDirInfo();
   if (f != null) {
     writer.writeMessage(
-      15,
+      16,
       f,
       proto.yartu.DirInfo.serializeBinaryToWriter
     );
@@ -2854,7 +2866,7 @@ proto.yartu.Dirent.serializeBinaryToWriter = function(message, writer) {
   f = message.getFileInfo();
   if (f != null) {
     writer.writeMessage(
-      16,
+      17,
       f,
       proto.yartu.FileInfo.serializeBinaryToWriter
     );
@@ -2862,21 +2874,14 @@ proto.yartu.Dirent.serializeBinaryToWriter = function(message, writer) {
   f = message.getLock();
   if (f != null) {
     writer.writeMessage(
-      17,
+      18,
       f,
       proto.yartu.LockInfo.serializeBinaryToWriter
     );
   }
-  f = /** @type {number} */ (jspb.Message.getField(message, 18));
+  f = /** @type {number} */ (jspb.Message.getField(message, 19));
   if (f != null) {
     writer.writeInt64(
-      18,
-      f
-    );
-  }
-  f = /** @type {string} */ (jspb.Message.getField(message, 19));
-  if (f != null) {
-    writer.writeString(
       19,
       f
     );
@@ -2885,6 +2890,13 @@ proto.yartu.Dirent.serializeBinaryToWriter = function(message, writer) {
   if (f != null) {
     writer.writeString(
       20,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 21));
+  if (f != null) {
+    writer.writeString(
+      21,
       f
     );
   }
@@ -3072,11 +3084,29 @@ proto.yartu.Dirent.prototype.setIsShared = function(value) {
 
 
 /**
- * optional string permission = 11;
+ * optional bool is_starred = 11;
+ * @return {boolean}
+ */
+proto.yartu.Dirent.prototype.getIsStarred = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 11, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.yartu.Dirent} returns this
+ */
+proto.yartu.Dirent.prototype.setIsStarred = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 11, value);
+};
+
+
+/**
+ * optional string permission = 12;
  * @return {string}
  */
 proto.yartu.Dirent.prototype.getPermission = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 11, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 12, ""));
 };
 
 
@@ -3085,17 +3115,17 @@ proto.yartu.Dirent.prototype.getPermission = function() {
  * @return {!proto.yartu.Dirent} returns this
  */
 proto.yartu.Dirent.prototype.setPermission = function(value) {
-  return jspb.Message.setProto3StringField(this, 11, value);
+  return jspb.Message.setProto3StringField(this, 12, value);
 };
 
 
 /**
- * optional UserBasic modifier = 12;
+ * optional UserBasic modifier = 13;
  * @return {?proto.yartu.UserBasic}
  */
 proto.yartu.Dirent.prototype.getModifier = function() {
   return /** @type{?proto.yartu.UserBasic} */ (
-    jspb.Message.getWrapperField(this, proto.yartu.UserBasic, 12));
+    jspb.Message.getWrapperField(this, proto.yartu.UserBasic, 13));
 };
 
 
@@ -3104,7 +3134,7 @@ proto.yartu.Dirent.prototype.getModifier = function() {
  * @return {!proto.yartu.Dirent} returns this
 */
 proto.yartu.Dirent.prototype.setModifier = function(value) {
-  return jspb.Message.setWrapperField(this, 12, value);
+  return jspb.Message.setWrapperField(this, 13, value);
 };
 
 
@@ -3122,17 +3152,17 @@ proto.yartu.Dirent.prototype.clearModifier = function() {
  * @return {boolean}
  */
 proto.yartu.Dirent.prototype.hasModifier = function() {
-  return jspb.Message.getField(this, 12) != null;
+  return jspb.Message.getField(this, 13) != null;
 };
 
 
 /**
- * optional UserBasic owner_user = 13;
+ * optional UserBasic owner_user = 14;
  * @return {?proto.yartu.UserBasic}
  */
 proto.yartu.Dirent.prototype.getOwnerUser = function() {
   return /** @type{?proto.yartu.UserBasic} */ (
-    jspb.Message.getWrapperField(this, proto.yartu.UserBasic, 13));
+    jspb.Message.getWrapperField(this, proto.yartu.UserBasic, 14));
 };
 
 
@@ -3141,7 +3171,7 @@ proto.yartu.Dirent.prototype.getOwnerUser = function() {
  * @return {!proto.yartu.Dirent} returns this
 */
 proto.yartu.Dirent.prototype.setOwnerUser = function(value) {
-  return jspb.Message.setOneofWrapperField(this, 13, proto.yartu.Dirent.oneofGroups_[0], value);
+  return jspb.Message.setOneofWrapperField(this, 14, proto.yartu.Dirent.oneofGroups_[0], value);
 };
 
 
@@ -3159,17 +3189,17 @@ proto.yartu.Dirent.prototype.clearOwnerUser = function() {
  * @return {boolean}
  */
 proto.yartu.Dirent.prototype.hasOwnerUser = function() {
-  return jspb.Message.getField(this, 13) != null;
+  return jspb.Message.getField(this, 14) != null;
 };
 
 
 /**
- * optional GroupBasic owner_group = 14;
+ * optional GroupBasic owner_group = 15;
  * @return {?proto.yartu.GroupBasic}
  */
 proto.yartu.Dirent.prototype.getOwnerGroup = function() {
   return /** @type{?proto.yartu.GroupBasic} */ (
-    jspb.Message.getWrapperField(this, proto.yartu.GroupBasic, 14));
+    jspb.Message.getWrapperField(this, proto.yartu.GroupBasic, 15));
 };
 
 
@@ -3178,7 +3208,7 @@ proto.yartu.Dirent.prototype.getOwnerGroup = function() {
  * @return {!proto.yartu.Dirent} returns this
 */
 proto.yartu.Dirent.prototype.setOwnerGroup = function(value) {
-  return jspb.Message.setOneofWrapperField(this, 14, proto.yartu.Dirent.oneofGroups_[0], value);
+  return jspb.Message.setOneofWrapperField(this, 15, proto.yartu.Dirent.oneofGroups_[0], value);
 };
 
 
@@ -3196,17 +3226,17 @@ proto.yartu.Dirent.prototype.clearOwnerGroup = function() {
  * @return {boolean}
  */
 proto.yartu.Dirent.prototype.hasOwnerGroup = function() {
-  return jspb.Message.getField(this, 14) != null;
+  return jspb.Message.getField(this, 15) != null;
 };
 
 
 /**
- * optional DirInfo dir_info = 15;
+ * optional DirInfo dir_info = 16;
  * @return {?proto.yartu.DirInfo}
  */
 proto.yartu.Dirent.prototype.getDirInfo = function() {
   return /** @type{?proto.yartu.DirInfo} */ (
-    jspb.Message.getWrapperField(this, proto.yartu.DirInfo, 15));
+    jspb.Message.getWrapperField(this, proto.yartu.DirInfo, 16));
 };
 
 
@@ -3215,7 +3245,7 @@ proto.yartu.Dirent.prototype.getDirInfo = function() {
  * @return {!proto.yartu.Dirent} returns this
 */
 proto.yartu.Dirent.prototype.setDirInfo = function(value) {
-  return jspb.Message.setOneofWrapperField(this, 15, proto.yartu.Dirent.oneofGroups_[1], value);
+  return jspb.Message.setOneofWrapperField(this, 16, proto.yartu.Dirent.oneofGroups_[1], value);
 };
 
 
@@ -3233,17 +3263,17 @@ proto.yartu.Dirent.prototype.clearDirInfo = function() {
  * @return {boolean}
  */
 proto.yartu.Dirent.prototype.hasDirInfo = function() {
-  return jspb.Message.getField(this, 15) != null;
+  return jspb.Message.getField(this, 16) != null;
 };
 
 
 /**
- * optional FileInfo file_info = 16;
+ * optional FileInfo file_info = 17;
  * @return {?proto.yartu.FileInfo}
  */
 proto.yartu.Dirent.prototype.getFileInfo = function() {
   return /** @type{?proto.yartu.FileInfo} */ (
-    jspb.Message.getWrapperField(this, proto.yartu.FileInfo, 16));
+    jspb.Message.getWrapperField(this, proto.yartu.FileInfo, 17));
 };
 
 
@@ -3252,7 +3282,7 @@ proto.yartu.Dirent.prototype.getFileInfo = function() {
  * @return {!proto.yartu.Dirent} returns this
 */
 proto.yartu.Dirent.prototype.setFileInfo = function(value) {
-  return jspb.Message.setOneofWrapperField(this, 16, proto.yartu.Dirent.oneofGroups_[1], value);
+  return jspb.Message.setOneofWrapperField(this, 17, proto.yartu.Dirent.oneofGroups_[1], value);
 };
 
 
@@ -3270,17 +3300,17 @@ proto.yartu.Dirent.prototype.clearFileInfo = function() {
  * @return {boolean}
  */
 proto.yartu.Dirent.prototype.hasFileInfo = function() {
-  return jspb.Message.getField(this, 16) != null;
+  return jspb.Message.getField(this, 17) != null;
 };
 
 
 /**
- * optional LockInfo lock = 17;
+ * optional LockInfo lock = 18;
  * @return {?proto.yartu.LockInfo}
  */
 proto.yartu.Dirent.prototype.getLock = function() {
   return /** @type{?proto.yartu.LockInfo} */ (
-    jspb.Message.getWrapperField(this, proto.yartu.LockInfo, 17));
+    jspb.Message.getWrapperField(this, proto.yartu.LockInfo, 18));
 };
 
 
@@ -3289,7 +3319,7 @@ proto.yartu.Dirent.prototype.getLock = function() {
  * @return {!proto.yartu.Dirent} returns this
 */
 proto.yartu.Dirent.prototype.setLock = function(value) {
-  return jspb.Message.setWrapperField(this, 17, value);
+  return jspb.Message.setWrapperField(this, 18, value);
 };
 
 
@@ -3307,16 +3337,16 @@ proto.yartu.Dirent.prototype.clearLock = function() {
  * @return {boolean}
  */
 proto.yartu.Dirent.prototype.hasLock = function() {
-  return jspb.Message.getField(this, 17) != null;
+  return jspb.Message.getField(this, 18) != null;
 };
 
 
 /**
- * optional int64 deleted_time = 18;
+ * optional int64 deleted_time = 19;
  * @return {number}
  */
 proto.yartu.Dirent.prototype.getDeletedTime = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 18, 0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 19, 0));
 };
 
 
@@ -3325,42 +3355,6 @@ proto.yartu.Dirent.prototype.getDeletedTime = function() {
  * @return {!proto.yartu.Dirent} returns this
  */
 proto.yartu.Dirent.prototype.setDeletedTime = function(value) {
-  return jspb.Message.setField(this, 18, value);
-};
-
-
-/**
- * Clears the field making it undefined.
- * @return {!proto.yartu.Dirent} returns this
- */
-proto.yartu.Dirent.prototype.clearDeletedTime = function() {
-  return jspb.Message.setField(this, 18, undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {boolean}
- */
-proto.yartu.Dirent.prototype.hasDeletedTime = function() {
-  return jspb.Message.getField(this, 18) != null;
-};
-
-
-/**
- * optional string scan_stat = 19;
- * @return {string}
- */
-proto.yartu.Dirent.prototype.getScanStat = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 19, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.yartu.Dirent} returns this
- */
-proto.yartu.Dirent.prototype.setScanStat = function(value) {
   return jspb.Message.setField(this, 19, value);
 };
 
@@ -3369,7 +3363,7 @@ proto.yartu.Dirent.prototype.setScanStat = function(value) {
  * Clears the field making it undefined.
  * @return {!proto.yartu.Dirent} returns this
  */
-proto.yartu.Dirent.prototype.clearScanStat = function() {
+proto.yartu.Dirent.prototype.clearDeletedTime = function() {
   return jspb.Message.setField(this, 19, undefined);
 };
 
@@ -3378,16 +3372,16 @@ proto.yartu.Dirent.prototype.clearScanStat = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu.Dirent.prototype.hasScanStat = function() {
+proto.yartu.Dirent.prototype.hasDeletedTime = function() {
   return jspb.Message.getField(this, 19) != null;
 };
 
 
 /**
- * optional string commit_id = 20;
+ * optional string scan_stat = 20;
  * @return {string}
  */
-proto.yartu.Dirent.prototype.getCommitId = function() {
+proto.yartu.Dirent.prototype.getScanStat = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 20, ""));
 };
 
@@ -3396,7 +3390,7 @@ proto.yartu.Dirent.prototype.getCommitId = function() {
  * @param {string} value
  * @return {!proto.yartu.Dirent} returns this
  */
-proto.yartu.Dirent.prototype.setCommitId = function(value) {
+proto.yartu.Dirent.prototype.setScanStat = function(value) {
   return jspb.Message.setField(this, 20, value);
 };
 
@@ -3405,7 +3399,7 @@ proto.yartu.Dirent.prototype.setCommitId = function(value) {
  * Clears the field making it undefined.
  * @return {!proto.yartu.Dirent} returns this
  */
-proto.yartu.Dirent.prototype.clearCommitId = function() {
+proto.yartu.Dirent.prototype.clearScanStat = function() {
   return jspb.Message.setField(this, 20, undefined);
 };
 
@@ -3414,8 +3408,44 @@ proto.yartu.Dirent.prototype.clearCommitId = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu.Dirent.prototype.hasCommitId = function() {
+proto.yartu.Dirent.prototype.hasScanStat = function() {
   return jspb.Message.getField(this, 20) != null;
+};
+
+
+/**
+ * optional string commit_id = 21;
+ * @return {string}
+ */
+proto.yartu.Dirent.prototype.getCommitId = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 21, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.Dirent} returns this
+ */
+proto.yartu.Dirent.prototype.setCommitId = function(value) {
+  return jspb.Message.setField(this, 21, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.Dirent} returns this
+ */
+proto.yartu.Dirent.prototype.clearCommitId = function() {
+  return jspb.Message.setField(this, 21, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.Dirent.prototype.hasCommitId = function() {
+  return jspb.Message.getField(this, 21) != null;
 };
 
 
