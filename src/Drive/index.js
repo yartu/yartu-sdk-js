@@ -3,9 +3,10 @@ import {
   GetRecentRequest,
   ListRepoRequest,
   UpsertRepoRequest,
-  GetDirEntriesRequest,
+  ListDirentRequest,
   UpsertDirectoryRequest,
-  UpsertFileRequest
+  UpsertFileRequest,
+  UploadFileRequest
 } from './service-pb.cjs';
 
 import { YDriveClient } from './service-grpc-web-pb.cjs';
@@ -124,14 +125,14 @@ export default (config) =>
       });
     };
 
-    getDirEntries = (repoId, path, query, recursive = false) => {
+    listDirent = (repoId, path, query, recursive = false) => {
       return new Promise((resolve, reject) => {
-        const request = new GetDirEntriesRequest();
+        const request = new ListDirentRequest();
         request.setRepoId(repoId);
         request.setPath(path);
         request.setRecursive(recursive);
 
-        this.client.getDirEntries(request, this.metadata, (error, response) => {
+        this.client.listDirent(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
           } else {
@@ -256,6 +257,38 @@ export default (config) =>
               resolve({
                 code,
                 data
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
+    uploadFile = (repoId, path, file_list) => {
+      return new Promise((resolve, reject) => {
+        const request = new UploadFileRequest();
+        request.setRepoId(repoId);
+        request.setPath(path);
+        request.setFileNameList(file_list);
+
+        this.client.uploadFile(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              const tokenList = response
+                .getTokenList()
+                .map((data) => data.toObject());
+
+              resolve({
+                code: code,
+                tokens: tokenList
               });
             } else {
               reject({
