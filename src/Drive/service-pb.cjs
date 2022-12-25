@@ -1838,7 +1838,9 @@ proto.yartu.Repo.toObject = function(includeInstance, msg) {
     shareType: jspb.Message.getFieldWithDefault(msg, 19, ""),
     salt: jspb.Message.getFieldWithDefault(msg, 20, ""),
     groupId: jspb.Message.getFieldWithDefault(msg, 21, 0),
-    groupName: jspb.Message.getFieldWithDefault(msg, 22, "")
+    groupName: jspb.Message.getFieldWithDefault(msg, 22, ""),
+    fileCount: jspb.Message.getFieldWithDefault(msg, 23, 0),
+    dirCount: jspb.Message.getFieldWithDefault(msg, 24, 0)
   };
 
   if (includeInstance) {
@@ -1965,6 +1967,14 @@ proto.yartu.Repo.deserializeBinaryFromReader = function(msg, reader) {
     case 22:
       var value = /** @type {string} */ (reader.readString());
       msg.setGroupName(value);
+      break;
+    case 23:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setFileCount(value);
+      break;
+    case 24:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setDirCount(value);
       break;
     default:
       reader.skipField();
@@ -2149,6 +2159,20 @@ proto.yartu.Repo.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writeString(
       22,
+      f
+    );
+  }
+  f = message.getFileCount();
+  if (f !== 0) {
+    writer.writeInt64(
+      23,
+      f
+    );
+  }
+  f = message.getDirCount();
+  if (f !== 0) {
+    writer.writeInt64(
+      24,
       f
     );
   }
@@ -2605,6 +2629,42 @@ proto.yartu.Repo.prototype.getGroupName = function() {
  */
 proto.yartu.Repo.prototype.setGroupName = function(value) {
   return jspb.Message.setProto3StringField(this, 22, value);
+};
+
+
+/**
+ * optional int64 file_count = 23;
+ * @return {number}
+ */
+proto.yartu.Repo.prototype.getFileCount = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 23, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu.Repo} returns this
+ */
+proto.yartu.Repo.prototype.setFileCount = function(value) {
+  return jspb.Message.setProto3IntField(this, 23, value);
+};
+
+
+/**
+ * optional int64 dir_count = 24;
+ * @return {number}
+ */
+proto.yartu.Repo.prototype.getDirCount = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 24, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu.Repo} returns this
+ */
+proto.yartu.Repo.prototype.setDirCount = function(value) {
+  return jspb.Message.setProto3IntField(this, 24, value);
 };
 
 
