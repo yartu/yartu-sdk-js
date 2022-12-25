@@ -5,6 +5,7 @@ import Auth from '../Auth';
 import Calendar from '../Calendar';
 import Conference from '../Conference';
 import Contact from '../Contact';
+import Note from '../Note';
 import Drive from '../Drive';
 import Email from '../Email';
 import Search from '../Search';
@@ -37,6 +38,7 @@ class YartuApp {
     this.Calendar = new (Calendar())(config);
     this.Conference = new (Conference())(config);
     this.Contact = new (Contact())(config);
+    this.Note = new (Note())(config);
     this.Drive = new (Drive())(config);
     this.Email = new (Email())(config);
     this.Search = new (Search())(config);
@@ -46,6 +48,8 @@ class YartuApp {
     this.Calendar.yartuSdk = this;
     this.Conference.yartuSdk = this;
     this.Drive.yartuSdk = this;
+    this.Contact.yartuSdk = this;
+    this.Note.yartuSdk = this;
     this.Email.yartuSdk = this;
     this.refreshUser();
   }
@@ -75,6 +79,7 @@ class YartuApp {
     this.Calendar.metadata = { Authentication: yartu_token };
     this.Conference.metadata = { Authentication: yartu_token };
     this.Contact.metadata = { Authentication: yartu_token };
+    this.Note.metadata = { Authentication: yartu_token };
     this.Drive.metadata = { Authentication: yartu_token };
     this.Email.metadata = { Authentication: yartu_token };
     this.Search.metadata = { Authentication: yartu_token };
