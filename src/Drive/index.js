@@ -221,6 +221,7 @@ export default (config) =>
                 let data = {};
                 if (operation !== 'delete') {
                   data = response.getData().toObject();
+                  data.path = `${data.parentDir}${data.name}`;
                 }
 
                 resolve({
