@@ -10237,7 +10237,8 @@ proto.yartu.Share.toObject = function(includeInstance, msg) {
     type: jspb.Message.getFieldWithDefault(msg, 1, ""),
     permission: jspb.Message.getFieldWithDefault(msg, 2, ""),
     sharedUser: (f = msg.getSharedUser()) && proto.yartu.UserBasic.toObject(includeInstance, f),
-    sharedGroup: (f = msg.getSharedGroup()) && proto.yartu.GroupBasic.toObject(includeInstance, f)
+    sharedGroup: (f = msg.getSharedGroup()) && proto.yartu.GroupBasic.toObject(includeInstance, f),
+    isAdmin: jspb.Message.getBooleanFieldWithDefault(msg, 5, false)
   };
 
   if (includeInstance) {
@@ -10291,6 +10292,10 @@ proto.yartu.Share.deserializeBinaryFromReader = function(msg, reader) {
       var value = new proto.yartu.GroupBasic;
       reader.readMessage(value,proto.yartu.GroupBasic.deserializeBinaryFromReader);
       msg.setSharedGroup(value);
+      break;
+    case 5:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setIsAdmin(value);
       break;
     default:
       reader.skipField();
@@ -10349,6 +10354,13 @@ proto.yartu.Share.serializeBinaryToWriter = function(message, writer) {
       4,
       f,
       proto.yartu.GroupBasic.serializeBinaryToWriter
+    );
+  }
+  f = message.getIsAdmin();
+  if (f) {
+    writer.writeBool(
+      5,
+      f
     );
   }
 };
@@ -10461,6 +10473,24 @@ proto.yartu.Share.prototype.clearSharedGroup = function() {
  */
 proto.yartu.Share.prototype.hasSharedGroup = function() {
   return jspb.Message.getField(this, 4) != null;
+};
+
+
+/**
+ * optional bool is_admin = 5;
+ * @return {boolean}
+ */
+proto.yartu.Share.prototype.getIsAdmin = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 5, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.yartu.Share} returns this
+ */
+proto.yartu.Share.prototype.setIsAdmin = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 5, value);
 };
 
 
@@ -10916,7 +10946,7 @@ proto.yartu.GetShareResponse.prototype.hasMessage = function() {
  * @private {!Array<number>}
  * @const
  */
-proto.yartu.UpsertShareRequest.repeatedFields_ = [4];
+proto.yartu.UpsertShareRequest.repeatedFields_ = [3];
 
 
 
@@ -10952,7 +10982,8 @@ proto.yartu.UpsertShareRequest.toObject = function(includeInstance, msg) {
     repoId: jspb.Message.getFieldWithDefault(msg, 1, ""),
     path: jspb.Message.getFieldWithDefault(msg, 2, ""),
     shareList: jspb.Message.toObjectList(msg.getShareList(),
-    proto.yartu.Share.toObject, includeInstance)
+    proto.yartu.Share.toObject, includeInstance),
+    description: jspb.Message.getFieldWithDefault(msg, 4, "")
   };
 
   if (includeInstance) {
@@ -10997,10 +11028,14 @@ proto.yartu.UpsertShareRequest.deserializeBinaryFromReader = function(msg, reade
       var value = /** @type {string} */ (reader.readString());
       msg.setPath(value);
       break;
-    case 4:
+    case 3:
       var value = new proto.yartu.Share;
       reader.readMessage(value,proto.yartu.Share.deserializeBinaryFromReader);
       msg.addShare(value);
+      break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setDescription(value);
       break;
     default:
       reader.skipField();
@@ -11048,9 +11083,16 @@ proto.yartu.UpsertShareRequest.serializeBinaryToWriter = function(message, write
   f = message.getShareList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
-      4,
+      3,
       f,
       proto.yartu.Share.serializeBinaryToWriter
+    );
+  }
+  f = message.getDescription();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
+      f
     );
   }
 };
@@ -11111,12 +11153,12 @@ proto.yartu.UpsertShareRequest.prototype.hasPath = function() {
 
 
 /**
- * repeated Share share = 4;
+ * repeated Share share = 3;
  * @return {!Array<!proto.yartu.Share>}
  */
 proto.yartu.UpsertShareRequest.prototype.getShareList = function() {
   return /** @type{!Array<!proto.yartu.Share>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.yartu.Share, 4));
+    jspb.Message.getRepeatedWrapperField(this, proto.yartu.Share, 3));
 };
 
 
@@ -11125,7 +11167,7 @@ proto.yartu.UpsertShareRequest.prototype.getShareList = function() {
  * @return {!proto.yartu.UpsertShareRequest} returns this
 */
 proto.yartu.UpsertShareRequest.prototype.setShareList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 4, value);
+  return jspb.Message.setRepeatedWrapperField(this, 3, value);
 };
 
 
@@ -11135,7 +11177,7 @@ proto.yartu.UpsertShareRequest.prototype.setShareList = function(value) {
  * @return {!proto.yartu.Share}
  */
 proto.yartu.UpsertShareRequest.prototype.addShare = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 4, opt_value, proto.yartu.Share, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 3, opt_value, proto.yartu.Share, opt_index);
 };
 
 
@@ -11145,6 +11187,24 @@ proto.yartu.UpsertShareRequest.prototype.addShare = function(opt_value, opt_inde
  */
 proto.yartu.UpsertShareRequest.prototype.clearShareList = function() {
   return this.setShareList([]);
+};
+
+
+/**
+ * optional string description = 4;
+ * @return {string}
+ */
+proto.yartu.UpsertShareRequest.prototype.getDescription = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.UpsertShareRequest} returns this
+ */
+proto.yartu.UpsertShareRequest.prototype.setDescription = function(value) {
+  return jspb.Message.setProto3StringField(this, 4, value);
 };
 
 

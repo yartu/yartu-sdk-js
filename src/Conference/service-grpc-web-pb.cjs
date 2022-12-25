@@ -869,5 +869,188 @@ proto.yartu.YConferencePromiseClient.prototype.upsertSessionParticipant =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.CheckPublicConferenceRequest,
+ *   !proto.yartu.CheckPublicConferenceResponse>}
+ */
+const methodDescriptor_YConference_checkPublicConference = new grpc.web.MethodDescriptor(
+  '/yartu.YConference/checkPublicConference',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.CheckPublicConferenceRequest,
+  proto.yartu.CheckPublicConferenceResponse,
+  /**
+   * @param {!proto.yartu.CheckPublicConferenceRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.CheckPublicConferenceResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.CheckPublicConferenceRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.CheckPublicConferenceResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.CheckPublicConferenceResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YConferenceClient.prototype.checkPublicConference =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YConference/checkPublicConference',
+      request,
+      metadata || {},
+      methodDescriptor_YConference_checkPublicConference,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.CheckPublicConferenceRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.CheckPublicConferenceResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YConferencePromiseClient.prototype.checkPublicConference =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YConference/checkPublicConference',
+      request,
+      metadata || {},
+      methodDescriptor_YConference_checkPublicConference);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.StartPublicConferenceRequest,
+ *   !proto.yartu.StartPublicConferenceResponse>}
+ */
+const methodDescriptor_YConference_startPublicConference = new grpc.web.MethodDescriptor(
+  '/yartu.YConference/startPublicConference',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.StartPublicConferenceRequest,
+  proto.yartu.StartPublicConferenceResponse,
+  /**
+   * @param {!proto.yartu.StartPublicConferenceRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.StartPublicConferenceResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.StartPublicConferenceRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.StartPublicConferenceResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.StartPublicConferenceResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YConferenceClient.prototype.startPublicConference =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YConference/startPublicConference',
+      request,
+      metadata || {},
+      methodDescriptor_YConference_startPublicConference,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.StartPublicConferenceRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.StartPublicConferenceResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YConferencePromiseClient.prototype.startPublicConference =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YConference/startPublicConference',
+      request,
+      metadata || {},
+      methodDescriptor_YConference_startPublicConference);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.GetPublicConferenceRequest,
+ *   !proto.yartu.GetPublicConferenceResponse>}
+ */
+const methodDescriptor_YConference_getPublicConference = new grpc.web.MethodDescriptor(
+  '/yartu.YConference/getPublicConference',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.GetPublicConferenceRequest,
+  proto.yartu.GetPublicConferenceResponse,
+  /**
+   * @param {!proto.yartu.GetPublicConferenceRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.GetPublicConferenceResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.GetPublicConferenceRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.GetPublicConferenceResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.GetPublicConferenceResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YConferenceClient.prototype.getPublicConference =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YConference/getPublicConference',
+      request,
+      metadata || {},
+      methodDescriptor_YConference_getPublicConference,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.GetPublicConferenceRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.GetPublicConferenceResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YConferencePromiseClient.prototype.getPublicConference =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YConference/getPublicConference',
+      request,
+      metadata || {},
+      methodDescriptor_YConference_getPublicConference);
+};
+
+
 module.exports = proto.yartu;
 
