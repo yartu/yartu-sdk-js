@@ -13,6 +13,9 @@ import {
   ListConferenceRecordsRequest,
   DeleteRecordRequest,
   ListSessionParticipantRequest,
+  CheckPublicConferenceRequest,
+  GetPublicConferenceRequest,
+  StartPublicConferenceRequest,
 } from './service-pb.cjs';
 
 import { Query } from '../utils/definitions_pb.cjs';
@@ -71,35 +74,6 @@ export default (config) =>
         console.log('conferenceUuid', conferenceUuid);
 
         this.client.getConference(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-
-            if (code == 0) {
-              resolve({
-                code,
-                conference: response.toObject().session,
-              });
-            } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
-            }
-          }
-        });
-      });
-    }
-
-    getPublicConference(conferenceUuid) {
-      return new Promise((resolve, reject) => {
-
-        const request = new GetConferenceRequest();
-        request.setUuid(conferenceUuid);
-        console.log('conferenceUuid', conferenceUuid);
-
-        this.client.getConference(request, {}, (error, response) => {
           if (error) {
             handleError(error, reject);
           } else {
@@ -484,5 +458,94 @@ export default (config) =>
         });
       });
     }
-    
+
+    checkPublicConference(conferenceUuid) {
+      return new Promise((resolve, reject) => {
+
+        const request = new CheckPublicConferenceRequest();
+        request.setUuid(conferenceUuid);
+
+        this.client.checkPublicConference(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage(),
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    getPublicConference(conferenceUuid, name) {
+      return new Promise((resolve, reject) => {
+
+        const request = new GetPublicConferenceRequest();
+        request.setUuid(conferenceUuid);
+        request.setName(name);
+
+        this.client.getPublicConference(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code,
+                conference: response.toObject().session,
+                message: response.getMessage(),
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    startPublicConference(conferenceUuid, password) {
+      return new Promise((resolve, reject) => {
+
+        const request = new StartPublicConferenceRequest();
+        request.setUuid(conferenceUuid);
+        request.setPassword(password);
+
+        this.client.startPublicConference(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code,
+                key: response.getKey(),
+                message: response.getMessage(),
+              });
+            } else {
+              reject({
+                code: code,
+                key: null,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
   };
