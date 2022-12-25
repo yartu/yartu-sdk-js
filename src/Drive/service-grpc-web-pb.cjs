@@ -869,5 +869,127 @@ proto.yartu.YDrivePromiseClient.prototype.downloadFile =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.GetShareRequest,
+ *   !proto.yartu.GetShareResponse>}
+ */
+const methodDescriptor_YDrive_getShare = new grpc.web.MethodDescriptor(
+  '/yartu.YDrive/getShare',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.GetShareRequest,
+  proto.yartu.GetShareResponse,
+  /**
+   * @param {!proto.yartu.GetShareRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.GetShareResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.GetShareRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.GetShareResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.GetShareResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YDriveClient.prototype.getShare =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YDrive/getShare',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_getShare,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.GetShareRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.GetShareResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YDrivePromiseClient.prototype.getShare =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YDrive/getShare',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_getShare);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.UpsertShareRequest,
+ *   !proto.yartu.UpsertShareResponse>}
+ */
+const methodDescriptor_YDrive_upsertShare = new grpc.web.MethodDescriptor(
+  '/yartu.YDrive/upsertShare',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.UpsertShareRequest,
+  proto.yartu.UpsertShareResponse,
+  /**
+   * @param {!proto.yartu.UpsertShareRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.UpsertShareResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.UpsertShareRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.UpsertShareResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.UpsertShareResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YDriveClient.prototype.upsertShare =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YDrive/upsertShare',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_upsertShare,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.UpsertShareRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.UpsertShareResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YDrivePromiseClient.prototype.upsertShare =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YDrive/upsertShare',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_upsertShare);
+};
+
+
 module.exports = proto.yartu;
 
