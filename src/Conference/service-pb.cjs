@@ -7337,7 +7337,6 @@ proto.yartu.CheckPublicConferenceResponse.prototype.toObject = function(opt_incl
 proto.yartu.CheckPublicConferenceResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    key: jspb.Message.getFieldWithDefault(msg, 2, ""),
     message: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
@@ -7379,10 +7378,6 @@ proto.yartu.CheckPublicConferenceResponse.deserializeBinaryFromReader = function
       var value = /** @type {number} */ (reader.readInt64());
       msg.setCode(value);
       break;
-    case 2:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setKey(value);
-      break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
@@ -7423,13 +7418,6 @@ proto.yartu.CheckPublicConferenceResponse.serializeBinaryToWriter = function(mes
       f
     );
   }
-  f = message.getKey();
-  if (f.length > 0) {
-    writer.writeString(
-      2,
-      f
-    );
-  }
   f = message.getMessage();
   if (f.length > 0) {
     writer.writeString(
@@ -7455,24 +7443,6 @@ proto.yartu.CheckPublicConferenceResponse.prototype.getCode = function() {
  */
 proto.yartu.CheckPublicConferenceResponse.prototype.setCode = function(value) {
   return jspb.Message.setProto3IntField(this, 1, value);
-};
-
-
-/**
- * optional string key = 2;
- * @return {string}
- */
-proto.yartu.CheckPublicConferenceResponse.prototype.getKey = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.yartu.CheckPublicConferenceResponse} returns this
- */
-proto.yartu.CheckPublicConferenceResponse.prototype.setKey = function(value) {
-  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
