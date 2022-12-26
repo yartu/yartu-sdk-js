@@ -76,7 +76,17 @@ export default (config) =>
           request.setNotebookId(notebookId);
         }
 
-        metaRequest.setFilterType('all');
+
+        if (query.isStarred) {
+          metaRequest.setIsStarred(true); 
+        }
+
+        if (query.isArchived) {
+          metaRequest.setIsArchived(true); 
+        }
+
+        metaRequest.setFilterType(query.filterType || 'all');
+
         request.setQuery(queryRequest);
         request.setMeta(metaRequest);
 
@@ -153,7 +163,7 @@ export default (config) =>
         
         request.setNotebookId(noteData.notebookId);
         request.setIsPinned(noteData.isPinned);
-        request.setIsPinned(noteData.isStarred);
+        request.setIsStarred(noteData.isStarred);
         request.setIsArchived(noteData.isArchived);
 
         this.client.upsertNote(
@@ -224,8 +234,6 @@ export default (config) =>
     moveNote = (moveData) => {
       return new Promise((resolve, reject) => {
         const request = new MoveNoteRequest();
-        
-        console.log('---->MOVE DATA...', moveData);
 
         request.setNoteIdsList(moveData.ids);
         request.setTargetNotebookId(moveData.targetNotebook);
