@@ -259,5 +259,188 @@ proto.yartu.YProjectPromiseClient.prototype.upsertProject =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.DeleteProjectRequest,
+ *   !proto.yartu.DeleteProjectResponse>}
+ */
+const methodDescriptor_YProject_deleteProject = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/deleteProject',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.DeleteProjectRequest,
+  proto.yartu.DeleteProjectResponse,
+  /**
+   * @param {!proto.yartu.DeleteProjectRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.DeleteProjectResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.DeleteProjectRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.DeleteProjectResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.DeleteProjectResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.deleteProject =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/deleteProject',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_deleteProject,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.DeleteProjectRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.DeleteProjectResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.deleteProject =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/deleteProject',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_deleteProject);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.DuplicateProjectRequest,
+ *   !proto.yartu.DuplicateProjectResponse>}
+ */
+const methodDescriptor_YProject_duplicateProject = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/duplicateProject',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.DuplicateProjectRequest,
+  proto.yartu.DuplicateProjectResponse,
+  /**
+   * @param {!proto.yartu.DuplicateProjectRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.DuplicateProjectResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.DuplicateProjectRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.DuplicateProjectResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.DuplicateProjectResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.duplicateProject =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/duplicateProject',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_duplicateProject,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.DuplicateProjectRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.DuplicateProjectResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.duplicateProject =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/duplicateProject',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_duplicateProject);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.ArchiveProjectRequest,
+ *   !proto.yartu.ArchiveProjectResponse>}
+ */
+const methodDescriptor_YProject_archiveProject = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/archiveProject',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.ArchiveProjectRequest,
+  proto.yartu.ArchiveProjectResponse,
+  /**
+   * @param {!proto.yartu.ArchiveProjectRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.ArchiveProjectResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.ArchiveProjectRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ArchiveProjectResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ArchiveProjectResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.archiveProject =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/archiveProject',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_archiveProject,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.ArchiveProjectRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.ArchiveProjectResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.archiveProject =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/archiveProject',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_archiveProject);
+};
+
+
 module.exports = proto.yartu;
 
