@@ -925,7 +925,7 @@ proto.yartu_mail.Query.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 3:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setPerpage(value);
+      msg.setPerPage(value);
       break;
     case 4:
       var value = /** @type {string} */ (reader.readString());
@@ -978,7 +978,7 @@ proto.yartu_mail.Query.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getPerpage();
+  f = message.getPerPage();
   if (f !== 0) {
     writer.writeInt64(
       3,
@@ -1042,7 +1042,7 @@ proto.yartu_mail.Query.prototype.setPage = function(value) {
  * optional int64 perPage = 3;
  * @return {number}
  */
-proto.yartu_mail.Query.prototype.getPerpage = function() {
+proto.yartu_mail.Query.prototype.getPerPage = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
 };
 
@@ -1051,7 +1051,7 @@ proto.yartu_mail.Query.prototype.getPerpage = function() {
  * @param {number} value
  * @return {!proto.yartu_mail.Query} returns this
  */
-proto.yartu_mail.Query.prototype.setPerpage = function(value) {
+proto.yartu_mail.Query.prototype.setPerPage = function(value) {
   return jspb.Message.setProto3IntField(this, 3, value);
 };
 
@@ -1184,11 +1184,11 @@ proto.yartu_mail.PaginationMeta.deserializeBinaryFromReader = function(msg, read
     switch (field) {
     case 1:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setCurrentpage(value);
+      msg.setCurrentPage(value);
       break;
     case 2:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setPerpage(value);
+      msg.setPerPage(value);
       break;
     case 3:
       var value = /** @type {number} */ (reader.readInt64());
@@ -1223,14 +1223,14 @@ proto.yartu_mail.PaginationMeta.prototype.serializeBinary = function() {
  */
 proto.yartu_mail.PaginationMeta.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getCurrentpage();
+  f = message.getCurrentPage();
   if (f !== 0) {
     writer.writeInt64(
       1,
       f
     );
   }
-  f = message.getPerpage();
+  f = message.getPerPage();
   if (f !== 0) {
     writer.writeInt64(
       2,
@@ -1251,7 +1251,7 @@ proto.yartu_mail.PaginationMeta.serializeBinaryToWriter = function(message, writ
  * optional int64 currentPage = 1;
  * @return {number}
  */
-proto.yartu_mail.PaginationMeta.prototype.getCurrentpage = function() {
+proto.yartu_mail.PaginationMeta.prototype.getCurrentPage = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
@@ -1260,7 +1260,7 @@ proto.yartu_mail.PaginationMeta.prototype.getCurrentpage = function() {
  * @param {number} value
  * @return {!proto.yartu_mail.PaginationMeta} returns this
  */
-proto.yartu_mail.PaginationMeta.prototype.setCurrentpage = function(value) {
+proto.yartu_mail.PaginationMeta.prototype.setCurrentPage = function(value) {
   return jspb.Message.setProto3IntField(this, 1, value);
 };
 
@@ -1269,7 +1269,7 @@ proto.yartu_mail.PaginationMeta.prototype.setCurrentpage = function(value) {
  * optional int64 perPage = 2;
  * @return {number}
  */
-proto.yartu_mail.PaginationMeta.prototype.getPerpage = function() {
+proto.yartu_mail.PaginationMeta.prototype.getPerPage = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
 };
 
@@ -1278,7 +1278,7 @@ proto.yartu_mail.PaginationMeta.prototype.getPerpage = function() {
  * @param {number} value
  * @return {!proto.yartu_mail.PaginationMeta} returns this
  */
-proto.yartu_mail.PaginationMeta.prototype.setPerpage = function(value) {
+proto.yartu_mail.PaginationMeta.prototype.setPerPage = function(value) {
   return jspb.Message.setProto3IntField(this, 2, value);
 };
 
