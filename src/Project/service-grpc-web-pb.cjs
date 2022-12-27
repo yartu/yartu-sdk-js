@@ -1241,8 +1241,8 @@ proto.yartu.YProjectPromiseClient.prototype.listCardLabel =
  *   !proto.yartu.UpsertCardLabelRequest,
  *   !proto.yartu.UpsertCardLabelResponse>}
  */
-const methodDescriptor_YProject_upsertardLabel = new grpc.web.MethodDescriptor(
-  '/yartu.YProject/upsertardLabel',
+const methodDescriptor_YProject_upsertCardLabel = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/upsertCardLabel',
   grpc.web.MethodType.UNARY,
   proto.yartu.UpsertCardLabelRequest,
   proto.yartu.UpsertCardLabelResponse,
@@ -1267,13 +1267,13 @@ const methodDescriptor_YProject_upsertardLabel = new grpc.web.MethodDescriptor(
  * @return {!grpc.web.ClientReadableStream<!proto.yartu.UpsertCardLabelResponse>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.yartu.YProjectClient.prototype.upsertardLabel =
+proto.yartu.YProjectClient.prototype.upsertCardLabel =
     function(request, metadata, callback) {
   return this.client_.rpcCall(this.hostname_ +
-      '/yartu.YProject/upsertardLabel',
+      '/yartu.YProject/upsertCardLabel',
       request,
       metadata || {},
-      methodDescriptor_YProject_upsertardLabel,
+      methodDescriptor_YProject_upsertCardLabel,
       callback);
 };
 
@@ -1286,13 +1286,13 @@ proto.yartu.YProjectClient.prototype.upsertardLabel =
  * @return {!Promise<!proto.yartu.UpsertCardLabelResponse>}
  *     Promise that resolves to the response
  */
-proto.yartu.YProjectPromiseClient.prototype.upsertardLabel =
+proto.yartu.YProjectPromiseClient.prototype.upsertCardLabel =
     function(request, metadata) {
   return this.client_.unaryCall(this.hostname_ +
-      '/yartu.YProject/upsertardLabel',
+      '/yartu.YProject/upsertCardLabel',
       request,
       metadata || {},
-      methodDescriptor_YProject_upsertardLabel);
+      methodDescriptor_YProject_upsertCardLabel);
 };
 
 
@@ -1415,6 +1415,128 @@ proto.yartu.YProjectPromiseClient.prototype.upsertCard =
       request,
       metadata || {},
       methodDescriptor_YProject_upsertCard);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.AddLabelToCardRequest,
+ *   !proto.yartu.AddLabelToCardResponse>}
+ */
+const methodDescriptor_YProject_addLabelToCard = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/addLabelToCard',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.AddLabelToCardRequest,
+  proto.yartu.AddLabelToCardResponse,
+  /**
+   * @param {!proto.yartu.AddLabelToCardRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.AddLabelToCardResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.AddLabelToCardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.AddLabelToCardResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.AddLabelToCardResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.addLabelToCard =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/addLabelToCard',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_addLabelToCard,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.AddLabelToCardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.AddLabelToCardResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.addLabelToCard =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/addLabelToCard',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_addLabelToCard);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.MoveCardRequest,
+ *   !proto.yartu.MoveCardResponse>}
+ */
+const methodDescriptor_YProject_moveCard = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/moveCard',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.MoveCardRequest,
+  proto.yartu.MoveCardResponse,
+  /**
+   * @param {!proto.yartu.MoveCardRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.MoveCardResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.MoveCardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.MoveCardResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.MoveCardResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.moveCard =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/moveCard',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_moveCard,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.MoveCardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.MoveCardResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.moveCard =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/moveCard',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_moveCard);
 };
 
 
