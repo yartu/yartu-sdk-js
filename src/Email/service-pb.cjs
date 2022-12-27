@@ -985,7 +985,7 @@ proto.yartu_mail.Query.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getSortby();
+  f = message.getSortBy();
   if (f.length > 0) {
     writer.writeString(
       4,
@@ -1060,7 +1060,7 @@ proto.yartu_mail.Query.prototype.setPerPage = function(value) {
  * optional string sortBy = 4;
  * @return {string}
  */
-proto.yartu_mail.Query.prototype.getSortby = function() {
+proto.yartu_mail.Query.prototype.getSortBy = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
 };
 
