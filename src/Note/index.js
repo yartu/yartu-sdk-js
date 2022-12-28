@@ -4,6 +4,7 @@ import {
   UpsertNotebookRequest,
   ListNoteRequest,
   GetNoteRequest,
+  DeleteNoteRequest,
   UpsertNoteRequest,
   StarNoteRequest,
   MoveNoteRequest,
@@ -278,6 +279,37 @@ export default (config) =>
         request.setTargetNotebookId(moveData.targetNotebook);
 
         this.client.moveNote(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    }
+
+    deleteNote = (noteId) => {
+      return new Promise((resolve, reject) => {
+        const request = new DeleteNoteRequest();
+
+        request.setId(noteId);
+
+        this.client.deleteNote(
           request,
           this.metadata,
           (error, response) => {
