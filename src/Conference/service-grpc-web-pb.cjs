@@ -262,6 +262,67 @@ proto.yartu.YConferencePromiseClient.prototype.upsertConference =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.DuplicateConferenceRequest,
+ *   !proto.yartu.DuplicateConferenceResponse>}
+ */
+const methodDescriptor_YConference_duplicateConference = new grpc.web.MethodDescriptor(
+  '/yartu.YConference/duplicateConference',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.DuplicateConferenceRequest,
+  proto.yartu.DuplicateConferenceResponse,
+  /**
+   * @param {!proto.yartu.DuplicateConferenceRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.DuplicateConferenceResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.DuplicateConferenceRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.DuplicateConferenceResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.DuplicateConferenceResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YConferenceClient.prototype.duplicateConference =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YConference/duplicateConference',
+      request,
+      metadata || {},
+      methodDescriptor_YConference_duplicateConference,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.DuplicateConferenceRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.DuplicateConferenceResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YConferencePromiseClient.prototype.duplicateConference =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YConference/duplicateConference',
+      request,
+      metadata || {},
+      methodDescriptor_YConference_duplicateConference);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.UpsertInstantConferenceRequest,
  *   !proto.yartu.UpsertInstantConferenceResponse>}
  */
