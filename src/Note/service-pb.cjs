@@ -1419,7 +1419,7 @@ proto.yartu.NoteMetaQuery.prototype.toObject = function(opt_includeInstance) {
  */
 proto.yartu.NoteMetaQuery.toObject = function(includeInstance, msg) {
   var f, obj = {
-    label: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    labelId: jspb.Message.getFieldWithDefault(msg, 1, 0),
     noteType: jspb.Message.getFieldWithDefault(msg, 2, ""),
     filterType: jspb.Message.getFieldWithDefault(msg, 3, ""),
     isArchived: jspb.Message.getBooleanFieldWithDefault(msg, 4, false),
@@ -1463,8 +1463,8 @@ proto.yartu.NoteMetaQuery.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setLabel(value);
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setLabelId(value);
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
@@ -1519,9 +1519,9 @@ proto.yartu.NoteMetaQuery.prototype.serializeBinary = function() {
  */
 proto.yartu.NoteMetaQuery.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = /** @type {string} */ (jspb.Message.getField(message, 1));
+  f = /** @type {number} */ (jspb.Message.getField(message, 1));
   if (f != null) {
-    writer.writeString(
+    writer.writeInt64(
       1,
       f
     );
@@ -1572,19 +1572,19 @@ proto.yartu.NoteMetaQuery.serializeBinaryToWriter = function(message, writer) {
 
 
 /**
- * optional string label = 1;
- * @return {string}
+ * optional int64 label_id = 1;
+ * @return {number}
  */
-proto.yartu.NoteMetaQuery.prototype.getLabel = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+proto.yartu.NoteMetaQuery.prototype.getLabelId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
 /**
- * @param {string} value
+ * @param {number} value
  * @return {!proto.yartu.NoteMetaQuery} returns this
  */
-proto.yartu.NoteMetaQuery.prototype.setLabel = function(value) {
+proto.yartu.NoteMetaQuery.prototype.setLabelId = function(value) {
   return jspb.Message.setField(this, 1, value);
 };
 
@@ -1593,7 +1593,7 @@ proto.yartu.NoteMetaQuery.prototype.setLabel = function(value) {
  * Clears the field making it undefined.
  * @return {!proto.yartu.NoteMetaQuery} returns this
  */
-proto.yartu.NoteMetaQuery.prototype.clearLabel = function() {
+proto.yartu.NoteMetaQuery.prototype.clearLabelId = function() {
   return jspb.Message.setField(this, 1, undefined);
 };
 
@@ -1602,7 +1602,7 @@ proto.yartu.NoteMetaQuery.prototype.clearLabel = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu.NoteMetaQuery.prototype.hasLabel = function() {
+proto.yartu.NoteMetaQuery.prototype.hasLabelId = function() {
   return jspb.Message.getField(this, 1) != null;
 };
 
@@ -11265,7 +11265,7 @@ proto.yartu.ListNoteLabelRequest.prototype.toObject = function(opt_includeInstan
  */
 proto.yartu.ListNoteLabelRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0)
+
   };
 
   if (includeInstance) {
@@ -11302,10 +11302,6 @@ proto.yartu.ListNoteLabelRequest.deserializeBinaryFromReader = function(msg, rea
     }
     var field = reader.getFieldNumber();
     switch (field) {
-    case 1:
-      var value = /** @type {number} */ (reader.readInt64());
-      msg.setId(value);
-      break;
     default:
       reader.skipField();
       break;
@@ -11335,31 +11331,6 @@ proto.yartu.ListNoteLabelRequest.prototype.serializeBinary = function() {
  */
 proto.yartu.ListNoteLabelRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getId();
-  if (f !== 0) {
-    writer.writeInt64(
-      1,
-      f
-    );
-  }
-};
-
-
-/**
- * optional int64 id = 1;
- * @return {number}
- */
-proto.yartu.ListNoteLabelRequest.prototype.getId = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
-};
-
-
-/**
- * @param {number} value
- * @return {!proto.yartu.ListNoteLabelRequest} returns this
- */
-proto.yartu.ListNoteLabelRequest.prototype.setId = function(value) {
-  return jspb.Message.setProto3IntField(this, 1, value);
 };
 
 
@@ -11403,8 +11374,9 @@ proto.yartu.ListNoteLabelResponse.prototype.toObject = function(opt_includeInsta
 proto.yartu.ListNoteLabelResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    labelList: jspb.Message.toObjectList(msg.getLabelList(),
-    proto.yartu.NoteLabel.toObject, includeInstance)
+    dataList: jspb.Message.toObjectList(msg.getDataList(),
+    proto.yartu.NoteLabel.toObject, includeInstance),
+    message: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -11448,7 +11420,11 @@ proto.yartu.ListNoteLabelResponse.deserializeBinaryFromReader = function(msg, re
     case 2:
       var value = new proto.yartu.NoteLabel;
       reader.readMessage(value,proto.yartu.NoteLabel.deserializeBinaryFromReader);
-      msg.addLabel(value);
+      msg.addData(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setMessage(value);
       break;
     default:
       reader.skipField();
@@ -11486,12 +11462,19 @@ proto.yartu.ListNoteLabelResponse.serializeBinaryToWriter = function(message, wr
       f
     );
   }
-  f = message.getLabelList();
+  f = message.getDataList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
       2,
       f,
       proto.yartu.NoteLabel.serializeBinaryToWriter
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 3));
+  if (f != null) {
+    writer.writeString(
+      3,
+      f
     );
   }
 };
@@ -11516,10 +11499,10 @@ proto.yartu.ListNoteLabelResponse.prototype.setCode = function(value) {
 
 
 /**
- * repeated NoteLabel label = 2;
+ * repeated NoteLabel data = 2;
  * @return {!Array<!proto.yartu.NoteLabel>}
  */
-proto.yartu.ListNoteLabelResponse.prototype.getLabelList = function() {
+proto.yartu.ListNoteLabelResponse.prototype.getDataList = function() {
   return /** @type{!Array<!proto.yartu.NoteLabel>} */ (
     jspb.Message.getRepeatedWrapperField(this, proto.yartu.NoteLabel, 2));
 };
@@ -11529,7 +11512,7 @@ proto.yartu.ListNoteLabelResponse.prototype.getLabelList = function() {
  * @param {!Array<!proto.yartu.NoteLabel>} value
  * @return {!proto.yartu.ListNoteLabelResponse} returns this
 */
-proto.yartu.ListNoteLabelResponse.prototype.setLabelList = function(value) {
+proto.yartu.ListNoteLabelResponse.prototype.setDataList = function(value) {
   return jspb.Message.setRepeatedWrapperField(this, 2, value);
 };
 
@@ -11539,7 +11522,7 @@ proto.yartu.ListNoteLabelResponse.prototype.setLabelList = function(value) {
  * @param {number=} opt_index
  * @return {!proto.yartu.NoteLabel}
  */
-proto.yartu.ListNoteLabelResponse.prototype.addLabel = function(opt_value, opt_index) {
+proto.yartu.ListNoteLabelResponse.prototype.addData = function(opt_value, opt_index) {
   return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.yartu.NoteLabel, opt_index);
 };
 
@@ -11548,8 +11531,44 @@ proto.yartu.ListNoteLabelResponse.prototype.addLabel = function(opt_value, opt_i
  * Clears the list making it empty but non-null.
  * @return {!proto.yartu.ListNoteLabelResponse} returns this
  */
-proto.yartu.ListNoteLabelResponse.prototype.clearLabelList = function() {
-  return this.setLabelList([]);
+proto.yartu.ListNoteLabelResponse.prototype.clearDataList = function() {
+  return this.setDataList([]);
+};
+
+
+/**
+ * optional string message = 3;
+ * @return {string}
+ */
+proto.yartu.ListNoteLabelResponse.prototype.getMessage = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.ListNoteLabelResponse} returns this
+ */
+proto.yartu.ListNoteLabelResponse.prototype.setMessage = function(value) {
+  return jspb.Message.setField(this, 3, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.ListNoteLabelResponse} returns this
+ */
+proto.yartu.ListNoteLabelResponse.prototype.clearMessage = function() {
+  return jspb.Message.setField(this, 3, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.ListNoteLabelResponse.prototype.hasMessage = function() {
+  return jspb.Message.getField(this, 3) != null;
 };
 
 
@@ -11587,7 +11606,8 @@ proto.yartu.UpsertNoteLabelRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, 0),
     name: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    color: jspb.Message.getFieldWithDefault(msg, 3, "")
+    color: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    noteId: jspb.Message.getFieldWithDefault(msg, 4, 0)
   };
 
   if (includeInstance) {
@@ -11636,6 +11656,10 @@ proto.yartu.UpsertNoteLabelRequest.deserializeBinaryFromReader = function(msg, r
       var value = /** @type {string} */ (reader.readString());
       msg.setColor(value);
       break;
+    case 4:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setNoteId(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -11683,6 +11707,13 @@ proto.yartu.UpsertNoteLabelRequest.serializeBinaryToWriter = function(message, w
   if (f.length > 0) {
     writer.writeString(
       3,
+      f
+    );
+  }
+  f = /** @type {number} */ (jspb.Message.getField(message, 4));
+  if (f != null) {
+    writer.writeInt64(
+      4,
       f
     );
   }
@@ -11740,6 +11771,42 @@ proto.yartu.UpsertNoteLabelRequest.prototype.getColor = function() {
  */
 proto.yartu.UpsertNoteLabelRequest.prototype.setColor = function(value) {
   return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional int64 note_id = 4;
+ * @return {number}
+ */
+proto.yartu.UpsertNoteLabelRequest.prototype.getNoteId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu.UpsertNoteLabelRequest} returns this
+ */
+proto.yartu.UpsertNoteLabelRequest.prototype.setNoteId = function(value) {
+  return jspb.Message.setField(this, 4, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.UpsertNoteLabelRequest} returns this
+ */
+proto.yartu.UpsertNoteLabelRequest.prototype.clearNoteId = function() {
+  return jspb.Message.setField(this, 4, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.UpsertNoteLabelRequest.prototype.hasNoteId = function() {
+  return jspb.Message.getField(this, 4) != null;
 };
 
 

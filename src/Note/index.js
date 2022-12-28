@@ -1,11 +1,14 @@
 import {
   NoteMetaQuery,
   ListNotebookRequest,
+  UpsertNotebookRequest,
   ListNoteRequest,
   GetNoteRequest,
   UpsertNoteRequest,
   StarNoteRequest,
   MoveNoteRequest,
+  ListNoteLabelRequest,
+  UpsertNoteLabelRequest,
 } from './service-pb.cjs';
 
 import { YNoteClient } from './service-grpc-web-pb.cjs';
@@ -66,6 +69,38 @@ export default (config) =>
       });
     }
 
+    upsertNotebook = (notebookData) => {
+      return new Promise((resolve, reject) => {
+        const request = new UpsertNotebookRequest();
+
+        request.setId(notebookData.id);
+        request.setName(notebookData.name);
+
+        this.client.upsertNotebook(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code,
+                  message: response.getMessage(),
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    }
+
     listNote = (notebookId = null, query = {}) => {
       return new Promise((resolve, reject) => {
         const request = new ListNoteRequest();
@@ -83,6 +118,10 @@ export default (config) =>
 
         if (query.isArchived) {
           metaRequest.setIsArchived(true); 
+        }
+
+        if (query.label) {
+          metaRequest.setLabelId(query.label); 
         }
 
         metaRequest.setFilterType(query.filterType || 'all');
@@ -263,4 +302,71 @@ export default (config) =>
       });
     }
 
+    listNoteLabel = () => {
+      return new Promise((resolve, reject) => {
+        const request = new ListNoteLabelRequest();
+        console.log('listNoteLabel SDK');
+
+        this.client.listNoteLabel(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              const dataList = response
+                .getDataList()
+                .map((data) => data.toObject());
+              if (code == 0) {
+                resolve({
+                  code,
+                  data: dataList,
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    }
+
+    upsertNoteLabel = (labelData) => {
+      return new Promise((resolve, reject) => {
+        const request = new UpsertNoteLabelRequest();
+        console.log('listNoteLabel SDK');
+
+        request.setName(labelData.name);
+        request.setColor(labelData.color);
+        request.setNoteId(labelData.noteId);
+
+        this.client.upsertNoteLabel(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code,
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    }
+
+    labelData
   }

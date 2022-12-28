@@ -171,7 +171,7 @@ export default (config) =>
           const emailType = new davType();
           emailType.setType(email.type);
           emailType.setValue(email.value);
-          emailType.setIsDefault(email.is_default);
+          emailType.setDefault(email.default);
           emailList.push(emailType);
         }
         const phoneList = [];
@@ -179,7 +179,7 @@ export default (config) =>
           const phoneType = new davType();
           phoneType.setType(phone.type);
           phoneType.setValue(phone.value);
-          phoneType.setIsDefault(phone.is_default);
+          phoneType.setDefault(phone.default);
           phoneList.push(phoneType);
         }
         const webList = [];
@@ -187,7 +187,7 @@ export default (config) =>
           const webType = new davType();
           webType.setType(web.type);
           webType.setValue(web.value);
-          webType.setIsDefault(web.is_default);
+          webType.setDefault(web.default);
           webList.push(webType);
         }
 
@@ -200,7 +200,7 @@ export default (config) =>
           addressType.setRegion(address.region);
           addressType.setPostalcode(address.postalcode);
           addressType.setCountry(address.country);
-          addressType.setIsDefault(address.is_default);
+          addressType.setDefault(address.default);
           addressList.push(addressType);
         }
 
