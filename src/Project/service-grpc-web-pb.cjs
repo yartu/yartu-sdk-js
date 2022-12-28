@@ -445,6 +445,67 @@ proto.yartu.YProjectPromiseClient.prototype.archiveProject =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.StarProjectRequest,
+ *   !proto.yartu.StarProjectResponse>}
+ */
+const methodDescriptor_YProject_starProject = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/starProject',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.StarProjectRequest,
+  proto.yartu.StarProjectResponse,
+  /**
+   * @param {!proto.yartu.StarProjectRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.StarProjectResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.StarProjectRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.StarProjectResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.StarProjectResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.starProject =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/starProject',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_starProject,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.StarProjectRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.StarProjectResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.starProject =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/starProject',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_starProject);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.ListThreadRequest,
  *   !proto.yartu.ListThreadResponse>}
  */
@@ -1415,6 +1476,67 @@ proto.yartu.YProjectPromiseClient.prototype.upsertCard =
       request,
       metadata || {},
       methodDescriptor_YProject_upsertCard);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.AddCommentToCardRequest,
+ *   !proto.yartu.AddCommentToCardResponse>}
+ */
+const methodDescriptor_YProject_addCommentToCard = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/addCommentToCard',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.AddCommentToCardRequest,
+  proto.yartu.AddCommentToCardResponse,
+  /**
+   * @param {!proto.yartu.AddCommentToCardRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.AddCommentToCardResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.AddCommentToCardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.AddCommentToCardResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.AddCommentToCardResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.addCommentToCard =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/addCommentToCard',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_addCommentToCard,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.AddCommentToCardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.AddCommentToCardResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.addCommentToCard =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/addCommentToCard',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_addCommentToCard);
 };
 
 
