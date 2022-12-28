@@ -79,6 +79,67 @@ proto.yartu.YProjectPromiseClient =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.GetProjectMeRequest,
+ *   !proto.yartu.GetProjectMeResponse>}
+ */
+const methodDescriptor_YProject_getMe = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/getMe',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.GetProjectMeRequest,
+  proto.yartu.GetProjectMeResponse,
+  /**
+   * @param {!proto.yartu.GetProjectMeRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.GetProjectMeResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.GetProjectMeRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.GetProjectMeResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.GetProjectMeResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.getMe =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/getMe',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_getMe,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.GetProjectMeRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.GetProjectMeResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.getMe =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/getMe',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_getMe);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.ListProjectRequest,
  *   !proto.yartu.ListProjectResponse>}
  */
