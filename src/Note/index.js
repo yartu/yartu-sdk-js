@@ -8,8 +8,11 @@ import {
   UpsertNoteRequest,
   StarNoteRequest,
   MoveNoteRequest,
+  CopyNoteRequest,
   ListNoteLabelRequest,
   UpsertNoteLabelRequest,
+  PinNoteRequest,
+  ConvertNoteRequest,
 } from './service-pb.cjs';
 
 import { YNoteClient } from './service-grpc-web-pb.cjs';
@@ -303,6 +306,38 @@ export default (config) =>
       });
     }
 
+    copyNote = (copyData) => {
+      return new Promise((resolve, reject) => {
+        const request = new CopyNoteRequest();
+
+        request.setNoteIdsList(copyData.ids);
+        request.setTargetNotebookId(copyData.targetNotebook);
+
+        this.client.copyNote(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    }
+
     deleteNote = (noteId) => {
       return new Promise((resolve, reject) => {
         const request = new DeleteNoteRequest();
@@ -400,5 +435,70 @@ export default (config) =>
       });
     }
 
-    labelData
+    pinNote = (pinData) => {
+      return new Promise((resolve, reject) => {
+        const request = new PinNoteRequest();
+
+        request.setId(pinData.id);
+        request.setPinned(pinData.pinned);
+
+        this.client.pinNote(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    }
+
+    convertNote = (convertData) => {
+      return new Promise((resolve, reject) => {
+        const request = new ConvertNoteRequest();
+
+        console.log('.... CONVERT', convertData);
+
+        request.setId(convertData.id);
+        request.setTo(convertData.to);
+
+        this.client.convertNote(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    }
+
   }

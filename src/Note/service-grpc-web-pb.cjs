@@ -1051,6 +1051,67 @@ proto.yartu.YNotePromiseClient.prototype.pinNote =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.ConvertNoteRequest,
+ *   !proto.yartu.ConvertNoteResponse>}
+ */
+const methodDescriptor_YNote_convertNote = new grpc.web.MethodDescriptor(
+  '/yartu.YNote/convertNote',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.ConvertNoteRequest,
+  proto.yartu.ConvertNoteResponse,
+  /**
+   * @param {!proto.yartu.ConvertNoteRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.ConvertNoteResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.ConvertNoteRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ConvertNoteResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ConvertNoteResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YNoteClient.prototype.convertNote =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YNote/convertNote',
+      request,
+      metadata || {},
+      methodDescriptor_YNote_convertNote,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.ConvertNoteRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.ConvertNoteResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YNotePromiseClient.prototype.convertNote =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YNote/convertNote',
+      request,
+      metadata || {},
+      methodDescriptor_YNote_convertNote);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.StarNoteRequest,
  *   !proto.yartu.StarNoteResponse>}
  */
