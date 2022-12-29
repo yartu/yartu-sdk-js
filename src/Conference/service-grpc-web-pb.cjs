@@ -509,8 +509,8 @@ proto.yartu.YConferencePromiseClient.prototype.finishConference =
  *   !proto.yartu.ListConferenceRecordsRequest,
  *   !proto.yartu.ListConferenceRecordsResponse>}
  */
-const methodDescriptor_YConference_listConfereceRecords = new grpc.web.MethodDescriptor(
-  '/yartu.YConference/listConfereceRecords',
+const methodDescriptor_YConference_listConferenceRecords = new grpc.web.MethodDescriptor(
+  '/yartu.YConference/listConferenceRecords',
   grpc.web.MethodType.UNARY,
   proto.yartu.ListConferenceRecordsRequest,
   proto.yartu.ListConferenceRecordsResponse,
@@ -535,13 +535,13 @@ const methodDescriptor_YConference_listConfereceRecords = new grpc.web.MethodDes
  * @return {!grpc.web.ClientReadableStream<!proto.yartu.ListConferenceRecordsResponse>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.yartu.YConferenceClient.prototype.listConfereceRecords =
+proto.yartu.YConferenceClient.prototype.listConferenceRecords =
     function(request, metadata, callback) {
   return this.client_.rpcCall(this.hostname_ +
-      '/yartu.YConference/listConfereceRecords',
+      '/yartu.YConference/listConferenceRecords',
       request,
       metadata || {},
-      methodDescriptor_YConference_listConfereceRecords,
+      methodDescriptor_YConference_listConferenceRecords,
       callback);
 };
 
@@ -554,13 +554,13 @@ proto.yartu.YConferenceClient.prototype.listConfereceRecords =
  * @return {!Promise<!proto.yartu.ListConferenceRecordsResponse>}
  *     Promise that resolves to the response
  */
-proto.yartu.YConferencePromiseClient.prototype.listConfereceRecords =
+proto.yartu.YConferencePromiseClient.prototype.listConferenceRecords =
     function(request, metadata) {
   return this.client_.unaryCall(this.hostname_ +
-      '/yartu.YConference/listConfereceRecords',
+      '/yartu.YConference/listConferenceRecords',
       request,
       metadata || {},
-      methodDescriptor_YConference_listConfereceRecords);
+      methodDescriptor_YConference_listConferenceRecords);
 };
 
 

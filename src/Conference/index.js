@@ -374,22 +374,23 @@ export default (config) =>
       });
     }
 
-    listConfereceRecords(confenreceUuid = null) {
+    listConferenceRecords(conferenceUuid = null) {
       return new Promise((resolve, reject) => {
 
         const request = new ListConferenceRecordsRequest();
-        request.setUuid(confenreceUuid);
+        request.setUuid(conferenceUuid);
 
-        this.client.listConfereceRecords(request, this.metadata, (error, response) => {
+        this.client.listConferenceRecords(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
           } else {
             const code = response.getCode();
 
             if (code == 0) {
+              const dataList = response.getRecordList().map((data) => data.toObject());
               resolve({
                 code,
-                data: response.toObject(),
+                records: dataList,
                 message: response.getMessage(),
               });
             } else {
