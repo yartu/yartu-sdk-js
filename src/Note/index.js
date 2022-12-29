@@ -115,7 +115,6 @@ export default (config) =>
           request.setNotebookId(notebookId);
         }
 
-
         if (query.isStarred) {
           metaRequest.setIsStarred(true); 
         }

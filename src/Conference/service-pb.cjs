@@ -1245,7 +1245,7 @@ proto.yartu.Session.toObject = function(includeInstance, msg) {
     externalParticipantsList: (f = jspb.Message.getRepeatedField(msg, 20)) == null ? undefined : f,
     jwt: jspb.Message.getFieldWithDefault(msg, 21, ""),
     rrule: jspb.Message.getFieldWithDefault(msg, 22, ""),
-    reminder: jspb.Message.getFieldWithDefault(msg, 23, "")
+    remincer: jspb.Message.getFieldWithDefault(msg, 23, "")
   };
 
   if (includeInstance) {
@@ -1374,7 +1374,7 @@ proto.yartu.Session.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 23:
       var value = /** @type {string} */ (reader.readString());
-      msg.setReminder(value);
+      msg.setRemincer(value);
       break;
     default:
       reader.skipField();
@@ -2062,10 +2062,10 @@ proto.yartu.Session.prototype.hasRrule = function() {
 
 
 /**
- * optional string reminder = 23;
+ * optional string remincer = 23;
  * @return {string}
  */
-proto.yartu.Session.prototype.getReminder = function() {
+proto.yartu.Session.prototype.getRemincer = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 23, ""));
 };
 
@@ -2074,7 +2074,7 @@ proto.yartu.Session.prototype.getReminder = function() {
  * @param {string} value
  * @return {!proto.yartu.Session} returns this
  */
-proto.yartu.Session.prototype.setReminder = function(value) {
+proto.yartu.Session.prototype.setRemincer = function(value) {
   return jspb.Message.setField(this, 23, value);
 };
 
@@ -2083,7 +2083,7 @@ proto.yartu.Session.prototype.setReminder = function(value) {
  * Clears the field making it undefined.
  * @return {!proto.yartu.Session} returns this
  */
-proto.yartu.Session.prototype.clearReminder = function() {
+proto.yartu.Session.prototype.clearRemincer = function() {
   return jspb.Message.setField(this, 23, undefined);
 };
 
@@ -2092,7 +2092,7 @@ proto.yartu.Session.prototype.clearReminder = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu.Session.prototype.hasReminder = function() {
+proto.yartu.Session.prototype.hasRemincer = function() {
   return jspb.Message.getField(this, 23) != null;
 };
 
