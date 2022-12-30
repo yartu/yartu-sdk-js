@@ -116,15 +116,23 @@ export default (config) =>
         }
 
         if (query.isStarred) {
-          metaRequest.setIsStarred(true); 
+          metaRequest.setIsStarred(true);
         }
 
         if (query.isArchived) {
-          metaRequest.setIsArchived(true); 
+          metaRequest.setIsArchived(true);
         }
 
         if (query.label) {
-          metaRequest.setLabelId(query.label); 
+          metaRequest.setLabelId(query.label);
+        }
+
+        if (query.sortBy) {
+          queryRequest.setSortBy(query.sortBy);
+        }
+
+        if (query.notebooks) {
+          metaRequest.setNotebookList(query.notebooks);
         }
 
         metaRequest.setFilterType(query.filterType || 'all');
@@ -164,7 +172,7 @@ export default (config) =>
     getNote = (noteId) => {
       return new Promise((resolve, reject) => {
         const request = new GetNoteRequest();
-        
+
         request.setId(noteId);
 
         this.client.getNote(
@@ -196,13 +204,13 @@ export default (config) =>
     upsertNote = (noteData) => {
       return new Promise((resolve, reject) => {
         const request = new UpsertNoteRequest();
-        
+
         request.setId(noteData.id);
         request.setTitle(noteData.title);
         request.setContent(noteData.content);
         request.setColor(noteData.color);
         request.setReminder(noteData.reminder);
-        
+
         request.setNotebookId(noteData.notebookId);
         request.setIsPinned(noteData.isPinned);
         request.setIsStarred(noteData.isStarred);
@@ -218,7 +226,7 @@ export default (config) =>
               const code = response.getCode();
 
               if (code == 0) {
-                
+
                 let note = null;
                 if (response.hasNote()) {
                   note = response.getNote().toObject();
@@ -244,7 +252,7 @@ export default (config) =>
     starNote = (noteData) => {
       return new Promise((resolve, reject) => {
         const request = new StarNoteRequest();
-        
+
         request.setId(noteData.id);
         request.setIsStarred(noteData.isStarred);
 
