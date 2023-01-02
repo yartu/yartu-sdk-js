@@ -3833,7 +3833,7 @@ proto.yartu.Column.prototype.clearCardList = function() {
  * @private {!Array<number>}
  * @const
  */
-proto.yartu.Board.repeatedFields_ = [6];
+proto.yartu.Board.repeatedFields_ = [7];
 
 
 
@@ -3867,15 +3867,17 @@ proto.yartu.Board.prototype.toObject = function(opt_includeInstance) {
 proto.yartu.Board.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    uuid: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    name: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    color: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    icon: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    projectUuid: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    uuid: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    name: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    color: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    icon: jspb.Message.getFieldWithDefault(msg, 6, ""),
     columnList: jspb.Message.toObjectList(msg.getColumnList(),
     proto.yartu.Column.toObject, includeInstance),
     permission: (f = msg.getPermission()) && common_grpc_definitions_pb.JSON.toObject(includeInstance, f),
-    cardCount: jspb.Message.getFieldWithDefault(msg, 8, 0),
-    completedCardCount: jspb.Message.getFieldWithDefault(msg, 9, 0)
+    cardCount: jspb.Message.getFieldWithDefault(msg, 9, 0),
+    usersCount: jspb.Message.getFieldWithDefault(msg, 10, 0),
+    completedCardCount: jspb.Message.getFieldWithDefault(msg, 11, 0)
   };
 
   if (includeInstance) {
@@ -3918,35 +3920,43 @@ proto.yartu.Board.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setUuid(value);
+      msg.setProjectUuid(value);
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
-      msg.setName(value);
+      msg.setUuid(value);
       break;
     case 4:
       var value = /** @type {string} */ (reader.readString());
-      msg.setColor(value);
+      msg.setName(value);
       break;
     case 5:
       var value = /** @type {string} */ (reader.readString());
-      msg.setIcon(value);
+      msg.setColor(value);
       break;
     case 6:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setIcon(value);
+      break;
+    case 7:
       var value = new proto.yartu.Column;
       reader.readMessage(value,proto.yartu.Column.deserializeBinaryFromReader);
       msg.addColumn(value);
       break;
-    case 7:
+    case 8:
       var value = new common_grpc_definitions_pb.JSON;
       reader.readMessage(value,common_grpc_definitions_pb.JSON.deserializeBinaryFromReader);
       msg.setPermission(value);
       break;
-    case 8:
+    case 9:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setCardCount(value);
       break;
-    case 9:
+    case 10:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setUsersCount(value);
+      break;
+    case 11:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setCompletedCardCount(value);
       break;
@@ -3986,38 +3996,45 @@ proto.yartu.Board.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getUuid();
+  f = message.getProjectUuid();
   if (f.length > 0) {
     writer.writeString(
       2,
       f
     );
   }
-  f = message.getName();
+  f = message.getUuid();
   if (f.length > 0) {
     writer.writeString(
       3,
       f
     );
   }
-  f = message.getColor();
+  f = message.getName();
   if (f.length > 0) {
     writer.writeString(
       4,
       f
     );
   }
-  f = message.getIcon();
+  f = message.getColor();
   if (f.length > 0) {
     writer.writeString(
       5,
       f
     );
   }
+  f = message.getIcon();
+  if (f.length > 0) {
+    writer.writeString(
+      6,
+      f
+    );
+  }
   f = message.getColumnList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
-      6,
+      7,
       f,
       proto.yartu.Column.serializeBinaryToWriter
     );
@@ -4025,7 +4042,7 @@ proto.yartu.Board.serializeBinaryToWriter = function(message, writer) {
   f = message.getPermission();
   if (f != null) {
     writer.writeMessage(
-      7,
+      8,
       f,
       common_grpc_definitions_pb.JSON.serializeBinaryToWriter
     );
@@ -4033,14 +4050,21 @@ proto.yartu.Board.serializeBinaryToWriter = function(message, writer) {
   f = message.getCardCount();
   if (f !== 0) {
     writer.writeInt64(
-      8,
+      9,
+      f
+    );
+  }
+  f = message.getUsersCount();
+  if (f !== 0) {
+    writer.writeInt64(
+      10,
       f
     );
   }
   f = message.getCompletedCardCount();
   if (f !== 0) {
     writer.writeInt64(
-      9,
+      11,
       f
     );
   }
@@ -4066,10 +4090,10 @@ proto.yartu.Board.prototype.setId = function(value) {
 
 
 /**
- * optional string uuid = 2;
+ * optional string project_uuid = 2;
  * @return {string}
  */
-proto.yartu.Board.prototype.getUuid = function() {
+proto.yartu.Board.prototype.getProjectUuid = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -4078,16 +4102,16 @@ proto.yartu.Board.prototype.getUuid = function() {
  * @param {string} value
  * @return {!proto.yartu.Board} returns this
  */
-proto.yartu.Board.prototype.setUuid = function(value) {
+proto.yartu.Board.prototype.setProjectUuid = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
 /**
- * optional string name = 3;
+ * optional string uuid = 3;
  * @return {string}
  */
-proto.yartu.Board.prototype.getName = function() {
+proto.yartu.Board.prototype.getUuid = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
@@ -4096,16 +4120,16 @@ proto.yartu.Board.prototype.getName = function() {
  * @param {string} value
  * @return {!proto.yartu.Board} returns this
  */
-proto.yartu.Board.prototype.setName = function(value) {
+proto.yartu.Board.prototype.setUuid = function(value) {
   return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 
 /**
- * optional string color = 4;
+ * optional string name = 4;
  * @return {string}
  */
-proto.yartu.Board.prototype.getColor = function() {
+proto.yartu.Board.prototype.getName = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
 };
 
@@ -4114,16 +4138,16 @@ proto.yartu.Board.prototype.getColor = function() {
  * @param {string} value
  * @return {!proto.yartu.Board} returns this
  */
-proto.yartu.Board.prototype.setColor = function(value) {
+proto.yartu.Board.prototype.setName = function(value) {
   return jspb.Message.setProto3StringField(this, 4, value);
 };
 
 
 /**
- * optional string icon = 5;
+ * optional string color = 5;
  * @return {string}
  */
-proto.yartu.Board.prototype.getIcon = function() {
+proto.yartu.Board.prototype.getColor = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
 };
 
@@ -4132,18 +4156,36 @@ proto.yartu.Board.prototype.getIcon = function() {
  * @param {string} value
  * @return {!proto.yartu.Board} returns this
  */
-proto.yartu.Board.prototype.setIcon = function(value) {
+proto.yartu.Board.prototype.setColor = function(value) {
   return jspb.Message.setProto3StringField(this, 5, value);
 };
 
 
 /**
- * repeated Column column = 6;
+ * optional string icon = 6;
+ * @return {string}
+ */
+proto.yartu.Board.prototype.getIcon = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.Board} returns this
+ */
+proto.yartu.Board.prototype.setIcon = function(value) {
+  return jspb.Message.setProto3StringField(this, 6, value);
+};
+
+
+/**
+ * repeated Column column = 7;
  * @return {!Array<!proto.yartu.Column>}
  */
 proto.yartu.Board.prototype.getColumnList = function() {
   return /** @type{!Array<!proto.yartu.Column>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.yartu.Column, 6));
+    jspb.Message.getRepeatedWrapperField(this, proto.yartu.Column, 7));
 };
 
 
@@ -4152,7 +4194,7 @@ proto.yartu.Board.prototype.getColumnList = function() {
  * @return {!proto.yartu.Board} returns this
 */
 proto.yartu.Board.prototype.setColumnList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 6, value);
+  return jspb.Message.setRepeatedWrapperField(this, 7, value);
 };
 
 
@@ -4162,7 +4204,7 @@ proto.yartu.Board.prototype.setColumnList = function(value) {
  * @return {!proto.yartu.Column}
  */
 proto.yartu.Board.prototype.addColumn = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 6, opt_value, proto.yartu.Column, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 7, opt_value, proto.yartu.Column, opt_index);
 };
 
 
@@ -4176,12 +4218,12 @@ proto.yartu.Board.prototype.clearColumnList = function() {
 
 
 /**
- * optional JSON permission = 7;
+ * optional JSON permission = 8;
  * @return {?proto.JSON}
  */
 proto.yartu.Board.prototype.getPermission = function() {
   return /** @type{?proto.JSON} */ (
-    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.JSON, 7));
+    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.JSON, 8));
 };
 
 
@@ -4190,7 +4232,7 @@ proto.yartu.Board.prototype.getPermission = function() {
  * @return {!proto.yartu.Board} returns this
 */
 proto.yartu.Board.prototype.setPermission = function(value) {
-  return jspb.Message.setWrapperField(this, 7, value);
+  return jspb.Message.setWrapperField(this, 8, value);
 };
 
 
@@ -4208,33 +4250,15 @@ proto.yartu.Board.prototype.clearPermission = function() {
  * @return {boolean}
  */
 proto.yartu.Board.prototype.hasPermission = function() {
-  return jspb.Message.getField(this, 7) != null;
+  return jspb.Message.getField(this, 8) != null;
 };
 
 
 /**
- * optional int64 card_count = 8;
+ * optional int64 card_count = 9;
  * @return {number}
  */
 proto.yartu.Board.prototype.getCardCount = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 8, 0));
-};
-
-
-/**
- * @param {number} value
- * @return {!proto.yartu.Board} returns this
- */
-proto.yartu.Board.prototype.setCardCount = function(value) {
-  return jspb.Message.setProto3IntField(this, 8, value);
-};
-
-
-/**
- * optional int64 completed_card_count = 9;
- * @return {number}
- */
-proto.yartu.Board.prototype.getCompletedCardCount = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 9, 0));
 };
 
@@ -4243,8 +4267,44 @@ proto.yartu.Board.prototype.getCompletedCardCount = function() {
  * @param {number} value
  * @return {!proto.yartu.Board} returns this
  */
-proto.yartu.Board.prototype.setCompletedCardCount = function(value) {
+proto.yartu.Board.prototype.setCardCount = function(value) {
   return jspb.Message.setProto3IntField(this, 9, value);
+};
+
+
+/**
+ * optional int64 users_count = 10;
+ * @return {number}
+ */
+proto.yartu.Board.prototype.getUsersCount = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 10, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu.Board} returns this
+ */
+proto.yartu.Board.prototype.setUsersCount = function(value) {
+  return jspb.Message.setProto3IntField(this, 10, value);
+};
+
+
+/**
+ * optional int64 completed_card_count = 11;
+ * @return {number}
+ */
+proto.yartu.Board.prototype.getCompletedCardCount = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 11, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu.Board} returns this
+ */
+proto.yartu.Board.prototype.setCompletedCardCount = function(value) {
+  return jspb.Message.setProto3IntField(this, 11, value);
 };
 
 
@@ -4297,7 +4357,8 @@ proto.yartu.Project.toObject = function(includeInstance, msg) {
     boardList: jspb.Message.toObjectList(msg.getBoardList(),
     proto.yartu.Board.toObject, includeInstance),
     tagList: (f = jspb.Message.getRepeatedField(msg, 9)) == null ? undefined : f,
-    archivedAt: jspb.Message.getFieldWithDefault(msg, 10, "")
+    archivedAt: jspb.Message.getFieldWithDefault(msg, 10, ""),
+    isSharedWithMe: jspb.Message.getBooleanFieldWithDefault(msg, 11, false)
   };
 
   if (includeInstance) {
@@ -4375,6 +4436,10 @@ proto.yartu.Project.deserializeBinaryFromReader = function(msg, reader) {
     case 10:
       var value = /** @type {string} */ (reader.readString());
       msg.setArchivedAt(value);
+      break;
+    case 11:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setIsSharedWithMe(value);
       break;
     default:
       reader.skipField();
@@ -4474,6 +4539,13 @@ proto.yartu.Project.serializeBinaryToWriter = function(message, writer) {
   if (f != null) {
     writer.writeString(
       10,
+      f
+    );
+  }
+  f = /** @type {boolean} */ (jspb.Message.getField(message, 11));
+  if (f != null) {
+    writer.writeBool(
+      11,
       f
     );
   }
@@ -4733,6 +4805,42 @@ proto.yartu.Project.prototype.clearArchivedAt = function() {
  */
 proto.yartu.Project.prototype.hasArchivedAt = function() {
   return jspb.Message.getField(this, 10) != null;
+};
+
+
+/**
+ * optional bool is_shared_with_me = 11;
+ * @return {boolean}
+ */
+proto.yartu.Project.prototype.getIsSharedWithMe = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 11, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.yartu.Project} returns this
+ */
+proto.yartu.Project.prototype.setIsSharedWithMe = function(value) {
+  return jspb.Message.setField(this, 11, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.Project} returns this
+ */
+proto.yartu.Project.prototype.clearIsSharedWithMe = function() {
+  return jspb.Message.setField(this, 11, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.Project.prototype.hasIsSharedWithMe = function() {
+  return jspb.Message.getField(this, 11) != null;
 };
 
 

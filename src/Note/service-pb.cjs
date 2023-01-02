@@ -98,7 +98,7 @@ goog.exportSymbol('proto.yartu.UpsertTaskResponse', null, global);
  * @constructor
  */
 proto.yartu.NoteMetaQuery = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.yartu.NoteMetaQuery.repeatedFields_, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
 goog.inherits(proto.yartu.NoteMetaQuery, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -1432,13 +1432,6 @@ if (goog.DEBUG && !COMPILED) {
   proto.yartu.ConvertNoteResponse.displayName = 'proto.yartu.ConvertNoteResponse';
 }
 
-/**
- * List of repeated fields within this message type.
- * @private {!Array<number>}
- * @const
- */
-proto.yartu.NoteMetaQuery.repeatedFields_ = [8];
-
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -1476,8 +1469,7 @@ proto.yartu.NoteMetaQuery.toObject = function(includeInstance, msg) {
     isArchived: jspb.Message.getBooleanFieldWithDefault(msg, 4, false),
     isStarred: jspb.Message.getBooleanFieldWithDefault(msg, 5, false),
     isSharedWithMe: jspb.Message.getBooleanFieldWithDefault(msg, 6, false),
-    isTaskCompleted: jspb.Message.getBooleanFieldWithDefault(msg, 7, false),
-    notebookList: (f = jspb.Message.getRepeatedField(msg, 8)) == null ? undefined : f
+    isTaskCompleted: jspb.Message.getBooleanFieldWithDefault(msg, 7, false)
   };
 
   if (includeInstance) {
@@ -1541,12 +1533,6 @@ proto.yartu.NoteMetaQuery.deserializeBinaryFromReader = function(msg, reader) {
     case 7:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setIsTaskCompleted(value);
-      break;
-    case 8:
-      var values = /** @type {!Array<number>} */ (reader.isDelimited() ? reader.readPackedInt64() : [reader.readInt64()]);
-      for (var i = 0; i < values.length; i++) {
-        msg.addNotebook(values[i]);
-      }
       break;
     default:
       reader.skipField();
@@ -1623,13 +1609,6 @@ proto.yartu.NoteMetaQuery.serializeBinaryToWriter = function(message, writer) {
   if (f != null) {
     writer.writeBool(
       7,
-      f
-    );
-  }
-  f = message.getNotebookList();
-  if (f.length > 0) {
-    writer.writePackedInt64(
-      8,
       f
     );
   }
@@ -1885,43 +1864,6 @@ proto.yartu.NoteMetaQuery.prototype.clearIsTaskCompleted = function() {
  */
 proto.yartu.NoteMetaQuery.prototype.hasIsTaskCompleted = function() {
   return jspb.Message.getField(this, 7) != null;
-};
-
-
-/**
- * repeated int64 notebook = 8;
- * @return {!Array<number>}
- */
-proto.yartu.NoteMetaQuery.prototype.getNotebookList = function() {
-  return /** @type {!Array<number>} */ (jspb.Message.getRepeatedField(this, 8));
-};
-
-
-/**
- * @param {!Array<number>} value
- * @return {!proto.yartu.NoteMetaQuery} returns this
- */
-proto.yartu.NoteMetaQuery.prototype.setNotebookList = function(value) {
-  return jspb.Message.setField(this, 8, value || []);
-};
-
-
-/**
- * @param {number} value
- * @param {number=} opt_index
- * @return {!proto.yartu.NoteMetaQuery} returns this
- */
-proto.yartu.NoteMetaQuery.prototype.addNotebook = function(value, opt_index) {
-  return jspb.Message.addToRepeatedField(this, 8, value, opt_index);
-};
-
-
-/**
- * Clears the list making it empty but non-null.
- * @return {!proto.yartu.NoteMetaQuery} returns this
- */
-proto.yartu.NoteMetaQuery.prototype.clearNotebookList = function() {
-  return this.setNotebookList([]);
 };
 
 

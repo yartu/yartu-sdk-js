@@ -68,19 +68,31 @@ export default (config) =>
       });
     }
 
-    listProject(get_archived, get_all, query) {
+    listProject(getAll = false, getArchived = false, query = {}) {
+
       return new Promise((resolve, reject) => {
         const request = new ListProjectRequest();
-        request.addGetArchived(get_archived);
-        request.addGetAll(get_all);
-        request.addQuery(query);
+        const queryRequset = new Query();
+
+        request.setGetArchived(getArchived);
+        request.setGetAll(getAll);
+        request.setQuery(queryRequset);
+
         this.client.listProject(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
           } else {
             const code = response.getCode();
-
             if (code == 0) {
+              const projects = response
+                .getProjectList()
+                .map((data) => data.toObject());
+
+              resolve({
+                code,
+                projects,
+              });
+
             } else {
               reject({
                 code: code,
@@ -92,17 +104,22 @@ export default (config) =>
       });
     }
 
-    getProject(uuid) {
+    getProject(projectUuid) {
       return new Promise((resolve, reject) => {
         const request = new GetProjectRequest();
-        request.addUuid(uuid);
+
+        request.setUuid(projectUuid);
+
         this.client.getProject(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
           } else {
             const code = response.getCode();
-
             if (code == 0) {
+              resolve({
+                code,
+                project: response.getProject().toObject(),
+              })
             } else {
               reject({
                 code: code,
@@ -240,18 +257,24 @@ export default (config) =>
       });
     }
 
-    listThread(project_uuid, query) {
+    listThread(project_uuid, query =  {}) {
       return new Promise((resolve, reject) => {
         const request = new ListThreadRequest();
-        request.addProjectUuid(project_uuid);
-        request.addQuery(query);
+        const queryRequest = new Query();
+
+        request.setProjectUuid(project_uuid);
+        request.setQuery(queryRequest);
+
         this.client.listThread(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
           } else {
             const code = response.getCode();
-
             if (code == 0) {
+              resolve({
+                code,
+                threads: response.getThreadList.map((thread) => thread.toObject()),
+              });
             } else {
               reject({
                 code: code,
