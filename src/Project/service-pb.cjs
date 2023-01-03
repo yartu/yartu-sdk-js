@@ -4884,7 +4884,9 @@ proto.yartu.Thread.toObject = function(includeInstance, msg) {
     isPinned: jspb.Message.getBooleanFieldWithDefault(msg, 6, false),
     isPrivate: jspb.Message.getBooleanFieldWithDefault(msg, 7, false),
     unreadCount: jspb.Message.getFieldWithDefault(msg, 8, 0),
-    totalCount: jspb.Message.getFieldWithDefault(msg, 9, 0)
+    totalCount: jspb.Message.getFieldWithDefault(msg, 9, 0),
+    createdAt: jspb.Message.getFieldWithDefault(msg, 10, ""),
+    user: (f = msg.getUser()) && common_grpc_definitions_pb.User.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -4956,6 +4958,15 @@ proto.yartu.Thread.deserializeBinaryFromReader = function(msg, reader) {
     case 9:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setTotalCount(value);
+      break;
+    case 10:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setCreatedAt(value);
+      break;
+    case 11:
+      var value = new common_grpc_definitions_pb.User;
+      reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
+      msg.setUser(value);
       break;
     default:
       reader.skipField();
@@ -5047,6 +5058,21 @@ proto.yartu.Thread.serializeBinaryToWriter = function(message, writer) {
     writer.writeInt64(
       9,
       f
+    );
+  }
+  f = message.getCreatedAt();
+  if (f.length > 0) {
+    writer.writeString(
+      10,
+      f
+    );
+  }
+  f = message.getUser();
+  if (f != null) {
+    writer.writeMessage(
+      11,
+      f,
+      common_grpc_definitions_pb.User.serializeBinaryToWriter
     );
   }
 };
@@ -5229,6 +5255,61 @@ proto.yartu.Thread.prototype.getTotalCount = function() {
  */
 proto.yartu.Thread.prototype.setTotalCount = function(value) {
   return jspb.Message.setProto3IntField(this, 9, value);
+};
+
+
+/**
+ * optional string created_at = 10;
+ * @return {string}
+ */
+proto.yartu.Thread.prototype.getCreatedAt = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 10, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.Thread} returns this
+ */
+proto.yartu.Thread.prototype.setCreatedAt = function(value) {
+  return jspb.Message.setProto3StringField(this, 10, value);
+};
+
+
+/**
+ * optional User user = 11;
+ * @return {?proto.User}
+ */
+proto.yartu.Thread.prototype.getUser = function() {
+  return /** @type{?proto.User} */ (
+    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.User, 11));
+};
+
+
+/**
+ * @param {?proto.User|undefined} value
+ * @return {!proto.yartu.Thread} returns this
+*/
+proto.yartu.Thread.prototype.setUser = function(value) {
+  return jspb.Message.setWrapperField(this, 11, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.yartu.Thread} returns this
+ */
+proto.yartu.Thread.prototype.clearUser = function() {
+  return this.setUser(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.Thread.prototype.hasUser = function() {
+  return jspb.Message.getField(this, 11) != null;
 };
 
 
@@ -9587,7 +9668,7 @@ proto.yartu.GetThreadRequest.prototype.toObject = function(opt_includeInstance) 
  */
 proto.yartu.GetThreadRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0)
+    threadUuid: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -9625,8 +9706,8 @@ proto.yartu.GetThreadRequest.deserializeBinaryFromReader = function(msg, reader)
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {number} */ (reader.readInt64());
-      msg.setId(value);
+      var value = /** @type {string} */ (reader.readString());
+      msg.setThreadUuid(value);
       break;
     default:
       reader.skipField();
@@ -9657,9 +9738,9 @@ proto.yartu.GetThreadRequest.prototype.serializeBinary = function() {
  */
 proto.yartu.GetThreadRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getId();
-  if (f !== 0) {
-    writer.writeInt64(
+  f = message.getThreadUuid();
+  if (f.length > 0) {
+    writer.writeString(
       1,
       f
     );
@@ -9668,20 +9749,20 @@ proto.yartu.GetThreadRequest.serializeBinaryToWriter = function(message, writer)
 
 
 /**
- * optional int64 id = 1;
- * @return {number}
+ * optional string thread_uuid = 1;
+ * @return {string}
  */
-proto.yartu.GetThreadRequest.prototype.getId = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+proto.yartu.GetThreadRequest.prototype.getThreadUuid = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /**
- * @param {number} value
+ * @param {string} value
  * @return {!proto.yartu.GetThreadRequest} returns this
  */
-proto.yartu.GetThreadRequest.prototype.setId = function(value) {
-  return jspb.Message.setProto3IntField(this, 1, value);
+proto.yartu.GetThreadRequest.prototype.setThreadUuid = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 

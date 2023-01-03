@@ -270,10 +270,11 @@ export default (config) =>
             handleError(error, reject);
           } else {
             const code = response.getCode();
+            console.log('CODE', response.getThreadList());
             if (code == 0) {
               resolve({
                 code,
-                threads: response.getThreadList.map((thread) => thread.toObject()),
+                threads: response.getThreadList().map((thread) => thread.toObject()),
               });
             } else {
               reject({
@@ -286,10 +287,12 @@ export default (config) =>
       });
     }
 
-    getThread(id) {
+    getThread(threadId) {
       return new Promise((resolve, reject) => {
+
         const request = new GetThreadRequest();
-        request.addId(id);
+        request.setThreadUuid(threadId);
+
         this.client.getThread(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
@@ -297,6 +300,10 @@ export default (config) =>
             const code = response.getCode();
 
             if (code == 0) {
+              resolve({
+                code,
+                thread: response.getThread().toObject(),
+              });
             } else {
               reject({
                 code: code,
@@ -366,12 +373,16 @@ export default (config) =>
       });
     }
 
-    listThreadMessage(thread_uuid, from_id, query) {
+    listThreadMessage(thread_uuid, from_id = 0, query) {
       return new Promise((resolve, reject) => {
+
         const request = new ListThreadMessageRequest();
-        request.addThreadUuid(thread_uuid);
-        request.addFromId(from_id);
-        request.addQuery(query);
+        const queryRequest = new Query();
+
+        request.setThreadUuid(thread_uuid);
+        request.setFromId(from_id);
+        request.setQuery(queryRequest);
+
         this.client.listThreadMessage(
           request,
           this.metadata,
@@ -382,6 +393,12 @@ export default (config) =>
               const code = response.getCode();
 
               if (code == 0) {
+                resolve({
+                  code,
+                  messages: response.getThreadMessageList().map((m) => m.toObject()),
+                  unreadCount: response.getUnreadCount(),
+                  totalCount: response.getTotalCount(),
+                });
               } else {
                 reject({
                   code: code,
@@ -501,15 +518,20 @@ export default (config) =>
 
     getBoard(uuid) {
       return new Promise((resolve, reject) => {
+
         const request = new GetBoardRequest();
-        request.addUuid(uuid);
+        request.setUuid(uuid);
+
         this.client.getBoard(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
           } else {
             const code = response.getCode();
-
             if (code == 0) {
+              resolve({
+                code,
+                board: response.getBoard().toObject(),
+              });
             } else {
               reject({
                 code: code,
