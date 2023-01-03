@@ -270,7 +270,6 @@ export default (config) =>
             handleError(error, reject);
           } else {
             const code = response.getCode();
-            console.log('CODE', response.getThreadList());
             if (code == 0) {
               resolve({
                 code,
