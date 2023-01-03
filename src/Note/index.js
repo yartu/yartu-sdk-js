@@ -2,6 +2,7 @@ import {
   NoteMetaQuery,
   ListNotebookRequest,
   UpsertNotebookRequest,
+  DeleteNotebookRequest,
   ListNoteRequest,
   GetNoteRequest,
   DeleteNoteRequest,
@@ -92,6 +93,37 @@ export default (config) =>
                 resolve({
                   code,
                   message: response.getMessage(),
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    }
+
+    deleteNotebook = (notebookId) => {
+      return new Promise((resolve, reject) => {
+        const request = new DeleteNotebookRequest();
+
+        request.setId(notebookId);
+
+        this.client.deleteNotebook(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code,
+                  message: response.getMessage()
                 });
               } else {
                 reject({

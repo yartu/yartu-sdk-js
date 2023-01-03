@@ -18,7 +18,8 @@ import {
   DeleteLabelRequest,
   UpsertContactLabelRequest,
   UpsertContactStarRequest,
-  ExportContactRequest
+  ExportContactRequest,
+  ListDuplicateContactRequest,
 } from './service-pb.cjs';
 
 import { YContactClient } from './service-grpc-web-pb.cjs';
@@ -524,4 +525,52 @@ export default (config) =>
         });
       });
     };
+
+    listDuplicateContact = () => {
+      return new Promise((resolve, reject) => {
+        const request = new ListDuplicateContactRequest();
+        // request.setQuery([]);
+
+        // const query = new Query();
+        // query.setQuery(queryRequest.query);
+        // query.setPage(queryRequest.page);
+        // query.setPerPage(queryRequest.perPage);
+        // query.setSearchFieldsList(queryRequest.searchFields);
+
+        // const meta = new ContactMetaQuery();
+        // meta.setLabel(queryRequest.label);
+        // meta.setStarred(queryRequest.starred);
+        // meta.setFrequently(queryRequest.frequently);
+        //
+        // request.setQuery(query);
+        // request.setMeta(meta);
+        //
+        // request.setAddressBookId(addressBookId);
+
+        this.client.listDuplicateContact(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              const dataList = response
+                .getDataList()
+                .map((data) => data.toObject());
+              console.log('dataList:', dataList)
+              resolve({
+                data: dataList,
+                pagination: response.getPagination().toObject()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
   };
