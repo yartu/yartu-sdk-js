@@ -50,10 +50,11 @@ export default (config) =>
           request.setUsername(username);
         }
         this.client.getInfo(request, this.metadata, (error, response) => {
-          const code = response.getCode();
           if (error) {
             handleError(error, reject);
           } else {
+            const code = response.getCode();
+
             if (code == 0) {
               resolve({
                 data: response.toObject()
@@ -74,10 +75,11 @@ export default (config) =>
         const request = new GetWeatherRequest();
 
         this.client.getWeather(request, this.metadata, (error, response) => {
-          const code = response.getCode();
           if (error) {
             handleError(error, reject);
           } else {
+            const code = response.getCode();
+
             if (code == 0) {
               resolve(response.toObject());
             } else {

@@ -3033,7 +3033,7 @@ proto.yartu.GetWeatherResponse.toObject = function(includeInstance, msg) {
     icon: jspb.Message.getFieldWithDefault(msg, 3, ""),
     temperature: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0),
     humidity: jspb.Message.getFieldWithDefault(msg, 5, 0),
-    windSpeed: jspb.Message.getFieldWithDefault(msg, 6, 0),
+    windSpeed: jspb.Message.getFloatingPointFieldWithDefault(msg, 6, 0.0),
     pressure: jspb.Message.getFieldWithDefault(msg, 7, 0),
     dateAt: jspb.Message.getFieldWithDefault(msg, 8, ""),
     message: jspb.Message.getFieldWithDefault(msg, 9, "")
@@ -3094,7 +3094,7 @@ proto.yartu.GetWeatherResponse.deserializeBinaryFromReader = function(msg, reade
       msg.setHumidity(value);
       break;
     case 6:
-      var value = /** @type {number} */ (reader.readInt64());
+      var value = /** @type {number} */ (reader.readDouble());
       msg.setWindSpeed(value);
       break;
     case 7:
@@ -3174,8 +3174,8 @@ proto.yartu.GetWeatherResponse.serializeBinaryToWriter = function(message, write
     );
   }
   f = message.getWindSpeed();
-  if (f !== 0) {
-    writer.writeInt64(
+  if (f !== 0.0) {
+    writer.writeDouble(
       6,
       f
     );
@@ -3295,11 +3295,11 @@ proto.yartu.GetWeatherResponse.prototype.setHumidity = function(value) {
 
 
 /**
- * optional int64 wind_speed = 6;
+ * optional double wind_speed = 6;
  * @return {number}
  */
 proto.yartu.GetWeatherResponse.prototype.getWindSpeed = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 6, 0.0));
 };
 
 
@@ -3308,7 +3308,7 @@ proto.yartu.GetWeatherResponse.prototype.getWindSpeed = function() {
  * @return {!proto.yartu.GetWeatherResponse} returns this
  */
 proto.yartu.GetWeatherResponse.prototype.setWindSpeed = function(value) {
-  return jspb.Message.setProto3IntField(this, 6, value);
+  return jspb.Message.setProto3FloatField(this, 6, value);
 };
 
 
