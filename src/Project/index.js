@@ -25,7 +25,8 @@ import {
   UpsertCardRequest,
   AddCommentToCardRequest,
   AddLabelToCardRequest,
-  MoveCardRequest
+  MoveCardRequest,
+  GetCardRequest,
 } from './service-pb.cjs';
 
 import { Query } from '../utils/definitions_pb.cjs';
@@ -799,4 +800,31 @@ export default (config) =>
         });
       });
     }
+
+    getCard(cardId) {
+      return new Promise((resolve, reject) => {
+        const request = new GetCardRequest();
+        request.setId(cardId);
+
+        this.client.getCard(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code,
+                card: response.getCard().toObject(),
+              })
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
   };
