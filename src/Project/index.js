@@ -132,22 +132,25 @@ export default (config) =>
       });
     }
 
-    upsertProject(uuid, name, color, icon, tag, member) {
+    upsertProject(projectData = {}) {
       return new Promise((resolve, reject) => {
         const request = new UpsertProjectRequest();
-        request.addUuid(uuid);
-        request.addName(name);
-        request.addColor(color);
-        request.addIcon(icon);
-        request.addTag(tag);
-        request.addMember(member);
+        request.setUuid(projectData.uuid);
+        request.setName(projectData.name);
+        request.setColor(projectData.color);
+        request.setIcon(projectData.icon);
+        
         this.client.upsertProject(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
           } else {
             const code = response.getCode();
-
             if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage(),
+                project: response.getProject().toObject(),
+              })
             } else {
               reject({
                 code: code,
