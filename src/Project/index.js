@@ -27,6 +27,7 @@ import {
   AddLabelToCardRequest,
   MoveCardRequest,
   GetCardRequest,
+  ListBoardTemplateRequest,
 } from './service-pb.cjs';
 
 import { Query } from '../utils/definitions_pb.cjs';
@@ -519,6 +520,32 @@ export default (config) =>
       });
     }
 
+    listBoardTemplate() {
+      return new Promise((resolve, reject) => {
+        const request = new ListBoardTemplateRequest();
+
+        this.client.listBoardTemplate(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code,
+                templates: response.getTemplatesList().map((t) => t.toObject()),
+                message: response.getMessage(),
+              })
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
     getBoard(uuid) {
       return new Promise((resolve, reject) => {
 
@@ -546,31 +573,29 @@ export default (config) =>
       });
     }
 
-    upsertBoard(
-      uuid,
-      project_uuid,
-      name,
-      color,
-      template_uuid,
-      member,
-      permission
-    ) {
+    upsertBoard(boardData = {}) {
       return new Promise((resolve, reject) => {
+
         const request = new UpsertBoardRequest();
-        request.addUuid(uuid);
-        request.addProjectUuid(project_uuid);
-        request.addName(name);
-        request.addColor(color);
-        request.addTemplateUuid(template_uuid);
-        request.addMember(member);
-        request.addPermission(permission);
+
+        request.setUuid(boardData.uuid);
+        request.setProjectUuid(boardData.projectUuid);
+        request.setName(boardData.name);
+        request.setColor(boardData.color);
+        request.setTemplateUuid(boardData.template.uuid);
+        // request.setName(member);
+        // request.addPermission(permission);
         this.client.upsertBoard(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
           } else {
             const code = response.getCode();
-
             if (code == 0) {
+              resolve({
+                code,
+                board: response.getBoard().toObject(),
+                message: response.getMessage()
+              })
             } else {
               reject({
                 code: code,
