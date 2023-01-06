@@ -163,6 +163,14 @@ export default (config) =>
           queryRequest.setSortBy(query.sortBy);
         }
 
+        if (query.perPage) {
+          queryRequest.setPerPage(query.perPage);
+        }
+
+        if (query.page) {
+          queryRequest.setPage(query.page);
+        }
+
         if (query.notebooks) {
           metaRequest.setNotebookList(query.notebooks);
         }

@@ -557,7 +557,6 @@ export default (config) =>
               const dataList = response
                 .getDataList()
                 .map((data) => data.toObject());
-              console.log('dataList:', dataList)
               resolve({
                 data: dataList,
                 pagination: response.getPagination().toObject()
