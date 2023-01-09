@@ -28,6 +28,7 @@ import {
   MoveCardRequest,
   GetCardRequest,
   ListBoardTemplateRequest,
+  ListCardActivityRequest,
 } from './service-pb.cjs';
 
 import { Query } from '../utils/definitions_pb.cjs';
@@ -711,7 +712,6 @@ export default (config) =>
 
         const request = new UpsertCardRequest();
         request.setUuid(cardData.uuid);
-        request.setColumnUuid(cardData.columnUuid);
         request.setIndex(cardData.Index);
         request.setTitle(cardData.title);
         request.setDescription(cardData.description);
@@ -721,6 +721,10 @@ export default (config) =>
         request.setIsArchived(cardData.isArchived);
         request.setIsCanceled(cardData.isCanceled);
         request.setColor(cardData.color);
+
+        if (cardData.column) {
+          request.setColumnUuid(cardData.column.uuid);
+        }
 
         this.client.upsertCard(request, this.metadata, (error, response) => {
           if (error) {
@@ -744,12 +748,16 @@ export default (config) =>
       });
     }
 
-    addCommentToCard(uuid, comment, mention) {
+    addCommentToCard(commentData = {}) {
       return new Promise((resolve, reject) => {
         const request = new AddCommentToCardRequest();
-        request.addUuid(uuid);
-        request.addComment(comment);
-        request.addMention(mention);
+
+        console.log('RQ', commentData);
+
+        request.setUuid(commentData.uuid);
+        request.setComment(commentData.comment);
+        request.setMentionList(commentData.mention);
+
         this.client.addCommentToCard(
           request,
           this.metadata,
@@ -758,8 +766,10 @@ export default (config) =>
               handleError(error, reject);
             } else {
               const code = response.getCode();
-
               if (code == 0) {
+                resolve({
+                  code,
+                })
               } else {
                 reject({
                   code: code,
@@ -837,6 +847,34 @@ export default (config) =>
               resolve({
                 code,
                 card: response.getCard().toObject(),
+              })
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    listCardActivity(cardId) {
+      return new Promise((resolve, reject) => {
+        const request = new ListCardActivityRequest();
+
+        request.setId(cardId);
+
+        this.client.listCardActivity(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code,
+                activitys: response.getActivityList().map((a) => a.toObject()),
+                message: response.getMessage()
               })
             } else {
               reject({

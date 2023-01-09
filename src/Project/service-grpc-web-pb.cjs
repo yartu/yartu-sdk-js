@@ -1600,6 +1600,67 @@ proto.yartu.YProjectPromiseClient.prototype.getCard =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.ListCardActivityRequest,
+ *   !proto.yartu.ListCardActivityResponse>}
+ */
+const methodDescriptor_YProject_listCardActivity = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/listCardActivity',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.ListCardActivityRequest,
+  proto.yartu.ListCardActivityResponse,
+  /**
+   * @param {!proto.yartu.ListCardActivityRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.ListCardActivityResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.ListCardActivityRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ListCardActivityResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ListCardActivityResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.listCardActivity =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/listCardActivity',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_listCardActivity,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.ListCardActivityRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.ListCardActivityResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.listCardActivity =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/listCardActivity',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_listCardActivity);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.UpsertCardRequest,
  *   !proto.yartu.UpsertCardResponse>}
  */
