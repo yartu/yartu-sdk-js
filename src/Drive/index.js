@@ -195,7 +195,7 @@ export default (config) =>
       });
     };
 
-    upsertDirectory = (repoId, path, name, operation) => {
+    upsertDirectory = (repoId, path, name, operation, dstRepoId, dstDir) => {
       return new Promise((resolve, reject) => {
         const request = new UpsertDirectoryRequest();
 
@@ -208,6 +208,10 @@ export default (config) =>
         request.setPath(path);
         request.setNewName(name);
         request.setOperation(operation);
+        if (operation == 'copy' || operation == 'move') {
+          request.setDstRepoId(dstRepoId);
+          request.setDstDir(dstDir);
+        }
 
         this.client.upsertDirectory(
           request,
@@ -218,15 +222,15 @@ export default (config) =>
             } else {
               const code = response.getCode();
               if (code == 0) {
-                let data = {};
+                let dirent = {};
                 if (operation !== 'delete') {
-                  data = response.getData().toObject();
-                  data.path = `${data.parentDir}${data.name}`;
+                  dirent = response.getData().toObject();
+                  dirent.path = `${dirent.parentDir}${dirent.name}`;
                 }
 
                 resolve({
                   code,
-                  data
+                  data: dirent
                 });
               } else {
                 reject({
@@ -266,7 +270,7 @@ export default (config) =>
         request.setOperation(operation);
         request.setIsDraft(isDraft);
 
-        if (operation == 'copy') {
+        if (operation == 'copy' || operation == 'move') {
           request.setDstRepoId(dstRepoId);
           request.setDstDir(dstDir);
         } else if (operation == 'lock') {
@@ -279,14 +283,15 @@ export default (config) =>
           } else {
             const code = response.getCode();
             if (code == 0) {
-              let data = {};
+              let dirent = {};
               if (operation !== 'delete') {
-                data = response.getData().toObject();
+                dirent = response.getData().toObject();
+                dirent.path = `${dirent.parentDir}${dirent.name}`;
               }
 
               resolve({
                 code,
-                data
+                data: dirent
               });
             } else {
               reject({
