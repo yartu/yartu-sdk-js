@@ -706,39 +706,33 @@ export default (config) =>
       });
     }
 
-    upsertCard(
-      uuid,
-      column_uuid,
-      index,
-      title,
-      description,
-      start_date,
-      due_date,
-      is_completed,
-      is_archived,
-      is_canceled,
-      color
-    ) {
+    upsertCard(cardData = {}) {
       return new Promise((resolve, reject) => {
+
         const request = new UpsertCardRequest();
-        request.addUuid(uuid);
-        request.addColumnUuid(column_uuid);
-        request.addIndex(index);
-        request.addTitle(title);
-        request.addDescription(description);
-        request.addStartDate(start_date);
-        request.addDueDate(due_date);
-        request.addIsCompleted(is_completed);
-        request.addIsArchived(is_archived);
-        request.addIsCanceled(is_canceled);
-        request.addColor(color);
+        request.setUuid(cardData.uuid);
+        request.setColumnUuid(cardData.columnUuid);
+        request.setIndex(cardData.Index);
+        request.setTitle(cardData.title);
+        request.setDescription(cardData.description);
+        request.setStartDate(cardData.startDate);
+        request.setDueDate(cardData.dueDate);
+        request.setIsCompleted(cardData.isCompleted);
+        request.setIsArchived(cardData.isArchived);
+        request.setIsCanceled(cardData.isCanceled);
+        request.setColor(cardData.color);
+
         this.client.upsertCard(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
           } else {
             const code = response.getCode();
-
             if (code == 0) {
+              resolve({
+                code,
+                card: response.getCard().toObject(),
+                message: response.getMessage(),
+              })
             } else {
               reject({
                 code: code,
