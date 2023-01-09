@@ -7902,9 +7902,7 @@ proto.yartu.UpsertDirectoryRequest.toObject = function(includeInstance, msg) {
     path: jspb.Message.getFieldWithDefault(msg, 2, ""),
     operation: jspb.Message.getFieldWithDefault(msg, 3, ""),
     newName: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    dstRepoId: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    dstDir: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    createParents: jspb.Message.getBooleanFieldWithDefault(msg, 7, false)
+    createParents: jspb.Message.getBooleanFieldWithDefault(msg, 5, false)
   };
 
   if (includeInstance) {
@@ -7958,14 +7956,6 @@ proto.yartu.UpsertDirectoryRequest.deserializeBinaryFromReader = function(msg, r
       msg.setNewName(value);
       break;
     case 5:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setDstRepoId(value);
-      break;
-    case 6:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setDstDir(value);
-      break;
-    case 7:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setCreateParents(value);
       break;
@@ -8026,24 +8016,10 @@ proto.yartu.UpsertDirectoryRequest.serializeBinaryToWriter = function(message, w
       f
     );
   }
-  f = /** @type {string} */ (jspb.Message.getField(message, 5));
-  if (f != null) {
-    writer.writeString(
-      5,
-      f
-    );
-  }
-  f = /** @type {string} */ (jspb.Message.getField(message, 6));
-  if (f != null) {
-    writer.writeString(
-      6,
-      f
-    );
-  }
   f = message.getCreateParents();
   if (f) {
     writer.writeBool(
-      7,
+      5,
       f
     );
   }
@@ -8141,83 +8117,11 @@ proto.yartu.UpsertDirectoryRequest.prototype.hasNewName = function() {
 
 
 /**
- * optional string dst_repo_id = 5;
- * @return {string}
- */
-proto.yartu.UpsertDirectoryRequest.prototype.getDstRepoId = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.yartu.UpsertDirectoryRequest} returns this
- */
-proto.yartu.UpsertDirectoryRequest.prototype.setDstRepoId = function(value) {
-  return jspb.Message.setField(this, 5, value);
-};
-
-
-/**
- * Clears the field making it undefined.
- * @return {!proto.yartu.UpsertDirectoryRequest} returns this
- */
-proto.yartu.UpsertDirectoryRequest.prototype.clearDstRepoId = function() {
-  return jspb.Message.setField(this, 5, undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {boolean}
- */
-proto.yartu.UpsertDirectoryRequest.prototype.hasDstRepoId = function() {
-  return jspb.Message.getField(this, 5) != null;
-};
-
-
-/**
- * optional string dst_dir = 6;
- * @return {string}
- */
-proto.yartu.UpsertDirectoryRequest.prototype.getDstDir = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.yartu.UpsertDirectoryRequest} returns this
- */
-proto.yartu.UpsertDirectoryRequest.prototype.setDstDir = function(value) {
-  return jspb.Message.setField(this, 6, value);
-};
-
-
-/**
- * Clears the field making it undefined.
- * @return {!proto.yartu.UpsertDirectoryRequest} returns this
- */
-proto.yartu.UpsertDirectoryRequest.prototype.clearDstDir = function() {
-  return jspb.Message.setField(this, 6, undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {boolean}
- */
-proto.yartu.UpsertDirectoryRequest.prototype.hasDstDir = function() {
-  return jspb.Message.getField(this, 6) != null;
-};
-
-
-/**
- * optional bool create_parents = 7;
+ * optional bool create_parents = 5;
  * @return {boolean}
  */
 proto.yartu.UpsertDirectoryRequest.prototype.getCreateParents = function() {
-  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 7, false));
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 5, false));
 };
 
 
@@ -8226,7 +8130,7 @@ proto.yartu.UpsertDirectoryRequest.prototype.getCreateParents = function() {
  * @return {!proto.yartu.UpsertDirectoryRequest} returns this
  */
 proto.yartu.UpsertDirectoryRequest.prototype.setCreateParents = function(value) {
-  return jspb.Message.setProto3BooleanField(this, 7, value);
+  return jspb.Message.setProto3BooleanField(this, 5, value);
 };
 
 

@@ -709,18 +709,21 @@ export default (config) =>
 
     upsertCard(cardData = {}) {
       return new Promise((resolve, reject) => {
-
         const request = new UpsertCardRequest();
         request.setUuid(cardData.uuid);
         request.setIndex(cardData.Index);
         request.setTitle(cardData.title);
         request.setDescription(cardData.description);
         request.setStartDate(cardData.startDate);
-        request.setDueDate(cardData.dueDate);
         request.setIsCompleted(cardData.isCompleted);
         request.setIsArchived(cardData.isArchived);
         request.setIsCanceled(cardData.isCanceled);
         request.setColor(cardData.color);
+
+        if (cardData.dueDate) {
+          const dueDate = cardData.dueDate.utc().format('YYYY-MM-DD HH:mm');
+          request.setDueDate(dueDate);
+        }
 
         if (cardData.column) {
           request.setColumnUuid(cardData.column.uuid);
@@ -785,8 +788,10 @@ export default (config) =>
     addLabelToCard(uuid, label_id) {
       return new Promise((resolve, reject) => {
         const request = new AddLabelToCardRequest();
-        request.addUuid(uuid);
-        request.addLabelId(label_id);
+
+        request.setUuid(uuid);
+        request.setLabelId(label_id);
+
         this.client.addLabelToCard(
           request,
           this.metadata,
@@ -795,8 +800,10 @@ export default (config) =>
               handleError(error, reject);
             } else {
               const code = response.getCode();
-
               if (code == 0) {
+                resolve({
+                  code,
+                })
               } else {
                 reject({
                   code: code,

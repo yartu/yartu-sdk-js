@@ -1452,7 +1452,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.yartu.AddLabelToCardRequest = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.yartu.AddLabelToCardRequest.repeatedFields_, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
 goog.inherits(proto.yartu.AddLabelToCardRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -18085,13 +18085,6 @@ proto.yartu.AddCommentToCardResponse.prototype.hasMessage = function() {
 
 
 
-/**
- * List of repeated fields within this message type.
- * @private {!Array<number>}
- * @const
- */
-proto.yartu.AddLabelToCardRequest.repeatedFields_ = [2];
-
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -18124,7 +18117,7 @@ proto.yartu.AddLabelToCardRequest.prototype.toObject = function(opt_includeInsta
 proto.yartu.AddLabelToCardRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     uuid: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    labelIdList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f
+    labelId: jspb.Message.getFieldWithDefault(msg, 2, 0)
   };
 
   if (includeInstance) {
@@ -18166,10 +18159,8 @@ proto.yartu.AddLabelToCardRequest.deserializeBinaryFromReader = function(msg, re
       msg.setUuid(value);
       break;
     case 2:
-      var values = /** @type {!Array<number>} */ (reader.isDelimited() ? reader.readPackedInt64() : [reader.readInt64()]);
-      for (var i = 0; i < values.length; i++) {
-        msg.addLabelId(values[i]);
-      }
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setLabelId(value);
       break;
     default:
       reader.skipField();
@@ -18207,9 +18198,9 @@ proto.yartu.AddLabelToCardRequest.serializeBinaryToWriter = function(message, wr
       f
     );
   }
-  f = message.getLabelIdList();
-  if (f.length > 0) {
-    writer.writePackedInt64(
+  f = message.getLabelId();
+  if (f !== 0) {
+    writer.writeInt64(
       2,
       f
     );
@@ -18236,39 +18227,20 @@ proto.yartu.AddLabelToCardRequest.prototype.setUuid = function(value) {
 
 
 /**
- * repeated int64 label_id = 2;
- * @return {!Array<number>}
+ * optional int64 label_id = 2;
+ * @return {number}
  */
-proto.yartu.AddLabelToCardRequest.prototype.getLabelIdList = function() {
-  return /** @type {!Array<number>} */ (jspb.Message.getRepeatedField(this, 2));
-};
-
-
-/**
- * @param {!Array<number>} value
- * @return {!proto.yartu.AddLabelToCardRequest} returns this
- */
-proto.yartu.AddLabelToCardRequest.prototype.setLabelIdList = function(value) {
-  return jspb.Message.setField(this, 2, value || []);
+proto.yartu.AddLabelToCardRequest.prototype.getLabelId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
 };
 
 
 /**
  * @param {number} value
- * @param {number=} opt_index
  * @return {!proto.yartu.AddLabelToCardRequest} returns this
  */
-proto.yartu.AddLabelToCardRequest.prototype.addLabelId = function(value, opt_index) {
-  return jspb.Message.addToRepeatedField(this, 2, value, opt_index);
-};
-
-
-/**
- * Clears the list making it empty but non-null.
- * @return {!proto.yartu.AddLabelToCardRequest} returns this
- */
-proto.yartu.AddLabelToCardRequest.prototype.clearLabelIdList = function() {
-  return this.setLabelIdList([]);
+proto.yartu.AddLabelToCardRequest.prototype.setLabelId = function(value) {
+  return jspb.Message.setProto3IntField(this, 2, value);
 };
 
 
