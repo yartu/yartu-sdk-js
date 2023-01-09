@@ -12,6 +12,7 @@ import {
   CopyNoteRequest,
   ListNoteLabelRequest,
   UpsertNoteLabelRequest,
+  UpsertNLabelRequest,
   PinNoteRequest,
   ConvertNoteRequest,
 } from './service-pb.cjs';
@@ -449,16 +450,15 @@ export default (config) =>
       });
     }
 
-    upsertNoteLabel = (labelData) => {
+    upsertNLabel = (labelData) => {
       return new Promise((resolve, reject) => {
-        const request = new UpsertNoteLabelRequest();
-        console.log('listNoteLabel SDK');
+        const request = new UpsertNLabelRequest();
 
         request.setName(labelData.name);
         request.setColor(labelData.color);
         request.setNoteId(labelData.noteId);
 
-        this.client.upsertNoteLabel(
+        this.client.upsertNLabel(
           request,
           this.metadata,
           (error, response) => {
@@ -481,6 +481,41 @@ export default (config) =>
         );
       });
     }
+
+    upsertNoteLabel = (noteId, labels) => {
+      return new Promise((resolve, reject) => {
+        const request = new UpsertNoteLabelRequest();
+        request.setNoteId(noteId);
+        request.setLabelsList(labels);
+
+        console.log('noteId:', noteId);
+        console.log('labels:', labels);
+
+        this.client.upsertNoteLabel(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+
+              if (code == 0) {
+                resolve({
+                  code: 0,
+                  message: 'successfully'
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    };
 
     pinNote = (pinData) => {
       return new Promise((resolve, reject) => {
