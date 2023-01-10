@@ -29,9 +29,10 @@ import {
   GetCardRequest,
   ListBoardTemplateRequest,
   ListCardActivityRequest,
+  UpsertCardUsersRequest,
 } from './service-pb.cjs';
 
-import { Query } from '../utils/definitions_pb.cjs';
+import { Query, UserModifyMeta } from '../utils/definitions_pb.cjs';
 import { YProjectClient } from './service-grpc-web-pb.cjs';
 import { handleError } from '../utils/helper';
 
@@ -764,6 +765,49 @@ export default (config) =>
             }
           }
         });
+      });
+    }
+
+    upsertCardUsers(cardUuid, users) {
+      return new Promise((resolve, reject) => {
+        const request = new UpsertCardUsersRequest();
+
+        request.setCardUuid(cardUuid);
+
+        console.log('SDK', cardUuid);
+        console.log('SDK', users);
+
+        for (const user of users) {
+          console.log('SDK USER', user);
+          const modifyRequest = new UserModifyMeta();
+          modifyRequest.setId(user.id);
+          modifyRequest.setOperation(user.operation);
+          request.addUser(modifyRequest);
+        }
+
+        this.client.upsertCardUsers(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code,
+                  users: response.getUsersList().map((u) => u.toObject()),
+                  results: response.getResultList().map((r) => r.toObject()),
+                })
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
       });
     }
 
