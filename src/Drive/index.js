@@ -199,7 +199,9 @@ export default (config) =>
       return new Promise((resolve, reject) => {
         const request = new UpsertDirectoryRequest();
 
-        if (!['create', 'rename', 'move', 'delete'].includes(operation)) {
+        if (
+          !['create', 'rename', 'move', 'copy', 'delete'].includes(operation)
+        ) {
           reject({
             code: 100
           });
