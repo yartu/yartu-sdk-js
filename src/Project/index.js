@@ -710,21 +710,37 @@ export default (config) =>
     upsertCard(cardData = {}) {
       return new Promise((resolve, reject) => {
         const request = new UpsertCardRequest();
-        request.setUuid(cardData.uuid);
-        request.setIndex(cardData.Index);
-        request.setTitle(cardData.title);
-        request.setDescription(cardData.description);
-        request.setStartDate(cardData.startDate);
-        request.setIsCompleted(cardData.isCompleted);
-        request.setIsArchived(cardData.isArchived);
-        request.setIsCanceled(cardData.isCanceled);
-        request.setColor(cardData.color);
-
+        if (cardData.uuid) {
+          request.setUuid(cardData.uuid);
+        }
+        if (cardData.index) {
+          request.setIndex(cardData.index);
+        }
+        if (cardData.title) {
+          request.setTitle(cardData.title);
+        }
+        if (cardData.description) {
+          request.setDescription(cardData.description);
+        }
+        if (cardData.startDate) {
+          request.setStartDate(cardData.startDate);
+        }
+        if (cardData.isCompleted) {
+          request.setIsCompleted(cardData.isCompleted);
+        }
+        if (cardData.isArchived) {
+          request.setIsArchived(cardData.isArchived);
+        }
+        if (cardData.isCanceled) {
+          request.setIsCanceled(cardData.isCanceled);
+        }
+        if (cardData.color) {
+          request.setColor(cardData.color);
+        }
         if (cardData.dueDate) {
           const dueDate = cardData.dueDate.utc().format('YYYY-MM-DD HH:mm');
           request.setDueDate(dueDate);
         }
-
         if (cardData.column) {
           request.setColumnUuid(cardData.column.uuid);
         }
