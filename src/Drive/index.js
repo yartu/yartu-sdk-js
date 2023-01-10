@@ -3,6 +3,7 @@ import {
   GetRecentRequest,
   ListRepoRequest,
   UpsertRepoRequest,
+  DeleteRepoRequest,
   ListDirentRequest,
   StarDirentRequest,
   UpsertDirectoryRequest,
@@ -127,6 +128,31 @@ export default (config) =>
       });
     };
 
+    deleteRepo = (repoId) => {
+      return new Promise((resolve, reject) => {
+        const request = new DeleteRepoRequest();
+        request.setId(repoId);
+
+        this.client.deleteRepo(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code: 0
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
     listDirent = (repoId, path, query, recursive = false) => {
       return new Promise((resolve, reject) => {
         const request = new ListDirentRequest();
@@ -141,7 +167,6 @@ export default (config) =>
             const code = response.getCode();
             const fileList = [];
             const dirList = [];
-            console.log(response);
 
             if (code == 0) {
               const dataList = response.getDataList().map((data) => {
