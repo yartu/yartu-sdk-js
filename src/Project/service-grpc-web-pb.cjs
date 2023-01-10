@@ -1722,6 +1722,67 @@ proto.yartu.YProjectPromiseClient.prototype.upsertCard =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.UpsertCardUsersRequest,
+ *   !proto.yartu.UpsertCardUsersResponse>}
+ */
+const methodDescriptor_YProject_upsertCardUsers = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/upsertCardUsers',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.UpsertCardUsersRequest,
+  proto.yartu.UpsertCardUsersResponse,
+  /**
+   * @param {!proto.yartu.UpsertCardUsersRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.UpsertCardUsersResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.UpsertCardUsersRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.UpsertCardUsersResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.UpsertCardUsersResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.upsertCardUsers =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/upsertCardUsers',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_upsertCardUsers,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.UpsertCardUsersRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.UpsertCardUsersResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.upsertCardUsers =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/upsertCardUsers',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_upsertCardUsers);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.AddCommentToCardRequest,
  *   !proto.yartu.AddCommentToCardResponse>}
  */
