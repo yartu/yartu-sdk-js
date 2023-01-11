@@ -11,8 +11,9 @@ import {
   MoveNoteRequest,
   CopyNoteRequest,
   ListNoteLabelRequest,
+  UpsertLabelToNoteRequest,
   UpsertNoteLabelRequest,
-  UpsertNLabelRequest,
+  DeleteNoteLabelRequest,
   PinNoteRequest,
   ConvertNoteRequest,
 } from './service-pb.cjs';
@@ -154,6 +155,10 @@ export default (config) =>
 
         if (query.isArchived) {
           metaRequest.setIsArchived(true);
+        }
+
+        if (query.isPinned) {
+          metaRequest.setIsPinned(true);
         }
 
         if (query.label) {
@@ -450,15 +455,15 @@ export default (config) =>
       });
     }
 
-    upsertNLabel = (labelData) => {
+    upsertNoteLabel = (labelData) => {
       return new Promise((resolve, reject) => {
-        const request = new UpsertNLabelRequest();
+        const request = new UpsertNoteLabelRequest();
 
         request.setName(labelData.name);
         request.setColor(labelData.color);
-        request.setNoteId(labelData.noteId);
+        request.setId(labelData.id);
 
-        this.client.upsertNLabel(
+        this.client.upsertNoteLabel(
           request,
           this.metadata,
           (error, response) => {
@@ -482,16 +487,13 @@ export default (config) =>
       });
     }
 
-    upsertNoteLabel = (noteId, labels) => {
+    upsertLabelToNote = (noteId, labels) => {
       return new Promise((resolve, reject) => {
-        const request = new UpsertNoteLabelRequest();
+        const request = new UpsertLabelToNoteRequest();
         request.setNoteId(noteId);
         request.setLabelsList(labels);
 
-        console.log('noteId:', noteId);
-        console.log('labels:', labels);
-
-        this.client.upsertNoteLabel(
+        this.client.upsertLabelToNote(
           request,
           this.metadata,
           (error, response) => {
@@ -516,6 +518,37 @@ export default (config) =>
         );
       });
     };
+
+    deleteNoteLabel = (labelId) => {
+      return new Promise((resolve, reject) => {
+        const request = new DeleteNoteLabelRequest();
+
+        request.setId(labelId);
+
+        this.client.deleteNoteLabel(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    }
 
     pinNote = (pinData) => {
       return new Promise((resolve, reject) => {

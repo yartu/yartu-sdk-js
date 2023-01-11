@@ -1421,6 +1421,67 @@ proto.yartu.YNotePromiseClient.prototype.listNoteLabel =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.UpsertLabelToNoteRequest,
+ *   !proto.yartu.UpsertLabelToNoteResponse>}
+ */
+const methodDescriptor_YNote_upsertLabelToNote = new grpc.web.MethodDescriptor(
+  '/yartu.YNote/upsertLabelToNote',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.UpsertLabelToNoteRequest,
+  proto.yartu.UpsertLabelToNoteResponse,
+  /**
+   * @param {!proto.yartu.UpsertLabelToNoteRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.UpsertLabelToNoteResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.UpsertLabelToNoteRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.UpsertLabelToNoteResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.UpsertLabelToNoteResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YNoteClient.prototype.upsertLabelToNote =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YNote/upsertLabelToNote',
+      request,
+      metadata || {},
+      methodDescriptor_YNote_upsertLabelToNote,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.UpsertLabelToNoteRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.UpsertLabelToNoteResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YNotePromiseClient.prototype.upsertLabelToNote =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YNote/upsertLabelToNote',
+      request,
+      metadata || {},
+      methodDescriptor_YNote_upsertLabelToNote);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.UpsertNoteLabelRequest,
  *   !proto.yartu.UpsertNoteLabelResponse>}
  */
@@ -1476,67 +1537,6 @@ proto.yartu.YNotePromiseClient.prototype.upsertNoteLabel =
       request,
       metadata || {},
       methodDescriptor_YNote_upsertNoteLabel);
-};
-
-
-/**
- * @const
- * @type {!grpc.web.MethodDescriptor<
- *   !proto.yartu.UpsertNLabelRequest,
- *   !proto.yartu.UpsertNLabelResponse>}
- */
-const methodDescriptor_YNote_upsertNLabel = new grpc.web.MethodDescriptor(
-  '/yartu.YNote/upsertNLabel',
-  grpc.web.MethodType.UNARY,
-  proto.yartu.UpsertNLabelRequest,
-  proto.yartu.UpsertNLabelResponse,
-  /**
-   * @param {!proto.yartu.UpsertNLabelRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.yartu.UpsertNLabelResponse.deserializeBinary
-);
-
-
-/**
- * @param {!proto.yartu.UpsertNLabelRequest} request The
- *     request proto
- * @param {?Object<string, string>} metadata User defined
- *     call metadata
- * @param {function(?grpc.web.RpcError, ?proto.yartu.UpsertNLabelResponse)}
- *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.yartu.UpsertNLabelResponse>|undefined}
- *     The XHR Node Readable Stream
- */
-proto.yartu.YNoteClient.prototype.upsertNLabel =
-    function(request, metadata, callback) {
-  return this.client_.rpcCall(this.hostname_ +
-      '/yartu.YNote/upsertNLabel',
-      request,
-      metadata || {},
-      methodDescriptor_YNote_upsertNLabel,
-      callback);
-};
-
-
-/**
- * @param {!proto.yartu.UpsertNLabelRequest} request The
- *     request proto
- * @param {?Object<string, string>=} metadata User defined
- *     call metadata
- * @return {!Promise<!proto.yartu.UpsertNLabelResponse>}
- *     Promise that resolves to the response
- */
-proto.yartu.YNotePromiseClient.prototype.upsertNLabel =
-    function(request, metadata) {
-  return this.client_.unaryCall(this.hostname_ +
-      '/yartu.YNote/upsertNLabel',
-      request,
-      metadata || {},
-      methodDescriptor_YNote_upsertNLabel);
 };
 
 
