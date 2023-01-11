@@ -876,19 +876,23 @@ export default (config) =>
       });
     }
 
-    moveCard(uuid, column_uuid, index) {
+    moveCard(cardUuid, columnUuid, index) {
       return new Promise((resolve, reject) => {
         const request = new MoveCardRequest();
-        request.addUuid(uuid);
-        request.addColumnUuid(column_uuid);
-        request.addIndex(index);
+
+        request.setUuid(cardUuid);
+        request.setColumnUuid(columnUuid);
+        request.setIndex(index);
+
         this.client.moveCard(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
           } else {
             const code = response.getCode();
-
             if (code == 0) {
+              resolve({
+                code,
+              })
             } else {
               reject({
                 code: code,
