@@ -15,6 +15,7 @@ import {
   UpsertNoteLabelRequest,
   DeleteNoteLabelRequest,
   PinNoteRequest,
+  ArchiveNoteRequest,
   ConvertNoteRequest,
 } from './service-pb.cjs';
 
@@ -558,6 +559,40 @@ export default (config) =>
         request.setPinned(pinData.pinned);
 
         this.client.pinNote(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    }
+
+    archiveNote = (archiveData) => {
+      return new Promise((resolve, reject) => {
+        const request = new ArchiveNoteRequest();
+
+        console.log('archiveData:', archiveData);
+
+        request.setNoteIdList(archiveData.idList);
+        request.setIsArchived(archiveData.isArchived);
+
+        this.client.archiveNote(
           request,
           this.metadata,
           (error, response) => {

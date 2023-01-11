@@ -940,7 +940,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.yartu.ArchiveNoteRequest = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.yartu.ArchiveNoteRequest.repeatedFields_, null);
 };
 goog.inherits(proto.yartu.ArchiveNoteRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -10530,6 +10530,13 @@ proto.yartu.StarNoteResponse.prototype.setMessage = function(value) {
 
 
 
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.yartu.ArchiveNoteRequest.repeatedFields_ = [1];
+
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -10561,7 +10568,8 @@ proto.yartu.ArchiveNoteRequest.prototype.toObject = function(opt_includeInstance
  */
 proto.yartu.ArchiveNoteRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0)
+    noteIdList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
+    isArchived: jspb.Message.getBooleanFieldWithDefault(msg, 2, false)
   };
 
   if (includeInstance) {
@@ -10599,8 +10607,14 @@ proto.yartu.ArchiveNoteRequest.deserializeBinaryFromReader = function(msg, reade
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {number} */ (reader.readInt64());
-      msg.setId(value);
+      var values = /** @type {!Array<number>} */ (reader.isDelimited() ? reader.readPackedInt64() : [reader.readInt64()]);
+      for (var i = 0; i < values.length; i++) {
+        msg.addNoteId(values[i]);
+      }
+      break;
+    case 2:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setIsArchived(value);
       break;
     default:
       reader.skipField();
@@ -10631,10 +10645,17 @@ proto.yartu.ArchiveNoteRequest.prototype.serializeBinary = function() {
  */
 proto.yartu.ArchiveNoteRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getId();
-  if (f !== 0) {
-    writer.writeInt64(
+  f = message.getNoteIdList();
+  if (f.length > 0) {
+    writer.writePackedInt64(
       1,
+      f
+    );
+  }
+  f = message.getIsArchived();
+  if (f) {
+    writer.writeBool(
+      2,
       f
     );
   }
@@ -10642,20 +10663,57 @@ proto.yartu.ArchiveNoteRequest.serializeBinaryToWriter = function(message, write
 
 
 /**
- * optional int64 id = 1;
- * @return {number}
+ * repeated int64 note_id = 1;
+ * @return {!Array<number>}
  */
-proto.yartu.ArchiveNoteRequest.prototype.getId = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+proto.yartu.ArchiveNoteRequest.prototype.getNoteIdList = function() {
+  return /** @type {!Array<number>} */ (jspb.Message.getRepeatedField(this, 1));
+};
+
+
+/**
+ * @param {!Array<number>} value
+ * @return {!proto.yartu.ArchiveNoteRequest} returns this
+ */
+proto.yartu.ArchiveNoteRequest.prototype.setNoteIdList = function(value) {
+  return jspb.Message.setField(this, 1, value || []);
 };
 
 
 /**
  * @param {number} value
+ * @param {number=} opt_index
  * @return {!proto.yartu.ArchiveNoteRequest} returns this
  */
-proto.yartu.ArchiveNoteRequest.prototype.setId = function(value) {
-  return jspb.Message.setProto3IntField(this, 1, value);
+proto.yartu.ArchiveNoteRequest.prototype.addNoteId = function(value, opt_index) {
+  return jspb.Message.addToRepeatedField(this, 1, value, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.yartu.ArchiveNoteRequest} returns this
+ */
+proto.yartu.ArchiveNoteRequest.prototype.clearNoteIdList = function() {
+  return this.setNoteIdList([]);
+};
+
+
+/**
+ * optional bool is_archived = 2;
+ * @return {boolean}
+ */
+proto.yartu.ArchiveNoteRequest.prototype.getIsArchived = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 2, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.yartu.ArchiveNoteRequest} returns this
+ */
+proto.yartu.ArchiveNoteRequest.prototype.setIsArchived = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 2, value);
 };
 
 
@@ -10692,7 +10750,8 @@ proto.yartu.ArchiveNoteResponse.prototype.toObject = function(opt_includeInstanc
 proto.yartu.ArchiveNoteResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, "")
+    message: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    messages: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -10737,6 +10796,10 @@ proto.yartu.ArchiveNoteResponse.deserializeBinaryFromReader = function(msg, read
       var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setMessages(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -10780,6 +10843,13 @@ proto.yartu.ArchiveNoteResponse.serializeBinaryToWriter = function(message, writ
       f
     );
   }
+  f = /** @type {string} */ (jspb.Message.getField(message, 3));
+  if (f != null) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
 };
 
 
@@ -10816,6 +10886,42 @@ proto.yartu.ArchiveNoteResponse.prototype.getMessage = function() {
  */
 proto.yartu.ArchiveNoteResponse.prototype.setMessage = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional string messages = 3;
+ * @return {string}
+ */
+proto.yartu.ArchiveNoteResponse.prototype.getMessages = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.ArchiveNoteResponse} returns this
+ */
+proto.yartu.ArchiveNoteResponse.prototype.setMessages = function(value) {
+  return jspb.Message.setField(this, 3, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.ArchiveNoteResponse} returns this
+ */
+proto.yartu.ArchiveNoteResponse.prototype.clearMessages = function() {
+  return jspb.Message.setField(this, 3, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.ArchiveNoteResponse.prototype.hasMessages = function() {
+  return jspb.Message.getField(this, 3) != null;
 };
 
 
