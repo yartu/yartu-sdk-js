@@ -958,4 +958,33 @@ export default (config) =>
       });
     }
 
+    upsertCheckList(checklistId, title) {
+      return new Promise((resolve, reject) => {
+        const request = new UpsertCheckListRequest();
+
+        request.setId(checklistId);
+        request.setTitle(title);
+
+        this.client.upsertCheckList(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code,
+                checklist: response.getChecklist().toObject(),
+                message: response.getMessage()
+              })
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
   };

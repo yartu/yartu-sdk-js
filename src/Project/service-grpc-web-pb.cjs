@@ -1905,6 +1905,250 @@ proto.yartu.YProjectPromiseClient.prototype.addLabelToCard =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.UpsertCheckListRequest,
+ *   !proto.yartu.UpsertCheckListResponse>}
+ */
+const methodDescriptor_YProject_upsertCheckList = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/upsertCheckList',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.UpsertCheckListRequest,
+  proto.yartu.UpsertCheckListResponse,
+  /**
+   * @param {!proto.yartu.UpsertCheckListRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.UpsertCheckListResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.UpsertCheckListRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.UpsertCheckListResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.UpsertCheckListResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.upsertCheckList =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/upsertCheckList',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_upsertCheckList,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.UpsertCheckListRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.UpsertCheckListResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.upsertCheckList =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/upsertCheckList',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_upsertCheckList);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.DeleteCheckListRequest,
+ *   !proto.yartu.DeleteCheckListResponse>}
+ */
+const methodDescriptor_YProject_deleteCheckList = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/deleteCheckList',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.DeleteCheckListRequest,
+  proto.yartu.DeleteCheckListResponse,
+  /**
+   * @param {!proto.yartu.DeleteCheckListRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.DeleteCheckListResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.DeleteCheckListRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.DeleteCheckListResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.DeleteCheckListResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.deleteCheckList =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/deleteCheckList',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_deleteCheckList,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.DeleteCheckListRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.DeleteCheckListResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.deleteCheckList =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/deleteCheckList',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_deleteCheckList);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.UpsertCheckListItemRequest,
+ *   !proto.yartu.UpsertCheckListItemResponse>}
+ */
+const methodDescriptor_YProject_upsertCheckListItem = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/upsertCheckListItem',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.UpsertCheckListItemRequest,
+  proto.yartu.UpsertCheckListItemResponse,
+  /**
+   * @param {!proto.yartu.UpsertCheckListItemRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.UpsertCheckListItemResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.UpsertCheckListItemRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.UpsertCheckListItemResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.UpsertCheckListItemResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.upsertCheckListItem =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/upsertCheckListItem',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_upsertCheckListItem,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.UpsertCheckListItemRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.UpsertCheckListItemResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.upsertCheckListItem =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/upsertCheckListItem',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_upsertCheckListItem);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.DeleteCheckListItemRequest,
+ *   !proto.yartu.DeleteCheckListItemResponse>}
+ */
+const methodDescriptor_YProject_deleteCheckListItem = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/deleteCheckListItem',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.DeleteCheckListItemRequest,
+  proto.yartu.DeleteCheckListItemResponse,
+  /**
+   * @param {!proto.yartu.DeleteCheckListItemRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.DeleteCheckListItemResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.DeleteCheckListItemRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.DeleteCheckListItemResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.DeleteCheckListItemResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.deleteCheckListItem =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/deleteCheckListItem',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_deleteCheckListItem,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.DeleteCheckListItemRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.DeleteCheckListItemResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.deleteCheckListItem =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/deleteCheckListItem',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_deleteCheckListItem);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.MoveCardRequest,
  *   !proto.yartu.MoveCardResponse>}
  */
