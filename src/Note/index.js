@@ -1,8 +1,13 @@
 import {
   NoteMetaQuery,
+
   ListNotebookRequest,
   UpsertNotebookRequest,
   DeleteNotebookRequest,
+  ShareNotebookRequest,
+
+  DeleteSharedNotebookRequest,
+
   ListNoteRequest,
   GetNoteRequest,
   DeleteNoteRequest,
@@ -10,14 +15,18 @@ import {
   StarNoteRequest,
   MoveNoteRequest,
   CopyNoteRequest,
-  ListNoteLabelRequest,
-  UpsertNoteLabelRequest,
   PinNoteRequest,
+  ArchiveNoteRequest,
   ConvertNoteRequest,
+
+  ListNoteLabelRequest,
+  UpsertLabelToNoteRequest,
+  UpsertNoteLabelRequest,
+  DeleteNoteLabelRequest,
 } from './service-pb.cjs';
 
 import { YNoteClient } from './service-grpc-web-pb.cjs';
-import { Query } from '../utils/definitions_pb.cjs';
+import { Query, User, Group, Shared } from '../utils/definitions_pb.cjs';
 import { handleError } from '../utils/helper';
 
 export default (config) =>
@@ -137,6 +146,95 @@ export default (config) =>
       });
     }
 
+    shareNotebook(notebookId, shareList) {
+      return new Promise((resolve, reject) => {
+        const request = new ShareNotebookRequest();
+        request.setId(notebookId);
+        const UserShareList = [];
+        shareList.forEach(s => {
+          const shared = new Shared();
+          if (s?.isYartuUser) {
+            const user = new User();
+            user.setId(s.id);
+            user.setUsername(s.email);
+            user.setName(s.name);
+            user.setSurname(s.surname);
+
+            shared.setUser(user);
+
+          } else if (s?.isGroup) {
+
+            const group = new Group();
+            group.setId(s.id);
+            group.setName(s.name);
+            group.setEmailAlias(s.email);
+
+            shared.setGroup(group);
+          } else {
+            console.log('@yartu/sdk/ shareNotebook method not supports external users and Realm share features for now!');
+          }
+
+
+          shared.setPermissions(s.permissions);
+          UserShareList.push(shared);
+        });
+
+        request.setSharedList(UserShareList);
+
+        this.client.shareNotebook(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code: 0,
+                // success: response.getSuccessList().map((data) => data.toObject()),
+                // error: response.getErrorList().map((data) => data.toObject()),
+                // TODO :: @ramazan add success repeated field to proto and backend service !
+                // TODO :: @ramazan add error repeated field to proto and backend service !
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    deleteSharedNotebook(notebookId, sharedNotebookId) {
+      return new Promise((resolve, reject) => {
+        const request = new DeleteSharedNotebookRequest();
+        request.setId(notebookId);
+        request.setSharedNotebookId(sharedNotebookId);
+
+        this.client.deleteSharedNotebook(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code: 0,
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
     listNote = (notebookId = null, query = {}) => {
       return new Promise((resolve, reject) => {
         const request = new ListNoteRequest();
@@ -153,6 +251,10 @@ export default (config) =>
 
         if (query.isArchived) {
           metaRequest.setIsArchived(true);
+        }
+
+        if (query.isPinned) {
+          metaRequest.setIsPinned(true);
         }
 
         if (query.label) {
@@ -452,11 +554,10 @@ export default (config) =>
     upsertNoteLabel = (labelData) => {
       return new Promise((resolve, reject) => {
         const request = new UpsertNoteLabelRequest();
-        console.log('listNoteLabel SDK');
 
         request.setName(labelData.name);
         request.setColor(labelData.color);
-        request.setNoteId(labelData.noteId);
+        request.setId(labelData.id);
 
         this.client.upsertNoteLabel(
           request,
@@ -482,6 +583,69 @@ export default (config) =>
       });
     }
 
+    upsertLabelToNote = (noteId, labels) => {
+      return new Promise((resolve, reject) => {
+        const request = new UpsertLabelToNoteRequest();
+        request.setNoteId(noteId);
+        request.setLabelsList(labels);
+
+        this.client.upsertLabelToNote(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+
+              if (code == 0) {
+                resolve({
+                  code: 0,
+                  message: 'successfully'
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
+    deleteNoteLabel = (labelId) => {
+      return new Promise((resolve, reject) => {
+        const request = new DeleteNoteLabelRequest();
+
+        request.setId(labelId);
+
+        this.client.deleteNoteLabel(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    }
+
     pinNote = (pinData) => {
       return new Promise((resolve, reject) => {
         const request = new PinNoteRequest();
@@ -490,6 +654,40 @@ export default (config) =>
         request.setPinned(pinData.pinned);
 
         this.client.pinNote(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    }
+
+    archiveNote = (archiveData) => {
+      return new Promise((resolve, reject) => {
+        const request = new ArchiveNoteRequest();
+
+        console.log('archiveData:', archiveData);
+
+        request.setNoteIdList(archiveData.idList);
+        request.setIsArchived(archiveData.isArchived);
+
+        this.client.archiveNote(
           request,
           this.metadata,
           (error, response) => {
