@@ -2755,7 +2755,8 @@ proto.yartu.Note.toObject = function(includeInstance, msg) {
     proto.yartu.NoteLabel.toObject, includeInstance),
     permissions: jspb.Message.getFieldWithDefault(msg, 17, ""),
     createdAt: jspb.Message.getFieldWithDefault(msg, 18, ""),
-    updatedAt: jspb.Message.getFieldWithDefault(msg, 19, "")
+    updatedAt: jspb.Message.getFieldWithDefault(msg, 19, ""),
+    isSharedWithMe: jspb.Message.getBooleanFieldWithDefault(msg, 20, false)
   };
 
   if (includeInstance) {
@@ -2872,6 +2873,10 @@ proto.yartu.Note.deserializeBinaryFromReader = function(msg, reader) {
     case 19:
       var value = /** @type {string} */ (reader.readString());
       msg.setUpdatedAt(value);
+      break;
+    case 20:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setIsSharedWithMe(value);
       break;
     default:
       reader.skipField();
@@ -3037,6 +3042,13 @@ proto.yartu.Note.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writeString(
       19,
+      f
+    );
+  }
+  f = message.getIsSharedWithMe();
+  if (f) {
+    writer.writeBool(
+      20,
       f
     );
   }
@@ -3496,6 +3508,24 @@ proto.yartu.Note.prototype.getUpdatedAt = function() {
  */
 proto.yartu.Note.prototype.setUpdatedAt = function(value) {
   return jspb.Message.setProto3StringField(this, 19, value);
+};
+
+
+/**
+ * optional bool is_shared_with_me = 20;
+ * @return {boolean}
+ */
+proto.yartu.Note.prototype.getIsSharedWithMe = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 20, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.yartu.Note} returns this
+ */
+proto.yartu.Note.prototype.setIsSharedWithMe = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 20, value);
 };
 
 
