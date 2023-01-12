@@ -5,6 +5,7 @@ import {
   UpsertNotebookRequest,
   DeleteNotebookRequest,
   ShareNotebookRequest,
+  UnshareNotebookRequest,
 
   DeleteSharedNotebookRequest,
 
@@ -194,6 +195,33 @@ export default (config) =>
                 // error: response.getErrorList().map((data) => data.toObject()),
                 // TODO :: @ramazan add success repeated field to proto and backend service !
                 // TODO :: @ramazan add error repeated field to proto and backend service !
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    unshareNotebook(notebookId) {
+      return new Promise((resolve, reject) => {
+        const request = new UnshareNotebookRequest();
+        request.setId(notebookId);
+
+        this.client.unshareNotebook(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code: 0,
                 message: response.getMessage()
               });
             } else {
