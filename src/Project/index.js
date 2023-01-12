@@ -755,8 +755,8 @@ export default (config) =>
               resolve({
                 code,
                 card: response.getCard().toObject(),
-                message: response.getMessage(),
-              })
+                message: response.getMessage()
+              });
             } else {
               reject({
                 code: code,

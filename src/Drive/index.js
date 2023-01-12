@@ -331,12 +331,12 @@ export default (config) =>
       });
     };
 
-    uploadFile = (repoId, path, file_list) => {
+    uploadFile = (repoId, path, fileList) => {
       return new Promise((resolve, reject) => {
         const request = new UploadFileRequest();
         request.setRepoId(repoId);
         request.setPath(path);
-        request.setFileNameList(file_list);
+        request.setFileNameList(fileList);
 
         this.client.uploadFile(request, this.metadata, (error, response) => {
           if (error) {
