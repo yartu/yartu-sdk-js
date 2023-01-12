@@ -726,7 +726,7 @@ export default (config) =>
         if (cardData.startDate) {
           request.setStartDate(cardData.startDate);
         }
-        if (cardData.isCompleted) {
+        if (cardData.isCompleted !== null) {
           request.setIsCompleted(cardData.isCompleted);
         }
         if (cardData.isArchived) {
