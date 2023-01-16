@@ -1162,7 +1162,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.yartu.ImportContactRequest = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.yartu.ImportContactRequest.repeatedFields_, null);
 };
 goog.inherits(proto.yartu.ImportContactRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -13251,6 +13251,13 @@ proto.yartu.ExportContactResponse.prototype.hasMessage = function() {
 
 
 
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.yartu.ImportContactRequest.repeatedFields_ = [2];
+
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -13283,8 +13290,8 @@ proto.yartu.ImportContactRequest.prototype.toObject = function(opt_includeInstan
 proto.yartu.ImportContactRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     addressBookId: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    keys: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    file: msg.getFile_asB64()
+    contactList: jspb.Message.toObjectList(msg.getContactList(),
+    proto.yartu.Contact.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -13326,12 +13333,9 @@ proto.yartu.ImportContactRequest.deserializeBinaryFromReader = function(msg, rea
       msg.setAddressBookId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setKeys(value);
-      break;
-    case 3:
-      var value = /** @type {!Uint8Array} */ (reader.readBytes());
-      msg.setFile(value);
+      var value = new proto.yartu.Contact;
+      reader.readMessage(value,proto.yartu.Contact.deserializeBinaryFromReader);
+      msg.addContact(value);
       break;
     default:
       reader.skipField();
@@ -13369,18 +13373,12 @@ proto.yartu.ImportContactRequest.serializeBinaryToWriter = function(message, wri
       f
     );
   }
-  f = message.getKeys();
+  f = message.getContactList();
   if (f.length > 0) {
-    writer.writeString(
+    writer.writeRepeatedMessage(
       2,
-      f
-    );
-  }
-  f = message.getFile_asU8();
-  if (f.length > 0) {
-    writer.writeBytes(
-      3,
-      f
+      f,
+      proto.yartu.Contact.serializeBinaryToWriter
     );
   }
 };
@@ -13405,62 +13403,40 @@ proto.yartu.ImportContactRequest.prototype.setAddressBookId = function(value) {
 
 
 /**
- * optional string keys = 2;
- * @return {string}
+ * repeated Contact contact = 2;
+ * @return {!Array<!proto.yartu.Contact>}
  */
-proto.yartu.ImportContactRequest.prototype.getKeys = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+proto.yartu.ImportContactRequest.prototype.getContactList = function() {
+  return /** @type{!Array<!proto.yartu.Contact>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.yartu.Contact, 2));
 };
 
 
 /**
- * @param {string} value
+ * @param {!Array<!proto.yartu.Contact>} value
+ * @return {!proto.yartu.ImportContactRequest} returns this
+*/
+proto.yartu.ImportContactRequest.prototype.setContactList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 2, value);
+};
+
+
+/**
+ * @param {!proto.yartu.Contact=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.yartu.Contact}
+ */
+proto.yartu.ImportContactRequest.prototype.addContact = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.yartu.Contact, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
  * @return {!proto.yartu.ImportContactRequest} returns this
  */
-proto.yartu.ImportContactRequest.prototype.setKeys = function(value) {
-  return jspb.Message.setProto3StringField(this, 2, value);
-};
-
-
-/**
- * optional bytes file = 3;
- * @return {string}
- */
-proto.yartu.ImportContactRequest.prototype.getFile = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
-};
-
-
-/**
- * optional bytes file = 3;
- * This is a type-conversion wrapper around `getFile()`
- * @return {string}
- */
-proto.yartu.ImportContactRequest.prototype.getFile_asB64 = function() {
-  return /** @type {string} */ (jspb.Message.bytesAsB64(
-      this.getFile()));
-};
-
-
-/**
- * optional bytes file = 3;
- * Note that Uint8Array is not supported on all browsers.
- * @see http://caniuse.com/Uint8Array
- * This is a type-conversion wrapper around `getFile()`
- * @return {!Uint8Array}
- */
-proto.yartu.ImportContactRequest.prototype.getFile_asU8 = function() {
-  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
-      this.getFile()));
-};
-
-
-/**
- * @param {!(string|Uint8Array)} value
- * @return {!proto.yartu.ImportContactRequest} returns this
- */
-proto.yartu.ImportContactRequest.prototype.setFile = function(value) {
-  return jspb.Message.setProto3BytesField(this, 3, value);
+proto.yartu.ImportContactRequest.prototype.clearContactList = function() {
+  return this.setContactList([]);
 };
 
 

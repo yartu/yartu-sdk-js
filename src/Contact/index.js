@@ -4,7 +4,7 @@ import {
   UpsertAddressBookRequest,
   UpsertContactRequest,
   AddressBook,
-  Contact,
+  Contact as ContactProto,
   Label,
   davType,
   Address,
@@ -19,6 +19,7 @@ import {
   UpsertContactLabelRequest,
   UpsertContactStarRequest,
   ExportContactRequest,
+  ImportContactRequest,
   ListDuplicateContactRequest,
 } from './service-pb.cjs';
 
@@ -157,7 +158,7 @@ export default (config) =>
 
         const addressBook = new AddressBook();
         addressBook.setId(addressBookId);
-        const contact = new Contact();
+        const contact = new ContactProto();
 
         contact.setAddressBook(addressBook);
         contact.setId(contactData.id);
@@ -514,6 +515,107 @@ export default (config) =>
               resolve({
                 code: 0,
                 file: response.getFile_asB64()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
+    importContact = (addressBookId, contactList) => {
+      return new Promise((resolve, reject) => {
+        const request = new ImportContactRequest();
+        // request.setAddressBookId(addressBookId);
+
+        const addressBook = new AddressBook();
+        addressBook.setId(addressBookId);
+
+        const contactArray = [];
+
+        for (const contactData of contactList) {
+          const contact = new ContactProto();
+
+          contact.setAddressBook(addressBook);
+          contact.setId(contactData.id);
+          contact.setTitle(contactData.title);
+          contact.setCompany(contactData.company);
+          contact.setName(contactData.name);
+          contact.setMiddleName(contactData.middle_name);
+          contact.setSurname(contactData.surname);
+
+          const emailList = [];
+          if (contactData.emailList && Array.isArray(contactData.emailList)){
+            for (const email of contactData.emailList) {
+              const emailType = new davType();
+              emailType.setType(email.type);
+              emailType.setValue(email.value);
+              emailType.setIsDefault(email.is_default);
+              emailList.push(emailType);
+            }
+          }
+          const phoneList = [];
+          if (contactData.phoneList && Array.isArray(contactData.phoneList)){
+            for (const phone of contactData.phoneList) {
+              const phoneType = new davType();
+              phoneType.setType(phone.type);
+              phoneType.setValue(phone.value);
+              phoneType.setIsDefault(phone.is_default);
+              phoneList.push(phoneType);
+            }
+          }
+          const webList = [];
+          if (contactData.webList && Array.isArray(contactData.webList)){
+            for (const web of contactData.webList) {
+              const webType = new davType();
+              webType.setType(web.type);
+              webType.setValue(web.value);
+              webType.setIsDefault(web.is_default);
+              webList.push(webType);
+            }
+          }
+
+          const addressList = [];
+          if (contactData.addressList && Array.isArray(contactData.addressList)){
+            for (const address of contactData.addressList) {
+              const addressType = new Address();
+              addressType.setType(address.type);
+              addressType.setStreet(address.street);
+              addressType.setCity(address.city);
+              addressType.setRegion(address.region);
+              addressType.setPostalcode(address.postalcode);
+              addressType.setCountry(address.country);
+              addressType.setIsDefault(address.default);
+              addressList.push(addressType);
+            }
+          }
+
+          contact.setEmailList(emailList);
+          contact.setPhoneList(phoneList);
+          contact.setWebList(webList);
+          contact.setAddressList(addressList);
+          contact.setNote(contactData.note);
+
+          // request.setLabelsList(contactData.labelsList);
+          contactArray.push(contact);
+        }
+        request.setContactList(contactArray);
+
+        this.client.importContact(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code: 0,
+                message: response.getMessage()
+                // file: response.getFile_asB64()
               });
             } else {
               reject({
