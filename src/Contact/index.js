@@ -530,7 +530,7 @@ export default (config) =>
     importContact = (addressBookId, contactList) => {
       return new Promise((resolve, reject) => {
         const request = new ImportContactRequest();
-        // request.setAddressBookId(addressBookId);
+        request.setAddressBookId(addressBookId);
 
         const addressBook = new AddressBook();
         addressBook.setId(addressBookId);
