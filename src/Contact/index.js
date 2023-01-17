@@ -1,31 +1,41 @@
 import {
-  ListAddressBookRequest,
-  ListContactRequest,
-  UpsertAddressBookRequest,
-  UpsertContactRequest,
+  ContactMetaQuery,
   AddressBook,
   Contact as ContactProto,
   Label,
   davType,
   Address,
-  GetContactRequest,
-  ContactMetaQuery,
-  DeleteContactRequest,
+
+  ListAddressBookRequest,
+  UpsertAddressBookRequest,
   DeleteAddressBookRequest,
+  ShareAddressBookRequest,
+  UnshareAddressBookRequest,
+
+  DeleteSharedAddressBookRequest,
+
+  ListContactRequest,
+  UpsertContactRequest,
+  GetContactRequest,
+  DeleteContactRequest,
+  ExportContactRequest,
+  ImportContactRequest,
+
+  UpsertContactLabelRequest,
+  UpsertContactStarRequest,
+
   UpsertLabelRequest,
   ListLabelRequest,
   GetLabelRequest,
   DeleteLabelRequest,
-  UpsertContactLabelRequest,
-  UpsertContactStarRequest,
-  ExportContactRequest,
-  ImportContactRequest,
+
   ListDuplicateContactRequest,
 } from './service-pb.cjs';
 
 import { YContactClient } from './service-grpc-web-pb.cjs';
-import { Query } from '../utils/definitions_pb.cjs';
+import {Group, Query, Shared, User} from '../utils/definitions_pb.cjs';
 import { handleError } from '../utils/helper';
+import {DeleteSharedNotebookRequest, ShareNotebookRequest, UnshareNotebookRequest} from "../Note/service-pb.cjs";
 
 export default (config) =>
   class Contact {
@@ -73,6 +83,184 @@ export default (config) =>
       });
     };
 
+    upsertAddressBook = (addressBookId, addressBookData) => {
+      return new Promise((resolve, reject) => {
+        const request = new UpsertAddressBookRequest();
+        request.setId(addressBookId);
+        request.setName(addressBookData.name);
+        request.setDescription(addressBookData.description);
+
+        this.client.upsertAddressBook(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+
+              if (code == 0) {
+                resolve({
+                  code: 0,
+                  message: 'successfully'
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
+    deleteAddressBook = (addressBookId) => {
+      return new Promise((resolve, reject) => {
+        const request = new DeleteAddressBookRequest();
+        request.setId(addressBookId);
+        this.client.deleteAddressBook(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+
+              if (code == 0) {
+                resolve({
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
+    shareAddressBook(addressBookId, shareList) {
+      return new Promise((resolve, reject) => {
+        const request = new ShareAddressBookRequest();
+        request.setId(addressBookId);
+        const UserShareList = [];
+        shareList.forEach(s => {
+          const shared = new Shared();
+          if (s?.isYartuUser) {
+            const user = new User();
+            user.setId(s.id);
+            user.setUsername(s.email);
+            user.setName(s.name);
+            user.setSurname(s.surname);
+
+            shared.setUser(user);
+
+          } else if (s?.isGroup) {
+
+            const group = new Group();
+            group.setId(s.id);
+            group.setName(s.name);
+            group.setEmailAlias(s.email);
+
+            shared.setGroup(group);
+          } else {
+            console.log('@yartu/sdk/ shareAddressBook method not supports external users and Realm share features for now!');
+          }
+
+
+          shared.setPermissions(s.permissions);
+          UserShareList.push(shared);
+        });
+
+        request.setSharedList(UserShareList);
+
+        this.client.shareAddressBook(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code: 0,
+                // success: response.getSuccessList().map((data) => data.toObject()),
+                // error: response.getErrorList().map((data) => data.toObject()),
+                // TODO :: @ramazan add success repeated field to proto and backend service !
+                // TODO :: @ramazan add error repeated field to proto and backend service !
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    unshareAddressBook(addressBookId) {
+      return new Promise((resolve, reject) => {
+        const request = new UnshareAddressBookRequest();
+        request.setId(addressBookId);
+
+        this.client.unshareAddressBook(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code: 0,
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    deleteSharedAddressBook(addressBookId, sharedAddressBookId) {
+      return new Promise((resolve, reject) => {
+        const request = new DeleteSharedAddressBookRequest();
+        request.setId(addressBookId);
+        request.setSharedAddressBookId(sharedAddressBookId);
+
+        this.client.deleteSharedAddressBook(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code: 0,
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
     listContact = (addressBookId, queryRequest = {}) => {
       return new Promise((resolve, reject) => {
         const request = new ListContactRequest();
@@ -116,39 +304,6 @@ export default (config) =>
             }
           }
         });
-      });
-    };
-
-    upsertAddressBook = (addressBookId, addressBookData) => {
-      return new Promise((resolve, reject) => {
-        const request = new UpsertAddressBookRequest();
-        request.setId(addressBookId);
-        request.setName(addressBookData.name);
-        request.setDescription(addressBookData.description);
-
-        this.client.upsertAddressBook(
-          request,
-          this.metadata,
-          (error, response) => {
-            if (error) {
-              handleError(error, reject);
-            } else {
-              const code = response.getCode();
-
-              if (code == 0) {
-                resolve({
-                  code: 0,
-                  message: 'successfully'
-                });
-              } else {
-                reject({
-                  code: code,
-                  message: response.getMessage()
-                });
-              }
-            }
-          }
-        );
       });
     };
 
@@ -286,35 +441,6 @@ export default (config) =>
             }
           }
         });
-      });
-    };
-
-    deleteAddressBook = (addressBookId) => {
-      return new Promise((resolve, reject) => {
-        const request = new DeleteAddressBookRequest();
-        request.setId(addressBookId);
-        this.client.deleteAddressBook(
-          request,
-          this.metadata,
-          (error, response) => {
-            if (error) {
-              handleError(error, reject);
-            } else {
-              const code = response.getCode();
-
-              if (code == 0) {
-                resolve({
-                  message: response.getMessage()
-                });
-              } else {
-                reject({
-                  code: code,
-                  message: response.getMessage()
-                });
-              }
-            }
-          }
-        );
       });
     };
 
