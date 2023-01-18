@@ -876,9 +876,9 @@ proto.yartu_mail.Query.toObject = function(includeInstance, msg) {
   var f, obj = {
     query: jspb.Message.getFieldWithDefault(msg, 1, ""),
     page: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    perpage: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    sortby: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    searchFieldsList: (f = jspb.Message.getRepeatedField(msg, 5)) == null ? undefined : f
+    perPage: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    sortBy: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    searchFieldList: (f = jspb.Message.getRepeatedField(msg, 5)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -929,11 +929,11 @@ proto.yartu_mail.Query.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 4:
       var value = /** @type {string} */ (reader.readString());
-      msg.setSortby(value);
+      msg.setSortBy(value);
       break;
     case 5:
       var value = /** @type {string} */ (reader.readString());
-      msg.addSearchFields(value);
+      msg.addSearchField(value);
       break;
     default:
       reader.skipField();
@@ -992,7 +992,7 @@ proto.yartu_mail.Query.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getSearchFieldsList();
+  f = message.getSearchFieldList();
   if (f.length > 0) {
     writer.writeRepeatedString(
       5,
@@ -1039,7 +1039,7 @@ proto.yartu_mail.Query.prototype.setPage = function(value) {
 
 
 /**
- * optional int64 perPage = 3;
+ * optional int64 per_page = 3;
  * @return {number}
  */
 proto.yartu_mail.Query.prototype.getPerPage = function() {
@@ -1057,7 +1057,7 @@ proto.yartu_mail.Query.prototype.setPerPage = function(value) {
 
 
 /**
- * optional string sortBy = 4;
+ * optional string sort_by = 4;
  * @return {string}
  */
 proto.yartu_mail.Query.prototype.getSortBy = function() {
@@ -1069,16 +1069,16 @@ proto.yartu_mail.Query.prototype.getSortBy = function() {
  * @param {string} value
  * @return {!proto.yartu_mail.Query} returns this
  */
-proto.yartu_mail.Query.prototype.setSortby = function(value) {
+proto.yartu_mail.Query.prototype.setSortBy = function(value) {
   return jspb.Message.setProto3StringField(this, 4, value);
 };
 
 
 /**
- * repeated string search_fields = 5;
+ * repeated string search_field = 5;
  * @return {!Array<string>}
  */
-proto.yartu_mail.Query.prototype.getSearchFieldsList = function() {
+proto.yartu_mail.Query.prototype.getSearchFieldList = function() {
   return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 5));
 };
 
@@ -1087,7 +1087,7 @@ proto.yartu_mail.Query.prototype.getSearchFieldsList = function() {
  * @param {!Array<string>} value
  * @return {!proto.yartu_mail.Query} returns this
  */
-proto.yartu_mail.Query.prototype.setSearchFieldsList = function(value) {
+proto.yartu_mail.Query.prototype.setSearchFieldList = function(value) {
   return jspb.Message.setField(this, 5, value || []);
 };
 
@@ -1097,7 +1097,7 @@ proto.yartu_mail.Query.prototype.setSearchFieldsList = function(value) {
  * @param {number=} opt_index
  * @return {!proto.yartu_mail.Query} returns this
  */
-proto.yartu_mail.Query.prototype.addSearchFields = function(value, opt_index) {
+proto.yartu_mail.Query.prototype.addSearchField = function(value, opt_index) {
   return jspb.Message.addToRepeatedField(this, 5, value, opt_index);
 };
 
@@ -1106,8 +1106,8 @@ proto.yartu_mail.Query.prototype.addSearchFields = function(value, opt_index) {
  * Clears the list making it empty but non-null.
  * @return {!proto.yartu_mail.Query} returns this
  */
-proto.yartu_mail.Query.prototype.clearSearchFieldsList = function() {
-  return this.setSearchFieldsList([]);
+proto.yartu_mail.Query.prototype.clearSearchFieldList = function() {
+  return this.setSearchFieldList([]);
 };
 
 
@@ -1143,8 +1143,8 @@ proto.yartu_mail.PaginationMeta.prototype.toObject = function(opt_includeInstanc
  */
 proto.yartu_mail.PaginationMeta.toObject = function(includeInstance, msg) {
   var f, obj = {
-    currentpage: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    perpage: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    currentPage: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    perPage: jspb.Message.getFieldWithDefault(msg, 2, 0),
     total: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
 
@@ -1248,7 +1248,7 @@ proto.yartu_mail.PaginationMeta.serializeBinaryToWriter = function(message, writ
 
 
 /**
- * optional int64 currentPage = 1;
+ * optional int64 current_page = 1;
  * @return {number}
  */
 proto.yartu_mail.PaginationMeta.prototype.getCurrentPage = function() {
@@ -1266,7 +1266,7 @@ proto.yartu_mail.PaginationMeta.prototype.setCurrentPage = function(value) {
 
 
 /**
- * optional int64 perPage = 2;
+ * optional int64 per_page = 2;
  * @return {number}
  */
 proto.yartu_mail.PaginationMeta.prototype.getPerPage = function() {
@@ -1342,12 +1342,12 @@ proto.yartu_mail.Folder.toObject = function(includeInstance, msg) {
   var f, obj = {
     uuid: jspb.Message.getFieldWithDefault(msg, 1, ""),
     name: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    constantname: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    subfolderList: jspb.Message.toObjectList(msg.getSubfolderList(),
+    constantName: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    subFolderList: jspb.Message.toObjectList(msg.getSubFolderList(),
     proto.yartu_mail.Folder.toObject, includeInstance),
     path: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    isdefault: jspb.Message.getBooleanFieldWithDefault(msg, 6, false),
-    unreadcount: jspb.Message.getFieldWithDefault(msg, 7, 0)
+    isDefault: jspb.Message.getBooleanFieldWithDefault(msg, 6, false),
+    unreadCount: jspb.Message.getFieldWithDefault(msg, 7, 0)
   };
 
   if (includeInstance) {
@@ -1394,12 +1394,12 @@ proto.yartu_mail.Folder.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
-      msg.setConstantname(value);
+      msg.setConstantName(value);
       break;
     case 4:
       var value = new proto.yartu_mail.Folder;
       reader.readMessage(value,proto.yartu_mail.Folder.deserializeBinaryFromReader);
-      msg.addSubfolder(value);
+      msg.addSubFolder(value);
       break;
     case 5:
       var value = /** @type {string} */ (reader.readString());
@@ -1407,11 +1407,11 @@ proto.yartu_mail.Folder.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 6:
       var value = /** @type {boolean} */ (reader.readBool());
-      msg.setIsdefault(value);
+      msg.setIsDefault(value);
       break;
     case 7:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setUnreadcount(value);
+      msg.setUnreadCount(value);
       break;
     default:
       reader.skipField();
@@ -1456,14 +1456,14 @@ proto.yartu_mail.Folder.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getConstantname();
+  f = message.getConstantName();
   if (f.length > 0) {
     writer.writeString(
       3,
       f
     );
   }
-  f = message.getSubfolderList();
+  f = message.getSubFolderList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
       4,
@@ -1478,14 +1478,14 @@ proto.yartu_mail.Folder.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getIsdefault();
+  f = message.getIsDefault();
   if (f) {
     writer.writeBool(
       6,
       f
     );
   }
-  f = message.getUnreadcount();
+  f = message.getUnreadCount();
   if (f !== 0) {
     writer.writeInt64(
       7,
@@ -1532,10 +1532,10 @@ proto.yartu_mail.Folder.prototype.setName = function(value) {
 
 
 /**
- * optional string constantName = 3;
+ * optional string constant_name = 3;
  * @return {string}
  */
-proto.yartu_mail.Folder.prototype.getConstantname = function() {
+proto.yartu_mail.Folder.prototype.getConstantName = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
@@ -1544,16 +1544,16 @@ proto.yartu_mail.Folder.prototype.getConstantname = function() {
  * @param {string} value
  * @return {!proto.yartu_mail.Folder} returns this
  */
-proto.yartu_mail.Folder.prototype.setConstantname = function(value) {
+proto.yartu_mail.Folder.prototype.setConstantName = function(value) {
   return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 
 /**
- * repeated Folder subFolder = 4;
+ * repeated Folder sub_folder = 4;
  * @return {!Array<!proto.yartu_mail.Folder>}
  */
-proto.yartu_mail.Folder.prototype.getSubfolderList = function() {
+proto.yartu_mail.Folder.prototype.getSubFolderList = function() {
   return /** @type{!Array<!proto.yartu_mail.Folder>} */ (
     jspb.Message.getRepeatedWrapperField(this, proto.yartu_mail.Folder, 4));
 };
@@ -1563,7 +1563,7 @@ proto.yartu_mail.Folder.prototype.getSubfolderList = function() {
  * @param {!Array<!proto.yartu_mail.Folder>} value
  * @return {!proto.yartu_mail.Folder} returns this
 */
-proto.yartu_mail.Folder.prototype.setSubfolderList = function(value) {
+proto.yartu_mail.Folder.prototype.setSubFolderList = function(value) {
   return jspb.Message.setRepeatedWrapperField(this, 4, value);
 };
 
@@ -1573,7 +1573,7 @@ proto.yartu_mail.Folder.prototype.setSubfolderList = function(value) {
  * @param {number=} opt_index
  * @return {!proto.yartu_mail.Folder}
  */
-proto.yartu_mail.Folder.prototype.addSubfolder = function(opt_value, opt_index) {
+proto.yartu_mail.Folder.prototype.addSubFolder = function(opt_value, opt_index) {
   return jspb.Message.addToRepeatedWrapperField(this, 4, opt_value, proto.yartu_mail.Folder, opt_index);
 };
 
@@ -1582,8 +1582,8 @@ proto.yartu_mail.Folder.prototype.addSubfolder = function(opt_value, opt_index) 
  * Clears the list making it empty but non-null.
  * @return {!proto.yartu_mail.Folder} returns this
  */
-proto.yartu_mail.Folder.prototype.clearSubfolderList = function() {
-  return this.setSubfolderList([]);
+proto.yartu_mail.Folder.prototype.clearSubFolderList = function() {
+  return this.setSubFolderList([]);
 };
 
 
@@ -1606,10 +1606,10 @@ proto.yartu_mail.Folder.prototype.setPath = function(value) {
 
 
 /**
- * optional bool isDefault = 6;
+ * optional bool is_default = 6;
  * @return {boolean}
  */
-proto.yartu_mail.Folder.prototype.getIsdefault = function() {
+proto.yartu_mail.Folder.prototype.getIsDefault = function() {
   return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 6, false));
 };
 
@@ -1618,16 +1618,16 @@ proto.yartu_mail.Folder.prototype.getIsdefault = function() {
  * @param {boolean} value
  * @return {!proto.yartu_mail.Folder} returns this
  */
-proto.yartu_mail.Folder.prototype.setIsdefault = function(value) {
+proto.yartu_mail.Folder.prototype.setIsDefault = function(value) {
   return jspb.Message.setProto3BooleanField(this, 6, value);
 };
 
 
 /**
- * optional int64 unreadCount = 7;
+ * optional int64 unread_count = 7;
  * @return {number}
  */
-proto.yartu_mail.Folder.prototype.getUnreadcount = function() {
+proto.yartu_mail.Folder.prototype.getUnreadCount = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 7, 0));
 };
 
@@ -1636,7 +1636,7 @@ proto.yartu_mail.Folder.prototype.getUnreadcount = function() {
  * @param {number} value
  * @return {!proto.yartu_mail.Folder} returns this
  */
-proto.yartu_mail.Folder.prototype.setUnreadcount = function(value) {
+proto.yartu_mail.Folder.prototype.setUnreadCount = function(value) {
   return jspb.Message.setProto3IntField(this, 7, value);
 };
 
@@ -1833,7 +1833,7 @@ proto.yartu_mail.MailAttachment.prototype.toObject = function(opt_includeInstanc
  */
 proto.yartu_mail.MailAttachment.toObject = function(includeInstance, msg) {
   var f, obj = {
-    mimetype: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    mimeType: jspb.Message.getFieldWithDefault(msg, 1, ""),
     place: jspb.Message.getFieldWithDefault(msg, 2, ""),
     description: jspb.Message.getFieldWithDefault(msg, 3, ""),
     encoding: jspb.Message.getFieldWithDefault(msg, 4, ""),
@@ -1878,7 +1878,7 @@ proto.yartu_mail.MailAttachment.deserializeBinaryFromReader = function(msg, read
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setMimetype(value);
+      msg.setMimeType(value);
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
@@ -1933,7 +1933,7 @@ proto.yartu_mail.MailAttachment.prototype.serializeBinary = function() {
  */
 proto.yartu_mail.MailAttachment.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getMimetype();
+  f = message.getMimeType();
   if (f.length > 0) {
     writer.writeString(
       1,
@@ -1986,10 +1986,10 @@ proto.yartu_mail.MailAttachment.serializeBinaryToWriter = function(message, writ
 
 
 /**
- * optional string MIMEType = 1;
+ * optional string MIME_type = 1;
  * @return {string}
  */
-proto.yartu_mail.MailAttachment.prototype.getMimetype = function() {
+proto.yartu_mail.MailAttachment.prototype.getMimeType = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -1998,13 +1998,13 @@ proto.yartu_mail.MailAttachment.prototype.getMimetype = function() {
  * @param {string} value
  * @return {!proto.yartu_mail.MailAttachment} returns this
  */
-proto.yartu_mail.MailAttachment.prototype.setMimetype = function(value) {
+proto.yartu_mail.MailAttachment.prototype.setMimeType = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
 /**
- * optional string Place = 2;
+ * optional string place = 2;
  * @return {string}
  */
 proto.yartu_mail.MailAttachment.prototype.getPlace = function() {
@@ -2022,7 +2022,7 @@ proto.yartu_mail.MailAttachment.prototype.setPlace = function(value) {
 
 
 /**
- * optional string Description = 3;
+ * optional string description = 3;
  * @return {string}
  */
 proto.yartu_mail.MailAttachment.prototype.getDescription = function() {
@@ -2040,7 +2040,7 @@ proto.yartu_mail.MailAttachment.prototype.setDescription = function(value) {
 
 
 /**
- * optional string Encoding = 4;
+ * optional string encoding = 4;
  * @return {string}
  */
 proto.yartu_mail.MailAttachment.prototype.getEncoding = function() {
@@ -2058,7 +2058,7 @@ proto.yartu_mail.MailAttachment.prototype.setEncoding = function(value) {
 
 
 /**
- * optional uint32 Size = 5;
+ * optional uint32 size = 5;
  * @return {number}
  */
 proto.yartu_mail.MailAttachment.prototype.getSize = function() {
@@ -2076,7 +2076,7 @@ proto.yartu_mail.MailAttachment.prototype.setSize = function(value) {
 
 
 /**
- * optional string Filename = 6;
+ * optional string filename = 6;
  * @return {string}
  */
 proto.yartu_mail.MailAttachment.prototype.getFilename = function() {
@@ -2094,7 +2094,7 @@ proto.yartu_mail.MailAttachment.prototype.setFilename = function(value) {
 
 
 /**
- * optional string Disposition = 7;
+ * optional string disposition = 7;
  * @return {string}
  */
 proto.yartu_mail.MailAttachment.prototype.getDisposition = function() {
@@ -2162,16 +2162,16 @@ proto.yartu_mail.MailMessage.toObject = function(includeInstance, msg) {
     folder: jspb.Message.getFieldWithDefault(msg, 6, ""),
     subject: jspb.Message.getFieldWithDefault(msg, 7, ""),
     snippet: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    recievedat: jspb.Message.getFieldWithDefault(msg, 9, ""),
-    isseen: jspb.Message.getBooleanFieldWithDefault(msg, 10, false),
-    isflagged: jspb.Message.getBooleanFieldWithDefault(msg, 11, false),
-    isjunk: jspb.Message.getBooleanFieldWithDefault(msg, 12, false),
-    isdraft: jspb.Message.getBooleanFieldWithDefault(msg, 13, false),
+    recievedAt: jspb.Message.getFieldWithDefault(msg, 9, ""),
+    isSeen: jspb.Message.getBooleanFieldWithDefault(msg, 10, false),
+    isFlagged: jspb.Message.getBooleanFieldWithDefault(msg, 11, false),
+    isJunk: jspb.Message.getBooleanFieldWithDefault(msg, 12, false),
+    isDraft: jspb.Message.getBooleanFieldWithDefault(msg, 13, false),
     attachmentList: jspb.Message.toObjectList(msg.getAttachmentList(),
     proto.yartu_mail.MailAttachment.toObject, includeInstance),
     eventList: (f = jspb.Message.getRepeatedField(msg, 15)) == null ? undefined : f,
-    messageid: jspb.Message.getFieldWithDefault(msg, 16, ""),
-    threadid: jspb.Message.getFieldWithDefault(msg, 17, ""),
+    messageId: jspb.Message.getFieldWithDefault(msg, 16, ""),
+    threadId: jspb.Message.getFieldWithDefault(msg, 17, ""),
     body: jspb.Message.getFieldWithDefault(msg, 18, "")
   };
 
@@ -2247,23 +2247,23 @@ proto.yartu_mail.MailMessage.deserializeBinaryFromReader = function(msg, reader)
       break;
     case 9:
       var value = /** @type {string} */ (reader.readString());
-      msg.setRecievedat(value);
+      msg.setRecievedAt(value);
       break;
     case 10:
       var value = /** @type {boolean} */ (reader.readBool());
-      msg.setIsseen(value);
+      msg.setIsSeen(value);
       break;
     case 11:
       var value = /** @type {boolean} */ (reader.readBool());
-      msg.setIsflagged(value);
+      msg.setIsFlagged(value);
       break;
     case 12:
       var value = /** @type {boolean} */ (reader.readBool());
-      msg.setIsjunk(value);
+      msg.setIsJunk(value);
       break;
     case 13:
       var value = /** @type {boolean} */ (reader.readBool());
-      msg.setIsdraft(value);
+      msg.setIsDraft(value);
       break;
     case 14:
       var value = new proto.yartu_mail.MailAttachment;
@@ -2276,11 +2276,11 @@ proto.yartu_mail.MailMessage.deserializeBinaryFromReader = function(msg, reader)
       break;
     case 16:
       var value = /** @type {string} */ (reader.readString());
-      msg.setMessageid(value);
+      msg.setMessageId(value);
       break;
     case 17:
       var value = /** @type {string} */ (reader.readString());
-      msg.setThreadid(value);
+      msg.setThreadId(value);
       break;
     case 18:
       var value = /** @type {string} */ (reader.readString());
@@ -2375,35 +2375,35 @@ proto.yartu_mail.MailMessage.serializeBinaryToWriter = function(message, writer)
       f
     );
   }
-  f = message.getRecievedat();
+  f = message.getRecievedAt();
   if (f.length > 0) {
     writer.writeString(
       9,
       f
     );
   }
-  f = message.getIsseen();
+  f = message.getIsSeen();
   if (f) {
     writer.writeBool(
       10,
       f
     );
   }
-  f = message.getIsflagged();
+  f = message.getIsFlagged();
   if (f) {
     writer.writeBool(
       11,
       f
     );
   }
-  f = message.getIsjunk();
+  f = message.getIsJunk();
   if (f) {
     writer.writeBool(
       12,
       f
     );
   }
-  f = message.getIsdraft();
+  f = message.getIsDraft();
   if (f) {
     writer.writeBool(
       13,
@@ -2425,7 +2425,7 @@ proto.yartu_mail.MailMessage.serializeBinaryToWriter = function(message, writer)
       f
     );
   }
-  f = message.getMessageid();
+  f = message.getMessageId();
   if (f.length > 0) {
     writer.writeString(
       16,
@@ -2674,10 +2674,10 @@ proto.yartu_mail.MailMessage.prototype.setSnippet = function(value) {
 
 
 /**
- * optional string recievedAt = 9;
+ * optional string recieved_at = 9;
  * @return {string}
  */
-proto.yartu_mail.MailMessage.prototype.getRecievedat = function() {
+proto.yartu_mail.MailMessage.prototype.getRecievedAt = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 9, ""));
 };
 
@@ -2686,16 +2686,16 @@ proto.yartu_mail.MailMessage.prototype.getRecievedat = function() {
  * @param {string} value
  * @return {!proto.yartu_mail.MailMessage} returns this
  */
-proto.yartu_mail.MailMessage.prototype.setRecievedat = function(value) {
+proto.yartu_mail.MailMessage.prototype.setRecievedAt = function(value) {
   return jspb.Message.setProto3StringField(this, 9, value);
 };
 
 
 /**
- * optional bool isSeen = 10;
+ * optional bool is_seen = 10;
  * @return {boolean}
  */
-proto.yartu_mail.MailMessage.prototype.getIsseen = function() {
+proto.yartu_mail.MailMessage.prototype.getIsSeen = function() {
   return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 10, false));
 };
 
@@ -2704,16 +2704,16 @@ proto.yartu_mail.MailMessage.prototype.getIsseen = function() {
  * @param {boolean} value
  * @return {!proto.yartu_mail.MailMessage} returns this
  */
-proto.yartu_mail.MailMessage.prototype.setIsseen = function(value) {
+proto.yartu_mail.MailMessage.prototype.setIsSeen = function(value) {
   return jspb.Message.setProto3BooleanField(this, 10, value);
 };
 
 
 /**
- * optional bool isFlagged = 11;
+ * optional bool is_flagged = 11;
  * @return {boolean}
  */
-proto.yartu_mail.MailMessage.prototype.getIsflagged = function() {
+proto.yartu_mail.MailMessage.prototype.getIsFlagged = function() {
   return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 11, false));
 };
 
@@ -2722,16 +2722,16 @@ proto.yartu_mail.MailMessage.prototype.getIsflagged = function() {
  * @param {boolean} value
  * @return {!proto.yartu_mail.MailMessage} returns this
  */
-proto.yartu_mail.MailMessage.prototype.setIsflagged = function(value) {
+proto.yartu_mail.MailMessage.prototype.setIsFlagged = function(value) {
   return jspb.Message.setProto3BooleanField(this, 11, value);
 };
 
 
 /**
- * optional bool isJunk = 12;
+ * optional bool is_junk = 12;
  * @return {boolean}
  */
-proto.yartu_mail.MailMessage.prototype.getIsjunk = function() {
+proto.yartu_mail.MailMessage.prototype.getIsJunk = function() {
   return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 12, false));
 };
 
@@ -2740,16 +2740,16 @@ proto.yartu_mail.MailMessage.prototype.getIsjunk = function() {
  * @param {boolean} value
  * @return {!proto.yartu_mail.MailMessage} returns this
  */
-proto.yartu_mail.MailMessage.prototype.setIsjunk = function(value) {
+proto.yartu_mail.MailMessage.prototype.setIsJunk = function(value) {
   return jspb.Message.setProto3BooleanField(this, 12, value);
 };
 
 
 /**
- * optional bool isDraft = 13;
+ * optional bool is_draft = 13;
  * @return {boolean}
  */
-proto.yartu_mail.MailMessage.prototype.getIsdraft = function() {
+proto.yartu_mail.MailMessage.prototype.getIsDraft = function() {
   return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 13, false));
 };
 
@@ -2758,7 +2758,7 @@ proto.yartu_mail.MailMessage.prototype.getIsdraft = function() {
  * @param {boolean} value
  * @return {!proto.yartu_mail.MailMessage} returns this
  */
-proto.yartu_mail.MailMessage.prototype.setIsdraft = function(value) {
+proto.yartu_mail.MailMessage.prototype.setIsDraft = function(value) {
   return jspb.Message.setProto3BooleanField(this, 13, value);
 };
 
@@ -2839,10 +2839,10 @@ proto.yartu_mail.MailMessage.prototype.clearEventList = function() {
 
 
 /**
- * optional string messageId = 16;
+ * optional string message_id = 16;
  * @return {string}
  */
-proto.yartu_mail.MailMessage.prototype.getMessageid = function() {
+proto.yartu_mail.MailMessage.prototype.getMessageId = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 16, ""));
 };
 
@@ -2851,16 +2851,16 @@ proto.yartu_mail.MailMessage.prototype.getMessageid = function() {
  * @param {string} value
  * @return {!proto.yartu_mail.MailMessage} returns this
  */
-proto.yartu_mail.MailMessage.prototype.setMessageid = function(value) {
+proto.yartu_mail.MailMessage.prototype.setMessageId = function(value) {
   return jspb.Message.setProto3StringField(this, 16, value);
 };
 
 
 /**
- * optional string threadId = 17;
+ * optional string thread_id = 17;
  * @return {string}
  */
-proto.yartu_mail.MailMessage.prototype.getThreadid = function() {
+proto.yartu_mail.MailMessage.prototype.getThreadId = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 17, ""));
 };
 
@@ -2869,7 +2869,7 @@ proto.yartu_mail.MailMessage.prototype.getThreadid = function() {
  * @param {string} value
  * @return {!proto.yartu_mail.MailMessage} returns this
  */
-proto.yartu_mail.MailMessage.prototype.setThreadid = function(value) {
+proto.yartu_mail.MailMessage.prototype.setThreadId = function(value) {
   return jspb.Message.setField(this, 17, value);
 };
 
@@ -2878,7 +2878,7 @@ proto.yartu_mail.MailMessage.prototype.setThreadid = function(value) {
  * Clears the field making it undefined.
  * @return {!proto.yartu_mail.MailMessage} returns this
  */
-proto.yartu_mail.MailMessage.prototype.clearThreadid = function() {
+proto.yartu_mail.MailMessage.prototype.clearThreadId = function() {
   return jspb.Message.setField(this, 17, undefined);
 };
 
@@ -2887,7 +2887,7 @@ proto.yartu_mail.MailMessage.prototype.clearThreadid = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu_mail.MailMessage.prototype.hasThreadid = function() {
+proto.yartu_mail.MailMessage.prototype.hasThreadId = function() {
   return jspb.Message.getField(this, 17) != null;
 };
 
@@ -3538,7 +3538,7 @@ proto.yartu_mail.UpsertFolderRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     uuid: jspb.Message.getFieldWithDefault(msg, 1, ""),
     name: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    parentfolder: jspb.Message.getFieldWithDefault(msg, 3, "")
+    parentFolder: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -3585,7 +3585,7 @@ proto.yartu_mail.UpsertFolderRequest.deserializeBinaryFromReader = function(msg,
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
-      msg.setParentfolder(value);
+      msg.setParentFolder(value);
       break;
     default:
       reader.skipField();
@@ -3630,7 +3630,7 @@ proto.yartu_mail.UpsertFolderRequest.serializeBinaryToWriter = function(message,
       f
     );
   }
-  f = message.getParentfolder();
+  f = message.getParentFolder();
   if (f.length > 0) {
     writer.writeString(
       3,
@@ -3677,10 +3677,10 @@ proto.yartu_mail.UpsertFolderRequest.prototype.setName = function(value) {
 
 
 /**
- * optional string parentFolder = 3;
+ * optional string parent_folder = 3;
  * @return {string}
  */
-proto.yartu_mail.UpsertFolderRequest.prototype.getParentfolder = function() {
+proto.yartu_mail.UpsertFolderRequest.prototype.getParentFolder = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
@@ -3689,7 +3689,7 @@ proto.yartu_mail.UpsertFolderRequest.prototype.getParentfolder = function() {
  * @param {string} value
  * @return {!proto.yartu_mail.UpsertFolderRequest} returns this
  */
-proto.yartu_mail.UpsertFolderRequest.prototype.setParentfolder = function(value) {
+proto.yartu_mail.UpsertFolderRequest.prototype.setParentFolder = function(value) {
   return jspb.Message.setProto3StringField(this, 3, value);
 };
 
@@ -4931,11 +4931,11 @@ proto.yartu_mail.ListMessageRequest.prototype.toObject = function(opt_includeIns
 proto.yartu_mail.ListMessageRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     folder: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    allmessages: jspb.Message.getBooleanFieldWithDefault(msg, 2, false),
-    flaggedmessages: jspb.Message.getBooleanFieldWithDefault(msg, 3, false),
-    seenonly: jspb.Message.getBooleanFieldWithDefault(msg, 4, false),
-    unseenonly: jspb.Message.getBooleanFieldWithDefault(msg, 5, false),
-    hasattachmentonly: jspb.Message.getBooleanFieldWithDefault(msg, 6, false),
+    allMessages: jspb.Message.getBooleanFieldWithDefault(msg, 2, false),
+    flaggedMessages: jspb.Message.getBooleanFieldWithDefault(msg, 3, false),
+    seenOnly: jspb.Message.getBooleanFieldWithDefault(msg, 4, false),
+    unseenOnly: jspb.Message.getBooleanFieldWithDefault(msg, 5, false),
+    hasAttachmentOnly: jspb.Message.getBooleanFieldWithDefault(msg, 6, false),
     query: (f = msg.getQuery()) && proto.yartu_mail.Query.toObject(includeInstance, f)
   };
 
@@ -4979,23 +4979,23 @@ proto.yartu_mail.ListMessageRequest.deserializeBinaryFromReader = function(msg, 
       break;
     case 2:
       var value = /** @type {boolean} */ (reader.readBool());
-      msg.setAllmessages(value);
+      msg.setAllMessages(value);
       break;
     case 3:
       var value = /** @type {boolean} */ (reader.readBool());
-      msg.setFlaggedmessages(value);
+      msg.setFlaggedMessages(value);
       break;
     case 4:
       var value = /** @type {boolean} */ (reader.readBool());
-      msg.setSeenonly(value);
+      msg.setSeenOnly(value);
       break;
     case 5:
       var value = /** @type {boolean} */ (reader.readBool());
-      msg.setUnseenonly(value);
+      msg.setUnseenOnly(value);
       break;
     case 6:
       var value = /** @type {boolean} */ (reader.readBool());
-      msg.setHasattachmentonly(value);
+      msg.setHasAttachmentOnly(value);
       break;
     case 7:
       var value = new proto.yartu_mail.Query;
@@ -5038,35 +5038,35 @@ proto.yartu_mail.ListMessageRequest.serializeBinaryToWriter = function(message, 
       f
     );
   }
-  f = message.getAllmessages();
+  f = message.getAllMessages();
   if (f) {
     writer.writeBool(
       2,
       f
     );
   }
-  f = message.getFlaggedmessages();
+  f = message.getFlaggedMessages();
   if (f) {
     writer.writeBool(
       3,
       f
     );
   }
-  f = message.getSeenonly();
+  f = message.getSeenOnly();
   if (f) {
     writer.writeBool(
       4,
       f
     );
   }
-  f = message.getUnseenonly();
+  f = message.getUnseenOnly();
   if (f) {
     writer.writeBool(
       5,
       f
     );
   }
-  f = message.getHasattachmentonly();
+  f = message.getHasAttachmentOnly();
   if (f) {
     writer.writeBool(
       6,
@@ -5103,10 +5103,10 @@ proto.yartu_mail.ListMessageRequest.prototype.setFolder = function(value) {
 
 
 /**
- * optional bool allMessages = 2;
+ * optional bool all_messages = 2;
  * @return {boolean}
  */
-proto.yartu_mail.ListMessageRequest.prototype.getAllmessages = function() {
+proto.yartu_mail.ListMessageRequest.prototype.getAllMessages = function() {
   return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 2, false));
 };
 
@@ -5115,16 +5115,16 @@ proto.yartu_mail.ListMessageRequest.prototype.getAllmessages = function() {
  * @param {boolean} value
  * @return {!proto.yartu_mail.ListMessageRequest} returns this
  */
-proto.yartu_mail.ListMessageRequest.prototype.setAllmessages = function(value) {
+proto.yartu_mail.ListMessageRequest.prototype.setAllMessages = function(value) {
   return jspb.Message.setProto3BooleanField(this, 2, value);
 };
 
 
 /**
- * optional bool flaggedMessages = 3;
+ * optional bool flagged_messages = 3;
  * @return {boolean}
  */
-proto.yartu_mail.ListMessageRequest.prototype.getFlaggedmessages = function() {
+proto.yartu_mail.ListMessageRequest.prototype.getFlaggedMessages = function() {
   return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 3, false));
 };
 
@@ -5133,16 +5133,16 @@ proto.yartu_mail.ListMessageRequest.prototype.getFlaggedmessages = function() {
  * @param {boolean} value
  * @return {!proto.yartu_mail.ListMessageRequest} returns this
  */
-proto.yartu_mail.ListMessageRequest.prototype.setFlaggedmessages = function(value) {
+proto.yartu_mail.ListMessageRequest.prototype.setFlaggedMessages = function(value) {
   return jspb.Message.setProto3BooleanField(this, 3, value);
 };
 
 
 /**
- * optional bool seenOnly = 4;
+ * optional bool seen_only = 4;
  * @return {boolean}
  */
-proto.yartu_mail.ListMessageRequest.prototype.getSeenonly = function() {
+proto.yartu_mail.ListMessageRequest.prototype.getSeenOnly = function() {
   return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 4, false));
 };
 
@@ -5151,16 +5151,16 @@ proto.yartu_mail.ListMessageRequest.prototype.getSeenonly = function() {
  * @param {boolean} value
  * @return {!proto.yartu_mail.ListMessageRequest} returns this
  */
-proto.yartu_mail.ListMessageRequest.prototype.setSeenonly = function(value) {
+proto.yartu_mail.ListMessageRequest.prototype.setSeenOnly = function(value) {
   return jspb.Message.setProto3BooleanField(this, 4, value);
 };
 
 
 /**
- * optional bool unseenOnly = 5;
+ * optional bool unseen_only = 5;
  * @return {boolean}
  */
-proto.yartu_mail.ListMessageRequest.prototype.getUnseenonly = function() {
+proto.yartu_mail.ListMessageRequest.prototype.getUnseenOnly = function() {
   return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 5, false));
 };
 
@@ -5169,16 +5169,16 @@ proto.yartu_mail.ListMessageRequest.prototype.getUnseenonly = function() {
  * @param {boolean} value
  * @return {!proto.yartu_mail.ListMessageRequest} returns this
  */
-proto.yartu_mail.ListMessageRequest.prototype.setUnseenonly = function(value) {
+proto.yartu_mail.ListMessageRequest.prototype.setUnseenOnly = function(value) {
   return jspb.Message.setProto3BooleanField(this, 5, value);
 };
 
 
 /**
- * optional bool hasAttachmentOnly = 6;
+ * optional bool has_attachment_only = 6;
  * @return {boolean}
  */
-proto.yartu_mail.ListMessageRequest.prototype.getHasattachmentonly = function() {
+proto.yartu_mail.ListMessageRequest.prototype.getHasAttachmentOnly = function() {
   return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 6, false));
 };
 
@@ -5187,7 +5187,7 @@ proto.yartu_mail.ListMessageRequest.prototype.getHasattachmentonly = function() 
  * @param {boolean} value
  * @return {!proto.yartu_mail.ListMessageRequest} returns this
  */
-proto.yartu_mail.ListMessageRequest.prototype.setHasattachmentonly = function(value) {
+proto.yartu_mail.ListMessageRequest.prototype.setHasAttachmentOnly = function(value) {
   return jspb.Message.setProto3BooleanField(this, 6, value);
 };
 
@@ -5269,7 +5269,7 @@ proto.yartu_mail.ListMessageResponse.prototype.toObject = function(opt_includeIn
 proto.yartu_mail.ListMessageResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    emailsList: jspb.Message.toObjectList(msg.getEmailsList(),
+    emailList: jspb.Message.toObjectList(msg.getEmailList(),
     proto.yartu_mail.MailMessage.toObject, includeInstance),
     pagination: (f = msg.getPagination()) && proto.yartu_mail.PaginationMeta.toObject(includeInstance, f),
     message: jspb.Message.getFieldWithDefault(msg, 4, "")
@@ -5316,7 +5316,7 @@ proto.yartu_mail.ListMessageResponse.deserializeBinaryFromReader = function(msg,
     case 2:
       var value = new proto.yartu_mail.MailMessage;
       reader.readMessage(value,proto.yartu_mail.MailMessage.deserializeBinaryFromReader);
-      msg.addEmails(value);
+      msg.addEmail(value);
       break;
     case 3:
       var value = new proto.yartu_mail.PaginationMeta;
@@ -5363,7 +5363,7 @@ proto.yartu_mail.ListMessageResponse.serializeBinaryToWriter = function(message,
       f
     );
   }
-  f = message.getEmailsList();
+  f = message.getEmailList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
       2,
@@ -5408,10 +5408,10 @@ proto.yartu_mail.ListMessageResponse.prototype.setCode = function(value) {
 
 
 /**
- * repeated MailMessage emails = 2;
+ * repeated MailMessage email = 2;
  * @return {!Array<!proto.yartu_mail.MailMessage>}
  */
-proto.yartu_mail.ListMessageResponse.prototype.getEmailsList = function() {
+proto.yartu_mail.ListMessageResponse.prototype.getEmailList = function() {
   return /** @type{!Array<!proto.yartu_mail.MailMessage>} */ (
     jspb.Message.getRepeatedWrapperField(this, proto.yartu_mail.MailMessage, 2));
 };
@@ -5421,7 +5421,7 @@ proto.yartu_mail.ListMessageResponse.prototype.getEmailsList = function() {
  * @param {!Array<!proto.yartu_mail.MailMessage>} value
  * @return {!proto.yartu_mail.ListMessageResponse} returns this
 */
-proto.yartu_mail.ListMessageResponse.prototype.setEmailsList = function(value) {
+proto.yartu_mail.ListMessageResponse.prototype.setEmailList = function(value) {
   return jspb.Message.setRepeatedWrapperField(this, 2, value);
 };
 
@@ -5431,7 +5431,7 @@ proto.yartu_mail.ListMessageResponse.prototype.setEmailsList = function(value) {
  * @param {number=} opt_index
  * @return {!proto.yartu_mail.MailMessage}
  */
-proto.yartu_mail.ListMessageResponse.prototype.addEmails = function(opt_value, opt_index) {
+proto.yartu_mail.ListMessageResponse.prototype.addEmail = function(opt_value, opt_index) {
   return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.yartu_mail.MailMessage, opt_index);
 };
 
@@ -5440,8 +5440,8 @@ proto.yartu_mail.ListMessageResponse.prototype.addEmails = function(opt_value, o
  * Clears the list making it empty but non-null.
  * @return {!proto.yartu_mail.ListMessageResponse} returns this
  */
-proto.yartu_mail.ListMessageResponse.prototype.clearEmailsList = function() {
-  return this.setEmailsList([]);
+proto.yartu_mail.ListMessageResponse.prototype.clearEmailList = function() {
+  return this.setEmailList([]);
 };
 
 
@@ -5563,9 +5563,9 @@ proto.yartu_mail.SendMessageRequest.toObject = function(includeInstance, msg) {
     bccList: (f = jspb.Message.getRepeatedField(msg, 4)) == null ? undefined : f,
     subject: jspb.Message.getFieldWithDefault(msg, 5, ""),
     body: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    textbody: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    attachmentsList: (f = jspb.Message.getRepeatedField(msg, 8)) == null ? undefined : f,
-    inreplyto: jspb.Message.getFieldWithDefault(msg, 9, "")
+    textBody: jspb.Message.getFieldWithDefault(msg, 7, ""),
+    attachmentList: (f = jspb.Message.getRepeatedField(msg, 8)) == null ? undefined : f,
+    inReplyTo: jspb.Message.getFieldWithDefault(msg, 9, "")
   };
 
   if (includeInstance) {
@@ -5628,15 +5628,15 @@ proto.yartu_mail.SendMessageRequest.deserializeBinaryFromReader = function(msg, 
       break;
     case 7:
       var value = /** @type {string} */ (reader.readString());
-      msg.setTextbody(value);
+      msg.setTextBody(value);
       break;
     case 8:
       var value = /** @type {string} */ (reader.readString());
-      msg.addAttachments(value);
+      msg.addAttachment(value);
       break;
     case 9:
       var value = /** @type {string} */ (reader.readString());
-      msg.setInreplyto(value);
+      msg.setInReplyTo(value);
       break;
     default:
       reader.skipField();
@@ -5709,21 +5709,21 @@ proto.yartu_mail.SendMessageRequest.serializeBinaryToWriter = function(message, 
       f
     );
   }
-  f = message.getTextbody();
+  f = message.getTextBody();
   if (f.length > 0) {
     writer.writeString(
       7,
       f
     );
   }
-  f = message.getAttachmentsList();
+  f = message.getAttachmentList();
   if (f.length > 0) {
     writer.writeRepeatedString(
       8,
       f
     );
   }
-  f = message.getInreplyto();
+  f = message.getInReplyTo();
   if (f.length > 0) {
     writer.writeString(
       9,
@@ -5899,10 +5899,10 @@ proto.yartu_mail.SendMessageRequest.prototype.setBody = function(value) {
 
 
 /**
- * optional string textBody = 7;
+ * optional string text_body = 7;
  * @return {string}
  */
-proto.yartu_mail.SendMessageRequest.prototype.getTextbody = function() {
+proto.yartu_mail.SendMessageRequest.prototype.getTextBody = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
 };
 
@@ -5911,16 +5911,16 @@ proto.yartu_mail.SendMessageRequest.prototype.getTextbody = function() {
  * @param {string} value
  * @return {!proto.yartu_mail.SendMessageRequest} returns this
  */
-proto.yartu_mail.SendMessageRequest.prototype.setTextbody = function(value) {
+proto.yartu_mail.SendMessageRequest.prototype.setTextBody = function(value) {
   return jspb.Message.setProto3StringField(this, 7, value);
 };
 
 
 /**
- * repeated string attachments = 8;
+ * repeated string attachment = 8;
  * @return {!Array<string>}
  */
-proto.yartu_mail.SendMessageRequest.prototype.getAttachmentsList = function() {
+proto.yartu_mail.SendMessageRequest.prototype.getAttachmentList = function() {
   return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 8));
 };
 
@@ -5929,7 +5929,7 @@ proto.yartu_mail.SendMessageRequest.prototype.getAttachmentsList = function() {
  * @param {!Array<string>} value
  * @return {!proto.yartu_mail.SendMessageRequest} returns this
  */
-proto.yartu_mail.SendMessageRequest.prototype.setAttachmentsList = function(value) {
+proto.yartu_mail.SendMessageRequest.prototype.setAttachmentList = function(value) {
   return jspb.Message.setField(this, 8, value || []);
 };
 
@@ -5939,7 +5939,7 @@ proto.yartu_mail.SendMessageRequest.prototype.setAttachmentsList = function(valu
  * @param {number=} opt_index
  * @return {!proto.yartu_mail.SendMessageRequest} returns this
  */
-proto.yartu_mail.SendMessageRequest.prototype.addAttachments = function(value, opt_index) {
+proto.yartu_mail.SendMessageRequest.prototype.addAttachment = function(value, opt_index) {
   return jspb.Message.addToRepeatedField(this, 8, value, opt_index);
 };
 
@@ -5948,16 +5948,16 @@ proto.yartu_mail.SendMessageRequest.prototype.addAttachments = function(value, o
  * Clears the list making it empty but non-null.
  * @return {!proto.yartu_mail.SendMessageRequest} returns this
  */
-proto.yartu_mail.SendMessageRequest.prototype.clearAttachmentsList = function() {
-  return this.setAttachmentsList([]);
+proto.yartu_mail.SendMessageRequest.prototype.clearAttachmentList = function() {
+  return this.setAttachmentList([]);
 };
 
 
 /**
- * optional string inReplyTo = 9;
+ * optional string in_reply_to = 9;
  * @return {string}
  */
-proto.yartu_mail.SendMessageRequest.prototype.getInreplyto = function() {
+proto.yartu_mail.SendMessageRequest.prototype.getInReplyTo = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 9, ""));
 };
 
@@ -5966,7 +5966,7 @@ proto.yartu_mail.SendMessageRequest.prototype.getInreplyto = function() {
  * @param {string} value
  * @return {!proto.yartu_mail.SendMessageRequest} returns this
  */
-proto.yartu_mail.SendMessageRequest.prototype.setInreplyto = function(value) {
+proto.yartu_mail.SendMessageRequest.prototype.setInReplyTo = function(value) {
   return jspb.Message.setProto3StringField(this, 9, value);
 };
 
@@ -7287,9 +7287,9 @@ proto.yartu_mail.UpdateDraftRequest.toObject = function(includeInstance, msg) {
     bccList: (f = jspb.Message.getRepeatedField(msg, 5)) == null ? undefined : f,
     subject: jspb.Message.getFieldWithDefault(msg, 6, ""),
     body: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    textbody: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    attachmentsList: (f = jspb.Message.getRepeatedField(msg, 9)) == null ? undefined : f,
-    inreplyto: jspb.Message.getFieldWithDefault(msg, 10, "")
+    textBody: jspb.Message.getFieldWithDefault(msg, 8, ""),
+    attachmentList: (f = jspb.Message.getRepeatedField(msg, 9)) == null ? undefined : f,
+    inReplyTo: jspb.Message.getFieldWithDefault(msg, 10, "")
   };
 
   if (includeInstance) {
@@ -7356,15 +7356,15 @@ proto.yartu_mail.UpdateDraftRequest.deserializeBinaryFromReader = function(msg, 
       break;
     case 8:
       var value = /** @type {string} */ (reader.readString());
-      msg.setTextbody(value);
+      msg.setTextBody(value);
       break;
     case 9:
       var value = /** @type {string} */ (reader.readString());
-      msg.addAttachments(value);
+      msg.addAttachment(value);
       break;
     case 10:
       var value = /** @type {string} */ (reader.readString());
-      msg.setInreplyto(value);
+      msg.setInReplyTo(value);
       break;
     default:
       reader.skipField();
@@ -7444,21 +7444,21 @@ proto.yartu_mail.UpdateDraftRequest.serializeBinaryToWriter = function(message, 
       f
     );
   }
-  f = message.getTextbody();
+  f = message.getTextBody();
   if (f.length > 0) {
     writer.writeString(
       8,
       f
     );
   }
-  f = message.getAttachmentsList();
+  f = message.getAttachmentList();
   if (f.length > 0) {
     writer.writeRepeatedString(
       9,
       f
     );
   }
-  f = message.getInreplyto();
+  f = message.getInReplyTo();
   if (f.length > 0) {
     writer.writeString(
       10,
@@ -7652,10 +7652,10 @@ proto.yartu_mail.UpdateDraftRequest.prototype.setBody = function(value) {
 
 
 /**
- * optional string textBody = 8;
+ * optional string text_body = 8;
  * @return {string}
  */
-proto.yartu_mail.UpdateDraftRequest.prototype.getTextbody = function() {
+proto.yartu_mail.UpdateDraftRequest.prototype.getTextBody = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
 };
 
@@ -7664,16 +7664,16 @@ proto.yartu_mail.UpdateDraftRequest.prototype.getTextbody = function() {
  * @param {string} value
  * @return {!proto.yartu_mail.UpdateDraftRequest} returns this
  */
-proto.yartu_mail.UpdateDraftRequest.prototype.setTextbody = function(value) {
+proto.yartu_mail.UpdateDraftRequest.prototype.setTextBody = function(value) {
   return jspb.Message.setProto3StringField(this, 8, value);
 };
 
 
 /**
- * repeated string attachments = 9;
+ * repeated string attachment = 9;
  * @return {!Array<string>}
  */
-proto.yartu_mail.UpdateDraftRequest.prototype.getAttachmentsList = function() {
+proto.yartu_mail.UpdateDraftRequest.prototype.getAttachmentList = function() {
   return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 9));
 };
 
@@ -7682,7 +7682,7 @@ proto.yartu_mail.UpdateDraftRequest.prototype.getAttachmentsList = function() {
  * @param {!Array<string>} value
  * @return {!proto.yartu_mail.UpdateDraftRequest} returns this
  */
-proto.yartu_mail.UpdateDraftRequest.prototype.setAttachmentsList = function(value) {
+proto.yartu_mail.UpdateDraftRequest.prototype.setAttachmentList = function(value) {
   return jspb.Message.setField(this, 9, value || []);
 };
 
@@ -7692,7 +7692,7 @@ proto.yartu_mail.UpdateDraftRequest.prototype.setAttachmentsList = function(valu
  * @param {number=} opt_index
  * @return {!proto.yartu_mail.UpdateDraftRequest} returns this
  */
-proto.yartu_mail.UpdateDraftRequest.prototype.addAttachments = function(value, opt_index) {
+proto.yartu_mail.UpdateDraftRequest.prototype.addAttachment = function(value, opt_index) {
   return jspb.Message.addToRepeatedField(this, 9, value, opt_index);
 };
 
@@ -7701,16 +7701,16 @@ proto.yartu_mail.UpdateDraftRequest.prototype.addAttachments = function(value, o
  * Clears the list making it empty but non-null.
  * @return {!proto.yartu_mail.UpdateDraftRequest} returns this
  */
-proto.yartu_mail.UpdateDraftRequest.prototype.clearAttachmentsList = function() {
-  return this.setAttachmentsList([]);
+proto.yartu_mail.UpdateDraftRequest.prototype.clearAttachmentList = function() {
+  return this.setAttachmentList([]);
 };
 
 
 /**
- * optional string inReplyTo = 10;
+ * optional string in_reply_to = 10;
  * @return {string}
  */
-proto.yartu_mail.UpdateDraftRequest.prototype.getInreplyto = function() {
+proto.yartu_mail.UpdateDraftRequest.prototype.getInReplyTo = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 10, ""));
 };
 
@@ -7719,7 +7719,7 @@ proto.yartu_mail.UpdateDraftRequest.prototype.getInreplyto = function() {
  * @param {string} value
  * @return {!proto.yartu_mail.UpdateDraftRequest} returns this
  */
-proto.yartu_mail.UpdateDraftRequest.prototype.setInreplyto = function(value) {
+proto.yartu_mail.UpdateDraftRequest.prototype.setInReplyTo = function(value) {
   return jspb.Message.setProto3StringField(this, 10, value);
 };
 
@@ -7948,9 +7948,9 @@ proto.yartu_mail.SaveDraftRequest.toObject = function(includeInstance, msg) {
     bccList: (f = jspb.Message.getRepeatedField(msg, 5)) == null ? undefined : f,
     subject: jspb.Message.getFieldWithDefault(msg, 6, ""),
     body: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    textbody: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    attachmentsList: (f = jspb.Message.getRepeatedField(msg, 9)) == null ? undefined : f,
-    inreplyto: jspb.Message.getFieldWithDefault(msg, 10, "")
+    textBody: jspb.Message.getFieldWithDefault(msg, 8, ""),
+    attachmentList: (f = jspb.Message.getRepeatedField(msg, 9)) == null ? undefined : f,
+    inReplyTo: jspb.Message.getFieldWithDefault(msg, 10, "")
   };
 
   if (includeInstance) {
@@ -8017,15 +8017,15 @@ proto.yartu_mail.SaveDraftRequest.deserializeBinaryFromReader = function(msg, re
       break;
     case 8:
       var value = /** @type {string} */ (reader.readString());
-      msg.setTextbody(value);
+      msg.setTextBody(value);
       break;
     case 9:
       var value = /** @type {string} */ (reader.readString());
-      msg.addAttachments(value);
+      msg.addAttachment(value);
       break;
     case 10:
       var value = /** @type {string} */ (reader.readString());
-      msg.setInreplyto(value);
+      msg.setInReplyTo(value);
       break;
     default:
       reader.skipField();
@@ -8105,21 +8105,21 @@ proto.yartu_mail.SaveDraftRequest.serializeBinaryToWriter = function(message, wr
       f
     );
   }
-  f = message.getTextbody();
+  f = message.getTextBody();
   if (f.length > 0) {
     writer.writeString(
       8,
       f
     );
   }
-  f = message.getAttachmentsList();
+  f = message.getAttachmentList();
   if (f.length > 0) {
     writer.writeRepeatedString(
       9,
       f
     );
   }
-  f = message.getInreplyto();
+  f = message.getInReplyTo();
   if (f.length > 0) {
     writer.writeString(
       10,
@@ -8313,10 +8313,10 @@ proto.yartu_mail.SaveDraftRequest.prototype.setBody = function(value) {
 
 
 /**
- * optional string textBody = 8;
+ * optional string text_body = 8;
  * @return {string}
  */
-proto.yartu_mail.SaveDraftRequest.prototype.getTextbody = function() {
+proto.yartu_mail.SaveDraftRequest.prototype.getTextBody = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
 };
 
@@ -8325,16 +8325,16 @@ proto.yartu_mail.SaveDraftRequest.prototype.getTextbody = function() {
  * @param {string} value
  * @return {!proto.yartu_mail.SaveDraftRequest} returns this
  */
-proto.yartu_mail.SaveDraftRequest.prototype.setTextbody = function(value) {
+proto.yartu_mail.SaveDraftRequest.prototype.setTextBody = function(value) {
   return jspb.Message.setProto3StringField(this, 8, value);
 };
 
 
 /**
- * repeated string attachments = 9;
+ * repeated string attachment = 9;
  * @return {!Array<string>}
  */
-proto.yartu_mail.SaveDraftRequest.prototype.getAttachmentsList = function() {
+proto.yartu_mail.SaveDraftRequest.prototype.getAttachmentList = function() {
   return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 9));
 };
 
@@ -8343,7 +8343,7 @@ proto.yartu_mail.SaveDraftRequest.prototype.getAttachmentsList = function() {
  * @param {!Array<string>} value
  * @return {!proto.yartu_mail.SaveDraftRequest} returns this
  */
-proto.yartu_mail.SaveDraftRequest.prototype.setAttachmentsList = function(value) {
+proto.yartu_mail.SaveDraftRequest.prototype.setAttachmentList = function(value) {
   return jspb.Message.setField(this, 9, value || []);
 };
 
@@ -8353,7 +8353,7 @@ proto.yartu_mail.SaveDraftRequest.prototype.setAttachmentsList = function(value)
  * @param {number=} opt_index
  * @return {!proto.yartu_mail.SaveDraftRequest} returns this
  */
-proto.yartu_mail.SaveDraftRequest.prototype.addAttachments = function(value, opt_index) {
+proto.yartu_mail.SaveDraftRequest.prototype.addAttachment = function(value, opt_index) {
   return jspb.Message.addToRepeatedField(this, 9, value, opt_index);
 };
 
@@ -8362,16 +8362,16 @@ proto.yartu_mail.SaveDraftRequest.prototype.addAttachments = function(value, opt
  * Clears the list making it empty but non-null.
  * @return {!proto.yartu_mail.SaveDraftRequest} returns this
  */
-proto.yartu_mail.SaveDraftRequest.prototype.clearAttachmentsList = function() {
-  return this.setAttachmentsList([]);
+proto.yartu_mail.SaveDraftRequest.prototype.clearAttachmentList = function() {
+  return this.setAttachmentList([]);
 };
 
 
 /**
- * optional string inReplyTo = 10;
+ * optional string in_reply_to = 10;
  * @return {string}
  */
-proto.yartu_mail.SaveDraftRequest.prototype.getInreplyto = function() {
+proto.yartu_mail.SaveDraftRequest.prototype.getInReplyTo = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 10, ""));
 };
 
@@ -8380,7 +8380,7 @@ proto.yartu_mail.SaveDraftRequest.prototype.getInreplyto = function() {
  * @param {string} value
  * @return {!proto.yartu_mail.SaveDraftRequest} returns this
  */
-proto.yartu_mail.SaveDraftRequest.prototype.setInreplyto = function(value) {
+proto.yartu_mail.SaveDraftRequest.prototype.setInReplyTo = function(value) {
   return jspb.Message.setProto3StringField(this, 10, value);
 };
 
@@ -8933,7 +8933,7 @@ proto.yartu_mail.DownloadAttachmentRequest.prototype.toObject = function(opt_inc
  */
 proto.yartu_mail.DownloadAttachmentRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    mailuuid: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    mailUuid: jspb.Message.getFieldWithDefault(msg, 1, ""),
     name: jspb.Message.getFieldWithDefault(msg, 2, ""),
     place: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
@@ -8974,7 +8974,7 @@ proto.yartu_mail.DownloadAttachmentRequest.deserializeBinaryFromReader = functio
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setMailuuid(value);
+      msg.setMailUuid(value);
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
@@ -9013,7 +9013,7 @@ proto.yartu_mail.DownloadAttachmentRequest.prototype.serializeBinary = function(
  */
 proto.yartu_mail.DownloadAttachmentRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getMailuuid();
+  f = message.getMailUuid();
   if (f.length > 0) {
     writer.writeString(
       1,
@@ -9038,10 +9038,10 @@ proto.yartu_mail.DownloadAttachmentRequest.serializeBinaryToWriter = function(me
 
 
 /**
- * optional string mailUuid = 1;
+ * optional string mail_uuid = 1;
  * @return {string}
  */
-proto.yartu_mail.DownloadAttachmentRequest.prototype.getMailuuid = function() {
+proto.yartu_mail.DownloadAttachmentRequest.prototype.getMailUuid = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -9050,7 +9050,7 @@ proto.yartu_mail.DownloadAttachmentRequest.prototype.getMailuuid = function() {
  * @param {string} value
  * @return {!proto.yartu_mail.DownloadAttachmentRequest} returns this
  */
-proto.yartu_mail.DownloadAttachmentRequest.prototype.setMailuuid = function(value) {
+proto.yartu_mail.DownloadAttachmentRequest.prototype.setMailUuid = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
@@ -9466,8 +9466,8 @@ proto.yartu_mail.GetInfoResponse.toObject = function(includeInstance, msg) {
     code: jspb.Message.getFieldWithDefault(msg, 1, 0),
     quota: jspb.Message.getFieldWithDefault(msg, 2, 0),
     usage: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    messagecount: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    mailboxesList: jspb.Message.toObjectList(msg.getMailboxesList(),
+    messageCount: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    mailboxList: jspb.Message.toObjectList(msg.getMailboxList(),
     proto.yartu_mail.SharedMailbox.toObject, includeInstance),
     message: jspb.Message.getFieldWithDefault(msg, 6, "")
   };
@@ -9520,12 +9520,12 @@ proto.yartu_mail.GetInfoResponse.deserializeBinaryFromReader = function(msg, rea
       break;
     case 4:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setMessagecount(value);
+      msg.setMessageCount(value);
       break;
     case 5:
       var value = new proto.yartu_mail.SharedMailbox;
       reader.readMessage(value,proto.yartu_mail.SharedMailbox.deserializeBinaryFromReader);
-      msg.addMailboxes(value);
+      msg.addMailbox(value);
       break;
     case 6:
       var value = /** @type {string} */ (reader.readString());
@@ -9581,14 +9581,14 @@ proto.yartu_mail.GetInfoResponse.serializeBinaryToWriter = function(message, wri
       f
     );
   }
-  f = message.getMessagecount();
+  f = message.getMessageCount();
   if (f !== 0) {
     writer.writeInt64(
       4,
       f
     );
   }
-  f = message.getMailboxesList();
+  f = message.getMailboxList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
       5,
@@ -9661,10 +9661,10 @@ proto.yartu_mail.GetInfoResponse.prototype.setUsage = function(value) {
 
 
 /**
- * optional int64 messageCount = 4;
+ * optional int64 message_count = 4;
  * @return {number}
  */
-proto.yartu_mail.GetInfoResponse.prototype.getMessagecount = function() {
+proto.yartu_mail.GetInfoResponse.prototype.getMessageCount = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
 };
 
@@ -9673,16 +9673,16 @@ proto.yartu_mail.GetInfoResponse.prototype.getMessagecount = function() {
  * @param {number} value
  * @return {!proto.yartu_mail.GetInfoResponse} returns this
  */
-proto.yartu_mail.GetInfoResponse.prototype.setMessagecount = function(value) {
+proto.yartu_mail.GetInfoResponse.prototype.setMessageCount = function(value) {
   return jspb.Message.setProto3IntField(this, 4, value);
 };
 
 
 /**
- * repeated SharedMailbox mailboxes = 5;
+ * repeated SharedMailbox mailbox = 5;
  * @return {!Array<!proto.yartu_mail.SharedMailbox>}
  */
-proto.yartu_mail.GetInfoResponse.prototype.getMailboxesList = function() {
+proto.yartu_mail.GetInfoResponse.prototype.getMailboxList = function() {
   return /** @type{!Array<!proto.yartu_mail.SharedMailbox>} */ (
     jspb.Message.getRepeatedWrapperField(this, proto.yartu_mail.SharedMailbox, 5));
 };
@@ -9692,7 +9692,7 @@ proto.yartu_mail.GetInfoResponse.prototype.getMailboxesList = function() {
  * @param {!Array<!proto.yartu_mail.SharedMailbox>} value
  * @return {!proto.yartu_mail.GetInfoResponse} returns this
 */
-proto.yartu_mail.GetInfoResponse.prototype.setMailboxesList = function(value) {
+proto.yartu_mail.GetInfoResponse.prototype.setMailboxList = function(value) {
   return jspb.Message.setRepeatedWrapperField(this, 5, value);
 };
 
@@ -9702,7 +9702,7 @@ proto.yartu_mail.GetInfoResponse.prototype.setMailboxesList = function(value) {
  * @param {number=} opt_index
  * @return {!proto.yartu_mail.SharedMailbox}
  */
-proto.yartu_mail.GetInfoResponse.prototype.addMailboxes = function(opt_value, opt_index) {
+proto.yartu_mail.GetInfoResponse.prototype.addMailbox = function(opt_value, opt_index) {
   return jspb.Message.addToRepeatedWrapperField(this, 5, opt_value, proto.yartu_mail.SharedMailbox, opt_index);
 };
 
@@ -9711,8 +9711,8 @@ proto.yartu_mail.GetInfoResponse.prototype.addMailboxes = function(opt_value, op
  * Clears the list making it empty but non-null.
  * @return {!proto.yartu_mail.GetInfoResponse} returns this
  */
-proto.yartu_mail.GetInfoResponse.prototype.clearMailboxesList = function() {
-  return this.setMailboxesList([]);
+proto.yartu_mail.GetInfoResponse.prototype.clearMailboxList = function() {
+  return this.setMailboxList([]);
 };
 
 
