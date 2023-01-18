@@ -583,7 +583,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.yartu.ListSharedNotebookResponse = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.yartu.ListSharedNotebookResponse.repeatedFields_, null);
 };
 goog.inherits(proto.yartu.ListSharedNotebookResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -7356,7 +7356,7 @@ proto.yartu.ListSharedNotebookRequest.prototype.toObject = function(opt_includeI
  */
 proto.yartu.ListSharedNotebookRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-
+    id: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
   if (includeInstance) {
@@ -7393,6 +7393,10 @@ proto.yartu.ListSharedNotebookRequest.deserializeBinaryFromReader = function(msg
     }
     var field = reader.getFieldNumber();
     switch (field) {
+    case 1:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setId(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -7422,9 +7426,41 @@ proto.yartu.ListSharedNotebookRequest.prototype.serializeBinary = function() {
  */
 proto.yartu.ListSharedNotebookRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getId();
+  if (f !== 0) {
+    writer.writeInt64(
+      1,
+      f
+    );
+  }
 };
 
 
+/**
+ * optional int64 id = 1;
+ * @return {number}
+ */
+proto.yartu.ListSharedNotebookRequest.prototype.getId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu.ListSharedNotebookRequest} returns this
+ */
+proto.yartu.ListSharedNotebookRequest.prototype.setId = function(value) {
+  return jspb.Message.setProto3IntField(this, 1, value);
+};
+
+
+
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.yartu.ListSharedNotebookResponse.repeatedFields_ = [3];
 
 
 
@@ -7457,7 +7493,10 @@ proto.yartu.ListSharedNotebookResponse.prototype.toObject = function(opt_include
  */
 proto.yartu.ListSharedNotebookResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0)
+    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    message: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    dataList: jspb.Message.toObjectList(msg.getDataList(),
+    common_grpc_definitions_pb.Shared.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -7496,7 +7535,16 @@ proto.yartu.ListSharedNotebookResponse.deserializeBinaryFromReader = function(ms
     switch (field) {
     case 1:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setId(value);
+      msg.setCode(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setMessage(value);
+      break;
+    case 3:
+      var value = new common_grpc_definitions_pb.Shared;
+      reader.readMessage(value,common_grpc_definitions_pb.Shared.deserializeBinaryFromReader);
+      msg.addData(value);
       break;
     default:
       reader.skipField();
@@ -7527,21 +7575,36 @@ proto.yartu.ListSharedNotebookResponse.prototype.serializeBinary = function() {
  */
 proto.yartu.ListSharedNotebookResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getId();
+  f = message.getCode();
   if (f !== 0) {
     writer.writeInt64(
       1,
       f
     );
   }
+  f = message.getMessage();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getDataList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      3,
+      f,
+      common_grpc_definitions_pb.Shared.serializeBinaryToWriter
+    );
+  }
 };
 
 
 /**
- * optional int64 id = 1;
+ * optional int64 code = 1;
  * @return {number}
  */
-proto.yartu.ListSharedNotebookResponse.prototype.getId = function() {
+proto.yartu.ListSharedNotebookResponse.prototype.getCode = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
@@ -7550,8 +7613,64 @@ proto.yartu.ListSharedNotebookResponse.prototype.getId = function() {
  * @param {number} value
  * @return {!proto.yartu.ListSharedNotebookResponse} returns this
  */
-proto.yartu.ListSharedNotebookResponse.prototype.setId = function(value) {
+proto.yartu.ListSharedNotebookResponse.prototype.setCode = function(value) {
   return jspb.Message.setProto3IntField(this, 1, value);
+};
+
+
+/**
+ * optional string message = 2;
+ * @return {string}
+ */
+proto.yartu.ListSharedNotebookResponse.prototype.getMessage = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.ListSharedNotebookResponse} returns this
+ */
+proto.yartu.ListSharedNotebookResponse.prototype.setMessage = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * repeated Shared data = 3;
+ * @return {!Array<!proto.Shared>}
+ */
+proto.yartu.ListSharedNotebookResponse.prototype.getDataList = function() {
+  return /** @type{!Array<!proto.Shared>} */ (
+    jspb.Message.getRepeatedWrapperField(this, common_grpc_definitions_pb.Shared, 3));
+};
+
+
+/**
+ * @param {!Array<!proto.Shared>} value
+ * @return {!proto.yartu.ListSharedNotebookResponse} returns this
+*/
+proto.yartu.ListSharedNotebookResponse.prototype.setDataList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 3, value);
+};
+
+
+/**
+ * @param {!proto.Shared=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.Shared}
+ */
+proto.yartu.ListSharedNotebookResponse.prototype.addData = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 3, opt_value, proto.Shared, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.yartu.ListSharedNotebookResponse} returns this
+ */
+proto.yartu.ListSharedNotebookResponse.prototype.clearDataList = function() {
+  return this.setDataList([]);
 };
 
 

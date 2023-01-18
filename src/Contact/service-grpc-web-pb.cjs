@@ -445,6 +445,67 @@ proto.yartu.YContactPromiseClient.prototype.unshareAddressBook =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.DeleteSharedAddressBookRequest,
+ *   !proto.yartu.DeleteSharedAddressBookResponse>}
+ */
+const methodDescriptor_YContact_deleteSharedAddressBook = new grpc.web.MethodDescriptor(
+  '/yartu.YContact/deleteSharedAddressBook',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.DeleteSharedAddressBookRequest,
+  proto.yartu.DeleteSharedAddressBookResponse,
+  /**
+   * @param {!proto.yartu.DeleteSharedAddressBookRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.DeleteSharedAddressBookResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.DeleteSharedAddressBookRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.DeleteSharedAddressBookResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.DeleteSharedAddressBookResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YContactClient.prototype.deleteSharedAddressBook =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YContact/deleteSharedAddressBook',
+      request,
+      metadata || {},
+      methodDescriptor_YContact_deleteSharedAddressBook,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.DeleteSharedAddressBookRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.DeleteSharedAddressBookResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YContactPromiseClient.prototype.deleteSharedAddressBook =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YContact/deleteSharedAddressBook',
+      request,
+      metadata || {},
+      methodDescriptor_YContact_deleteSharedAddressBook);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.GetContactRequest,
  *   !proto.yartu.GetContactResponse>}
  */
