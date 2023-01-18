@@ -84,7 +84,7 @@ export default (config) =>
 
             if (code == 0) {
               const dataList = response
-                .getEmailsList()
+                .getEmailList()
                 .map((data) => data.toObject());
               resolve({
                 emails: dataList,
@@ -420,7 +420,7 @@ export default (config) =>
         request.setBccList(bccList);
       }
 
-      request.setAttachmentsList(data.attachments);
+      request.setAttachmentList(data.attachments);
 
       if (data.replyTo) {
         request.setInreplyto(data.replyTo);
