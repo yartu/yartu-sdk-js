@@ -51,20 +51,20 @@ export default (config) =>
         request.setFolder(folder);
 
         if (filter.getAllMessages) {
-          request.setAllmessages(true);
+          request.setAllMessages(true);
         } else if (filter.getFlaggedMessages) {
           // Starred
-          request.setFlaggedmessages(true);
+          request.setFlaggedMessages(true);
         }
 
         if (filter.setSeenonly) {
-          request.setSeenonly(true);
+          request.setSeenOnly(true);
         } else if (filter.setUnseenonly) {
-          request.setUnseenonly(true);
+          request.setUnseenOnly(true);
         }
 
         if (filter.setHasattachmentonly) {
-          request.setHasattachmentonly(true);
+          request.setHasAttachmentOnly(true);
         }
 
         queryData.setPage(pagination.page || 1);
@@ -130,7 +130,7 @@ export default (config) =>
     downloadAttachment(emailUuid, place, name) {
       return new Promise((resolve, reject) => {
         const request = new DownloadAttachmentRequest();
-        request.setMailuuid(emailUuid);
+        request.setMailUuid(emailUuid);
         request.setPlace(place);
         this.client.downloadAttachment(
           request,
@@ -309,7 +309,7 @@ export default (config) =>
 
         request.setUuid(folderUuid);
         request.setName(folderName);
-        request.setParentfolder(folderParent);
+        request.setParentFolder(folderParent);
 
         this.client.upsertFolder(request, this.metadata, (error, response) => {
           if (error) {
@@ -394,7 +394,7 @@ export default (config) =>
 
       request.setSubject(data.subject);
       request.setBody(data.body); // html
-      request.setTextbody(data.bodyText); // text
+      request.setTextBody(data.bodyText); // text
 
       const toList = [];
       if (!!data.to && !!data.to[Symbol.iterator]) {
@@ -423,7 +423,7 @@ export default (config) =>
       request.setAttachmentList(data.attachments);
 
       if (data.replyTo) {
-        request.setInreplyto(data.replyTo);
+        request.setInReplyTo(data.replyTo);
       }
 
       return request;
