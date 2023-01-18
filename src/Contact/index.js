@@ -35,7 +35,7 @@ import {
 import { YContactClient } from './service-grpc-web-pb.cjs';
 import {Group, Query, Shared, User} from '../utils/definitions_pb.cjs';
 import { handleError } from '../utils/helper';
-import {DeleteSharedNotebookRequest, ShareNotebookRequest, UnshareNotebookRequest} from "../Note/service-pb.cjs";
+
 
 export default (config) =>
   class Contact {
