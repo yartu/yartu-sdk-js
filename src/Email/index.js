@@ -1,4 +1,5 @@
 import {
+  Query,
   ListMessageRequest,
   GetMessageRequest,
   DownloadAttachmentRequest,
@@ -16,7 +17,6 @@ import {
 } from './service-pb.cjs';
 import { YEmailClient } from './service-grpc-web-pb.cjs';
 import { handleError } from '../utils/helper';
-import { Query } from '../utils/definitions_pb.cjs';
 
 export default (config) =>
   class Email {
