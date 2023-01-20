@@ -419,6 +419,7 @@ export default (config) =>
     };
 
     deleteContact = (contactId, contactIds = []) => {
+      // TODO :: @ramazan, @ahmet remove contactId field & if contactIds comes as integer convert to list.
       return new Promise((resolve, reject) => {
         const request = new DeleteContactRequest();
         request.setId(contactId);
