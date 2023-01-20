@@ -1299,67 +1299,6 @@ proto.yartu.YContactPromiseClient.prototype.listDuplicateContact =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
- *   !proto.yartu.UpsertMergeContactRequest,
- *   !proto.yartu.UpsertMergeContactResponse>}
- */
-const methodDescriptor_YContact_upsertMergeContact = new grpc.web.MethodDescriptor(
-  '/yartu.YContact/upsertMergeContact',
-  grpc.web.MethodType.UNARY,
-  proto.yartu.UpsertMergeContactRequest,
-  proto.yartu.UpsertMergeContactResponse,
-  /**
-   * @param {!proto.yartu.UpsertMergeContactRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.yartu.UpsertMergeContactResponse.deserializeBinary
-);
-
-
-/**
- * @param {!proto.yartu.UpsertMergeContactRequest} request The
- *     request proto
- * @param {?Object<string, string>} metadata User defined
- *     call metadata
- * @param {function(?grpc.web.RpcError, ?proto.yartu.UpsertMergeContactResponse)}
- *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.yartu.UpsertMergeContactResponse>|undefined}
- *     The XHR Node Readable Stream
- */
-proto.yartu.YContactClient.prototype.upsertMergeContact =
-    function(request, metadata, callback) {
-  return this.client_.rpcCall(this.hostname_ +
-      '/yartu.YContact/upsertMergeContact',
-      request,
-      metadata || {},
-      methodDescriptor_YContact_upsertMergeContact,
-      callback);
-};
-
-
-/**
- * @param {!proto.yartu.UpsertMergeContactRequest} request The
- *     request proto
- * @param {?Object<string, string>=} metadata User defined
- *     call metadata
- * @return {!Promise<!proto.yartu.UpsertMergeContactResponse>}
- *     Promise that resolves to the response
- */
-proto.yartu.YContactPromiseClient.prototype.upsertMergeContact =
-    function(request, metadata) {
-  return this.client_.unaryCall(this.hostname_ +
-      '/yartu.YContact/upsertMergeContact',
-      request,
-      metadata || {},
-      methodDescriptor_YContact_upsertMergeContact);
-};
-
-
-/**
- * @const
- * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.ListFavoriteContactRequest,
  *   !proto.yartu.ListFavoriteContactResponse>}
  */
@@ -1665,61 +1604,61 @@ proto.yartu.YContactPromiseClient.prototype.cloneContact =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
- *   !proto.yartu.UpsertContactStarRequest,
- *   !proto.yartu.UpsertContactStarResponse>}
+ *   !proto.yartu.StarContactRequest,
+ *   !proto.yartu.StarContactResponse>}
  */
-const methodDescriptor_YContact_upsertContactStar = new grpc.web.MethodDescriptor(
-  '/yartu.YContact/upsertContactStar',
+const methodDescriptor_YContact_starContact = new grpc.web.MethodDescriptor(
+  '/yartu.YContact/starContact',
   grpc.web.MethodType.UNARY,
-  proto.yartu.UpsertContactStarRequest,
-  proto.yartu.UpsertContactStarResponse,
+  proto.yartu.StarContactRequest,
+  proto.yartu.StarContactResponse,
   /**
-   * @param {!proto.yartu.UpsertContactStarRequest} request
+   * @param {!proto.yartu.StarContactRequest} request
    * @return {!Uint8Array}
    */
   function(request) {
     return request.serializeBinary();
   },
-  proto.yartu.UpsertContactStarResponse.deserializeBinary
+  proto.yartu.StarContactResponse.deserializeBinary
 );
 
 
 /**
- * @param {!proto.yartu.UpsertContactStarRequest} request The
+ * @param {!proto.yartu.StarContactRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.RpcError, ?proto.yartu.UpsertContactStarResponse)}
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.StarContactResponse)}
  *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.yartu.UpsertContactStarResponse>|undefined}
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.StarContactResponse>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.yartu.YContactClient.prototype.upsertContactStar =
+proto.yartu.YContactClient.prototype.starContact =
     function(request, metadata, callback) {
   return this.client_.rpcCall(this.hostname_ +
-      '/yartu.YContact/upsertContactStar',
+      '/yartu.YContact/starContact',
       request,
       metadata || {},
-      methodDescriptor_YContact_upsertContactStar,
+      methodDescriptor_YContact_starContact,
       callback);
 };
 
 
 /**
- * @param {!proto.yartu.UpsertContactStarRequest} request The
+ * @param {!proto.yartu.StarContactRequest} request The
  *     request proto
  * @param {?Object<string, string>=} metadata User defined
  *     call metadata
- * @return {!Promise<!proto.yartu.UpsertContactStarResponse>}
+ * @return {!Promise<!proto.yartu.StarContactResponse>}
  *     Promise that resolves to the response
  */
-proto.yartu.YContactPromiseClient.prototype.upsertContactStar =
+proto.yartu.YContactPromiseClient.prototype.starContact =
     function(request, metadata) {
   return this.client_.unaryCall(this.hostname_ +
-      '/yartu.YContact/upsertContactStar',
+      '/yartu.YContact/starContact',
       request,
       metadata || {},
-      methodDescriptor_YContact_upsertContactStar);
+      methodDescriptor_YContact_starContact);
 };
 
 

@@ -22,8 +22,8 @@ import {
   ImportContactRequest,
   MoveContactRequest,
 
-  UpsertContactLabelRequest,
-  UpsertContactStarRequest,
+  UpsertContactToLabelRequest,
+  StarContactRequest,
 
   UpsertLabelRequest,
   ListLabelRequest,
@@ -590,12 +590,12 @@ export default (config) =>
       });
     };
 
-    upsertContactLabel = (contactId, labels) => {
+    upsertContactToLabel = (contactId, labels) => {
       return new Promise((resolve, reject) => {
-        const request = new UpsertContactLabelRequest();
+        const request = new UpsertContactToLabelRequest();
         request.setContactId(contactId);
         request.setLabelsList(labels);
-        this.client.upsertContactLabel(
+        this.client.upsertContactToLabel(
           request,
           this.metadata,
           (error, response) => {
@@ -621,12 +621,12 @@ export default (config) =>
       });
     };
 
-    upsertContactStar = (contactId, starred) => {
+    starContact = (contactId, starred) => {
       return new Promise((resolve, reject) => {
-        const request = new UpsertContactStarRequest();
+        const request = new StarContactRequest();
         request.setId(contactId);
         request.setStarred(starred);
-        this.client.upsertContactStar(
+        this.client.starContact(
           request,
           this.metadata,
           (error, response) => {
