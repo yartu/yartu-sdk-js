@@ -9,7 +9,8 @@ import {
   UpsertDirectoryRequest,
   UpsertFileRequest,
   UploadFileRequest,
-  DownloadFileRequest
+  DownloadFileRequest,
+  GetOfficeFileRequest
 } from './service-pb.cjs';
 
 import { YDriveClient } from './service-grpc-web-pb.cjs';
@@ -380,6 +381,41 @@ export default (config) =>
               resolve({
                 code: code,
                 token: token
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
+    getOfficeFile = (repoId, path) => {
+      return new Promise((resolve, reject) => {
+        const request = new GetOfficeFileRequest();
+        request.setRepoId(repoId);
+        request.setPath(path);
+
+        this.client.getOfficeFile(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              const file = response.getFile().toObject();
+              const fileType = response.getFileType();
+              const officeToken = response.getOfficeToken();
+              const accessToken = response.getAccessToken();
+
+              resolve({
+                code: code,
+                file,
+                fileType,
+                officeToken,
+                accessToken
               });
             } else {
               reject({

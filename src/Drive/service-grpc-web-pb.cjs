@@ -872,6 +872,67 @@ proto.yartu.YDrivePromiseClient.prototype.downloadFile =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.GetOfficeFileRequest,
+ *   !proto.yartu.GetOfficeFileResponse>}
+ */
+const methodDescriptor_YDrive_getOfficeFile = new grpc.web.MethodDescriptor(
+  '/yartu.YDrive/getOfficeFile',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.GetOfficeFileRequest,
+  proto.yartu.GetOfficeFileResponse,
+  /**
+   * @param {!proto.yartu.GetOfficeFileRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.GetOfficeFileResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.GetOfficeFileRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.GetOfficeFileResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.GetOfficeFileResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YDriveClient.prototype.getOfficeFile =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YDrive/getOfficeFile',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_getOfficeFile,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.GetOfficeFileRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.GetOfficeFileResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YDrivePromiseClient.prototype.getOfficeFile =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YDrive/getOfficeFile',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_getOfficeFile);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.GetShareRequest,
  *   !proto.yartu.GetShareResponse>}
  */
