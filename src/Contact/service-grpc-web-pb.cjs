@@ -750,6 +750,67 @@ proto.yartu.YContactPromiseClient.prototype.listContact =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.MoveContactRequest,
+ *   !proto.yartu.MoveContactResponse>}
+ */
+const methodDescriptor_YContact_moveContact = new grpc.web.MethodDescriptor(
+  '/yartu.YContact/moveContact',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.MoveContactRequest,
+  proto.yartu.MoveContactResponse,
+  /**
+   * @param {!proto.yartu.MoveContactRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.MoveContactResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.MoveContactRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.MoveContactResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.MoveContactResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YContactClient.prototype.moveContact =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YContact/moveContact',
+      request,
+      metadata || {},
+      methodDescriptor_YContact_moveContact,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.MoveContactRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.MoveContactResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YContactPromiseClient.prototype.moveContact =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YContact/moveContact',
+      request,
+      metadata || {},
+      methodDescriptor_YContact_moveContact);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.GetLabelRequest,
  *   !proto.yartu.GetLabelResponse>}
  */
