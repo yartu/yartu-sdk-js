@@ -20,6 +20,7 @@ import {
   DeleteContactRequest,
   ExportContactRequest,
   ImportContactRequest,
+  MoveContactRequest,
 
   UpsertContactLabelRequest,
   UpsertContactStarRequest,
@@ -432,6 +433,33 @@ export default (config) =>
 
             if (code == 0) {
               resolve({
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
+    moveContact = (destinationAddressBookId, contactIds = []) => {
+      return new Promise((resolve, reject) => {
+        const request = new MoveContactRequest();
+        request.setDestinationAddressBookId(destinationAddressBookId);
+        request.setContactIdList(contactIds);
+        this.client.moveContact(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code: code,
                 message: response.getMessage()
               });
             } else {
