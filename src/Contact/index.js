@@ -20,9 +20,10 @@ import {
   DeleteContactRequest,
   ExportContactRequest,
   ImportContactRequest,
+  MoveContactRequest,
 
-  UpsertContactLabelRequest,
-  UpsertContactStarRequest,
+  UpsertContactToLabelRequest,
+  StarContactRequest,
 
   UpsertLabelRequest,
   ListLabelRequest,
@@ -419,6 +420,7 @@ export default (config) =>
     };
 
     deleteContact = (contactId, contactIds = []) => {
+      // TODO :: @ramazan, @ahmet remove contactId field & if contactIds comes as integer convert to list.
       return new Promise((resolve, reject) => {
         const request = new DeleteContactRequest();
         request.setId(contactId);
@@ -431,6 +433,33 @@ export default (config) =>
 
             if (code == 0) {
               resolve({
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
+    moveContact = (destinationAddressBookId, contactIds = []) => {
+      return new Promise((resolve, reject) => {
+        const request = new MoveContactRequest();
+        request.setDestinationAddressBookId(destinationAddressBookId);
+        request.setContactIdList(contactIds);
+        this.client.moveContact(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code: code,
                 message: response.getMessage()
               });
             } else {
@@ -561,12 +590,12 @@ export default (config) =>
       });
     };
 
-    upsertContactLabel = (contactId, labels) => {
+    upsertContactToLabel = (contactId, labels) => {
       return new Promise((resolve, reject) => {
-        const request = new UpsertContactLabelRequest();
+        const request = new UpsertContactToLabelRequest();
         request.setContactId(contactId);
         request.setLabelsList(labels);
-        this.client.upsertContactLabel(
+        this.client.upsertContactToLabel(
           request,
           this.metadata,
           (error, response) => {
@@ -592,12 +621,12 @@ export default (config) =>
       });
     };
 
-    upsertContactStar = (contactId, starred) => {
+    starContact = (contactId, starred) => {
       return new Promise((resolve, reject) => {
-        const request = new UpsertContactStarRequest();
+        const request = new StarContactRequest();
         request.setId(contactId);
         request.setStarred(starred);
-        this.client.upsertContactStar(
+        this.client.starContact(
           request,
           this.metadata,
           (error, response) => {
