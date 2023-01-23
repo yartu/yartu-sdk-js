@@ -22,7 +22,7 @@ import {
   ImportContactRequest,
   MoveContactRequest,
 
-  UpsertContactToLabelRequest,
+  UpsertLabelToContactRequest,
   StarContactRequest,
 
   UpsertLabelRequest,
@@ -590,12 +590,12 @@ export default (config) =>
       });
     };
 
-    upsertContactToLabel = (contactId, labels) => {
+    upsertLabelToContact = (contactId, labels) => {
       return new Promise((resolve, reject) => {
-        const request = new UpsertContactToLabelRequest();
+        const request = new UpsertLabelToContactRequest();
         request.setContactId(contactId);
         request.setLabelsList(labels);
-        this.client.upsertContactToLabel(
+        this.client.upsertLabelToContact(
           request,
           this.metadata,
           (error, response) => {
