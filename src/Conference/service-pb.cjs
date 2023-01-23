@@ -23,6 +23,8 @@ var global =
 
 var common_grpc_definitions_pb = require('../utils/definitions_pb.cjs');
 goog.object.extend(proto, common_grpc_definitions_pb);
+var note_grpc_service_pb = require('../../note/grpc/service_pb.js');
+goog.object.extend(proto, note_grpc_service_pb);
 goog.exportSymbol('proto.yartu.CheckPublicConferenceRequest', null, global);
 goog.exportSymbol('proto.yartu.CheckPublicConferenceResponse', null, global);
 goog.exportSymbol('proto.yartu.DeleteConferenceRequest', null, global);
@@ -1245,7 +1247,8 @@ proto.yartu.Session.toObject = function(includeInstance, msg) {
     externalParticipantsList: (f = jspb.Message.getRepeatedField(msg, 20)) == null ? undefined : f,
     jwt: jspb.Message.getFieldWithDefault(msg, 21, ""),
     rrule: jspb.Message.getFieldWithDefault(msg, 22, ""),
-    reminder: jspb.Message.getFieldWithDefault(msg, 23, "")
+    reminder: jspb.Message.getFieldWithDefault(msg, 23, ""),
+    note: (f = msg.getNote()) && note_grpc_service_pb.Note.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -1375,6 +1378,11 @@ proto.yartu.Session.deserializeBinaryFromReader = function(msg, reader) {
     case 23:
       var value = /** @type {string} */ (reader.readString());
       msg.setReminder(value);
+      break;
+    case 24:
+      var value = new note_grpc_service_pb.Note;
+      reader.readMessage(value,note_grpc_service_pb.Note.deserializeBinaryFromReader);
+      msg.setNote(value);
       break;
     default:
       reader.skipField();
@@ -1566,6 +1574,14 @@ proto.yartu.Session.serializeBinaryToWriter = function(message, writer) {
     writer.writeString(
       23,
       f
+    );
+  }
+  f = message.getNote();
+  if (f != null) {
+    writer.writeMessage(
+      24,
+      f,
+      note_grpc_service_pb.Note.serializeBinaryToWriter
     );
   }
 };
@@ -2094,6 +2110,43 @@ proto.yartu.Session.prototype.clearReminder = function() {
  */
 proto.yartu.Session.prototype.hasReminder = function() {
   return jspb.Message.getField(this, 23) != null;
+};
+
+
+/**
+ * optional Note note = 24;
+ * @return {?proto.yartu.Note}
+ */
+proto.yartu.Session.prototype.getNote = function() {
+  return /** @type{?proto.yartu.Note} */ (
+    jspb.Message.getWrapperField(this, note_grpc_service_pb.Note, 24));
+};
+
+
+/**
+ * @param {?proto.yartu.Note|undefined} value
+ * @return {!proto.yartu.Session} returns this
+*/
+proto.yartu.Session.prototype.setNote = function(value) {
+  return jspb.Message.setWrapperField(this, 24, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.yartu.Session} returns this
+ */
+proto.yartu.Session.prototype.clearNote = function() {
+  return this.setNote(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.Session.prototype.hasNote = function() {
+  return jspb.Message.getField(this, 24) != null;
 };
 
 
