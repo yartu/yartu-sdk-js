@@ -23,7 +23,7 @@ var global =
 
 var common_grpc_definitions_pb = require('../utils/definitions_pb.cjs');
 goog.object.extend(proto, common_grpc_definitions_pb);
-var note_grpc_service_pb = require('../../note/grpc/service_pb.js');
+var note_grpc_service_pb = require('../Note/service-pb.cjs');
 goog.object.extend(proto, note_grpc_service_pb);
 goog.exportSymbol('proto.yartu.CheckPublicConferenceRequest', null, global);
 goog.exportSymbol('proto.yartu.CheckPublicConferenceResponse', null, global);
