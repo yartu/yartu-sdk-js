@@ -8281,8 +8281,7 @@ proto.yartu.GetNoteRequest.prototype.toObject = function(opt_includeInstance) {
  */
 proto.yartu.GetNoteRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    conferenceSessionId: jspb.Message.getFieldWithDefault(msg, 2, 0)
+    id: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
   if (includeInstance) {
@@ -8323,10 +8322,6 @@ proto.yartu.GetNoteRequest.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {number} */ (reader.readInt64());
       msg.setId(value);
       break;
-    case 2:
-      var value = /** @type {number} */ (reader.readInt64());
-      msg.setConferenceSessionId(value);
-      break;
     default:
       reader.skipField();
       break;
@@ -8356,17 +8351,10 @@ proto.yartu.GetNoteRequest.prototype.serializeBinary = function() {
  */
 proto.yartu.GetNoteRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = /** @type {number} */ (jspb.Message.getField(message, 1));
-  if (f != null) {
+  f = message.getId();
+  if (f !== 0) {
     writer.writeInt64(
       1,
-      f
-    );
-  }
-  f = /** @type {number} */ (jspb.Message.getField(message, 2));
-  if (f != null) {
-    writer.writeInt64(
-      2,
       f
     );
   }
@@ -8387,61 +8375,7 @@ proto.yartu.GetNoteRequest.prototype.getId = function() {
  * @return {!proto.yartu.GetNoteRequest} returns this
  */
 proto.yartu.GetNoteRequest.prototype.setId = function(value) {
-  return jspb.Message.setField(this, 1, value);
-};
-
-
-/**
- * Clears the field making it undefined.
- * @return {!proto.yartu.GetNoteRequest} returns this
- */
-proto.yartu.GetNoteRequest.prototype.clearId = function() {
-  return jspb.Message.setField(this, 1, undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {boolean}
- */
-proto.yartu.GetNoteRequest.prototype.hasId = function() {
-  return jspb.Message.getField(this, 1) != null;
-};
-
-
-/**
- * optional int64 conference_session_id = 2;
- * @return {number}
- */
-proto.yartu.GetNoteRequest.prototype.getConferenceSessionId = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
-};
-
-
-/**
- * @param {number} value
- * @return {!proto.yartu.GetNoteRequest} returns this
- */
-proto.yartu.GetNoteRequest.prototype.setConferenceSessionId = function(value) {
-  return jspb.Message.setField(this, 2, value);
-};
-
-
-/**
- * Clears the field making it undefined.
- * @return {!proto.yartu.GetNoteRequest} returns this
- */
-proto.yartu.GetNoteRequest.prototype.clearConferenceSessionId = function() {
-  return jspb.Message.setField(this, 2, undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {boolean}
- */
-proto.yartu.GetNoteRequest.prototype.hasConferenceSessionId = function() {
-  return jspb.Message.getField(this, 2) != null;
+  return jspb.Message.setProto3IntField(this, 1, value);
 };
 
 
