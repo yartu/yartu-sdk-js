@@ -19,6 +19,8 @@
 const grpc = {};
 grpc.web = require('grpc-web');
 
+
+var common_grpc_definitions_pb = require('../utils/definitions_pb.cjs')
 const proto = {};
 proto.yartu = require('./service-pb.cjs');
 
@@ -382,33 +384,33 @@ proto.yartu.YCalendarPromiseClient.prototype.shareCalendar =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
- *   !proto.yartu.UnShareCalendarRequest,
- *   !proto.yartu.UnShareCalendarResponse>}
+ *   !proto.yartu.UnshareCalendarRequest,
+ *   !proto.yartu.UnshareCalendarResponse>}
  */
 const methodDescriptor_YCalendar_unshareCalendar = new grpc.web.MethodDescriptor(
   '/yartu.YCalendar/unshareCalendar',
   grpc.web.MethodType.UNARY,
-  proto.yartu.UnShareCalendarRequest,
-  proto.yartu.UnShareCalendarResponse,
+  proto.yartu.UnshareCalendarRequest,
+  proto.yartu.UnshareCalendarResponse,
   /**
-   * @param {!proto.yartu.UnShareCalendarRequest} request
+   * @param {!proto.yartu.UnshareCalendarRequest} request
    * @return {!Uint8Array}
    */
   function(request) {
     return request.serializeBinary();
   },
-  proto.yartu.UnShareCalendarResponse.deserializeBinary
+  proto.yartu.UnshareCalendarResponse.deserializeBinary
 );
 
 
 /**
- * @param {!proto.yartu.UnShareCalendarRequest} request The
+ * @param {!proto.yartu.UnshareCalendarRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.RpcError, ?proto.yartu.UnShareCalendarResponse)}
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.UnshareCalendarResponse)}
  *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.yartu.UnShareCalendarResponse>|undefined}
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.UnshareCalendarResponse>|undefined}
  *     The XHR Node Readable Stream
  */
 proto.yartu.YCalendarClient.prototype.unshareCalendar =
@@ -423,11 +425,11 @@ proto.yartu.YCalendarClient.prototype.unshareCalendar =
 
 
 /**
- * @param {!proto.yartu.UnShareCalendarRequest} request The
+ * @param {!proto.yartu.UnshareCalendarRequest} request The
  *     request proto
  * @param {?Object<string, string>=} metadata User defined
  *     call metadata
- * @return {!Promise<!proto.yartu.UnShareCalendarResponse>}
+ * @return {!Promise<!proto.yartu.UnshareCalendarResponse>}
  *     Promise that resolves to the response
  */
 proto.yartu.YCalendarPromiseClient.prototype.unshareCalendar =
@@ -437,6 +439,67 @@ proto.yartu.YCalendarPromiseClient.prototype.unshareCalendar =
       request,
       metadata || {},
       methodDescriptor_YCalendar_unshareCalendar);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.DeleteSharedCalendarRequest,
+ *   !proto.yartu.DeleteSharedCalendarResponse>}
+ */
+const methodDescriptor_YCalendar_deleteSharedCalendar = new grpc.web.MethodDescriptor(
+  '/yartu.YCalendar/deleteSharedCalendar',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.DeleteSharedCalendarRequest,
+  proto.yartu.DeleteSharedCalendarResponse,
+  /**
+   * @param {!proto.yartu.DeleteSharedCalendarRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.DeleteSharedCalendarResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.DeleteSharedCalendarRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.DeleteSharedCalendarResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.DeleteSharedCalendarResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YCalendarClient.prototype.deleteSharedCalendar =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YCalendar/deleteSharedCalendar',
+      request,
+      metadata || {},
+      methodDescriptor_YCalendar_deleteSharedCalendar,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.DeleteSharedCalendarRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.DeleteSharedCalendarResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YCalendarPromiseClient.prototype.deleteSharedCalendar =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YCalendar/deleteSharedCalendar',
+      request,
+      metadata || {},
+      methodDescriptor_YCalendar_deleteSharedCalendar);
 };
 
 

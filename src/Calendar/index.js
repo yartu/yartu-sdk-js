@@ -1,21 +1,25 @@
 import {
+  dateRange,
+  Attendee,
+
   ListCalendarRequest,
   DeleteCalendarRequest,
-  ListCalendarObjectRequest,
   UpsertCalendarRequest,
-  dateRange,
-  UpsertCalendarObjectRequest,
-  CalendarObject,
-  Attendee,
-  GetCalendarObjectRequest,
-  UpsertCalendarObjectDatesRequest,
   ShareCalendarRequest,
-  CalendarUserSharePermissionMeta,
+  UnshareCalendarRequest,
+  DeleteSharedCalendarRequest,
+
+  ListCalendarObjectRequest,
+  UpsertCalendarObjectRequest,
+  GetCalendarObjectRequest,
+
+  UpsertCalendarObjectDatesRequest,
   UpsertCalendarObjectSplitRequest,
 } from './service-pb.cjs';
 
 import { YCalendarClient } from './service-grpc-web-pb.cjs';
 import { handleError } from '../utils/helper';
+import {Group, Shared, User} from "../utils/definitions_pb.cjs";
 
 export default (config) =>
   class Calendar {
@@ -317,21 +321,40 @@ export default (config) =>
       });
     }
 
-    shareCalendar(calendarId, usersList) {
+    shareCalendar(calendarId, shareList) {
       return new Promise((resolve, reject) => {
         const request = new ShareCalendarRequest();
         request.setId(calendarId);
-        console.log('CAL', calendarId);
-        console.log('usersList', usersList);
-        const UserSharePermissionsList = [];
-        usersList.forEach(user => {
-          const meta = new CalendarUserSharePermissionMeta();
-          meta.setUsername(user.username);
-          meta.setPermission(user.permission);
-          UserSharePermissionsList.push(meta);
+
+        const UserShareList = [];
+        shareList.forEach(s => {
+          const shared = new Shared();
+          if (s?.isYartuUser) {
+            const user = new User();
+            user.setId(s.id);
+            user.setUsername(s.email || s.username);
+            user.setName(s.name);
+            user.setSurname(s.surname);
+
+            shared.setUser(user);
+
+          } else if (s?.isGroup) {
+
+            const group = new Group();
+            group.setId(s.id);
+            group.setName(s.name);
+            group.setEmailAlias(s.email);
+
+            shared.setGroup(group);
+          } else {
+            console.log('@yartu/sdk/ shareNotebook method not supports external users and Realm share features for now!');
+          }
+
+          shared.setPermissions(s.permissions);
+          UserShareList.push(shared);
         });
 
-        request.setPermissionsList(UserSharePermissionsList)
+        request.setSharedList(UserShareList);
 
         this.client.shareCalendar(request, this.metadata, (error, response) => {
           if (error) {
@@ -356,6 +379,63 @@ export default (config) =>
         });
       });
     }
+
+    unshareCalendar(calendarId) {
+      return new Promise((resolve, reject) => {
+        const request = new UnshareCalendarRequest();
+        request.setId(calendarId);
+
+        this.client.unshareCalendar(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code: 0,
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    deleteSharedCalendar(calendarId, sharedCalendarId) {
+      return new Promise((resolve, reject) => {
+        const request = new DeleteSharedCalendarRequest();
+        request.setId(calendarId);
+        request.setSharedCalendarId(sharedCalendarId);
+
+        this.client.deleteSharedCalendar(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code: 0,
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+
 
     listCalendarSharedList(calendarId) {
       return new Promise((resolve, reject) => {

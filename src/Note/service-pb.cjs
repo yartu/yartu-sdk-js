@@ -436,7 +436,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.yartu.UnshareNotebookRequest = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.yartu.UnshareNotebookRequest.repeatedFields_, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
 goog.inherits(proto.yartu.UnshareNotebookRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -6389,13 +6389,6 @@ proto.yartu.ShareNotebookResponse.prototype.setMessage = function(value) {
 
 
 
-/**
- * List of repeated fields within this message type.
- * @private {!Array<number>}
- * @const
- */
-proto.yartu.UnshareNotebookRequest.repeatedFields_ = [2];
-
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -6427,9 +6420,7 @@ proto.yartu.UnshareNotebookRequest.prototype.toObject = function(opt_includeInst
  */
 proto.yartu.UnshareNotebookRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    sharedList: jspb.Message.toObjectList(msg.getSharedList(),
-    common_grpc_definitions_pb.Shared.toObject, includeInstance)
+    id: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
   if (includeInstance) {
@@ -6470,11 +6461,6 @@ proto.yartu.UnshareNotebookRequest.deserializeBinaryFromReader = function(msg, r
       var value = /** @type {number} */ (reader.readInt64());
       msg.setId(value);
       break;
-    case 2:
-      var value = new common_grpc_definitions_pb.Shared;
-      reader.readMessage(value,common_grpc_definitions_pb.Shared.deserializeBinaryFromReader);
-      msg.addShared(value);
-      break;
     default:
       reader.skipField();
       break;
@@ -6511,14 +6497,6 @@ proto.yartu.UnshareNotebookRequest.serializeBinaryToWriter = function(message, w
       f
     );
   }
-  f = message.getSharedList();
-  if (f.length > 0) {
-    writer.writeRepeatedMessage(
-      2,
-      f,
-      common_grpc_definitions_pb.Shared.serializeBinaryToWriter
-    );
-  }
 };
 
 
@@ -6537,44 +6515,6 @@ proto.yartu.UnshareNotebookRequest.prototype.getId = function() {
  */
 proto.yartu.UnshareNotebookRequest.prototype.setId = function(value) {
   return jspb.Message.setProto3IntField(this, 1, value);
-};
-
-
-/**
- * repeated Shared shared = 2;
- * @return {!Array<!proto.Shared>}
- */
-proto.yartu.UnshareNotebookRequest.prototype.getSharedList = function() {
-  return /** @type{!Array<!proto.Shared>} */ (
-    jspb.Message.getRepeatedWrapperField(this, common_grpc_definitions_pb.Shared, 2));
-};
-
-
-/**
- * @param {!Array<!proto.Shared>} value
- * @return {!proto.yartu.UnshareNotebookRequest} returns this
-*/
-proto.yartu.UnshareNotebookRequest.prototype.setSharedList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 2, value);
-};
-
-
-/**
- * @param {!proto.Shared=} opt_value
- * @param {number=} opt_index
- * @return {!proto.Shared}
- */
-proto.yartu.UnshareNotebookRequest.prototype.addShared = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.Shared, opt_index);
-};
-
-
-/**
- * Clears the list making it empty but non-null.
- * @return {!proto.yartu.UnshareNotebookRequest} returns this
- */
-proto.yartu.UnshareNotebookRequest.prototype.clearSharedList = function() {
-  return this.setSharedList([]);
 };
 
 
