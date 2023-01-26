@@ -147,7 +147,7 @@ export default (config) =>
       });
     }
 
-    upsertCalendarObject(calendarObjectData = {}) {""
+    upsertCalendarObject(calendarObjectData = {}) {
       return new Promise((resolve, reject) => {
         const request = new UpsertCalendarObjectRequest();
 
@@ -260,7 +260,7 @@ export default (config) =>
       return new Promise((resolve, reject) => {
         const request = new UpsertCalendarObjectSplitRequest();
         // request.setDate(date);
-        
+
         request.setId(calendarObjectId);
         request.setOldDate(date.oldDate);
         request.setNewDateStart(date.newStart);
