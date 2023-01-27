@@ -260,67 +260,6 @@ proto.yartu_mail.YEmailPromiseClient.prototype.deleteFolder =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
- *   !proto.yartu_mail.EmptyFolderRequest,
- *   !proto.yartu_mail.EmptyFolderResponse>}
- */
-const methodDescriptor_YEmail_emptyFolder = new grpc.web.MethodDescriptor(
-  '/yartu_mail.YEmail/emptyFolder',
-  grpc.web.MethodType.UNARY,
-  proto.yartu_mail.EmptyFolderRequest,
-  proto.yartu_mail.EmptyFolderResponse,
-  /**
-   * @param {!proto.yartu_mail.EmptyFolderRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.yartu_mail.EmptyFolderResponse.deserializeBinary
-);
-
-
-/**
- * @param {!proto.yartu_mail.EmptyFolderRequest} request The
- *     request proto
- * @param {?Object<string, string>} metadata User defined
- *     call metadata
- * @param {function(?grpc.web.RpcError, ?proto.yartu_mail.EmptyFolderResponse)}
- *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.yartu_mail.EmptyFolderResponse>|undefined}
- *     The XHR Node Readable Stream
- */
-proto.yartu_mail.YEmailClient.prototype.emptyFolder =
-    function(request, metadata, callback) {
-  return this.client_.rpcCall(this.hostname_ +
-      '/yartu_mail.YEmail/emptyFolder',
-      request,
-      metadata || {},
-      methodDescriptor_YEmail_emptyFolder,
-      callback);
-};
-
-
-/**
- * @param {!proto.yartu_mail.EmptyFolderRequest} request The
- *     request proto
- * @param {?Object<string, string>=} metadata User defined
- *     call metadata
- * @return {!Promise<!proto.yartu_mail.EmptyFolderResponse>}
- *     Promise that resolves to the response
- */
-proto.yartu_mail.YEmailPromiseClient.prototype.emptyFolder =
-    function(request, metadata) {
-  return this.client_.unaryCall(this.hostname_ +
-      '/yartu_mail.YEmail/emptyFolder',
-      request,
-      metadata || {},
-      methodDescriptor_YEmail_emptyFolder);
-};
-
-
-/**
- * @const
- * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu_mail.BulkActionFolderRequest,
  *   !proto.yartu_mail.BulkActionFolderResponse>}
  */
