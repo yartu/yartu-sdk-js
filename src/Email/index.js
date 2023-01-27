@@ -12,6 +12,7 @@ import {
   UploadAttachmentRequest,
   DeleteFolderRequest,
   EmptyFolderRequest,
+  BulkActionFolderRequest,
   GetInfoRequest,
   MailAddress
 } from './service-pb.cjs';
@@ -384,6 +385,39 @@ export default (config) =>
             }
           }
         });
+      });
+    }
+
+    bulkActionFolder(folderUuid, action) {
+      return new Promise((resolve, reject) => {
+        const request = new BulkActionFolderRequest();
+
+        request.setUuid(folderUuid);
+        request.setAction(action);
+
+        this.client.bulkActionFolder(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+
+              if (code == 0) {
+                resolve({
+                  code: 0,
+                  message: 'success'
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
       });
     }
 
