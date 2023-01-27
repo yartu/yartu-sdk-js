@@ -321,6 +321,67 @@ proto.yartu_mail.YEmailPromiseClient.prototype.emptyFolder =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu_mail.BulkActionFolderRequest,
+ *   !proto.yartu_mail.BulkActionFolderResponse>}
+ */
+const methodDescriptor_YEmail_bulkActionFolder = new grpc.web.MethodDescriptor(
+  '/yartu_mail.YEmail/bulkActionFolder',
+  grpc.web.MethodType.UNARY,
+  proto.yartu_mail.BulkActionFolderRequest,
+  proto.yartu_mail.BulkActionFolderResponse,
+  /**
+   * @param {!proto.yartu_mail.BulkActionFolderRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu_mail.BulkActionFolderResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu_mail.BulkActionFolderRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu_mail.BulkActionFolderResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu_mail.BulkActionFolderResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu_mail.YEmailClient.prototype.bulkActionFolder =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu_mail.YEmail/bulkActionFolder',
+      request,
+      metadata || {},
+      methodDescriptor_YEmail_bulkActionFolder,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu_mail.BulkActionFolderRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu_mail.BulkActionFolderResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu_mail.YEmailPromiseClient.prototype.bulkActionFolder =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu_mail.YEmail/bulkActionFolder',
+      request,
+      metadata || {},
+      methodDescriptor_YEmail_bulkActionFolder);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu_mail.ListMessageRequest,
  *   !proto.yartu_mail.ListMessageResponse>}
  */
