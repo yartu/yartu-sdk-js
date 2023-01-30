@@ -156,7 +156,9 @@ export default (config) =>
         const request = new UpsertCalendarObjectRequest();
 
         request.setStart(calendarObjectData.start);
+        request.setStartTimeZone(calendarObjectData?.startTimeZone);
         request.setEnd(calendarObjectData.end);
+        request.setEndTimeZone(calendarObjectData?.endTimeZone);
         request.setSummary(calendarObjectData.summary);
         request.setLocation(calendarObjectData.location);
         request.setDescription(calendarObjectData.description);
