@@ -628,6 +628,67 @@ proto.yartu.YDrivePromiseClient.prototype.starDirent =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.UpsertDirentRequest,
+ *   !proto.yartu.UpsertDirentResponse>}
+ */
+const methodDescriptor_YDrive_upsertDirent = new grpc.web.MethodDescriptor(
+  '/yartu.YDrive/upsertDirent',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.UpsertDirentRequest,
+  proto.yartu.UpsertDirentResponse,
+  /**
+   * @param {!proto.yartu.UpsertDirentRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.UpsertDirentResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.UpsertDirentRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.UpsertDirentResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.UpsertDirentResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YDriveClient.prototype.upsertDirent =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YDrive/upsertDirent',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_upsertDirent,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.UpsertDirentRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.UpsertDirentResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YDrivePromiseClient.prototype.upsertDirent =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YDrive/upsertDirent',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_upsertDirent);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.UpsertDirectoryRequest,
  *   !proto.yartu.UpsertDirectoryResponse>}
  */
