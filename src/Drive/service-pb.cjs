@@ -8172,7 +8172,7 @@ proto.yartu.StarDirentResponse.prototype.hasMessage = function() {
  * @private {!Array<number>}
  * @const
  */
-proto.yartu.UpsertDirentRequest.repeatedFields_ = [3,8];
+proto.yartu.UpsertDirentRequest.repeatedFields_ = [3];
 
 
 
@@ -8212,7 +8212,7 @@ proto.yartu.UpsertDirentRequest.toObject = function(includeInstance, msg) {
     isDraft: jspb.Message.getBooleanFieldWithDefault(msg, 5, false),
     dstRepoId: jspb.Message.getFieldWithDefault(msg, 6, ""),
     dstDir: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    newNameList: (f = jspb.Message.getRepeatedField(msg, 8)) == null ? undefined : f,
+    newName: jspb.Message.getFieldWithDefault(msg, 8, ""),
     createParents: jspb.Message.getBooleanFieldWithDefault(msg, 9, false),
     commitId: jspb.Message.getFieldWithDefault(msg, 10, ""),
     expire: jspb.Message.getFieldWithDefault(msg, 11, 0)
@@ -8282,7 +8282,7 @@ proto.yartu.UpsertDirentRequest.deserializeBinaryFromReader = function(msg, read
       break;
     case 8:
       var value = /** @type {string} */ (reader.readString());
-      msg.addNewName(value);
+      msg.setNewName(value);
       break;
     case 9:
       var value = /** @type {boolean} */ (reader.readBool());
@@ -8374,9 +8374,9 @@ proto.yartu.UpsertDirentRequest.serializeBinaryToWriter = function(message, writ
       f
     );
   }
-  f = message.getNewNameList();
+  f = message.getNewName();
   if (f.length > 0) {
-    writer.writeRepeatedString(
+    writer.writeString(
       8,
       f
     );
@@ -8587,39 +8587,20 @@ proto.yartu.UpsertDirentRequest.prototype.hasDstDir = function() {
 
 
 /**
- * repeated string new_name = 8;
- * @return {!Array<string>}
+ * optional string new_name = 8;
+ * @return {string}
  */
-proto.yartu.UpsertDirentRequest.prototype.getNewNameList = function() {
-  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 8));
-};
-
-
-/**
- * @param {!Array<string>} value
- * @return {!proto.yartu.UpsertDirentRequest} returns this
- */
-proto.yartu.UpsertDirentRequest.prototype.setNewNameList = function(value) {
-  return jspb.Message.setField(this, 8, value || []);
+proto.yartu.UpsertDirentRequest.prototype.getNewName = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
 };
 
 
 /**
  * @param {string} value
- * @param {number=} opt_index
  * @return {!proto.yartu.UpsertDirentRequest} returns this
  */
-proto.yartu.UpsertDirentRequest.prototype.addNewName = function(value, opt_index) {
-  return jspb.Message.addToRepeatedField(this, 8, value, opt_index);
-};
-
-
-/**
- * Clears the list making it empty but non-null.
- * @return {!proto.yartu.UpsertDirentRequest} returns this
- */
-proto.yartu.UpsertDirentRequest.prototype.clearNewNameList = function() {
-  return this.setNewNameList([]);
+proto.yartu.UpsertDirentRequest.prototype.setNewName = function(value) {
+  return jspb.Message.setProto3StringField(this, 8, value);
 };
 
 

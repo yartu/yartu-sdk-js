@@ -221,6 +221,73 @@ export default (config) =>
       });
     };
 
+    upsertDirent = (
+      repoId,
+      pathList,
+      name,
+      operation,
+      dstRepoId,
+      dstDir,
+      force = false,
+      expire = 0,
+      isDraft = false
+    ) => {
+      return new Promise((resolve, reject) => {
+        const request = new UpsertDirentRequest();
+
+        if (
+          !['create', 'rename', 'move', 'copy', 'delete'].includes(operation)
+        ) {
+          reject({
+            code: 100
+          });
+        }
+        request.setRepoId(repoId);
+        request.setPath(pathList);
+        request.setNewName(name);
+        request.setOperation(operation);
+        request.setIsDraft(isDraft);
+
+        if (operation == 'copy' || operation == 'move') {
+          request.setDstRepoId(dstRepoId);
+          request.setDstDir(dstDir);
+        } else if (operation == 'lock') {
+          request.setExpire(expire);
+        }
+
+        this.client.upsertDirent(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code === 0) {
+              let dirent = {};
+              if (operation !== 'delete') {
+                dirent = response.getData().toObject();
+                dirent.path = `${dirent.parentDir}${dirent.name}`;
+              }
+
+              resolve({
+                code,
+                data: dirent
+              });
+            } else if (code === -1) {
+              // Forceable error
+              resolve({
+                code,
+                error: response.getErrorList().map((data) => data.toObject())
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
     upsertDirectory = (repoId, path, name, operation, dstRepoId, dstDir) => {
       return new Promise((resolve, reject) => {
         const request = new UpsertDirectoryRequest();
