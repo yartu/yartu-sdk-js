@@ -243,9 +243,10 @@ export default (config) =>
           });
         }
         request.setRepoId(repoId);
-        request.setPath(pathList);
+        request.setPathList(pathList);
         request.setNewName(name);
         request.setOperation(operation);
+        request.setForce(force);
         request.setIsDraft(isDraft);
 
         if (operation == 'copy' || operation == 'move') {
