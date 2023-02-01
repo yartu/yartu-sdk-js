@@ -1,5 +1,6 @@
 import {
   NoteMetaQuery,
+  NoteLabel,
 
   ListNotebookRequest,
   UpsertNotebookRequest,
@@ -615,7 +616,17 @@ export default (config) =>
       return new Promise((resolve, reject) => {
         const request = new UpsertLabelToNoteRequest();
         request.setNoteId(noteId);
-        request.setLabelsList(labels);
+
+        const labelsList = [];
+        labels.forEach(l => {
+          const notelabel = new NoteLabel();
+          notelabel.setId(l.id);
+          notelabel.setName(l.name);
+          notelabel.setColor(l.color);
+          // notelabel.setUser(s.permissions);  // this line is not reuqired we can get context.user in backend.
+          labelsList.push(notelabel);
+        });
+        request.setLabelsList(labelsList);
 
         this.client.upsertLabelToNote(
           request,
