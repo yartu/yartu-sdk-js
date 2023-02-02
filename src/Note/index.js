@@ -380,8 +380,9 @@ export default (config) =>
         request.setTitle(noteData.title);
         request.setContent(noteData.content);
         request.setColor(noteData.color);
-        request.setReminder(noteData.reminder);
-
+        if (typeof noteData.reminder === 'object' && noteData.reminder) {
+          request.setReminder(noteData?.reminder.format('YYYY-MM-DD HH:mm'));
+        }
         request.setNotebookId(noteData.notebookId);
         request.setIsPinned(noteData.isPinned);
         request.setIsStarred(noteData.isStarred);
@@ -620,7 +621,9 @@ export default (config) =>
         const labelsList = [];
         labels.forEach(l => {
           const notelabel = new NoteLabel();
-          notelabel.setId(l.id);
+          if(typeof l.id === 'number') {
+            notelabel.setId(l.id);
+          }
           notelabel.setName(l.name);
           notelabel.setColor(l.color);
           // notelabel.setUser(s.permissions);  // this line is not reuqired we can get context.user in backend.
