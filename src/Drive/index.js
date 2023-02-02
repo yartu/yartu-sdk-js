@@ -30,9 +30,12 @@ export default (config) =>
       this.metadata = { Authentication: yartu_token };
     }
 
-    getRecent = () => {
+    getRecent = (recentType = ['viewed', 'updated', 'starred']) => {
       return new Promise((resolve, reject) => {
         const request = new GetRecentRequest();
+
+        request.setRecentTypesList(recentType);
+
         this.client.getRecent(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
@@ -47,8 +50,15 @@ export default (config) =>
                 .getUpdatedList()
                 .map((data) => data.toObject());
               const starredList = response
-                .getStarredList()
-                .map((data) => data.toObject());
+                .getStarredList().map((data) => {
+                  const l = data.toObject();
+                  if (l.type === 'file') {
+                    l.path = `${l.parentDir}${l.name}`;
+                  } else {
+                    l.path = l.parentDir;
+                  }
+                  return l;
+                });
               resolve({
                 viewed: viewedList,
                 updated: updatedList,
