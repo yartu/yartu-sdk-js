@@ -517,11 +517,14 @@ export default (config) =>
       });
     }
 
-    deleteNote = (noteId) => {
+    deleteNote = (noteIds) => {
       return new Promise((resolve, reject) => {
         const request = new DeleteNoteRequest();
-
-        request.setId(noteId);
+        if (Array.isArray(noteIds) && noteIds.length > 0) {
+          request.setIdsList(noteIds);
+        } else {
+          request.setId(noteIds);
+        }
 
         this.client.deleteNote(
           request,
