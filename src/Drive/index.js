@@ -10,7 +10,8 @@ import {
   UpsertFileRequest,
   UploadFileRequest,
   DownloadFileRequest,
-  GetOfficeFileRequest
+  GetOfficeFileRequest,
+  UpsertDirentRequest,
 } from './service-pb.cjs';
 
 import { YDriveClient } from './service-grpc-web-pb.cjs';
@@ -30,9 +31,12 @@ export default (config) =>
       this.metadata = { Authentication: yartu_token };
     }
 
-    getRecent = () => {
+    getRecent = (recentType = ['viewed', 'updated', 'starred']) => {
       return new Promise((resolve, reject) => {
         const request = new GetRecentRequest();
+
+        request.setRecentTypesList(recentType);
+
         this.client.getRecent(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
@@ -47,8 +51,15 @@ export default (config) =>
                 .getUpdatedList()
                 .map((data) => data.toObject());
               const starredList = response
-                .getStarredList()
-                .map((data) => data.toObject());
+                .getStarredList().map((data) => {
+                  const l = data.toObject();
+                  if (l.type === 'file') {
+                    l.path = `${l.parentDir}${l.name}`;
+                  } else {
+                    l.path = l.parentDir;
+                  }
+                  return l;
+                });
               resolve({
                 viewed: viewedList,
                 updated: updatedList,
@@ -262,15 +273,14 @@ export default (config) =>
           } else {
             const code = response.getCode();
             if (code === 0) {
-              let dirent = {};
+              let dirents = {};
               if (operation !== 'delete') {
-                dirent = response.getData().toObject();
-                dirent.path = `${dirent.parentDir}${dirent.name}`;
+                dirents = response.getDataList().toObject();
+                // dirent.path = `${dirent.parentDir}${dirent.name}`;
               }
-
               resolve({
                 code,
-                data: dirent
+                data: dirents
               });
             } else if (code === -1) {
               // Forceable error
