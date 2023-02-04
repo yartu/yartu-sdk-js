@@ -11,7 +11,7 @@ import {
   UploadFileRequest,
   DownloadFileRequest,
   GetOfficeFileRequest,
-  UpsertDirentRequest,
+  UpsertDirentRequest
 } from './service-pb.cjs';
 
 import { YDriveClient } from './service-grpc-web-pb.cjs';
@@ -50,16 +50,15 @@ export default (config) =>
               const updatedList = response
                 .getUpdatedList()
                 .map((data) => data.toObject());
-              const starredList = response
-                .getStarredList().map((data) => {
-                  const l = data.toObject();
-                  if (l.type === 'file') {
-                    l.path = `${l.parentDir}${l.name}`;
-                  } else {
-                    l.path = l.parentDir;
-                  }
-                  return l;
-                });
+              const starredList = response.getStarredList().map((data) => {
+                const l = data.toObject();
+                if (l.type === 'file') {
+                  l.path = `${l.parentDir}${l.name}`;
+                } else {
+                  l.path = l.parentDir;
+                }
+                return l;
+              });
               resolve({
                 viewed: viewedList,
                 updated: updatedList,
@@ -275,8 +274,11 @@ export default (config) =>
             if (code === 0) {
               let dirents = {};
               if (operation !== 'delete') {
-                dirents = response.getDataList().toObject();
-                // dirent.path = `${dirent.parentDir}${dirent.name}`;
+                dirents = response.getDataList().map((data) => {
+                  const dirent = data.toObject();
+                  dirent.path = `${dirent.parentDir}${dirent.name}`;
+                  return dirent;
+                });
               }
               resolve({
                 code,

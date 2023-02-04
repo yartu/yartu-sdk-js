@@ -689,6 +689,67 @@ proto.yartu.YDrivePromiseClient.prototype.upsertDirent =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.DownloadDirentRequest,
+ *   !proto.yartu.DownloadDirentResponse>}
+ */
+const methodDescriptor_YDrive_downloadDirent = new grpc.web.MethodDescriptor(
+  '/yartu.YDrive/downloadDirent',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.DownloadDirentRequest,
+  proto.yartu.DownloadDirentResponse,
+  /**
+   * @param {!proto.yartu.DownloadDirentRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.DownloadDirentResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.DownloadDirentRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.DownloadDirentResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.DownloadDirentResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YDriveClient.prototype.downloadDirent =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YDrive/downloadDirent',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_downloadDirent,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.DownloadDirentRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.DownloadDirentResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YDrivePromiseClient.prototype.downloadDirent =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YDrive/downloadDirent',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_downloadDirent);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.UpsertDirectoryRequest,
  *   !proto.yartu.UpsertDirectoryResponse>}
  */
