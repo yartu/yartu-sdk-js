@@ -294,7 +294,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.yartu.GetRecentRequest = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.yartu.GetRecentRequest.repeatedFields_, null);
 };
 goog.inherits(proto.yartu.GetRecentRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -4532,6 +4532,13 @@ proto.yartu.RepoHistoryEntry.prototype.clearTagsList = function() {
 
 
 
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.yartu.GetRecentRequest.repeatedFields_ = [2];
+
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -4563,7 +4570,8 @@ proto.yartu.GetRecentRequest.prototype.toObject = function(opt_includeInstance) 
  */
 proto.yartu.GetRecentRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    username: jspb.Message.getFieldWithDefault(msg, 1, "")
+    username: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    recentTypesList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -4604,6 +4612,10 @@ proto.yartu.GetRecentRequest.deserializeBinaryFromReader = function(msg, reader)
       var value = /** @type {string} */ (reader.readString());
       msg.setUsername(value);
       break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.addRecentTypes(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -4637,6 +4649,13 @@ proto.yartu.GetRecentRequest.serializeBinaryToWriter = function(message, writer)
   if (f != null) {
     writer.writeString(
       1,
+      f
+    );
+  }
+  f = message.getRecentTypesList();
+  if (f.length > 0) {
+    writer.writeRepeatedString(
+      2,
       f
     );
   }
@@ -4676,6 +4695,43 @@ proto.yartu.GetRecentRequest.prototype.clearUsername = function() {
  */
 proto.yartu.GetRecentRequest.prototype.hasUsername = function() {
   return jspb.Message.getField(this, 1) != null;
+};
+
+
+/**
+ * repeated string recent_types = 2;
+ * @return {!Array<string>}
+ */
+proto.yartu.GetRecentRequest.prototype.getRecentTypesList = function() {
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 2));
+};
+
+
+/**
+ * @param {!Array<string>} value
+ * @return {!proto.yartu.GetRecentRequest} returns this
+ */
+proto.yartu.GetRecentRequest.prototype.setRecentTypesList = function(value) {
+  return jspb.Message.setField(this, 2, value || []);
+};
+
+
+/**
+ * @param {string} value
+ * @param {number=} opt_index
+ * @return {!proto.yartu.GetRecentRequest} returns this
+ */
+proto.yartu.GetRecentRequest.prototype.addRecentTypes = function(value, opt_index) {
+  return jspb.Message.addToRepeatedField(this, 2, value, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.yartu.GetRecentRequest} returns this
+ */
+proto.yartu.GetRecentRequest.prototype.clearRecentTypesList = function() {
+  return this.setRecentTypesList([]);
 };
 
 

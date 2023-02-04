@@ -730,7 +730,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.yartu.DeleteNoteRequest = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.yartu.DeleteNoteRequest.repeatedFields_, null);
 };
 goog.inherits(proto.yartu.DeleteNoteRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -9232,6 +9232,13 @@ proto.yartu.UpsertNoteResponse.prototype.setMessage = function(value) {
 
 
 
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.yartu.DeleteNoteRequest.repeatedFields_ = [2];
+
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -9263,7 +9270,8 @@ proto.yartu.DeleteNoteRequest.prototype.toObject = function(opt_includeInstance)
  */
 proto.yartu.DeleteNoteRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0)
+    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    idsList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -9304,6 +9312,12 @@ proto.yartu.DeleteNoteRequest.deserializeBinaryFromReader = function(msg, reader
       var value = /** @type {number} */ (reader.readInt64());
       msg.setId(value);
       break;
+    case 2:
+      var values = /** @type {!Array<number>} */ (reader.isDelimited() ? reader.readPackedInt64() : [reader.readInt64()]);
+      for (var i = 0; i < values.length; i++) {
+        msg.addIds(values[i]);
+      }
+      break;
     default:
       reader.skipField();
       break;
@@ -9340,6 +9354,13 @@ proto.yartu.DeleteNoteRequest.serializeBinaryToWriter = function(message, writer
       f
     );
   }
+  f = message.getIdsList();
+  if (f.length > 0) {
+    writer.writePackedInt64(
+      2,
+      f
+    );
+  }
 };
 
 
@@ -9358,6 +9379,43 @@ proto.yartu.DeleteNoteRequest.prototype.getId = function() {
  */
 proto.yartu.DeleteNoteRequest.prototype.setId = function(value) {
   return jspb.Message.setProto3IntField(this, 1, value);
+};
+
+
+/**
+ * repeated int64 ids = 2;
+ * @return {!Array<number>}
+ */
+proto.yartu.DeleteNoteRequest.prototype.getIdsList = function() {
+  return /** @type {!Array<number>} */ (jspb.Message.getRepeatedField(this, 2));
+};
+
+
+/**
+ * @param {!Array<number>} value
+ * @return {!proto.yartu.DeleteNoteRequest} returns this
+ */
+proto.yartu.DeleteNoteRequest.prototype.setIdsList = function(value) {
+  return jspb.Message.setField(this, 2, value || []);
+};
+
+
+/**
+ * @param {number} value
+ * @param {number=} opt_index
+ * @return {!proto.yartu.DeleteNoteRequest} returns this
+ */
+proto.yartu.DeleteNoteRequest.prototype.addIds = function(value, opt_index) {
+  return jspb.Message.addToRepeatedField(this, 2, value, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.yartu.DeleteNoteRequest} returns this
+ */
+proto.yartu.DeleteNoteRequest.prototype.clearIdsList = function() {
+  return this.setIdsList([]);
 };
 
 
