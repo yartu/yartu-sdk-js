@@ -1,5 +1,6 @@
 import {
   NoteMetaQuery,
+  TaskMetaQuery,
   NoteLabel,
 
   ListNotebookRequest,
@@ -25,6 +26,13 @@ import {
   UpsertLabelToNoteRequest,
   UpsertNoteLabelRequest,
   DeleteNoteLabelRequest,
+
+  GetTaskRequest,
+  UpsertTaskRequest,
+  DeleteTaskRequest,
+  ListTaskRequest,
+  CompleteTaskRequest,
+
 } from './service-pb.cjs';
 
 import { YNoteClient } from './service-grpc-web-pb.cjs';
@@ -300,6 +308,10 @@ export default (config) =>
 
         if (query.page) {
           queryRequest.setPage(query.page);
+        }
+
+        if (query.isTaskCompleted) {
+          queryRequest.setIsTaskCompleted(query.isTaskCompleted);
         }
 
         if (query.notebooks) {
@@ -778,6 +790,191 @@ export default (config) =>
                 resolve({
                   code,
                   message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    }
+
+    // TASK SERVICES
+    getTask = (noteId, taskId) => {
+      return new Promise((resolve, reject) => {
+        const request = new GetTaskRequest();
+        request.setNoteId(noteId);
+        request.setTaskId(taskId);
+
+        this.client.getTask(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code,
+                  message: response.getMessage(),
+                  data: response.getData()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    }
+
+    upsertTask = (noteId, taskData) => {
+      return new Promise((resolve, reject) => {
+        const request = new UpsertTaskRequest();
+
+        request.setId(taskData.id);
+        request.setNoteId(noteId);
+        request.setContent(taskData.content);
+        request.setPriority(taskData.priority);
+        request.setReminder(taskData.reminder);
+        request.setDeadline(taskData.deadline);
+        request.setOrder(taskData.order);
+        // request.setIsComplete(taskData.is_complete);
+
+        this.client.upsertTask(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code,
+                  message: response.getMessage(),
+                  data: response.getData()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    }
+
+    deleteTask = (taskId) => {
+      return new Promise((resolve, reject) => {
+        const request = new DeleteTaskRequest();
+        request.setTaskId(taskId);
+
+        this.client.deleteTask(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code,
+                  message: response.getMessage(),
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    }
+
+    listTask = (queryRequest) => {
+      return new Promise((resolve, reject) => {
+        const request = new ListTaskRequest();
+        const query = new Query();
+        query.setPage(queryRequest.page);
+        query.setPerPage(queryRequest.perPage);
+
+        const meta = new TaskMetaQuery();
+        meta.setNoteId(queryRequest.note_id);
+        meta.setGroupBy(queryRequest.group_by);
+        meta.setOrderBy(queryRequest.order_by);
+        meta.setFilters(queryRequest.filters);
+        if (queryRequest.completed_at) {
+          // TODO :: check & fix
+          meta.setCompletedAt(queryRequest.completed_at);
+        }
+        meta.setDeadline(queryRequest.deadline);
+        meta.setNotebook(queryRequest.notebook);
+        meta.setIsSticky(queryRequest.is_sticky);
+
+        request.setQuery(query);
+        request.setMeta(meta);
+
+        this.client.listTask(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code,
+                  message: response.getMessage(),
+                  data: response.getData()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    }
+
+    completeTask = (noteId, taskId, complete) => {
+      return new Promise((resolve, reject) => {
+        const request = new CompleteTaskRequest();
+
+        request.setNoteId(noteId);
+        request.setTaskId(taskId);
+        request.setComplete(complete);
+
+        this.client.completeTask(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code,
+                  message: response.getMessage(),
+                  data: response.getData()
                 });
               } else {
                 reject({
