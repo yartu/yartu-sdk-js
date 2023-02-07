@@ -994,6 +994,67 @@ proto.yartu.YDrivePromiseClient.prototype.downloadFile =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.GetFileHistoryRequest,
+ *   !proto.yartu.GetFileHistoryResponse>}
+ */
+const methodDescriptor_YDrive_getFileHistory = new grpc.web.MethodDescriptor(
+  '/yartu.YDrive/getFileHistory',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.GetFileHistoryRequest,
+  proto.yartu.GetFileHistoryResponse,
+  /**
+   * @param {!proto.yartu.GetFileHistoryRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.GetFileHistoryResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.GetFileHistoryRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.GetFileHistoryResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.GetFileHistoryResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YDriveClient.prototype.getFileHistory =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YDrive/getFileHistory',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_getFileHistory,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.GetFileHistoryRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.GetFileHistoryResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YDrivePromiseClient.prototype.getFileHistory =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YDrive/getFileHistory',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_getFileHistory);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.GetOfficeFileRequest,
  *   !proto.yartu.GetOfficeFileResponse>}
  */
