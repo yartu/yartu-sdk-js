@@ -1,6 +1,7 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 import {
   GetRecentRequest,
+  GetQuotaRequest,
   ListRepoRequest,
   UpsertRepoRequest,
   DeleteRepoRequest,
@@ -64,6 +65,28 @@ export default (config) =>
                 updated: updatedList,
                 starred: starredList
               });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
+    getQuota = () => {
+      return new Promise((resolve, reject) => {
+        const request = new GetQuotaRequest();
+        this.client.getQuota(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve(response.toObject());
             } else {
               reject({
                 code: code,

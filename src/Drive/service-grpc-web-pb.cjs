@@ -140,6 +140,67 @@ proto.yartu.YDrivePromiseClient.prototype.getRecent =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.GetQuotaRequest,
+ *   !proto.yartu.GetQuotaResponse>}
+ */
+const methodDescriptor_YDrive_getQuota = new grpc.web.MethodDescriptor(
+  '/yartu.YDrive/getQuota',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.GetQuotaRequest,
+  proto.yartu.GetQuotaResponse,
+  /**
+   * @param {!proto.yartu.GetQuotaRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.GetQuotaResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.GetQuotaRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.GetQuotaResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.GetQuotaResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YDriveClient.prototype.getQuota =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YDrive/getQuota',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_getQuota,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.GetQuotaRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.GetQuotaResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YDrivePromiseClient.prototype.getQuota =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YDrive/getQuota',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_getQuota);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.GetRepoRequest,
  *   !proto.yartu.GetRepoResponse>}
  */
