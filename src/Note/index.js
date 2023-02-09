@@ -850,7 +850,7 @@ export default (config) =>
       });
     }
 
-    // TASK SERVICES
+// TASK SERVICES
     getTask = (noteId, taskId) => {
       return new Promise((resolve, reject) => {
         const request = new GetTaskRequest();
@@ -884,6 +884,7 @@ export default (config) =>
     }
 
     upsertTask = (noteId, taskData) => {
+      // upsertTask service not used.
       return new Promise((resolve, reject) => {
         const request = new UpsertTaskRequest();
 
@@ -891,8 +892,14 @@ export default (config) =>
         request.setNoteId(noteId);
         request.setContent(taskData.content);
         request.setPriority(taskData.priority);
-        request.setReminder(taskData.reminder);
-        request.setDeadline(taskData.deadline);
+
+        // TODO :: check this two variable is valid datetime format !!!!
+        if (typeof taskData.reminder === 'object' && taskData.reminder) {
+          request.setReminder(taskData?.reminder.format('YYYY-MM-DD HH:mm'));
+        }
+        if (typeof taskData.deadline === 'object' && taskData.deadline) {
+          request.setDeadline(taskData?.deadline.format('YYYY-MM-DD HH:mm'));
+        }
         request.setOrder(taskData.order);
         // request.setIsComplete(taskData.is_complete);
 
