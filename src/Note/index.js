@@ -393,12 +393,47 @@ export default (config) =>
         request.setContent(noteData.content);
         request.setColor(noteData.color);
         if (typeof noteData.reminder === 'object' && noteData.reminder) {
+          // in this line noteData.reminder object is a dayjs object
+          // so we can call the format function.
           request.setReminder(noteData?.reminder.format('YYYY-MM-DD HH:mm'));
         }
         request.setNotebookId(noteData.notebookId);
         request.setIsPinned(noteData.isPinned);
         request.setIsStarred(noteData.isStarred);
         request.setIsArchived(noteData.isArchived);
+
+        const taskList = [];
+        const e = document.createElement('div');
+        e.innerHTML = noteData.content;
+
+        let bindedTasks = e.getElementsByClassName('task');
+        for (const bindedTask of bindedTasks) {
+          if (!bindedTask.attributes.random_id.nodeValue) continue;
+
+          const parsedTask = new Task();
+          parsedTask.setId(bindedTask.attributes.task_id.nodeValue);
+          parsedTask.setRandomId(bindedTask.attributes.random_id.nodeValue);
+          parsedTask.setContent(bindedTask.attributes.content.nodeValue);
+          parsedTask.setPriority(bindedTask.attributes.priority.nodeValue);
+          parsedTask.setOrder(bindedTask.attributes.order.nodeValue);
+          parsedTask.setIsComplete(bindedTask.attributes.is_complete.nodeValue === 'true');
+
+          if (bindedTask.attributes.hasOwnProperty('reminder') && bindedTask.attributes.reminder.nodeValue) {
+            // in this line bindedTask.attributes.reminder.nodeValue is a string
+            // so we cannot call basically format function.
+            const reminder = new Date(bindedTask.attributes.reminder.nodeValue);
+            parsedTask.setReminder(reminder.toISOString());
+          }
+          if (bindedTask.attributes.hasOwnProperty('deadline') && bindedTask.attributes.deadline.nodeValue) {
+            const deadline = new Date(bindedTask.attributes.deadline.nodeValue);
+            parsedTask.setDeadline(deadline.toISOString());
+          }
+          // console.log('parsedTask:', parsedTask);
+          // console.log('bindedTask.attributes:', bindedTask.attributes);
+          taskList.push(parsedTask)
+        }
+
+        request.setTaskList(taskList);
 
         this.client.upsertNote(
           request,
@@ -414,6 +449,17 @@ export default (config) =>
                 let note = null;
                 if (response.hasNote()) {
                   note = response.getNote().toObject();
+                  const e = document.createElement('div');
+                  e.innerHTML = note.content;
+                  const savedTasks = note.tasksList;
+                  let bindedTasks = e.getElementsByClassName('task');
+                  for (const bindedTask of bindedTasks) {
+                    if (bindedTask.attributes.task_id.nodeValue == 0) {
+                      const savedTask = savedTasks.find((t) => t.randomId === bindedTask.attributes.random_id.nodeValue);
+                      bindedTask.setAttribute('task_id', savedTask.id)
+                    }
+                  }
+                  note.content = e.innerHTML;
                 }
 
                 resolve({
