@@ -2045,7 +2045,7 @@ proto.yartu.NoteMetaQuery.prototype.clearNotebookList = function() {
  * @private {!Array<number>}
  * @const
  */
-proto.yartu.TaskMetaQuery.repeatedFields_ = [7,8];
+proto.yartu.TaskMetaQuery.repeatedFields_ = [8];
 
 
 
@@ -2078,14 +2078,14 @@ proto.yartu.TaskMetaQuery.prototype.toObject = function(opt_includeInstance) {
  */
 proto.yartu.TaskMetaQuery.toObject = function(includeInstance, msg) {
   var f, obj = {
-    noteId: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    noteId: jspb.Message.getFieldWithDefault(msg, 1, 0),
     groupBy: jspb.Message.getFieldWithDefault(msg, 2, ""),
     orderBy: jspb.Message.getFieldWithDefault(msg, 3, ""),
     filters: jspb.Message.getFieldWithDefault(msg, 4, ""),
     completedAt: jspb.Message.getFieldWithDefault(msg, 5, ""),
     deadline: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    notebookList: (f = jspb.Message.getRepeatedField(msg, 7)) == null ? undefined : f,
-    isStickyList: (f = jspb.Message.getRepeatedField(msg, 8)) == null ? undefined : f
+    isSticky: jspb.Message.getBooleanFieldWithDefault(msg, 7, false),
+    notebookList: (f = jspb.Message.getRepeatedField(msg, 8)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -2123,7 +2123,7 @@ proto.yartu.TaskMetaQuery.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {number} */ (reader.readInt64());
       msg.setNoteId(value);
       break;
     case 2:
@@ -2147,15 +2147,13 @@ proto.yartu.TaskMetaQuery.deserializeBinaryFromReader = function(msg, reader) {
       msg.setDeadline(value);
       break;
     case 7:
-      var values = /** @type {!Array<number>} */ (reader.isDelimited() ? reader.readPackedInt64() : [reader.readInt64()]);
-      for (var i = 0; i < values.length; i++) {
-        msg.addNotebook(values[i]);
-      }
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setIsSticky(value);
       break;
     case 8:
       var values = /** @type {!Array<number>} */ (reader.isDelimited() ? reader.readPackedInt64() : [reader.readInt64()]);
       for (var i = 0; i < values.length; i++) {
-        msg.addIsSticky(values[i]);
+        msg.addNotebook(values[i]);
       }
       break;
     default:
@@ -2187,9 +2185,9 @@ proto.yartu.TaskMetaQuery.prototype.serializeBinary = function() {
  */
 proto.yartu.TaskMetaQuery.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = /** @type {string} */ (jspb.Message.getField(message, 1));
+  f = /** @type {number} */ (jspb.Message.getField(message, 1));
   if (f != null) {
-    writer.writeString(
+    writer.writeInt64(
       1,
       f
     );
@@ -2229,14 +2227,14 @@ proto.yartu.TaskMetaQuery.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getNotebookList();
-  if (f.length > 0) {
-    writer.writePackedInt64(
+  f = /** @type {boolean} */ (jspb.Message.getField(message, 7));
+  if (f != null) {
+    writer.writeBool(
       7,
       f
     );
   }
-  f = message.getIsStickyList();
+  f = message.getNotebookList();
   if (f.length > 0) {
     writer.writePackedInt64(
       8,
@@ -2247,16 +2245,16 @@ proto.yartu.TaskMetaQuery.serializeBinaryToWriter = function(message, writer) {
 
 
 /**
- * optional string note_id = 1;
- * @return {string}
+ * optional int64 note_id = 1;
+ * @return {number}
  */
 proto.yartu.TaskMetaQuery.prototype.getNoteId = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
 /**
- * @param {string} value
+ * @param {number} value
  * @return {!proto.yartu.TaskMetaQuery} returns this
  */
 proto.yartu.TaskMetaQuery.prototype.setNoteId = function(value) {
@@ -2463,47 +2461,46 @@ proto.yartu.TaskMetaQuery.prototype.hasDeadline = function() {
 
 
 /**
- * repeated int64 notebook = 7;
+ * optional bool is_sticky = 7;
+ * @return {boolean}
+ */
+proto.yartu.TaskMetaQuery.prototype.getIsSticky = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 7, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.yartu.TaskMetaQuery} returns this
+ */
+proto.yartu.TaskMetaQuery.prototype.setIsSticky = function(value) {
+  return jspb.Message.setField(this, 7, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.TaskMetaQuery} returns this
+ */
+proto.yartu.TaskMetaQuery.prototype.clearIsSticky = function() {
+  return jspb.Message.setField(this, 7, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.TaskMetaQuery.prototype.hasIsSticky = function() {
+  return jspb.Message.getField(this, 7) != null;
+};
+
+
+/**
+ * repeated int64 notebook = 8;
  * @return {!Array<number>}
  */
 proto.yartu.TaskMetaQuery.prototype.getNotebookList = function() {
-  return /** @type {!Array<number>} */ (jspb.Message.getRepeatedField(this, 7));
-};
-
-
-/**
- * @param {!Array<number>} value
- * @return {!proto.yartu.TaskMetaQuery} returns this
- */
-proto.yartu.TaskMetaQuery.prototype.setNotebookList = function(value) {
-  return jspb.Message.setField(this, 7, value || []);
-};
-
-
-/**
- * @param {number} value
- * @param {number=} opt_index
- * @return {!proto.yartu.TaskMetaQuery} returns this
- */
-proto.yartu.TaskMetaQuery.prototype.addNotebook = function(value, opt_index) {
-  return jspb.Message.addToRepeatedField(this, 7, value, opt_index);
-};
-
-
-/**
- * Clears the list making it empty but non-null.
- * @return {!proto.yartu.TaskMetaQuery} returns this
- */
-proto.yartu.TaskMetaQuery.prototype.clearNotebookList = function() {
-  return this.setNotebookList([]);
-};
-
-
-/**
- * repeated int64 is_sticky = 8;
- * @return {!Array<number>}
- */
-proto.yartu.TaskMetaQuery.prototype.getIsStickyList = function() {
   return /** @type {!Array<number>} */ (jspb.Message.getRepeatedField(this, 8));
 };
 
@@ -2512,7 +2509,7 @@ proto.yartu.TaskMetaQuery.prototype.getIsStickyList = function() {
  * @param {!Array<number>} value
  * @return {!proto.yartu.TaskMetaQuery} returns this
  */
-proto.yartu.TaskMetaQuery.prototype.setIsStickyList = function(value) {
+proto.yartu.TaskMetaQuery.prototype.setNotebookList = function(value) {
   return jspb.Message.setField(this, 8, value || []);
 };
 
@@ -2522,7 +2519,7 @@ proto.yartu.TaskMetaQuery.prototype.setIsStickyList = function(value) {
  * @param {number=} opt_index
  * @return {!proto.yartu.TaskMetaQuery} returns this
  */
-proto.yartu.TaskMetaQuery.prototype.addIsSticky = function(value, opt_index) {
+proto.yartu.TaskMetaQuery.prototype.addNotebook = function(value, opt_index) {
   return jspb.Message.addToRepeatedField(this, 8, value, opt_index);
 };
 
@@ -2531,8 +2528,8 @@ proto.yartu.TaskMetaQuery.prototype.addIsSticky = function(value, opt_index) {
  * Clears the list making it empty but non-null.
  * @return {!proto.yartu.TaskMetaQuery} returns this
  */
-proto.yartu.TaskMetaQuery.prototype.clearIsStickyList = function() {
-  return this.setIsStickyList([]);
+proto.yartu.TaskMetaQuery.prototype.clearNotebookList = function() {
+  return this.setNotebookList([]);
 };
 
 
@@ -3312,7 +3309,8 @@ proto.yartu.Task.toObject = function(includeInstance, msg) {
     order: jspb.Message.getFieldWithDefault(msg, 8, 0),
     isComplete: jspb.Message.getBooleanFieldWithDefault(msg, 9, false),
     createdAt: jspb.Message.getFieldWithDefault(msg, 10, ""),
-    updatedAt: jspb.Message.getFieldWithDefault(msg, 11, "")
+    updatedAt: jspb.Message.getFieldWithDefault(msg, 11, ""),
+    randomId: jspb.Message.getFieldWithDefault(msg, 12, "")
   };
 
   if (includeInstance) {
@@ -3393,6 +3391,10 @@ proto.yartu.Task.deserializeBinaryFromReader = function(msg, reader) {
     case 11:
       var value = /** @type {string} */ (reader.readString());
       msg.setUpdatedAt(value);
+      break;
+    case 12:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setRandomId(value);
       break;
     default:
       reader.skipField();
@@ -3498,6 +3500,13 @@ proto.yartu.Task.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writeString(
       11,
+      f
+    );
+  }
+  f = message.getRandomId();
+  if (f.length > 0) {
+    writer.writeString(
+      12,
       f
     );
   }
@@ -3718,6 +3727,24 @@ proto.yartu.Task.prototype.getUpdatedAt = function() {
  */
 proto.yartu.Task.prototype.setUpdatedAt = function(value) {
   return jspb.Message.setProto3StringField(this, 11, value);
+};
+
+
+/**
+ * optional string random_id = 12;
+ * @return {string}
+ */
+proto.yartu.Task.prototype.getRandomId = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 12, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.Task} returns this
+ */
+proto.yartu.Task.prototype.setRandomId = function(value) {
+  return jspb.Message.setProto3StringField(this, 12, value);
 };
 
 
@@ -9117,7 +9144,7 @@ proto.yartu.GetNoteResponse.prototype.setMessage = function(value) {
  * @private {!Array<number>}
  * @const
  */
-proto.yartu.UpsertNoteRequest.repeatedFields_ = [6];
+proto.yartu.UpsertNoteRequest.repeatedFields_ = [6,13];
 
 
 
@@ -9162,7 +9189,9 @@ proto.yartu.UpsertNoteRequest.toObject = function(includeInstance, msg) {
     isStarred: jspb.Message.getBooleanFieldWithDefault(msg, 9, false),
     isArchived: jspb.Message.getBooleanFieldWithDefault(msg, 10, false),
     noteType: jspb.Message.getFieldWithDefault(msg, 11, ""),
-    conferenceSessionId: jspb.Message.getFieldWithDefault(msg, 12, 0)
+    conferenceSessionId: jspb.Message.getFieldWithDefault(msg, 12, 0),
+    taskList: jspb.Message.toObjectList(msg.getTaskList(),
+    proto.yartu.Task.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -9247,6 +9276,11 @@ proto.yartu.UpsertNoteRequest.deserializeBinaryFromReader = function(msg, reader
     case 12:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setConferenceSessionId(value);
+      break;
+    case 13:
+      var value = new proto.yartu.Task;
+      reader.readMessage(value,proto.yartu.Task.deserializeBinaryFromReader);
+      msg.addTask(value);
       break;
     default:
       reader.skipField();
@@ -9360,6 +9394,14 @@ proto.yartu.UpsertNoteRequest.serializeBinaryToWriter = function(message, writer
     writer.writeInt64(
       12,
       f
+    );
+  }
+  f = message.getTaskList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      13,
+      f,
+      proto.yartu.Task.serializeBinaryToWriter
     );
   }
 };
@@ -9598,6 +9640,44 @@ proto.yartu.UpsertNoteRequest.prototype.getConferenceSessionId = function() {
  */
 proto.yartu.UpsertNoteRequest.prototype.setConferenceSessionId = function(value) {
   return jspb.Message.setProto3IntField(this, 12, value);
+};
+
+
+/**
+ * repeated Task task = 13;
+ * @return {!Array<!proto.yartu.Task>}
+ */
+proto.yartu.UpsertNoteRequest.prototype.getTaskList = function() {
+  return /** @type{!Array<!proto.yartu.Task>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.yartu.Task, 13));
+};
+
+
+/**
+ * @param {!Array<!proto.yartu.Task>} value
+ * @return {!proto.yartu.UpsertNoteRequest} returns this
+*/
+proto.yartu.UpsertNoteRequest.prototype.setTaskList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 13, value);
+};
+
+
+/**
+ * @param {!proto.yartu.Task=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.yartu.Task}
+ */
+proto.yartu.UpsertNoteRequest.prototype.addTask = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 13, opt_value, proto.yartu.Task, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.yartu.UpsertNoteRequest} returns this
+ */
+proto.yartu.UpsertNoteRequest.prototype.clearTaskList = function() {
+  return this.setTaskList([]);
 };
 
 
@@ -14306,7 +14386,8 @@ proto.yartu.UpsertTaskRequest.toObject = function(includeInstance, msg) {
     priority: jspb.Message.getFieldWithDefault(msg, 4, 0),
     reminder: jspb.Message.getFieldWithDefault(msg, 5, ""),
     deadline: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    order: jspb.Message.getFieldWithDefault(msg, 7, 0)
+    order: jspb.Message.getFieldWithDefault(msg, 7, 0),
+    randomId: jspb.Message.getFieldWithDefault(msg, 8, "")
   };
 
   if (includeInstance) {
@@ -14370,6 +14451,10 @@ proto.yartu.UpsertTaskRequest.deserializeBinaryFromReader = function(msg, reader
     case 7:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setOrder(value);
+      break;
+    case 8:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setRandomId(value);
       break;
     default:
       reader.skipField();
@@ -14446,6 +14531,13 @@ proto.yartu.UpsertTaskRequest.serializeBinaryToWriter = function(message, writer
   if (f !== 0) {
     writer.writeInt64(
       7,
+      f
+    );
+  }
+  f = message.getRandomId();
+  if (f.length > 0) {
+    writer.writeString(
+      8,
       f
     );
   }
@@ -14575,6 +14667,24 @@ proto.yartu.UpsertTaskRequest.prototype.getOrder = function() {
  */
 proto.yartu.UpsertTaskRequest.prototype.setOrder = function(value) {
   return jspb.Message.setProto3IntField(this, 7, value);
+};
+
+
+/**
+ * optional string random_id = 8;
+ * @return {string}
+ */
+proto.yartu.UpsertTaskRequest.prototype.getRandomId = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.UpsertTaskRequest} returns this
+ */
+proto.yartu.UpsertTaskRequest.prototype.setRandomId = function(value) {
+  return jspb.Message.setProto3StringField(this, 8, value);
 };
 
 
