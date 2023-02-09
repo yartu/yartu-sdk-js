@@ -2,6 +2,7 @@ import {
   NoteMetaQuery,
   TaskMetaQuery,
   NoteLabel,
+  Task,
 
   ListNotebookRequest,
   UpsertNotebookRequest,
