@@ -456,8 +456,12 @@ export default (config) =>
                   let bindedTasks = e.getElementsByClassName('task');
                   for (const bindedTask of bindedTasks) {
                     if (bindedTask.attributes.task_id.nodeValue == 0) {
-                      const savedTask = savedTasks.find((t) => t.randomId === bindedTask.attributes.random_id.nodeValue);
-                      bindedTask.setAttribute('task_id', savedTask.id)
+                      try {
+                        const savedTask = savedTasks.find((t) => t.randomId === bindedTask.attributes.random_id.nodeValue);
+                        bindedTask.setAttribute('task_id', savedTask.id)
+                      } catch (e) {
+                        console.log('task cannot synced:', e);
+                      }
                     }
                   }
                   note.content = e.innerHTML;
