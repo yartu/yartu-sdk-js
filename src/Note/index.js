@@ -1,6 +1,8 @@
 import {
   NoteMetaQuery,
+  TaskMetaQuery,
   NoteLabel,
+  Task,
 
   ListNotebookRequest,
   UpsertNotebookRequest,
@@ -25,6 +27,13 @@ import {
   UpsertLabelToNoteRequest,
   UpsertNoteLabelRequest,
   DeleteNoteLabelRequest,
+
+  GetTaskRequest,
+  UpsertTaskRequest,
+  DeleteTaskRequest,
+  ListTaskRequest,
+  CompleteTaskRequest,
+
 } from './service-pb.cjs';
 
 import { YNoteClient } from './service-grpc-web-pb.cjs';
@@ -302,6 +311,10 @@ export default (config) =>
           queryRequest.setPage(query.page);
         }
 
+        if (query.isTaskCompleted) {
+          queryRequest.setIsTaskCompleted(query.isTaskCompleted);
+        }
+
         if (query.notebooks) {
           metaRequest.setNotebookList(query.notebooks);
         }
@@ -381,12 +394,47 @@ export default (config) =>
         request.setContent(noteData.content);
         request.setColor(noteData.color);
         if (typeof noteData.reminder === 'object' && noteData.reminder) {
+          // in this line noteData.reminder object is a dayjs object
+          // so we can call the format function.
           request.setReminder(noteData?.reminder.format('YYYY-MM-DD HH:mm'));
         }
         request.setNotebookId(noteData.notebookId);
         request.setIsPinned(noteData.isPinned);
         request.setIsStarred(noteData.isStarred);
         request.setIsArchived(noteData.isArchived);
+
+        const taskList = [];
+        const e = document.createElement('div');
+        e.innerHTML = noteData.content;
+
+        let bindedTasks = e.getElementsByClassName('task');
+        for (const bindedTask of bindedTasks) {
+          if (!bindedTask.attributes.random_id.nodeValue) continue;
+
+          const parsedTask = new Task();
+          parsedTask.setId(bindedTask.attributes.task_id.nodeValue);
+          parsedTask.setRandomId(bindedTask.attributes.random_id.nodeValue);
+          parsedTask.setContent(bindedTask.attributes.content.nodeValue);
+          parsedTask.setPriority(bindedTask.attributes.priority.nodeValue);
+          parsedTask.setOrder(bindedTask.attributes.order.nodeValue);
+          parsedTask.setIsComplete(bindedTask.attributes.is_complete.nodeValue === 'true');
+
+          if (bindedTask.attributes.hasOwnProperty('reminder') && bindedTask.attributes.reminder.nodeValue) {
+            // in this line bindedTask.attributes.reminder.nodeValue is a string
+            // so we cannot call basically format function.
+            const reminder = new Date(bindedTask.attributes.reminder.nodeValue);
+            parsedTask.setReminder(reminder.toISOString());
+          }
+          if (bindedTask.attributes.hasOwnProperty('deadline') && bindedTask.attributes.deadline.nodeValue) {
+            const deadline = new Date(bindedTask.attributes.deadline.nodeValue);
+            parsedTask.setDeadline(deadline.toISOString());
+          }
+          // console.log('parsedTask:', parsedTask);
+          // console.log('bindedTask.attributes:', bindedTask.attributes);
+          taskList.push(parsedTask)
+        }
+
+        request.setTaskList(taskList);
 
         this.client.upsertNote(
           request,
@@ -402,6 +450,17 @@ export default (config) =>
                 let note = null;
                 if (response.hasNote()) {
                   note = response.getNote().toObject();
+                  const e = document.createElement('div');
+                  e.innerHTML = note.content;
+                  const savedTasks = note.tasksList;
+                  let bindedTasks = e.getElementsByClassName('task');
+                  for (const bindedTask of bindedTasks) {
+                    if (bindedTask.attributes.task_id.nodeValue == 0) {
+                      const savedTask = savedTasks.find((t) => t.randomId === bindedTask.attributes.random_id.nodeValue);
+                      bindedTask.setAttribute('task_id', savedTask.id)
+                    }
+                  }
+                  note.content = e.innerHTML;
                 }
 
                 resolve({
@@ -778,6 +837,249 @@ export default (config) =>
                 resolve({
                   code,
                   message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    }
+
+// TASK SERVICES
+    getTask = (noteId, taskId) => {
+      return new Promise((resolve, reject) => {
+        const request = new GetTaskRequest();
+        request.setNoteId(noteId);
+        request.setTaskId(taskId);
+
+        this.client.getTask(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code,
+                  message: response.getMessage(),
+                  data: response.getData()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    }
+
+    upsertTask = (noteId, taskData) => {
+      // upsertTask service not used.
+      return new Promise((resolve, reject) => {
+        const request = new UpsertTaskRequest();
+
+        request.setId(taskData.id);
+        request.setNoteId(noteId);
+        request.setContent(taskData.content);
+        request.setPriority(taskData.priority);
+
+        // TODO :: check this two variable is valid datetime format !!!!
+        if (typeof taskData.reminder === 'object' && taskData.reminder) {
+          request.setReminder(taskData?.reminder.format('YYYY-MM-DD HH:mm'));
+        }
+        if (typeof taskData.deadline === 'object' && taskData.deadline) {
+          request.setDeadline(taskData?.deadline.format('YYYY-MM-DD HH:mm'));
+        }
+        request.setOrder(taskData.order);
+        // request.setIsComplete(taskData.is_complete);
+
+        this.client.upsertTask(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code,
+                  message: response.getMessage(),
+                  data: response.getData()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    }
+
+    deleteTask = (taskId) => {
+      return new Promise((resolve, reject) => {
+        const request = new DeleteTaskRequest();
+        request.setTaskId(taskId);
+
+        this.client.deleteTask(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code,
+                  message: response.getMessage(),
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    }
+
+    listTask = (queryRequest) => {
+      return new Promise((resolve, reject) => {
+        const request = new ListTaskRequest();
+        const query = new Query();
+        const groupBy = queryRequest.groupBy || 'priority';  // groupBy can be 'priority' or 'deadline'
+        query.setPage(queryRequest.page);
+        query.setPerPage(queryRequest.perPage);
+
+        const meta = new TaskMetaQuery();
+        if (queryRequest.noteId > 0) {
+          meta.setNoteId(queryRequest.noteId);
+        }
+        meta.setGroupBy(groupBy);
+        meta.setOrderBy(queryRequest.orderBy);
+        meta.setFilters(queryRequest.filters);
+        if (queryRequest.completedAt) {
+          // TODO :: check & fix
+          meta.setCompletedAt(queryRequest.completedAt);
+        }
+        meta.setDeadline(queryRequest.deadline);
+        meta.setNotebookList(queryRequest.notebook);
+        meta.setIsSticky(queryRequest.isSticky);
+
+        request.setQuery(query);
+        request.setMeta(meta);
+
+        this.client.listTask(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                let groupedTasks = {};
+                const dataList = response.getDataList().map((data) => data.toObject());
+                if (groupBy === 'priority') {
+                  for (const task of dataList) {
+                    if (!(`priority-${task.priority}` in groupedTasks)) {
+                      groupedTasks[`priority-${task.priority}`] = [];
+                    }
+                    groupedTasks[`priority-${task.priority}`].push(task);
+                  }
+                }
+                else if (groupBy === 'deadline') {
+                  const now = new Date();
+                  groupedTasks = {
+                    'today': [],
+                    'upcoming': [],
+                    'finished': [],
+                    'no-deadline': [],
+                  };
+                  for (const task of dataList) {
+                    let taskDeadLine = task.deadline;
+                    if (task.isComplete == 'true') {
+                      groupedTasks['finished'].push(task);
+                    }
+                    else if (taskDeadLine) {
+                      try {
+                        taskDeadLine = new Date(taskDeadLine);
+                      } catch (e) {
+                        console.log(e);
+                        groupedTasks['no-deadline'].push(task);
+                        continue;
+                      }
+                      if (now.getFullYear() === taskDeadLine.getFullYear() && now.getMonth() === taskDeadLine.getMonth() && now.getDate() === taskDeadLine.getDate()) {
+                        // if taskDeadLine is in today
+                        groupedTasks['today'].push(task);
+                      }
+                      else {
+                        groupedTasks['upcoming'].push(task);
+                      }
+                    }
+                    else {
+                      groupedTasks['no-deadline'].push(task);
+                    }
+                  }
+                }
+                else {
+                  const groupedTasks = dataList;
+                }
+
+                resolve({
+                  code,
+                  message: response.getMessage(),
+                  data: groupedTasks
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    }
+
+    completeTask = (noteId, taskId, complete) => {
+      return new Promise((resolve, reject) => {
+        const request = new CompleteTaskRequest();
+
+        request.setNoteId(noteId);
+        request.setTaskId(taskId);
+        request.setComplete(complete);
+
+        this.client.completeTask(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code,
+                  message: response.getMessage(),
+                  data: response.getData()
                 });
               } else {
                 reject({
