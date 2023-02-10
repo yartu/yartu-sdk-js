@@ -1544,7 +1544,8 @@ proto.yartu.NoteMetaQuery.toObject = function(includeInstance, msg) {
     isPinned: jspb.Message.getBooleanFieldWithDefault(msg, 6, false),
     isSharedWithMe: jspb.Message.getBooleanFieldWithDefault(msg, 7, false),
     isTaskCompleted: jspb.Message.getBooleanFieldWithDefault(msg, 8, false),
-    notebookList: (f = jspb.Message.getRepeatedField(msg, 9)) == null ? undefined : f
+    notebookList: (f = jspb.Message.getRepeatedField(msg, 9)) == null ? undefined : f,
+    hasTask: jspb.Message.getBooleanFieldWithDefault(msg, 10, false)
   };
 
   if (includeInstance) {
@@ -1618,6 +1619,10 @@ proto.yartu.NoteMetaQuery.deserializeBinaryFromReader = function(msg, reader) {
       for (var i = 0; i < values.length; i++) {
         msg.addNotebook(values[i]);
       }
+      break;
+    case 10:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setHasTask(value);
       break;
     default:
       reader.skipField();
@@ -1708,6 +1713,13 @@ proto.yartu.NoteMetaQuery.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writePackedInt64(
       9,
+      f
+    );
+  }
+  f = /** @type {boolean} */ (jspb.Message.getField(message, 10));
+  if (f != null) {
+    writer.writeBool(
+      10,
       f
     );
   }
@@ -2036,6 +2048,42 @@ proto.yartu.NoteMetaQuery.prototype.addNotebook = function(value, opt_index) {
  */
 proto.yartu.NoteMetaQuery.prototype.clearNotebookList = function() {
   return this.setNotebookList([]);
+};
+
+
+/**
+ * optional bool has_task = 10;
+ * @return {boolean}
+ */
+proto.yartu.NoteMetaQuery.prototype.getHasTask = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 10, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.yartu.NoteMetaQuery} returns this
+ */
+proto.yartu.NoteMetaQuery.prototype.setHasTask = function(value) {
+  return jspb.Message.setField(this, 10, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.NoteMetaQuery} returns this
+ */
+proto.yartu.NoteMetaQuery.prototype.clearHasTask = function() {
+  return jspb.Message.setField(this, 10, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.NoteMetaQuery.prototype.hasHasTask = function() {
+  return jspb.Message.getField(this, 10) != null;
 };
 
 
@@ -3310,7 +3358,8 @@ proto.yartu.Task.toObject = function(includeInstance, msg) {
     isComplete: jspb.Message.getBooleanFieldWithDefault(msg, 9, false),
     createdAt: jspb.Message.getFieldWithDefault(msg, 10, ""),
     updatedAt: jspb.Message.getFieldWithDefault(msg, 11, ""),
-    randomId: jspb.Message.getFieldWithDefault(msg, 12, "")
+    randomId: jspb.Message.getFieldWithDefault(msg, 12, ""),
+    noteId: jspb.Message.getFieldWithDefault(msg, 13, 0)
   };
 
   if (includeInstance) {
@@ -3395,6 +3444,10 @@ proto.yartu.Task.deserializeBinaryFromReader = function(msg, reader) {
     case 12:
       var value = /** @type {string} */ (reader.readString());
       msg.setRandomId(value);
+      break;
+    case 13:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setNoteId(value);
       break;
     default:
       reader.skipField();
@@ -3507,6 +3560,13 @@ proto.yartu.Task.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writeString(
       12,
+      f
+    );
+  }
+  f = message.getNoteId();
+  if (f !== 0) {
+    writer.writeInt64(
+      13,
       f
     );
   }
@@ -3745,6 +3805,24 @@ proto.yartu.Task.prototype.getRandomId = function() {
  */
 proto.yartu.Task.prototype.setRandomId = function(value) {
   return jspb.Message.setProto3StringField(this, 12, value);
+};
+
+
+/**
+ * optional int64 note_id = 13;
+ * @return {number}
+ */
+proto.yartu.Task.prototype.getNoteId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 13, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu.Task} returns this
+ */
+proto.yartu.Task.prototype.setNoteId = function(value) {
+  return jspb.Message.setProto3IntField(this, 13, value);
 };
 
 

@@ -963,21 +963,24 @@ export default (config) =>
       return new Promise((resolve, reject) => {
         const request = new ListTaskRequest();
         const query = new Query();
+        const groupBy = queryRequest.groupBy || 'priority';  // groupBy can be 'priority' or 'deadline'
         query.setPage(queryRequest.page);
         query.setPerPage(queryRequest.perPage);
 
         const meta = new TaskMetaQuery();
-        meta.setNoteId(queryRequest.note_id);
-        meta.setGroupBy(queryRequest.group_by);
-        meta.setOrderBy(queryRequest.order_by);
+        if (queryRequest.noteId > 0) {
+          meta.setNoteId(queryRequest.noteId);
+        }
+        meta.setGroupBy(groupBy);
+        meta.setOrderBy(queryRequest.orderBy);
         meta.setFilters(queryRequest.filters);
-        if (queryRequest.completed_at) {
+        if (queryRequest.completedAt) {
           // TODO :: check & fix
-          meta.setCompletedAt(queryRequest.completed_at);
+          meta.setCompletedAt(queryRequest.completedAt);
         }
         meta.setDeadline(queryRequest.deadline);
-        meta.setNotebook(queryRequest.notebook);
-        meta.setIsSticky(queryRequest.is_sticky);
+        meta.setNotebookList(queryRequest.notebook);
+        meta.setIsSticky(queryRequest.isSticky);
 
         request.setQuery(query);
         request.setMeta(meta);
@@ -991,10 +994,58 @@ export default (config) =>
             } else {
               const code = response.getCode();
               if (code == 0) {
+                let groupedTasks = {};
+                const dataList = response.getDataList().map((data) => data.toObject());
+                if (groupBy === 'priority') {
+                  for (const task of dataList) {
+                    if (!(`priority-${task.priority}` in groupedTasks)) {
+                      groupedTasks[`priority-${task.priority}`] = [];
+                    }
+                    groupedTasks[`priority-${task.priority}`].push(task);
+                  }
+                }
+                else if (groupBy === 'deadline') {
+                  const now = new Date();
+                  groupedTasks = {
+                    'today': [],
+                    'upcoming': [],
+                    'finished': [],
+                    'no-deadline': [],
+                  };
+                  for (const task of dataList) {
+                    let taskDeadLine = task.deadline;
+                    if (task.isComplete == 'true') {
+                      groupedTasks['finished'].push(task);
+                    }
+                    else if (taskDeadLine) {
+                      try {
+                        taskDeadLine = new Date(taskDeadLine);
+                      } catch (e) {
+                        console.log(e);
+                        groupedTasks['no-deadline'].push(task);
+                        continue;
+                      }
+                      if (now.getFullYear() === taskDeadLine.getFullYear() && now.getMonth() === taskDeadLine.getMonth() && now.getDate() === taskDeadLine.getDate()) {
+                        // if taskDeadLine is in today
+                        groupedTasks['today'].push(task);
+                      }
+                      else {
+                        groupedTasks['upcoming'].push(task);
+                      }
+                    }
+                    else {
+                      groupedTasks['no-deadline'].push(task);
+                    }
+                  }
+                }
+                else {
+                  const groupedTasks = dataList;
+                }
+
                 resolve({
                   code,
                   message: response.getMessage(),
-                  data: response.getData()
+                  data: groupedTasks
                 });
               } else {
                 reject({
