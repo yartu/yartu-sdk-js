@@ -51,15 +51,16 @@ export default (config) =>
               const updatedList = response
                 .getUpdatedList()
                 .map((data) => data.toObject());
-              const starredList = response.getStarredList().map((data) => {
-                const l = data.toObject();
-                if (l.type === 'file') {
-                  l.path = `${l.parentDir}${l.name}`;
-                } else {
-                  l.path = l.parentDir;
-                }
-                return l;
-              });
+              const starredList = response
+                .getStarredList().map((data) => {
+                  const l = data.toObject();
+                  if (l.type === 'file') {
+                    l.path = `${l.parentDir}/${l.name}`;
+                  } else {
+                    l.path = l.parentDir;
+                  }
+                  return l;
+                });
               resolve({
                 viewed: viewedList,
                 updated: updatedList,
