@@ -1,28 +1,39 @@
 import {
   User,
   GetInfoRequest,
-  GetWeatherRequest,
   UpsertAccountRequest,
+  // Weather
+  GetWeatherRequest,
+  // Signature
+  GetEmailSignatureRequest,
   ListEmailSignatureRequest,
   UpsertEmailSignatureRequest,
   DeleteEmailSignatureRequest,
+  // Template
+  GetEmailTemplateRequest,
+  ListEmailTemplateRequest,
+  UpsertEmailTemplateRequest,
+  DeleteEmailTemplateRequest,
+  // Forwarding
   SetEmailForwardingRequest,
   GetEmailForwardingRequest,
+  // AutoReply
   GetEmailAutoReplyRequest,
   SetEmailAutoReplyRequest,
+  // Rule
+  EmailRule,
+  EmailRuleInstance,
+  EmailRuleAction,
   GetEmailRuleRequest,
   ListEmailRuleRequest,
   UpsertEmailRuleRequest,
   DeleteEmailRuleRequest,
-  EmailRule,
-  EmailRuleInstance,
-  EmailRuleAction,
-  ListSharedMailBoxRequest,
-  GetSharedMailBoxRequest,
+  // SharedMailbox
   ListSharedMailBoxUsersRequest,
+  GetSharedMailBoxRequest,
+  ListSharedMailBoxRequest,
   UpsertSharedMailBoxRequest,
-  DeleteSharedMailBoxRequest,
-  GetEmailSignatureRequest
+  DeleteSharedMailBoxRequest
 } from './service-pb.cjs';
 
 import { YAccountClient } from './service-grpc-web-pb.cjs';
@@ -137,6 +148,7 @@ export default (config) =>
       });
     };
 
+    /* Email Signature functions */
     listEmailSignature() {
       return new Promise((resolve, reject) => {
         const request = new ListEmailSignatureRequest();
@@ -268,6 +280,138 @@ export default (config) =>
       });
     };
 
+    /* Email Template functions */
+
+    listEmailTemplate() {
+      return new Promise((resolve, reject) => {
+        const request = new ListEmailTemplateRequest();
+
+        this.client.listEmailTemplate(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+
+              if (code == 0) {
+                const dataList = response
+                  .getDataList()
+                  .map((data) => data.toObject());
+                resolve({
+                  templates: dataList,
+                  code: 0,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    }
+
+    upsertEmailTemplate = (data) => {
+      return new Promise((resolve, reject) => {
+        const request = new UpsertEmailTemplateRequest();
+
+        request.setId(data.id);
+        request.setName(data.name);
+        request.setTemplate(data.template);
+
+        this.client.upsertEmailTemplate(
+          request,
+          this.metadata,
+          (error, response) => {
+            const code = response.getCode();
+            if (error) {
+              handleError(error, reject);
+            } else {
+              if (code == 0) {
+                resolve({
+                  code: code,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
+    deleteEmailTemplate = (templateId) => {
+      return new Promise((resolve, reject) => {
+        const request = new DeleteEmailTemplateRequest();
+
+        request.setId(templateId);
+
+        this.client.deleteEmailTemplate(
+          request,
+          this.metadata,
+          (error, response) => {
+            const code = response.getCode();
+            if (error) {
+              handleError(error, reject);
+            } else {
+              if (code == 0) {
+                resolve({
+                  code: code,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
+    getEmailTemplate = (templateId) => {
+      return new Promise((resolve, reject) => {
+        const request = new GetEmailTemplateRequest();
+
+        request.setId(templateId);
+
+        this.client.getEmailTemplate(
+          request,
+          this.metadata,
+          (error, response) => {
+            const code = response.getCode();
+            if (error) {
+              handleError(error, reject);
+            } else {
+              if (code == 0) {
+                resolve({
+                  code: code,
+                  template: response.toObject()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
+    /* Email Rule functions */
     getEmailForwarding() {
       return new Promise((resolve, reject) => {
         const request = new GetEmailForwardingRequest();

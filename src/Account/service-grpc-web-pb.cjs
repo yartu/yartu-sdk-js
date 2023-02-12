@@ -567,6 +567,250 @@ proto.yartu.YAccountPromiseClient.prototype.deleteEmailSignature =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.ListEmailTemplateRequest,
+ *   !proto.yartu.ListEmailTemplateResponse>}
+ */
+const methodDescriptor_YAccount_listEmailTemplate = new grpc.web.MethodDescriptor(
+  '/yartu.YAccount/listEmailTemplate',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.ListEmailTemplateRequest,
+  proto.yartu.ListEmailTemplateResponse,
+  /**
+   * @param {!proto.yartu.ListEmailTemplateRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.ListEmailTemplateResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.ListEmailTemplateRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ListEmailTemplateResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ListEmailTemplateResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YAccountClient.prototype.listEmailTemplate =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YAccount/listEmailTemplate',
+      request,
+      metadata || {},
+      methodDescriptor_YAccount_listEmailTemplate,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.ListEmailTemplateRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.ListEmailTemplateResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YAccountPromiseClient.prototype.listEmailTemplate =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YAccount/listEmailTemplate',
+      request,
+      metadata || {},
+      methodDescriptor_YAccount_listEmailTemplate);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.GetEmailTemplateRequest,
+ *   !proto.yartu.GetEmailTemplateResponse>}
+ */
+const methodDescriptor_YAccount_getEmailTemplate = new grpc.web.MethodDescriptor(
+  '/yartu.YAccount/getEmailTemplate',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.GetEmailTemplateRequest,
+  proto.yartu.GetEmailTemplateResponse,
+  /**
+   * @param {!proto.yartu.GetEmailTemplateRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.GetEmailTemplateResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.GetEmailTemplateRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.GetEmailTemplateResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.GetEmailTemplateResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YAccountClient.prototype.getEmailTemplate =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YAccount/getEmailTemplate',
+      request,
+      metadata || {},
+      methodDescriptor_YAccount_getEmailTemplate,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.GetEmailTemplateRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.GetEmailTemplateResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YAccountPromiseClient.prototype.getEmailTemplate =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YAccount/getEmailTemplate',
+      request,
+      metadata || {},
+      methodDescriptor_YAccount_getEmailTemplate);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.UpsertEmailTemplateRequest,
+ *   !proto.yartu.UpsertEmailTemplateResponse>}
+ */
+const methodDescriptor_YAccount_upsertEmailTemplate = new grpc.web.MethodDescriptor(
+  '/yartu.YAccount/upsertEmailTemplate',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.UpsertEmailTemplateRequest,
+  proto.yartu.UpsertEmailTemplateResponse,
+  /**
+   * @param {!proto.yartu.UpsertEmailTemplateRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.UpsertEmailTemplateResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.UpsertEmailTemplateRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.UpsertEmailTemplateResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.UpsertEmailTemplateResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YAccountClient.prototype.upsertEmailTemplate =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YAccount/upsertEmailTemplate',
+      request,
+      metadata || {},
+      methodDescriptor_YAccount_upsertEmailTemplate,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.UpsertEmailTemplateRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.UpsertEmailTemplateResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YAccountPromiseClient.prototype.upsertEmailTemplate =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YAccount/upsertEmailTemplate',
+      request,
+      metadata || {},
+      methodDescriptor_YAccount_upsertEmailTemplate);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.DeleteEmailTemplateRequest,
+ *   !proto.yartu.DeleteEmailTemplateResponse>}
+ */
+const methodDescriptor_YAccount_deleteEmailTemplate = new grpc.web.MethodDescriptor(
+  '/yartu.YAccount/deleteEmailTemplate',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.DeleteEmailTemplateRequest,
+  proto.yartu.DeleteEmailTemplateResponse,
+  /**
+   * @param {!proto.yartu.DeleteEmailTemplateRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.DeleteEmailTemplateResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.DeleteEmailTemplateRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.DeleteEmailTemplateResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.DeleteEmailTemplateResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YAccountClient.prototype.deleteEmailTemplate =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YAccount/deleteEmailTemplate',
+      request,
+      metadata || {},
+      methodDescriptor_YAccount_deleteEmailTemplate,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.DeleteEmailTemplateRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.DeleteEmailTemplateResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YAccountPromiseClient.prototype.deleteEmailTemplate =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YAccount/deleteEmailTemplate',
+      request,
+      metadata || {},
+      methodDescriptor_YAccount_deleteEmailTemplate);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.ListEmailRuleRequest,
  *   !proto.yartu.ListEmailRuleResponse>}
  */
