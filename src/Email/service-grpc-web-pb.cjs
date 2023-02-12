@@ -687,67 +687,6 @@ proto.yartu_mail.YEmailPromiseClient.prototype.deleteMessage =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
- *   !proto.yartu_mail.UpdateDraftRequest,
- *   !proto.yartu_mail.UpdateDraftResponse>}
- */
-const methodDescriptor_YEmail_updateDraft = new grpc.web.MethodDescriptor(
-  '/yartu_mail.YEmail/updateDraft',
-  grpc.web.MethodType.UNARY,
-  proto.yartu_mail.UpdateDraftRequest,
-  proto.yartu_mail.UpdateDraftResponse,
-  /**
-   * @param {!proto.yartu_mail.UpdateDraftRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.yartu_mail.UpdateDraftResponse.deserializeBinary
-);
-
-
-/**
- * @param {!proto.yartu_mail.UpdateDraftRequest} request The
- *     request proto
- * @param {?Object<string, string>} metadata User defined
- *     call metadata
- * @param {function(?grpc.web.RpcError, ?proto.yartu_mail.UpdateDraftResponse)}
- *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.yartu_mail.UpdateDraftResponse>|undefined}
- *     The XHR Node Readable Stream
- */
-proto.yartu_mail.YEmailClient.prototype.updateDraft =
-    function(request, metadata, callback) {
-  return this.client_.rpcCall(this.hostname_ +
-      '/yartu_mail.YEmail/updateDraft',
-      request,
-      metadata || {},
-      methodDescriptor_YEmail_updateDraft,
-      callback);
-};
-
-
-/**
- * @param {!proto.yartu_mail.UpdateDraftRequest} request The
- *     request proto
- * @param {?Object<string, string>=} metadata User defined
- *     call metadata
- * @return {!Promise<!proto.yartu_mail.UpdateDraftResponse>}
- *     Promise that resolves to the response
- */
-proto.yartu_mail.YEmailPromiseClient.prototype.updateDraft =
-    function(request, metadata) {
-  return this.client_.unaryCall(this.hostname_ +
-      '/yartu_mail.YEmail/updateDraft',
-      request,
-      metadata || {},
-      methodDescriptor_YEmail_updateDraft);
-};
-
-
-/**
- * @const
- * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu_mail.SaveDraftRequest,
  *   !proto.yartu_mail.SaveDraftResponse>}
  */
