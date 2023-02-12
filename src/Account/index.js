@@ -322,6 +322,7 @@ export default (config) =>
 
         request.setId(data.id);
         request.setName(data.name);
+        request.setSubject(data.subject);
         request.setTemplate(data.template);
 
         this.client.upsertEmailTemplate(

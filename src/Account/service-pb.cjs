@@ -1561,7 +1561,8 @@ proto.yartu.EmailTemplate.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, 0),
     name: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    template: jspb.Message.getFieldWithDefault(msg, 3, "")
+    subject: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    template: jspb.Message.getFieldWithDefault(msg, 4, "")
   };
 
   if (includeInstance) {
@@ -1608,6 +1609,10 @@ proto.yartu.EmailTemplate.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
+      msg.setSubject(value);
+      break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
       msg.setTemplate(value);
       break;
     default:
@@ -1653,10 +1658,17 @@ proto.yartu.EmailTemplate.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getTemplate();
+  f = message.getSubject();
   if (f.length > 0) {
     writer.writeString(
       3,
+      f
+    );
+  }
+  f = message.getTemplate();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
       f
     );
   }
@@ -1700,10 +1712,10 @@ proto.yartu.EmailTemplate.prototype.setName = function(value) {
 
 
 /**
- * optional string template = 3;
+ * optional string subject = 3;
  * @return {string}
  */
-proto.yartu.EmailTemplate.prototype.getTemplate = function() {
+proto.yartu.EmailTemplate.prototype.getSubject = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
@@ -1712,8 +1724,26 @@ proto.yartu.EmailTemplate.prototype.getTemplate = function() {
  * @param {string} value
  * @return {!proto.yartu.EmailTemplate} returns this
  */
-proto.yartu.EmailTemplate.prototype.setTemplate = function(value) {
+proto.yartu.EmailTemplate.prototype.setSubject = function(value) {
   return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional string template = 4;
+ * @return {string}
+ */
+proto.yartu.EmailTemplate.prototype.getTemplate = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.EmailTemplate} returns this
+ */
+proto.yartu.EmailTemplate.prototype.setTemplate = function(value) {
+  return jspb.Message.setProto3StringField(this, 4, value);
 };
 
 
@@ -7302,7 +7332,8 @@ proto.yartu.UpsertEmailTemplateRequest.toObject = function(includeInstance, msg)
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, 0),
     name: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    template: jspb.Message.getFieldWithDefault(msg, 3, "")
+    subject: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    template: jspb.Message.getFieldWithDefault(msg, 4, "")
   };
 
   if (includeInstance) {
@@ -7349,6 +7380,10 @@ proto.yartu.UpsertEmailTemplateRequest.deserializeBinaryFromReader = function(ms
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
+      msg.setSubject(value);
+      break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
       msg.setTemplate(value);
       break;
     default:
@@ -7394,10 +7429,17 @@ proto.yartu.UpsertEmailTemplateRequest.serializeBinaryToWriter = function(messag
       f
     );
   }
-  f = message.getTemplate();
+  f = message.getSubject();
   if (f.length > 0) {
     writer.writeString(
       3,
+      f
+    );
+  }
+  f = message.getTemplate();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
       f
     );
   }
@@ -7441,10 +7483,10 @@ proto.yartu.UpsertEmailTemplateRequest.prototype.setName = function(value) {
 
 
 /**
- * optional string template = 3;
+ * optional string subject = 3;
  * @return {string}
  */
-proto.yartu.UpsertEmailTemplateRequest.prototype.getTemplate = function() {
+proto.yartu.UpsertEmailTemplateRequest.prototype.getSubject = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
@@ -7453,8 +7495,26 @@ proto.yartu.UpsertEmailTemplateRequest.prototype.getTemplate = function() {
  * @param {string} value
  * @return {!proto.yartu.UpsertEmailTemplateRequest} returns this
  */
-proto.yartu.UpsertEmailTemplateRequest.prototype.setTemplate = function(value) {
+proto.yartu.UpsertEmailTemplateRequest.prototype.setSubject = function(value) {
   return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional string template = 4;
+ * @return {string}
+ */
+proto.yartu.UpsertEmailTemplateRequest.prototype.getTemplate = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.UpsertEmailTemplateRequest} returns this
+ */
+proto.yartu.UpsertEmailTemplateRequest.prototype.setTemplate = function(value) {
+  return jspb.Message.setProto3StringField(this, 4, value);
 };
 
 
