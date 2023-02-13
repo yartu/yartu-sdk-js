@@ -567,6 +567,67 @@ proto.yartu.YDrivePromiseClient.prototype.getRepoTrash =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.GetDirentRequest,
+ *   !proto.yartu.GetDirentResponse>}
+ */
+const methodDescriptor_YDrive_getDirent = new grpc.web.MethodDescriptor(
+  '/yartu.YDrive/getDirent',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.GetDirentRequest,
+  proto.yartu.GetDirentResponse,
+  /**
+   * @param {!proto.yartu.GetDirentRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.GetDirentResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.GetDirentRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.GetDirentResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.GetDirentResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YDriveClient.prototype.getDirent =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YDrive/getDirent',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_getDirent,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.GetDirentRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.GetDirentResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YDrivePromiseClient.prototype.getDirent =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YDrive/getDirent',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_getDirent);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.ListDirentRequest,
  *   !proto.yartu.ListDirentResponse>}
  */
