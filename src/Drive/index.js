@@ -474,6 +474,10 @@ export default (config) =>
         request.setRepoId(repoId);
         request.setPath(path);
 
+        if (preview) {
+          request.setOp('view');
+        }
+
         this.client.downloadFile(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
