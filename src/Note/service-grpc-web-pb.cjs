@@ -1482,6 +1482,67 @@ proto.yartu.YNotePromiseClient.prototype.upsertLabelToNote =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.UpsertImageToNoteRequest,
+ *   !proto.yartu.UpsertImageToNoteResponse>}
+ */
+const methodDescriptor_YNote_upsertImageToNote = new grpc.web.MethodDescriptor(
+  '/yartu.YNote/upsertImageToNote',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.UpsertImageToNoteRequest,
+  proto.yartu.UpsertImageToNoteResponse,
+  /**
+   * @param {!proto.yartu.UpsertImageToNoteRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.UpsertImageToNoteResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.UpsertImageToNoteRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.UpsertImageToNoteResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.UpsertImageToNoteResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YNoteClient.prototype.upsertImageToNote =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YNote/upsertImageToNote',
+      request,
+      metadata || {},
+      methodDescriptor_YNote_upsertImageToNote,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.UpsertImageToNoteRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.UpsertImageToNoteResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YNotePromiseClient.prototype.upsertImageToNote =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YNote/upsertImageToNote',
+      request,
+      metadata || {},
+      methodDescriptor_YNote_upsertImageToNote);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.UpsertNoteLabelRequest,
  *   !proto.yartu.UpsertNoteLabelResponse>}
  */

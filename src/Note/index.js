@@ -28,6 +28,9 @@ import {
   UpsertNoteLabelRequest,
   DeleteNoteLabelRequest,
 
+  // for file upload requests
+  UpsertImageToNoteRequest,
+
   GetTaskRequest,
   UpsertTaskRequest,
   DeleteTaskRequest,
@@ -853,7 +856,41 @@ export default (config) =>
       });
     }
 
-// TASK SERVICES
+    upsertImageToNote = (noteId, fileName) => {
+      return new Promise((resolve, reject) => {
+        const request = new UpsertImageToNoteRequest();
+        request.setNoteId(noteId);
+        request.setFileName(fileName);
+
+        this.client.upsertImageToNote(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              console.log('response:', response);
+              const code = response.getCode();
+
+              if (code == 0) {
+                resolve({
+                  code: 0,
+                  message: 'successfully',
+                  uploadToken: response.getUploadToken(),
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
+    // TASK SERVICES
     getTask = (noteId, taskId) => {
       return new Promise((resolve, reject) => {
         const request = new GetTaskRequest();
