@@ -869,9 +869,7 @@ export default (config) =>
             if (error) {
               handleError(error, reject);
             } else {
-              console.log('response:', response);
               const code = response.getCode();
-
               if (code == 0) {
                 resolve({
                   code: 0,
