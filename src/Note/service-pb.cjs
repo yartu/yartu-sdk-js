@@ -1503,7 +1503,7 @@ if (goog.DEBUG && !COMPILED) {
  * @private {!Array<number>}
  * @const
  */
-proto.yartu.NoteMetaQuery.repeatedFields_ = [9];
+proto.yartu.NoteMetaQuery.repeatedFields_ = [1,9];
 
 
 
@@ -1536,7 +1536,7 @@ proto.yartu.NoteMetaQuery.prototype.toObject = function(opt_includeInstance) {
  */
 proto.yartu.NoteMetaQuery.toObject = function(includeInstance, msg) {
   var f, obj = {
-    labelId: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    labelList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
     noteType: jspb.Message.getFieldWithDefault(msg, 2, ""),
     filterType: jspb.Message.getFieldWithDefault(msg, 3, ""),
     isArchived: jspb.Message.getBooleanFieldWithDefault(msg, 4, false),
@@ -1583,8 +1583,10 @@ proto.yartu.NoteMetaQuery.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {number} */ (reader.readInt64());
-      msg.setLabelId(value);
+      var values = /** @type {!Array<number>} */ (reader.isDelimited() ? reader.readPackedInt64() : [reader.readInt64()]);
+      for (var i = 0; i < values.length; i++) {
+        msg.addLabel(values[i]);
+      }
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
@@ -1653,9 +1655,9 @@ proto.yartu.NoteMetaQuery.prototype.serializeBinary = function() {
  */
 proto.yartu.NoteMetaQuery.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = /** @type {number} */ (jspb.Message.getField(message, 1));
-  if (f != null) {
-    writer.writeInt64(
+  f = message.getLabelList();
+  if (f.length > 0) {
+    writer.writePackedInt64(
       1,
       f
     );
@@ -1727,38 +1729,39 @@ proto.yartu.NoteMetaQuery.serializeBinaryToWriter = function(message, writer) {
 
 
 /**
- * optional int64 label_id = 1;
- * @return {number}
+ * repeated int64 label = 1;
+ * @return {!Array<number>}
  */
-proto.yartu.NoteMetaQuery.prototype.getLabelId = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+proto.yartu.NoteMetaQuery.prototype.getLabelList = function() {
+  return /** @type {!Array<number>} */ (jspb.Message.getRepeatedField(this, 1));
+};
+
+
+/**
+ * @param {!Array<number>} value
+ * @return {!proto.yartu.NoteMetaQuery} returns this
+ */
+proto.yartu.NoteMetaQuery.prototype.setLabelList = function(value) {
+  return jspb.Message.setField(this, 1, value || []);
 };
 
 
 /**
  * @param {number} value
+ * @param {number=} opt_index
  * @return {!proto.yartu.NoteMetaQuery} returns this
  */
-proto.yartu.NoteMetaQuery.prototype.setLabelId = function(value) {
-  return jspb.Message.setField(this, 1, value);
+proto.yartu.NoteMetaQuery.prototype.addLabel = function(value, opt_index) {
+  return jspb.Message.addToRepeatedField(this, 1, value, opt_index);
 };
 
 
 /**
- * Clears the field making it undefined.
+ * Clears the list making it empty but non-null.
  * @return {!proto.yartu.NoteMetaQuery} returns this
  */
-proto.yartu.NoteMetaQuery.prototype.clearLabelId = function() {
-  return jspb.Message.setField(this, 1, undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {boolean}
- */
-proto.yartu.NoteMetaQuery.prototype.hasLabelId = function() {
-  return jspb.Message.getField(this, 1) != null;
+proto.yartu.NoteMetaQuery.prototype.clearLabelList = function() {
+  return this.setLabelList([]);
 };
 
 
@@ -2093,7 +2096,7 @@ proto.yartu.NoteMetaQuery.prototype.hasHasTask = function() {
  * @private {!Array<number>}
  * @const
  */
-proto.yartu.TaskMetaQuery.repeatedFields_ = [8];
+proto.yartu.TaskMetaQuery.repeatedFields_ = [8,9];
 
 
 
@@ -2132,8 +2135,9 @@ proto.yartu.TaskMetaQuery.toObject = function(includeInstance, msg) {
     filters: jspb.Message.getFieldWithDefault(msg, 4, ""),
     completedAt: jspb.Message.getFieldWithDefault(msg, 5, ""),
     deadline: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    isSticky: jspb.Message.getBooleanFieldWithDefault(msg, 7, false),
-    notebookList: (f = jspb.Message.getRepeatedField(msg, 8)) == null ? undefined : f
+    noteType: jspb.Message.getFieldWithDefault(msg, 7, ""),
+    notebookList: (f = jspb.Message.getRepeatedField(msg, 8)) == null ? undefined : f,
+    labelList: (f = jspb.Message.getRepeatedField(msg, 9)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -2195,13 +2199,19 @@ proto.yartu.TaskMetaQuery.deserializeBinaryFromReader = function(msg, reader) {
       msg.setDeadline(value);
       break;
     case 7:
-      var value = /** @type {boolean} */ (reader.readBool());
-      msg.setIsSticky(value);
+      var value = /** @type {string} */ (reader.readString());
+      msg.setNoteType(value);
       break;
     case 8:
       var values = /** @type {!Array<number>} */ (reader.isDelimited() ? reader.readPackedInt64() : [reader.readInt64()]);
       for (var i = 0; i < values.length; i++) {
         msg.addNotebook(values[i]);
+      }
+      break;
+    case 9:
+      var values = /** @type {!Array<number>} */ (reader.isDelimited() ? reader.readPackedInt64() : [reader.readInt64()]);
+      for (var i = 0; i < values.length; i++) {
+        msg.addLabel(values[i]);
       }
       break;
     default:
@@ -2275,9 +2285,9 @@ proto.yartu.TaskMetaQuery.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = /** @type {boolean} */ (jspb.Message.getField(message, 7));
+  f = /** @type {string} */ (jspb.Message.getField(message, 7));
   if (f != null) {
-    writer.writeBool(
+    writer.writeString(
       7,
       f
     );
@@ -2286,6 +2296,13 @@ proto.yartu.TaskMetaQuery.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writePackedInt64(
       8,
+      f
+    );
+  }
+  f = message.getLabelList();
+  if (f.length > 0) {
+    writer.writePackedInt64(
+      9,
       f
     );
   }
@@ -2509,19 +2526,19 @@ proto.yartu.TaskMetaQuery.prototype.hasDeadline = function() {
 
 
 /**
- * optional bool is_sticky = 7;
- * @return {boolean}
+ * optional string note_type = 7;
+ * @return {string}
  */
-proto.yartu.TaskMetaQuery.prototype.getIsSticky = function() {
-  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 7, false));
+proto.yartu.TaskMetaQuery.prototype.getNoteType = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
 };
 
 
 /**
- * @param {boolean} value
+ * @param {string} value
  * @return {!proto.yartu.TaskMetaQuery} returns this
  */
-proto.yartu.TaskMetaQuery.prototype.setIsSticky = function(value) {
+proto.yartu.TaskMetaQuery.prototype.setNoteType = function(value) {
   return jspb.Message.setField(this, 7, value);
 };
 
@@ -2530,7 +2547,7 @@ proto.yartu.TaskMetaQuery.prototype.setIsSticky = function(value) {
  * Clears the field making it undefined.
  * @return {!proto.yartu.TaskMetaQuery} returns this
  */
-proto.yartu.TaskMetaQuery.prototype.clearIsSticky = function() {
+proto.yartu.TaskMetaQuery.prototype.clearNoteType = function() {
   return jspb.Message.setField(this, 7, undefined);
 };
 
@@ -2539,7 +2556,7 @@ proto.yartu.TaskMetaQuery.prototype.clearIsSticky = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu.TaskMetaQuery.prototype.hasIsSticky = function() {
+proto.yartu.TaskMetaQuery.prototype.hasNoteType = function() {
   return jspb.Message.getField(this, 7) != null;
 };
 
@@ -2578,6 +2595,43 @@ proto.yartu.TaskMetaQuery.prototype.addNotebook = function(value, opt_index) {
  */
 proto.yartu.TaskMetaQuery.prototype.clearNotebookList = function() {
   return this.setNotebookList([]);
+};
+
+
+/**
+ * repeated int64 label = 9;
+ * @return {!Array<number>}
+ */
+proto.yartu.TaskMetaQuery.prototype.getLabelList = function() {
+  return /** @type {!Array<number>} */ (jspb.Message.getRepeatedField(this, 9));
+};
+
+
+/**
+ * @param {!Array<number>} value
+ * @return {!proto.yartu.TaskMetaQuery} returns this
+ */
+proto.yartu.TaskMetaQuery.prototype.setLabelList = function(value) {
+  return jspb.Message.setField(this, 9, value || []);
+};
+
+
+/**
+ * @param {number} value
+ * @param {number=} opt_index
+ * @return {!proto.yartu.TaskMetaQuery} returns this
+ */
+proto.yartu.TaskMetaQuery.prototype.addLabel = function(value, opt_index) {
+  return jspb.Message.addToRepeatedField(this, 9, value, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.yartu.TaskMetaQuery} returns this
+ */
+proto.yartu.TaskMetaQuery.prototype.clearLabelList = function() {
+  return this.setLabelList([]);
 };
 
 

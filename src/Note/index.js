@@ -273,56 +273,55 @@ export default (config) =>
       });
     }
 
-    listNote = (notebookId = null, query = {}) => {
+    listNote = (notebookId = null, queryRequest = {}) => {
       return new Promise((resolve, reject) => {
         const request = new ListNoteRequest();
-        const queryRequest = new Query();
-        const metaRequest = new NoteMetaQuery();
+        const query = new Query();
+        const meta = new NoteMetaQuery();
 
         if (notebookId && notebookId > 0) {
           request.setNotebookId(notebookId);
         }
 
-        if (query.isStarred) {
-          metaRequest.setIsStarred(true);
+        if (queryRequest.sortBy) {
+          query.setSortBy(queryRequest.sortBy);
         }
 
-        if (query.isArchived) {
-          metaRequest.setIsArchived(true);
+        if (queryRequest.perPage) {
+          query.setPerPage(queryRequest.perPage);
         }
 
-        if (query.isPinned) {
-          metaRequest.setIsPinned(true);
+        if (queryRequest.page) {
+          query.setPage(queryRequest.page);
         }
 
-        if (query.label) {
-          metaRequest.setLabelId(query.label);
+        if (queryRequest.isTaskCompleted) {
+          query.setIsTaskCompleted(queryRequest.isTaskCompleted);
         }
 
-        if (query.sortBy) {
-          queryRequest.setSortBy(query.sortBy);
+        if (queryRequest.noteType) {
+          meta.setNoteType(queryRequest.noteType);
         }
 
-        if (query.perPage) {
-          queryRequest.setPerPage(query.perPage);
+        if (queryRequest.isStarred) {
+          meta.setIsStarred(true);
         }
 
-        if (query.page) {
-          queryRequest.setPage(query.page);
+        if (queryRequest.isArchived) {
+          meta.setIsArchived(true);
         }
 
-        if (query.isTaskCompleted) {
-          queryRequest.setIsTaskCompleted(query.isTaskCompleted);
+        if (queryRequest.isPinned) {
+          meta.setIsPinned(true);
         }
 
-        if (query.notebooks) {
-          metaRequest.setNotebookList(query.notebooks);
-        }
+        meta.setNotebookList(queryRequest.notebooks);
+        meta.setLabelList(queryRequest.labels);
 
-        metaRequest.setFilterType(query.filterType || 'all');
+        meta.setFilterType(queryRequest.filterType || 'all');
 
-        request.setQuery(queryRequest);
-        request.setMeta(metaRequest);
+        request.setQuery(query);
+        request.setMeta(meta);
 
         this.client.listNote(
           request,
@@ -968,8 +967,13 @@ export default (config) =>
         const request = new ListTaskRequest();
         const query = new Query();
         const groupBy = queryRequest.groupBy || 'priority';  // groupBy can be 'priority' or 'deadline'
+
         query.setPage(queryRequest.page);
         query.setPerPage(queryRequest.perPage);
+
+        if (queryRequest.sortBy) {
+          query.setSortBy(queryRequest.sortBy);
+        }
 
         const meta = new TaskMetaQuery();
         if (queryRequest.noteId > 0) {
@@ -983,8 +987,12 @@ export default (config) =>
           meta.setCompletedAt(queryRequest.completedAt);
         }
         meta.setDeadline(queryRequest.deadline);
-        meta.setNotebookList(queryRequest.notebook);
-        meta.setIsSticky(queryRequest.isSticky);
+        meta.setNotebookList(queryRequest.notebooks);
+        meta.setLabelList(queryRequest.labels);
+
+        if (queryRequest.noteType) {
+          meta.setNoteType(queryRequest.noteType);
+        }
 
         request.setQuery(query);
         request.setMeta(meta);
