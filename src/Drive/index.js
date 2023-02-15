@@ -12,6 +12,7 @@ import {
   UploadFileRequest,
   DownloadFileRequest,
   GetOfficeFileRequest,
+  GetDirentRequest,
   UpsertDirentRequest
 } from './service-pb.cjs';
 
@@ -535,4 +536,37 @@ export default (config) =>
         });
       });
     };
-  };
+
+    getDirent = (repoId, path, hasDownloadLink = false) => {
+      return new Promise((resolve, reject) => {
+        const request = new GetDirentRequest();
+
+        request.setRepoId(repoId);
+        request.setPath(path);
+        request.setDownloadLink(hasDownloadLink);
+
+        this.client.getDirent(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              const dirent = response.getData().toObject();
+              const token = response.getToken();
+
+              resolve({
+                code: code,
+                token,
+                ...dirent,
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+ };
