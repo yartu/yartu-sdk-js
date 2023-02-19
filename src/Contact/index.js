@@ -175,7 +175,7 @@ export default (config) =>
           }
 
 
-          shared.setPermissions(s.permissions);
+          shared.setPermission(s.permission);
           UserShareList.push(shared);
         });
 

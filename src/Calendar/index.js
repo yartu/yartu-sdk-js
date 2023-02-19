@@ -352,7 +352,7 @@ export default (config) =>
             console.log('@yartu/sdk/ shareNotebook method not supports external users and Realm share features for now!');
           }
 
-          shared.setPermissions(s.permissions);
+          shared.setPermission(s.permission);
           UserShareList.push(shared);
         });
 

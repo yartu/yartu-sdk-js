@@ -4823,7 +4823,7 @@ proto.Shared.toObject = function(includeInstance, msg) {
     realm: (f = msg.getRealm()) && proto.Realm.toObject(includeInstance, f),
     createdAt: jspb.Message.getFieldWithDefault(msg, 5, ""),
     updatedAt: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    permissions: jspb.Message.getFieldWithDefault(msg, 7, "")
+    permission: jspb.Message.getFieldWithDefault(msg, 7, "")
   };
 
   if (includeInstance) {
@@ -4889,7 +4889,7 @@ proto.Shared.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 7:
       var value = /** @type {string} */ (reader.readString());
-      msg.setPermissions(value);
+      msg.setPermission(value);
       break;
     default:
       reader.skipField();
@@ -4965,8 +4965,8 @@ proto.Shared.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getPermissions();
-  if (f.length > 0) {
+  f = /** @type {string} */ (jspb.Message.getField(message, 7));
+  if (f != null) {
     writer.writeString(
       7,
       f
@@ -5177,10 +5177,10 @@ proto.Shared.prototype.hasUpdatedAt = function() {
 
 
 /**
- * optional string permissions = 7;
+ * optional string permission = 7;
  * @return {string}
  */
-proto.Shared.prototype.getPermissions = function() {
+proto.Shared.prototype.getPermission = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
 };
 
@@ -5189,8 +5189,26 @@ proto.Shared.prototype.getPermissions = function() {
  * @param {string} value
  * @return {!proto.Shared} returns this
  */
-proto.Shared.prototype.setPermissions = function(value) {
-  return jspb.Message.setProto3StringField(this, 7, value);
+proto.Shared.prototype.setPermission = function(value) {
+  return jspb.Message.setField(this, 7, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.Shared} returns this
+ */
+proto.Shared.prototype.clearPermission = function() {
+  return jspb.Message.setField(this, 7, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.Shared.prototype.hasPermission = function() {
+  return jspb.Message.getField(this, 7) != null;
 };
 
 

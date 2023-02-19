@@ -189,7 +189,7 @@ export default (config) =>
           }
 
 
-          shared.setPermissions(s.permissions);
+          shared.setPermission(s.permission);
           UserShareList.push(shared);
         });
 
@@ -694,7 +694,6 @@ export default (config) =>
           }
           notelabel.setName(l.name);
           notelabel.setColor(l.color);
-          // notelabel.setUser(s.permissions);  // this line is not reuqired we can get context.user in backend.
           labelsList.push(notelabel);
         });
         request.setLabelsList(labelsList);
