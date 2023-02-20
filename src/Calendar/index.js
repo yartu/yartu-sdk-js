@@ -262,15 +262,27 @@ export default (config) =>
       });
     }
 
-    upsertCalendarObjectSplit(calendarObjectId, date) {
+    upsertCalendarObjectSplit(calendarObjectId, splitData) {
       return new Promise((resolve, reject) => {
         const request = new UpsertCalendarObjectSplitRequest();
-        // request.setDate(date);
 
         request.setId(calendarObjectId);
-        request.setOldDate(date.oldDate);
-        request.setNewDateStart(date.newStart);
-        request.setNewDateEnd(date.newEnd);
+        request.setSelectedDate(splitData.selectedDate);
+        request.setSplitMode(splitData.splitMode);
+        request.setActionMode(splitData.actionMode);
+        request.setOrder(splitData.order);
+        
+        if (splitData.newStart) {
+          request.setNewDateStart(splitData.newStart);
+        }
+
+        if (splitData.newEnd) {
+          request.setNewDateEnd(splitData.newEnd);
+        }
+
+        if (splitData.uid) {
+          request.setUid(splitData.uid);
+        }
 
         this.client.upsertCalendarObjectSplit(request, this.metadata, (error, response) => {
           if (error) {
