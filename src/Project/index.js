@@ -30,9 +30,14 @@ import {
   ListBoardTemplateRequest,
   ListCardActivityRequest,
   UpsertCardUsersRequest,
+
+  listSharedBoard,
+  ShareBoardRequest,
+  UnshareBoardRequest,
+  DeleteSharedBoardRequest,
 } from './service-pb.cjs';
 
-import { Query, UserModifyMeta } from '../utils/definitions_pb.cjs';
+import {Group, Query, Shared, User, UserModifyMeta} from '../utils/definitions_pb.cjs';
 import { YProjectClient } from './service-grpc-web-pb.cjs';
 import { handleError } from '../utils/helper';
 
@@ -142,7 +147,7 @@ export default (config) =>
         request.setName(projectData.name);
         request.setColor(projectData.color);
         request.setIcon(projectData.icon);
-        
+
         this.client.upsertProject(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
@@ -620,6 +625,127 @@ export default (config) =>
             const code = response.getCode();
 
             if (code == 0) {
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    shareBoard(boardId, shareList) {
+      return new Promise((resolve, reject) => {
+        const request = new ShareBoardRequest();
+        request.setId(boardId);
+        const UserShareList = [];
+        shareList.forEach(s => {
+          const shared = new Shared();
+          shared.setId(s.shared_id);
+          shared.setPermission(String(s.permission));
+
+          if (s?.isYartuUser) {
+            const user = new User();
+            user.setId(s.id);
+            user.setUsername(s.email);
+            user.setName(s.name);
+            user.setSurname(s.surname);
+
+            shared.setUser(user);
+
+          } else if (s?.isGroup) {
+
+            const group = new Group();
+            group.setId(s.id);
+            group.setName(s.name);
+            group.setEmailAlias(s.email);
+
+            shared.setGroup(group);
+          } else {
+            console.log('@yartu/sdk/ shareBoard method not supports external users and Realm share features for now!');
+          }
+
+
+          UserShareList.push(shared);
+        });
+
+        request.setSharedList(UserShareList);
+
+        this.client.shareBoard(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code: 0,
+                // success: response.getSuccessList().map((data) => data.toObject()),
+                // error: response.getErrorList().map((data) => data.toObject()),
+                // TODO :: @ramazan add success repeated field to proto and backend service !
+                // TODO :: @ramazan add error repeated field to proto and backend service !
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    unshareBoard(boardId) {
+      return new Promise((resolve, reject) => {
+        const request = new UnshareBoardRequest();
+        request.setId(boardId);
+
+        this.client.unshareBoard(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code: 0,
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    deleteSharedBoard(boardId, sharedBoard) {
+      return new Promise((resolve, reject) => {
+        const request = new DeleteSharedBoardRequest();
+        request.setBoardId(boardId);
+        request.setSharedId(sharedBoard.shared_id);
+        request.setId(sharedBoard.id);
+        request.setIsYartuUser(sharedBoard.isYartuUser);
+        request.setIsGroup(sharedBoard.isGroup);
+
+        this.client.deleteSharedBoard(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code: 0,
+                message: response.getMessage()
+              });
             } else {
               reject({
                 code: code,

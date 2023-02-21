@@ -167,6 +167,9 @@ export default (config) =>
         const UserShareList = [];
         shareList.forEach(s => {
           const shared = new Shared();
+          shared.setId(s.shared_id);
+          shared.setPermission(s.permission);
+
           if (s?.isYartuUser) {
             const user = new User();
             user.setId(s.id);
@@ -188,8 +191,6 @@ export default (config) =>
             console.log('@yartu/sdk/ shareNotebook method not supports external users and Realm share features for now!');
           }
 
-
-          shared.setPermissions(s.permissions);
           UserShareList.push(shared);
         });
 
@@ -694,7 +695,6 @@ export default (config) =>
           }
           notelabel.setName(l.name);
           notelabel.setColor(l.color);
-          // notelabel.setUser(s.permissions);  // this line is not reuqired we can get context.user in backend.
           labelsList.push(notelabel);
         });
         request.setLabelsList(labelsList);
