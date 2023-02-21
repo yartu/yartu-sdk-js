@@ -7883,10 +7883,13 @@ proto.yartu.UpsertCalendarObjectSplitRequest.prototype.toObject = function(opt_i
 proto.yartu.UpsertCalendarObjectSplitRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    oldDate: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    selectedDate: jspb.Message.getFieldWithDefault(msg, 2, ""),
     newDateStart: jspb.Message.getFieldWithDefault(msg, 3, ""),
     newDateEnd: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    order: jspb.Message.getFieldWithDefault(msg, 5, 0)
+    uid: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    splitMode: jspb.Message.getFieldWithDefault(msg, 6, ""),
+    actionMode: jspb.Message.getFieldWithDefault(msg, 7, ""),
+    order: jspb.Message.getFieldWithDefault(msg, 8, 0)
   };
 
   if (includeInstance) {
@@ -7929,7 +7932,7 @@ proto.yartu.UpsertCalendarObjectSplitRequest.deserializeBinaryFromReader = funct
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setOldDate(value);
+      msg.setSelectedDate(value);
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
@@ -7940,6 +7943,18 @@ proto.yartu.UpsertCalendarObjectSplitRequest.deserializeBinaryFromReader = funct
       msg.setNewDateEnd(value);
       break;
     case 5:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setUid(value);
+      break;
+    case 6:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setSplitMode(value);
+      break;
+    case 7:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setActionMode(value);
+      break;
+    case 8:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setOrder(value);
       break;
@@ -7979,7 +7994,7 @@ proto.yartu.UpsertCalendarObjectSplitRequest.serializeBinaryToWriter = function(
       f
     );
   }
-  f = message.getOldDate();
+  f = message.getSelectedDate();
   if (f.length > 0) {
     writer.writeString(
       2,
@@ -8000,10 +8015,31 @@ proto.yartu.UpsertCalendarObjectSplitRequest.serializeBinaryToWriter = function(
       f
     );
   }
+  f = message.getUid();
+  if (f.length > 0) {
+    writer.writeString(
+      5,
+      f
+    );
+  }
+  f = message.getSplitMode();
+  if (f.length > 0) {
+    writer.writeString(
+      6,
+      f
+    );
+  }
+  f = message.getActionMode();
+  if (f.length > 0) {
+    writer.writeString(
+      7,
+      f
+    );
+  }
   f = message.getOrder();
   if (f !== 0) {
     writer.writeInt64(
-      5,
+      8,
       f
     );
   }
@@ -8029,10 +8065,10 @@ proto.yartu.UpsertCalendarObjectSplitRequest.prototype.setId = function(value) {
 
 
 /**
- * optional string old_date = 2;
+ * optional string selected_date = 2;
  * @return {string}
  */
-proto.yartu.UpsertCalendarObjectSplitRequest.prototype.getOldDate = function() {
+proto.yartu.UpsertCalendarObjectSplitRequest.prototype.getSelectedDate = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -8041,7 +8077,7 @@ proto.yartu.UpsertCalendarObjectSplitRequest.prototype.getOldDate = function() {
  * @param {string} value
  * @return {!proto.yartu.UpsertCalendarObjectSplitRequest} returns this
  */
-proto.yartu.UpsertCalendarObjectSplitRequest.prototype.setOldDate = function(value) {
+proto.yartu.UpsertCalendarObjectSplitRequest.prototype.setSelectedDate = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
@@ -8083,11 +8119,65 @@ proto.yartu.UpsertCalendarObjectSplitRequest.prototype.setNewDateEnd = function(
 
 
 /**
- * optional int64 order = 5;
+ * optional string uid = 5;
+ * @return {string}
+ */
+proto.yartu.UpsertCalendarObjectSplitRequest.prototype.getUid = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.UpsertCalendarObjectSplitRequest} returns this
+ */
+proto.yartu.UpsertCalendarObjectSplitRequest.prototype.setUid = function(value) {
+  return jspb.Message.setProto3StringField(this, 5, value);
+};
+
+
+/**
+ * optional string split_mode = 6;
+ * @return {string}
+ */
+proto.yartu.UpsertCalendarObjectSplitRequest.prototype.getSplitMode = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.UpsertCalendarObjectSplitRequest} returns this
+ */
+proto.yartu.UpsertCalendarObjectSplitRequest.prototype.setSplitMode = function(value) {
+  return jspb.Message.setProto3StringField(this, 6, value);
+};
+
+
+/**
+ * optional string action_mode = 7;
+ * @return {string}
+ */
+proto.yartu.UpsertCalendarObjectSplitRequest.prototype.getActionMode = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.UpsertCalendarObjectSplitRequest} returns this
+ */
+proto.yartu.UpsertCalendarObjectSplitRequest.prototype.setActionMode = function(value) {
+  return jspb.Message.setProto3StringField(this, 7, value);
+};
+
+
+/**
+ * optional int64 order = 8;
  * @return {number}
  */
 proto.yartu.UpsertCalendarObjectSplitRequest.prototype.getOrder = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 8, 0));
 };
 
 
@@ -8096,7 +8186,7 @@ proto.yartu.UpsertCalendarObjectSplitRequest.prototype.getOrder = function() {
  * @return {!proto.yartu.UpsertCalendarObjectSplitRequest} returns this
  */
 proto.yartu.UpsertCalendarObjectSplitRequest.prototype.setOrder = function(value) {
-  return jspb.Message.setProto3IntField(this, 5, value);
+  return jspb.Message.setProto3IntField(this, 8, value);
 };
 
 
