@@ -1,40 +1,60 @@
 import {
   GetProjectMeRequest,
+
+  // Project services
   ListProjectRequest,
   GetProjectRequest,
   UpsertProjectRequest,
   DeleteProjectRequest,
   DuplicateProjectRequest,
   ArchiveProjectRequest,
-  StarProjectRequest,
+  StarProjectRequest,  // unused yet
+
+  // Thread services
   ListThreadRequest,
   GetThreadRequest,
   UpsertThreadRequest,
-  DeleteThreadRequest,
+  DeleteThreadRequest,  // unused yet
+
+  // ThreadMessage services
   ListThreadMessageRequest,
   SendThreadMessageRequest,
   ReadThreadMessageRequest,
   InteractThreadMessageRequest,
+
+  // Board services
   ListBoardRequest,
+  ListBoardTemplateRequest,
   GetBoardRequest,
   UpsertBoardRequest,
   DeleteBoardRequest,
+
+  // Share Board services
+  ShareBoardRequest,
+  UnshareBoardRequest,
+  // UpsertSharedBoardRequest,
+  DeleteSharedBoardRequest,
+  ListSharedBoardRequest,
+
+  // CardLabelServices
   ListCardLabelRequest,
   UpsertCardLabelRequest,
   DeleteCardLabelRequest,
+
+  // Card services
+  GetCardRequest,
+  ListCardActivityRequest,
   UpsertCardRequest,
+  DeleteCardRequest,
+  UpsertCardUsersRequest,
   AddCommentToCardRequest,
   AddLabelToCardRequest,
-  MoveCardRequest,
-  GetCardRequest,
-  ListBoardTemplateRequest,
-  ListCardActivityRequest,
-  UpsertCardUsersRequest,
+  UpsertCheckListRequest,
+  DeleteCheckListRequest,
+  UpsertCheckListItemRequest,
+  DeleteCheckListItemRequest,  // unused yet
+  MoveCardRequest,  // unused yet
 
-  listSharedBoard,
-  ShareBoardRequest,
-  UnshareBoardRequest,
-  DeleteSharedBoardRequest,
 } from './service-pb.cjs';
 
 import {Group, Query, Shared, User, UserModifyMeta} from '../utils/definitions_pb.cjs';
@@ -173,7 +193,7 @@ export default (config) =>
     deleteProject(uuid) {
       return new Promise((resolve, reject) => {
         const request = new DeleteProjectRequest();
-        request.addUuid(uuid);
+        request.setUuid(uuid);
         this.client.deleteProject(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
@@ -195,8 +215,8 @@ export default (config) =>
     duplicateProject(uuid, name) {
       return new Promise((resolve, reject) => {
         const request = new DuplicateProjectRequest();
-        request.addUuid(uuid);
-        request.addName(name);
+        request.setUuid(uuid);
+        request.setName(name);
         this.client.duplicateProject(
           request,
           this.metadata,
@@ -222,8 +242,8 @@ export default (config) =>
     archiveProject(uuid, unarchive) {
       return new Promise((resolve, reject) => {
         const request = new ArchiveProjectRequest();
-        request.addUuid(uuid);
-        request.addUnarchive(unarchive);
+        request.setUuid(uuid);
+        request.setUnarchive(unarchive);
         this.client.archiveProject(
           request,
           this.metadata,
@@ -249,8 +269,8 @@ export default (config) =>
     starProject(uuid, star) {
       return new Promise((resolve, reject) => {
         const request = new StarProjectRequest();
-        request.addUuid(uuid);
-        request.addStar(star);
+        request.setUuid(uuid);
+        request.setStar(star);
         this.client.starProject(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
@@ -337,13 +357,13 @@ export default (config) =>
     ) {
       return new Promise((resolve, reject) => {
         const request = new UpsertThreadRequest();
-        request.addId(id);
-        request.addTitle(title);
-        request.addDescription(description);
-        request.addProjectUuid(project_uuid);
-        request.addBoardId(board_id);
-        request.addIsPinned(is_pinned);
-        request.addIsPrivate(is_private);
+        request.setId(id);
+        request.setTitle(title);
+        request.setDescription(description);
+        request.setProjectUuid(project_uuid);
+        request.setBoardId(board_id);
+        request.setIsPinned(is_pinned);
+        request.setIsPrivate(is_private);
         this.client.upsertThread(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
@@ -365,7 +385,7 @@ export default (config) =>
     deleteThread(id) {
       return new Promise((resolve, reject) => {
         const request = new DeleteThreadRequest();
-        request.addId(id);
+        request.setId(id);
         this.client.deleteThread(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
@@ -425,9 +445,9 @@ export default (config) =>
     sendThreadMessage(thread_uuid, message, answered_message_uuid) {
       return new Promise((resolve, reject) => {
         const request = new SendThreadMessageRequest();
-        request.addThreadUuid(thread_uuid);
-        request.addMessage(message);
-        request.addAnsweredMessageUuid(answered_message_uuid);
+        request.setThreadUuid(thread_uuid);
+        request.setMessage(message);
+        request.setAnsweredMessageUuid(answered_message_uuid);
         this.client.sendThreadMessage(
           request,
           this.metadata,
@@ -453,8 +473,8 @@ export default (config) =>
     readThreadMessage(thread_uuid, message_uuid) {
       return new Promise((resolve, reject) => {
         const request = new ReadThreadMessageRequest();
-        request.addThreadUuid(thread_uuid);
-        request.addMessageUuid(message_uuid);
+        request.setThreadUuid(thread_uuid);
+        request.setMessageUuid(message_uuid);
         this.client.readThreadMessage(
           request,
           this.metadata,
@@ -480,9 +500,9 @@ export default (config) =>
     interactThreadMessage(thread_uuid, message_uuid, emoji) {
       return new Promise((resolve, reject) => {
         const request = new InteractThreadMessageRequest();
-        request.addThreadUuid(thread_uuid);
-        request.addMessageUuid(message_uuid);
-        request.addEmoji(emoji);
+        request.setThreadUuid(thread_uuid);
+        request.setMessageUuid(message_uuid);
+        request.setEmoji(emoji);
         this.client.interactThreadMessage(
           request,
           this.metadata,
@@ -508,7 +528,7 @@ export default (config) =>
     listBoard(project_uuid) {
       return new Promise((resolve, reject) => {
         const request = new ListBoardRequest();
-        request.addProjectUuid(project_uuid);
+        request.setProjectUuid(project_uuid);
         this.client.listBoard(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
@@ -591,7 +611,7 @@ export default (config) =>
         request.setColor(boardData.color);
         request.setTemplateUuid(boardData.template.uuid);
         // request.setName(member);
-        // request.addPermission(permission);
+        // request.setPermission(permission);
         this.client.upsertBoard(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
@@ -617,7 +637,7 @@ export default (config) =>
     deleteBoard(uuid) {
       return new Promise((resolve, reject) => {
         const request = new DeleteBoardRequest();
-        request.addUuid(uuid);
+        request.setUuid(uuid);
         this.client.deleteBoard(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
@@ -760,7 +780,7 @@ export default (config) =>
     listCardLabel(board_uuid) {
       return new Promise((resolve, reject) => {
         const request = new ListCardLabelRequest();
-        request.addBoardUuid(board_uuid);
+        request.setBoardUuid(board_uuid);
         this.client.listCardLabel(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
@@ -782,10 +802,10 @@ export default (config) =>
     upsertCardLabel(id, board_uuid, name, color) {
       return new Promise((resolve, reject) => {
         const request = new UpsertCardLabelRequest();
-        request.addId(id);
-        request.addBoardUuid(board_uuid);
-        request.addName(name);
-        request.addColor(color);
+        request.setId(id);
+        request.setBoardUuid(board_uuid);
+        request.setName(name);
+        request.setColor(color);
         this.client.upsertCardLabel(
           request,
           this.metadata,
@@ -811,7 +831,7 @@ export default (config) =>
     deleteCardLabel(id) {
       return new Promise((resolve, reject) => {
         const request = new DeleteCardLabelRequest();
-        request.addId(id);
+        request.setId(id);
         this.client.deleteCardLabel(
           request,
           this.metadata,
@@ -883,6 +903,31 @@ export default (config) =>
                 card: response.getCard().toObject(),
                 message: response.getMessage()
               });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    deleteCard(cardId) {
+      return new Promise((resolve, reject) => {
+        const request = new DeleteCardRequest();
+        request.setId(cardId);
+        this.client.deleteCard(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage()
+              })
             } else {
               reject({
                 code: code,

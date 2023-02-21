@@ -1970,6 +1970,67 @@ proto.yartu.YProjectPromiseClient.prototype.upsertCard =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.DeleteCardRequest,
+ *   !proto.yartu.DeleteCardResponse>}
+ */
+const methodDescriptor_YProject_deleteCard = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/deleteCard',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.DeleteCardRequest,
+  proto.yartu.DeleteCardResponse,
+  /**
+   * @param {!proto.yartu.DeleteCardRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.DeleteCardResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.DeleteCardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.DeleteCardResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.DeleteCardResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.deleteCard =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/deleteCard',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_deleteCard,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.DeleteCardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.DeleteCardResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.deleteCard =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/deleteCard',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_deleteCard);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.UpsertCardUsersRequest,
  *   !proto.yartu.UpsertCardUsersResponse>}
  */
