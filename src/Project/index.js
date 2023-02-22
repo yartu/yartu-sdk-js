@@ -1221,7 +1221,7 @@ export default (config) =>
 
     upsertCheckListItem(checkListId, checkListItem) {
       return new Promise((resolve, reject) => {
-        const request = new UpsertCheckListRequest();
+        const request = new UpsertCheckListItemRequest();
 
         request.setChecklistId(checkListId);
 
@@ -1277,8 +1277,6 @@ export default (config) =>
         });
       });
     }
-
-
 
   };
 
