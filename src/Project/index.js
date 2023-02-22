@@ -1278,5 +1278,31 @@ export default (config) =>
       });
     }
 
+    deleteCheckListItem(checkListItemId) {
+      return new Promise((resolve, reject) => {
+        const request = new DeleteCheckListItemRequest();
+        request.setId(checkListItemId);
+
+        this.client.deleteCheckListItem(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage()
+              })
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
   };
 
