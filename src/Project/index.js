@@ -823,13 +823,13 @@ export default (config) =>
       });
     }
 
-    upsertCardLabel(id, board_uuid, name, color) {
+    upsertCardLabel(boardUUID, labelData) {
       return new Promise((resolve, reject) => {
         const request = new UpsertCardLabelRequest();
-        request.setId(id);
-        request.setBoardUuid(board_uuid);
-        request.setName(name);
-        request.setColor(color);
+        request.setBoardUuid(boardUUID);
+        request.setId(labelData.id);
+        request.setName(labelData.name);
+        request.setColor(labelData.color);
         this.client.upsertCardLabel(
           request,
           this.metadata,
