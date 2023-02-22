@@ -1161,12 +1161,13 @@ export default (config) =>
       });
     }
 
-    upsertCheckList(checklistId, title) {
+    upsertCheckList(cardId, checkList) {
       return new Promise((resolve, reject) => {
         const request = new UpsertCheckListRequest();
 
-        request.setId(checklistId);
-        request.setTitle(title);
+        request.setCardId(cardId);
+        request.setId(checkList.id);
+        request.setTitle(checkList.title);
 
         this.client.upsertCheckList(request, this.metadata, (error, response) => {
           if (error) {
@@ -1176,7 +1177,6 @@ export default (config) =>
             if (code == 0) {
               resolve({
                 code,
-                checklist: response.getChecklist().toObject(),
                 message: response.getMessage()
               })
             } else {
