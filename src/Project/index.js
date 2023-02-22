@@ -1,4 +1,7 @@
 import {
+  //
+  CardLabel,
+
   GetProjectMeRequest,
 
   // Project services
@@ -1190,4 +1193,92 @@ export default (config) =>
       });
     }
 
+    deleteCheckList(checkListId) {
+      return new Promise((resolve, reject) => {
+        const request = new DeleteCheckListRequest();
+        request.setId(checkListId);
+
+        this.client.deleteCheckList(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage()
+              })
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    upsertCheckListItem(checkListId, checkListItem) {
+      return new Promise((resolve, reject) => {
+        const request = new UpsertCheckListRequest();
+
+        request.setChecklistId(checkListId);
+
+        request.setId(checkListItem.id);
+        request.setTitle(checkListItem.title);
+        request.setPriority(checkListItem.priority);
+        request.setIndex(checkListItem.index);
+
+        // TODO :: check and fix this (may be need to convert or other someting)
+        request.setDueDate(checkListItem.dueDate);
+
+        request.setIsCompleted(checkListItem.isCompleted);
+
+        if (checkListItem.assignee) {
+          const assignee = new User();
+          assignee.setId(checkListItem.assignee.id);
+          assignee.setUsername(checkListItem.assignee.email || checkListItem.assignee.username);
+          assignee.setName(checkListItem.assignee.name);
+          assignee.setSurname(checkListItem.assignee.surname);
+          request.setAssignee(assignee);
+        }
+
+        if (checkListItem.labelList && checkListItem.labelList.length > 0 ) {
+          const cardLabelList = [];
+          checkListItem.labelList.forEach((l) => {
+            const label = new CardLabel();
+            label.setId(l.id);
+            label.setName(l.name);
+            label.setColor(l.color);
+
+            cardLabelList.push(label);
+          });
+          request.setCardLabelList(cardLabelList);
+        }
+
+        this.client.upsertCheckListItem(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage()
+              })
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+
+
   };
+
