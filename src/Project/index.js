@@ -227,6 +227,10 @@ export default (config) =>
               const code = response.getCode();
 
               if (code == 0) {
+                resolve({
+                  code: 0,
+                  message: response.getMessage()
+                });
               } else {
                 reject({
                   code: code,
@@ -254,6 +258,10 @@ export default (config) =>
               const code = response.getCode();
 
               if (code == 0) {
+                resolve({
+                  code: 0,
+                  message: response.getMessage()
+                });
               } else {
                 reject({
                   code: code,
@@ -458,6 +466,10 @@ export default (config) =>
               const code = response.getCode();
 
               if (code == 0) {
+                resolve({
+                  code: 0,
+                  message: response.getMessage()
+                });
               } else {
                 reject({
                   code: code,
@@ -485,6 +497,10 @@ export default (config) =>
               const code = response.getCode();
 
               if (code == 0) {
+                resolve({
+                  code: 0,
+                  message: response.getMessage()
+                });
               } else {
                 reject({
                   code: code,
@@ -513,6 +529,10 @@ export default (config) =>
               const code = response.getCode();
 
               if (code == 0) {
+                resolve({
+                  code: 0,
+                  message: response.getMessage()
+                });
               } else {
                 reject({
                   code: code,
@@ -788,6 +808,10 @@ export default (config) =>
             const code = response.getCode();
 
             if (code == 0) {
+              resolve({
+                code: 0,
+                message: response.getMessage()
+              });
             } else {
               reject({
                 code: code,
@@ -816,6 +840,10 @@ export default (config) =>
               const code = response.getCode();
 
               if (code == 0) {
+                resolve({
+                  code: 0,
+                  message: response.getMessage()
+                });
               } else {
                 reject({
                   code: code,
@@ -842,6 +870,10 @@ export default (config) =>
               const code = response.getCode();
 
               if (code == 0) {
+                resolve({
+                  code: 0,
+                  message: response.getMessage()
+                });
               } else {
                 reject({
                   code: code,
