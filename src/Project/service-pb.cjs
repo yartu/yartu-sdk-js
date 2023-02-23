@@ -2477,7 +2477,7 @@ proto.yartu.CardAttachment.prototype.setName = function(value) {
  * @private {!Array<number>}
  * @const
  */
-proto.yartu.CardChecklistItem.repeatedFields_ = [8,9];
+proto.yartu.CardChecklistItem.repeatedFields_ = [9];
 
 
 
@@ -2517,8 +2517,7 @@ proto.yartu.CardChecklistItem.toObject = function(includeInstance, msg) {
     dueDate: jspb.Message.getFieldWithDefault(msg, 5, ""),
     completedAt: jspb.Message.getFieldWithDefault(msg, 6, ""),
     canceledAt: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    assigneeList: jspb.Message.toObjectList(msg.getAssigneeList(),
-    common_grpc_definitions_pb.User.toObject, includeInstance),
+    assignee: (f = msg.getAssignee()) && common_grpc_definitions_pb.User.toObject(includeInstance, f),
     labelList: jspb.Message.toObjectList(msg.getLabelList(),
     proto.yartu.CardLabel.toObject, includeInstance)
   };
@@ -2588,7 +2587,7 @@ proto.yartu.CardChecklistItem.deserializeBinaryFromReader = function(msg, reader
     case 8:
       var value = new common_grpc_definitions_pb.User;
       reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
-      msg.addAssignee(value);
+      msg.setAssignee(value);
       break;
     case 9:
       var value = new proto.yartu.CardLabel;
@@ -2673,9 +2672,9 @@ proto.yartu.CardChecklistItem.serializeBinaryToWriter = function(message, writer
       f
     );
   }
-  f = message.getAssigneeList();
-  if (f.length > 0) {
-    writer.writeRepeatedMessage(
+  f = message.getAssignee();
+  if (f != null) {
+    writer.writeMessage(
       8,
       f,
       common_grpc_definitions_pb.User.serializeBinaryToWriter
@@ -2873,40 +2872,39 @@ proto.yartu.CardChecklistItem.prototype.hasCanceledAt = function() {
 
 
 /**
- * repeated User assignee = 8;
- * @return {!Array<!proto.User>}
+ * optional User assignee = 8;
+ * @return {?proto.User}
  */
-proto.yartu.CardChecklistItem.prototype.getAssigneeList = function() {
-  return /** @type{!Array<!proto.User>} */ (
-    jspb.Message.getRepeatedWrapperField(this, common_grpc_definitions_pb.User, 8));
+proto.yartu.CardChecklistItem.prototype.getAssignee = function() {
+  return /** @type{?proto.User} */ (
+    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.User, 8));
 };
 
 
 /**
- * @param {!Array<!proto.User>} value
+ * @param {?proto.User|undefined} value
  * @return {!proto.yartu.CardChecklistItem} returns this
 */
-proto.yartu.CardChecklistItem.prototype.setAssigneeList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 8, value);
+proto.yartu.CardChecklistItem.prototype.setAssignee = function(value) {
+  return jspb.Message.setWrapperField(this, 8, value);
 };
 
 
 /**
- * @param {!proto.User=} opt_value
- * @param {number=} opt_index
- * @return {!proto.User}
- */
-proto.yartu.CardChecklistItem.prototype.addAssignee = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 8, opt_value, proto.User, opt_index);
-};
-
-
-/**
- * Clears the list making it empty but non-null.
+ * Clears the message field making it undefined.
  * @return {!proto.yartu.CardChecklistItem} returns this
  */
-proto.yartu.CardChecklistItem.prototype.clearAssigneeList = function() {
-  return this.setAssigneeList([]);
+proto.yartu.CardChecklistItem.prototype.clearAssignee = function() {
+  return this.setAssignee(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.CardChecklistItem.prototype.hasAssignee = function() {
+  return jspb.Message.getField(this, 8) != null;
 };
 
 
@@ -5333,7 +5331,7 @@ proto.yartu.Column.prototype.clearCardList = function() {
  * @private {!Array<number>}
  * @const
  */
-proto.yartu.Board.repeatedFields_ = [7,9,13,14];
+proto.yartu.Board.repeatedFields_ = [7,9,13,14,15];
 
 
 
@@ -5383,7 +5381,9 @@ proto.yartu.Board.toObject = function(includeInstance, msg) {
     labelList: jspb.Message.toObjectList(msg.getLabelList(),
     proto.yartu.CardLabel.toObject, includeInstance),
     sharedList: jspb.Message.toObjectList(msg.getSharedList(),
-    common_grpc_definitions_pb.Shared.toObject, includeInstance)
+    common_grpc_definitions_pb.Shared.toObject, includeInstance),
+    assignableUserList: jspb.Message.toObjectList(msg.getAssignableUserList(),
+    common_grpc_definitions_pb.User.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -5480,6 +5480,11 @@ proto.yartu.Board.deserializeBinaryFromReader = function(msg, reader) {
       var value = new common_grpc_definitions_pb.Shared;
       reader.readMessage(value,common_grpc_definitions_pb.Shared.deserializeBinaryFromReader);
       msg.addShared(value);
+      break;
+    case 15:
+      var value = new common_grpc_definitions_pb.User;
+      reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
+      msg.addAssignableUser(value);
       break;
     default:
       reader.skipField();
@@ -5611,6 +5616,14 @@ proto.yartu.Board.serializeBinaryToWriter = function(message, writer) {
       14,
       f,
       common_grpc_definitions_pb.Shared.serializeBinaryToWriter
+    );
+  }
+  f = message.getAssignableUserList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      15,
+      f,
+      common_grpc_definitions_pb.User.serializeBinaryToWriter
     );
   }
 };
@@ -5964,6 +5977,44 @@ proto.yartu.Board.prototype.addShared = function(opt_value, opt_index) {
  */
 proto.yartu.Board.prototype.clearSharedList = function() {
   return this.setSharedList([]);
+};
+
+
+/**
+ * repeated User assignable_user = 15;
+ * @return {!Array<!proto.User>}
+ */
+proto.yartu.Board.prototype.getAssignableUserList = function() {
+  return /** @type{!Array<!proto.User>} */ (
+    jspb.Message.getRepeatedWrapperField(this, common_grpc_definitions_pb.User, 15));
+};
+
+
+/**
+ * @param {!Array<!proto.User>} value
+ * @return {!proto.yartu.Board} returns this
+*/
+proto.yartu.Board.prototype.setAssignableUserList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 15, value);
+};
+
+
+/**
+ * @param {!proto.User=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.User}
+ */
+proto.yartu.Board.prototype.addAssignableUser = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 15, opt_value, proto.User, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.yartu.Board} returns this
+ */
+proto.yartu.Board.prototype.clearAssignableUserList = function() {
+  return this.setAssignableUserList([]);
 };
 
 
@@ -16858,7 +16909,7 @@ proto.yartu.UpsertCardLabelResponse.prototype.toObject = function(opt_includeIns
 proto.yartu.UpsertCardLabelResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    cardLabel: (f = msg.getCardLabel()) && proto.yartu.CardLabel.toObject(includeInstance, f),
+    data: (f = msg.getData()) && proto.yartu.CardLabel.toObject(includeInstance, f),
     message: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
@@ -16903,7 +16954,7 @@ proto.yartu.UpsertCardLabelResponse.deserializeBinaryFromReader = function(msg, 
     case 2:
       var value = new proto.yartu.CardLabel;
       reader.readMessage(value,proto.yartu.CardLabel.deserializeBinaryFromReader);
-      msg.setCardLabel(value);
+      msg.setData(value);
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
@@ -16945,7 +16996,7 @@ proto.yartu.UpsertCardLabelResponse.serializeBinaryToWriter = function(message, 
       f
     );
   }
-  f = message.getCardLabel();
+  f = message.getData();
   if (f != null) {
     writer.writeMessage(
       2,
@@ -16982,10 +17033,10 @@ proto.yartu.UpsertCardLabelResponse.prototype.setCode = function(value) {
 
 
 /**
- * optional CardLabel card_label = 2;
+ * optional CardLabel data = 2;
  * @return {?proto.yartu.CardLabel}
  */
-proto.yartu.UpsertCardLabelResponse.prototype.getCardLabel = function() {
+proto.yartu.UpsertCardLabelResponse.prototype.getData = function() {
   return /** @type{?proto.yartu.CardLabel} */ (
     jspb.Message.getWrapperField(this, proto.yartu.CardLabel, 2));
 };
@@ -16995,7 +17046,7 @@ proto.yartu.UpsertCardLabelResponse.prototype.getCardLabel = function() {
  * @param {?proto.yartu.CardLabel|undefined} value
  * @return {!proto.yartu.UpsertCardLabelResponse} returns this
 */
-proto.yartu.UpsertCardLabelResponse.prototype.setCardLabel = function(value) {
+proto.yartu.UpsertCardLabelResponse.prototype.setData = function(value) {
   return jspb.Message.setWrapperField(this, 2, value);
 };
 
@@ -17004,8 +17055,8 @@ proto.yartu.UpsertCardLabelResponse.prototype.setCardLabel = function(value) {
  * Clears the message field making it undefined.
  * @return {!proto.yartu.UpsertCardLabelResponse} returns this
  */
-proto.yartu.UpsertCardLabelResponse.prototype.clearCardLabel = function() {
-  return this.setCardLabel(undefined);
+proto.yartu.UpsertCardLabelResponse.prototype.clearData = function() {
+  return this.setData(undefined);
 };
 
 
@@ -17013,7 +17064,7 @@ proto.yartu.UpsertCardLabelResponse.prototype.clearCardLabel = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu.UpsertCardLabelResponse.prototype.hasCardLabel = function() {
+proto.yartu.UpsertCardLabelResponse.prototype.hasData = function() {
   return jspb.Message.getField(this, 2) != null;
 };
 
@@ -20087,8 +20138,8 @@ proto.yartu.UpsertCheckListRequest.prototype.toObject = function(opt_includeInst
 proto.yartu.UpsertCheckListRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    cardUuid: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    name: jspb.Message.getFieldWithDefault(msg, 3, "")
+    cardId: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    title: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -20131,11 +20182,11 @@ proto.yartu.UpsertCheckListRequest.deserializeBinaryFromReader = function(msg, r
       break;
     case 2:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setCardUuid(value);
+      msg.setCardId(value);
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
-      msg.setName(value);
+      msg.setTitle(value);
       break;
     default:
       reader.skipField();
@@ -20173,14 +20224,14 @@ proto.yartu.UpsertCheckListRequest.serializeBinaryToWriter = function(message, w
       f
     );
   }
-  f = message.getCardUuid();
+  f = message.getCardId();
   if (f !== 0) {
     writer.writeInt64(
       2,
       f
     );
   }
-  f = message.getName();
+  f = message.getTitle();
   if (f.length > 0) {
     writer.writeString(
       3,
@@ -20209,10 +20260,10 @@ proto.yartu.UpsertCheckListRequest.prototype.setId = function(value) {
 
 
 /**
- * optional int64 card_uuid = 2;
+ * optional int64 card_id = 2;
  * @return {number}
  */
-proto.yartu.UpsertCheckListRequest.prototype.getCardUuid = function() {
+proto.yartu.UpsertCheckListRequest.prototype.getCardId = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
 };
 
@@ -20221,16 +20272,16 @@ proto.yartu.UpsertCheckListRequest.prototype.getCardUuid = function() {
  * @param {number} value
  * @return {!proto.yartu.UpsertCheckListRequest} returns this
  */
-proto.yartu.UpsertCheckListRequest.prototype.setCardUuid = function(value) {
+proto.yartu.UpsertCheckListRequest.prototype.setCardId = function(value) {
   return jspb.Message.setProto3IntField(this, 2, value);
 };
 
 
 /**
- * optional string name = 3;
+ * optional string title = 3;
  * @return {string}
  */
-proto.yartu.UpsertCheckListRequest.prototype.getName = function() {
+proto.yartu.UpsertCheckListRequest.prototype.getTitle = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
@@ -20239,7 +20290,7 @@ proto.yartu.UpsertCheckListRequest.prototype.getName = function() {
  * @param {string} value
  * @return {!proto.yartu.UpsertCheckListRequest} returns this
  */
-proto.yartu.UpsertCheckListRequest.prototype.setName = function(value) {
+proto.yartu.UpsertCheckListRequest.prototype.setTitle = function(value) {
   return jspb.Message.setProto3StringField(this, 3, value);
 };
 

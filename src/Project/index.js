@@ -1254,7 +1254,7 @@ export default (config) =>
 
             cardLabelList.push(label);
           });
-          request.setCardLabelList(cardLabelList);
+          request.setLabelList(cardLabelList);
         }
 
         this.client.upsertCheckListItem(request, this.metadata, (error, response) => {
