@@ -1263,8 +1263,10 @@ export default (config) =>
           } else {
             const code = response.getCode();
             if (code == 0) {
+              const data = response.getData().toObject()
               resolve({
                 code,
+                data: data,
                 message: response.getMessage()
               })
             } else {
