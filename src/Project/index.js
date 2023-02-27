@@ -56,6 +56,7 @@ import {
   DeleteCheckListRequest,
   UpsertCheckListItemRequest,
   DeleteCheckListItemRequest,  // unused yet
+  AssignAllCheckListItemsRequest,
   MoveCardRequest,  // unused yet
 
 } from './service-pb.cjs';
@@ -1230,8 +1231,15 @@ export default (config) =>
         request.setPriority(checkListItem.priority);
         request.setIndex(checkListItem.index);
 
-        // TODO :: check and fix this (may be need to convert or other someting)
-        request.setDueDate(checkListItem.dueDate);
+        if (checkListItem.dueDate) {
+          let dueDate = '';
+          if(checkListItem.dueDate?.$d) {
+            dueDate = checkListItem.dueDate.format('YYYY-MM-DD HH:mm');
+          } else {
+            dueDate = checkListItem.dueDate;
+          }
+          request.setDueDate(dueDate);
+        }
 
         request.setIsCompleted(checkListItem.isCompleted);
 
@@ -1306,5 +1314,41 @@ export default (config) =>
       });
     }
 
+    assignAllCheckListItems(checkListId, user) {
+      return new Promise((resolve, reject) => {
+        const request = new AssignAllCheckListItemsRequest();
+        request.setChecklistId(checkListId);
+
+        if (user) {
+          const assignee = new User();
+          assignee.setId(user.id);
+          assignee.setUsername(user.email || user.username);
+          assignee.setName(user.name);
+          assignee.setSurname(user.surname);
+          request.setAssignee(assignee);
+        } else {
+          request.setUnasign(true);
+        }
+
+        this.client.assignAllCheckListItems(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage()
+              })
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
   };
 

@@ -2458,6 +2458,67 @@ proto.yartu.YProjectPromiseClient.prototype.deleteCheckListItem =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.AssignAllCheckListItemsRequest,
+ *   !proto.yartu.AssignAllCheckListItemsResponse>}
+ */
+const methodDescriptor_YProject_assignAllCheckListItems = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/assignAllCheckListItems',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.AssignAllCheckListItemsRequest,
+  proto.yartu.AssignAllCheckListItemsResponse,
+  /**
+   * @param {!proto.yartu.AssignAllCheckListItemsRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.AssignAllCheckListItemsResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.AssignAllCheckListItemsRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.AssignAllCheckListItemsResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.AssignAllCheckListItemsResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.assignAllCheckListItems =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/assignAllCheckListItems',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_assignAllCheckListItems,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.AssignAllCheckListItemsRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.AssignAllCheckListItemsResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.assignAllCheckListItems =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/assignAllCheckListItems',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_assignAllCheckListItems);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.MoveCardRequest,
  *   !proto.yartu.MoveCardResponse>}
  */
