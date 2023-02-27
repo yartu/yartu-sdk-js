@@ -58,6 +58,7 @@ import {
   DeleteCheckListItemRequest,  // unused yet
   AssignAllCheckListItemsRequest,
   MoveCardRequest,  // unused yet
+  DuplicateCardRequest,
 
 } from './service-pb.cjs';
 
@@ -955,6 +956,31 @@ export default (config) =>
         const request = new DeleteCardRequest();
         request.setId(cardId);
         this.client.deleteCard(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage()
+              })
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    duplicateCard(cardId) {
+      return new Promise((resolve, reject) => {
+        const request = new DuplicateCardRequest();
+        request.setId(cardId);
+        this.client.duplicateCard(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
           } else {

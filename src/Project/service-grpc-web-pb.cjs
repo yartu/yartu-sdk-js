@@ -2031,6 +2031,67 @@ proto.yartu.YProjectPromiseClient.prototype.deleteCard =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.DuplicateCardRequest,
+ *   !proto.yartu.DuplicateCardResponse>}
+ */
+const methodDescriptor_YProject_duplicateCard = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/duplicateCard',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.DuplicateCardRequest,
+  proto.yartu.DuplicateCardResponse,
+  /**
+   * @param {!proto.yartu.DuplicateCardRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.DuplicateCardResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.DuplicateCardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.DuplicateCardResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.DuplicateCardResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.duplicateCard =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/duplicateCard',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_duplicateCard,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.DuplicateCardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.DuplicateCardResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.duplicateCard =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/duplicateCard',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_duplicateCard);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.UpsertCardUsersRequest,
  *   !proto.yartu.UpsertCardUsersResponse>}
  */
