@@ -49,6 +49,9 @@ import {
   ListCardActivityRequest,
   UpsertCardRequest,
   DeleteCardRequest,
+  JoinCardRequest,
+  LeaveCardRequest,
+  ArchiveCardRequest,
   UpsertCardUsersRequest,
   AddCommentToCardRequest,
   AddLabelToCardRequest,
@@ -91,6 +94,10 @@ export default (config) =>
             const code = response.getCode();
 
             if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage()
+              })
             } else {
               reject({
                 code: code,
@@ -206,6 +213,10 @@ export default (config) =>
             const code = response.getCode();
 
             if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage()
+              })
             } else {
               reject({
                 code: code,
@@ -291,6 +302,10 @@ export default (config) =>
             const code = response.getCode();
 
             if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage()
+              })
             } else {
               reject({
                 code: code,
@@ -384,6 +399,10 @@ export default (config) =>
             const code = response.getCode();
 
             if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage()
+              })
             } else {
               reject({
                 code: code,
@@ -406,6 +425,10 @@ export default (config) =>
             const code = response.getCode();
 
             if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage()
+              })
             } else {
               reject({
                 code: code,
@@ -561,6 +584,10 @@ export default (config) =>
             const code = response.getCode();
 
             if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage()
+              })
             } else {
               reject({
                 code: code,
@@ -670,6 +697,10 @@ export default (config) =>
             const code = response.getCode();
 
             if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage()
+              })
             } else {
               reject({
                 code: code,
@@ -1162,6 +1193,89 @@ export default (config) =>
         });
       });
     }
+
+    joinCard(id) {
+      return new Promise((resolve, reject) => {
+        const request = new JoinCardRequest();
+        request.setId(id);
+        this.client.joinCard(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage()
+              })
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    leaveCard(id) {
+      return new Promise((resolve, reject) => {
+        const request = new LeaveCardRequest();
+        request.setId(id);
+        this.client.leaveCard(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage()
+              })
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    archiveCard(id, archive) {
+      return new Promise((resolve, reject) => {
+        const request = new ArchiveCardRequest();
+        request.setId(id);
+        request.setArchive(archive);
+
+        this.client.archiveCard(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage()
+              })
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+
+
 
     listCardActivity(cardId) {
       return new Promise((resolve, reject) => {

@@ -2092,6 +2092,189 @@ proto.yartu.YProjectPromiseClient.prototype.duplicateCard =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.JoinCardRequest,
+ *   !proto.yartu.JoinCardResponse>}
+ */
+const methodDescriptor_YProject_joinCard = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/joinCard',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.JoinCardRequest,
+  proto.yartu.JoinCardResponse,
+  /**
+   * @param {!proto.yartu.JoinCardRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.JoinCardResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.JoinCardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.JoinCardResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.JoinCardResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.joinCard =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/joinCard',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_joinCard,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.JoinCardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.JoinCardResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.joinCard =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/joinCard',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_joinCard);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.LeaveCardRequest,
+ *   !proto.yartu.LeaveCardResponse>}
+ */
+const methodDescriptor_YProject_leaveCard = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/leaveCard',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.LeaveCardRequest,
+  proto.yartu.LeaveCardResponse,
+  /**
+   * @param {!proto.yartu.LeaveCardRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.LeaveCardResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.LeaveCardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.LeaveCardResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.LeaveCardResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.leaveCard =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/leaveCard',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_leaveCard,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.LeaveCardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.LeaveCardResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.leaveCard =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/leaveCard',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_leaveCard);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.ArchiveCardRequest,
+ *   !proto.yartu.ArchiveCardResponse>}
+ */
+const methodDescriptor_YProject_archiveCard = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/archiveCard',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.ArchiveCardRequest,
+  proto.yartu.ArchiveCardResponse,
+  /**
+   * @param {!proto.yartu.ArchiveCardRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.ArchiveCardResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.ArchiveCardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ArchiveCardResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ArchiveCardResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.archiveCard =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/archiveCard',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_archiveCard,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.ArchiveCardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.ArchiveCardResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.archiveCard =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/archiveCard',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_archiveCard);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.UpsertCardUsersRequest,
  *   !proto.yartu.UpsertCardUsersResponse>}
  */
