@@ -1965,7 +1965,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.yartu.JoinCardResponse = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.yartu.JoinCardResponse.repeatedFields_, null);
 };
 goog.inherits(proto.yartu.JoinCardResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -2007,7 +2007,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.yartu.LeaveCardResponse = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.yartu.LeaveCardResponse.repeatedFields_, null);
 };
 goog.inherits(proto.yartu.LeaveCardResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -23176,6 +23176,13 @@ proto.yartu.JoinCardRequest.prototype.setId = function(value) {
 
 
 
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.yartu.JoinCardResponse.repeatedFields_ = [3];
+
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -23208,7 +23215,9 @@ proto.yartu.JoinCardResponse.prototype.toObject = function(opt_includeInstance) 
 proto.yartu.JoinCardResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, "")
+    message: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    dataList: jspb.Message.toObjectList(msg.getDataList(),
+    common_grpc_definitions_pb.User.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -23253,6 +23262,11 @@ proto.yartu.JoinCardResponse.deserializeBinaryFromReader = function(msg, reader)
       var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
+    case 3:
+      var value = new common_grpc_definitions_pb.User;
+      reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
+      msg.addData(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -23296,6 +23310,14 @@ proto.yartu.JoinCardResponse.serializeBinaryToWriter = function(message, writer)
       f
     );
   }
+  f = message.getDataList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      3,
+      f,
+      common_grpc_definitions_pb.User.serializeBinaryToWriter
+    );
+  }
 };
 
 
@@ -23332,6 +23354,44 @@ proto.yartu.JoinCardResponse.prototype.getMessage = function() {
  */
 proto.yartu.JoinCardResponse.prototype.setMessage = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * repeated User data = 3;
+ * @return {!Array<!proto.User>}
+ */
+proto.yartu.JoinCardResponse.prototype.getDataList = function() {
+  return /** @type{!Array<!proto.User>} */ (
+    jspb.Message.getRepeatedWrapperField(this, common_grpc_definitions_pb.User, 3));
+};
+
+
+/**
+ * @param {!Array<!proto.User>} value
+ * @return {!proto.yartu.JoinCardResponse} returns this
+*/
+proto.yartu.JoinCardResponse.prototype.setDataList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 3, value);
+};
+
+
+/**
+ * @param {!proto.User=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.User}
+ */
+proto.yartu.JoinCardResponse.prototype.addData = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 3, opt_value, proto.User, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.yartu.JoinCardResponse} returns this
+ */
+proto.yartu.JoinCardResponse.prototype.clearDataList = function() {
+  return this.setDataList([]);
 };
 
 
@@ -23466,6 +23526,13 @@ proto.yartu.LeaveCardRequest.prototype.setId = function(value) {
 
 
 
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.yartu.LeaveCardResponse.repeatedFields_ = [3];
+
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -23498,7 +23565,9 @@ proto.yartu.LeaveCardResponse.prototype.toObject = function(opt_includeInstance)
 proto.yartu.LeaveCardResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, "")
+    message: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    dataList: jspb.Message.toObjectList(msg.getDataList(),
+    common_grpc_definitions_pb.User.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -23543,6 +23612,11 @@ proto.yartu.LeaveCardResponse.deserializeBinaryFromReader = function(msg, reader
       var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
+    case 3:
+      var value = new common_grpc_definitions_pb.User;
+      reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
+      msg.addData(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -23586,6 +23660,14 @@ proto.yartu.LeaveCardResponse.serializeBinaryToWriter = function(message, writer
       f
     );
   }
+  f = message.getDataList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      3,
+      f,
+      common_grpc_definitions_pb.User.serializeBinaryToWriter
+    );
+  }
 };
 
 
@@ -23622,6 +23704,44 @@ proto.yartu.LeaveCardResponse.prototype.getMessage = function() {
  */
 proto.yartu.LeaveCardResponse.prototype.setMessage = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * repeated User data = 3;
+ * @return {!Array<!proto.User>}
+ */
+proto.yartu.LeaveCardResponse.prototype.getDataList = function() {
+  return /** @type{!Array<!proto.User>} */ (
+    jspb.Message.getRepeatedWrapperField(this, common_grpc_definitions_pb.User, 3));
+};
+
+
+/**
+ * @param {!Array<!proto.User>} value
+ * @return {!proto.yartu.LeaveCardResponse} returns this
+*/
+proto.yartu.LeaveCardResponse.prototype.setDataList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 3, value);
+};
+
+
+/**
+ * @param {!proto.User=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.User}
+ */
+proto.yartu.LeaveCardResponse.prototype.addData = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 3, opt_value, proto.User, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.yartu.LeaveCardResponse} returns this
+ */
+proto.yartu.LeaveCardResponse.prototype.clearDataList = function() {
+  return this.setDataList([]);
 };
 
 

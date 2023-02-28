@@ -1203,10 +1203,13 @@ export default (config) =>
             handleError(error, reject);
           } else {
             const code = response.getCode();
-
+            const dataList = response
+              .getDataList()
+              .map((data) => data.toObject());
             if (code == 0) {
               resolve({
                 code,
+                data: dataList,
                 message: response.getMessage()
               })
             } else {
@@ -1229,10 +1232,13 @@ export default (config) =>
             handleError(error, reject);
           } else {
             const code = response.getCode();
-
+            const dataList = response
+              .getDataList()
+              .map((data) => data.toObject());
             if (code == 0) {
               resolve({
                 code,
+                data: dataList,
                 message: response.getMessage()
               })
             } else {
