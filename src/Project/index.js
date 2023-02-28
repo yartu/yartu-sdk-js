@@ -32,6 +32,9 @@ import {
   UpsertBoardRequest,
   DeleteBoardRequest,
 
+  // Column services
+  UpsertColumnRequest,
+
   // Share Board services
   ShareBoardRequest,
   UnshareBoardRequest,
@@ -1294,6 +1297,40 @@ export default (config) =>
               resolve({
                 code,
                 message: response.getMessage()
+              })
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    upsertColumn(columnData) {
+      return new Promise((resolve, reject) => {
+        const request = new UpsertColumnRequest();
+
+        console.log('COLUMN DATA SDK', columnData);
+
+        request.setId(columnData.id);
+        request.setBoardId(columnData.boardId);
+        request.setName(columnData.name);
+        request.setColor(columnData.color);
+        request.setIndex(columnData.index);
+
+        this.client.upsertColumn(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage(),
+                column: response.getColumn().toObject(),
               })
             } else {
               reject({
