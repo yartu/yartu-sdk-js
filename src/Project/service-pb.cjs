@@ -21051,7 +21051,7 @@ proto.yartu.UpsertCheckListResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     code: jspb.Message.getFieldWithDefault(msg, 1, 0),
     message: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    checklist: (f = msg.getChecklist()) && proto.yartu.CardChecklist.toObject(includeInstance, f)
+    data: (f = msg.getData()) && proto.yartu.CardChecklist.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -21099,7 +21099,7 @@ proto.yartu.UpsertCheckListResponse.deserializeBinaryFromReader = function(msg, 
     case 3:
       var value = new proto.yartu.CardChecklist;
       reader.readMessage(value,proto.yartu.CardChecklist.deserializeBinaryFromReader);
-      msg.setChecklist(value);
+      msg.setData(value);
       break;
     default:
       reader.skipField();
@@ -21144,7 +21144,7 @@ proto.yartu.UpsertCheckListResponse.serializeBinaryToWriter = function(message, 
       f
     );
   }
-  f = message.getChecklist();
+  f = message.getData();
   if (f != null) {
     writer.writeMessage(
       3,
@@ -21192,10 +21192,10 @@ proto.yartu.UpsertCheckListResponse.prototype.setMessage = function(value) {
 
 
 /**
- * optional CardChecklist checklist = 3;
+ * optional CardChecklist data = 3;
  * @return {?proto.yartu.CardChecklist}
  */
-proto.yartu.UpsertCheckListResponse.prototype.getChecklist = function() {
+proto.yartu.UpsertCheckListResponse.prototype.getData = function() {
   return /** @type{?proto.yartu.CardChecklist} */ (
     jspb.Message.getWrapperField(this, proto.yartu.CardChecklist, 3));
 };
@@ -21205,7 +21205,7 @@ proto.yartu.UpsertCheckListResponse.prototype.getChecklist = function() {
  * @param {?proto.yartu.CardChecklist|undefined} value
  * @return {!proto.yartu.UpsertCheckListResponse} returns this
 */
-proto.yartu.UpsertCheckListResponse.prototype.setChecklist = function(value) {
+proto.yartu.UpsertCheckListResponse.prototype.setData = function(value) {
   return jspb.Message.setWrapperField(this, 3, value);
 };
 
@@ -21214,8 +21214,8 @@ proto.yartu.UpsertCheckListResponse.prototype.setChecklist = function(value) {
  * Clears the message field making it undefined.
  * @return {!proto.yartu.UpsertCheckListResponse} returns this
  */
-proto.yartu.UpsertCheckListResponse.prototype.clearChecklist = function() {
-  return this.setChecklist(undefined);
+proto.yartu.UpsertCheckListResponse.prototype.clearData = function() {
+  return this.setData(undefined);
 };
 
 
@@ -21223,7 +21223,7 @@ proto.yartu.UpsertCheckListResponse.prototype.clearChecklist = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu.UpsertCheckListResponse.prototype.hasChecklist = function() {
+proto.yartu.UpsertCheckListResponse.prototype.hasData = function() {
   return jspb.Message.getField(this, 3) != null;
 };
 
