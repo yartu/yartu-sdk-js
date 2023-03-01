@@ -52,6 +52,9 @@ import {
   ListCardActivityRequest,
   UpsertCardRequest,
   DeleteCardRequest,
+  JoinCardRequest,
+  LeaveCardRequest,
+  ArchiveCardRequest,
   UpsertCardUsersRequest,
   AddCommentToCardRequest,
   AddLabelToCardRequest,
@@ -59,7 +62,9 @@ import {
   DeleteCheckListRequest,
   UpsertCheckListItemRequest,
   DeleteCheckListItemRequest,  // unused yet
+  AssignAllCheckListItemsRequest,
   MoveCardRequest,  // unused yet
+  DuplicateCardRequest,
 
 } from './service-pb.cjs';
 
@@ -92,6 +97,10 @@ export default (config) =>
             const code = response.getCode();
 
             if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage()
+              })
             } else {
               reject({
                 code: code,
@@ -207,6 +216,10 @@ export default (config) =>
             const code = response.getCode();
 
             if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage()
+              })
             } else {
               reject({
                 code: code,
@@ -292,6 +305,10 @@ export default (config) =>
             const code = response.getCode();
 
             if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage()
+              })
             } else {
               reject({
                 code: code,
@@ -385,6 +402,10 @@ export default (config) =>
             const code = response.getCode();
 
             if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage()
+              })
             } else {
               reject({
                 code: code,
@@ -407,6 +428,10 @@ export default (config) =>
             const code = response.getCode();
 
             if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage()
+              })
             } else {
               reject({
                 code: code,
@@ -562,6 +587,10 @@ export default (config) =>
             const code = response.getCode();
 
             if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage()
+              })
             } else {
               reject({
                 code: code,
@@ -671,6 +700,10 @@ export default (config) =>
             const code = response.getCode();
 
             if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage()
+              })
             } else {
               reject({
                 code: code,
@@ -977,6 +1010,31 @@ export default (config) =>
       });
     }
 
+    duplicateCard(cardId) {
+      return new Promise((resolve, reject) => {
+        const request = new DuplicateCardRequest();
+        request.setId(cardId);
+        this.client.duplicateCard(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage()
+              })
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
     upsertCardUsers(cardUuid, users) {
       return new Promise((resolve, reject) => {
         const request = new UpsertCardUsersRequest();
@@ -1139,6 +1197,95 @@ export default (config) =>
       });
     }
 
+    joinCard(id) {
+      return new Promise((resolve, reject) => {
+        const request = new JoinCardRequest();
+        request.setId(id);
+        this.client.joinCard(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            const dataList = response
+              .getDataList()
+              .map((data) => data.toObject());
+            if (code == 0) {
+              resolve({
+                code,
+                data: dataList,
+                message: response.getMessage()
+              })
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    leaveCard(id) {
+      return new Promise((resolve, reject) => {
+        const request = new LeaveCardRequest();
+        request.setId(id);
+        this.client.leaveCard(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            const dataList = response
+              .getDataList()
+              .map((data) => data.toObject());
+            if (code == 0) {
+              resolve({
+                code,
+                data: dataList,
+                message: response.getMessage()
+              })
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    archiveCard(id, archive) {
+      return new Promise((resolve, reject) => {
+        const request = new ArchiveCardRequest();
+        request.setId(id);
+        request.setArchive(archive);
+
+        this.client.archiveCard(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage()
+              })
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+
+
+
     listCardActivity(cardId) {
       return new Promise((resolve, reject) => {
         const request = new ListCardActivityRequest();
@@ -1233,8 +1380,15 @@ export default (config) =>
         request.setPriority(checkListItem.priority);
         request.setIndex(checkListItem.index);
 
-        // TODO :: check and fix this (may be need to convert or other someting)
-        request.setDueDate(checkListItem.dueDate);
+        if (checkListItem.dueDate) {
+          let dueDate = '';
+          if(checkListItem.dueDate?.$d) {
+            dueDate = checkListItem.dueDate.format('YYYY-MM-DD HH:mm');
+          } else {
+            dueDate = checkListItem.dueDate;
+          }
+          request.setDueDate(dueDate);
+        }
 
         request.setIsCompleted(checkListItem.isCompleted);
 
@@ -1343,5 +1497,41 @@ export default (config) =>
       });
     }
 
+    assignAllCheckListItems(checkListId, user) {
+      return new Promise((resolve, reject) => {
+        const request = new AssignAllCheckListItemsRequest();
+        request.setChecklistId(checkListId);
+
+        if (user) {
+          const assignee = new User();
+          assignee.setId(user.id);
+          assignee.setUsername(user.email || user.username);
+          assignee.setName(user.name);
+          assignee.setSurname(user.surname);
+          request.setAssignee(assignee);
+        } else {
+          request.setUnasign(true);
+        }
+
+        this.client.assignAllCheckListItems(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage()
+              })
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
   };
 
