@@ -65,12 +65,14 @@ import {
   AssignAllCheckListItemsRequest,
   MoveCardRequest,  // unused yet
   DuplicateCardRequest,
+  UpsertCardAttachmentRequest,
 
 } from './service-pb.cjs';
 
 import {Group, Query, Shared, User, UserModifyMeta} from '../utils/definitions_pb.cjs';
 import { YProjectClient } from './service-grpc-web-pb.cjs';
 import { handleError } from '../utils/helper';
+import {UpsertImageToNoteRequest} from "../Note/service-pb.cjs";
 
 export default (config) =>
   class Project {
@@ -985,6 +987,38 @@ export default (config) =>
       });
     }
 
+    upsertCardAttachment = (cardId, fileName) => {
+      return new Promise((resolve, reject) => {
+        const request = new UpsertCardAttachmentRequest();
+        request.setCardId(cardId);
+        request.setFileName(fileName);
+
+        this.client.upsertCardAttachment(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code: 0,
+                  message: 'successfully',
+                  uploadToken: response.getUploadToken(),
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
     deleteCard(cardId) {
       return new Promise((resolve, reject) => {
         const request = new DeleteCardRequest();
@@ -1282,9 +1316,6 @@ export default (config) =>
         });
       });
     }
-
-
-
 
     listCardActivity(cardId) {
       return new Promise((resolve, reject) => {

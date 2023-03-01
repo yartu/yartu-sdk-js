@@ -2336,6 +2336,67 @@ proto.yartu.YProjectPromiseClient.prototype.archiveCard =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.UpsertCardAttachmentRequest,
+ *   !proto.yartu.UpsertCardAttachmentResponse>}
+ */
+const methodDescriptor_YProject_upsertCardAttachment = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/upsertCardAttachment',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.UpsertCardAttachmentRequest,
+  proto.yartu.UpsertCardAttachmentResponse,
+  /**
+   * @param {!proto.yartu.UpsertCardAttachmentRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.UpsertCardAttachmentResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.UpsertCardAttachmentRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.UpsertCardAttachmentResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.UpsertCardAttachmentResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.upsertCardAttachment =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/upsertCardAttachment',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_upsertCardAttachment,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.UpsertCardAttachmentRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.UpsertCardAttachmentResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.upsertCardAttachment =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/upsertCardAttachment',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_upsertCardAttachment);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.UpsertCardUsersRequest,
  *   !proto.yartu.UpsertCardUsersResponse>}
  */
