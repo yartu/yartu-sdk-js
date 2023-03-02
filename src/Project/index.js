@@ -30,6 +30,7 @@ import {
   GetBoardRequest,
   UpsertBoardRequest,
   DeleteBoardRequest,
+  DuplicateBoardRequest,
 
   // Board Template services
   ListBoardTemplateRequest,
@@ -713,6 +714,33 @@ export default (config) =>
                 board: response.getBoard().toObject(),
                 message: response.getMessage()
               })
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    duplicateBoard(boardUUID) {
+      return new Promise((resolve, reject) => {
+
+        const request = new DuplicateBoardRequest();
+        request.setUuid(boardUUID);
+
+        this.client.duplicateBoard(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage()
+              });
             } else {
               reject({
                 code: code,

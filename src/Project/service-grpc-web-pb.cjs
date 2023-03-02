@@ -1238,6 +1238,67 @@ proto.yartu.YProjectPromiseClient.prototype.upsertBoard =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.DuplicateBoardRequest,
+ *   !proto.yartu.DuplicateBoardResponse>}
+ */
+const methodDescriptor_YProject_duplicateBoard = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/duplicateBoard',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.DuplicateBoardRequest,
+  proto.yartu.DuplicateBoardResponse,
+  /**
+   * @param {!proto.yartu.DuplicateBoardRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.DuplicateBoardResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.DuplicateBoardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.DuplicateBoardResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.DuplicateBoardResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.duplicateBoard =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/duplicateBoard',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_duplicateBoard,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.DuplicateBoardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.DuplicateBoardResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.duplicateBoard =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/duplicateBoard',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_duplicateBoard);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.DeleteBoardRequest,
  *   !proto.yartu.DeleteBoardResponse>}
  */
