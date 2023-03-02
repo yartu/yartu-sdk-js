@@ -954,7 +954,7 @@ export default (config) =>
         if (cardData.isCanceled) {
           request.setIsCanceled(cardData.isCanceled);
         }
-        if (cardData.color) {
+        if (cardData.color !== undefined && cardData.color !== null) {
           request.setColor(cardData.color);
         }
         if (cardData.dueDate) {
