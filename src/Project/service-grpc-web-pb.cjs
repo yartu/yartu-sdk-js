@@ -1299,6 +1299,67 @@ proto.yartu.YProjectPromiseClient.prototype.duplicateBoard =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.CopyBoardRequest,
+ *   !proto.yartu.CopyBoardResponse>}
+ */
+const methodDescriptor_YProject_copyBoard = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/copyBoard',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.CopyBoardRequest,
+  proto.yartu.CopyBoardResponse,
+  /**
+   * @param {!proto.yartu.CopyBoardRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.CopyBoardResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.CopyBoardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.CopyBoardResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.CopyBoardResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.copyBoard =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/copyBoard',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_copyBoard,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.CopyBoardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.CopyBoardResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.copyBoard =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/copyBoard',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_copyBoard);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.DeleteBoardRequest,
  *   !proto.yartu.DeleteBoardResponse>}
  */
