@@ -32,6 +32,7 @@ import {
   DeleteBoardRequest,
   DuplicateBoardRequest,
   CopyBoardRequest,
+  MoveBoardRequest,
 
   // Board Template services
   ListBoardTemplateRequest,
@@ -761,6 +762,34 @@ export default (config) =>
         request.setDestinationProjectUuid(destinationProjectUUID);
 
         this.client.copyBoard(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    moveBoard(soureceBoardUUID, destinationProjectUUID) {
+      return new Promise((resolve, reject) => {
+
+        const request = new MoveBoardRequest();
+        request.setSourceBoardUuid(soureceBoardUUID);
+        request.setDestinationProjectUuid(destinationProjectUUID);
+
+        this.client.moveBoard(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
           } else {

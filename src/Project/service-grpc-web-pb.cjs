@@ -1360,6 +1360,67 @@ proto.yartu.YProjectPromiseClient.prototype.copyBoard =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.MoveBoardRequest,
+ *   !proto.yartu.MoveBoardResponse>}
+ */
+const methodDescriptor_YProject_moveBoard = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/moveBoard',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.MoveBoardRequest,
+  proto.yartu.MoveBoardResponse,
+  /**
+   * @param {!proto.yartu.MoveBoardRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.MoveBoardResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.MoveBoardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.MoveBoardResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.MoveBoardResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.moveBoard =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/moveBoard',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_moveBoard,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.MoveBoardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.MoveBoardResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.moveBoard =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/moveBoard',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_moveBoard);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.DeleteBoardRequest,
  *   !proto.yartu.DeleteBoardResponse>}
  */
