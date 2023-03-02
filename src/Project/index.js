@@ -27,10 +27,13 @@ import {
 
   // Board services
   ListBoardRequest,
-  ListBoardTemplateRequest,
   GetBoardRequest,
   UpsertBoardRequest,
   DeleteBoardRequest,
+
+  // Board Template services
+  ListBoardTemplateRequest,
+  UpsertBoardTemplateRequest,
 
   // Column services
   UpsertColumnRequest,
@@ -66,6 +69,7 @@ import {
   MoveCardRequest,  // unused yet
   DuplicateCardRequest,
   UpsertCardAttachmentRequest,
+  DeleteCardAttachmentRequest,
 
 } from './service-pb.cjs';
 
@@ -630,6 +634,35 @@ export default (config) =>
       });
     }
 
+    upsertBoardTemplate(boardUUID, templateData) {
+      return new Promise((resolve, reject) => {
+        const request = new UpsertBoardTemplateRequest();
+
+        request.setBoardUuid(boardUUID);
+        request.setId(templateData.id);
+        request.setName(templateData.name);
+
+        this.client.upsertBoardTemplate(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage()
+              })
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
     getBoard(uuid) {
       return new Promise((resolve, reject) => {
 
@@ -838,10 +871,10 @@ export default (config) =>
       });
     }
 
-    listCardLabel(board_uuid) {
+    listCardLabel(boardUUID) {
       return new Promise((resolve, reject) => {
         const request = new ListCardLabelRequest();
-        request.setBoardUuid(board_uuid);
+        request.setBoardUuid(boardUUID);
         this.client.listCardLabel(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
@@ -1006,6 +1039,37 @@ export default (config) =>
                   code: 0,
                   message: 'successfully',
                   uploadToken: response.getUploadToken(),
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
+    deleteCardAttachment = (cardId, attachmentId) => {
+      return new Promise((resolve, reject) => {
+        const request = new DeleteCardAttachmentRequest();
+        request.setId(attachmentId);
+        request.setCardId(cardId);
+
+        this.client.deleteCardAttachment(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code: 0,
+                  message: 'successfully',
                 });
               } else {
                 reject({

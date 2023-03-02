@@ -1116,67 +1116,6 @@ proto.yartu.YProjectPromiseClient.prototype.listBoard =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
- *   !proto.yartu.ListBoardTemplateRequest,
- *   !proto.yartu.ListBoardTemplateResponse>}
- */
-const methodDescriptor_YProject_listBoardTemplate = new grpc.web.MethodDescriptor(
-  '/yartu.YProject/listBoardTemplate',
-  grpc.web.MethodType.UNARY,
-  proto.yartu.ListBoardTemplateRequest,
-  proto.yartu.ListBoardTemplateResponse,
-  /**
-   * @param {!proto.yartu.ListBoardTemplateRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.yartu.ListBoardTemplateResponse.deserializeBinary
-);
-
-
-/**
- * @param {!proto.yartu.ListBoardTemplateRequest} request The
- *     request proto
- * @param {?Object<string, string>} metadata User defined
- *     call metadata
- * @param {function(?grpc.web.RpcError, ?proto.yartu.ListBoardTemplateResponse)}
- *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.yartu.ListBoardTemplateResponse>|undefined}
- *     The XHR Node Readable Stream
- */
-proto.yartu.YProjectClient.prototype.listBoardTemplate =
-    function(request, metadata, callback) {
-  return this.client_.rpcCall(this.hostname_ +
-      '/yartu.YProject/listBoardTemplate',
-      request,
-      metadata || {},
-      methodDescriptor_YProject_listBoardTemplate,
-      callback);
-};
-
-
-/**
- * @param {!proto.yartu.ListBoardTemplateRequest} request The
- *     request proto
- * @param {?Object<string, string>=} metadata User defined
- *     call metadata
- * @return {!Promise<!proto.yartu.ListBoardTemplateResponse>}
- *     Promise that resolves to the response
- */
-proto.yartu.YProjectPromiseClient.prototype.listBoardTemplate =
-    function(request, metadata) {
-  return this.client_.unaryCall(this.hostname_ +
-      '/yartu.YProject/listBoardTemplate',
-      request,
-      metadata || {},
-      methodDescriptor_YProject_listBoardTemplate);
-};
-
-
-/**
- * @const
- * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.GetBoardRequest,
  *   !proto.yartu.GetBoardResponse>}
  */
@@ -1354,6 +1293,128 @@ proto.yartu.YProjectPromiseClient.prototype.deleteBoard =
       request,
       metadata || {},
       methodDescriptor_YProject_deleteBoard);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.ListBoardTemplateRequest,
+ *   !proto.yartu.ListBoardTemplateResponse>}
+ */
+const methodDescriptor_YProject_listBoardTemplate = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/listBoardTemplate',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.ListBoardTemplateRequest,
+  proto.yartu.ListBoardTemplateResponse,
+  /**
+   * @param {!proto.yartu.ListBoardTemplateRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.ListBoardTemplateResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.ListBoardTemplateRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ListBoardTemplateResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ListBoardTemplateResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.listBoardTemplate =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/listBoardTemplate',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_listBoardTemplate,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.ListBoardTemplateRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.ListBoardTemplateResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.listBoardTemplate =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/listBoardTemplate',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_listBoardTemplate);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.UpsertBoardTemplateRequest,
+ *   !proto.yartu.UpsertBoardTemplateResponse>}
+ */
+const methodDescriptor_YProject_upsertBoardTemplate = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/upsertBoardTemplate',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.UpsertBoardTemplateRequest,
+  proto.yartu.UpsertBoardTemplateResponse,
+  /**
+   * @param {!proto.yartu.UpsertBoardTemplateRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.UpsertBoardTemplateResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.UpsertBoardTemplateRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.UpsertBoardTemplateResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.UpsertBoardTemplateResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.upsertBoardTemplate =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/upsertBoardTemplate',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_upsertBoardTemplate,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.UpsertBoardTemplateRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.UpsertBoardTemplateResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.upsertBoardTemplate =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/upsertBoardTemplate',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_upsertBoardTemplate);
 };
 
 
@@ -2391,6 +2452,67 @@ proto.yartu.YProjectPromiseClient.prototype.upsertCardAttachment =
       request,
       metadata || {},
       methodDescriptor_YProject_upsertCardAttachment);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.DeleteCardAttachmentRequest,
+ *   !proto.yartu.DeleteCardAttachmentResponse>}
+ */
+const methodDescriptor_YProject_deleteCardAttachment = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/deleteCardAttachment',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.DeleteCardAttachmentRequest,
+  proto.yartu.DeleteCardAttachmentResponse,
+  /**
+   * @param {!proto.yartu.DeleteCardAttachmentRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.DeleteCardAttachmentResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.DeleteCardAttachmentRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.DeleteCardAttachmentResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.DeleteCardAttachmentResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.deleteCardAttachment =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/deleteCardAttachment',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_deleteCardAttachment,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.DeleteCardAttachmentRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.DeleteCardAttachmentResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.deleteCardAttachment =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/deleteCardAttachment',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_deleteCardAttachment);
 };
 
 
