@@ -1665,6 +1665,67 @@ proto.yartu.YProjectPromiseClient.prototype.upsertColumn =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.ArchiveAllCardsInColumnRequest,
+ *   !proto.yartu.ArchiveAllCardsInColumnResponse>}
+ */
+const methodDescriptor_YProject_archiveAllCardsInColumn = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/archiveAllCardsInColumn',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.ArchiveAllCardsInColumnRequest,
+  proto.yartu.ArchiveAllCardsInColumnResponse,
+  /**
+   * @param {!proto.yartu.ArchiveAllCardsInColumnRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.ArchiveAllCardsInColumnResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.ArchiveAllCardsInColumnRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ArchiveAllCardsInColumnResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ArchiveAllCardsInColumnResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.archiveAllCardsInColumn =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/archiveAllCardsInColumn',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_archiveAllCardsInColumn,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.ArchiveAllCardsInColumnRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.ArchiveAllCardsInColumnResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.archiveAllCardsInColumn =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/archiveAllCardsInColumn',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_archiveAllCardsInColumn);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.ShareBoardRequest,
  *   !proto.yartu.ShareBoardResponse>}
  */

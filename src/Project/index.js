@@ -40,6 +40,7 @@ import {
 
   // Column services
   UpsertColumnRequest,
+  ArchiveAllCardsInColumnRequest,
 
   // Share Board services
   ShareBoardRequest,
@@ -1705,6 +1706,33 @@ export default (config) =>
                 code,
                 message: response.getMessage(),
                 column: response.getColumn().toObject(),
+              })
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+
+    archiveAllCardsInColumn(columnId) {
+      return new Promise((resolve, reject) => {
+        const request = new ArchiveAllCardsInColumnRequest();
+        request.setColumnId(columnId);
+
+        this.client.archiveAllCardsInColumn(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage(),
               })
             } else {
               reject({
