@@ -71,8 +71,11 @@ import {
   AssignAllCheckListItemsRequest,
   MoveCardRequest,  // unused yet
   DuplicateCardRequest,
+
+  // CardAttachment services
   UpsertCardAttachmentRequest,
   DeleteCardAttachmentRequest,
+  ListCardAttachmentRequest,
 
 } from './service-pb.cjs';
 
@@ -1155,6 +1158,40 @@ export default (config) =>
               if (code == 0) {
                 resolve({
                   code: 0,
+                  message: 'successfully',
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
+    listCardAttachment = (cardId) => {
+      return new Promise((resolve, reject) => {
+        const request = new ListCardAttachmentRequest();
+        request.setCardId(cardId);
+
+        this.client.listCardAttachment(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              const dataList = response
+                .getDataList()
+                .map((data) => data.toObject());
+              if (code == 0) {
+                resolve({
+                  code: 0,
+                  data: dataList,
                   message: 'successfully',
                 });
               } else {

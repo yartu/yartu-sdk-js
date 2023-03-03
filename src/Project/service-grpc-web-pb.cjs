@@ -2641,6 +2641,67 @@ proto.yartu.YProjectPromiseClient.prototype.upsertCardAttachment =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.ListCardAttachmentRequest,
+ *   !proto.yartu.ListCardAttachmentResponse>}
+ */
+const methodDescriptor_YProject_listCardAttachment = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/listCardAttachment',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.ListCardAttachmentRequest,
+  proto.yartu.ListCardAttachmentResponse,
+  /**
+   * @param {!proto.yartu.ListCardAttachmentRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.ListCardAttachmentResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.ListCardAttachmentRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ListCardAttachmentResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ListCardAttachmentResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.listCardAttachment =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/listCardAttachment',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_listCardAttachment,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.ListCardAttachmentRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.ListCardAttachmentResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.listCardAttachment =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/listCardAttachment',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_listCardAttachment);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.DeleteCardAttachmentRequest,
  *   !proto.yartu.DeleteCardAttachmentResponse>}
  */
