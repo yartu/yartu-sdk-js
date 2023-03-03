@@ -83,7 +83,6 @@ import {
 import {Group, Query, Shared, User, UserModifyMeta} from '../utils/definitions_pb.cjs';
 import { YProjectClient } from './service-grpc-web-pb.cjs';
 import { handleError } from '../utils/helper';
-import {UpsertImageToNoteRequest} from "../Note/service-pb.cjs";
 
 export default (config) =>
   class Project {
@@ -1717,7 +1716,6 @@ export default (config) =>
         });
       });
     }
-
 
     archiveAllCardsInColumn(columnId) {
       return new Promise((resolve, reject) => {
