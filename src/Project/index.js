@@ -57,6 +57,7 @@ import {
   // Card services
   GetCardRequest,
   ListCardActivityRequest,
+  ListArchivedCardRequest,
   UpsertCardRequest,
   DeleteCardRequest,
   JoinCardRequest,
@@ -1519,6 +1520,38 @@ export default (config) =>
               resolve({
                 code,
                 activitys: response.getActivityList().map((a) => a.toObject()),
+                message: response.getMessage()
+              })
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    listArchivedCard(boardUUID) {
+      return new Promise((resolve, reject) => {
+        const request = new ListArchivedCardRequest();
+
+        request.setBoardUuid(boardUUID);
+
+        this.client.listArchivedCard(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            const dataList = response
+              .getDataList()
+              .map((data) => data.toObject());
+
+            if (code == 0) {
+              resolve({
+                code,
+                data: dataList,
                 message: response.getMessage()
               })
             } else {
