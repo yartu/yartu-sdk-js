@@ -3007,6 +3007,128 @@ proto.yartu.YProjectPromiseClient.prototype.addCommentToCard =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.DeleteCommentToCardRequest,
+ *   !proto.yartu.DeleteCommentToCardResponse>}
+ */
+const methodDescriptor_YProject_deleteCommentToCard = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/deleteCommentToCard',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.DeleteCommentToCardRequest,
+  proto.yartu.DeleteCommentToCardResponse,
+  /**
+   * @param {!proto.yartu.DeleteCommentToCardRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.DeleteCommentToCardResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.DeleteCommentToCardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.DeleteCommentToCardResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.DeleteCommentToCardResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.deleteCommentToCard =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/deleteCommentToCard',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_deleteCommentToCard,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.DeleteCommentToCardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.DeleteCommentToCardResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.deleteCommentToCard =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/deleteCommentToCard',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_deleteCommentToCard);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.AddInteractionToCardRequest,
+ *   !proto.yartu.AddInteractionToCardResponse>}
+ */
+const methodDescriptor_YProject_addInteractionToCard = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/addInteractionToCard',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.AddInteractionToCardRequest,
+  proto.yartu.AddInteractionToCardResponse,
+  /**
+   * @param {!proto.yartu.AddInteractionToCardRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.AddInteractionToCardResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.AddInteractionToCardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.AddInteractionToCardResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.AddInteractionToCardResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.addInteractionToCard =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/addInteractionToCard',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_addInteractionToCard,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.AddInteractionToCardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.AddInteractionToCardResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.addInteractionToCard =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/addInteractionToCard',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_addInteractionToCard);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.AddLabelToCardRequest,
  *   !proto.yartu.AddLabelToCardResponse>}
  */
