@@ -65,6 +65,8 @@ import {
   ArchiveCardRequest,
   UpsertCardUsersRequest,
   AddCommentToCardRequest,
+  DeleteCommentToCardRequest,
+  AddInteractionToCardRequest,
   AddLabelToCardRequest,
   UpsertCheckListRequest,
   DeleteCheckListRequest,
@@ -125,7 +127,7 @@ export default (config) =>
       });
     }
 
-    listProject(getAll = false, getArchived = false, query = {}) {
+    listProject(getAll = false, getArchived = false, starred = false, query = {}) {
 
       return new Promise((resolve, reject) => {
         const request = new ListProjectRequest();
@@ -133,6 +135,7 @@ export default (config) =>
 
         request.setGetArchived(getArchived);
         request.setGetAll(getAll);
+        request.setStarred(starred);
         request.setQuery(queryRequset);
 
         this.client.listProject(request, this.metadata, (error, response) => {
@@ -706,7 +709,12 @@ export default (config) =>
         request.setProjectUuid(boardData.projectUuid);
         request.setName(boardData.name);
         request.setColor(boardData.color);
-        request.setTemplateUuid(boardData.template.uuid);
+        request.setDescription(boardData.description);
+
+        if (boardData.template) {
+          request.setTemplateUuid(boardData.template.uuid);
+        }
+
         // request.setName(member);
         // request.setPermission(permission);
         this.client.upsertBoard(request, this.metadata, (error, response) => {
@@ -1306,11 +1314,76 @@ export default (config) =>
 
         console.log('RQ', commentData);
 
+        request.setId(commentData.id);
         request.setUuid(commentData.uuid);
         request.setComment(commentData.comment);
+
         request.setMentionList(commentData.mention);
 
         this.client.addCommentToCard(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code,
+                })
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    }
+
+    deleteCommentToCard(commentData = {}) {
+      return new Promise((resolve, reject) => {
+        const request = new DeleteCommentToCardRequest();
+
+        request.setId(commentData.id);
+        request.setUuid(commentData.uuid);
+
+        this.client.deleteCommentToCard(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code,
+                })
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    }
+
+    addInteractionToCard(commentData = {}) {
+      return new Promise((resolve, reject) => {
+        const request = new AddInteractionToCardRequest();
+
+        request.setId(commentData.id);
+        request.setUuid(commentData.uuid);
+        request.setEmoji(commentData.emoji);
+
+        this.client.addInteractionToCard(
           request,
           this.metadata,
           (error, response) => {
