@@ -135,5 +135,66 @@ proto.yartu.YSearchPromiseClient.prototype.listSearchShareablePeople =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.SearchRequest,
+ *   !proto.yartu.SearchResponse>}
+ */
+const methodDescriptor_YSearch_search = new grpc.web.MethodDescriptor(
+  '/yartu.YSearch/search',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.SearchRequest,
+  proto.yartu.SearchResponse,
+  /**
+   * @param {!proto.yartu.SearchRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.SearchResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.SearchRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.SearchResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.SearchResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YSearchClient.prototype.search =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YSearch/search',
+      request,
+      metadata || {},
+      methodDescriptor_YSearch_search,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.SearchRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.SearchResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YSearchPromiseClient.prototype.search =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YSearch/search',
+      request,
+      metadata || {},
+      methodDescriptor_YSearch_search);
+};
+
+
 module.exports = proto.yartu;
 

@@ -9,8 +9,11 @@ import {
   status_AUTH_TWO_FA_FORCE
 } from '../utils/codes';
 
-import { ListSearchShareablePeopleRequest, SharableQuery } from './service-pb.cjs';
-import {YSearchClient } from './service-grpc-web-pb.cjs';
+import {
+  ListSearchShareablePeopleRequest,
+  SharableQuery
+} from './service-pb.cjs';
+import { YSearchClient } from './service-grpc-web-pb.cjs';
 import { handleError } from '../utils/helper';
 
 export default (config) =>
@@ -26,29 +29,33 @@ export default (config) =>
       this.metadata = { Authentication: yartu_token };
     }
 
-    searchShareablePeople = (search, type, query = {}) => {
+    searchShareablePeople = (search, type_list, query = {}) => {
       return new Promise((resolve, reject) => {
         const request = new ListSearchShareablePeopleRequest();
         const searchQuery = new SharableQuery();
 
         request.setSearch(search);
-        request.setType(type)
-        request.setQuery(searchQuery)
+        request.setQuery(searchQuery);
+        for (const type of type_list) {
+          request.addType(type);
+        }
 
         this.client.listSearchShareablePeople(
           request,
           this.metadata,
           (error, response) => {
             if (error) {
-            handleError(error, reject);
+              handleError(error, reject);
             } else {
               const code = response.getCode();
 
               if (code == 0) {
-                const people = response.getPeopleList().map((data) => data.toObject());
+                const people = response
+                  .getPeopleList()
+                  .map((data) => data.toObject());
                 resolve({
                   message: response.getMessage(),
-                  people,
+                  people
                 });
               } else {
                 reject({
@@ -61,4 +68,4 @@ export default (config) =>
         );
       });
     };
-  }
+  };
