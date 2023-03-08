@@ -11,13 +11,13 @@ import {
   DeleteProjectRequest,
   DuplicateProjectRequest,
   ArchiveProjectRequest,
-  StarProjectRequest,  // unused yet
+  StarProjectRequest,
 
   // Thread services
   ListThreadRequest,
   GetThreadRequest,
   UpsertThreadRequest,
-  DeleteThreadRequest,  // unused yet
+  DeleteThreadRequest,
 
   // ThreadMessage services
   ListThreadMessageRequest,
