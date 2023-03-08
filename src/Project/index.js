@@ -1583,10 +1583,10 @@ export default (config) =>
     moveCardToAnotherBoard(sourceCardId, destinationBoardId, destinationColumnId, newIndex) {
       return new Promise((resolve, reject) => {
         const request = new MoveCardToAnotherBoardRequest();
-        request.setSourceCardId(archive);
-        request.setDestinationBoardId(archive);
-        request.setDestinationColumnId(archive);
-        request.setNewIndex(archive);
+        request.setSourceCardId(sourceCardId);
+        request.setDestinationBoardId(destinationBoardId);
+        request.setDestinationColumnId(destinationColumnId);
+        request.setNewIndex(newIndex);
 
         this.client.moveCardToAnotherBoard(request, this.metadata, (error, response) => {
           if (error) {
