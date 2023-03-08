@@ -11,7 +11,7 @@ import {
 
 import {
   ListSearchShareablePeopleRequest,
-  SharableQuery
+  ShareableQuery
 } from './service-pb.cjs';
 import { YSearchClient } from './service-grpc-web-pb.cjs';
 import { handleError } from '../utils/helper';
@@ -32,7 +32,7 @@ export default (config) =>
     searchShareablePeople = (search, type_list, query = {}) => {
       return new Promise((resolve, reject) => {
         const request = new ListSearchShareablePeopleRequest();
-        const searchQuery = new SharableQuery();
+        const searchQuery = new ShareableQuery();
 
         request.setSearch(search);
         request.setQuery(searchQuery);
