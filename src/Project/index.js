@@ -11,13 +11,13 @@ import {
   DeleteProjectRequest,
   DuplicateProjectRequest,
   ArchiveProjectRequest,
-  StarProjectRequest,  // unused yet
+  StarProjectRequest,
 
   // Thread services
   ListThreadRequest,
   GetThreadRequest,
   UpsertThreadRequest,
-  DeleteThreadRequest,  // unused yet
+  DeleteThreadRequest,
 
   // ThreadMessage services
   ListThreadMessageRequest,
@@ -71,10 +71,12 @@ import {
   UpsertCheckListRequest,
   DeleteCheckListRequest,
   UpsertCheckListItemRequest,
-  DeleteCheckListItemRequest,  // unused yet
+  DeleteCheckListItemRequest,
   AssignAllCheckListItemsRequest,
-  MoveCardRequest,  // unused yet
+  MoveCardRequest,
   DuplicateCardRequest,
+  MoveCardToAnotherBoardRequest,
+  CopyCardToAnotherBoardRequest,
 
   // CardAttachment services
   UpsertCardAttachmentRequest,
@@ -1557,6 +1559,66 @@ export default (config) =>
         request.setArchive(archive);
 
         this.client.archiveCard(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage()
+              })
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    moveCardToAnotherBoard(sourceCardId, destinationBoardId, destinationColumnId, newIndex) {
+      return new Promise((resolve, reject) => {
+        const request = new MoveCardToAnotherBoardRequest();
+        request.setSourceCardId(sourceCardId);
+        request.setDestinationBoardId(destinationBoardId);
+        request.setDestinationColumnId(destinationColumnId);
+        request.setNewIndex(newIndex);
+
+        this.client.moveCardToAnotherBoard(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage()
+              })
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    copyCardToAnotherBoard(sourceCardId, destinationBoardId, destinationColumnId, newIndex) {
+      return new Promise((resolve, reject) => {
+        const request = new CopyCardToAnotherBoardRequest();
+        request.setSourceCardId(sourceCardId);
+        request.setDestinationBoardId(destinationBoardId);
+        request.setDestinationColumnId(destinationColumnId);
+        request.setNewIndex(newIndex);
+
+        this.client.copyCardToAnotherBoard(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
           } else {

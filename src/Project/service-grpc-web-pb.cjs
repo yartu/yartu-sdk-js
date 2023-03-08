@@ -2885,6 +2885,128 @@ proto.yartu.YProjectPromiseClient.prototype.deleteCardAttachment =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.MoveCardToAnotherBoardRequest,
+ *   !proto.yartu.MoveCardToAnotherBoardResponse>}
+ */
+const methodDescriptor_YProject_moveCardToAnotherBoard = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/moveCardToAnotherBoard',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.MoveCardToAnotherBoardRequest,
+  proto.yartu.MoveCardToAnotherBoardResponse,
+  /**
+   * @param {!proto.yartu.MoveCardToAnotherBoardRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.MoveCardToAnotherBoardResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.MoveCardToAnotherBoardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.MoveCardToAnotherBoardResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.MoveCardToAnotherBoardResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.moveCardToAnotherBoard =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/moveCardToAnotherBoard',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_moveCardToAnotherBoard,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.MoveCardToAnotherBoardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.MoveCardToAnotherBoardResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.moveCardToAnotherBoard =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/moveCardToAnotherBoard',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_moveCardToAnotherBoard);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.CopyCardToAnotherBoardRequest,
+ *   !proto.yartu.CopyCardToAnotherBoardResponse>}
+ */
+const methodDescriptor_YProject_copyCardToAnotherBoard = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/copyCardToAnotherBoard',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.CopyCardToAnotherBoardRequest,
+  proto.yartu.CopyCardToAnotherBoardResponse,
+  /**
+   * @param {!proto.yartu.CopyCardToAnotherBoardRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.CopyCardToAnotherBoardResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.CopyCardToAnotherBoardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.CopyCardToAnotherBoardResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.CopyCardToAnotherBoardResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.copyCardToAnotherBoard =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/copyCardToAnotherBoard',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_copyCardToAnotherBoard,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.CopyCardToAnotherBoardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.CopyCardToAnotherBoardResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.copyCardToAnotherBoard =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/copyCardToAnotherBoard',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_copyCardToAnotherBoard);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.UpsertCardUsersRequest,
  *   !proto.yartu.UpsertCardUsersResponse>}
  */
