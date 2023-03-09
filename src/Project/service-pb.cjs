@@ -6681,8 +6681,8 @@ proto.yartu.Board.serializeBinaryToWriter = function(message, writer) {
       common_grpc_definitions_pb.User.serializeBinaryToWriter
     );
   }
-  f = message.getCardCount();
-  if (f !== 0) {
+  f = /** @type {number} */ (jspb.Message.getField(message, 10));
+  if (f != null) {
     writer.writeInt64(
       10,
       f
@@ -6695,8 +6695,8 @@ proto.yartu.Board.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getCompletedCardCount();
-  if (f !== 0) {
+  f = /** @type {number} */ (jspb.Message.getField(message, 12));
+  if (f != null) {
     writer.writeInt64(
       12,
       f
@@ -6986,7 +6986,25 @@ proto.yartu.Board.prototype.getCardCount = function() {
  * @return {!proto.yartu.Board} returns this
  */
 proto.yartu.Board.prototype.setCardCount = function(value) {
-  return jspb.Message.setProto3IntField(this, 10, value);
+  return jspb.Message.setField(this, 10, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.Board} returns this
+ */
+proto.yartu.Board.prototype.clearCardCount = function() {
+  return jspb.Message.setField(this, 10, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.Board.prototype.hasCardCount = function() {
+  return jspb.Message.getField(this, 10) != null;
 };
 
 
@@ -7022,7 +7040,25 @@ proto.yartu.Board.prototype.getCompletedCardCount = function() {
  * @return {!proto.yartu.Board} returns this
  */
 proto.yartu.Board.prototype.setCompletedCardCount = function(value) {
-  return jspb.Message.setProto3IntField(this, 12, value);
+  return jspb.Message.setField(this, 12, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.Board} returns this
+ */
+proto.yartu.Board.prototype.clearCompletedCardCount = function() {
+  return jspb.Message.setField(this, 12, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.Board.prototype.hasCompletedCardCount = function() {
+  return jspb.Message.getField(this, 12) != null;
 };
 
 
