@@ -79,61 +79,61 @@ proto.yartu.YProjectPromiseClient =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
- *   !proto.yartu.GetProjectMeRequest,
- *   !proto.yartu.GetProjectMeResponse>}
+ *   !proto.yartu.GetProjectHomeRequest,
+ *   !proto.yartu.GetProjectHomeResponse>}
  */
-const methodDescriptor_YProject_getMe = new grpc.web.MethodDescriptor(
-  '/yartu.YProject/getMe',
+const methodDescriptor_YProject_getProjectHome = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/getProjectHome',
   grpc.web.MethodType.UNARY,
-  proto.yartu.GetProjectMeRequest,
-  proto.yartu.GetProjectMeResponse,
+  proto.yartu.GetProjectHomeRequest,
+  proto.yartu.GetProjectHomeResponse,
   /**
-   * @param {!proto.yartu.GetProjectMeRequest} request
+   * @param {!proto.yartu.GetProjectHomeRequest} request
    * @return {!Uint8Array}
    */
   function(request) {
     return request.serializeBinary();
   },
-  proto.yartu.GetProjectMeResponse.deserializeBinary
+  proto.yartu.GetProjectHomeResponse.deserializeBinary
 );
 
 
 /**
- * @param {!proto.yartu.GetProjectMeRequest} request The
+ * @param {!proto.yartu.GetProjectHomeRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.RpcError, ?proto.yartu.GetProjectMeResponse)}
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.GetProjectHomeResponse)}
  *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.yartu.GetProjectMeResponse>|undefined}
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.GetProjectHomeResponse>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.yartu.YProjectClient.prototype.getMe =
+proto.yartu.YProjectClient.prototype.getProjectHome =
     function(request, metadata, callback) {
   return this.client_.rpcCall(this.hostname_ +
-      '/yartu.YProject/getMe',
+      '/yartu.YProject/getProjectHome',
       request,
       metadata || {},
-      methodDescriptor_YProject_getMe,
+      methodDescriptor_YProject_getProjectHome,
       callback);
 };
 
 
 /**
- * @param {!proto.yartu.GetProjectMeRequest} request The
+ * @param {!proto.yartu.GetProjectHomeRequest} request The
  *     request proto
  * @param {?Object<string, string>=} metadata User defined
  *     call metadata
- * @return {!Promise<!proto.yartu.GetProjectMeResponse>}
+ * @return {!Promise<!proto.yartu.GetProjectHomeResponse>}
  *     Promise that resolves to the response
  */
-proto.yartu.YProjectPromiseClient.prototype.getMe =
+proto.yartu.YProjectPromiseClient.prototype.getProjectHome =
     function(request, metadata) {
   return this.client_.unaryCall(this.hostname_ +
-      '/yartu.YProject/getMe',
+      '/yartu.YProject/getProjectHome',
       request,
       metadata || {},
-      methodDescriptor_YProject_getMe);
+      methodDescriptor_YProject_getProjectHome);
 };
 
 

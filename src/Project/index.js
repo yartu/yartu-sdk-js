@@ -2,7 +2,7 @@ import {
   //
   CardLabel,
 
-  GetProjectMeRequest,
+  GetProjectHomeRequest,
 
   // Project services
   ListProjectRequest,
@@ -103,19 +103,28 @@ export default (config) =>
       this.metadata = { Authentication: yartu_token };
     }
 
-    getMe() {
+    getProjectHome() {
       return new Promise((resolve, reject) => {
-        const request = new GetProjectMeRequest();
-        request.add(add);
-        this.client.getMe(request, this.metadata, (error, response) => {
+        const request = new GetProjectHomeRequest();
+
+
+        this.client.getProjectHome(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
           } else {
             const code = response.getCode();
+            const starredProjectList = response.getStarredProjectList().map((d) => d.toObject());
+            const recentProjectList = response.getRecentProjectList().map((d) => d.toObject());
+            const recentBoardList = response.getRecentBoardList().map((d) => d.toObject());
+            const upcomingDeadlineList = response.getUpcomingDeadlineList().map((d) => d.toObject());
 
             if (code == 0) {
               resolve({
                 code,
+                starredProjectList,
+                recentProjectList,
+                recentBoardList,
+                upcomingDeadlineList,
                 message: response.getMessage()
               })
             } else {
