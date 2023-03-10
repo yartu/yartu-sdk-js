@@ -3675,5 +3675,66 @@ proto.yartu.YProjectPromiseClient.prototype.moveCard =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.GetProjectorOrBoardUserListRequest,
+ *   !proto.yartu.GetProjectorOrBoardUserListResponse>}
+ */
+const methodDescriptor_YProject_getProjectorOrBoardUserList = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/getProjectorOrBoardUserList',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.GetProjectorOrBoardUserListRequest,
+  proto.yartu.GetProjectorOrBoardUserListResponse,
+  /**
+   * @param {!proto.yartu.GetProjectorOrBoardUserListRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.GetProjectorOrBoardUserListResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.GetProjectorOrBoardUserListRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.GetProjectorOrBoardUserListResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.GetProjectorOrBoardUserListResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.getProjectorOrBoardUserList =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/getProjectorOrBoardUserList',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_getProjectorOrBoardUserList,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.GetProjectorOrBoardUserListRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.GetProjectorOrBoardUserListResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.getProjectorOrBoardUserList =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/getProjectorOrBoardUserList',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_getProjectorOrBoardUserList);
+};
+
+
 module.exports = proto.yartu;
 

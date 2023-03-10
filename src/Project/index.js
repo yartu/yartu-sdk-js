@@ -3,6 +3,7 @@ import {
   CardLabel,
 
   GetProjectHomeRequest,
+  GetProjectorOrBoardUserListRequest,
 
   // Project services
   ListProjectRequest,
@@ -376,22 +377,23 @@ export default (config) =>
       });
     }
 
-    getThread(threadId) {
+    getThread(threadUUID) {
       return new Promise((resolve, reject) => {
 
         const request = new GetThreadRequest();
-        request.setThreadUuid(threadId);
+        request.setThreadUuid(threadUUID);
 
         this.client.getThread(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
           } else {
             const code = response.getCode();
-
+            const data = response.getData().toObject();
             if (code == 0) {
               resolve({
                 code,
-                thread: response.getThread().toObject(),
+                data: data,
+                message: response.getMessage()
               });
             } else {
               reject({
@@ -404,33 +406,31 @@ export default (config) =>
       });
     }
 
-    upsertThread(
-      id,
-      title,
-      description,
-      project_uuid,
-      board_id,
-      is_pinned,
-      is_private
-    ) {
+    upsertThread(projectUUID = null, boardUUID = null, threadData) {
       return new Promise((resolve, reject) => {
         const request = new UpsertThreadRequest();
-        request.setId(id);
-        request.setTitle(title);
-        request.setDescription(description);
-        request.setProjectUuid(project_uuid);
-        request.setBoardId(board_id);
-        request.setIsPinned(is_pinned);
-        request.setIsPrivate(is_private);
+        request.setProjectUuid(projectUUID);
+        if (boardUUID) {
+          // boardUUID can be blank
+          // and this means this thread can be avaliable for all users in this project
+          request.setBoardUuid(boardUUID);
+        }
+
+        request.setUuid(threadData.uuid);
+        request.setTitle(threadData.title);
+        request.setDescription(threadData.description);
+        request.setIsPinned(threadData.isPinned);
+        request.setIsPrivate(threadData.isPrivate);
         this.client.upsertThread(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
           } else {
             const code = response.getCode();
-
+            const data = response.getData().toObject();
             if (code == 0) {
               resolve({
                 code,
+                data,
                 message: response.getMessage()
               })
             } else {
@@ -444,10 +444,10 @@ export default (config) =>
       });
     }
 
-    deleteThread(id) {
+    deleteThread(ThreadUUID) {
       return new Promise((resolve, reject) => {
         const request = new DeleteThreadRequest();
-        request.setId(id);
+        request.setUuid(ThreadUUID);
         this.client.deleteThread(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
@@ -1944,6 +1944,41 @@ export default (config) =>
             if (code == 0) {
               resolve({
                 code,
+                message: response.getMessage()
+              })
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    getProjectorOrBoardUserList(projectUUID = null, boardUUID = null) {
+      return new Promise((resolve, reject) => {
+        const request = new GetProjectorOrBoardUserListRequest();
+        if (boardUUID) {
+          // board uuid is enough to fetch data
+          //  so if user was sent projectUUID with boardUUID we can ignore projectUUID
+          request.setBoardUuid(boardUUID);
+        }
+        else if (projectUUID) {
+          request.setProjectUuid(projectUUID);
+        }
+
+        this.client.getProjectorOrBoardUserList(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            const dataList = response.getDataList().map((data) => data.toObject());
+            if (code == 0) {
+              resolve({
+                code,
+                data: dataList,
                 message: response.getMessage()
               })
             } else {
