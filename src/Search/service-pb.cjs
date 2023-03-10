@@ -21,7 +21,7 @@ var global =
     (function () { return this; }).call(null) ||
     Function('return this')();
 
-var common_grpc_definitions_pb = require('../../common/grpc/definitions_pb.js');
+var common_grpc_definitions_pb = require('../utils/definitions_pb.cjs');
 goog.object.extend(proto, common_grpc_definitions_pb);
 goog.exportSymbol('proto.yartu.ListSearchShareablePeopleRequest', null, global);
 goog.exportSymbol('proto.yartu.ListSearchShareablePeopleResponse', null, global);
