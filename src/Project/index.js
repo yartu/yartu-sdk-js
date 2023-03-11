@@ -25,6 +25,7 @@ import {
   SendThreadMessageRequest,
   ReadThreadMessageRequest,
   InteractThreadMessageRequest,
+  DeleteThreadMessageRequest,
 
   // Board services
   ListBoardRequest,
@@ -388,8 +389,8 @@ export default (config) =>
             handleError(error, reject);
           } else {
             const code = response.getCode();
-            const data = response.getData().toObject();
             if (code == 0) {
+              const data = response.getData().toObject();
               resolve({
                 code,
                 data: data,
@@ -406,28 +407,39 @@ export default (config) =>
       });
     }
 
-    upsertThread(projectUUID = null, boardUUID = null, threadData) {
+    upsertThread(projectUUID = null, threadData) {
       return new Promise((resolve, reject) => {
         const request = new UpsertThreadRequest();
         request.setProjectUuid(projectUUID);
-        if (boardUUID) {
-          // boardUUID can be blank
-          // and this means this thread can be avaliable for all users in this project
-          request.setBoardUuid(boardUUID);
-        }
 
-        request.setUuid(threadData.uuid);
+        // boardId can be 0
+        // and this means this thread can be avaliable for all users in this project
+        request.setBoardId(threadData.boardId);
+
+        request.setUuid(threadData?.uuid);
         request.setTitle(threadData.title);
         request.setDescription(threadData.description);
         request.setIsPinned(threadData.isPinned);
         request.setIsPrivate(threadData.isPrivate);
+
+        const participantList = [];
+        threadData.userList.forEach(s => {
+          const user = new User();
+          user.setId(s.id);
+          user.setUsername(s.email);
+          user.setName(s.name);
+          user.setSurname(s.surname);
+          participantList.push(user)
+        });
+        request.setParticipantList(participantList);
+
         this.client.upsertThread(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
           } else {
             const code = response.getCode();
-            const data = response.getData().toObject();
             if (code == 0) {
+              const data = response.getData().toObject();
               resolve({
                 code,
                 data,
@@ -470,14 +482,14 @@ export default (config) =>
       });
     }
 
-    listThreadMessage(thread_uuid, from_id = 0, query) {
+    listThreadMessage(threadUUID, fromId = 0, query) {
       return new Promise((resolve, reject) => {
 
         const request = new ListThreadMessageRequest();
         const queryRequest = new Query();
 
-        request.setThreadUuid(thread_uuid);
-        request.setFromId(from_id);
+        request.setThreadUuid(threadUUID);
+        request.setFromId(fromId);
         request.setQuery(queryRequest);
 
         this.client.listThreadMessage(
@@ -508,12 +520,15 @@ export default (config) =>
       });
     }
 
-    sendThreadMessage(thread_uuid, message, answered_message_uuid) {
+    sendThreadMessage(threadUUID, message, answeredMessageUUID) {
       return new Promise((resolve, reject) => {
         const request = new SendThreadMessageRequest();
-        request.setThreadUuid(thread_uuid);
-        request.setMessage(message);
-        request.setAnsweredMessageUuid(answered_message_uuid);
+        request.setThreadUuid(threadUUID);
+        request.setMessage(message.message);
+        if (message?.uuid){
+          request.setUuid(message?.uuid);
+        }
+        request.setAnsweredMessageUuid(answeredMessageUUID);
         this.client.sendThreadMessage(
           request,
           this.metadata,
@@ -522,10 +537,11 @@ export default (config) =>
               handleError(error, reject);
             } else {
               const code = response.getCode();
-
               if (code == 0) {
+                const data = response.getData().toObject()
                 resolve({
                   code: 0,
+                  data: data,
                   message: response.getMessage()
                 });
               } else {
@@ -540,11 +556,11 @@ export default (config) =>
       });
     }
 
-    readThreadMessage(thread_uuid, message_uuid) {
+    readThreadMessage(threadUUID, messageUUID) {
       return new Promise((resolve, reject) => {
         const request = new ReadThreadMessageRequest();
-        request.setThreadUuid(thread_uuid);
-        request.setMessageUuid(message_uuid);
+        request.setThreadUuid(threadUUID);
+        request.setMessageUuid(messageUUID);
         this.client.readThreadMessage(
           request,
           this.metadata,
@@ -571,11 +587,11 @@ export default (config) =>
       });
     }
 
-    interactThreadMessage(thread_uuid, message_uuid, emoji) {
+    interactThreadMessage(threadUUID, messageUUID, emoji) {
       return new Promise((resolve, reject) => {
         const request = new InteractThreadMessageRequest();
-        request.setThreadUuid(thread_uuid);
-        request.setMessageUuid(message_uuid);
+        request.setThreadUuid(threadUUID);
+        request.setMessageUuid(messageUUID);
         request.setEmoji(emoji);
         this.client.interactThreadMessage(
           request,
@@ -602,6 +618,34 @@ export default (config) =>
         );
       });
     }
+
+    deleteThreadMessage(MessageUUID) {
+      return new Promise((resolve, reject) => {
+        const request = new DeleteThreadMessageRequest();
+        request.setUuid(MessageUUID);
+
+        this.client.deleteThreadMessage(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage()
+              })
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
 
     listBoard(project_uuid) {
       return new Promise((resolve, reject) => {
@@ -1722,8 +1766,8 @@ export default (config) =>
             handleError(error, reject);
           } else {
             const code = response.getCode();
-            const data = response.getData().toObject()
             if (code == 0) {
+              const data = response.getData().toObject()
               resolve({
                 code,
                 data: data,
