@@ -3797,5 +3797,66 @@ proto.yartu.YProjectPromiseClient.prototype.getProjectorOrBoardUserList =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.GetProjectFilesRequest,
+ *   !proto.yartu.GetProjectFilesResponse>}
+ */
+const methodDescriptor_YProject_getProjectFiles = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/getProjectFiles',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.GetProjectFilesRequest,
+  proto.yartu.GetProjectFilesResponse,
+  /**
+   * @param {!proto.yartu.GetProjectFilesRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.GetProjectFilesResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.GetProjectFilesRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.GetProjectFilesResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.GetProjectFilesResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.getProjectFiles =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/getProjectFiles',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_getProjectFiles,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.GetProjectFilesRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.GetProjectFilesResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.getProjectFiles =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/getProjectFiles',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_getProjectFiles);
+};
+
+
 module.exports = proto.yartu;
 

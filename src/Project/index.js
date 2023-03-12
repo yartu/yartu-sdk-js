@@ -4,6 +4,7 @@ import {
 
   GetProjectHomeRequest,
   GetProjectorOrBoardUserListRequest,
+  GetProjectFilesRequest,
 
   // Project services
   ListProjectRequest,
@@ -1249,10 +1250,8 @@ export default (config) =>
               handleError(error, reject);
             } else {
               const code = response.getCode();
-              const dataList = response
-                .getDataList()
-                .map((data) => data.toObject());
               if (code == 0) {
+                const dataList = response.getDataList().map((data) => data.toObject());
                 resolve({
                   code: 0,
                   data: dataList,
@@ -1556,10 +1555,8 @@ export default (config) =>
             handleError(error, reject);
           } else {
             const code = response.getCode();
-            const dataList = response
-              .getDataList()
-              .map((data) => data.toObject());
             if (code == 0) {
+              const dataList = response.getDataList().map((data) => data.toObject());
               resolve({
                 code,
                 data: dataList,
@@ -1585,10 +1582,8 @@ export default (config) =>
             handleError(error, reject);
           } else {
             const code = response.getCode();
-            const dataList = response
-              .getDataList()
-              .map((data) => data.toObject());
             if (code == 0) {
+              const dataList = response.getDataList().map((data) => data.toObject());
               resolve({
                 code,
                 data: dataList,
@@ -1732,11 +1727,8 @@ export default (config) =>
             handleError(error, reject);
           } else {
             const code = response.getCode();
-            const dataList = response
-              .getDataList()
-              .map((data) => data.toObject());
-
             if (code == 0) {
+              const dataList = response.getDataList().map((data) => data.toObject());
               resolve({
                 code,
                 data: dataList,
@@ -2018,8 +2010,8 @@ export default (config) =>
             handleError(error, reject);
           } else {
             const code = response.getCode();
-            const dataList = response.getDataList().map((data) => data.toObject());
             if (code == 0) {
+              const dataList = response.getDataList().map((data) => data.toObject());
               resolve({
                 code,
                 data: dataList,
@@ -2035,5 +2027,41 @@ export default (config) =>
         });
       });
     }
+
+    getProjectFiles(projectUUID = null, boardUUID = null) {
+      return new Promise((resolve, reject) => {
+        const request = new GetProjectFilesRequest();
+        if (boardUUID) {
+          // board uuid is enough to fetch data
+          //  so if user was sent projectUUID with boardUUID we can ignore projectUUID
+          request.setBoardUuid(boardUUID);
+        }
+        else if (projectUUID) {
+          request.setProjectUuid(projectUUID);
+        }
+
+        this.client.getProjectFiles(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              const dataList = response.getDataList().map((data) => data.toObject());
+              resolve({
+                code,
+                data: dataList,
+                message: response.getMessage()
+              })
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
   };
 
