@@ -128,6 +128,10 @@ export default (config) =>
           request.setLanguage(lang);
         }
 
+        if (data.notifications !== null) {
+          request.setNotificationList(data.notifications)
+        }
+
         this.client.upsertAccount(request, this.metadata, (error, response) => {
           const code = response.getCode();
           if (error) {
