@@ -280,7 +280,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.yartu.UpsertAccountRequest = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.yartu.UpsertAccountRequest.repeatedFields_, null);
 };
 goog.inherits(proto.yartu.UpsertAccountRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -2674,7 +2674,7 @@ proto.yartu.GetInfoRequest.prototype.hasUsername = function() {
  * @private {!Array<number>}
  * @const
  */
-proto.yartu.GetInfoResponse.repeatedFields_ = [15];
+proto.yartu.GetInfoResponse.repeatedFields_ = [15,17];
 
 
 
@@ -2722,7 +2722,8 @@ proto.yartu.GetInfoResponse.toObject = function(includeInstance, msg) {
     city: jspb.Message.getFieldWithDefault(msg, 13, ""),
     roleName: jspb.Message.getFieldWithDefault(msg, 14, ""),
     permissionList: (f = jspb.Message.getRepeatedField(msg, 15)) == null ? undefined : f,
-    message: jspb.Message.getFieldWithDefault(msg, 16, "")
+    message: jspb.Message.getFieldWithDefault(msg, 16, ""),
+    notificationList: (f = jspb.Message.getRepeatedField(msg, 17)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -2823,6 +2824,10 @@ proto.yartu.GetInfoResponse.deserializeBinaryFromReader = function(msg, reader) 
     case 16:
       var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
+      break;
+    case 17:
+      var value = /** @type {string} */ (reader.readString());
+      msg.addNotification(value);
       break;
     default:
       reader.skipField();
@@ -2963,6 +2968,13 @@ proto.yartu.GetInfoResponse.serializeBinaryToWriter = function(message, writer) 
   if (f != null) {
     writer.writeString(
       16,
+      f
+    );
+  }
+  f = message.getNotificationList();
+  if (f.length > 0) {
+    writer.writeRepeatedString(
+      17,
       f
     );
   }
@@ -3310,6 +3322,43 @@ proto.yartu.GetInfoResponse.prototype.clearMessage = function() {
  */
 proto.yartu.GetInfoResponse.prototype.hasMessage = function() {
   return jspb.Message.getField(this, 16) != null;
+};
+
+
+/**
+ * repeated string notification = 17;
+ * @return {!Array<string>}
+ */
+proto.yartu.GetInfoResponse.prototype.getNotificationList = function() {
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 17));
+};
+
+
+/**
+ * @param {!Array<string>} value
+ * @return {!proto.yartu.GetInfoResponse} returns this
+ */
+proto.yartu.GetInfoResponse.prototype.setNotificationList = function(value) {
+  return jspb.Message.setField(this, 17, value || []);
+};
+
+
+/**
+ * @param {string} value
+ * @param {number=} opt_index
+ * @return {!proto.yartu.GetInfoResponse} returns this
+ */
+proto.yartu.GetInfoResponse.prototype.addNotification = function(value, opt_index) {
+  return jspb.Message.addToRepeatedField(this, 17, value, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.yartu.GetInfoResponse} returns this
+ */
+proto.yartu.GetInfoResponse.prototype.clearNotificationList = function() {
+  return this.setNotificationList([]);
 };
 
 
@@ -3803,6 +3852,13 @@ proto.yartu.GetWeatherResponse.prototype.hasMessage = function() {
 
 
 
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.yartu.UpsertAccountRequest.repeatedFields_ = [13];
+
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -3845,7 +3901,8 @@ proto.yartu.UpsertAccountRequest.toObject = function(includeInstance, msg) {
     country: jspb.Message.getFieldWithDefault(msg, 9, ""),
     timezone: jspb.Message.getFieldWithDefault(msg, 10, ""),
     timeformat: jspb.Message.getFieldWithDefault(msg, 11, ""),
-    city: jspb.Message.getFieldWithDefault(msg, 12, "")
+    city: jspb.Message.getFieldWithDefault(msg, 12, ""),
+    notificationList: (f = jspb.Message.getRepeatedField(msg, 13)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -3929,6 +3986,10 @@ proto.yartu.UpsertAccountRequest.deserializeBinaryFromReader = function(msg, rea
     case 12:
       var value = /** @type {string} */ (reader.readString());
       msg.setCity(value);
+      break;
+    case 13:
+      var value = /** @type {string} */ (reader.readString());
+      msg.addNotification(value);
       break;
     default:
       reader.skipField();
@@ -4040,6 +4101,13 @@ proto.yartu.UpsertAccountRequest.serializeBinaryToWriter = function(message, wri
   if (f != null) {
     writer.writeString(
       12,
+      f
+    );
+  }
+  f = message.getNotificationList();
+  if (f.length > 0) {
+    writer.writeRepeatedString(
+      13,
       f
     );
   }
@@ -4475,6 +4543,43 @@ proto.yartu.UpsertAccountRequest.prototype.clearCity = function() {
  */
 proto.yartu.UpsertAccountRequest.prototype.hasCity = function() {
   return jspb.Message.getField(this, 12) != null;
+};
+
+
+/**
+ * repeated string notification = 13;
+ * @return {!Array<string>}
+ */
+proto.yartu.UpsertAccountRequest.prototype.getNotificationList = function() {
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 13));
+};
+
+
+/**
+ * @param {!Array<string>} value
+ * @return {!proto.yartu.UpsertAccountRequest} returns this
+ */
+proto.yartu.UpsertAccountRequest.prototype.setNotificationList = function(value) {
+  return jspb.Message.setField(this, 13, value || []);
+};
+
+
+/**
+ * @param {string} value
+ * @param {number=} opt_index
+ * @return {!proto.yartu.UpsertAccountRequest} returns this
+ */
+proto.yartu.UpsertAccountRequest.prototype.addNotification = function(value, opt_index) {
+  return jspb.Message.addToRepeatedField(this, 13, value, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.yartu.UpsertAccountRequest} returns this
+ */
+proto.yartu.UpsertAccountRequest.prototype.clearNotificationList = function() {
+  return this.setNotificationList([]);
 };
 
 
