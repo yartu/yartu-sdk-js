@@ -423,16 +423,18 @@ export default (config) =>
         request.setIsPinned(threadData.isPinned);
         request.setIsPrivate(threadData.isPrivate);
 
-        const participantList = [];
-        threadData.userList.forEach(s => {
-          const user = new User();
-          user.setId(s.id);
-          user.setUsername(s.email);
-          user.setName(s.name);
-          user.setSurname(s.surname);
-          participantList.push(user)
-        });
-        request.setParticipantList(participantList);
+        if (threadData.userList && threadData.userList.length > 0) {
+          const participantList = [];
+          threadData.userList.forEach(s => {
+            const user = new User();
+            user.setId(s.id);
+            user.setUsername(s.email);
+            user.setName(s.name);
+            user.setSurname(s.surname);
+            participantList.push(user)
+          });
+          request.setParticipantList(participantList);
+        }
 
         this.client.upsertThread(request, this.metadata, (error, response) => {
           if (error) {
@@ -483,14 +485,21 @@ export default (config) =>
       });
     }
 
-    listThreadMessage(threadUUID, fromId = 0, query) {
+    listThreadMessage(threadUUID, fromId = 0, scrollDirection = 'bottom',  query) {
       return new Promise((resolve, reject) => {
 
         const request = new ListThreadMessageRequest();
+
         const queryRequest = new Query();
+        queryRequest.setQuery(query?.query || '');
+        queryRequest.setPage(query?.page || 1);
+        queryRequest.setPerPage(query?.perPage || 20);
+        queryRequest.setSortBy(query?.sortBy || '');
+        queryRequest.setSearchFieldsList(query?.searchFields || []);
 
         request.setThreadUuid(threadUUID);
         request.setFromId(fromId);
+        request.setScrollDirection(scrollDirection);
         request.setQuery(queryRequest);
 
         this.client.listThreadMessage(
@@ -508,6 +517,7 @@ export default (config) =>
                   messages: response.getThreadMessageList().map((m) => m.toObject()),
                   unreadCount: response.getUnreadCount(),
                   totalCount: response.getTotalCount(),
+                  lastReadId: response.getLastReadId(),
                 });
               } else {
                 reject({
@@ -521,11 +531,12 @@ export default (config) =>
       });
     }
 
-    sendThreadMessage(threadUUID, message, answeredMessageUUID) {
+    sendThreadMessage(threadUUID, message, answeredMessageUUID, lastReadId = 0) {
       return new Promise((resolve, reject) => {
         const request = new SendThreadMessageRequest();
         request.setThreadUuid(threadUUID);
         request.setMessage(message.message);
+        request.setLastReadId(lastReadId);
         if (message?.uuid){
           request.setUuid(message?.uuid);
         }
@@ -539,10 +550,10 @@ export default (config) =>
             } else {
               const code = response.getCode();
               if (code == 0) {
-                const data = response.getData().toObject()
+                const dataList = response.getDataList().map((data) => data.toObject());
                 resolve({
                   code: 0,
-                  data: data,
+                  data: dataList,
                   message: response.getMessage()
                 });
               } else {

@@ -1033,7 +1033,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.yartu.SendThreadMessageResponse = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.yartu.SendThreadMessageResponse.repeatedFields_, null);
 };
 goog.inherits(proto.yartu.SendThreadMessageResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -9098,7 +9098,8 @@ proto.yartu.ThreadMessage.toObject = function(includeInstance, msg) {
     removedAt: jspb.Message.getFieldWithDefault(msg, 6, ""),
     isInteracted: jspb.Message.getBooleanFieldWithDefault(msg, 7, false),
     interactionsList: jspb.Message.toObjectList(msg.getInteractionsList(),
-    proto.yartu.MessageInteraction.toObject, includeInstance)
+    proto.yartu.MessageInteraction.toObject, includeInstance),
+    isEdited: jspb.Message.getBooleanFieldWithDefault(msg, 9, false)
   };
 
   if (includeInstance) {
@@ -9168,6 +9169,10 @@ proto.yartu.ThreadMessage.deserializeBinaryFromReader = function(msg, reader) {
       var value = new proto.yartu.MessageInteraction;
       reader.readMessage(value,proto.yartu.MessageInteraction.deserializeBinaryFromReader);
       msg.addInteractions(value);
+      break;
+    case 9:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setIsEdited(value);
       break;
     default:
       reader.skipField();
@@ -9254,6 +9259,13 @@ proto.yartu.ThreadMessage.serializeBinaryToWriter = function(message, writer) {
       8,
       f,
       proto.yartu.MessageInteraction.serializeBinaryToWriter
+    );
+  }
+  f = /** @type {boolean} */ (jspb.Message.getField(message, 9));
+  if (f != null) {
+    writer.writeBool(
+      9,
+      f
     );
   }
 };
@@ -9457,6 +9469,42 @@ proto.yartu.ThreadMessage.prototype.addInteractions = function(opt_value, opt_in
  */
 proto.yartu.ThreadMessage.prototype.clearInteractionsList = function() {
   return this.setInteractionsList([]);
+};
+
+
+/**
+ * optional bool is_edited = 9;
+ * @return {boolean}
+ */
+proto.yartu.ThreadMessage.prototype.getIsEdited = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 9, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.yartu.ThreadMessage} returns this
+ */
+proto.yartu.ThreadMessage.prototype.setIsEdited = function(value) {
+  return jspb.Message.setField(this, 9, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.ThreadMessage} returns this
+ */
+proto.yartu.ThreadMessage.prototype.clearIsEdited = function() {
+  return jspb.Message.setField(this, 9, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.ThreadMessage.prototype.hasIsEdited = function() {
+  return jspb.Message.getField(this, 9) != null;
 };
 
 
@@ -14616,6 +14664,7 @@ proto.yartu.ListThreadMessageRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     threadUuid: jspb.Message.getFieldWithDefault(msg, 1, ""),
     fromId: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    scrollDirection: jspb.Message.getFieldWithDefault(msg, 3, ""),
     query: (f = msg.getQuery()) && common_grpc_definitions_pb.Query.toObject(includeInstance, f)
   };
 
@@ -14662,6 +14711,10 @@ proto.yartu.ListThreadMessageRequest.deserializeBinaryFromReader = function(msg,
       msg.setFromId(value);
       break;
     case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setScrollDirection(value);
+      break;
+    case 4:
       var value = new common_grpc_definitions_pb.Query;
       reader.readMessage(value,common_grpc_definitions_pb.Query.deserializeBinaryFromReader);
       msg.setQuery(value);
@@ -14709,10 +14762,17 @@ proto.yartu.ListThreadMessageRequest.serializeBinaryToWriter = function(message,
       f
     );
   }
+  f = message.getScrollDirection();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
   f = message.getQuery();
   if (f != null) {
     writer.writeMessage(
-      3,
+      4,
       f,
       common_grpc_definitions_pb.Query.serializeBinaryToWriter
     );
@@ -14775,12 +14835,30 @@ proto.yartu.ListThreadMessageRequest.prototype.hasFromId = function() {
 
 
 /**
- * optional Query query = 3;
+ * optional string scroll_direction = 3;
+ * @return {string}
+ */
+proto.yartu.ListThreadMessageRequest.prototype.getScrollDirection = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.ListThreadMessageRequest} returns this
+ */
+proto.yartu.ListThreadMessageRequest.prototype.setScrollDirection = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional Query query = 4;
  * @return {?proto.Query}
  */
 proto.yartu.ListThreadMessageRequest.prototype.getQuery = function() {
   return /** @type{?proto.Query} */ (
-    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.Query, 3));
+    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.Query, 4));
 };
 
 
@@ -14789,7 +14867,7 @@ proto.yartu.ListThreadMessageRequest.prototype.getQuery = function() {
  * @return {!proto.yartu.ListThreadMessageRequest} returns this
 */
 proto.yartu.ListThreadMessageRequest.prototype.setQuery = function(value) {
-  return jspb.Message.setWrapperField(this, 3, value);
+  return jspb.Message.setWrapperField(this, 4, value);
 };
 
 
@@ -14807,7 +14885,7 @@ proto.yartu.ListThreadMessageRequest.prototype.clearQuery = function() {
  * @return {boolean}
  */
 proto.yartu.ListThreadMessageRequest.prototype.hasQuery = function() {
-  return jspb.Message.getField(this, 3) != null;
+  return jspb.Message.getField(this, 4) != null;
 };
 
 
@@ -14856,7 +14934,8 @@ proto.yartu.ListThreadMessageResponse.toObject = function(includeInstance, msg) 
     unreadCount: jspb.Message.getFieldWithDefault(msg, 3, 0),
     totalCount: jspb.Message.getFieldWithDefault(msg, 4, 0),
     message: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    pagination: (f = msg.getPagination()) && common_grpc_definitions_pb.PaginationMeta.toObject(includeInstance, f)
+    pagination: (f = msg.getPagination()) && common_grpc_definitions_pb.PaginationMeta.toObject(includeInstance, f),
+    lastReadId: jspb.Message.getFieldWithDefault(msg, 7, 0)
   };
 
   if (includeInstance) {
@@ -14918,6 +14997,10 @@ proto.yartu.ListThreadMessageResponse.deserializeBinaryFromReader = function(msg
       var value = new common_grpc_definitions_pb.PaginationMeta;
       reader.readMessage(value,common_grpc_definitions_pb.PaginationMeta.deserializeBinaryFromReader);
       msg.setPagination(value);
+      break;
+    case 7:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setLastReadId(value);
       break;
     default:
       reader.skipField();
@@ -14990,6 +15073,13 @@ proto.yartu.ListThreadMessageResponse.serializeBinaryToWriter = function(message
       6,
       f,
       common_grpc_definitions_pb.PaginationMeta.serializeBinaryToWriter
+    );
+  }
+  f = /** @type {number} */ (jspb.Message.getField(message, 7));
+  if (f != null) {
+    writer.writeInt64(
+      7,
+      f
     );
   }
 };
@@ -15160,6 +15250,42 @@ proto.yartu.ListThreadMessageResponse.prototype.hasPagination = function() {
 };
 
 
+/**
+ * optional int64 last_read_id = 7;
+ * @return {number}
+ */
+proto.yartu.ListThreadMessageResponse.prototype.getLastReadId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 7, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu.ListThreadMessageResponse} returns this
+ */
+proto.yartu.ListThreadMessageResponse.prototype.setLastReadId = function(value) {
+  return jspb.Message.setField(this, 7, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.ListThreadMessageResponse} returns this
+ */
+proto.yartu.ListThreadMessageResponse.prototype.clearLastReadId = function() {
+  return jspb.Message.setField(this, 7, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.ListThreadMessageResponse.prototype.hasLastReadId = function() {
+  return jspb.Message.getField(this, 7) != null;
+};
+
+
 
 
 
@@ -15195,7 +15321,8 @@ proto.yartu.SendThreadMessageRequest.toObject = function(includeInstance, msg) {
     threadUuid: jspb.Message.getFieldWithDefault(msg, 1, ""),
     uuid: jspb.Message.getFieldWithDefault(msg, 2, ""),
     message: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    answeredMessageUuid: jspb.Message.getFieldWithDefault(msg, 4, "")
+    answeredMessageUuid: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    lastReadId: jspb.Message.getFieldWithDefault(msg, 5, 0)
   };
 
   if (includeInstance) {
@@ -15247,6 +15374,10 @@ proto.yartu.SendThreadMessageRequest.deserializeBinaryFromReader = function(msg,
     case 4:
       var value = /** @type {string} */ (reader.readString());
       msg.setAnsweredMessageUuid(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setLastReadId(value);
       break;
     default:
       reader.skipField();
@@ -15302,6 +15433,13 @@ proto.yartu.SendThreadMessageRequest.serializeBinaryToWriter = function(message,
   if (f != null) {
     writer.writeString(
       4,
+      f
+    );
+  }
+  f = /** @type {number} */ (jspb.Message.getField(message, 5));
+  if (f != null) {
+    writer.writeInt64(
+      5,
       f
     );
   }
@@ -15416,6 +15554,49 @@ proto.yartu.SendThreadMessageRequest.prototype.hasAnsweredMessageUuid = function
 };
 
 
+/**
+ * optional int64 last_read_id = 5;
+ * @return {number}
+ */
+proto.yartu.SendThreadMessageRequest.prototype.getLastReadId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu.SendThreadMessageRequest} returns this
+ */
+proto.yartu.SendThreadMessageRequest.prototype.setLastReadId = function(value) {
+  return jspb.Message.setField(this, 5, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.SendThreadMessageRequest} returns this
+ */
+proto.yartu.SendThreadMessageRequest.prototype.clearLastReadId = function() {
+  return jspb.Message.setField(this, 5, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.SendThreadMessageRequest.prototype.hasLastReadId = function() {
+  return jspb.Message.getField(this, 5) != null;
+};
+
+
+
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.yartu.SendThreadMessageResponse.repeatedFields_ = [2];
 
 
 
@@ -15449,7 +15630,8 @@ proto.yartu.SendThreadMessageResponse.prototype.toObject = function(opt_includeI
 proto.yartu.SendThreadMessageResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    data: (f = msg.getData()) && proto.yartu.ThreadMessage.toObject(includeInstance, f),
+    dataList: jspb.Message.toObjectList(msg.getDataList(),
+    proto.yartu.ThreadMessage.toObject, includeInstance),
     message: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
@@ -15494,7 +15676,7 @@ proto.yartu.SendThreadMessageResponse.deserializeBinaryFromReader = function(msg
     case 2:
       var value = new proto.yartu.ThreadMessage;
       reader.readMessage(value,proto.yartu.ThreadMessage.deserializeBinaryFromReader);
-      msg.setData(value);
+      msg.addData(value);
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
@@ -15536,9 +15718,9 @@ proto.yartu.SendThreadMessageResponse.serializeBinaryToWriter = function(message
       f
     );
   }
-  f = message.getData();
-  if (f != null) {
-    writer.writeMessage(
+  f = message.getDataList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
       2,
       f,
       proto.yartu.ThreadMessage.serializeBinaryToWriter
@@ -15573,39 +15755,40 @@ proto.yartu.SendThreadMessageResponse.prototype.setCode = function(value) {
 
 
 /**
- * optional ThreadMessage data = 2;
- * @return {?proto.yartu.ThreadMessage}
+ * repeated ThreadMessage data = 2;
+ * @return {!Array<!proto.yartu.ThreadMessage>}
  */
-proto.yartu.SendThreadMessageResponse.prototype.getData = function() {
-  return /** @type{?proto.yartu.ThreadMessage} */ (
-    jspb.Message.getWrapperField(this, proto.yartu.ThreadMessage, 2));
+proto.yartu.SendThreadMessageResponse.prototype.getDataList = function() {
+  return /** @type{!Array<!proto.yartu.ThreadMessage>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.yartu.ThreadMessage, 2));
 };
 
 
 /**
- * @param {?proto.yartu.ThreadMessage|undefined} value
+ * @param {!Array<!proto.yartu.ThreadMessage>} value
  * @return {!proto.yartu.SendThreadMessageResponse} returns this
 */
-proto.yartu.SendThreadMessageResponse.prototype.setData = function(value) {
-  return jspb.Message.setWrapperField(this, 2, value);
+proto.yartu.SendThreadMessageResponse.prototype.setDataList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 2, value);
 };
 
 
 /**
- * Clears the message field making it undefined.
+ * @param {!proto.yartu.ThreadMessage=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.yartu.ThreadMessage}
+ */
+proto.yartu.SendThreadMessageResponse.prototype.addData = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.yartu.ThreadMessage, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
  * @return {!proto.yartu.SendThreadMessageResponse} returns this
  */
-proto.yartu.SendThreadMessageResponse.prototype.clearData = function() {
-  return this.setData(undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {boolean}
- */
-proto.yartu.SendThreadMessageResponse.prototype.hasData = function() {
-  return jspb.Message.getField(this, 2) != null;
+proto.yartu.SendThreadMessageResponse.prototype.clearDataList = function() {
+  return this.setDataList([]);
 };
 
 
