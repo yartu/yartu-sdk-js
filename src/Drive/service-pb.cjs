@@ -13584,8 +13584,9 @@ proto.yartu.GetOfficeFileResponse.toObject = function(includeInstance, msg) {
     file: (f = msg.getFile()) && proto.yartu.Dirent.toObject(includeInstance, f),
     fileType: jspb.Message.getFieldWithDefault(msg, 3, ""),
     officeToken: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    accessToken: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    message: jspb.Message.getFieldWithDefault(msg, 6, "")
+    fileToken: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    jwtToken: jspb.Message.getFieldWithDefault(msg, 6, ""),
+    message: jspb.Message.getFieldWithDefault(msg, 7, "")
   };
 
   if (includeInstance) {
@@ -13641,9 +13642,13 @@ proto.yartu.GetOfficeFileResponse.deserializeBinaryFromReader = function(msg, re
       break;
     case 5:
       var value = /** @type {string} */ (reader.readString());
-      msg.setAccessToken(value);
+      msg.setFileToken(value);
       break;
     case 6:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setJwtToken(value);
+      break;
+    case 7:
       var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
@@ -13705,17 +13710,24 @@ proto.yartu.GetOfficeFileResponse.serializeBinaryToWriter = function(message, wr
       f
     );
   }
-  f = message.getAccessToken();
+  f = message.getFileToken();
   if (f.length > 0) {
     writer.writeString(
       5,
       f
     );
   }
-  f = /** @type {string} */ (jspb.Message.getField(message, 6));
-  if (f != null) {
+  f = message.getJwtToken();
+  if (f.length > 0) {
     writer.writeString(
       6,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 7));
+  if (f != null) {
+    writer.writeString(
+      7,
       f
     );
   }
@@ -13814,10 +13826,10 @@ proto.yartu.GetOfficeFileResponse.prototype.setOfficeToken = function(value) {
 
 
 /**
- * optional string access_token = 5;
+ * optional string file_token = 5;
  * @return {string}
  */
-proto.yartu.GetOfficeFileResponse.prototype.getAccessToken = function() {
+proto.yartu.GetOfficeFileResponse.prototype.getFileToken = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
 };
 
@@ -13826,16 +13838,16 @@ proto.yartu.GetOfficeFileResponse.prototype.getAccessToken = function() {
  * @param {string} value
  * @return {!proto.yartu.GetOfficeFileResponse} returns this
  */
-proto.yartu.GetOfficeFileResponse.prototype.setAccessToken = function(value) {
+proto.yartu.GetOfficeFileResponse.prototype.setFileToken = function(value) {
   return jspb.Message.setProto3StringField(this, 5, value);
 };
 
 
 /**
- * optional string message = 6;
+ * optional string jwt_token = 6;
  * @return {string}
  */
-proto.yartu.GetOfficeFileResponse.prototype.getMessage = function() {
+proto.yartu.GetOfficeFileResponse.prototype.getJwtToken = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
 };
 
@@ -13844,8 +13856,26 @@ proto.yartu.GetOfficeFileResponse.prototype.getMessage = function() {
  * @param {string} value
  * @return {!proto.yartu.GetOfficeFileResponse} returns this
  */
+proto.yartu.GetOfficeFileResponse.prototype.setJwtToken = function(value) {
+  return jspb.Message.setProto3StringField(this, 6, value);
+};
+
+
+/**
+ * optional string message = 7;
+ * @return {string}
+ */
+proto.yartu.GetOfficeFileResponse.prototype.getMessage = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.GetOfficeFileResponse} returns this
+ */
 proto.yartu.GetOfficeFileResponse.prototype.setMessage = function(value) {
-  return jspb.Message.setField(this, 6, value);
+  return jspb.Message.setField(this, 7, value);
 };
 
 
@@ -13854,7 +13884,7 @@ proto.yartu.GetOfficeFileResponse.prototype.setMessage = function(value) {
  * @return {!proto.yartu.GetOfficeFileResponse} returns this
  */
 proto.yartu.GetOfficeFileResponse.prototype.clearMessage = function() {
-  return jspb.Message.setField(this, 6, undefined);
+  return jspb.Message.setField(this, 7, undefined);
 };
 
 
@@ -13863,7 +13893,7 @@ proto.yartu.GetOfficeFileResponse.prototype.clearMessage = function() {
  * @return {boolean}
  */
 proto.yartu.GetOfficeFileResponse.prototype.hasMessage = function() {
-  return jspb.Message.getField(this, 6) != null;
+  return jspb.Message.getField(this, 7) != null;
 };
 
 
