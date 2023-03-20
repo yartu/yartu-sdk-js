@@ -3,6 +3,7 @@ import {
   CardLabel,
 
   GetProjectHomeRequest,
+  GetMyTaskRequest,
   GetProjectorOrBoardUserListRequest,
   GetProjectFilesRequest,
 
@@ -140,6 +141,40 @@ export default (config) =>
         });
       });
     }
+
+    getMyTask() {
+      return new Promise((resolve, reject) => {
+        const request = new GetMyTaskRequest();
+
+        this.client.getMyTask(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            const recentlyAssignedList = response.getRecentlyAssignedList().map((d) => d.toObject());
+            const doTodayList = response.getDoTodayList().map((d) => d.toObject());
+            const overdueList = response.getOverdueList().map((d) => d.toObject());
+            const upcomingDeadlineList = response.getUpcomingDeadlineList().map((d) => d.toObject());
+            if (code == 0) {
+              resolve({
+                code,
+                recentlyAssignedList,
+                doTodayList,
+                overdueList,
+                upcomingDeadlineList,
+                message: response.getMessage()
+              })
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
 
     listProject(getAll = false, getArchived = false, starred = false, query = {}) {
 
