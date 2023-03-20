@@ -599,11 +599,11 @@ export default (config) =>
       });
     }
 
-    interactThreadMessage(threadUUID, messageUUID, emoji) {
+    interactThreadMessage(threadUUID, messageID, emoji) {
       return new Promise((resolve, reject) => {
         const request = new InteractThreadMessageRequest();
         request.setThreadUuid(threadUUID);
-        request.setMessageUuid(messageUUID);
+        request.setId(messageID);
         request.setEmoji(emoji);
         this.client.interactThreadMessage(
           request,

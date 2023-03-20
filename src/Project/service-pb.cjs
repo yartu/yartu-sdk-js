@@ -8924,7 +8924,8 @@ proto.yartu.MessageInteraction.prototype.toObject = function(opt_includeInstance
 proto.yartu.MessageInteraction.toObject = function(includeInstance, msg) {
   var f, obj = {
     emoji: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    count: jspb.Message.getFieldWithDefault(msg, 2, 0)
+    count: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    isInteracted: jspb.Message.getBooleanFieldWithDefault(msg, 3, false)
   };
 
   if (includeInstance) {
@@ -8969,6 +8970,10 @@ proto.yartu.MessageInteraction.deserializeBinaryFromReader = function(msg, reade
       var value = /** @type {number} */ (reader.readInt64());
       msg.setCount(value);
       break;
+    case 3:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setIsInteracted(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -9012,6 +9017,13 @@ proto.yartu.MessageInteraction.serializeBinaryToWriter = function(message, write
       f
     );
   }
+  f = message.getIsInteracted();
+  if (f) {
+    writer.writeBool(
+      3,
+      f
+    );
+  }
 };
 
 
@@ -9048,6 +9060,24 @@ proto.yartu.MessageInteraction.prototype.getCount = function() {
  */
 proto.yartu.MessageInteraction.prototype.setCount = function(value) {
   return jspb.Message.setProto3IntField(this, 2, value);
+};
+
+
+/**
+ * optional bool is_interacted = 3;
+ * @return {boolean}
+ */
+proto.yartu.MessageInteraction.prototype.getIsInteracted = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 3, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.yartu.MessageInteraction} returns this
+ */
+proto.yartu.MessageInteraction.prototype.setIsInteracted = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 3, value);
 };
 
 
@@ -16198,8 +16228,8 @@ proto.yartu.InteractThreadMessageRequest.prototype.toObject = function(opt_inclu
  */
 proto.yartu.InteractThreadMessageRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    threadUuid: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    messageUuid: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    threadUuid: jspb.Message.getFieldWithDefault(msg, 2, ""),
     emoji: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
 
@@ -16238,12 +16268,12 @@ proto.yartu.InteractThreadMessageRequest.deserializeBinaryFromReader = function(
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setThreadUuid(value);
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setId(value);
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setMessageUuid(value);
+      msg.setThreadUuid(value);
       break;
     case 3:
       var value = /** @type {number} */ (reader.readInt64());
@@ -16278,14 +16308,14 @@ proto.yartu.InteractThreadMessageRequest.prototype.serializeBinary = function() 
  */
 proto.yartu.InteractThreadMessageRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getThreadUuid();
-  if (f.length > 0) {
-    writer.writeString(
+  f = message.getId();
+  if (f !== 0) {
+    writer.writeInt64(
       1,
       f
     );
   }
-  f = message.getMessageUuid();
+  f = message.getThreadUuid();
   if (f.length > 0) {
     writer.writeString(
       2,
@@ -16303,28 +16333,28 @@ proto.yartu.InteractThreadMessageRequest.serializeBinaryToWriter = function(mess
 
 
 /**
- * optional string thread_uuid = 1;
+ * optional int64 id = 1;
+ * @return {number}
+ */
+proto.yartu.InteractThreadMessageRequest.prototype.getId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu.InteractThreadMessageRequest} returns this
+ */
+proto.yartu.InteractThreadMessageRequest.prototype.setId = function(value) {
+  return jspb.Message.setProto3IntField(this, 1, value);
+};
+
+
+/**
+ * optional string thread_uuid = 2;
  * @return {string}
  */
 proto.yartu.InteractThreadMessageRequest.prototype.getThreadUuid = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.yartu.InteractThreadMessageRequest} returns this
- */
-proto.yartu.InteractThreadMessageRequest.prototype.setThreadUuid = function(value) {
-  return jspb.Message.setProto3StringField(this, 1, value);
-};
-
-
-/**
- * optional string message_uuid = 2;
- * @return {string}
- */
-proto.yartu.InteractThreadMessageRequest.prototype.getMessageUuid = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -16333,7 +16363,7 @@ proto.yartu.InteractThreadMessageRequest.prototype.getMessageUuid = function() {
  * @param {string} value
  * @return {!proto.yartu.InteractThreadMessageRequest} returns this
  */
-proto.yartu.InteractThreadMessageRequest.prototype.setMessageUuid = function(value) {
+proto.yartu.InteractThreadMessageRequest.prototype.setThreadUuid = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
@@ -16470,8 +16500,8 @@ proto.yartu.InteractThreadMessageResponse.serializeBinaryToWriter = function(mes
       f
     );
   }
-  f = /** @type {string} */ (jspb.Message.getField(message, 2));
-  if (f != null) {
+  f = message.getMessage();
+  if (f.length > 0) {
     writer.writeString(
       2,
       f
@@ -16512,25 +16542,7 @@ proto.yartu.InteractThreadMessageResponse.prototype.getMessage = function() {
  * @return {!proto.yartu.InteractThreadMessageResponse} returns this
  */
 proto.yartu.InteractThreadMessageResponse.prototype.setMessage = function(value) {
-  return jspb.Message.setField(this, 2, value);
-};
-
-
-/**
- * Clears the field making it undefined.
- * @return {!proto.yartu.InteractThreadMessageResponse} returns this
- */
-proto.yartu.InteractThreadMessageResponse.prototype.clearMessage = function() {
-  return jspb.Message.setField(this, 2, undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {boolean}
- */
-proto.yartu.InteractThreadMessageResponse.prototype.hasMessage = function() {
-  return jspb.Message.getField(this, 2) != null;
+  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
