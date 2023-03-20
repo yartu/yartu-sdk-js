@@ -2161,7 +2161,7 @@ proto.yartu.SearchResponse.toObject = function(includeInstance, msg) {
     code: jspb.Message.getFieldWithDefault(msg, 1, 0),
     dataList: jspb.Message.toObjectList(msg.getDataList(),
     proto.yartu.SearchResult.toObject, includeInstance),
-    pagination: (f = msg.getPagination()) && common_grpc_definitions_pb.PaginationMeta.toObject(includeInstance, f),
+    paginationMap: (f = msg.getPaginationMap()) ? f.toObject(includeInstance, proto.PaginationMeta.toObject) : [],
     message: jspb.Message.getFieldWithDefault(msg, 4, "")
   };
 
@@ -2209,9 +2209,10 @@ proto.yartu.SearchResponse.deserializeBinaryFromReader = function(msg, reader) {
       msg.addData(value);
       break;
     case 3:
-      var value = new common_grpc_definitions_pb.PaginationMeta;
-      reader.readMessage(value,common_grpc_definitions_pb.PaginationMeta.deserializeBinaryFromReader);
-      msg.setPagination(value);
+      var value = msg.getPaginationMap();
+      reader.readMessage(value, function(message, reader) {
+        jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readMessage, proto.PaginationMeta.deserializeBinaryFromReader, "", new proto.PaginationMeta());
+         });
       break;
     case 4:
       var value = /** @type {string} */ (reader.readString());
@@ -2261,13 +2262,9 @@ proto.yartu.SearchResponse.serializeBinaryToWriter = function(message, writer) {
       proto.yartu.SearchResult.serializeBinaryToWriter
     );
   }
-  f = message.getPagination();
-  if (f != null) {
-    writer.writeMessage(
-      3,
-      f,
-      common_grpc_definitions_pb.PaginationMeta.serializeBinaryToWriter
-    );
+  f = message.getPaginationMap(true);
+  if (f && f.getLength() > 0) {
+    f.serializeBinary(3, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeMessage, proto.PaginationMeta.serializeBinaryToWriter);
   }
   f = /** @type {string} */ (jspb.Message.getField(message, 4));
   if (f != null) {
@@ -2336,39 +2333,25 @@ proto.yartu.SearchResponse.prototype.clearDataList = function() {
 
 
 /**
- * optional PaginationMeta pagination = 3;
- * @return {?proto.PaginationMeta}
+ * map<string, PaginationMeta> pagination = 3;
+ * @param {boolean=} opt_noLazyCreate Do not create the map if
+ * empty, instead returning `undefined`
+ * @return {!jspb.Map<string,!proto.PaginationMeta>}
  */
-proto.yartu.SearchResponse.prototype.getPagination = function() {
-  return /** @type{?proto.PaginationMeta} */ (
-    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.PaginationMeta, 3));
+proto.yartu.SearchResponse.prototype.getPaginationMap = function(opt_noLazyCreate) {
+  return /** @type {!jspb.Map<string,!proto.PaginationMeta>} */ (
+      jspb.Message.getMapField(this, 3, opt_noLazyCreate,
+      proto.PaginationMeta));
 };
 
 
 /**
- * @param {?proto.PaginationMeta|undefined} value
- * @return {!proto.yartu.SearchResponse} returns this
-*/
-proto.yartu.SearchResponse.prototype.setPagination = function(value) {
-  return jspb.Message.setWrapperField(this, 3, value);
-};
-
-
-/**
- * Clears the message field making it undefined.
+ * Clears values from the map. The map will be non-null.
  * @return {!proto.yartu.SearchResponse} returns this
  */
-proto.yartu.SearchResponse.prototype.clearPagination = function() {
-  return this.setPagination(undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {boolean}
- */
-proto.yartu.SearchResponse.prototype.hasPagination = function() {
-  return jspb.Message.getField(this, 3) != null;
+proto.yartu.SearchResponse.prototype.clearPaginationMap = function() {
+  this.getPaginationMap().clear();
+  return this;
 };
 
 
