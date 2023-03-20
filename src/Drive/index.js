@@ -517,14 +517,16 @@ export default (config) =>
               const file = response.getFile().toObject();
               const fileType = response.getFileType();
               const officeToken = response.getOfficeToken();
-              const accessToken = response.getAccessToken();
+              const fileToken = response.getFileToken();
+              const jwtToken = response.getJwtToken();
 
               resolve({
                 code: code,
                 file,
                 fileType,
                 officeToken,
-                accessToken
+                fileToken,
+                jwtToken
               });
             } else {
               reject({
