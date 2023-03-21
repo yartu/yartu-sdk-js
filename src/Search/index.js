@@ -1,14 +1,3 @@
-import jwt_decode from 'jwt-decode';
-
-import {
-  code_AUTH_TWO_FA_FORCE,
-  code_AUTH_TWO_FA_NEEDED,
-  status_AUTH_NEEDED,
-  status_AUTH_OK,
-  status_AUTH_TWO_FA_NEEDED,
-  status_AUTH_TWO_FA_FORCE
-} from '../utils/codes';
-
 import { Query } from '../utils/definitions_pb.cjs';
 
 import {
@@ -31,7 +20,7 @@ export default (config) =>
       this.client = new YSearchClient(this.endpoint, '', '');
       const yartu_token = window.localStorage.getItem('yartu-token');
       this.metadata = { Authentication: yartu_token };
-      this.activeSearch = null
+      this.activeSearch = null;
     }
 
     searchShareablePeople = (search, type_list, query = {}) => {
@@ -75,7 +64,6 @@ export default (config) =>
     };
 
     search = (query = {}, filters = []) => {
-
       if (this.activeSearch) {
         this.activeSearch.cancel();
       }
@@ -85,16 +73,16 @@ export default (config) =>
         const queryRequest = new Query();
 
         if (query.app !== 'all') {
-          request.setAppList([query.app])
+          request.setAppList([query.app]);
         }
 
         for (const filter of filters) {
           const searchFilter = new SearchFilter();
           searchFilter.setSelector(filter.selector);
           searchFilter.addValue(filter.value);
-          request.addFilter(searchFilter)
+          request.addFilter(searchFilter);
         }
-        
+
         queryRequest.setQuery(query.query);
         request.setQuery(queryRequest);
 
@@ -108,12 +96,14 @@ export default (config) =>
               const code = response.getCode();
 
               if (code == 0) {
-                const results = response.getDataList().map((data) => data.toObject());
-                const pagination = response.getPagination(); // TODO::
+                const results = response
+                  .getDataList()
+                  .map((data) => data.toObject());
+                const pagination = {}; // response.getPagination(); // TODO::
                 resolve({
                   message: response.getMessage(),
                   results,
-                  pagination: {},
+                  pagination: {}
                 });
               } else {
                 reject({
@@ -124,8 +114,6 @@ export default (config) =>
             }
           }
         );
-
       });
     };
-
   };
