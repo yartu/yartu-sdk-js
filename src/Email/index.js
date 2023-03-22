@@ -14,7 +14,9 @@ import {
   EmptyFolderRequest,
   BulkActionFolderRequest,
   GetInfoRequest,
-  MailAddress
+  MailAddress,
+  SearchFilter,
+  SearchRequest
 } from './service-pb.cjs';
 import { YEmailClient } from './service-grpc-web-pb.cjs';
 import { handleError } from '../utils/helper';
@@ -543,4 +545,58 @@ export default (config) =>
         });
       });
     }
+
+    search = (query = {}, filters = []) => {
+      if (this.activeSearch) {
+        this.activeSearch.cancel();
+      }
+
+      return new Promise((resolve, reject) => {
+        const request = new SearchRequest();
+        const queryRequest = new Query();
+
+        if (query.app !== 'all') {
+          request.setAppList([query.app]);
+        }
+
+        for (const filter of filters) {
+          const searchFilter = new SearchFilter();
+          searchFilter.setSelector(filter.selector);
+          searchFilter.addValue(filter.value);
+          request.addFilter(searchFilter);
+        }
+
+        queryRequest.setQuery(query.query);
+        request.setQuery(queryRequest);
+
+        this.activeSearch = this.client.search(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+
+              if (code == 0) {
+                const results = response
+                  .getDataList()
+                  .map((data) => data.toObject());
+                const pagination = {};
+                resolve({
+                  message: response.getMessage(),
+                  results,
+                  pagination: {}
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    };
   };
