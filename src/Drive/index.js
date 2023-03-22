@@ -571,4 +571,4 @@ export default (config) =>
         });
       });
     };
- };
+  };

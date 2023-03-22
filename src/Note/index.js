@@ -620,8 +620,6 @@ export default (config) =>
     listNoteLabel = () => {
       return new Promise((resolve, reject) => {
         const request = new ListNoteLabelRequest();
-        console.log('listNoteLabel SDK');
-
         this.client.listNoteLabel(
           request,
           this.metadata,
@@ -792,8 +790,6 @@ export default (config) =>
       return new Promise((resolve, reject) => {
         const request = new ArchiveNoteRequest();
 
-        console.log('archiveData:', archiveData);
-
         request.setNoteIdList(archiveData.idList);
         request.setIsArchived(archiveData.isArchived);
 
@@ -825,8 +821,6 @@ export default (config) =>
     convertNote = (convertData) => {
       return new Promise((resolve, reject) => {
         const request = new ConvertNoteRequest();
-
-        console.log('.... CONVERT', convertData);
 
         request.setId(convertData.id);
         request.setTo(convertData.to);

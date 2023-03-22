@@ -1371,11 +1371,7 @@ export default (config) =>
 
         request.setCardUuid(cardUuid);
 
-        console.log('SDK', cardUuid);
-        console.log('SDK', users);
-
         for (const user of users) {
-          console.log('SDK USER', user);
           const modifyRequest = new UserModifyMeta();
           modifyRequest.setId(user.id);
           modifyRequest.setOperation(user.operation);
@@ -1411,8 +1407,6 @@ export default (config) =>
     addCommentToCard(commentData = {}) {
       return new Promise((resolve, reject) => {
         const request = new AddCommentToCardRequest();
-
-        console.log('RQ', commentData);
 
         request.setId(commentData.id);
         request.setUuid(commentData.uuid);
@@ -1945,8 +1939,6 @@ export default (config) =>
     upsertColumn(columnData) {
       return new Promise((resolve, reject) => {
         const request = new UpsertColumnRequest();
-
-        console.log('COLUMN DATA SDK', columnData);
 
         request.setId(columnData.id);
         request.setBoardId(columnData.boardId);

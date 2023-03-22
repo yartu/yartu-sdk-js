@@ -62,8 +62,6 @@ export default (config) =>
       return new Promise((resolve, reject) => {
         const request = new UpsertNotificationRequest();
 
-        console.log('IN SDK', notification);
-
         request.setUuid(notification.uuid);
         request.setIsDelivered(notification.isDelivered);
         request.setIsRead(notification.isRead);

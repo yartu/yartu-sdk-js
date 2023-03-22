@@ -72,8 +72,6 @@ export default (config) =>
 
         const request = new GetConferenceRequest();
         request.setUuid(conferenceUuid);
-        console.log('conferenceUuid', conferenceUuid);
-
         this.client.getConference(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
@@ -212,21 +210,19 @@ export default (config) =>
     shareConference(sharedData) {
       return new Promise((resolve, reject) => {
 
-        console.log('IN SDK', sharedData);
-
         const request = new ShareConferenceRequest();
         request.setUuid(sharedData.uuid);
 
         const participantsList = [];
         for (const participant of sharedData.participantsList) {
-          console.log('ITEM-participant', participant);
+          // console.log('participant:', participant);
           const sessionParticipant = new SessionParticipant();
           sessionParticipant.setUsername(participant.username);
           sessionParticipant.setParticipantType(1);
           sessionParticipant.setIsGroup(participant.isGroup);
           participantsList.push(sessionParticipant);
         }
-        console.log('****', participantsList);
+        // console.log('shareConference:participantsList:', participantsList);
         request.setParticipantListList(participantsList);
 
         this.client.shareConference(request, this.metadata, (error, response) => {
@@ -293,7 +289,7 @@ export default (config) =>
       return new Promise((resolve, reject) => {
         const request = new UpsertConferenceRequest();
 
-        console.log('....conferenceData', conferenceData);
+        // console.log('upsertConference:conferenceData:', conferenceData);
 
         request.setId(conferenceData.id);
         request.setName(conferenceData.name);
