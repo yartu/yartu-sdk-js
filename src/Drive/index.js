@@ -13,11 +13,18 @@ import {
   DownloadFileRequest,
   GetOfficeFileRequest,
   GetDirentRequest,
-  UpsertDirentRequest
+  UpsertDirentRequest,
+
+  ListShareRequest,
+  ShareRequest,
+  UnshareRequest,
+  DeleteShareRequest,
+
 } from './service-pb.cjs';
 
 import { YDriveClient } from './service-grpc-web-pb.cjs';
 import { handleError } from '../utils/helper';
+import { Group, Shared, User } from "../utils/definitions_pb.cjs";
 
 export default (config) =>
   class Drive {
@@ -570,5 +577,157 @@ export default (config) =>
           }
         });
       });
+    };
+
+    listShare = (repoId, path) => {
+      return new Promise((resolve, reject) => {
+        const request = new ListShareRequest();
+        request.setRepoId(repoId);
+        request.setPath(path);
+
+        this.client.listShare(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              const data = response.getDataList().map((data) => data.toObject());
+              resolve({
+                code: code,
+                data: data,
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
+    share = (repoId, path, description, shareList) => {
+      return new Promise((resolve, reject) => {
+        const request = new ShareRequest();
+        request.setRepoId(repoId);
+        request.setPath(path);
+        request.setDescription(description);
+
+        const sharedList = [];
+        shareList.forEach(s => {
+          const shared = new Shared();
+          shared.setId(s.shared_id);
+
+          // TODO :: set Permission map text ??
+          shared.setPermission(s.permission);
+
+          if (s?.isYartuUser) {
+            const user = new User();
+            user.setId(s.id);
+            user.setUsername(s.email);
+            user.setName(s.name);
+            user.setSurname(s.surname);
+
+            shared.setUser(user);
+
+          } else if (s?.isGroup) {
+
+            const group = new Group();
+            group.setId(s.id);
+            group.setName(s.name);
+            group.setEmailAlias(s.email);
+
+            shared.setGroup(group);
+          } else {
+            console.log('@yartu/sdk/ shareNotebook method not supports external users and Realm share features for now!');
+          }
+
+          sharedList.push(shared);
+        });
+
+        request.setSharedList(sharedList);
+
+        this.client.share(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code: 0,
+                // success: response.getSuccessList().map((data) => data.toObject()),
+                // error: response.getErrorList().map((data) => data.toObject()),
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
+    unshare = (repoId, path) => {
+      return new Promise((resolve, reject) => {
+        const request = new UnshareRequest();
+        request.setRepoId(repoId);
+        request.setPath(path);
+
+        this.client.unshare(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code: 0,
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
+    deleteShare = (repoId, path) => {
+      return new Promise((resolve, reject) => {
+        const request = new DeleteShareRequest();
+        request.setRepoId(repoId);
+        request.setPath(path);
+
+        this.client.deleteShare(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code: 0,
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+
     };
   };
