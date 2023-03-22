@@ -72,7 +72,7 @@ export default (config) =>
         queryData.setPerPage(pagination.perPage || 20);
 
         if (filter.sortBy) {
-          queryData.setSortby(filter.sortBy || ''); // from, size, revieved_at,
+          queryData.setSortBy(filter.sortBy || ''); // from, size, revieved_at,
         }
 
         request.setQuery(queryData);
