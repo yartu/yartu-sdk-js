@@ -8707,7 +8707,8 @@ proto.yartu_mail.UploadAttachmentRequest.prototype.toObject = function(opt_inclu
  */
 proto.yartu_mail.UploadAttachmentRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, "")
+    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    type: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -8748,6 +8749,10 @@ proto.yartu_mail.UploadAttachmentRequest.deserializeBinaryFromReader = function(
       var value = /** @type {string} */ (reader.readString());
       msg.setName(value);
       break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setType(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -8784,6 +8789,13 @@ proto.yartu_mail.UploadAttachmentRequest.serializeBinaryToWriter = function(mess
       f
     );
   }
+  f = message.getType();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
 };
 
 
@@ -8802,6 +8814,24 @@ proto.yartu_mail.UploadAttachmentRequest.prototype.getName = function() {
  */
 proto.yartu_mail.UploadAttachmentRequest.prototype.setName = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional string type = 2;
+ * @return {string}
+ */
+proto.yartu_mail.UploadAttachmentRequest.prototype.getType = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu_mail.UploadAttachmentRequest} returns this
+ */
+proto.yartu_mail.UploadAttachmentRequest.prototype.setType = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
