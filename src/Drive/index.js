@@ -138,7 +138,7 @@ export default (config) =>
       return new Promise((resolve, reject) => {
         const request = new UpsertRepoRequest();
         if (repoId) {
-          request.setRepoId(repoId);
+          request.setId(repoId);
         } else {
           request.setIsNew(true);
         }
