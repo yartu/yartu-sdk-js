@@ -18814,7 +18814,8 @@ proto.yartu.UpsertBoardRequest.toObject = function(includeInstance, msg) {
     color: jspb.Message.getFieldWithDefault(msg, 4, ""),
     description: jspb.Message.getFieldWithDefault(msg, 5, ""),
     templateUuid: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    memberList: (f = jspb.Message.getRepeatedField(msg, 7)) == null ? undefined : f,
+    sharedList: jspb.Message.toObjectList(msg.getSharedList(),
+    common_grpc_definitions_pb.Shared.toObject, includeInstance),
     permission: jspb.Message.getFieldWithDefault(msg, 8, "")
   };
 
@@ -18877,8 +18878,9 @@ proto.yartu.UpsertBoardRequest.deserializeBinaryFromReader = function(msg, reade
       msg.setTemplateUuid(value);
       break;
     case 7:
-      var value = /** @type {string} */ (reader.readString());
-      msg.addMember(value);
+      var value = new common_grpc_definitions_pb.Shared;
+      reader.readMessage(value,common_grpc_definitions_pb.Shared.deserializeBinaryFromReader);
+      msg.addShared(value);
       break;
     case 8:
       var value = /** @type {string} */ (reader.readString());
@@ -18955,11 +18957,12 @@ proto.yartu.UpsertBoardRequest.serializeBinaryToWriter = function(message, write
       f
     );
   }
-  f = message.getMemberList();
+  f = message.getSharedList();
   if (f.length > 0) {
-    writer.writeRepeatedString(
+    writer.writeRepeatedMessage(
       7,
-      f
+      f,
+      common_grpc_definitions_pb.Shared.serializeBinaryToWriter
     );
   }
   f = message.getPermission();
@@ -19081,30 +19084,31 @@ proto.yartu.UpsertBoardRequest.prototype.setTemplateUuid = function(value) {
 
 
 /**
- * repeated string member = 7;
- * @return {!Array<string>}
+ * repeated Shared shared = 7;
+ * @return {!Array<!proto.Shared>}
  */
-proto.yartu.UpsertBoardRequest.prototype.getMemberList = function() {
-  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 7));
+proto.yartu.UpsertBoardRequest.prototype.getSharedList = function() {
+  return /** @type{!Array<!proto.Shared>} */ (
+    jspb.Message.getRepeatedWrapperField(this, common_grpc_definitions_pb.Shared, 7));
 };
 
 
 /**
- * @param {!Array<string>} value
+ * @param {!Array<!proto.Shared>} value
  * @return {!proto.yartu.UpsertBoardRequest} returns this
- */
-proto.yartu.UpsertBoardRequest.prototype.setMemberList = function(value) {
-  return jspb.Message.setField(this, 7, value || []);
+*/
+proto.yartu.UpsertBoardRequest.prototype.setSharedList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 7, value);
 };
 
 
 /**
- * @param {string} value
+ * @param {!proto.Shared=} opt_value
  * @param {number=} opt_index
- * @return {!proto.yartu.UpsertBoardRequest} returns this
+ * @return {!proto.Shared}
  */
-proto.yartu.UpsertBoardRequest.prototype.addMember = function(value, opt_index) {
-  return jspb.Message.addToRepeatedField(this, 7, value, opt_index);
+proto.yartu.UpsertBoardRequest.prototype.addShared = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 7, opt_value, proto.Shared, opt_index);
 };
 
 
@@ -19112,8 +19116,8 @@ proto.yartu.UpsertBoardRequest.prototype.addMember = function(value, opt_index) 
  * Clears the list making it empty but non-null.
  * @return {!proto.yartu.UpsertBoardRequest} returns this
  */
-proto.yartu.UpsertBoardRequest.prototype.clearMemberList = function() {
-  return this.setMemberList([]);
+proto.yartu.UpsertBoardRequest.prototype.clearSharedList = function() {
+  return this.setSharedList([]);
 };
 
 

@@ -175,7 +175,6 @@ export default (config) =>
       });
     }
 
-
     listProject(getAll = false, getArchived = false, starred = false, query = {}) {
 
       return new Promise((resolve, reject) => {
@@ -693,7 +692,6 @@ export default (config) =>
       });
     }
 
-
     listBoard(project_uuid) {
       return new Promise((resolve, reject) => {
         const request = new ListBoardRequest();
@@ -816,6 +814,41 @@ export default (config) =>
         if (boardData.template) {
           request.setTemplateUuid(boardData.template.uuid);
         }
+
+        if (!boardData.uuid) {
+          const ShareList = [];
+          boardData.sharedList.forEach(s => {
+            const shared = new Shared();
+            // shared.setId(s.shared_id); // because we not update shared data
+            shared.setPermission(String(s.permission.value));
+            if (s?.isYartuUser) {
+              const user = new User();
+              user.setId(s.id);
+              user.setUsername(s.email);
+              user.setName(s.name);
+              user.setSurname(s.surname);
+
+              shared.setUser(user);
+
+            } else if (s?.isGroup) {
+
+              const group = new Group();
+              group.setId(s.id);
+              group.setName(s.name);
+              group.setEmailAlias(s.email);
+
+              shared.setGroup(group);
+
+            } else {
+              console.log('@yartu/sdk/ shareBoard method not supports external users and Realm share features for now!');
+            }
+
+            ShareList.push(shared);
+          });
+
+          request.setSharedList(ShareList);
+        }
+
 
         // request.setName(member);
         // request.setPermission(permission);
