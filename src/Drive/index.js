@@ -14,17 +14,16 @@ import {
   GetOfficeFileRequest,
   GetDirentRequest,
   UpsertDirentRequest,
-
+  // share requests
   ListShareRequest,
   ShareRequest,
   UnshareRequest,
-  DeleteShareRequest,
-
+  DeleteShareRequest
 } from './service-pb.cjs';
 
 import { YDriveClient } from './service-grpc-web-pb.cjs';
 import { handleError } from '../utils/helper';
-import { Group, Shared, User } from "../utils/definitions_pb.cjs";
+import { Group, Shared, User } from '../utils/definitions_pb.cjs';
 
 export default (config) =>
   class Drive {
@@ -591,7 +590,10 @@ export default (config) =>
             const code = response.getCode();
 
             if (code == 0) {
-              const data = response.getDataList().map((data) => data.toObject());
+              const data = response
+                .getDataList()
+                .map((data) => data.toObject());
+
               resolve({
                 code: code,
                 data: data,
@@ -616,7 +618,7 @@ export default (config) =>
         request.setDescription(description);
 
         const sharedList = [];
-        shareList.forEach(s => {
+        for (const s of shareList) {
           const shared = new Shared();
           shared.setId(s.shared_id);
 
@@ -631,9 +633,7 @@ export default (config) =>
             user.setSurname(s.surname);
 
             shared.setUser(user);
-
           } else if (s?.isGroup) {
-
             const group = new Group();
             group.setId(s.id);
             group.setName(s.name);
@@ -641,11 +641,13 @@ export default (config) =>
 
             shared.setGroup(group);
           } else {
-            console.log('@yartu/sdk/ shareNotebook method not supports external users and Realm share features for now!');
+            console.log(
+              '@yartu/sdk/ shareNotebook method not supports external users and Realm share features for now!'
+            );
           }
 
           sharedList.push(shared);
-        });
+        }
 
         request.setSharedList(sharedList);
 
@@ -727,6 +729,5 @@ export default (config) =>
           }
         });
       });
-
     };
   };
