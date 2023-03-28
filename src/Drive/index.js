@@ -46,22 +46,21 @@ export default (config) =>
             const code = response.getCode();
 
             if (code == 0) {
-              const viewedList = response
-                .getViewedList()
-                .map((data) => data.toObject());
-              const updatedList = response
-                .getUpdatedList()
-                .map((data) => data.toObject());
-              const starredList = response
-                .getStarredList().map((data) => {
-                  const l = data.toObject();
-                  if (l.type === 'file') {
-                    l.path = `${l.parentDir}/${l.name}`;
-                  } else {
-                    l.path = l.parentDir;
-                  }
-                  return l;
-                });
+              const viewedList = response.getViewedList().map((data) => {
+                const l = data.toObject();
+                l.path = `${l.parentDir}/${l.name}`;
+                return l;
+              });
+              const updatedList = response.getUpdatedList().map((data) => {
+                const l = data.toObject();
+                l.path = `${l.parentDir}/${l.name}`;
+                return l;
+              });
+              const starredList = response.getStarredList().map((data) => {
+                const l = data.toObject();
+                l.path = l.type === 'file' ? `${l.parentDir}/${l.name}` : l.parentDir;
+                return l;
+              });
               resolve({
                 viewed: viewedList,
                 updated: updatedList,
@@ -559,7 +558,7 @@ export default (config) =>
               resolve({
                 code: code,
                 token,
-                ...dirent,
+                ...dirent
               });
             } else {
               reject({
