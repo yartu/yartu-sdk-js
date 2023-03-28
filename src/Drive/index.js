@@ -365,7 +365,7 @@ export default (config) =>
                 let dirent = {};
                 if (operation !== 'delete') {
                   dirent = response.getData().toObject();
-                  dirent.path = `${dirent.parentDir}${dirent.name}`;
+                  dirent.path = `${dirent.parentDir}/${dirent.name}`;
                 }
 
                 resolve({
