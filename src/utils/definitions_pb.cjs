@@ -4823,7 +4823,8 @@ proto.Shared.toObject = function(includeInstance, msg) {
     realm: (f = msg.getRealm()) && proto.Realm.toObject(includeInstance, f),
     createdAt: jspb.Message.getFieldWithDefault(msg, 5, ""),
     updatedAt: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    permission: jspb.Message.getFieldWithDefault(msg, 7, "")
+    permission: jspb.Message.getFieldWithDefault(msg, 7, ""),
+    type: jspb.Message.getFieldWithDefault(msg, 8, "")
   };
 
   if (includeInstance) {
@@ -4890,6 +4891,10 @@ proto.Shared.deserializeBinaryFromReader = function(msg, reader) {
     case 7:
       var value = /** @type {string} */ (reader.readString());
       msg.setPermission(value);
+      break;
+    case 8:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setType(value);
       break;
     default:
       reader.skipField();
@@ -4969,6 +4974,13 @@ proto.Shared.serializeBinaryToWriter = function(message, writer) {
   if (f != null) {
     writer.writeString(
       7,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 8));
+  if (f != null) {
+    writer.writeString(
+      8,
       f
     );
   }
@@ -5209,6 +5221,42 @@ proto.Shared.prototype.clearPermission = function() {
  */
 proto.Shared.prototype.hasPermission = function() {
   return jspb.Message.getField(this, 7) != null;
+};
+
+
+/**
+ * optional string type = 8;
+ * @return {string}
+ */
+proto.Shared.prototype.getType = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.Shared} returns this
+ */
+proto.Shared.prototype.setType = function(value) {
+  return jspb.Message.setField(this, 8, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.Shared} returns this
+ */
+proto.Shared.prototype.clearType = function() {
+  return jspb.Message.setField(this, 8, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.Shared.prototype.hasType = function() {
+  return jspb.Message.getField(this, 8) != null;
 };
 
 

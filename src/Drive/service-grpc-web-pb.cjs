@@ -1238,122 +1238,244 @@ proto.yartu.YDrivePromiseClient.prototype.getOfficeFile =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
- *   !proto.yartu.GetShareRequest,
- *   !proto.yartu.GetShareResponse>}
+ *   !proto.yartu.ListShareRequest,
+ *   !proto.yartu.ListShareResponse>}
  */
-const methodDescriptor_YDrive_getShare = new grpc.web.MethodDescriptor(
-  '/yartu.YDrive/getShare',
+const methodDescriptor_YDrive_listShare = new grpc.web.MethodDescriptor(
+  '/yartu.YDrive/listShare',
   grpc.web.MethodType.UNARY,
-  proto.yartu.GetShareRequest,
-  proto.yartu.GetShareResponse,
+  proto.yartu.ListShareRequest,
+  proto.yartu.ListShareResponse,
   /**
-   * @param {!proto.yartu.GetShareRequest} request
+   * @param {!proto.yartu.ListShareRequest} request
    * @return {!Uint8Array}
    */
   function(request) {
     return request.serializeBinary();
   },
-  proto.yartu.GetShareResponse.deserializeBinary
+  proto.yartu.ListShareResponse.deserializeBinary
 );
 
 
 /**
- * @param {!proto.yartu.GetShareRequest} request The
+ * @param {!proto.yartu.ListShareRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.RpcError, ?proto.yartu.GetShareResponse)}
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ListShareResponse)}
  *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.yartu.GetShareResponse>|undefined}
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ListShareResponse>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.yartu.YDriveClient.prototype.getShare =
+proto.yartu.YDriveClient.prototype.listShare =
     function(request, metadata, callback) {
   return this.client_.rpcCall(this.hostname_ +
-      '/yartu.YDrive/getShare',
+      '/yartu.YDrive/listShare',
       request,
       metadata || {},
-      methodDescriptor_YDrive_getShare,
+      methodDescriptor_YDrive_listShare,
       callback);
 };
 
 
 /**
- * @param {!proto.yartu.GetShareRequest} request The
+ * @param {!proto.yartu.ListShareRequest} request The
  *     request proto
  * @param {?Object<string, string>=} metadata User defined
  *     call metadata
- * @return {!Promise<!proto.yartu.GetShareResponse>}
+ * @return {!Promise<!proto.yartu.ListShareResponse>}
  *     Promise that resolves to the response
  */
-proto.yartu.YDrivePromiseClient.prototype.getShare =
+proto.yartu.YDrivePromiseClient.prototype.listShare =
     function(request, metadata) {
   return this.client_.unaryCall(this.hostname_ +
-      '/yartu.YDrive/getShare',
+      '/yartu.YDrive/listShare',
       request,
       metadata || {},
-      methodDescriptor_YDrive_getShare);
+      methodDescriptor_YDrive_listShare);
 };
 
 
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
- *   !proto.yartu.UpsertShareRequest,
- *   !proto.yartu.UpsertShareResponse>}
+ *   !proto.yartu.ShareRequest,
+ *   !proto.yartu.ShareResponse>}
  */
-const methodDescriptor_YDrive_upsertShare = new grpc.web.MethodDescriptor(
-  '/yartu.YDrive/upsertShare',
+const methodDescriptor_YDrive_share = new grpc.web.MethodDescriptor(
+  '/yartu.YDrive/share',
   grpc.web.MethodType.UNARY,
-  proto.yartu.UpsertShareRequest,
-  proto.yartu.UpsertShareResponse,
+  proto.yartu.ShareRequest,
+  proto.yartu.ShareResponse,
   /**
-   * @param {!proto.yartu.UpsertShareRequest} request
+   * @param {!proto.yartu.ShareRequest} request
    * @return {!Uint8Array}
    */
   function(request) {
     return request.serializeBinary();
   },
-  proto.yartu.UpsertShareResponse.deserializeBinary
+  proto.yartu.ShareResponse.deserializeBinary
 );
 
 
 /**
- * @param {!proto.yartu.UpsertShareRequest} request The
+ * @param {!proto.yartu.ShareRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.RpcError, ?proto.yartu.UpsertShareResponse)}
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ShareResponse)}
  *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.yartu.UpsertShareResponse>|undefined}
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ShareResponse>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.yartu.YDriveClient.prototype.upsertShare =
+proto.yartu.YDriveClient.prototype.share =
     function(request, metadata, callback) {
   return this.client_.rpcCall(this.hostname_ +
-      '/yartu.YDrive/upsertShare',
+      '/yartu.YDrive/share',
       request,
       metadata || {},
-      methodDescriptor_YDrive_upsertShare,
+      methodDescriptor_YDrive_share,
       callback);
 };
 
 
 /**
- * @param {!proto.yartu.UpsertShareRequest} request The
+ * @param {!proto.yartu.ShareRequest} request The
  *     request proto
  * @param {?Object<string, string>=} metadata User defined
  *     call metadata
- * @return {!Promise<!proto.yartu.UpsertShareResponse>}
+ * @return {!Promise<!proto.yartu.ShareResponse>}
  *     Promise that resolves to the response
  */
-proto.yartu.YDrivePromiseClient.prototype.upsertShare =
+proto.yartu.YDrivePromiseClient.prototype.share =
     function(request, metadata) {
   return this.client_.unaryCall(this.hostname_ +
-      '/yartu.YDrive/upsertShare',
+      '/yartu.YDrive/share',
       request,
       metadata || {},
-      methodDescriptor_YDrive_upsertShare);
+      methodDescriptor_YDrive_share);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.UnshareRequest,
+ *   !proto.yartu.UnshareResponse>}
+ */
+const methodDescriptor_YDrive_unshare = new grpc.web.MethodDescriptor(
+  '/yartu.YDrive/unshare',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.UnshareRequest,
+  proto.yartu.UnshareResponse,
+  /**
+   * @param {!proto.yartu.UnshareRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.UnshareResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.UnshareRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.UnshareResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.UnshareResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YDriveClient.prototype.unshare =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YDrive/unshare',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_unshare,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.UnshareRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.UnshareResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YDrivePromiseClient.prototype.unshare =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YDrive/unshare',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_unshare);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.DeleteShareRequest,
+ *   !proto.yartu.DeleteShareResponse>}
+ */
+const methodDescriptor_YDrive_deleteShare = new grpc.web.MethodDescriptor(
+  '/yartu.YDrive/deleteShare',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.DeleteShareRequest,
+  proto.yartu.DeleteShareResponse,
+  /**
+   * @param {!proto.yartu.DeleteShareRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.DeleteShareResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.DeleteShareRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.DeleteShareResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.DeleteShareResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YDriveClient.prototype.deleteShare =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YDrive/deleteShare',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_deleteShare,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.DeleteShareRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.DeleteShareResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YDrivePromiseClient.prototype.deleteShare =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YDrive/deleteShare',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_deleteShare);
 };
 
 
