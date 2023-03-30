@@ -2723,7 +2723,8 @@ proto.yartu.GetInfoResponse.toObject = function(includeInstance, msg) {
     roleName: jspb.Message.getFieldWithDefault(msg, 14, ""),
     permissionList: (f = jspb.Message.getRepeatedField(msg, 15)) == null ? undefined : f,
     message: jspb.Message.getFieldWithDefault(msg, 16, ""),
-    notificationList: (f = jspb.Message.getRepeatedField(msg, 17)) == null ? undefined : f
+    notificationList: (f = jspb.Message.getRepeatedField(msg, 17)) == null ? undefined : f,
+    image: msg.getImage_asB64()
   };
 
   if (includeInstance) {
@@ -2828,6 +2829,10 @@ proto.yartu.GetInfoResponse.deserializeBinaryFromReader = function(msg, reader) 
     case 17:
       var value = /** @type {string} */ (reader.readString());
       msg.addNotification(value);
+      break;
+    case 18:
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      msg.setImage(value);
       break;
     default:
       reader.skipField();
@@ -2975,6 +2980,13 @@ proto.yartu.GetInfoResponse.serializeBinaryToWriter = function(message, writer) 
   if (f.length > 0) {
     writer.writeRepeatedString(
       17,
+      f
+    );
+  }
+  f = message.getImage_asU8();
+  if (f.length > 0) {
+    writer.writeBytes(
+      18,
       f
     );
   }
@@ -3359,6 +3371,48 @@ proto.yartu.GetInfoResponse.prototype.addNotification = function(value, opt_inde
  */
 proto.yartu.GetInfoResponse.prototype.clearNotificationList = function() {
   return this.setNotificationList([]);
+};
+
+
+/**
+ * optional bytes image = 18;
+ * @return {string}
+ */
+proto.yartu.GetInfoResponse.prototype.getImage = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 18, ""));
+};
+
+
+/**
+ * optional bytes image = 18;
+ * This is a type-conversion wrapper around `getImage()`
+ * @return {string}
+ */
+proto.yartu.GetInfoResponse.prototype.getImage_asB64 = function() {
+  return /** @type {string} */ (jspb.Message.bytesAsB64(
+      this.getImage()));
+};
+
+
+/**
+ * optional bytes image = 18;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getImage()`
+ * @return {!Uint8Array}
+ */
+proto.yartu.GetInfoResponse.prototype.getImage_asU8 = function() {
+  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
+      this.getImage()));
+};
+
+
+/**
+ * @param {!(string|Uint8Array)} value
+ * @return {!proto.yartu.GetInfoResponse} returns this
+ */
+proto.yartu.GetInfoResponse.prototype.setImage = function(value) {
+  return jspb.Message.setProto3BytesField(this, 18, value);
 };
 
 
@@ -3902,7 +3956,8 @@ proto.yartu.UpsertAccountRequest.toObject = function(includeInstance, msg) {
     timezone: jspb.Message.getFieldWithDefault(msg, 10, ""),
     timeformat: jspb.Message.getFieldWithDefault(msg, 11, ""),
     city: jspb.Message.getFieldWithDefault(msg, 12, ""),
-    notificationList: (f = jspb.Message.getRepeatedField(msg, 13)) == null ? undefined : f
+    notificationList: (f = jspb.Message.getRepeatedField(msg, 13)) == null ? undefined : f,
+    image: jspb.Message.getFieldWithDefault(msg, 14, "")
   };
 
   if (includeInstance) {
@@ -3990,6 +4045,10 @@ proto.yartu.UpsertAccountRequest.deserializeBinaryFromReader = function(msg, rea
     case 13:
       var value = /** @type {string} */ (reader.readString());
       msg.addNotification(value);
+      break;
+    case 14:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setImage(value);
       break;
     default:
       reader.skipField();
@@ -4108,6 +4167,13 @@ proto.yartu.UpsertAccountRequest.serializeBinaryToWriter = function(message, wri
   if (f.length > 0) {
     writer.writeRepeatedString(
       13,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 14));
+  if (f != null) {
+    writer.writeString(
+      14,
       f
     );
   }
@@ -4580,6 +4646,42 @@ proto.yartu.UpsertAccountRequest.prototype.addNotification = function(value, opt
  */
 proto.yartu.UpsertAccountRequest.prototype.clearNotificationList = function() {
   return this.setNotificationList([]);
+};
+
+
+/**
+ * optional string image = 14;
+ * @return {string}
+ */
+proto.yartu.UpsertAccountRequest.prototype.getImage = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 14, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.UpsertAccountRequest} returns this
+ */
+proto.yartu.UpsertAccountRequest.prototype.setImage = function(value) {
+  return jspb.Message.setField(this, 14, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.UpsertAccountRequest} returns this
+ */
+proto.yartu.UpsertAccountRequest.prototype.clearImage = function() {
+  return jspb.Message.setField(this, 14, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.UpsertAccountRequest.prototype.hasImage = function() {
+  return jspb.Message.getField(this, 14) != null;
 };
 
 

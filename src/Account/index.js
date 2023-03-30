@@ -65,10 +65,12 @@ export default (config) =>
             handleError(error, reject);
           } else {
             const code = response.getCode();
-
             if (code == 0) {
+              const data = response.toObject();
+              data.image = data.image ? 'data:image/png;base64,'.concat(data.image) : null;
               resolve({
-                data: response.toObject()
+                data: data,
+                message: response.getMessage()
               });
             } else {
               reject({
@@ -120,6 +122,7 @@ export default (config) =>
           request.setTimezone(data.timezone);
           request.setTimeformat(data.timeformat);
           request.setCity(data.city);
+          request.setImage(data.image);
 
           let lang = data.language;
           if (typeof lang === 'object') {
@@ -133,10 +136,10 @@ export default (config) =>
         }
 
         this.client.upsertAccount(request, this.metadata, (error, response) => {
-          const code = response.getCode();
           if (error) {
             handleError(error, reject);
           } else {
+            const code = response.getCode();
             if (code == 0) {
               resolve({
                 data: response.toObject()
