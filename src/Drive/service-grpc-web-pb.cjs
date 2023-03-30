@@ -1479,5 +1479,127 @@ proto.yartu.YDrivePromiseClient.prototype.deleteShare =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.SharedWithMeRequest,
+ *   !proto.yartu.SharedWithMeResponse>}
+ */
+const methodDescriptor_YDrive_sharedWithMe = new grpc.web.MethodDescriptor(
+  '/yartu.YDrive/sharedWithMe',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.SharedWithMeRequest,
+  proto.yartu.SharedWithMeResponse,
+  /**
+   * @param {!proto.yartu.SharedWithMeRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.SharedWithMeResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.SharedWithMeRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.SharedWithMeResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.SharedWithMeResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YDriveClient.prototype.sharedWithMe =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YDrive/sharedWithMe',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_sharedWithMe,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.SharedWithMeRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.SharedWithMeResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YDrivePromiseClient.prototype.sharedWithMe =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YDrive/sharedWithMe',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_sharedWithMe);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.SharedByMeRequest,
+ *   !proto.yartu.SharedByMeResponse>}
+ */
+const methodDescriptor_YDrive_sharedByMe = new grpc.web.MethodDescriptor(
+  '/yartu.YDrive/sharedByMe',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.SharedByMeRequest,
+  proto.yartu.SharedByMeResponse,
+  /**
+   * @param {!proto.yartu.SharedByMeRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.SharedByMeResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.SharedByMeRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.SharedByMeResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.SharedByMeResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YDriveClient.prototype.sharedByMe =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YDrive/sharedByMe',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_sharedByMe,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.SharedByMeRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.SharedByMeResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YDrivePromiseClient.prototype.sharedByMe =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YDrive/sharedByMe',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_sharedByMe);
+};
+
+
 module.exports = proto.yartu;
 

@@ -4824,7 +4824,7 @@ proto.Shared.toObject = function(includeInstance, msg) {
     createdAt: jspb.Message.getFieldWithDefault(msg, 5, ""),
     updatedAt: jspb.Message.getFieldWithDefault(msg, 6, ""),
     permission: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    type: jspb.Message.getFieldWithDefault(msg, 8, "")
+    customPermissionMap: (f = msg.getCustomPermissionMap()) ? f.toObject(includeInstance, undefined) : []
   };
 
   if (includeInstance) {
@@ -4893,8 +4893,10 @@ proto.Shared.deserializeBinaryFromReader = function(msg, reader) {
       msg.setPermission(value);
       break;
     case 8:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setType(value);
+      var value = msg.getCustomPermissionMap();
+      reader.readMessage(value, function(message, reader) {
+        jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readBool, null, "", false);
+         });
       break;
     default:
       reader.skipField();
@@ -4977,12 +4979,9 @@ proto.Shared.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = /** @type {string} */ (jspb.Message.getField(message, 8));
-  if (f != null) {
-    writer.writeString(
-      8,
-      f
-    );
+  f = message.getCustomPermissionMap(true);
+  if (f && f.getLength() > 0) {
+    f.serializeBinary(8, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeBool);
   }
 };
 
@@ -5225,38 +5224,25 @@ proto.Shared.prototype.hasPermission = function() {
 
 
 /**
- * optional string type = 8;
- * @return {string}
+ * map<string, bool> custom_permission = 8;
+ * @param {boolean=} opt_noLazyCreate Do not create the map if
+ * empty, instead returning `undefined`
+ * @return {!jspb.Map<string,boolean>}
  */
-proto.Shared.prototype.getType = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
+proto.Shared.prototype.getCustomPermissionMap = function(opt_noLazyCreate) {
+  return /** @type {!jspb.Map<string,boolean>} */ (
+      jspb.Message.getMapField(this, 8, opt_noLazyCreate,
+      null));
 };
 
 
 /**
- * @param {string} value
+ * Clears values from the map. The map will be non-null.
  * @return {!proto.Shared} returns this
  */
-proto.Shared.prototype.setType = function(value) {
-  return jspb.Message.setField(this, 8, value);
-};
-
-
-/**
- * Clears the field making it undefined.
- * @return {!proto.Shared} returns this
- */
-proto.Shared.prototype.clearType = function() {
-  return jspb.Message.setField(this, 8, undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {boolean}
- */
-proto.Shared.prototype.hasType = function() {
-  return jspb.Message.getField(this, 8) != null;
+proto.Shared.prototype.clearCustomPermissionMap = function() {
+  this.getCustomPermissionMap().clear();
+  return this;
 };
 
 
