@@ -14,11 +14,14 @@ import {
   GetOfficeFileRequest,
   GetDirentRequest,
   UpsertDirentRequest,
-  // share requests
+
+  // Share
   ListShareRequest,
   ShareRequest,
   UnshareRequest,
-  DeleteShareRequest
+  DeleteShareRequest,
+  SharedWithMeRequest,
+  SharedByMeRequest,
 } from './service-pb.cjs';
 
 import { YDriveClient } from './service-grpc-web-pb.cjs';
@@ -577,6 +580,7 @@ export default (config) =>
       });
     };
 
+    // share
     listShare = (repoId, path) => {
       return new Promise((resolve, reject) => {
         const request = new ListShareRequest();
@@ -590,13 +594,12 @@ export default (config) =>
             const code = response.getCode();
 
             if (code == 0) {
-              const data = response
-                .getDataList()
-                .map((data) => data.toObject());
-
+              const data = response.getShareList().map((data) => data.toObject());
+              const type = response.getType(); // type can be "repo", "dir" or "file"
               resolve({
                 code: code,
                 data: data,
+                type: type,
                 message: response.getMessage()
               });
             } else {
@@ -622,8 +625,13 @@ export default (config) =>
           const shared = new Shared();
           shared.setId(s.shared_id);
 
-          // TODO :: set Permission map text ??
-          shared.setPermission(s.permission);
+          if (typeof s.permission === 'string') {
+            shared.setPermission(s.permission);
+          } else {
+            Object.keys(s.permission).forEach((k) => {
+              shared.getCustomPermissionMap().set(k, s.permission[k]);
+            });
+          }
 
           if (s?.isYartuUser) {
             const user = new User();
@@ -641,15 +649,13 @@ export default (config) =>
 
             shared.setGroup(group);
           } else {
-            console.log(
-              '@yartu/sdk/ shareNotebook method not supports external users and Realm share features for now!'
-            );
+            console.log('@yartu/sdk/Drive share method not supports external users and Realm share features for now!');
           }
 
           sharedList.push(shared);
         }
 
-        request.setSharedList(sharedList);
+        request.setShareList(sharedList);
 
         this.client.share(request, this.metadata, (error, response) => {
           if (error) {
@@ -660,8 +666,8 @@ export default (config) =>
             if (code == 0) {
               resolve({
                 code: 0,
-                // success: response.getSuccessList().map((data) => data.toObject()),
-                // error: response.getErrorList().map((data) => data.toObject()),
+                success: response.getSuccessList().map((data) => data.toObject()),
+                failed: response.getFailedList().map((data) => data.toObject()),
                 message: response.getMessage()
               });
             } else {
@@ -703,11 +709,47 @@ export default (config) =>
       });
     };
 
-    deleteShare = (repoId, path) => {
+    deleteShare = (repoId, path, description, shareList) => {
       return new Promise((resolve, reject) => {
         const request = new DeleteShareRequest();
         request.setRepoId(repoId);
         request.setPath(path);
+        request.setDescription(description);
+
+        const sharedList = [];
+        for (const s of shareList) {
+          const shared = new Shared();
+          // shared.setId(s.shared_id);
+
+          // TODO :: set Permission map text ??
+          // shared.setPermission(s.permission);
+
+          if (s?.isYartuUser) {
+            const user = new User();
+            user.setId(s.id);
+            user.setUsername(s.email);
+            user.setName(s.name);
+            user.setSurname(s.surname);
+
+
+            console.log('AAAAA:user', user, s);
+            shared.setUser(user);
+          } else if (s?.isGroup) {
+            const group = new Group();
+            group.setId(s.id);
+            group.setName(s.name);
+            group.setEmailAlias(s.email);
+
+            shared.setGroup(group);
+          } else {
+            console.log('@yartu/sdk/Drive deleteShare method not supports external users and Realm share features for now!');
+            console.log('@yartu/sdk/Drive deleteShare: s:', s);
+          }
+
+          sharedList.push(shared);
+        }
+
+        request.setShareList(sharedList);
 
         this.client.deleteShare(request, this.metadata, (error, response) => {
           if (error) {
@@ -718,6 +760,63 @@ export default (config) =>
             if (code == 0) {
               resolve({
                 code: 0,
+                success: response.getSuccessList().map((data) => data.toObject()),
+                failed: response.getFailedList().map((data) => data.toObject()),
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
+    sharedWithMe = () => {
+      return new Promise((resolve, reject) => {
+        const request = new SharedWithMeRequest();
+
+        this.client.sharedWithMe(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              const dataList = response.getDataList().map((data) => data.toObject());
+              resolve({
+                code: 0,
+                data: dataList,
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
+    sharedByMe = () => {
+      return new Promise((resolve, reject) => {
+        const request = new SharedByMeRequest();
+
+        this.client.sharedByMe(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              const dataList = response.getDataList().map((data) => data.toObject());
+              resolve({
+                code: 0,
+                data: dataList,
                 message: response.getMessage()
               });
             } else {
