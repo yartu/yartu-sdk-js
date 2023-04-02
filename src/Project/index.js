@@ -326,7 +326,7 @@ export default (config) =>
       });
     }
 
-    archiveProject(uuid, unarchive) {
+    archiveProject(uuid, unarchive = false) {
       return new Promise((resolve, reject) => {
         const request = new ArchiveProjectRequest();
         request.setUuid(uuid);
