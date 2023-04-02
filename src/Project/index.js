@@ -1113,10 +1113,12 @@ export default (config) =>
             handleError(error, reject);
           } else {
             const code = response.getCode();
+            const data = response.getCardLabelList().map((data) => data.toObject());;
 
             if (code == 0) {
               resolve({
                 code: 0,
+                data,
                 message: response.getMessage()
               });
             } else {
