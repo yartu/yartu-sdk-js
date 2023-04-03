@@ -872,6 +872,128 @@ proto.yartu.YDrivePromiseClient.prototype.downloadDirent =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.LockDirentRequest,
+ *   !proto.yartu.LockDirentResponse>}
+ */
+const methodDescriptor_YDrive_lockDirent = new grpc.web.MethodDescriptor(
+  '/yartu.YDrive/lockDirent',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.LockDirentRequest,
+  proto.yartu.LockDirentResponse,
+  /**
+   * @param {!proto.yartu.LockDirentRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.LockDirentResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.LockDirentRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.LockDirentResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.LockDirentResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YDriveClient.prototype.lockDirent =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YDrive/lockDirent',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_lockDirent,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.LockDirentRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.LockDirentResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YDrivePromiseClient.prototype.lockDirent =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YDrive/lockDirent',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_lockDirent);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.UnlockDirentRequest,
+ *   !proto.yartu.UnlockDirentResponse>}
+ */
+const methodDescriptor_YDrive_unlockDirent = new grpc.web.MethodDescriptor(
+  '/yartu.YDrive/unlockDirent',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.UnlockDirentRequest,
+  proto.yartu.UnlockDirentResponse,
+  /**
+   * @param {!proto.yartu.UnlockDirentRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.UnlockDirentResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.UnlockDirentRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.UnlockDirentResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.UnlockDirentResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YDriveClient.prototype.unlockDirent =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YDrive/unlockDirent',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_unlockDirent,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.UnlockDirentRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.UnlockDirentResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YDrivePromiseClient.prototype.unlockDirent =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YDrive/unlockDirent',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_unlockDirent);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.UpsertDirectoryRequest,
  *   !proto.yartu.UpsertDirectoryResponse>}
  */
