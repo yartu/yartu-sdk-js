@@ -235,7 +235,7 @@ proto.yartu.ShareablePeople.toObject = function(includeInstance, msg) {
     isContact: jspb.Message.getBooleanFieldWithDefault(msg, 2, false),
     isYartuUser: jspb.Message.getBooleanFieldWithDefault(msg, 3, false),
     id: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    photo: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    photo: msg.getPhoto_asB64(),
     name: jspb.Message.getFieldWithDefault(msg, 6, ""),
     surname: jspb.Message.getFieldWithDefault(msg, 7, ""),
     email: jspb.Message.getFieldWithDefault(msg, 8, ""),
@@ -294,7 +294,7 @@ proto.yartu.ShareablePeople.deserializeBinaryFromReader = function(msg, reader) 
       msg.setId(value);
       break;
     case 5:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
       msg.setPhoto(value);
       break;
     case 6:
@@ -374,9 +374,9 @@ proto.yartu.ShareablePeople.serializeBinaryToWriter = function(message, writer) 
       f
     );
   }
-  f = /** @type {string} */ (jspb.Message.getField(message, 5));
+  f = /** @type {!(string|Uint8Array)} */ (jspb.Message.getField(message, 5));
   if (f != null) {
-    writer.writeString(
+    writer.writeBytes(
       5,
       f
     );
@@ -492,7 +492,7 @@ proto.yartu.ShareablePeople.prototype.setId = function(value) {
 
 
 /**
- * optional string photo = 5;
+ * optional bytes photo = 5;
  * @return {string}
  */
 proto.yartu.ShareablePeople.prototype.getPhoto = function() {
@@ -501,7 +501,31 @@ proto.yartu.ShareablePeople.prototype.getPhoto = function() {
 
 
 /**
- * @param {string} value
+ * optional bytes photo = 5;
+ * This is a type-conversion wrapper around `getPhoto()`
+ * @return {string}
+ */
+proto.yartu.ShareablePeople.prototype.getPhoto_asB64 = function() {
+  return /** @type {string} */ (jspb.Message.bytesAsB64(
+      this.getPhoto()));
+};
+
+
+/**
+ * optional bytes photo = 5;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getPhoto()`
+ * @return {!Uint8Array}
+ */
+proto.yartu.ShareablePeople.prototype.getPhoto_asU8 = function() {
+  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
+      this.getPhoto()));
+};
+
+
+/**
+ * @param {!(string|Uint8Array)} value
  * @return {!proto.yartu.ShareablePeople} returns this
  */
 proto.yartu.ShareablePeople.prototype.setPhoto = function(value) {

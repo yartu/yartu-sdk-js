@@ -3064,7 +3064,7 @@ proto.yartu.Contact.toObject = function(includeInstance, msg) {
     proto.yartu.Label.toObject, includeInstance),
     isStarred: jspb.Message.getBooleanFieldWithDefault(msg, 10, false),
     uid: jspb.Message.getFieldWithDefault(msg, 11, ""),
-    photo: jspb.Message.getFieldWithDefault(msg, 12, ""),
+    photo: msg.getPhoto_asB64(),
     title: jspb.Message.getFieldWithDefault(msg, 13, ""),
     company: jspb.Message.getFieldWithDefault(msg, 14, ""),
     name: jspb.Message.getFieldWithDefault(msg, 15, ""),
@@ -3164,7 +3164,7 @@ proto.yartu.Contact.deserializeBinaryFromReader = function(msg, reader) {
       msg.setUid(value);
       break;
     case 12:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
       msg.setPhoto(value);
       break;
     case 13:
@@ -3327,9 +3327,9 @@ proto.yartu.Contact.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = /** @type {string} */ (jspb.Message.getField(message, 12));
+  f = /** @type {!(string|Uint8Array)} */ (jspb.Message.getField(message, 12));
   if (f != null) {
-    writer.writeString(
+    writer.writeBytes(
       12,
       f
     );
@@ -3681,7 +3681,7 @@ proto.yartu.Contact.prototype.hasUid = function() {
 
 
 /**
- * optional string photo = 12;
+ * optional bytes photo = 12;
  * @return {string}
  */
 proto.yartu.Contact.prototype.getPhoto = function() {
@@ -3690,7 +3690,31 @@ proto.yartu.Contact.prototype.getPhoto = function() {
 
 
 /**
- * @param {string} value
+ * optional bytes photo = 12;
+ * This is a type-conversion wrapper around `getPhoto()`
+ * @return {string}
+ */
+proto.yartu.Contact.prototype.getPhoto_asB64 = function() {
+  return /** @type {string} */ (jspb.Message.bytesAsB64(
+      this.getPhoto()));
+};
+
+
+/**
+ * optional bytes photo = 12;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getPhoto()`
+ * @return {!Uint8Array}
+ */
+proto.yartu.Contact.prototype.getPhoto_asU8 = function() {
+  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
+      this.getPhoto()));
+};
+
+
+/**
+ * @param {!(string|Uint8Array)} value
  * @return {!proto.yartu.Contact} returns this
  */
 proto.yartu.Contact.prototype.setPhoto = function(value) {

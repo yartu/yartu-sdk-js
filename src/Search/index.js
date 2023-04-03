@@ -44,9 +44,9 @@ export default (config) =>
               const code = response.getCode();
 
               if (code == 0) {
-                const people = response
-                  .getPeopleList()
-                  .map((data) => data.toObject());
+                const people = response.getPeopleList().map((data) => data.toObject());
+                people.forEach((p) => p.photo = p.photo ? 'data:image/png;base64,'.concat(p.photo) : null);
+
                 resolve({
                   message: response.getMessage(),
                   people
