@@ -14,6 +14,8 @@ import {
   GetOfficeFileRequest,
   GetDirentRequest,
   UpsertDirentRequest,
+  LockDirentRequest,
+  UnlockDirentRequest,
 
   // Share
   ListShareRequest,
@@ -322,6 +324,64 @@ export default (config) =>
               resolve({
                 code,
                 error: response.getErrorList().map((data) => data.toObject())
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
+    lockDirent = (repoId, path, force = false) => {
+      return new Promise((resolve, reject) => {
+        const request = new LockDirentRequest();
+        request.setRepoId(repoId);
+        request.setPath(path);
+        request.setForce(force);
+
+        this.client.lockDirent(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0 || code == 400) {
+              resolve({
+                code: code,
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
+    unlockDirent = (repoId, path, force = false) => {
+      return new Promise((resolve, reject) => {
+        const request = new UnlockDirentRequest();
+        request.setRepoId(repoId);
+        request.setPath(path);
+        request.setForce(force);
+
+        this.client.unlockDirent(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0 || code == 400) {
+              resolve({
+                code: code,
+                message: response.getMessage()
               });
             } else {
               reject({
@@ -829,4 +889,6 @@ export default (config) =>
         });
       });
     };
+
+
   };
