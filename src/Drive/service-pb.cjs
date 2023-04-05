@@ -14934,7 +14934,8 @@ proto.yartu.LockDirentRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     repoId: jspb.Message.getFieldWithDefault(msg, 1, ""),
     path: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    force: jspb.Message.getBooleanFieldWithDefault(msg, 3, false)
+    comment: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    force: jspb.Message.getBooleanFieldWithDefault(msg, 4, false)
   };
 
   if (includeInstance) {
@@ -14980,6 +14981,10 @@ proto.yartu.LockDirentRequest.deserializeBinaryFromReader = function(msg, reader
       msg.setPath(value);
       break;
     case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setComment(value);
+      break;
+    case 4:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setForce(value);
       break;
@@ -15026,10 +15031,17 @@ proto.yartu.LockDirentRequest.serializeBinaryToWriter = function(message, writer
       f
     );
   }
+  f = message.getComment();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
   f = message.getForce();
   if (f) {
     writer.writeBool(
-      3,
+      4,
       f
     );
   }
@@ -15073,11 +15085,29 @@ proto.yartu.LockDirentRequest.prototype.setPath = function(value) {
 
 
 /**
- * optional bool force = 3;
+ * optional string comment = 3;
+ * @return {string}
+ */
+proto.yartu.LockDirentRequest.prototype.getComment = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.LockDirentRequest} returns this
+ */
+proto.yartu.LockDirentRequest.prototype.setComment = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional bool force = 4;
  * @return {boolean}
  */
 proto.yartu.LockDirentRequest.prototype.getForce = function() {
-  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 3, false));
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 4, false));
 };
 
 
@@ -15086,7 +15116,7 @@ proto.yartu.LockDirentRequest.prototype.getForce = function() {
  * @return {!proto.yartu.LockDirentRequest} returns this
  */
 proto.yartu.LockDirentRequest.prototype.setForce = function(value) {
-  return jspb.Message.setProto3BooleanField(this, 3, value);
+  return jspb.Message.setProto3BooleanField(this, 4, value);
 };
 
 
