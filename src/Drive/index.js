@@ -336,12 +336,13 @@ export default (config) =>
       });
     };
 
-    lockDirent = (repoId, path, force = false) => {
+    lockDirent = (repoId, path, force = false, comment = '') => {
       return new Promise((resolve, reject) => {
         const request = new LockDirentRequest();
         request.setRepoId(repoId);
         request.setPath(path);
         request.setForce(force);
+        request.setComment(comment);
 
         this.client.lockDirent(request, this.metadata, (error, response) => {
           if (error) {
