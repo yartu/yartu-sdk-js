@@ -2249,7 +2249,7 @@ proto.yartu.LockInfo.prototype.toObject = function(opt_includeInstance) {
 proto.yartu.LockInfo.toObject = function(includeInstance, msg) {
   var f, obj = {
     owner: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    time: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    time: jspb.Message.getFieldWithDefault(msg, 2, ""),
     type: jspb.Message.getFieldWithDefault(msg, 3, 0),
     comment: jspb.Message.getFieldWithDefault(msg, 4, "")
   };
@@ -2293,7 +2293,7 @@ proto.yartu.LockInfo.deserializeBinaryFromReader = function(msg, reader) {
       msg.setOwner(value);
       break;
     case 2:
-      var value = /** @type {number} */ (reader.readInt64());
+      var value = /** @type {string} */ (reader.readString());
       msg.setTime(value);
       break;
     case 3:
@@ -2341,8 +2341,8 @@ proto.yartu.LockInfo.serializeBinaryToWriter = function(message, writer) {
     );
   }
   f = message.getTime();
-  if (f !== 0) {
-    writer.writeInt64(
+  if (f.length > 0) {
+    writer.writeString(
       2,
       f
     );
@@ -2383,20 +2383,20 @@ proto.yartu.LockInfo.prototype.setOwner = function(value) {
 
 
 /**
- * optional int64 time = 2;
- * @return {number}
+ * optional string time = 2;
+ * @return {string}
  */
 proto.yartu.LockInfo.prototype.getTime = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
 /**
- * @param {number} value
+ * @param {string} value
  * @return {!proto.yartu.LockInfo} returns this
  */
 proto.yartu.LockInfo.prototype.setTime = function(value) {
-  return jspb.Message.setProto3IntField(this, 2, value);
+  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
