@@ -1604,6 +1604,67 @@ proto.yartu.YDrivePromiseClient.prototype.deleteShare =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.ListSharePermissionTemplateRequest,
+ *   !proto.yartu.ListSharePermissionTemplateResponse>}
+ */
+const methodDescriptor_YDrive_listSharePermissionTemplate = new grpc.web.MethodDescriptor(
+  '/yartu.YDrive/listSharePermissionTemplate',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.ListSharePermissionTemplateRequest,
+  proto.yartu.ListSharePermissionTemplateResponse,
+  /**
+   * @param {!proto.yartu.ListSharePermissionTemplateRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.ListSharePermissionTemplateResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.ListSharePermissionTemplateRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ListSharePermissionTemplateResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ListSharePermissionTemplateResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YDriveClient.prototype.listSharePermissionTemplate =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YDrive/listSharePermissionTemplate',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_listSharePermissionTemplate,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.ListSharePermissionTemplateRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.ListSharePermissionTemplateResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YDrivePromiseClient.prototype.listSharePermissionTemplate =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YDrive/listSharePermissionTemplate',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_listSharePermissionTemplate);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.SharedWithMeRequest,
  *   !proto.yartu.SharedWithMeResponse>}
  */
