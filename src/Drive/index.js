@@ -5,12 +5,14 @@ import {
   ListRepoRequest,
   UpsertRepoRequest,
   DeleteRepoRequest,
+  GetRepoHistoryRequest,
   ListDirentRequest,
   StarDirentRequest,
   UpsertDirectoryRequest,
   UpsertFileRequest,
   UploadFileRequest,
   DownloadFileRequest,
+  GetFileHistoryRequest,
   GetOfficeFileRequest,
   GetDirentRequest,
   UpsertDirentRequest,
@@ -28,7 +30,7 @@ import {
 
 import { YDriveClient } from './service-grpc-web-pb.cjs';
 import { handleError } from '../utils/helper';
-import { Group, Shared, User } from '../utils/definitions_pb.cjs';
+import {Group, Query, Shared, User} from '../utils/definitions_pb.cjs';
 
 export default (config) =>
   class Drive {
@@ -187,6 +189,50 @@ export default (config) =>
             if (code == 0) {
               resolve({
                 code: 0
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
+    getRepoHistory = (repoId, queryRequest = {}) => {
+      return new Promise((resolve, reject) => {
+        const request = new GetRepoHistoryRequest();
+        request.setRepoId(repoId);
+
+        const query = new Query();
+
+        if (queryRequest.sortBy) {
+          query.setSortBy(queryRequest.sortBy);
+        }
+        if (queryRequest.perPage) {
+          query.setPerPage(queryRequest.perPage);
+        }
+        if (queryRequest.page) {
+          query.setPage(queryRequest.page);
+        }
+
+        request.setQuery(query);
+
+        this.client.getRepoHistory(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              const dataList = response.getDataList().map((data) => data.toObject());
+              resolve({
+                code: 0,
+                data: dataList,
+                more: response.getMore(),
+                message: response.getMessage()
               });
             } else {
               reject({
@@ -571,6 +617,39 @@ export default (config) =>
       });
     };
 
+    getFileHistory = (repoId, path, commitId, limit) => {
+      return new Promise((resolve, reject) => {
+        const request = new GetFileHistoryRequest();
+        request.setRepoId(repoId);
+        request.setPath(path);
+        request.setCommitId(commitId);
+        request.setLimit(limit);
+
+        this.client.getFileHistory(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              const dataList = response.getDataList().map((data) => data.toObject());
+              resolve({
+                code: 0,
+                data: dataList,
+                more: response.getMore(),
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
     getOfficeFile = (repoId, path) => {
       return new Promise((resolve, reject) => {
         const request = new GetOfficeFileRequest();
@@ -891,6 +970,5 @@ export default (config) =>
         });
       });
     };
-
 
   };
