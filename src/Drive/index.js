@@ -689,6 +689,7 @@ export default (config) =>
           if (typeof s.permission === 'string') {
             shared.setPermission(s.permission);
           } else {
+            shared.setPermission('custom');
             Object.keys(s.permission).forEach((k) => {
               shared.getCustomPermissionMap().set(k, s.permission[k]);
             });
@@ -742,7 +743,7 @@ export default (config) =>
       });
     };
 
-    unshare = (repoId, path) => {
+    unshare = (repoId, path = '/') => {
       return new Promise((resolve, reject) => {
         const request = new UnshareRequest();
         request.setRepoId(repoId);
