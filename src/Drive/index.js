@@ -25,12 +25,12 @@ import {
   UnshareRequest,
   DeleteShareRequest,
   SharedWithMeRequest,
-  SharedByMeRequest,
+  SharedByMeRequest
 } from './service-pb.cjs';
 
 import { YDriveClient } from './service-grpc-web-pb.cjs';
 import { handleError } from '../utils/helper';
-import {Group, Query, Shared, User} from '../utils/definitions_pb.cjs';
+import { Group, Query, Shared, User } from '../utils/definitions_pb.cjs';
 
 export default (config) =>
   class Drive {
@@ -61,17 +61,17 @@ export default (config) =>
             if (code == 0) {
               const viewedList = response.getViewedList().map((data) => {
                 const l = data.toObject();
-                l.path = `${l.parentDir}/${l.name}`;
+                l.path = `${l.parentDir}${l.name}`;
                 return l;
               });
               const updatedList = response.getUpdatedList().map((data) => {
                 const l = data.toObject();
-                l.path = `${l.parentDir}/${l.name}`;
+                l.path = `${l.parentDir}${l.name}`;
                 return l;
               });
               const starredList = response.getStarredList().map((data) => {
                 const l = data.toObject();
-                l.path = l.type === 'file' ? `${l.parentDir}/${l.name}` : l.parentDir;
+                l.path = l.type === 'file' ? `${l.parentDir}${l.name}` : l.parentDir;
                 return l;
               });
               resolve({
@@ -220,28 +220,35 @@ export default (config) =>
 
         request.setQuery(query);
 
-        this.client.getRepoHistory(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-
-            if (code == 0) {
-              const dataList = response.getDataList().map((data) => data.toObject());
-              resolve({
-                code: 0,
-                data: dataList,
-                more: response.getMore(),
-                message: response.getMessage()
-              });
+        this.client.getRepoHistory(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+
+              if (code == 0) {
+                const dataList = response
+                  .getDataList()
+                  .map((data) => data.toObject());
+
+                resolve({
+                  code: 0,
+                  data: dataList,
+                  more: response.getMore(),
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     };
 
@@ -473,7 +480,7 @@ export default (config) =>
                 let dirent = {};
                 if (operation !== 'delete') {
                   dirent = response.getData().toObject();
-                  dirent.path = `${dirent.parentDir}/${dirent.name}`;
+                  dirent.path = `${dirent.parentDir}${dirent.name}`;
                 }
 
                 resolve({
@@ -625,28 +632,34 @@ export default (config) =>
         request.setCommitId(commitId);
         request.setLimit(limit);
 
-        this.client.getFileHistory(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-
-            if (code == 0) {
-              const dataList = response.getDataList().map((data) => data.toObject());
-              resolve({
-                code: 0,
-                data: dataList,
-                more: response.getMore(),
-                message: response.getMessage()
-              });
+        this.client.getFileHistory(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+
+              if (code == 0) {
+                const dataList = response
+                  .getDataList()
+                  .map((data) => data.toObject());
+                resolve({
+                  code: 0,
+                  data: dataList,
+                  more: response.getMore(),
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     };
 
@@ -734,7 +747,9 @@ export default (config) =>
             const code = response.getCode();
 
             if (code == 0) {
-              const data = response.getShareList().map((data) => data.toObject());
+              const data = response
+                .getShareList()
+                .map((data) => data.toObject());
               const type = response.getType(); // type can be "repo", "dir" or "file"
               resolve({
                 code: code,
@@ -790,7 +805,9 @@ export default (config) =>
 
             shared.setGroup(group);
           } else {
-            console.log('@yartu/sdk/Drive share method not supports external users and Realm share features for now!');
+            console.log(
+              '@yartu/sdk/Drive share method not supports external users and Realm share features for now!'
+            );
           }
 
           sharedList.push(shared);
@@ -807,7 +824,9 @@ export default (config) =>
             if (code == 0) {
               resolve({
                 code: 0,
-                success: response.getSuccessList().map((data) => data.toObject()),
+                success: response
+                  .getSuccessList()
+                  .map((data) => data.toObject()),
                 failed: response.getFailedList().map((data) => data.toObject()),
                 message: response.getMessage()
               });
@@ -872,7 +891,6 @@ export default (config) =>
             user.setName(s.name);
             user.setSurname(s.surname);
 
-
             console.log('AAAAA:user', user, s);
             shared.setUser(user);
           } else if (s?.isGroup) {
@@ -883,7 +901,9 @@ export default (config) =>
 
             shared.setGroup(group);
           } else {
-            console.log('@yartu/sdk/Drive deleteShare method not supports external users and Realm share features for now!');
+            console.log(
+              '@yartu/sdk/Drive deleteShare method not supports external users and Realm share features for now!'
+            );
             console.log('@yartu/sdk/Drive deleteShare: s:', s);
           }
 
@@ -901,7 +921,9 @@ export default (config) =>
             if (code == 0) {
               resolve({
                 code: 0,
-                success: response.getSuccessList().map((data) => data.toObject()),
+                success: response
+                  .getSuccessList()
+                  .map((data) => data.toObject()),
                 failed: response.getFailedList().map((data) => data.toObject()),
                 message: response.getMessage()
               });
@@ -926,7 +948,10 @@ export default (config) =>
           } else {
             const code = response.getCode();
             if (code == 0) {
-              const dataList = response.getDataList().map((data) => data.toObject());
+              const dataList = response
+                .getDataList()
+                .map((data) => data.toObject());
+
               resolve({
                 code: 0,
                 data: dataList,
@@ -954,7 +979,10 @@ export default (config) =>
             const code = response.getCode();
 
             if (code == 0) {
-              const dataList = response.getDataList().map((data) => data.toObject());
+              const dataList = response
+                .getDataList()
+                .map((data) => data.toObject());
+
               resolve({
                 code: 0,
                 data: dataList,
@@ -970,5 +998,4 @@ export default (config) =>
         });
       });
     };
-
   };
