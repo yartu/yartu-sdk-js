@@ -327,7 +327,7 @@ export default (config) =>
       return new Promise((resolve, reject) => {
         const request = new UpsertDirentRequest();
 
-        if (!['create', 'rename', 'move', 'copy', 'delete', 'revert'].includes(operation)) {
+        if (!['create-dir', 'create-file', 'rename', 'move', 'copy', 'delete', 'revert'].includes(operation)) {
           reject({
             code: 100
           });
