@@ -321,14 +321,13 @@ export default (config) =>
       dstDir,
       force = false,
       expire = 0,
-      isDraft = false
+      isDraft = false,
+      commitId = '',
     ) => {
       return new Promise((resolve, reject) => {
         const request = new UpsertDirentRequest();
 
-        if (
-          !['create', 'rename', 'move', 'copy', 'delete'].includes(operation)
-        ) {
+        if (!['create', 'rename', 'move', 'copy', 'delete', 'revert'].includes(operation)) {
           reject({
             code: 100
           });
@@ -339,6 +338,7 @@ export default (config) =>
         request.setOperation(operation);
         request.setForce(force);
         request.setIsDraft(isDraft);
+        request.setCommitId(commitId);
 
         if (operation == 'copy' || operation == 'move') {
           request.setDstRepoId(dstRepoId);
@@ -506,6 +506,7 @@ export default (config) =>
         const request = new UpsertFileRequest();
 
         if (
+
           !['create', 'rename', 'move', 'copy', 'delete'].includes(operation)
         ) {
           reject({
