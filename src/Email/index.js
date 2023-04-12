@@ -561,9 +561,13 @@ export default (config) =>
 
         for (const filter of filters) {
           const searchFilter = new SearchFilter();
-          searchFilter.setSelector(filter.selector);
-          searchFilter.addValue(filter.value);
-          request.addFilter(searchFilter);
+          const { selector, value } = filter;
+
+          if (value && value.length > 0) {
+            searchFilter.setSelector(selector);
+            searchFilter.setValueList(value);
+            request.addFilter(searchFilter);
+          }
         }
 
         queryRequest.setQuery(query.query);
@@ -579,14 +583,14 @@ export default (config) =>
               const code = response.getCode();
 
               if (code == 0) {
-                const results = response
-                  .getDataList()
-                  .map((data) => data.toObject());
+                const results = response.getDataList().map((data) => data.toObject());
+                const emails = response.getEmailList().map((email) => email.toObject());
                 const pagination = {};
                 resolve({
                   message: response.getMessage(),
                   results,
-                  pagination: {}
+                  emails,
+                  pagination,
                 });
               } else {
                 reject({
