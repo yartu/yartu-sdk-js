@@ -9417,7 +9417,7 @@ proto.yartu.GetRepoTrashRequest.toObject = function(includeInstance, msg) {
     path: jspb.Message.getFieldWithDefault(msg, 2, ""),
     commitId: jspb.Message.getFieldWithDefault(msg, 3, ""),
     showDays: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    scanStat: jspb.Message.getFieldWithDefault(msg, 5, 0)
+    scanStat: jspb.Message.getFieldWithDefault(msg, 5, "")
   };
 
   if (includeInstance) {
@@ -9471,7 +9471,7 @@ proto.yartu.GetRepoTrashRequest.deserializeBinaryFromReader = function(msg, read
       msg.setShowDays(value);
       break;
     case 5:
-      var value = /** @type {number} */ (reader.readInt64());
+      var value = /** @type {string} */ (reader.readString());
       msg.setScanStat(value);
       break;
     default:
@@ -9532,8 +9532,8 @@ proto.yartu.GetRepoTrashRequest.serializeBinaryToWriter = function(message, writ
     );
   }
   f = message.getScanStat();
-  if (f !== 0) {
-    writer.writeInt64(
+  if (f.length > 0) {
+    writer.writeString(
       5,
       f
     );
@@ -9614,20 +9614,20 @@ proto.yartu.GetRepoTrashRequest.prototype.setShowDays = function(value) {
 
 
 /**
- * optional int64 scan_stat = 5;
- * @return {number}
+ * optional string scan_stat = 5;
+ * @return {string}
  */
 proto.yartu.GetRepoTrashRequest.prototype.getScanStat = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
 };
 
 
 /**
- * @param {number} value
+ * @param {string} value
  * @return {!proto.yartu.GetRepoTrashRequest} returns this
  */
 proto.yartu.GetRepoTrashRequest.prototype.setScanStat = function(value) {
-  return jspb.Message.setProto3IntField(this, 5, value);
+  return jspb.Message.setProto3StringField(this, 5, value);
 };
 
 

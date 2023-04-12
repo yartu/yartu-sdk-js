@@ -6,6 +6,7 @@ import {
   UpsertRepoRequest,
   DeleteRepoRequest,
   GetRepoHistoryRequest,
+  GetRepoTrashRequest,
   ListDirentRequest,
   StarDirentRequest,
   UpsertDirectoryRequest,
@@ -238,6 +239,45 @@ export default (config) =>
                   code: 0,
                   data: dataList,
                   more: response.getMore(),
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
+    getRepoTrash = (repoId = '', path = '', commitId = '', showDays = 0, scanStat = '') => {
+      return new Promise((resolve, reject) => {
+        const request = new GetRepoTrashRequest();
+        request.setRepoId(repoId);
+        request.setPath(path);
+        request.setCommitId(commitId);
+        request.setShowDays(showDays);
+        request.setScanStat(scanStat);
+
+        this.client.getRepoTrash(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+
+              if (code == 0) {
+                const dataList = response.getDataList().map((data) => data.toObject());
+                resolve({
+                  code: 0,
+                  data: dataList,
+                  more: response.getMore(),
+                  scanStat: response.getScanStat(),
                   message: response.getMessage()
                 });
               } else {
