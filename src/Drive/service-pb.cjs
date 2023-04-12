@@ -13781,9 +13781,8 @@ proto.yartu.GetFileHistoryRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     repoId: jspb.Message.getFieldWithDefault(msg, 1, ""),
     path: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    revisionPath: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    commitId: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    limit: jspb.Message.getFieldWithDefault(msg, 5, 0)
+    commitId: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    limit: jspb.Message.getFieldWithDefault(msg, 4, 0)
   };
 
   if (includeInstance) {
@@ -13830,13 +13829,9 @@ proto.yartu.GetFileHistoryRequest.deserializeBinaryFromReader = function(msg, re
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
-      msg.setRevisionPath(value);
-      break;
-    case 4:
-      var value = /** @type {string} */ (reader.readString());
       msg.setCommitId(value);
       break;
-    case 5:
+    case 4:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setLimit(value);
       break;
@@ -13883,24 +13878,17 @@ proto.yartu.GetFileHistoryRequest.serializeBinaryToWriter = function(message, wr
       f
     );
   }
-  f = message.getRevisionPath();
+  f = message.getCommitId();
   if (f.length > 0) {
     writer.writeString(
       3,
       f
     );
   }
-  f = message.getCommitId();
-  if (f.length > 0) {
-    writer.writeString(
-      4,
-      f
-    );
-  }
   f = message.getLimit();
   if (f !== 0) {
     writer.writeInt64(
-      5,
+      4,
       f
     );
   }
@@ -13944,10 +13932,10 @@ proto.yartu.GetFileHistoryRequest.prototype.setPath = function(value) {
 
 
 /**
- * optional string revision_path = 3;
+ * optional string commit_id = 3;
  * @return {string}
  */
-proto.yartu.GetFileHistoryRequest.prototype.getRevisionPath = function() {
+proto.yartu.GetFileHistoryRequest.prototype.getCommitId = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
@@ -13956,35 +13944,17 @@ proto.yartu.GetFileHistoryRequest.prototype.getRevisionPath = function() {
  * @param {string} value
  * @return {!proto.yartu.GetFileHistoryRequest} returns this
  */
-proto.yartu.GetFileHistoryRequest.prototype.setRevisionPath = function(value) {
+proto.yartu.GetFileHistoryRequest.prototype.setCommitId = function(value) {
   return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 
 /**
- * optional string commit_id = 4;
- * @return {string}
- */
-proto.yartu.GetFileHistoryRequest.prototype.getCommitId = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.yartu.GetFileHistoryRequest} returns this
- */
-proto.yartu.GetFileHistoryRequest.prototype.setCommitId = function(value) {
-  return jspb.Message.setProto3StringField(this, 4, value);
-};
-
-
-/**
- * optional int64 limit = 5;
+ * optional int64 limit = 4;
  * @return {number}
  */
 proto.yartu.GetFileHistoryRequest.prototype.getLimit = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
 };
 
 
@@ -13993,7 +13963,7 @@ proto.yartu.GetFileHistoryRequest.prototype.getLimit = function() {
  * @return {!proto.yartu.GetFileHistoryRequest} returns this
  */
 proto.yartu.GetFileHistoryRequest.prototype.setLimit = function(value) {
-  return jspb.Message.setProto3IntField(this, 5, value);
+  return jspb.Message.setProto3IntField(this, 4, value);
 };
 
 
