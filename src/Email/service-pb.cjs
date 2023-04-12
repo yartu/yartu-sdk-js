@@ -10160,7 +10160,7 @@ proto.yartu_mail.SearchRequest.prototype.clearAppList = function() {
  * @private {!Array<number>}
  * @const
  */
-proto.yartu_mail.SearchResponse.repeatedFields_ = [2];
+proto.yartu_mail.SearchResponse.repeatedFields_ = [2,3];
 
 
 
@@ -10194,10 +10194,12 @@ proto.yartu_mail.SearchResponse.prototype.toObject = function(opt_includeInstanc
 proto.yartu_mail.SearchResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    emailList: jspb.Message.toObjectList(msg.getEmailList(),
+    proto.yartu_mail.MailMessage.toObject, includeInstance),
     dataList: jspb.Message.toObjectList(msg.getDataList(),
     proto.yartu_mail.SearchResult.toObject, includeInstance),
     pagination: (f = msg.getPagination()) && proto.yartu_mail.PaginationMeta.toObject(includeInstance, f),
-    message: jspb.Message.getFieldWithDefault(msg, 4, "")
+    message: jspb.Message.getFieldWithDefault(msg, 5, "")
   };
 
   if (includeInstance) {
@@ -10239,16 +10241,21 @@ proto.yartu_mail.SearchResponse.deserializeBinaryFromReader = function(msg, read
       msg.setCode(value);
       break;
     case 2:
+      var value = new proto.yartu_mail.MailMessage;
+      reader.readMessage(value,proto.yartu_mail.MailMessage.deserializeBinaryFromReader);
+      msg.addEmail(value);
+      break;
+    case 3:
       var value = new proto.yartu_mail.SearchResult;
       reader.readMessage(value,proto.yartu_mail.SearchResult.deserializeBinaryFromReader);
       msg.addData(value);
       break;
-    case 3:
+    case 4:
       var value = new proto.yartu_mail.PaginationMeta;
       reader.readMessage(value,proto.yartu_mail.PaginationMeta.deserializeBinaryFromReader);
       msg.setPagination(value);
       break;
-    case 4:
+    case 5:
       var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
@@ -10288,10 +10295,18 @@ proto.yartu_mail.SearchResponse.serializeBinaryToWriter = function(message, writ
       f
     );
   }
-  f = message.getDataList();
+  f = message.getEmailList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
       2,
+      f,
+      proto.yartu_mail.MailMessage.serializeBinaryToWriter
+    );
+  }
+  f = message.getDataList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      3,
       f,
       proto.yartu_mail.SearchResult.serializeBinaryToWriter
     );
@@ -10299,15 +10314,15 @@ proto.yartu_mail.SearchResponse.serializeBinaryToWriter = function(message, writ
   f = message.getPagination();
   if (f != null) {
     writer.writeMessage(
-      3,
+      4,
       f,
       proto.yartu_mail.PaginationMeta.serializeBinaryToWriter
     );
   }
-  f = /** @type {string} */ (jspb.Message.getField(message, 4));
+  f = /** @type {string} */ (jspb.Message.getField(message, 5));
   if (f != null) {
     writer.writeString(
-      4,
+      5,
       f
     );
   }
@@ -10333,12 +10348,50 @@ proto.yartu_mail.SearchResponse.prototype.setCode = function(value) {
 
 
 /**
- * repeated SearchResult data = 2;
+ * repeated MailMessage email = 2;
+ * @return {!Array<!proto.yartu_mail.MailMessage>}
+ */
+proto.yartu_mail.SearchResponse.prototype.getEmailList = function() {
+  return /** @type{!Array<!proto.yartu_mail.MailMessage>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.yartu_mail.MailMessage, 2));
+};
+
+
+/**
+ * @param {!Array<!proto.yartu_mail.MailMessage>} value
+ * @return {!proto.yartu_mail.SearchResponse} returns this
+*/
+proto.yartu_mail.SearchResponse.prototype.setEmailList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 2, value);
+};
+
+
+/**
+ * @param {!proto.yartu_mail.MailMessage=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.yartu_mail.MailMessage}
+ */
+proto.yartu_mail.SearchResponse.prototype.addEmail = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.yartu_mail.MailMessage, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.yartu_mail.SearchResponse} returns this
+ */
+proto.yartu_mail.SearchResponse.prototype.clearEmailList = function() {
+  return this.setEmailList([]);
+};
+
+
+/**
+ * repeated SearchResult data = 3;
  * @return {!Array<!proto.yartu_mail.SearchResult>}
  */
 proto.yartu_mail.SearchResponse.prototype.getDataList = function() {
   return /** @type{!Array<!proto.yartu_mail.SearchResult>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.yartu_mail.SearchResult, 2));
+    jspb.Message.getRepeatedWrapperField(this, proto.yartu_mail.SearchResult, 3));
 };
 
 
@@ -10347,7 +10400,7 @@ proto.yartu_mail.SearchResponse.prototype.getDataList = function() {
  * @return {!proto.yartu_mail.SearchResponse} returns this
 */
 proto.yartu_mail.SearchResponse.prototype.setDataList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 2, value);
+  return jspb.Message.setRepeatedWrapperField(this, 3, value);
 };
 
 
@@ -10357,7 +10410,7 @@ proto.yartu_mail.SearchResponse.prototype.setDataList = function(value) {
  * @return {!proto.yartu_mail.SearchResult}
  */
 proto.yartu_mail.SearchResponse.prototype.addData = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.yartu_mail.SearchResult, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 3, opt_value, proto.yartu_mail.SearchResult, opt_index);
 };
 
 
@@ -10371,12 +10424,12 @@ proto.yartu_mail.SearchResponse.prototype.clearDataList = function() {
 
 
 /**
- * optional PaginationMeta pagination = 3;
+ * optional PaginationMeta pagination = 4;
  * @return {?proto.yartu_mail.PaginationMeta}
  */
 proto.yartu_mail.SearchResponse.prototype.getPagination = function() {
   return /** @type{?proto.yartu_mail.PaginationMeta} */ (
-    jspb.Message.getWrapperField(this, proto.yartu_mail.PaginationMeta, 3));
+    jspb.Message.getWrapperField(this, proto.yartu_mail.PaginationMeta, 4));
 };
 
 
@@ -10385,7 +10438,7 @@ proto.yartu_mail.SearchResponse.prototype.getPagination = function() {
  * @return {!proto.yartu_mail.SearchResponse} returns this
 */
 proto.yartu_mail.SearchResponse.prototype.setPagination = function(value) {
-  return jspb.Message.setWrapperField(this, 3, value);
+  return jspb.Message.setWrapperField(this, 4, value);
 };
 
 
@@ -10403,16 +10456,16 @@ proto.yartu_mail.SearchResponse.prototype.clearPagination = function() {
  * @return {boolean}
  */
 proto.yartu_mail.SearchResponse.prototype.hasPagination = function() {
-  return jspb.Message.getField(this, 3) != null;
+  return jspb.Message.getField(this, 4) != null;
 };
 
 
 /**
- * optional string message = 4;
+ * optional string message = 5;
  * @return {string}
  */
 proto.yartu_mail.SearchResponse.prototype.getMessage = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
 };
 
 
@@ -10421,7 +10474,7 @@ proto.yartu_mail.SearchResponse.prototype.getMessage = function() {
  * @return {!proto.yartu_mail.SearchResponse} returns this
  */
 proto.yartu_mail.SearchResponse.prototype.setMessage = function(value) {
-  return jspb.Message.setField(this, 4, value);
+  return jspb.Message.setField(this, 5, value);
 };
 
 
@@ -10430,7 +10483,7 @@ proto.yartu_mail.SearchResponse.prototype.setMessage = function(value) {
  * @return {!proto.yartu_mail.SearchResponse} returns this
  */
 proto.yartu_mail.SearchResponse.prototype.clearMessage = function() {
-  return jspb.Message.setField(this, 4, undefined);
+  return jspb.Message.setField(this, 5, undefined);
 };
 
 
@@ -10439,7 +10492,7 @@ proto.yartu_mail.SearchResponse.prototype.clearMessage = function() {
  * @return {boolean}
  */
 proto.yartu_mail.SearchResponse.prototype.hasMessage = function() {
-  return jspb.Message.getField(this, 4) != null;
+  return jspb.Message.getField(this, 5) != null;
 };
 
 
