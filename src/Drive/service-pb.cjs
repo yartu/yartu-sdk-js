@@ -14010,7 +14010,8 @@ proto.yartu.GetFileHistoryResponse.toObject = function(includeInstance, msg) {
     dataList: jspb.Message.toObjectList(msg.getDataList(),
     proto.yartu.FileHistoryEntry.toObject, includeInstance),
     more: jspb.Message.getBooleanFieldWithDefault(msg, 3, false),
-    message: jspb.Message.getFieldWithDefault(msg, 4, "")
+    nextCommitId: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    message: jspb.Message.getFieldWithDefault(msg, 5, "")
   };
 
   if (includeInstance) {
@@ -14061,6 +14062,10 @@ proto.yartu.GetFileHistoryResponse.deserializeBinaryFromReader = function(msg, r
       msg.setMore(value);
       break;
     case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setNextCommitId(value);
+      break;
+    case 5:
       var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
@@ -14115,10 +14120,17 @@ proto.yartu.GetFileHistoryResponse.serializeBinaryToWriter = function(message, w
       f
     );
   }
-  f = /** @type {string} */ (jspb.Message.getField(message, 4));
-  if (f != null) {
+  f = message.getNextCommitId();
+  if (f.length > 0) {
     writer.writeString(
       4,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 5));
+  if (f != null) {
+    writer.writeString(
+      5,
       f
     );
   }
@@ -14200,10 +14212,10 @@ proto.yartu.GetFileHistoryResponse.prototype.setMore = function(value) {
 
 
 /**
- * optional string message = 4;
+ * optional string next_commit_id = 4;
  * @return {string}
  */
-proto.yartu.GetFileHistoryResponse.prototype.getMessage = function() {
+proto.yartu.GetFileHistoryResponse.prototype.getNextCommitId = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
 };
 
@@ -14212,8 +14224,26 @@ proto.yartu.GetFileHistoryResponse.prototype.getMessage = function() {
  * @param {string} value
  * @return {!proto.yartu.GetFileHistoryResponse} returns this
  */
+proto.yartu.GetFileHistoryResponse.prototype.setNextCommitId = function(value) {
+  return jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional string message = 5;
+ * @return {string}
+ */
+proto.yartu.GetFileHistoryResponse.prototype.getMessage = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.GetFileHistoryResponse} returns this
+ */
 proto.yartu.GetFileHistoryResponse.prototype.setMessage = function(value) {
-  return jspb.Message.setField(this, 4, value);
+  return jspb.Message.setField(this, 5, value);
 };
 
 
@@ -14222,7 +14252,7 @@ proto.yartu.GetFileHistoryResponse.prototype.setMessage = function(value) {
  * @return {!proto.yartu.GetFileHistoryResponse} returns this
  */
 proto.yartu.GetFileHistoryResponse.prototype.clearMessage = function() {
-  return jspb.Message.setField(this, 4, undefined);
+  return jspb.Message.setField(this, 5, undefined);
 };
 
 
@@ -14231,7 +14261,7 @@ proto.yartu.GetFileHistoryResponse.prototype.clearMessage = function() {
  * @return {boolean}
  */
 proto.yartu.GetFileHistoryResponse.prototype.hasMessage = function() {
-  return jspb.Message.getField(this, 4) != null;
+  return jspb.Message.getField(this, 5) != null;
 };
 
 
