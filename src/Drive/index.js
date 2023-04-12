@@ -650,6 +650,7 @@ export default (config) =>
                   code: 0,
                   data: dataList,
                   more: response.getMore(),
+                  nextCommitId: response.getNextCommitId(),
                   message: response.getMessage()
                 });
               } else {
