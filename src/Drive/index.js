@@ -272,10 +272,23 @@ export default (config) =>
               const code = response.getCode();
 
               if (code == 0) {
+                const fileList = [];
+                const dirList = [];
                 const dataList = response.getDataList().map((data) => data.toObject());
+                response.getDataList().map((data) => {
+                  let dirent = data.toObject();
+                  dirent.path = `${dirent.parentDir}${dirent.name}`;
+                  if (dirent.isFile) {
+                    fileList.push({ ...dirent, id: dirent.objId, type: 'file'});
+                  } else {
+                    dirList.push({ ...dirent, id: dirent.objId, type: 'dir'});
+                  }
+                });
                 resolve({
                   code: 0,
                   data: dataList,
+                  files: fileList,
+                  dirs: dirList,
                   more: response.getMore(),
                   scanStat: response.getScanStat(),
                   message: response.getMessage()
