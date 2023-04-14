@@ -785,9 +785,16 @@ export default (config) =>
           } else {
             const code = response.getCode();
             if (code == 0) {
+              const board = response.getBoard().toObject();
+              try {
+                board['permission'] = JSON.parse(board['permission']['json']);
+              } catch (err) {
+                console.log(err);
+              }
               resolve({
                 code,
-                board: response.getBoard().toObject(),
+                board,
+                userPermission: response.getUserPermission(),
               });
             } else {
               reject({

@@ -18574,7 +18574,8 @@ proto.yartu.GetBoardResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     code: jspb.Message.getFieldWithDefault(msg, 1, 0),
     board: (f = msg.getBoard()) && proto.yartu.Board.toObject(includeInstance, f),
-    message: jspb.Message.getFieldWithDefault(msg, 3, "")
+    userPermission: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    message: jspb.Message.getFieldWithDefault(msg, 4, "")
   };
 
   if (includeInstance) {
@@ -18621,6 +18622,10 @@ proto.yartu.GetBoardResponse.deserializeBinaryFromReader = function(msg, reader)
       msg.setBoard(value);
       break;
     case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setUserPermission(value);
+      break;
+    case 4:
       var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
@@ -18672,6 +18677,13 @@ proto.yartu.GetBoardResponse.serializeBinaryToWriter = function(message, writer)
   if (f != null) {
     writer.writeString(
       3,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 4));
+  if (f != null) {
+    writer.writeString(
+      4,
       f
     );
   }
@@ -18734,10 +18746,10 @@ proto.yartu.GetBoardResponse.prototype.hasBoard = function() {
 
 
 /**
- * optional string message = 3;
+ * optional string user_permission = 3;
  * @return {string}
  */
-proto.yartu.GetBoardResponse.prototype.getMessage = function() {
+proto.yartu.GetBoardResponse.prototype.getUserPermission = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
@@ -18746,7 +18758,7 @@ proto.yartu.GetBoardResponse.prototype.getMessage = function() {
  * @param {string} value
  * @return {!proto.yartu.GetBoardResponse} returns this
  */
-proto.yartu.GetBoardResponse.prototype.setMessage = function(value) {
+proto.yartu.GetBoardResponse.prototype.setUserPermission = function(value) {
   return jspb.Message.setField(this, 3, value);
 };
 
@@ -18755,7 +18767,7 @@ proto.yartu.GetBoardResponse.prototype.setMessage = function(value) {
  * Clears the field making it undefined.
  * @return {!proto.yartu.GetBoardResponse} returns this
  */
-proto.yartu.GetBoardResponse.prototype.clearMessage = function() {
+proto.yartu.GetBoardResponse.prototype.clearUserPermission = function() {
   return jspb.Message.setField(this, 3, undefined);
 };
 
@@ -18764,8 +18776,44 @@ proto.yartu.GetBoardResponse.prototype.clearMessage = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu.GetBoardResponse.prototype.hasMessage = function() {
+proto.yartu.GetBoardResponse.prototype.hasUserPermission = function() {
   return jspb.Message.getField(this, 3) != null;
+};
+
+
+/**
+ * optional string message = 4;
+ * @return {string}
+ */
+proto.yartu.GetBoardResponse.prototype.getMessage = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.GetBoardResponse} returns this
+ */
+proto.yartu.GetBoardResponse.prototype.setMessage = function(value) {
+  return jspb.Message.setField(this, 4, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.GetBoardResponse} returns this
+ */
+proto.yartu.GetBoardResponse.prototype.clearMessage = function() {
+  return jspb.Message.setField(this, 4, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.GetBoardResponse.prototype.hasMessage = function() {
+  return jspb.Message.getField(this, 4) != null;
 };
 
 
