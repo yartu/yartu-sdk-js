@@ -21,6 +21,8 @@ import {
 import { YEmailClient } from './service-grpc-web-pb.cjs';
 import { handleError } from '../utils/helper';
 
+import { sanitize } from '../utils/xss_filter.js';
+
 export default (config) =>
   class Email {
     endpoint = 'http://localhost:5001';
@@ -104,7 +106,7 @@ export default (config) =>
       });
     }
 
-    getMessage(emailUuid) {
+    getMessage(emailUuid, filter_xss = true) {
       return new Promise((resolve, reject) => {
         const request = new GetMessageRequest();
         request.setUuid(emailUuid);
@@ -116,6 +118,10 @@ export default (config) =>
 
             if (code == 0) {
               const data = response.getEmail().toObject();
+              if (filter_xss) {
+                // filtered body and return
+                data.body = sanitize(data.body);
+              }
               resolve({
                 data: data
               });
