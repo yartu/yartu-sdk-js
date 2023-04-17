@@ -44,6 +44,7 @@ import {
 
   // Column services
   UpsertColumnRequest,
+  DeleteColumnRequest,
   ArchiveAllCardsInColumnRequest,
 
   // Share Board services
@@ -2002,6 +2003,34 @@ export default (config) =>
             } else {
               reject({
                 code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    deleteColumn(boardId, columnId) {
+      return new Promise((resolve, reject) => {
+        const request = new DeleteColumnRequest();
+
+        request.setBoardId(boardId);
+        request.setId(columnId);
+
+        this.client.deleteColumn(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage(),
+              })
+            } else {
+              reject({
+                code,
                 message: response.getMessage()
               });
             }

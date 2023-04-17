@@ -1787,6 +1787,67 @@ proto.yartu.YProjectPromiseClient.prototype.upsertColumn =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.DeleteColumnRequest,
+ *   !proto.yartu.DeleteColumnResponse>}
+ */
+const methodDescriptor_YProject_deleteColumn = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/deleteColumn',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.DeleteColumnRequest,
+  proto.yartu.DeleteColumnResponse,
+  /**
+   * @param {!proto.yartu.DeleteColumnRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.DeleteColumnResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.DeleteColumnRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.DeleteColumnResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.DeleteColumnResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.deleteColumn =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/deleteColumn',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_deleteColumn,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.DeleteColumnRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.DeleteColumnResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.deleteColumn =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/deleteColumn',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_deleteColumn);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.ArchiveAllCardsInColumnRequest,
  *   !proto.yartu.ArchiveAllCardsInColumnResponse>}
  */
