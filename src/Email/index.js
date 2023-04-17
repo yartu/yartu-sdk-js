@@ -434,6 +434,21 @@ export default (config) =>
         this.yartuSdk.user.name + ' ' + this.yartuSdk.user.surname
       );
 
+      const parser = new DOMParser();
+      const document = parser.parseFromString(data.body, 'text/html');
+      const images = document.querySelectorAll('img');
+
+      const signatureQuery = document.querySelectorAll('p[signature]');
+
+      if (signatureQuery?.length > 0) {
+        const signature = signatureQuery[0].getAttribute('signature');
+        data.body += signature;
+      }
+
+      if (images?.length > 0) {
+        // TODO: cid:images
+      }
+
       request.setSubject(data.subject);
       request.setBody(data.body); // html
       request.setTextBody(data.bodyText); // text
