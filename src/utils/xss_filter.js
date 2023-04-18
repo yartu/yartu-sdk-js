@@ -83,7 +83,6 @@ export const xssOptions = (yartuAttach = {}) => {
       },
       img: (tagName, attribs) => {
         let source = attribs.src;
-        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
         if (source) {
           if (source.includes('cid:')) {
             attribs['yartu-name'] = 'yartu-attach-fileeee';
@@ -95,7 +94,7 @@ export const xssOptions = (yartuAttach = {}) => {
               const base64 = Buffer.from(attribs.src, 'utf8').toString(
                 'base64'
               );
-              source = `/assets/notAllowed.svg?base=${base64}`;
+              source = `/assets/not.svg?base=/${base64}`;
             }
           }
         }
