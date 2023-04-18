@@ -19,6 +19,7 @@ import {
   UpsertDirentRequest,
   LockDirentRequest,
   UnlockDirentRequest,
+  DownloadDirentRequest,
 
   // Share
   ListShareRequest,
@@ -1041,6 +1042,41 @@ export default (config) =>
               resolve({
                 code: 0,
                 data: dataList,
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
+    downloadDirent = (repoId, paths = [], asList = false) => {
+      return new Promise((resolve, reject) => {
+        const request = new DownloadDirentRequest();
+
+        request.setRepoId(repoId);
+        request.setPathList(paths);
+        request.setAsList(asList);
+
+        this.client.downloadDirent(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              const tokenList = response
+                .getTokenList()
+                .map((data) => data.toObject());
+
+              resolve({
+                code: 0,
+                data: tokenList,
                 message: response.getMessage()
               });
             } else {
