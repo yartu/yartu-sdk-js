@@ -1162,7 +1162,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.yartu.GetOfficeFileResponse = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.yartu.GetOfficeFileResponse.repeatedFields_, null);
 };
 goog.inherits(proto.yartu.GetOfficeFileResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -15194,6 +15194,13 @@ proto.yartu.GetOfficeFileRequest.prototype.setToken = function(value) {
 
 
 
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.yartu.GetOfficeFileResponse.repeatedFields_ = [7];
+
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -15231,7 +15238,9 @@ proto.yartu.GetOfficeFileResponse.toObject = function(includeInstance, msg) {
     officeToken: jspb.Message.getFieldWithDefault(msg, 4, ""),
     fileToken: jspb.Message.getFieldWithDefault(msg, 5, ""),
     jwtToken: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    message: jspb.Message.getFieldWithDefault(msg, 7, "")
+    shareList: jspb.Message.toObjectList(msg.getShareList(),
+    common_grpc_definitions_pb.Shared.toObject, includeInstance),
+    message: jspb.Message.getFieldWithDefault(msg, 8, "")
   };
 
   if (includeInstance) {
@@ -15294,6 +15303,11 @@ proto.yartu.GetOfficeFileResponse.deserializeBinaryFromReader = function(msg, re
       msg.setJwtToken(value);
       break;
     case 7:
+      var value = new common_grpc_definitions_pb.Shared;
+      reader.readMessage(value,common_grpc_definitions_pb.Shared.deserializeBinaryFromReader);
+      msg.addShare(value);
+      break;
+    case 8:
       var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
@@ -15369,10 +15383,18 @@ proto.yartu.GetOfficeFileResponse.serializeBinaryToWriter = function(message, wr
       f
     );
   }
-  f = /** @type {string} */ (jspb.Message.getField(message, 7));
+  f = message.getShareList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      7,
+      f,
+      common_grpc_definitions_pb.Shared.serializeBinaryToWriter
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 8));
   if (f != null) {
     writer.writeString(
-      7,
+      8,
       f
     );
   }
@@ -15507,11 +15529,49 @@ proto.yartu.GetOfficeFileResponse.prototype.setJwtToken = function(value) {
 
 
 /**
- * optional string message = 7;
+ * repeated Shared share = 7;
+ * @return {!Array<!proto.Shared>}
+ */
+proto.yartu.GetOfficeFileResponse.prototype.getShareList = function() {
+  return /** @type{!Array<!proto.Shared>} */ (
+    jspb.Message.getRepeatedWrapperField(this, common_grpc_definitions_pb.Shared, 7));
+};
+
+
+/**
+ * @param {!Array<!proto.Shared>} value
+ * @return {!proto.yartu.GetOfficeFileResponse} returns this
+*/
+proto.yartu.GetOfficeFileResponse.prototype.setShareList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 7, value);
+};
+
+
+/**
+ * @param {!proto.Shared=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.Shared}
+ */
+proto.yartu.GetOfficeFileResponse.prototype.addShare = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 7, opt_value, proto.Shared, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.yartu.GetOfficeFileResponse} returns this
+ */
+proto.yartu.GetOfficeFileResponse.prototype.clearShareList = function() {
+  return this.setShareList([]);
+};
+
+
+/**
+ * optional string message = 8;
  * @return {string}
  */
 proto.yartu.GetOfficeFileResponse.prototype.getMessage = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
 };
 
 
@@ -15520,7 +15580,7 @@ proto.yartu.GetOfficeFileResponse.prototype.getMessage = function() {
  * @return {!proto.yartu.GetOfficeFileResponse} returns this
  */
 proto.yartu.GetOfficeFileResponse.prototype.setMessage = function(value) {
-  return jspb.Message.setField(this, 7, value);
+  return jspb.Message.setField(this, 8, value);
 };
 
 
@@ -15529,7 +15589,7 @@ proto.yartu.GetOfficeFileResponse.prototype.setMessage = function(value) {
  * @return {!proto.yartu.GetOfficeFileResponse} returns this
  */
 proto.yartu.GetOfficeFileResponse.prototype.clearMessage = function() {
-  return jspb.Message.setField(this, 7, undefined);
+  return jspb.Message.setField(this, 8, undefined);
 };
 
 
@@ -15538,7 +15598,7 @@ proto.yartu.GetOfficeFileResponse.prototype.clearMessage = function() {
  * @return {boolean}
  */
 proto.yartu.GetOfficeFileResponse.prototype.hasMessage = function() {
-  return jspb.Message.getField(this, 7) != null;
+  return jspb.Message.getField(this, 8) != null;
 };
 
 
