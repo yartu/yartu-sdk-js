@@ -826,9 +826,6 @@ export default (config) =>
     };
 
     share = (repoId, path, description, shareList) => {
-      console.log('-----------------------------------------------------')
-      console.log('SDK:SHARE:', repoId, path, description, shareList);
-      console.log('-----------------------------------------------------')
       return new Promise((resolve, reject) => {
         const request = new ShareRequest();
         request.setRepoId(repoId);
