@@ -933,6 +933,67 @@ proto.yartu.YDrivePromiseClient.prototype.downloadDirent =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.QueryZipProgressRequest,
+ *   !proto.yartu.QueryZipProgressResponse>}
+ */
+const methodDescriptor_YDrive_queryZipProgress = new grpc.web.MethodDescriptor(
+  '/yartu.YDrive/queryZipProgress',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.QueryZipProgressRequest,
+  proto.yartu.QueryZipProgressResponse,
+  /**
+   * @param {!proto.yartu.QueryZipProgressRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.QueryZipProgressResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.QueryZipProgressRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.QueryZipProgressResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.QueryZipProgressResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YDriveClient.prototype.queryZipProgress =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YDrive/queryZipProgress',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_queryZipProgress,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.QueryZipProgressRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.QueryZipProgressResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YDrivePromiseClient.prototype.queryZipProgress =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YDrive/queryZipProgress',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_queryZipProgress);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.LockDirentRequest,
  *   !proto.yartu.LockDirentResponse>}
  */
