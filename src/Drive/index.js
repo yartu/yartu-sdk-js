@@ -736,6 +736,7 @@ export default (config) =>
               const officeToken = response.getOfficeToken();
               const fileToken = response.getFileToken();
               const jwtToken = response.getJwtToken();
+              const shareList = response.getShareList().map((data) => data.toObject());
 
               resolve({
                 code: code,
@@ -743,7 +744,8 @@ export default (config) =>
                 fileType,
                 officeToken,
                 fileToken,
-                jwtToken
+                jwtToken,
+                shareList,
               });
             } else {
               reject({
