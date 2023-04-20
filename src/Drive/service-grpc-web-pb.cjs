@@ -445,6 +445,67 @@ proto.yartu.YDrivePromiseClient.prototype.listRepo =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.SetRepoPasswordRequest,
+ *   !proto.yartu.SetRepoPasswordResponse>}
+ */
+const methodDescriptor_YDrive_setRepoPassword = new grpc.web.MethodDescriptor(
+  '/yartu.YDrive/setRepoPassword',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.SetRepoPasswordRequest,
+  proto.yartu.SetRepoPasswordResponse,
+  /**
+   * @param {!proto.yartu.SetRepoPasswordRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.SetRepoPasswordResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.SetRepoPasswordRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.SetRepoPasswordResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.SetRepoPasswordResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YDriveClient.prototype.setRepoPassword =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YDrive/setRepoPassword',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_setRepoPassword,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.SetRepoPasswordRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.SetRepoPasswordResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YDrivePromiseClient.prototype.setRepoPassword =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YDrive/setRepoPassword',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_setRepoPassword);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.GetRepoHistoryRequest,
  *   !proto.yartu.GetRepoHistoryResponse>}
  */
