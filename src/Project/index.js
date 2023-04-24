@@ -823,6 +823,10 @@ export default (config) =>
           request.setTemplateUuid(boardData.template.uuid);
         }
 
+        if (typeof boardData.permission === 'string') {
+          request.setPermission(boardData.permission);
+        }
+
         if (!boardData.uuid) {
           const ShareList = [];
           boardData.sharedList.forEach(s => {
