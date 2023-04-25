@@ -1906,5 +1906,615 @@ proto.yartu.YDrivePromiseClient.prototype.sharedByMe =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.ListPublicShareRequest,
+ *   !proto.yartu.ListPublicShareResponse>}
+ */
+const methodDescriptor_YDrive_listPublicShare = new grpc.web.MethodDescriptor(
+  '/yartu.YDrive/listPublicShare',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.ListPublicShareRequest,
+  proto.yartu.ListPublicShareResponse,
+  /**
+   * @param {!proto.yartu.ListPublicShareRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.ListPublicShareResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.ListPublicShareRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ListPublicShareResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ListPublicShareResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YDriveClient.prototype.listPublicShare =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YDrive/listPublicShare',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_listPublicShare,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.ListPublicShareRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.ListPublicShareResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YDrivePromiseClient.prototype.listPublicShare =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YDrive/listPublicShare',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_listPublicShare);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.UpsertPublicShareRequest,
+ *   !proto.yartu.UpsertPublicShareResponse>}
+ */
+const methodDescriptor_YDrive_upsertPublicShare = new grpc.web.MethodDescriptor(
+  '/yartu.YDrive/upsertPublicShare',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.UpsertPublicShareRequest,
+  proto.yartu.UpsertPublicShareResponse,
+  /**
+   * @param {!proto.yartu.UpsertPublicShareRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.UpsertPublicShareResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.UpsertPublicShareRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.UpsertPublicShareResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.UpsertPublicShareResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YDriveClient.prototype.upsertPublicShare =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YDrive/upsertPublicShare',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_upsertPublicShare,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.UpsertPublicShareRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.UpsertPublicShareResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YDrivePromiseClient.prototype.upsertPublicShare =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YDrive/upsertPublicShare',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_upsertPublicShare);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.DeletePublicShareRequest,
+ *   !proto.yartu.DeletePublicShareResponse>}
+ */
+const methodDescriptor_YDrive_deletePublicShare = new grpc.web.MethodDescriptor(
+  '/yartu.YDrive/deletePublicShare',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.DeletePublicShareRequest,
+  proto.yartu.DeletePublicShareResponse,
+  /**
+   * @param {!proto.yartu.DeletePublicShareRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.DeletePublicShareResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.DeletePublicShareRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.DeletePublicShareResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.DeletePublicShareResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YDriveClient.prototype.deletePublicShare =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YDrive/deletePublicShare',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_deletePublicShare,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.DeletePublicShareRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.DeletePublicShareResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YDrivePromiseClient.prototype.deletePublicShare =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YDrive/deletePublicShare',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_deletePublicShare);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.GetPublicShareRequest,
+ *   !proto.yartu.GetPublicShareResponse>}
+ */
+const methodDescriptor_YDrive_getPublicShare = new grpc.web.MethodDescriptor(
+  '/yartu.YDrive/getPublicShare',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.GetPublicShareRequest,
+  proto.yartu.GetPublicShareResponse,
+  /**
+   * @param {!proto.yartu.GetPublicShareRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.GetPublicShareResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.GetPublicShareRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.GetPublicShareResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.GetPublicShareResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YDriveClient.prototype.getPublicShare =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YDrive/getPublicShare',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_getPublicShare,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.GetPublicShareRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.GetPublicShareResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YDrivePromiseClient.prototype.getPublicShare =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YDrive/getPublicShare',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_getPublicShare);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.ListUploadPointRequest,
+ *   !proto.yartu.ListUploadPointResponse>}
+ */
+const methodDescriptor_YDrive_listUploadPoint = new grpc.web.MethodDescriptor(
+  '/yartu.YDrive/listUploadPoint',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.ListUploadPointRequest,
+  proto.yartu.ListUploadPointResponse,
+  /**
+   * @param {!proto.yartu.ListUploadPointRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.ListUploadPointResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.ListUploadPointRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ListUploadPointResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ListUploadPointResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YDriveClient.prototype.listUploadPoint =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YDrive/listUploadPoint',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_listUploadPoint,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.ListUploadPointRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.ListUploadPointResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YDrivePromiseClient.prototype.listUploadPoint =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YDrive/listUploadPoint',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_listUploadPoint);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.UpsertUploadPointRequest,
+ *   !proto.yartu.UpsertUploadPointResponse>}
+ */
+const methodDescriptor_YDrive_upsertUploadPoint = new grpc.web.MethodDescriptor(
+  '/yartu.YDrive/upsertUploadPoint',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.UpsertUploadPointRequest,
+  proto.yartu.UpsertUploadPointResponse,
+  /**
+   * @param {!proto.yartu.UpsertUploadPointRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.UpsertUploadPointResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.UpsertUploadPointRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.UpsertUploadPointResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.UpsertUploadPointResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YDriveClient.prototype.upsertUploadPoint =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YDrive/upsertUploadPoint',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_upsertUploadPoint,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.UpsertUploadPointRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.UpsertUploadPointResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YDrivePromiseClient.prototype.upsertUploadPoint =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YDrive/upsertUploadPoint',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_upsertUploadPoint);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.DeleteUploadPointRequest,
+ *   !proto.yartu.DeleteUploadPointResponse>}
+ */
+const methodDescriptor_YDrive_deleteUploadPoint = new grpc.web.MethodDescriptor(
+  '/yartu.YDrive/deleteUploadPoint',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.DeleteUploadPointRequest,
+  proto.yartu.DeleteUploadPointResponse,
+  /**
+   * @param {!proto.yartu.DeleteUploadPointRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.DeleteUploadPointResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.DeleteUploadPointRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.DeleteUploadPointResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.DeleteUploadPointResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YDriveClient.prototype.deleteUploadPoint =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YDrive/deleteUploadPoint',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_deleteUploadPoint,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.DeleteUploadPointRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.DeleteUploadPointResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YDrivePromiseClient.prototype.deleteUploadPoint =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YDrive/deleteUploadPoint',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_deleteUploadPoint);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.GetUploadPointRequest,
+ *   !proto.yartu.GetUploadPointResponse>}
+ */
+const methodDescriptor_YDrive_getUploadPoint = new grpc.web.MethodDescriptor(
+  '/yartu.YDrive/getUploadPoint',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.GetUploadPointRequest,
+  proto.yartu.GetUploadPointResponse,
+  /**
+   * @param {!proto.yartu.GetUploadPointRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.GetUploadPointResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.GetUploadPointRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.GetUploadPointResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.GetUploadPointResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YDriveClient.prototype.getUploadPoint =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YDrive/getUploadPoint',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_getUploadPoint,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.GetUploadPointRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.GetUploadPointResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YDrivePromiseClient.prototype.getUploadPoint =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YDrive/getUploadPoint',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_getUploadPoint);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.ListConnectedClientRequest,
+ *   !proto.yartu.ListConnectedClientResponse>}
+ */
+const methodDescriptor_YDrive_listConnectedClient = new grpc.web.MethodDescriptor(
+  '/yartu.YDrive/listConnectedClient',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.ListConnectedClientRequest,
+  proto.yartu.ListConnectedClientResponse,
+  /**
+   * @param {!proto.yartu.ListConnectedClientRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.ListConnectedClientResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.ListConnectedClientRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ListConnectedClientResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ListConnectedClientResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YDriveClient.prototype.listConnectedClient =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YDrive/listConnectedClient',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_listConnectedClient,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.ListConnectedClientRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.ListConnectedClientResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YDrivePromiseClient.prototype.listConnectedClient =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YDrive/listConnectedClient',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_listConnectedClient);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.SignOutClientRequest,
+ *   !proto.yartu.SignOutClientResponse>}
+ */
+const methodDescriptor_YDrive_signOutClient = new grpc.web.MethodDescriptor(
+  '/yartu.YDrive/signOutClient',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.SignOutClientRequest,
+  proto.yartu.SignOutClientResponse,
+  /**
+   * @param {!proto.yartu.SignOutClientRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.SignOutClientResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.SignOutClientRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.SignOutClientResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.SignOutClientResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YDriveClient.prototype.signOutClient =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YDrive/signOutClient',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_signOutClient,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.SignOutClientRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.SignOutClientResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YDrivePromiseClient.prototype.signOutClient =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YDrive/signOutClient',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_signOutClient);
+};
+
+
 module.exports = proto.yartu;
 

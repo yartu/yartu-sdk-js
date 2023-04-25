@@ -27,7 +27,24 @@ import {
   UnshareRequest,
   DeleteShareRequest,
   SharedWithMeRequest,
-  SharedByMeRequest
+  SharedByMeRequest,
+
+  // PublicShare (Share with link)
+  ListPublicShareRequest,
+  UpsertPublicShareRequest,
+  DeletePublicShareRequest,
+  GetPublicShareRequest,
+
+  // UploadPoint
+  ListUploadPointRequest,
+  UpsertUploadPointRequest,
+  DeleteUploadPointRequest,
+  GetUploadPointRequest,
+
+  // Client
+  ListConnectedClientRequest,
+  SignOutClientRequest,
+
 } from './service-pb.cjs';
 
 import { YDriveClient } from './service-grpc-web-pb.cjs';
@@ -1091,4 +1108,268 @@ export default (config) =>
         });
       });
     };
+
+    // PublicShare (Share with link)
+    listPublicShare = (repoId) => {
+      return new Promise((resolve, reject) => {
+        const request = new ListPublicShareRequest();
+        request.setRepoId(repoId);
+
+        this.client.listPublicShare(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
+    upsertPublicShare = (repoId) => {
+      return new Promise((resolve, reject) => {
+        const request = new UpsertPublicShareRequest();
+        request.setRepoId(repoId);
+
+        this.client.upsertPublicShare(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
+    deletePublicShare = () => {
+      return new Promise((resolve, reject) => {
+        const request = new DeletePublicShareRequest();
+        request.setRepoId(repoId);
+        request.setPath(path);
+        request.setStar(star);
+
+        this.client.deletePublicShare(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
+    getPublicShare = () => {
+      return new Promise((resolve, reject) => {
+        const request = new GetPublicShareRequest();
+        request.setRepoId(repoId);
+        request.setPath(path);
+        request.setStar(star);
+
+        this.client.getPublicShare(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
+    // UploadPoint
+    listUploadPoint = () => {
+      return new Promise((resolve, reject) => {
+        const request = new ListUploadPointRequest();
+
+        this.client.listUploadPoint(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
+    upsertUploadPoint = () => {
+      return new Promise((resolve, reject) => {
+        const request = new UpsertUploadPointRequest();
+        request.setRepoId(repoId);
+        request.setPath(path);
+        request.setStar(star);
+
+        this.client.upsertUploadPoint(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
+    deleteUploadPoint = () => {
+      return new Promise((resolve, reject) => {
+        const request = new DeleteUploadPointRequest();
+        request.setRepoId(repoId);
+        request.setPath(path);
+        request.setStar(star);
+
+        this.client.deleteUploadPoint(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
+    getUploadPoint = () => {
+      return new Promise((resolve, reject) => {
+        const request = new GetUploadPointRequest();
+
+        this.client.getUploadPoint(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
+    // Client
+    listConnectedClient = () => {
+      return new Promise((resolve, reject) => {
+        const request = new ListConnectedClientRequest();
+
+        this.client.listConnectedClient(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              const dataList = response.getDataList().map((data) => data.toObject());
+              resolve({
+                code,
+                data: dataList,
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
+    signOutClient = (deviceId = '', platform = '', wipe = false) => {
+      return new Promise((resolve, reject) => {
+        const request = new SignOutClientRequest();
+        request.setDeviceId(deviceId);
+        request.setPlatform(platform);
+        request.setWipe(wipe);
+
+        this.client.signOutClient(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
   };
