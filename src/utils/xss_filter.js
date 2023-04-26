@@ -85,9 +85,9 @@ export const xssOptions = (yartuAttach = {}) => {
         let source = attribs.src;
         if (source) {
           if (source.includes('cid:')) {
-            attribs['yartu-name'] = 'yartu-attach-fileeee';
+            attribs['yartu-name'] = 'yartu-attach-file';
             const cid = source.replace('cid:', '');
-            source = `/file/attahments/${yartuAttach.uuid}/${cid}`;
+            source = `/file/attachment/${yartuAttach.uuid}?cid=${cid}`;
           } else {
             attribs['yartu-name'] = 'yartu-image';
             if (source.includes('//')) {

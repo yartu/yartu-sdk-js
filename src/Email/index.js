@@ -170,8 +170,10 @@ export default (config) =>
     uploadAttachment(name, type = 'attachment') {
       return new Promise((resolve, reject) => {
         const request = new UploadAttachmentRequest();
+
         request.setName(name);
-        // request.setType(type);
+        request.setType(type);
+
         this.client.uploadAttachment(
           request,
           this.metadata,
@@ -436,8 +438,6 @@ export default (config) =>
 
       const parser = new DOMParser();
       const document = parser.parseFromString(data.body, 'text/html');
-      const images = document.querySelectorAll('img');
-
       const signatureQuery = document.querySelectorAll('p[signature]');
 
       if (signatureQuery?.length > 0) {
@@ -445,9 +445,7 @@ export default (config) =>
         data.body += signature;
       }
 
-      if (images?.length > 0) {
-        // TODO: cid:images
-      }
+      data.body = data.body.replace(/\/file\/attachment\/draft?cid=/g, 'cid:');
 
       request.setSubject(data.subject);
       request.setBody(data.body); // html
