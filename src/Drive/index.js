@@ -1215,9 +1215,11 @@ export default (config) =>
     };
 
     // UploadPoint
-    listUploadPoint = () => {
+    listUploadPoint = (repoId, path) => {
       return new Promise((resolve, reject) => {
         const request = new ListUploadPointRequest();
+        request.setRepoId(repoId);
+        request.setPath(path);
 
         this.client.listUploadPoint(request, this.metadata, (error, response) => {
           if (error) {
@@ -1225,13 +1227,16 @@ export default (config) =>
           } else {
             const code = response.getCode();
             if (code == 0) {
+              const dataList = response.getDataList().map((data) => data.toObject());
               resolve({
-                code
+                code,
+                data: dataList,
+                message: response.getMessage(),
               });
             } else {
               reject({
                 code: code,
-                message: response.getMessage()
+                message: response.getMessage(),
               });
             }
           }
@@ -1239,12 +1244,26 @@ export default (config) =>
       });
     };
 
-    upsertUploadPoint = () => {
+    upsertUploadPoint = (
+      repoId,
+      path,
+      description,
+      password,
+      expireDate,
+      fileCountLimit,
+      fileSizeLimit,
+      extensionList = [],
+    ) => {
       return new Promise((resolve, reject) => {
         const request = new UpsertUploadPointRequest();
         request.setRepoId(repoId);
         request.setPath(path);
-        request.setStar(star);
+        request.setDescription(description);
+        request.setPassword(password);
+        request.setExpireDate(expireDate);
+        request.setFileCountLimit(fileCountLimit);
+        request.setFileSizeLimit(fileSizeLimit);
+        request.setExtensionListList(extensionList);
 
         this.client.upsertUploadPoint(request, this.metadata, (error, response) => {
           if (error) {
@@ -1252,12 +1271,15 @@ export default (config) =>
           } else {
             const code = response.getCode();
             if (code == 0) {
+              const data = response.getData().toObject();
               resolve({
-                code
+                code,
+                data,
+                message: response.getMessage()
               });
             } else {
               reject({
-                code: code,
+                code,
                 message: response.getMessage()
               });
             }
@@ -1266,12 +1288,10 @@ export default (config) =>
       });
     };
 
-    deleteUploadPoint = () => {
+    deleteUploadPoint = (token) => {
       return new Promise((resolve, reject) => {
         const request = new DeleteUploadPointRequest();
-        request.setRepoId(repoId);
-        request.setPath(path);
-        request.setStar(star);
+        request.setToken(token);
 
         this.client.deleteUploadPoint(request, this.metadata, (error, response) => {
           if (error) {
@@ -1280,7 +1300,8 @@ export default (config) =>
             const code = response.getCode();
             if (code == 0) {
               resolve({
-                code
+                code: code,
+                message: response.getMessage()
               });
             } else {
               reject({
@@ -1293,9 +1314,11 @@ export default (config) =>
       });
     };
 
-    getUploadPoint = () => {
+    getUploadPoint = (token, password = '') => {
       return new Promise((resolve, reject) => {
         const request = new GetUploadPointRequest();
+        request.setToken(token);
+        request.setPassword(password);
 
         this.client.getUploadPoint(request, this.metadata, (error, response) => {
           if (error) {
@@ -1303,8 +1326,16 @@ export default (config) =>
           } else {
             const code = response.getCode();
             if (code == 0) {
+              const data = response.getData().toObject();
+              const passwordNeeded = response.getPasswordNeeded();
+              const uploadKey = response.getUploadKey();
+
               resolve({
-                code
+                code,
+                data,
+                passwordNeeded,
+                uploadKey,
+                message: response.getMessage()
               });
             } else {
               reject({
