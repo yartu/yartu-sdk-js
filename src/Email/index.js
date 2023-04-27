@@ -445,7 +445,7 @@ export default (config) =>
         data.body += signature;
       }
 
-      data.body = data.body.replace(/\/file\/attachment\/draft?cid=/g, 'cid:');
+      data.body = data.body.replaceAll('/file/attachment/draft?cid=', 'cid:');
 
       request.setSubject(data.subject);
       request.setBody(data.body); // html

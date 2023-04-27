@@ -84,11 +84,13 @@ export const xssOptions = (yartuAttach = {}) => {
       img: (tagName, attribs) => {
         let source = attribs.src;
         if (source) {
+          const yartuName = attribs['yartu-name'];
+
           if (source.includes('cid:')) {
             attribs['yartu-name'] = 'yartu-attach-file';
             const cid = source.replace('cid:', '');
             source = `/file/attachment/${yartuAttach.uuid}?cid=${cid}`;
-          } else {
+          } else if (!yartuName) {
             attribs['yartu-name'] = 'yartu-image';
             if (source.includes('//')) {
               const base64 = Buffer.from(attribs.src, 'utf8').toString(
