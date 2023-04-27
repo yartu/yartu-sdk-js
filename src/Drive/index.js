@@ -1110,10 +1110,12 @@ export default (config) =>
     };
 
     // PublicShare (Share with link)
-    listPublicShare = (repoId) => {
+    listPublicShare = (repoId = '', path = '', showExpired = false) => {
       return new Promise((resolve, reject) => {
         const request = new ListPublicShareRequest();
         request.setRepoId(repoId);
+        request.setPath(path);
+        request.setShowExpired(showExpired);
 
         this.client.listPublicShare(request, this.metadata, (error, response) => {
           if (error) {
@@ -1121,8 +1123,10 @@ export default (config) =>
           } else {
             const code = response.getCode();
             if (code == 0) {
+              const dataList = response.getDataList().map((data) => data.toObject());
               resolve({
-                code
+                code,
+                data: dataList,
               });
             } else {
               reject({
@@ -1244,26 +1248,18 @@ export default (config) =>
       });
     };
 
-    upsertUploadPoint = (
-      repoId,
-      path,
-      description,
-      password,
-      expireDate,
-      fileCountLimit,
-      fileSizeLimit,
-      extensionList = [],
-    ) => {
+    upsertUploadPoint = (uploadPointData) => {
       return new Promise((resolve, reject) => {
         const request = new UpsertUploadPointRequest();
-        request.setRepoId(repoId);
-        request.setPath(path);
-        request.setDescription(description);
-        request.setPassword(password);
-        request.setExpireDate(expireDate);
-        request.setFileCountLimit(fileCountLimit);
-        request.setFileSizeLimit(fileSizeLimit);
-        request.setExtensionListList(extensionList);
+        console.log('SDK:uploadPointData:', uploadPointData);
+        request.setRepoId(uploadPointData.repoId);
+        request.setPath(uploadPointData.path);
+        request.setDescription(uploadPointData.description);
+        request.setPassword(uploadPointData.password);
+        request.setExpireDate(uploadPointData.expireDate);
+        request.setFileCountLimit(uploadPointData.fileCountLimit);
+        request.setFileSizeLimit(uploadPointData.fileSizeLimit);
+        request.setExtensionListList(uploadPointData.extensionList);
 
         this.client.upsertUploadPoint(request, this.metadata, (error, response) => {
           if (error) {
