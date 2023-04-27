@@ -604,7 +604,7 @@ export default (config) =>
               if (code == 0) {
                 const results = response.getDataList().map((data) => data.toObject());
                 const emails = response.getEmailList().map((email) => email.toObject());
-                const pagination = {};
+                const pagination = response.getPagination().toObject();
                 resolve({
                   message: response.getMessage(),
                   results,
