@@ -20,6 +20,7 @@ import {
   LockDirentRequest,
   UnlockDirentRequest,
   DownloadDirentRequest,
+  SetRepoPasswordRequest,
 
   // Share
   ListShareRequest,
@@ -1364,6 +1365,36 @@ export default (config) =>
             } else {
               reject({
                 code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
+    setRepoPassword = (repoId = '', password = '') => {
+      return new Promise((resolve, reject) => {
+        const request = new SetRepoPasswordRequest();
+
+        request.setRepoId(repoId);
+        request.setPassword(password);
+
+        this.client.setRepoPassword(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code,
+                status: response.getStatus(),
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                status: false,
                 message: response.getMessage()
               });
             }
