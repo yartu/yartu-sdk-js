@@ -90,7 +90,7 @@ export default (config) =>
               });
               const starredList = response.getStarredList().map((data) => {
                 const l = data.toObject();
-                l.path = l.type === 'file' ? `${l.parentDir}${l.name}` : l.parentDir;
+                l.path = `${l.parentDir}${l.name}`;
                 return l;
               });
               resolve({
