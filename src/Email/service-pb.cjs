@@ -1371,7 +1371,8 @@ proto.yartu_mail.PaginationMeta.toObject = function(includeInstance, msg) {
   var f, obj = {
     currentPage: jspb.Message.getFieldWithDefault(msg, 1, 0),
     perPage: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    total: jspb.Message.getFieldWithDefault(msg, 3, 0)
+    total: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    totalCount: jspb.Message.getFieldWithDefault(msg, 4, 0)
   };
 
   if (includeInstance) {
@@ -1420,6 +1421,10 @@ proto.yartu_mail.PaginationMeta.deserializeBinaryFromReader = function(msg, read
       var value = /** @type {number} */ (reader.readInt64());
       msg.setTotal(value);
       break;
+    case 4:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setTotalCount(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -1467,6 +1472,13 @@ proto.yartu_mail.PaginationMeta.serializeBinaryToWriter = function(message, writ
   if (f !== 0) {
     writer.writeInt64(
       3,
+      f
+    );
+  }
+  f = message.getTotalCount();
+  if (f !== 0) {
+    writer.writeInt64(
+      4,
       f
     );
   }
@@ -1524,6 +1536,24 @@ proto.yartu_mail.PaginationMeta.prototype.getTotal = function() {
  */
 proto.yartu_mail.PaginationMeta.prototype.setTotal = function(value) {
   return jspb.Message.setProto3IntField(this, 3, value);
+};
+
+
+/**
+ * optional int64 total_count = 4;
+ * @return {number}
+ */
+proto.yartu_mail.PaginationMeta.prototype.getTotalCount = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu_mail.PaginationMeta} returns this
+ */
+proto.yartu_mail.PaginationMeta.prototype.setTotalCount = function(value) {
+  return jspb.Message.setProto3IntField(this, 4, value);
 };
 
 
@@ -8023,7 +8053,7 @@ proto.yartu_mail.SaveDraftRequest.prototype.toObject = function(opt_includeInsta
  */
 proto.yartu_mail.SaveDraftRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    uid: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    uuid: jspb.Message.getFieldWithDefault(msg, 1, ""),
     from: jspb.Message.getFieldWithDefault(msg, 2, ""),
     toList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f,
     ccList: (f = jspb.Message.getRepeatedField(msg, 4)) == null ? undefined : f,
@@ -8070,8 +8100,8 @@ proto.yartu_mail.SaveDraftRequest.deserializeBinaryFromReader = function(msg, re
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {number} */ (reader.readInt64());
-      msg.setUid(value);
+      var value = /** @type {string} */ (reader.readString());
+      msg.setUuid(value);
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
@@ -8138,9 +8168,9 @@ proto.yartu_mail.SaveDraftRequest.prototype.serializeBinary = function() {
  */
 proto.yartu_mail.SaveDraftRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getUid();
-  if (f !== 0) {
-    writer.writeInt64(
+  f = message.getUuid();
+  if (f.length > 0) {
+    writer.writeString(
       1,
       f
     );
@@ -8212,20 +8242,20 @@ proto.yartu_mail.SaveDraftRequest.serializeBinaryToWriter = function(message, wr
 
 
 /**
- * optional int64 uid = 1;
- * @return {number}
+ * optional string uuid = 1;
+ * @return {string}
  */
-proto.yartu_mail.SaveDraftRequest.prototype.getUid = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+proto.yartu_mail.SaveDraftRequest.prototype.getUuid = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /**
- * @param {number} value
+ * @param {string} value
  * @return {!proto.yartu_mail.SaveDraftRequest} returns this
  */
-proto.yartu_mail.SaveDraftRequest.prototype.setUid = function(value) {
-  return jspb.Message.setProto3IntField(this, 1, value);
+proto.yartu_mail.SaveDraftRequest.prototype.setUuid = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
@@ -8500,8 +8530,9 @@ proto.yartu_mail.SaveDraftResponse.prototype.toObject = function(opt_includeInst
 proto.yartu_mail.SaveDraftResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    uid: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 3, "")
+    uuid: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    messageid: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    message: jspb.Message.getFieldWithDefault(msg, 4, "")
   };
 
   if (includeInstance) {
@@ -8543,10 +8574,14 @@ proto.yartu_mail.SaveDraftResponse.deserializeBinaryFromReader = function(msg, r
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {number} */ (reader.readInt64());
-      msg.setUid(value);
+      var value = /** @type {string} */ (reader.readString());
+      msg.setUuid(value);
       break;
     case 3:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setMessageid(value);
+      break;
+    case 4:
       var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
@@ -8586,17 +8621,24 @@ proto.yartu_mail.SaveDraftResponse.serializeBinaryToWriter = function(message, w
       f
     );
   }
-  f = message.getUid();
-  if (f !== 0) {
-    writer.writeInt64(
+  f = message.getUuid();
+  if (f.length > 0) {
+    writer.writeString(
       2,
       f
     );
   }
-  f = /** @type {string} */ (jspb.Message.getField(message, 3));
+  f = message.getMessageid();
+  if (f !== 0) {
+    writer.writeInt64(
+      3,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 4));
   if (f != null) {
     writer.writeString(
-      3,
+      4,
       f
     );
   }
@@ -8622,11 +8664,29 @@ proto.yartu_mail.SaveDraftResponse.prototype.setCode = function(value) {
 
 
 /**
- * optional int64 uid = 2;
+ * optional string uuid = 2;
+ * @return {string}
+ */
+proto.yartu_mail.SaveDraftResponse.prototype.getUuid = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu_mail.SaveDraftResponse} returns this
+ */
+proto.yartu_mail.SaveDraftResponse.prototype.setUuid = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional int64 messageId = 3;
  * @return {number}
  */
-proto.yartu_mail.SaveDraftResponse.prototype.getUid = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+proto.yartu_mail.SaveDraftResponse.prototype.getMessageid = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
 };
 
 
@@ -8634,17 +8694,17 @@ proto.yartu_mail.SaveDraftResponse.prototype.getUid = function() {
  * @param {number} value
  * @return {!proto.yartu_mail.SaveDraftResponse} returns this
  */
-proto.yartu_mail.SaveDraftResponse.prototype.setUid = function(value) {
-  return jspb.Message.setProto3IntField(this, 2, value);
+proto.yartu_mail.SaveDraftResponse.prototype.setMessageid = function(value) {
+  return jspb.Message.setProto3IntField(this, 3, value);
 };
 
 
 /**
- * optional string message = 3;
+ * optional string message = 4;
  * @return {string}
  */
 proto.yartu_mail.SaveDraftResponse.prototype.getMessage = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
 };
 
 
@@ -8653,7 +8713,7 @@ proto.yartu_mail.SaveDraftResponse.prototype.getMessage = function() {
  * @return {!proto.yartu_mail.SaveDraftResponse} returns this
  */
 proto.yartu_mail.SaveDraftResponse.prototype.setMessage = function(value) {
-  return jspb.Message.setField(this, 3, value);
+  return jspb.Message.setField(this, 4, value);
 };
 
 
@@ -8662,7 +8722,7 @@ proto.yartu_mail.SaveDraftResponse.prototype.setMessage = function(value) {
  * @return {!proto.yartu_mail.SaveDraftResponse} returns this
  */
 proto.yartu_mail.SaveDraftResponse.prototype.clearMessage = function() {
-  return jspb.Message.setField(this, 3, undefined);
+  return jspb.Message.setField(this, 4, undefined);
 };
 
 
@@ -8671,7 +8731,7 @@ proto.yartu_mail.SaveDraftResponse.prototype.clearMessage = function() {
  * @return {boolean}
  */
 proto.yartu_mail.SaveDraftResponse.prototype.hasMessage = function() {
-  return jspb.Message.getField(this, 3) != null;
+  return jspb.Message.getField(this, 4) != null;
 };
 
 
