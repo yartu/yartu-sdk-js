@@ -1139,10 +1139,16 @@ export default (config) =>
       });
     };
 
-    upsertPublicShare = (repoId) => {
+    upsertPublicShare = (repoId = '', path = '', description = '', password = '', expireDate = '', downloadCountLimit = 0, ipaddress = '') => {
       return new Promise((resolve, reject) => {
         const request = new UpsertPublicShareRequest();
         request.setRepoId(repoId);
+        request.setPath(path);
+        request.setDescription(description);
+        request.setPassword(password);
+        request.setExpireDate(expireDate);
+        request.setDownloadCountLimit(downloadCountLimit);
+        request.setIpaddress(ipaddress);
 
         this.client.upsertPublicShare(request, this.metadata, (error, response) => {
           if (error) {
@@ -1150,8 +1156,11 @@ export default (config) =>
           } else {
             const code = response.getCode();
             if (code == 0) {
+              const data = response.getData().toObject();
               resolve({
-                code
+                code,
+                data,
+                message: response.getMessage()
               });
             } else {
               reject({
@@ -1164,12 +1173,10 @@ export default (config) =>
       });
     };
 
-    deletePublicShare = () => {
+    deletePublicShare = (token) => {
       return new Promise((resolve, reject) => {
         const request = new DeletePublicShareRequest();
-        request.setRepoId(repoId);
-        request.setPath(path);
-        request.setStar(star);
+        request.setToken(token);
 
         this.client.deletePublicShare(request, this.metadata, (error, response) => {
           if (error) {
@@ -1178,7 +1185,8 @@ export default (config) =>
             const code = response.getCode();
             if (code == 0) {
               resolve({
-                code
+                code: code,
+                message: response.getMessage()
               });
             } else {
               reject({
