@@ -1111,10 +1111,12 @@ export default (config) =>
     };
 
     // PublicShare (Share with link)
-    listPublicShare = (repoId) => {
+    listPublicShare = (repoId = '', path = '', showExpired = false) => {
       return new Promise((resolve, reject) => {
         const request = new ListPublicShareRequest();
         request.setRepoId(repoId);
+        request.setPath(path);
+        request.setShowExpired(showExpired);
 
         this.client.listPublicShare(request, this.metadata, (error, response) => {
           if (error) {
@@ -1122,8 +1124,10 @@ export default (config) =>
           } else {
             const code = response.getCode();
             if (code == 0) {
+              const dataList = response.getDataList().map((data) => data.toObject());
               resolve({
-                code
+                code,
+                data: dataList,
               });
             } else {
               reject({
@@ -1136,10 +1140,16 @@ export default (config) =>
       });
     };
 
-    upsertPublicShare = (repoId) => {
+    upsertPublicShare = (repoId = '', path = '', description = '', password = '', expireDate = '', downloadCountLimit = 0, ipaddress = '') => {
       return new Promise((resolve, reject) => {
         const request = new UpsertPublicShareRequest();
         request.setRepoId(repoId);
+        request.setPath(path);
+        request.setDescription(description);
+        request.setPassword(password);
+        request.setExpireDate(expireDate);
+        request.setDownloadCountLimit(downloadCountLimit);
+        request.setIpaddress(ipaddress);
 
         this.client.upsertPublicShare(request, this.metadata, (error, response) => {
           if (error) {
@@ -1147,8 +1157,11 @@ export default (config) =>
           } else {
             const code = response.getCode();
             if (code == 0) {
+              const data = response.getData().toObject();
               resolve({
-                code
+                code,
+                data,
+                message: response.getMessage()
               });
             } else {
               reject({
@@ -1161,12 +1174,10 @@ export default (config) =>
       });
     };
 
-    deletePublicShare = () => {
+    deletePublicShare = (token) => {
       return new Promise((resolve, reject) => {
         const request = new DeletePublicShareRequest();
-        request.setRepoId(repoId);
-        request.setPath(path);
-        request.setStar(star);
+        request.setToken(token);
 
         this.client.deletePublicShare(request, this.metadata, (error, response) => {
           if (error) {
@@ -1175,7 +1186,8 @@ export default (config) =>
             const code = response.getCode();
             if (code == 0) {
               resolve({
-                code
+                code: code,
+                message: response.getMessage()
               });
             } else {
               reject({
@@ -1216,9 +1228,11 @@ export default (config) =>
     };
 
     // UploadPoint
-    listUploadPoint = () => {
+    listUploadPoint = (repoId, path) => {
       return new Promise((resolve, reject) => {
         const request = new ListUploadPointRequest();
+        request.setRepoId(repoId);
+        request.setPath(path);
 
         this.client.listUploadPoint(request, this.metadata, (error, response) => {
           if (error) {
@@ -1226,13 +1240,16 @@ export default (config) =>
           } else {
             const code = response.getCode();
             if (code == 0) {
+              const dataList = response.getDataList().map((data) => data.toObject());
               resolve({
-                code
+                code,
+                data: dataList,
+                message: response.getMessage(),
               });
             } else {
               reject({
                 code: code,
-                message: response.getMessage()
+                message: response.getMessage(),
               });
             }
           }
@@ -1240,12 +1257,18 @@ export default (config) =>
       });
     };
 
-    upsertUploadPoint = () => {
+    upsertUploadPoint = (uploadPointData) => {
       return new Promise((resolve, reject) => {
         const request = new UpsertUploadPointRequest();
-        request.setRepoId(repoId);
-        request.setPath(path);
-        request.setStar(star);
+        console.log('SDK:uploadPointData:', uploadPointData);
+        request.setRepoId(uploadPointData.repoId);
+        request.setPath(uploadPointData.path);
+        request.setDescription(uploadPointData.description);
+        request.setPassword(uploadPointData.password);
+        request.setExpireDate(uploadPointData.expireDate);
+        request.setFileCountLimit(uploadPointData.fileCountLimit);
+        request.setFileSizeLimit(uploadPointData.fileSizeLimit);
+        request.setExtensionListList(uploadPointData.extensionList);
 
         this.client.upsertUploadPoint(request, this.metadata, (error, response) => {
           if (error) {
@@ -1253,12 +1276,15 @@ export default (config) =>
           } else {
             const code = response.getCode();
             if (code == 0) {
+              const data = response.getData().toObject();
               resolve({
-                code
+                code,
+                data,
+                message: response.getMessage()
               });
             } else {
               reject({
-                code: code,
+                code,
                 message: response.getMessage()
               });
             }
@@ -1267,12 +1293,10 @@ export default (config) =>
       });
     };
 
-    deleteUploadPoint = () => {
+    deleteUploadPoint = (token) => {
       return new Promise((resolve, reject) => {
         const request = new DeleteUploadPointRequest();
-        request.setRepoId(repoId);
-        request.setPath(path);
-        request.setStar(star);
+        request.setToken(token);
 
         this.client.deleteUploadPoint(request, this.metadata, (error, response) => {
           if (error) {
@@ -1281,7 +1305,8 @@ export default (config) =>
             const code = response.getCode();
             if (code == 0) {
               resolve({
-                code
+                code: code,
+                message: response.getMessage()
               });
             } else {
               reject({
@@ -1294,9 +1319,11 @@ export default (config) =>
       });
     };
 
-    getUploadPoint = () => {
+    getUploadPoint = (token, password = '') => {
       return new Promise((resolve, reject) => {
         const request = new GetUploadPointRequest();
+        request.setToken(token);
+        request.setPassword(password);
 
         this.client.getUploadPoint(request, this.metadata, (error, response) => {
           if (error) {
@@ -1304,8 +1331,16 @@ export default (config) =>
           } else {
             const code = response.getCode();
             if (code == 0) {
+              const data = response.getData().toObject();
+              const passwordNeeded = response.getPasswordNeeded();
+              const uploadKey = response.getUploadKey();
+
               resolve({
-                code
+                code,
+                data,
+                passwordNeeded,
+                uploadKey,
+                message: response.getMessage()
               });
             } else {
               reject({
