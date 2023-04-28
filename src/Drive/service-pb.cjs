@@ -24495,7 +24495,7 @@ proto.yartu.UploadPoint.toObject = function(includeInstance, msg) {
     description: jspb.Message.getFieldWithDefault(msg, 9, ""),
     fileCountLimit: jspb.Message.getFieldWithDefault(msg, 10, 0),
     fileCount: jspb.Message.getFieldWithDefault(msg, 11, 0),
-    maxSize: jspb.Message.getFieldWithDefault(msg, 12, 0),
+    fileSizeLimit: jspb.Message.getFieldWithDefault(msg, 12, 0),
     usedSize: jspb.Message.getFieldWithDefault(msg, 13, 0),
     extensionList: (f = jspb.Message.getRepeatedField(msg, 14)) == null ? undefined : f,
     passwordNeeded: jspb.Message.getBooleanFieldWithDefault(msg, 15, false),
@@ -24584,7 +24584,7 @@ proto.yartu.UploadPoint.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 12:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setMaxSize(value);
+      msg.setFileSizeLimit(value);
       break;
     case 13:
       var value = /** @type {number} */ (reader.readInt64());
@@ -24716,7 +24716,7 @@ proto.yartu.UploadPoint.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getMaxSize();
+  f = message.getFileSizeLimit();
   if (f !== 0) {
     writer.writeInt64(
       12,
@@ -24967,10 +24967,10 @@ proto.yartu.UploadPoint.prototype.setFileCount = function(value) {
 
 
 /**
- * optional int64 max_size = 12;
+ * optional int64 file_size_limit = 12;
  * @return {number}
  */
-proto.yartu.UploadPoint.prototype.getMaxSize = function() {
+proto.yartu.UploadPoint.prototype.getFileSizeLimit = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 12, 0));
 };
 
@@ -24979,7 +24979,7 @@ proto.yartu.UploadPoint.prototype.getMaxSize = function() {
  * @param {number} value
  * @return {!proto.yartu.UploadPoint} returns this
  */
-proto.yartu.UploadPoint.prototype.setMaxSize = function(value) {
+proto.yartu.UploadPoint.prototype.setFileSizeLimit = function(value) {
   return jspb.Message.setProto3IntField(this, 12, value);
 };
 
