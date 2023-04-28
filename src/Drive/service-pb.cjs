@@ -10979,6 +10979,7 @@ proto.yartu.TransferRepoRequest.prototype.toObject = function(opt_includeInstanc
  */
 proto.yartu.TransferRepoRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
+    repoId: jspb.Message.getFieldWithDefault(msg, 1, ""),
     to: (f = msg.getTo()) && common_grpc_definitions_pb.User.toObject(includeInstance, f)
   };
 
@@ -11017,6 +11018,10 @@ proto.yartu.TransferRepoRequest.deserializeBinaryFromReader = function(msg, read
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setRepoId(value);
+      break;
+    case 2:
       var value = new common_grpc_definitions_pb.User;
       reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
       msg.setTo(value);
@@ -11050,10 +11055,17 @@ proto.yartu.TransferRepoRequest.prototype.serializeBinary = function() {
  */
 proto.yartu.TransferRepoRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getRepoId();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
   f = message.getTo();
   if (f != null) {
     writer.writeMessage(
-      1,
+      2,
       f,
       common_grpc_definitions_pb.User.serializeBinaryToWriter
     );
@@ -11062,12 +11074,30 @@ proto.yartu.TransferRepoRequest.serializeBinaryToWriter = function(message, writ
 
 
 /**
- * optional User to = 1;
+ * optional string repo_id = 1;
+ * @return {string}
+ */
+proto.yartu.TransferRepoRequest.prototype.getRepoId = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.TransferRepoRequest} returns this
+ */
+proto.yartu.TransferRepoRequest.prototype.setRepoId = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional User to = 2;
  * @return {?proto.User}
  */
 proto.yartu.TransferRepoRequest.prototype.getTo = function() {
   return /** @type{?proto.User} */ (
-    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.User, 1));
+    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.User, 2));
 };
 
 
@@ -11076,7 +11106,7 @@ proto.yartu.TransferRepoRequest.prototype.getTo = function() {
  * @return {!proto.yartu.TransferRepoRequest} returns this
 */
 proto.yartu.TransferRepoRequest.prototype.setTo = function(value) {
-  return jspb.Message.setWrapperField(this, 1, value);
+  return jspb.Message.setWrapperField(this, 2, value);
 };
 
 
@@ -11094,7 +11124,7 @@ proto.yartu.TransferRepoRequest.prototype.clearTo = function() {
  * @return {boolean}
  */
 proto.yartu.TransferRepoRequest.prototype.hasTo = function() {
-  return jspb.Message.getField(this, 1) != null;
+  return jspb.Message.getField(this, 2) != null;
 };
 
 
@@ -23103,13 +23133,14 @@ proto.yartu.UpsertPublicShareRequest.prototype.toObject = function(opt_includeIn
  */
 proto.yartu.UpsertPublicShareRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    repoId: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    path: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    description: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    password: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    expireDate: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    downloadCountLimit: jspb.Message.getFieldWithDefault(msg, 6, 0),
-    ipaddress: jspb.Message.getFieldWithDefault(msg, 7, "")
+    token: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    repoId: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    path: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    description: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    password: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    expireDate: jspb.Message.getFieldWithDefault(msg, 6, ""),
+    downloadCountLimit: jspb.Message.getFieldWithDefault(msg, 7, 0),
+    ipaddress: jspb.Message.getFieldWithDefault(msg, 8, "")
   };
 
   if (includeInstance) {
@@ -23148,29 +23179,33 @@ proto.yartu.UpsertPublicShareRequest.deserializeBinaryFromReader = function(msg,
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setRepoId(value);
+      msg.setToken(value);
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setPath(value);
+      msg.setRepoId(value);
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
-      msg.setDescription(value);
+      msg.setPath(value);
       break;
     case 4:
       var value = /** @type {string} */ (reader.readString());
-      msg.setPassword(value);
+      msg.setDescription(value);
       break;
     case 5:
       var value = /** @type {string} */ (reader.readString());
-      msg.setExpireDate(value);
+      msg.setPassword(value);
       break;
     case 6:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setExpireDate(value);
+      break;
+    case 7:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setDownloadCountLimit(value);
       break;
-    case 7:
+    case 8:
       var value = /** @type {string} */ (reader.readString());
       msg.setIpaddress(value);
       break;
@@ -23203,52 +23238,59 @@ proto.yartu.UpsertPublicShareRequest.prototype.serializeBinary = function() {
  */
 proto.yartu.UpsertPublicShareRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getRepoId();
+  f = message.getToken();
   if (f.length > 0) {
     writer.writeString(
       1,
       f
     );
   }
-  f = message.getPath();
+  f = message.getRepoId();
   if (f.length > 0) {
     writer.writeString(
       2,
       f
     );
   }
-  f = message.getDescription();
+  f = message.getPath();
   if (f.length > 0) {
     writer.writeString(
       3,
       f
     );
   }
-  f = message.getPassword();
+  f = message.getDescription();
   if (f.length > 0) {
     writer.writeString(
       4,
       f
     );
   }
-  f = message.getExpireDate();
+  f = message.getPassword();
   if (f.length > 0) {
     writer.writeString(
       5,
       f
     );
   }
+  f = message.getExpireDate();
+  if (f.length > 0) {
+    writer.writeString(
+      6,
+      f
+    );
+  }
   f = message.getDownloadCountLimit();
   if (f !== 0) {
     writer.writeInt64(
-      6,
+      7,
       f
     );
   }
   f = message.getIpaddress();
   if (f.length > 0) {
     writer.writeString(
-      7,
+      8,
       f
     );
   }
@@ -23256,10 +23298,10 @@ proto.yartu.UpsertPublicShareRequest.serializeBinaryToWriter = function(message,
 
 
 /**
- * optional string repo_id = 1;
+ * optional string token = 1;
  * @return {string}
  */
-proto.yartu.UpsertPublicShareRequest.prototype.getRepoId = function() {
+proto.yartu.UpsertPublicShareRequest.prototype.getToken = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -23268,16 +23310,16 @@ proto.yartu.UpsertPublicShareRequest.prototype.getRepoId = function() {
  * @param {string} value
  * @return {!proto.yartu.UpsertPublicShareRequest} returns this
  */
-proto.yartu.UpsertPublicShareRequest.prototype.setRepoId = function(value) {
+proto.yartu.UpsertPublicShareRequest.prototype.setToken = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
 /**
- * optional string path = 2;
+ * optional string repo_id = 2;
  * @return {string}
  */
-proto.yartu.UpsertPublicShareRequest.prototype.getPath = function() {
+proto.yartu.UpsertPublicShareRequest.prototype.getRepoId = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -23286,16 +23328,16 @@ proto.yartu.UpsertPublicShareRequest.prototype.getPath = function() {
  * @param {string} value
  * @return {!proto.yartu.UpsertPublicShareRequest} returns this
  */
-proto.yartu.UpsertPublicShareRequest.prototype.setPath = function(value) {
+proto.yartu.UpsertPublicShareRequest.prototype.setRepoId = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
 /**
- * optional string description = 3;
+ * optional string path = 3;
  * @return {string}
  */
-proto.yartu.UpsertPublicShareRequest.prototype.getDescription = function() {
+proto.yartu.UpsertPublicShareRequest.prototype.getPath = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
@@ -23304,16 +23346,16 @@ proto.yartu.UpsertPublicShareRequest.prototype.getDescription = function() {
  * @param {string} value
  * @return {!proto.yartu.UpsertPublicShareRequest} returns this
  */
-proto.yartu.UpsertPublicShareRequest.prototype.setDescription = function(value) {
+proto.yartu.UpsertPublicShareRequest.prototype.setPath = function(value) {
   return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 
 /**
- * optional string password = 4;
+ * optional string description = 4;
  * @return {string}
  */
-proto.yartu.UpsertPublicShareRequest.prototype.getPassword = function() {
+proto.yartu.UpsertPublicShareRequest.prototype.getDescription = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
 };
 
@@ -23322,16 +23364,16 @@ proto.yartu.UpsertPublicShareRequest.prototype.getPassword = function() {
  * @param {string} value
  * @return {!proto.yartu.UpsertPublicShareRequest} returns this
  */
-proto.yartu.UpsertPublicShareRequest.prototype.setPassword = function(value) {
+proto.yartu.UpsertPublicShareRequest.prototype.setDescription = function(value) {
   return jspb.Message.setProto3StringField(this, 4, value);
 };
 
 
 /**
- * optional string expire_date = 5;
+ * optional string password = 5;
  * @return {string}
  */
-proto.yartu.UpsertPublicShareRequest.prototype.getExpireDate = function() {
+proto.yartu.UpsertPublicShareRequest.prototype.getPassword = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
 };
 
@@ -23340,17 +23382,35 @@ proto.yartu.UpsertPublicShareRequest.prototype.getExpireDate = function() {
  * @param {string} value
  * @return {!proto.yartu.UpsertPublicShareRequest} returns this
  */
-proto.yartu.UpsertPublicShareRequest.prototype.setExpireDate = function(value) {
+proto.yartu.UpsertPublicShareRequest.prototype.setPassword = function(value) {
   return jspb.Message.setProto3StringField(this, 5, value);
 };
 
 
 /**
- * optional int64 download_count_limit = 6;
+ * optional string expire_date = 6;
+ * @return {string}
+ */
+proto.yartu.UpsertPublicShareRequest.prototype.getExpireDate = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.UpsertPublicShareRequest} returns this
+ */
+proto.yartu.UpsertPublicShareRequest.prototype.setExpireDate = function(value) {
+  return jspb.Message.setProto3StringField(this, 6, value);
+};
+
+
+/**
+ * optional int64 download_count_limit = 7;
  * @return {number}
  */
 proto.yartu.UpsertPublicShareRequest.prototype.getDownloadCountLimit = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 7, 0));
 };
 
 
@@ -23359,16 +23419,16 @@ proto.yartu.UpsertPublicShareRequest.prototype.getDownloadCountLimit = function(
  * @return {!proto.yartu.UpsertPublicShareRequest} returns this
  */
 proto.yartu.UpsertPublicShareRequest.prototype.setDownloadCountLimit = function(value) {
-  return jspb.Message.setProto3IntField(this, 6, value);
+  return jspb.Message.setProto3IntField(this, 7, value);
 };
 
 
 /**
- * optional string ipaddress = 7;
+ * optional string ipaddress = 8;
  * @return {string}
  */
 proto.yartu.UpsertPublicShareRequest.prototype.getIpaddress = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
 };
 
 
@@ -23377,7 +23437,7 @@ proto.yartu.UpsertPublicShareRequest.prototype.getIpaddress = function() {
  * @return {!proto.yartu.UpsertPublicShareRequest} returns this
  */
 proto.yartu.UpsertPublicShareRequest.prototype.setIpaddress = function(value) {
-  return jspb.Message.setProto3StringField(this, 7, value);
+  return jspb.Message.setProto3StringField(this, 8, value);
 };
 
 
@@ -24391,7 +24451,7 @@ proto.yartu.GetPublicShareResponse.prototype.hasMessage = function() {
  * @private {!Array<number>}
  * @const
  */
-proto.yartu.UploadPoint.repeatedFields_ = [13];
+proto.yartu.UploadPoint.repeatedFields_ = [14];
 
 
 
@@ -24431,16 +24491,17 @@ proto.yartu.UploadPoint.toObject = function(includeInstance, msg) {
     token: jspb.Message.getFieldWithDefault(msg, 5, ""),
     createdAt: jspb.Message.getFieldWithDefault(msg, 6, ""),
     expireDate: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    description: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    fileCountLimit: jspb.Message.getFieldWithDefault(msg, 9, 0),
-    fileCount: jspb.Message.getFieldWithDefault(msg, 10, 0),
-    maxSize: jspb.Message.getFieldWithDefault(msg, 11, 0),
-    usedSize: jspb.Message.getFieldWithDefault(msg, 12, 0),
-    extensionList: (f = jspb.Message.getRepeatedField(msg, 13)) == null ? undefined : f,
-    passwordNeeded: jspb.Message.getBooleanFieldWithDefault(msg, 14, false),
-    viewCount: jspb.Message.getFieldWithDefault(msg, 15, 0),
-    uploadCount: jspb.Message.getFieldWithDefault(msg, 16, 0),
-    expired: jspb.Message.getBooleanFieldWithDefault(msg, 17, false)
+    title: jspb.Message.getFieldWithDefault(msg, 8, ""),
+    description: jspb.Message.getFieldWithDefault(msg, 9, ""),
+    fileCountLimit: jspb.Message.getFieldWithDefault(msg, 10, 0),
+    fileCount: jspb.Message.getFieldWithDefault(msg, 11, 0),
+    maxSize: jspb.Message.getFieldWithDefault(msg, 12, 0),
+    usedSize: jspb.Message.getFieldWithDefault(msg, 13, 0),
+    extensionList: (f = jspb.Message.getRepeatedField(msg, 14)) == null ? undefined : f,
+    passwordNeeded: jspb.Message.getBooleanFieldWithDefault(msg, 15, false),
+    viewCount: jspb.Message.getFieldWithDefault(msg, 16, 0),
+    uploadCount: jspb.Message.getFieldWithDefault(msg, 17, 0),
+    expired: jspb.Message.getBooleanFieldWithDefault(msg, 18, false)
   };
 
   if (includeInstance) {
@@ -24507,41 +24568,45 @@ proto.yartu.UploadPoint.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 8:
       var value = /** @type {string} */ (reader.readString());
-      msg.setDescription(value);
+      msg.setTitle(value);
       break;
     case 9:
-      var value = /** @type {number} */ (reader.readInt64());
-      msg.setFileCountLimit(value);
+      var value = /** @type {string} */ (reader.readString());
+      msg.setDescription(value);
       break;
     case 10:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setFileCount(value);
+      msg.setFileCountLimit(value);
       break;
     case 11:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setMaxSize(value);
+      msg.setFileCount(value);
       break;
     case 12:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setUsedSize(value);
+      msg.setMaxSize(value);
       break;
     case 13:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setUsedSize(value);
+      break;
+    case 14:
       var value = /** @type {string} */ (reader.readString());
       msg.addExtension$(value);
       break;
-    case 14:
+    case 15:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setPasswordNeeded(value);
       break;
-    case 15:
+    case 16:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setViewCount(value);
       break;
-    case 16:
+    case 17:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setUploadCount(value);
       break;
-    case 17:
+    case 18:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setExpired(value);
       break;
@@ -24623,73 +24688,80 @@ proto.yartu.UploadPoint.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getDescription();
+  f = message.getTitle();
   if (f.length > 0) {
     writer.writeString(
       8,
       f
     );
   }
-  f = message.getFileCountLimit();
-  if (f !== 0) {
-    writer.writeInt64(
+  f = message.getDescription();
+  if (f.length > 0) {
+    writer.writeString(
       9,
       f
     );
   }
-  f = message.getFileCount();
+  f = message.getFileCountLimit();
   if (f !== 0) {
     writer.writeInt64(
       10,
       f
     );
   }
-  f = message.getMaxSize();
+  f = message.getFileCount();
   if (f !== 0) {
     writer.writeInt64(
       11,
       f
     );
   }
-  f = message.getUsedSize();
+  f = message.getMaxSize();
   if (f !== 0) {
     writer.writeInt64(
       12,
       f
     );
   }
+  f = message.getUsedSize();
+  if (f !== 0) {
+    writer.writeInt64(
+      13,
+      f
+    );
+  }
   f = message.getExtensionList();
   if (f.length > 0) {
     writer.writeRepeatedString(
-      13,
+      14,
       f
     );
   }
   f = message.getPasswordNeeded();
   if (f) {
     writer.writeBool(
-      14,
+      15,
       f
     );
   }
   f = message.getViewCount();
   if (f !== 0) {
     writer.writeInt64(
-      15,
+      16,
       f
     );
   }
   f = message.getUploadCount();
   if (f !== 0) {
     writer.writeInt64(
-      16,
+      17,
       f
     );
   }
   f = message.getExpired();
   if (f) {
     writer.writeBool(
-      17,
+      18,
       f
     );
   }
@@ -24823,10 +24895,10 @@ proto.yartu.UploadPoint.prototype.setExpireDate = function(value) {
 
 
 /**
- * optional string description = 8;
+ * optional string title = 8;
  * @return {string}
  */
-proto.yartu.UploadPoint.prototype.getDescription = function() {
+proto.yartu.UploadPoint.prototype.getTitle = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
 };
 
@@ -24835,34 +24907,34 @@ proto.yartu.UploadPoint.prototype.getDescription = function() {
  * @param {string} value
  * @return {!proto.yartu.UploadPoint} returns this
  */
-proto.yartu.UploadPoint.prototype.setDescription = function(value) {
+proto.yartu.UploadPoint.prototype.setTitle = function(value) {
   return jspb.Message.setProto3StringField(this, 8, value);
 };
 
 
 /**
- * optional int64 file_count_limit = 9;
+ * optional string description = 9;
+ * @return {string}
+ */
+proto.yartu.UploadPoint.prototype.getDescription = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 9, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.UploadPoint} returns this
+ */
+proto.yartu.UploadPoint.prototype.setDescription = function(value) {
+  return jspb.Message.setProto3StringField(this, 9, value);
+};
+
+
+/**
+ * optional int64 file_count_limit = 10;
  * @return {number}
  */
 proto.yartu.UploadPoint.prototype.getFileCountLimit = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 9, 0));
-};
-
-
-/**
- * @param {number} value
- * @return {!proto.yartu.UploadPoint} returns this
- */
-proto.yartu.UploadPoint.prototype.setFileCountLimit = function(value) {
-  return jspb.Message.setProto3IntField(this, 9, value);
-};
-
-
-/**
- * optional int64 file_count = 10;
- * @return {number}
- */
-proto.yartu.UploadPoint.prototype.getFileCount = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 10, 0));
 };
 
@@ -24871,16 +24943,16 @@ proto.yartu.UploadPoint.prototype.getFileCount = function() {
  * @param {number} value
  * @return {!proto.yartu.UploadPoint} returns this
  */
-proto.yartu.UploadPoint.prototype.setFileCount = function(value) {
+proto.yartu.UploadPoint.prototype.setFileCountLimit = function(value) {
   return jspb.Message.setProto3IntField(this, 10, value);
 };
 
 
 /**
- * optional int64 max_size = 11;
+ * optional int64 file_count = 11;
  * @return {number}
  */
-proto.yartu.UploadPoint.prototype.getMaxSize = function() {
+proto.yartu.UploadPoint.prototype.getFileCount = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 11, 0));
 };
 
@@ -24889,16 +24961,16 @@ proto.yartu.UploadPoint.prototype.getMaxSize = function() {
  * @param {number} value
  * @return {!proto.yartu.UploadPoint} returns this
  */
-proto.yartu.UploadPoint.prototype.setMaxSize = function(value) {
+proto.yartu.UploadPoint.prototype.setFileCount = function(value) {
   return jspb.Message.setProto3IntField(this, 11, value);
 };
 
 
 /**
- * optional int64 used_size = 12;
+ * optional int64 max_size = 12;
  * @return {number}
  */
-proto.yartu.UploadPoint.prototype.getUsedSize = function() {
+proto.yartu.UploadPoint.prototype.getMaxSize = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 12, 0));
 };
 
@@ -24907,17 +24979,35 @@ proto.yartu.UploadPoint.prototype.getUsedSize = function() {
  * @param {number} value
  * @return {!proto.yartu.UploadPoint} returns this
  */
-proto.yartu.UploadPoint.prototype.setUsedSize = function(value) {
+proto.yartu.UploadPoint.prototype.setMaxSize = function(value) {
   return jspb.Message.setProto3IntField(this, 12, value);
 };
 
 
 /**
- * repeated string extension = 13;
+ * optional int64 used_size = 13;
+ * @return {number}
+ */
+proto.yartu.UploadPoint.prototype.getUsedSize = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 13, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu.UploadPoint} returns this
+ */
+proto.yartu.UploadPoint.prototype.setUsedSize = function(value) {
+  return jspb.Message.setProto3IntField(this, 13, value);
+};
+
+
+/**
+ * repeated string extension = 14;
  * @return {!Array<string>}
  */
 proto.yartu.UploadPoint.prototype.getExtensionList = function() {
-  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 13));
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 14));
 };
 
 
@@ -24926,7 +25016,7 @@ proto.yartu.UploadPoint.prototype.getExtensionList = function() {
  * @return {!proto.yartu.UploadPoint} returns this
  */
 proto.yartu.UploadPoint.prototype.setExtensionList = function(value) {
-  return jspb.Message.setField(this, 13, value || []);
+  return jspb.Message.setField(this, 14, value || []);
 };
 
 
@@ -24936,7 +25026,7 @@ proto.yartu.UploadPoint.prototype.setExtensionList = function(value) {
  * @return {!proto.yartu.UploadPoint} returns this
  */
 proto.yartu.UploadPoint.prototype.addExtension$ = function(value, opt_index) {
-  return jspb.Message.addToRepeatedField(this, 13, value, opt_index);
+  return jspb.Message.addToRepeatedField(this, 14, value, opt_index);
 };
 
 
@@ -24950,11 +25040,11 @@ proto.yartu.UploadPoint.prototype.clearExtensionList = function() {
 
 
 /**
- * optional bool password_needed = 14;
+ * optional bool password_needed = 15;
  * @return {boolean}
  */
 proto.yartu.UploadPoint.prototype.getPasswordNeeded = function() {
-  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 14, false));
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 15, false));
 };
 
 
@@ -24963,33 +25053,15 @@ proto.yartu.UploadPoint.prototype.getPasswordNeeded = function() {
  * @return {!proto.yartu.UploadPoint} returns this
  */
 proto.yartu.UploadPoint.prototype.setPasswordNeeded = function(value) {
-  return jspb.Message.setProto3BooleanField(this, 14, value);
+  return jspb.Message.setProto3BooleanField(this, 15, value);
 };
 
 
 /**
- * optional int64 view_count = 15;
+ * optional int64 view_count = 16;
  * @return {number}
  */
 proto.yartu.UploadPoint.prototype.getViewCount = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 15, 0));
-};
-
-
-/**
- * @param {number} value
- * @return {!proto.yartu.UploadPoint} returns this
- */
-proto.yartu.UploadPoint.prototype.setViewCount = function(value) {
-  return jspb.Message.setProto3IntField(this, 15, value);
-};
-
-
-/**
- * optional int64 upload_count = 16;
- * @return {number}
- */
-proto.yartu.UploadPoint.prototype.getUploadCount = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 16, 0));
 };
 
@@ -24998,17 +25070,35 @@ proto.yartu.UploadPoint.prototype.getUploadCount = function() {
  * @param {number} value
  * @return {!proto.yartu.UploadPoint} returns this
  */
-proto.yartu.UploadPoint.prototype.setUploadCount = function(value) {
+proto.yartu.UploadPoint.prototype.setViewCount = function(value) {
   return jspb.Message.setProto3IntField(this, 16, value);
 };
 
 
 /**
- * optional bool expired = 17;
+ * optional int64 upload_count = 17;
+ * @return {number}
+ */
+proto.yartu.UploadPoint.prototype.getUploadCount = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 17, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu.UploadPoint} returns this
+ */
+proto.yartu.UploadPoint.prototype.setUploadCount = function(value) {
+  return jspb.Message.setProto3IntField(this, 17, value);
+};
+
+
+/**
+ * optional bool expired = 18;
  * @return {boolean}
  */
 proto.yartu.UploadPoint.prototype.getExpired = function() {
-  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 17, false));
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 18, false));
 };
 
 
@@ -25017,7 +25107,7 @@ proto.yartu.UploadPoint.prototype.getExpired = function() {
  * @return {!proto.yartu.UploadPoint} returns this
  */
 proto.yartu.UploadPoint.prototype.setExpired = function(value) {
-  return jspb.Message.setProto3BooleanField(this, 17, value);
+  return jspb.Message.setProto3BooleanField(this, 18, value);
 };
 
 
@@ -25425,7 +25515,7 @@ proto.yartu.ListUploadPointResponse.prototype.hasMessage = function() {
  * @private {!Array<number>}
  * @const
  */
-proto.yartu.UpsertUploadPointRequest.repeatedFields_ = [8];
+proto.yartu.UpsertUploadPointRequest.repeatedFields_ = [11];
 
 
 
@@ -25458,14 +25548,17 @@ proto.yartu.UpsertUploadPointRequest.prototype.toObject = function(opt_includeIn
  */
 proto.yartu.UpsertUploadPointRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    repoId: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    path: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    description: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    password: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    expireDate: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    fileCountLimit: jspb.Message.getFieldWithDefault(msg, 6, 0),
-    fileSizeLimit: jspb.Message.getFieldWithDefault(msg, 7, 0),
-    extensionListList: (f = jspb.Message.getRepeatedField(msg, 8)) == null ? undefined : f
+    token: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    repoId: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    path: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    title: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    description: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    password: jspb.Message.getFieldWithDefault(msg, 6, ""),
+    expireDate: jspb.Message.getFieldWithDefault(msg, 7, ""),
+    fileCountLimit: jspb.Message.getFieldWithDefault(msg, 8, 0),
+    fileSizeLimit: jspb.Message.getFieldWithDefault(msg, 9, 0),
+    ipaddress: jspb.Message.getFieldWithDefault(msg, 10, ""),
+    extensionListList: (f = jspb.Message.getRepeatedField(msg, 11)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -25504,33 +25597,45 @@ proto.yartu.UpsertUploadPointRequest.deserializeBinaryFromReader = function(msg,
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setRepoId(value);
+      msg.setToken(value);
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setPath(value);
+      msg.setRepoId(value);
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
-      msg.setDescription(value);
+      msg.setPath(value);
       break;
     case 4:
       var value = /** @type {string} */ (reader.readString());
-      msg.setPassword(value);
+      msg.setTitle(value);
       break;
     case 5:
       var value = /** @type {string} */ (reader.readString());
-      msg.setExpireDate(value);
+      msg.setDescription(value);
       break;
     case 6:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setPassword(value);
+      break;
+    case 7:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setExpireDate(value);
+      break;
+    case 8:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setFileCountLimit(value);
       break;
-    case 7:
+    case 9:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setFileSizeLimit(value);
       break;
-    case 8:
+    case 10:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setIpaddress(value);
+      break;
+    case 11:
       var value = /** @type {string} */ (reader.readString());
       msg.addExtensionList(value);
       break;
@@ -25563,59 +25668,80 @@ proto.yartu.UpsertUploadPointRequest.prototype.serializeBinary = function() {
  */
 proto.yartu.UpsertUploadPointRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getRepoId();
+  f = message.getToken();
   if (f.length > 0) {
     writer.writeString(
       1,
       f
     );
   }
-  f = message.getPath();
+  f = message.getRepoId();
   if (f.length > 0) {
     writer.writeString(
       2,
       f
     );
   }
-  f = message.getDescription();
+  f = message.getPath();
   if (f.length > 0) {
     writer.writeString(
       3,
       f
     );
   }
-  f = message.getPassword();
+  f = message.getTitle();
   if (f.length > 0) {
     writer.writeString(
       4,
       f
     );
   }
-  f = message.getExpireDate();
+  f = message.getDescription();
   if (f.length > 0) {
     writer.writeString(
       5,
       f
     );
   }
+  f = message.getPassword();
+  if (f.length > 0) {
+    writer.writeString(
+      6,
+      f
+    );
+  }
+  f = message.getExpireDate();
+  if (f.length > 0) {
+    writer.writeString(
+      7,
+      f
+    );
+  }
   f = message.getFileCountLimit();
   if (f !== 0) {
     writer.writeInt64(
-      6,
+      8,
       f
     );
   }
   f = message.getFileSizeLimit();
   if (f !== 0) {
     writer.writeInt64(
-      7,
+      9,
+      f
+    );
+  }
+  f = message.getIpaddress();
+  if (f.length > 0) {
+    writer.writeString(
+      10,
       f
     );
   }
   f = message.getExtensionListList();
   if (f.length > 0) {
     writer.writeRepeatedString(
-      8,
+      11,
       f
     );
   }
@@ -25623,10 +25749,10 @@ proto.yartu.UpsertUploadPointRequest.serializeBinaryToWriter = function(message,
 
 
 /**
- * optional string repo_id = 1;
+ * optional string token = 1;
  * @return {string}
  */
-proto.yartu.UpsertUploadPointRequest.prototype.getRepoId = function() {
+proto.yartu.UpsertUploadPointRequest.prototype.getToken = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -25635,16 +25761,16 @@ proto.yartu.UpsertUploadPointRequest.prototype.getRepoId = function() {
  * @param {string} value
  * @return {!proto.yartu.UpsertUploadPointRequest} returns this
  */
-proto.yartu.UpsertUploadPointRequest.prototype.setRepoId = function(value) {
+proto.yartu.UpsertUploadPointRequest.prototype.setToken = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
 /**
- * optional string path = 2;
+ * optional string repo_id = 2;
  * @return {string}
  */
-proto.yartu.UpsertUploadPointRequest.prototype.getPath = function() {
+proto.yartu.UpsertUploadPointRequest.prototype.getRepoId = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -25653,16 +25779,16 @@ proto.yartu.UpsertUploadPointRequest.prototype.getPath = function() {
  * @param {string} value
  * @return {!proto.yartu.UpsertUploadPointRequest} returns this
  */
-proto.yartu.UpsertUploadPointRequest.prototype.setPath = function(value) {
+proto.yartu.UpsertUploadPointRequest.prototype.setRepoId = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
 /**
- * optional string description = 3;
+ * optional string path = 3;
  * @return {string}
  */
-proto.yartu.UpsertUploadPointRequest.prototype.getDescription = function() {
+proto.yartu.UpsertUploadPointRequest.prototype.getPath = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
@@ -25671,16 +25797,16 @@ proto.yartu.UpsertUploadPointRequest.prototype.getDescription = function() {
  * @param {string} value
  * @return {!proto.yartu.UpsertUploadPointRequest} returns this
  */
-proto.yartu.UpsertUploadPointRequest.prototype.setDescription = function(value) {
+proto.yartu.UpsertUploadPointRequest.prototype.setPath = function(value) {
   return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 
 /**
- * optional string password = 4;
+ * optional string title = 4;
  * @return {string}
  */
-proto.yartu.UpsertUploadPointRequest.prototype.getPassword = function() {
+proto.yartu.UpsertUploadPointRequest.prototype.getTitle = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
 };
 
@@ -25689,16 +25815,16 @@ proto.yartu.UpsertUploadPointRequest.prototype.getPassword = function() {
  * @param {string} value
  * @return {!proto.yartu.UpsertUploadPointRequest} returns this
  */
-proto.yartu.UpsertUploadPointRequest.prototype.setPassword = function(value) {
+proto.yartu.UpsertUploadPointRequest.prototype.setTitle = function(value) {
   return jspb.Message.setProto3StringField(this, 4, value);
 };
 
 
 /**
- * optional string expire_date = 5;
+ * optional string description = 5;
  * @return {string}
  */
-proto.yartu.UpsertUploadPointRequest.prototype.getExpireDate = function() {
+proto.yartu.UpsertUploadPointRequest.prototype.getDescription = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
 };
 
@@ -25707,17 +25833,53 @@ proto.yartu.UpsertUploadPointRequest.prototype.getExpireDate = function() {
  * @param {string} value
  * @return {!proto.yartu.UpsertUploadPointRequest} returns this
  */
-proto.yartu.UpsertUploadPointRequest.prototype.setExpireDate = function(value) {
+proto.yartu.UpsertUploadPointRequest.prototype.setDescription = function(value) {
   return jspb.Message.setProto3StringField(this, 5, value);
 };
 
 
 /**
- * optional int64 file_count_limit = 6;
+ * optional string password = 6;
+ * @return {string}
+ */
+proto.yartu.UpsertUploadPointRequest.prototype.getPassword = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.UpsertUploadPointRequest} returns this
+ */
+proto.yartu.UpsertUploadPointRequest.prototype.setPassword = function(value) {
+  return jspb.Message.setProto3StringField(this, 6, value);
+};
+
+
+/**
+ * optional string expire_date = 7;
+ * @return {string}
+ */
+proto.yartu.UpsertUploadPointRequest.prototype.getExpireDate = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.UpsertUploadPointRequest} returns this
+ */
+proto.yartu.UpsertUploadPointRequest.prototype.setExpireDate = function(value) {
+  return jspb.Message.setProto3StringField(this, 7, value);
+};
+
+
+/**
+ * optional int64 file_count_limit = 8;
  * @return {number}
  */
 proto.yartu.UpsertUploadPointRequest.prototype.getFileCountLimit = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 8, 0));
 };
 
 
@@ -25726,16 +25888,16 @@ proto.yartu.UpsertUploadPointRequest.prototype.getFileCountLimit = function() {
  * @return {!proto.yartu.UpsertUploadPointRequest} returns this
  */
 proto.yartu.UpsertUploadPointRequest.prototype.setFileCountLimit = function(value) {
-  return jspb.Message.setProto3IntField(this, 6, value);
+  return jspb.Message.setProto3IntField(this, 8, value);
 };
 
 
 /**
- * optional int64 file_size_limit = 7;
+ * optional int64 file_size_limit = 9;
  * @return {number}
  */
 proto.yartu.UpsertUploadPointRequest.prototype.getFileSizeLimit = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 7, 0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 9, 0));
 };
 
 
@@ -25744,16 +25906,34 @@ proto.yartu.UpsertUploadPointRequest.prototype.getFileSizeLimit = function() {
  * @return {!proto.yartu.UpsertUploadPointRequest} returns this
  */
 proto.yartu.UpsertUploadPointRequest.prototype.setFileSizeLimit = function(value) {
-  return jspb.Message.setProto3IntField(this, 7, value);
+  return jspb.Message.setProto3IntField(this, 9, value);
 };
 
 
 /**
- * repeated string extension_list = 8;
+ * optional string ipaddress = 10;
+ * @return {string}
+ */
+proto.yartu.UpsertUploadPointRequest.prototype.getIpaddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 10, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.UpsertUploadPointRequest} returns this
+ */
+proto.yartu.UpsertUploadPointRequest.prototype.setIpaddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 10, value);
+};
+
+
+/**
+ * repeated string extension_list = 11;
  * @return {!Array<string>}
  */
 proto.yartu.UpsertUploadPointRequest.prototype.getExtensionListList = function() {
-  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 8));
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 11));
 };
 
 
@@ -25762,7 +25942,7 @@ proto.yartu.UpsertUploadPointRequest.prototype.getExtensionListList = function()
  * @return {!proto.yartu.UpsertUploadPointRequest} returns this
  */
 proto.yartu.UpsertUploadPointRequest.prototype.setExtensionListList = function(value) {
-  return jspb.Message.setField(this, 8, value || []);
+  return jspb.Message.setField(this, 11, value || []);
 };
 
 
@@ -25772,7 +25952,7 @@ proto.yartu.UpsertUploadPointRequest.prototype.setExtensionListList = function(v
  * @return {!proto.yartu.UpsertUploadPointRequest} returns this
  */
 proto.yartu.UpsertUploadPointRequest.prototype.addExtensionList = function(value, opt_index) {
-  return jspb.Message.addToRepeatedField(this, 8, value, opt_index);
+  return jspb.Message.addToRepeatedField(this, 11, value, opt_index);
 };
 
 
