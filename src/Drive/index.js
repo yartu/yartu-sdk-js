@@ -1140,9 +1140,10 @@ export default (config) =>
       });
     };
 
-    upsertPublicShare = (repoId = '', path = '', description = '', password = '', expireDate = '', downloadCountLimit = 0, ipaddress = '') => {
+    upsertPublicShare = (token, repoId = '', path = '', description = '', password = '', expireDate = '', downloadCountLimit = 0, ipaddress = '') => {
       return new Promise((resolve, reject) => {
         const request = new UpsertPublicShareRequest();
+        request.setToken(token);
         request.setRepoId(repoId);
         request.setPath(path);
         request.setDescription(description);
@@ -1261,8 +1262,10 @@ export default (config) =>
       return new Promise((resolve, reject) => {
         const request = new UpsertUploadPointRequest();
         console.log('SDK:uploadPointData:', uploadPointData);
+        request.setToken(uploadPointData.token);
         request.setRepoId(uploadPointData.repoId);
         request.setPath(uploadPointData.path);
+        request.setTitle(uploadPointData.title);
         request.setDescription(uploadPointData.description);
         request.setPassword(uploadPointData.password);
         request.setExpireDate(uploadPointData.expireDate);
