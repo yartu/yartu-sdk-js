@@ -21,6 +21,7 @@ import {
   UnlockDirentRequest,
   DownloadDirentRequest,
   SetRepoPasswordRequest,
+  TransferRepoRequest,
 
   // Share
   ListShareRequest,
@@ -1440,5 +1441,40 @@ export default (config) =>
         });
       });
     };
+
+    transferRepo = (repoId, user) => {
+      return new Promise((resolve, reject) => {
+        const request = new TransferRepoRequest();
+
+        const userRequest = new User();
+        userRequest.setId(user.id);
+        userRequest.setUsername(user.email);
+        userRequest.setName(user.name);
+        userRequest.setSurname(user.surname);
+
+        request.setRepoId(repoId);
+        request.setTo(userRequest);
+
+        this.client.transferRepo(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+    
 
   };
