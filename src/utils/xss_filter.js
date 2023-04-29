@@ -53,7 +53,7 @@ export const xssOptions = (yartuAttach = {}) => {
         'width',
         'style'
       ],
-      div: ['align']
+      div: ['align', 'data-signature']
     },
     allowedSchemes: ['http', 'https'],
     allowedSchemesByTag: {
@@ -64,11 +64,13 @@ export const xssOptions = (yartuAttach = {}) => {
       a: (tagName, attribs) => {
         let href = attribs.href;
         const { host } = window.location;
-        const aHost = new URL(href).host;
 
-        if (host !== aHost && !href.includes('/public-url/')) {
-          const base64Url = Buffer.from(href, 'utf8').toString('base64');
-          href = `/#/public-url/?u=${base64Url}`;
+        if (!href.includes('/public-url/')) {
+          const aHost = new URL(href).host;
+          if (host !== aHost) {
+            const base64Url = Buffer.from(href, 'utf8').toString('base64');
+            href = `/#/public-url/?u=${base64Url}`;
+          }
         }
 
         if (href) {
