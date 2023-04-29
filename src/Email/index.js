@@ -436,15 +436,6 @@ export default (config) =>
         this.yartuSdk.user.name + ' ' + this.yartuSdk.user.surname
       );
 
-      const parser = new DOMParser();
-      const document = parser.parseFromString(data.body, 'text/html');
-      const signatureQuery = document.querySelectorAll('p[signature]');
-
-      if (signatureQuery?.length > 0) {
-        const signature = signatureQuery[0].getAttribute('signature');
-        data.body += signature;
-      }
-
       data.body = data.body.replaceAll('/file/attachment/draft?cid=', 'cid:');
 
       request.setSubject(data.subject);
