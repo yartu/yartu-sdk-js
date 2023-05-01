@@ -1469,9 +1469,12 @@ export default (config) =>
               handleError(error, reject);
             } else {
               const code = response.getCode();
+              const data = response.getData().toObject();
               if (code == 0) {
                 resolve({
                   code,
+                  data,
+                  message: response.getMessage()
                 })
               } else {
                 reject({

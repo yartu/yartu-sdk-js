@@ -3419,7 +3419,7 @@ proto.yartu.CardAttachment.toObject = function(includeInstance, msg) {
     displayName: jspb.Message.getFieldWithDefault(msg, 4, ""),
     name: jspb.Message.getFieldWithDefault(msg, 5, ""),
     size: jspb.Message.getFieldWithDefault(msg, 6, 0),
-    fileId: jspb.Message.getFieldWithDefault(msg, 7, "")
+    fileUuid: jspb.Message.getFieldWithDefault(msg, 7, "")
   };
 
   if (includeInstance) {
@@ -3482,7 +3482,7 @@ proto.yartu.CardAttachment.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 7:
       var value = /** @type {string} */ (reader.readString());
-      msg.setFileId(value);
+      msg.setFileUuid(value);
       break;
     default:
       reader.skipField();
@@ -3555,7 +3555,7 @@ proto.yartu.CardAttachment.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getFileId();
+  f = message.getFileUuid();
   if (f.length > 0) {
     writer.writeString(
       7,
@@ -3674,10 +3674,10 @@ proto.yartu.CardAttachment.prototype.setSize = function(value) {
 
 
 /**
- * optional string file_id = 7;
+ * optional string file_uuid = 7;
  * @return {string}
  */
-proto.yartu.CardAttachment.prototype.getFileId = function() {
+proto.yartu.CardAttachment.prototype.getFileUuid = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
 };
 
@@ -3686,7 +3686,7 @@ proto.yartu.CardAttachment.prototype.getFileId = function() {
  * @param {string} value
  * @return {!proto.yartu.CardAttachment} returns this
  */
-proto.yartu.CardAttachment.prototype.setFileId = function(value) {
+proto.yartu.CardAttachment.prototype.setFileUuid = function(value) {
   return jspb.Message.setProto3StringField(this, 7, value);
 };
 
@@ -24813,7 +24813,8 @@ proto.yartu.AddCommentToCardResponse.prototype.toObject = function(opt_includeIn
 proto.yartu.AddCommentToCardResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, "")
+    data: (f = msg.getData()) && proto.yartu.CardActivity.toObject(includeInstance, f),
+    message: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -24855,6 +24856,11 @@ proto.yartu.AddCommentToCardResponse.deserializeBinaryFromReader = function(msg,
       msg.setCode(value);
       break;
     case 2:
+      var value = new proto.yartu.CardActivity;
+      reader.readMessage(value,proto.yartu.CardActivity.deserializeBinaryFromReader);
+      msg.setData(value);
+      break;
+    case 3:
       var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
@@ -24894,10 +24900,18 @@ proto.yartu.AddCommentToCardResponse.serializeBinaryToWriter = function(message,
       f
     );
   }
-  f = /** @type {string} */ (jspb.Message.getField(message, 2));
+  f = message.getData();
+  if (f != null) {
+    writer.writeMessage(
+      2,
+      f,
+      proto.yartu.CardActivity.serializeBinaryToWriter
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 3));
   if (f != null) {
     writer.writeString(
-      2,
+      3,
       f
     );
   }
@@ -24923,11 +24937,48 @@ proto.yartu.AddCommentToCardResponse.prototype.setCode = function(value) {
 
 
 /**
- * optional string message = 2;
+ * optional CardActivity data = 2;
+ * @return {?proto.yartu.CardActivity}
+ */
+proto.yartu.AddCommentToCardResponse.prototype.getData = function() {
+  return /** @type{?proto.yartu.CardActivity} */ (
+    jspb.Message.getWrapperField(this, proto.yartu.CardActivity, 2));
+};
+
+
+/**
+ * @param {?proto.yartu.CardActivity|undefined} value
+ * @return {!proto.yartu.AddCommentToCardResponse} returns this
+*/
+proto.yartu.AddCommentToCardResponse.prototype.setData = function(value) {
+  return jspb.Message.setWrapperField(this, 2, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.yartu.AddCommentToCardResponse} returns this
+ */
+proto.yartu.AddCommentToCardResponse.prototype.clearData = function() {
+  return this.setData(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.AddCommentToCardResponse.prototype.hasData = function() {
+  return jspb.Message.getField(this, 2) != null;
+};
+
+
+/**
+ * optional string message = 3;
  * @return {string}
  */
 proto.yartu.AddCommentToCardResponse.prototype.getMessage = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
 
@@ -24936,7 +24987,7 @@ proto.yartu.AddCommentToCardResponse.prototype.getMessage = function() {
  * @return {!proto.yartu.AddCommentToCardResponse} returns this
  */
 proto.yartu.AddCommentToCardResponse.prototype.setMessage = function(value) {
-  return jspb.Message.setField(this, 2, value);
+  return jspb.Message.setField(this, 3, value);
 };
 
 
@@ -24945,7 +24996,7 @@ proto.yartu.AddCommentToCardResponse.prototype.setMessage = function(value) {
  * @return {!proto.yartu.AddCommentToCardResponse} returns this
  */
 proto.yartu.AddCommentToCardResponse.prototype.clearMessage = function() {
-  return jspb.Message.setField(this, 2, undefined);
+  return jspb.Message.setField(this, 3, undefined);
 };
 
 
@@ -24954,7 +25005,7 @@ proto.yartu.AddCommentToCardResponse.prototype.clearMessage = function() {
  * @return {boolean}
  */
 proto.yartu.AddCommentToCardResponse.prototype.hasMessage = function() {
-  return jspb.Message.getField(this, 2) != null;
+  return jspb.Message.getField(this, 3) != null;
 };
 
 
