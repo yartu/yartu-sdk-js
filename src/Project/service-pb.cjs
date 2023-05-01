@@ -7336,7 +7336,8 @@ proto.yartu.Board.toObject = function(includeInstance, msg) {
     common_grpc_definitions_pb.Shared.toObject, includeInstance),
     assignableUserList: jspb.Message.toObjectList(msg.getAssignableUserList(),
     common_grpc_definitions_pb.User.toObject, includeInstance),
-    checklistItemCount: jspb.Message.getFieldWithDefault(msg, 18, 0)
+    checklistItemCount: jspb.Message.getFieldWithDefault(msg, 18, 0),
+    countOfMyUnfinishedTasks: jspb.Message.getFieldWithDefault(msg, 19, 0)
   };
 
   if (includeInstance) {
@@ -7451,6 +7452,10 @@ proto.yartu.Board.deserializeBinaryFromReader = function(msg, reader) {
     case 18:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setChecklistItemCount(value);
+      break;
+    case 19:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setCountOfMyUnfinishedTasks(value);
       break;
     default:
       reader.skipField();
@@ -7611,6 +7616,13 @@ proto.yartu.Board.serializeBinaryToWriter = function(message, writer) {
   if (f != null) {
     writer.writeInt64(
       18,
+      f
+    );
+  }
+  f = /** @type {number} */ (jspb.Message.getField(message, 19));
+  if (f != null) {
+    writer.writeInt64(
+      19,
       f
     );
   }
@@ -8130,6 +8142,42 @@ proto.yartu.Board.prototype.clearChecklistItemCount = function() {
  */
 proto.yartu.Board.prototype.hasChecklistItemCount = function() {
   return jspb.Message.getField(this, 18) != null;
+};
+
+
+/**
+ * optional int64 count_of_my_unfinished_tasks = 19;
+ * @return {number}
+ */
+proto.yartu.Board.prototype.getCountOfMyUnfinishedTasks = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 19, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu.Board} returns this
+ */
+proto.yartu.Board.prototype.setCountOfMyUnfinishedTasks = function(value) {
+  return jspb.Message.setField(this, 19, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.Board} returns this
+ */
+proto.yartu.Board.prototype.clearCountOfMyUnfinishedTasks = function() {
+  return jspb.Message.setField(this, 19, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.Board.prototype.hasCountOfMyUnfinishedTasks = function() {
+  return jspb.Message.getField(this, 19) != null;
 };
 
 
