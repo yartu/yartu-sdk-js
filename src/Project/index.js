@@ -152,14 +152,14 @@ export default (config) =>
             handleError(error, reject);
           } else {
             const code = response.getCode();
-            const recentlyAssignedList = response.getRecentlyAssignedList().map((d) => d.toObject());
+            const allTasksList = response.getAllTasksList().map((d) => d.toObject());
             const doTodayList = response.getDoTodayList().map((d) => d.toObject());
             const overdueList = response.getOverdueList().map((d) => d.toObject());
             const upcomingDeadlineList = response.getUpcomingDeadlineList().map((d) => d.toObject());
             if (code == 0) {
               resolve({
                 code,
-                recentlyAssignedList,
+                allTasksList,
                 doTodayList,
                 overdueList,
                 upcomingDeadlineList,

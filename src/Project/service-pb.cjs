@@ -10959,7 +10959,7 @@ proto.yartu.GetMyTaskResponse.prototype.toObject = function(opt_includeInstance)
 proto.yartu.GetMyTaskResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    recentlyAssignedList: jspb.Message.toObjectList(msg.getRecentlyAssignedList(),
+    allTasksList: jspb.Message.toObjectList(msg.getAllTasksList(),
     proto.yartu.Card.toObject, includeInstance),
     doTodayList: jspb.Message.toObjectList(msg.getDoTodayList(),
     proto.yartu.Card.toObject, includeInstance),
@@ -11011,7 +11011,7 @@ proto.yartu.GetMyTaskResponse.deserializeBinaryFromReader = function(msg, reader
     case 2:
       var value = new proto.yartu.Card;
       reader.readMessage(value,proto.yartu.Card.deserializeBinaryFromReader);
-      msg.addRecentlyAssigned(value);
+      msg.addAllTasks(value);
       break;
     case 3:
       var value = new proto.yartu.Card;
@@ -11068,7 +11068,7 @@ proto.yartu.GetMyTaskResponse.serializeBinaryToWriter = function(message, writer
       f
     );
   }
-  f = message.getRecentlyAssignedList();
+  f = message.getAllTasksList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
       2,
@@ -11129,10 +11129,10 @@ proto.yartu.GetMyTaskResponse.prototype.setCode = function(value) {
 
 
 /**
- * repeated Card recently_assigned = 2;
+ * repeated Card all_tasks = 2;
  * @return {!Array<!proto.yartu.Card>}
  */
-proto.yartu.GetMyTaskResponse.prototype.getRecentlyAssignedList = function() {
+proto.yartu.GetMyTaskResponse.prototype.getAllTasksList = function() {
   return /** @type{!Array<!proto.yartu.Card>} */ (
     jspb.Message.getRepeatedWrapperField(this, proto.yartu.Card, 2));
 };
@@ -11142,7 +11142,7 @@ proto.yartu.GetMyTaskResponse.prototype.getRecentlyAssignedList = function() {
  * @param {!Array<!proto.yartu.Card>} value
  * @return {!proto.yartu.GetMyTaskResponse} returns this
 */
-proto.yartu.GetMyTaskResponse.prototype.setRecentlyAssignedList = function(value) {
+proto.yartu.GetMyTaskResponse.prototype.setAllTasksList = function(value) {
   return jspb.Message.setRepeatedWrapperField(this, 2, value);
 };
 
@@ -11152,7 +11152,7 @@ proto.yartu.GetMyTaskResponse.prototype.setRecentlyAssignedList = function(value
  * @param {number=} opt_index
  * @return {!proto.yartu.Card}
  */
-proto.yartu.GetMyTaskResponse.prototype.addRecentlyAssigned = function(opt_value, opt_index) {
+proto.yartu.GetMyTaskResponse.prototype.addAllTasks = function(opt_value, opt_index) {
   return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.yartu.Card, opt_index);
 };
 
@@ -11161,8 +11161,8 @@ proto.yartu.GetMyTaskResponse.prototype.addRecentlyAssigned = function(opt_value
  * Clears the list making it empty but non-null.
  * @return {!proto.yartu.GetMyTaskResponse} returns this
  */
-proto.yartu.GetMyTaskResponse.prototype.clearRecentlyAssignedList = function() {
-  return this.setRecentlyAssignedList([]);
+proto.yartu.GetMyTaskResponse.prototype.clearAllTasksList = function() {
+  return this.setAllTasksList([]);
 };
 
 
