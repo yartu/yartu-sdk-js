@@ -1155,7 +1155,17 @@ export default (config) =>
         request.setPath(path);
         request.setDescription(description);
         request.setPassword(password);
-        request.setExpireDate(expireDate);
+
+        if (expireDate) {
+          let expireDateData = '';
+          if(expireDate?.$d) {
+            expireDateData = expireDate.format('YYYY-MM-DD HH:mm');
+          } else {
+            expireDateData = expireDate;
+          }
+          request.setExpireDate(expireDateData);
+        }
+
         request.setDownloadCountLimit(downloadCountLimit);
         request.setIpaddress(ipaddress);
 
@@ -1268,14 +1278,23 @@ export default (config) =>
     upsertUploadPoint = (uploadPointData) => {
       return new Promise((resolve, reject) => {
         const request = new UpsertUploadPointRequest();
-        console.log('SDK:uploadPointData:', uploadPointData);
         request.setToken(uploadPointData.token);
         request.setRepoId(uploadPointData.repoId);
         request.setPath(uploadPointData.path);
         request.setTitle(uploadPointData.title);
         request.setDescription(uploadPointData.description);
         request.setPassword(uploadPointData.password);
-        request.setExpireDate(uploadPointData.expireDate);
+
+        if (uploadPointData.expireDate) {
+          let expireDate = '';
+          if(uploadPointData.expireDate?.$d) {
+            expireDate = uploadPointData.expireDate.format('YYYY-MM-DD HH:mm');
+          } else {
+            expireDate = uploadPointData.expireDate;
+          }
+        request.setExpireDate(expireDate);
+        }
+
         request.setFileCountLimit(uploadPointData.fileCountLimit);
         request.setFileSizeLimit(uploadPointData.fileSizeLimit);
         request.setExtensionListList(uploadPointData.extensionList);
