@@ -25570,7 +25570,8 @@ proto.yartu.AddInteractionToCardResponse.prototype.toObject = function(opt_inclu
 proto.yartu.AddInteractionToCardResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, "")
+    data: (f = msg.getData()) && proto.yartu.CardActivity.toObject(includeInstance, f),
+    message: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -25612,6 +25613,11 @@ proto.yartu.AddInteractionToCardResponse.deserializeBinaryFromReader = function(
       msg.setCode(value);
       break;
     case 2:
+      var value = new proto.yartu.CardActivity;
+      reader.readMessage(value,proto.yartu.CardActivity.deserializeBinaryFromReader);
+      msg.setData(value);
+      break;
+    case 3:
       var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
@@ -25651,10 +25657,18 @@ proto.yartu.AddInteractionToCardResponse.serializeBinaryToWriter = function(mess
       f
     );
   }
-  f = /** @type {string} */ (jspb.Message.getField(message, 2));
+  f = message.getData();
+  if (f != null) {
+    writer.writeMessage(
+      2,
+      f,
+      proto.yartu.CardActivity.serializeBinaryToWriter
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 3));
   if (f != null) {
     writer.writeString(
-      2,
+      3,
       f
     );
   }
@@ -25680,11 +25694,48 @@ proto.yartu.AddInteractionToCardResponse.prototype.setCode = function(value) {
 
 
 /**
- * optional string message = 2;
+ * optional CardActivity data = 2;
+ * @return {?proto.yartu.CardActivity}
+ */
+proto.yartu.AddInteractionToCardResponse.prototype.getData = function() {
+  return /** @type{?proto.yartu.CardActivity} */ (
+    jspb.Message.getWrapperField(this, proto.yartu.CardActivity, 2));
+};
+
+
+/**
+ * @param {?proto.yartu.CardActivity|undefined} value
+ * @return {!proto.yartu.AddInteractionToCardResponse} returns this
+*/
+proto.yartu.AddInteractionToCardResponse.prototype.setData = function(value) {
+  return jspb.Message.setWrapperField(this, 2, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.yartu.AddInteractionToCardResponse} returns this
+ */
+proto.yartu.AddInteractionToCardResponse.prototype.clearData = function() {
+  return this.setData(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.AddInteractionToCardResponse.prototype.hasData = function() {
+  return jspb.Message.getField(this, 2) != null;
+};
+
+
+/**
+ * optional string message = 3;
  * @return {string}
  */
 proto.yartu.AddInteractionToCardResponse.prototype.getMessage = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
 
@@ -25693,7 +25744,7 @@ proto.yartu.AddInteractionToCardResponse.prototype.getMessage = function() {
  * @return {!proto.yartu.AddInteractionToCardResponse} returns this
  */
 proto.yartu.AddInteractionToCardResponse.prototype.setMessage = function(value) {
-  return jspb.Message.setField(this, 2, value);
+  return jspb.Message.setField(this, 3, value);
 };
 
 
@@ -25702,7 +25753,7 @@ proto.yartu.AddInteractionToCardResponse.prototype.setMessage = function(value) 
  * @return {!proto.yartu.AddInteractionToCardResponse} returns this
  */
 proto.yartu.AddInteractionToCardResponse.prototype.clearMessage = function() {
-  return jspb.Message.setField(this, 2, undefined);
+  return jspb.Message.setField(this, 3, undefined);
 };
 
 
@@ -25711,7 +25762,7 @@ proto.yartu.AddInteractionToCardResponse.prototype.clearMessage = function() {
  * @return {boolean}
  */
 proto.yartu.AddInteractionToCardResponse.prototype.hasMessage = function() {
-  return jspb.Message.getField(this, 2) != null;
+  return jspb.Message.getField(this, 3) != null;
 };
 
 

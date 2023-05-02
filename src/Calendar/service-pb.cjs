@@ -2431,7 +2431,7 @@ proto.yartu.CalendarObject.toObject = function(includeInstance, msg) {
     attendeesList: jspb.Message.toObjectList(msg.getAttendeesList(),
     proto.yartu.Attendee.toObject, includeInstance),
     allday: jspb.Message.getBooleanFieldWithDefault(msg, 20, false),
-    alarmsList: jspb.Message.toObjectList(msg.getAlarmsList(),
+    alarmList: jspb.Message.toObjectList(msg.getAlarmList(),
     proto.yartu.Alarm.toObject, includeInstance),
     source: jspb.Message.getFieldWithDefault(msg, 22, ""),
     conference: jspb.Message.getFieldWithDefault(msg, 23, 0),
@@ -2562,7 +2562,7 @@ proto.yartu.CalendarObject.deserializeBinaryFromReader = function(msg, reader) {
     case 21:
       var value = new proto.yartu.Alarm;
       reader.readMessage(value,proto.yartu.Alarm.deserializeBinaryFromReader);
-      msg.addAlarms(value);
+      msg.addAlarm(value);
       break;
     case 22:
       var value = /** @type {string} */ (reader.readString());
@@ -2771,7 +2771,7 @@ proto.yartu.CalendarObject.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getAlarmsList();
+  f = message.getAlarmList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
       21,
@@ -3263,10 +3263,10 @@ proto.yartu.CalendarObject.prototype.setAllday = function(value) {
 
 
 /**
- * repeated Alarm alarms = 21;
+ * repeated Alarm alarm = 21;
  * @return {!Array<!proto.yartu.Alarm>}
  */
-proto.yartu.CalendarObject.prototype.getAlarmsList = function() {
+proto.yartu.CalendarObject.prototype.getAlarmList = function() {
   return /** @type{!Array<!proto.yartu.Alarm>} */ (
     jspb.Message.getRepeatedWrapperField(this, proto.yartu.Alarm, 21));
 };
@@ -3276,7 +3276,7 @@ proto.yartu.CalendarObject.prototype.getAlarmsList = function() {
  * @param {!Array<!proto.yartu.Alarm>} value
  * @return {!proto.yartu.CalendarObject} returns this
 */
-proto.yartu.CalendarObject.prototype.setAlarmsList = function(value) {
+proto.yartu.CalendarObject.prototype.setAlarmList = function(value) {
   return jspb.Message.setRepeatedWrapperField(this, 21, value);
 };
 
@@ -3286,7 +3286,7 @@ proto.yartu.CalendarObject.prototype.setAlarmsList = function(value) {
  * @param {number=} opt_index
  * @return {!proto.yartu.Alarm}
  */
-proto.yartu.CalendarObject.prototype.addAlarms = function(opt_value, opt_index) {
+proto.yartu.CalendarObject.prototype.addAlarm = function(opt_value, opt_index) {
   return jspb.Message.addToRepeatedWrapperField(this, 21, opt_value, proto.yartu.Alarm, opt_index);
 };
 
@@ -3295,8 +3295,8 @@ proto.yartu.CalendarObject.prototype.addAlarms = function(opt_value, opt_index) 
  * Clears the list making it empty but non-null.
  * @return {!proto.yartu.CalendarObject} returns this
  */
-proto.yartu.CalendarObject.prototype.clearAlarmsList = function() {
-  return this.setAlarmsList([]);
+proto.yartu.CalendarObject.prototype.clearAlarmList = function() {
+  return this.setAlarmList([]);
 };
 
 
