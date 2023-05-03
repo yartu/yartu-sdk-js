@@ -1237,10 +1237,14 @@ export default (config) =>
         if (cardData.color !== undefined && cardData.color !== null) {
           request.setColor(cardData.color);
         }
+
         if (cardData.dueDate) {
           const dueDate = cardData.dueDate.utc().format('YYYY-MM-DD HH:mm');
           request.setDueDate(dueDate);
+        } else if (cardData.dueDate === null) {
+          request.setDueDate('clear');
         }
+
         if (cardData.column) {
           request.setColumnUuid(cardData.column.uuid);
         }
