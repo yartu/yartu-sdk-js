@@ -581,6 +581,10 @@ export default (config) =>
         }
 
         queryRequest.setQuery(query.query);
+        queryRequest.setPage(query.page);
+        queryRequest.setPerPage(query.perPage);
+        queryRequest.setSortBy(query.sortBy);
+
         request.setQuery(queryRequest);
 
         this.activeSearch = this.client.search(
