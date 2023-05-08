@@ -118,6 +118,7 @@ export default (config) =>
 
             if (code == 0) {
               const data = response.getEmail().toObject();
+              data.rawBody = data;
               if (filter_xss) {
                 // filtered body and return
                 data.body = sanitizeEmail(data);
@@ -507,7 +508,7 @@ export default (config) =>
         let request = new SaveDraftRequest();
         request = this.prepareEmail(data, request);
         if (uid) {
-          request.setUid(uid);
+          request.setUuid(uid);
         }
 
         this.client.saveDraft(request, this.metadata, (error, response) => {

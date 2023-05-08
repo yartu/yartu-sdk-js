@@ -65,7 +65,7 @@ export const xssOptions = (yartuAttach = {}) => {
         let href = attribs.href;
         const { host } = window.location;
 
-        if (!href.includes('/public-url/')) {
+        if (href && !href.includes('/public-url/')) {
           const aHost = new URL(href).host;
           if (host !== aHost) {
             const base64Url = Buffer.from(href, 'utf8').toString('base64');
@@ -76,6 +76,7 @@ export const xssOptions = (yartuAttach = {}) => {
         if (href) {
           attribs.href = href;
         }
+
         attribs.target = '_blank';
 
         return {
