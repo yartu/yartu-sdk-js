@@ -118,7 +118,7 @@ export default (config) =>
 
             if (code == 0) {
               const data = response.getEmail().toObject();
-              data.rawBody = data;
+              data.rawBody = data.body;
               if (filter_xss) {
                 // filtered body and return
                 data.body = sanitizeEmail(data);
