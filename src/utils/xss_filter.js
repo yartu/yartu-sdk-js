@@ -21,7 +21,7 @@ export const xssOptions = (yartuAttach = {}) => {
     ],
     allowedAttributes: {
       '*': ['style', 'width', 'height'],
-      a: ['href', 'target'],
+      a: ['href', 'target', 'data-yartu'],
       img: ['src', 'border', 'width', 'height', 'id', 'style', 'yartu-name'],
       tbody: ['align', 'bgcolor', 'valign'],
       td: [
@@ -55,33 +55,46 @@ export const xssOptions = (yartuAttach = {}) => {
       ],
       div: ['align', 'data-signature']
     },
-    allowedSchemes: ['http', 'https'],
+    allowedSchemes: ['http', 'https', 'mailto', 'tel'],
     allowedSchemesByTag: {
       img: ['data', 'src']
     },
     // allowedStyles: {},
     transformTags: {
       a: (tagName, attribs) => {
-        let href = attribs.href;
+        const attribute = { ...attribs };
+        let href = `${attribute.href}`;
         const { host } = window.location;
 
-        if (href && !href.includes('/public-url/')) {
-          const aHost = new URL(href).host;
-          if (host !== aHost) {
-            const base64Url = Buffer.from(href, 'utf8').toString('base64');
-            href = `/#/public-url/?u=${base64Url}`;
+        if (
+          href &&
+          !href.includes('/public-url/') &&
+          !href.includes('mailto:') &&
+          !href.includes('tel:') &&
+          !href.includes('fax:')
+        ) {
+          try {
+            console.log('CHANGE URL');
+            const aHost = new URL(href).host;
+            if (host !== aHost) {
+              const base64Url = Buffer.from(href, 'utf8').toString('base64');
+              href = `/#/public-url/?u=${base64Url}`;
+            }
+          } catch {
+            // pass
+            attribute['data-yartu'] = 'wrong-url';
           }
         }
 
         if (href) {
-          attribs.href = href;
+          attribute.href = href;
         }
 
-        attribs.target = '_blank';
+        attribute.target = '_blank';
 
         return {
           tagName: 'a',
-          attribs: attribs
+          attribs: attribute
         };
       },
       img: (tagName, attribs) => {
