@@ -146,7 +146,7 @@ export default (config) =>
       });
     };
 
-    shareAddressBook(addressBookId, shareList) {
+    shareAddressBook = (addressBookId, shareList) => {
       return new Promise((resolve, reject) => {
         const request = new ShareAddressBookRequest();
         request.setId(addressBookId);
@@ -208,7 +208,7 @@ export default (config) =>
       });
     }
 
-    unshareAddressBook(addressBookId) {
+    unshareAddressBook = (addressBookId) => {
       return new Promise((resolve, reject) => {
         const request = new UnshareAddressBookRequest();
         request.setId(addressBookId);
@@ -235,7 +235,7 @@ export default (config) =>
       });
     }
 
-    deleteSharedAddressBook(addressBookId, sharedAddressBookId) {
+    deleteSharedAddressBook = (addressBookId, sharedAddressBookId) => {
       return new Promise((resolve, reject) => {
         const request = new DeleteSharedAddressBookRequest();
         request.setId(addressBookId);
@@ -272,6 +272,7 @@ export default (config) =>
         query.setQuery(queryRequest.query);
         query.setPage(queryRequest.page);
         query.setPerPage(queryRequest.perPage);
+        query.setSortBy(queryRequest.sortBy);
         query.setSearchFieldsList(queryRequest.searchFields);
 
         const meta = new ContactMetaQuery();
