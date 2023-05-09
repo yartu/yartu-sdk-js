@@ -21,7 +21,7 @@ import {
 import { YEmailClient } from './service-grpc-web-pb.cjs';
 import { handleError } from '../utils/helper';
 
-import { sanitizeEmail } from '../utils/xss_filter.js';
+import { sanitizeEmail, sanitize } from '../utils/xss_filter.js';
 
 export default (config) =>
   class Email {
@@ -118,7 +118,7 @@ export default (config) =>
 
             if (code == 0) {
               const data = response.getEmail().toObject();
-              data.rawBody = data.body;
+              data.rawBody = sanitize(data.body, { transformTags: undefined });
               if (filter_xss) {
                 // filtered body and return
                 data.body = sanitizeEmail(data);
