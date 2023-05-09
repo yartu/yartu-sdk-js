@@ -53,7 +53,8 @@ export const xssOptions = (yartuAttach = {}) => {
         'width',
         'style'
       ],
-      div: ['align', 'data-signature']
+      div: ['align', 'data-signature'],
+      p: ['data-signature', 'data-type', 'data-signature', 'data-yartu']
     },
     allowedSchemes: ['http', 'https', 'mailto', 'tel'],
     allowedSchemesByTag: {
