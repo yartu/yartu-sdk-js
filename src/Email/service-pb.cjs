@@ -5344,7 +5344,8 @@ proto.yartu_mail.GetMessageRequest.prototype.toObject = function(opt_includeInst
  */
 proto.yartu_mail.GetMessageRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    uuid: jspb.Message.getFieldWithDefault(msg, 1, "")
+    uuid: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    soft: jspb.Message.getBooleanFieldWithDefault(msg, 2, false)
   };
 
   if (includeInstance) {
@@ -5385,6 +5386,10 @@ proto.yartu_mail.GetMessageRequest.deserializeBinaryFromReader = function(msg, r
       var value = /** @type {string} */ (reader.readString());
       msg.setUuid(value);
       break;
+    case 2:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setSoft(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -5421,6 +5426,13 @@ proto.yartu_mail.GetMessageRequest.serializeBinaryToWriter = function(message, w
       f
     );
   }
+  f = message.getSoft();
+  if (f) {
+    writer.writeBool(
+      2,
+      f
+    );
+  }
 };
 
 
@@ -5439,6 +5451,24 @@ proto.yartu_mail.GetMessageRequest.prototype.getUuid = function() {
  */
 proto.yartu_mail.GetMessageRequest.prototype.setUuid = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional bool soft = 2;
+ * @return {boolean}
+ */
+proto.yartu_mail.GetMessageRequest.prototype.getSoft = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 2, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.yartu_mail.GetMessageRequest} returns this
+ */
+proto.yartu_mail.GetMessageRequest.prototype.setSoft = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 2, value);
 };
 
 
