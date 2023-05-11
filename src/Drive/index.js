@@ -1,4 +1,5 @@
 /* eslint-disable unicorn/prevent-abbreviations */
+/* eslint-disable */
 import {
   GetRecentRequest,
   GetQuotaRequest,
@@ -1218,26 +1219,38 @@ export default (config) =>
       });
     };
 
-    getPublicShare = () => {
+    getPublicShare = (token, password = '', path = '/') => {
       return new Promise((resolve, reject) => {
         const request = new GetPublicShareRequest();
-        request.setRepoId(repoId);
+        request.setToken(token);
+        request.setPassword(password);
         request.setPath(path);
-        request.setStar(star);
 
         this.client.getPublicShare(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
           } else {
             const code = response.getCode();
+            const info = response.getInfo().toObject();
+            const passwordNeeded = response.getPasswordNeeded();
+            const downloadToken = response.getDownloadToken();
+            const dirent = response.getDirentList.map((data) => data.toObject());
+            const message =  response.getMessage();
+
             if (code == 0) {
               resolve({
-                code
+                type: 'publicShare',
+                code,
+                info,
+                passwordNeeded,
+                downloadToken,
+                dirent,
+                message,
               });
             } else {
               reject({
-                code: code,
-                message: response.getMessage()
+                code,
+                message,
               });
             }
           }
@@ -1365,6 +1378,7 @@ export default (config) =>
               const uploadKey = response.getUploadKey();
 
               resolve({
+                type: 'uploadPoint',
                 code,
                 data,
                 passwordNeeded,
@@ -1500,6 +1514,4 @@ export default (config) =>
         });
       });
     };
-
-
   };
