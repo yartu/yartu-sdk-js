@@ -113,7 +113,7 @@ export const xssOptions = (yartuAttach = {}) => {
               const base64 = Buffer.from(attribs.src, 'utf8').toString(
                 'base64'
               );
-              source = `/assets/not.svg?base=/${base64}`;
+              source = `/img/not-allowed.png?base=/${base64}`;
             }
           }
         }
