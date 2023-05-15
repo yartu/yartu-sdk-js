@@ -1234,7 +1234,7 @@ export default (config) =>
             const info = response.getInfo().toObject();
             const passwordNeeded = response.getPasswordNeeded();
             const downloadToken = response.getDownloadToken();
-            const dirent = response.getDirentList.map((data) => data.toObject());
+            const dirent = response.getDirentList().map((data) => data.toObject());
             const message =  response.getMessage();
 
             if (code == 0) {
