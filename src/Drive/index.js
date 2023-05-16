@@ -31,6 +31,7 @@ import {
   DeleteShareRequest,
   SharedWithMeRequest,
   SharedByMeRequest,
+  GetPublicShareDownloadRequest,
 
   // PublicShare (Share with link)
   ListPublicShareRequest,
@@ -1233,7 +1234,7 @@ export default (config) =>
             const code = response.getCode();
             const info = response.getInfo().toObject();
             const passwordNeeded = response.getPasswordNeeded();
-            const downloadToken = response.getDownloadToken();
+            const viewToken = response.getViewToken();
             const dirent = response.getDirentList().map((data) => data.toObject());
             const message =  response.getMessage();
 
@@ -1243,8 +1244,45 @@ export default (config) =>
                 code,
                 info,
                 passwordNeeded,
-                downloadToken,
+                viewToken,
                 dirent,
+                message,
+              });
+            } else {
+              reject({
+                code,
+                message,
+              });
+            }
+          }
+        });
+      });
+    };
+
+    getPublicShareDownload = (token, password = '', path = '/') => {
+      return new Promise((resolve, reject) => {
+        const request = new GetPublicShareDownloadRequest();
+        request.setToken(token);
+        request.setPassword(password);
+        request.setPath(path);
+
+        this.client.getPublicShareDownload(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+
+            const code = response.getCode();
+            const downloadToken = response.getToken();
+            const isZip = response.getIsZip();
+            const passwordNeeded = response.getPasswordNeeded();
+            const message =  response.getMessage();
+
+            if (code == 0) {
+              resolve({
+                code,
+                downloadToken,
+                passwordNeeded,
+                isZip,
                 message,
               });
             } else {
