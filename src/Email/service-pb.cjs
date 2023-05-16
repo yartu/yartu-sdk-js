@@ -6368,7 +6368,11 @@ proto.yartu_mail.SendMessageRequest.toObject = function(includeInstance, msg) {
     body: jspb.Message.getFieldWithDefault(msg, 6, ""),
     textBody: jspb.Message.getFieldWithDefault(msg, 7, ""),
     attachmentList: (f = jspb.Message.getRepeatedField(msg, 8)) == null ? undefined : f,
-    inReplyTo: jspb.Message.getFieldWithDefault(msg, 9, "")
+    inReplyTo: jspb.Message.getFieldWithDefault(msg, 9, ""),
+    deliverynotification: jspb.Message.getBooleanFieldWithDefault(msg, 10, false),
+    readnotification: jspb.Message.getBooleanFieldWithDefault(msg, 11, false),
+    priority: jspb.Message.getFieldWithDefault(msg, 12, 0),
+    originalUuid: jspb.Message.getFieldWithDefault(msg, 13, "")
   };
 
   if (includeInstance) {
@@ -6440,6 +6444,22 @@ proto.yartu_mail.SendMessageRequest.deserializeBinaryFromReader = function(msg, 
     case 9:
       var value = /** @type {string} */ (reader.readString());
       msg.setInReplyTo(value);
+      break;
+    case 10:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setDeliverynotification(value);
+      break;
+    case 11:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setReadnotification(value);
+      break;
+    case 12:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setPriority(value);
+      break;
+    case 13:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOriginalUuid(value);
       break;
     default:
       reader.skipField();
@@ -6530,6 +6550,34 @@ proto.yartu_mail.SendMessageRequest.serializeBinaryToWriter = function(message, 
   if (f.length > 0) {
     writer.writeString(
       9,
+      f
+    );
+  }
+  f = message.getDeliverynotification();
+  if (f) {
+    writer.writeBool(
+      10,
+      f
+    );
+  }
+  f = message.getReadnotification();
+  if (f) {
+    writer.writeBool(
+      11,
+      f
+    );
+  }
+  f = message.getPriority();
+  if (f !== 0) {
+    writer.writeInt64(
+      12,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 13));
+  if (f != null) {
+    writer.writeString(
+      13,
       f
     );
   }
@@ -6771,6 +6819,96 @@ proto.yartu_mail.SendMessageRequest.prototype.getInReplyTo = function() {
  */
 proto.yartu_mail.SendMessageRequest.prototype.setInReplyTo = function(value) {
   return jspb.Message.setProto3StringField(this, 9, value);
+};
+
+
+/**
+ * optional bool deliveryNotification = 10;
+ * @return {boolean}
+ */
+proto.yartu_mail.SendMessageRequest.prototype.getDeliverynotification = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 10, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.yartu_mail.SendMessageRequest} returns this
+ */
+proto.yartu_mail.SendMessageRequest.prototype.setDeliverynotification = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 10, value);
+};
+
+
+/**
+ * optional bool readNotification = 11;
+ * @return {boolean}
+ */
+proto.yartu_mail.SendMessageRequest.prototype.getReadnotification = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 11, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.yartu_mail.SendMessageRequest} returns this
+ */
+proto.yartu_mail.SendMessageRequest.prototype.setReadnotification = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 11, value);
+};
+
+
+/**
+ * optional int64 priority = 12;
+ * @return {number}
+ */
+proto.yartu_mail.SendMessageRequest.prototype.getPriority = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 12, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu_mail.SendMessageRequest} returns this
+ */
+proto.yartu_mail.SendMessageRequest.prototype.setPriority = function(value) {
+  return jspb.Message.setProto3IntField(this, 12, value);
+};
+
+
+/**
+ * optional string original_uuid = 13;
+ * @return {string}
+ */
+proto.yartu_mail.SendMessageRequest.prototype.getOriginalUuid = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 13, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu_mail.SendMessageRequest} returns this
+ */
+proto.yartu_mail.SendMessageRequest.prototype.setOriginalUuid = function(value) {
+  return jspb.Message.setField(this, 13, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu_mail.SendMessageRequest} returns this
+ */
+proto.yartu_mail.SendMessageRequest.prototype.clearOriginalUuid = function() {
+  return jspb.Message.setField(this, 13, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu_mail.SendMessageRequest.prototype.hasOriginalUuid = function() {
+  return jspb.Message.getField(this, 13) != null;
 };
 
 
@@ -8092,7 +8230,11 @@ proto.yartu_mail.SaveDraftRequest.toObject = function(includeInstance, msg) {
     body: jspb.Message.getFieldWithDefault(msg, 7, ""),
     textBody: jspb.Message.getFieldWithDefault(msg, 8, ""),
     attachmentList: (f = jspb.Message.getRepeatedField(msg, 9)) == null ? undefined : f,
-    inReplyTo: jspb.Message.getFieldWithDefault(msg, 10, "")
+    inReplyTo: jspb.Message.getFieldWithDefault(msg, 10, ""),
+    deliveryNotification: jspb.Message.getBooleanFieldWithDefault(msg, 11, false),
+    readNotification: jspb.Message.getBooleanFieldWithDefault(msg, 12, false),
+    priority: jspb.Message.getFieldWithDefault(msg, 13, 0),
+    originalUuid: jspb.Message.getFieldWithDefault(msg, 14, "")
   };
 
   if (includeInstance) {
@@ -8168,6 +8310,22 @@ proto.yartu_mail.SaveDraftRequest.deserializeBinaryFromReader = function(msg, re
     case 10:
       var value = /** @type {string} */ (reader.readString());
       msg.setInReplyTo(value);
+      break;
+    case 11:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setDeliveryNotification(value);
+      break;
+    case 12:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setReadNotification(value);
+      break;
+    case 13:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setPriority(value);
+      break;
+    case 14:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOriginalUuid(value);
       break;
     default:
       reader.skipField();
@@ -8265,6 +8423,34 @@ proto.yartu_mail.SaveDraftRequest.serializeBinaryToWriter = function(message, wr
   if (f.length > 0) {
     writer.writeString(
       10,
+      f
+    );
+  }
+  f = message.getDeliveryNotification();
+  if (f) {
+    writer.writeBool(
+      11,
+      f
+    );
+  }
+  f = message.getReadNotification();
+  if (f) {
+    writer.writeBool(
+      12,
+      f
+    );
+  }
+  f = message.getPriority();
+  if (f !== 0) {
+    writer.writeInt64(
+      13,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 14));
+  if (f != null) {
+    writer.writeString(
+      14,
       f
     );
   }
@@ -8524,6 +8710,96 @@ proto.yartu_mail.SaveDraftRequest.prototype.getInReplyTo = function() {
  */
 proto.yartu_mail.SaveDraftRequest.prototype.setInReplyTo = function(value) {
   return jspb.Message.setProto3StringField(this, 10, value);
+};
+
+
+/**
+ * optional bool delivery_notification = 11;
+ * @return {boolean}
+ */
+proto.yartu_mail.SaveDraftRequest.prototype.getDeliveryNotification = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 11, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.yartu_mail.SaveDraftRequest} returns this
+ */
+proto.yartu_mail.SaveDraftRequest.prototype.setDeliveryNotification = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 11, value);
+};
+
+
+/**
+ * optional bool read_notification = 12;
+ * @return {boolean}
+ */
+proto.yartu_mail.SaveDraftRequest.prototype.getReadNotification = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 12, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.yartu_mail.SaveDraftRequest} returns this
+ */
+proto.yartu_mail.SaveDraftRequest.prototype.setReadNotification = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 12, value);
+};
+
+
+/**
+ * optional int64 priority = 13;
+ * @return {number}
+ */
+proto.yartu_mail.SaveDraftRequest.prototype.getPriority = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 13, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu_mail.SaveDraftRequest} returns this
+ */
+proto.yartu_mail.SaveDraftRequest.prototype.setPriority = function(value) {
+  return jspb.Message.setProto3IntField(this, 13, value);
+};
+
+
+/**
+ * optional string original_uuid = 14;
+ * @return {string}
+ */
+proto.yartu_mail.SaveDraftRequest.prototype.getOriginalUuid = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 14, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu_mail.SaveDraftRequest} returns this
+ */
+proto.yartu_mail.SaveDraftRequest.prototype.setOriginalUuid = function(value) {
+  return jspb.Message.setField(this, 14, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu_mail.SaveDraftRequest} returns this
+ */
+proto.yartu_mail.SaveDraftRequest.prototype.clearOriginalUuid = function() {
+  return jspb.Message.setField(this, 14, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu_mail.SaveDraftRequest.prototype.hasOriginalUuid = function() {
+  return jspb.Message.getField(this, 14) != null;
 };
 
 
