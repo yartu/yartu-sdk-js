@@ -106,10 +106,12 @@ export default (config) =>
       });
     }
 
-    getMessage(emailUuid, filter_xss = true) {
+    getMessage(emailUuid, filter_xss = true, soft = false) {
       return new Promise((resolve, reject) => {
         const request = new GetMessageRequest();
         request.setUuid(emailUuid);
+        request.setSoft(soft);
+
         this.client.getMessage(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
