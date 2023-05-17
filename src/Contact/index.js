@@ -322,7 +322,7 @@ export default (config) =>
         contact.setTitle(contactData.title);
         contact.setCompany(contactData.company);
         contact.setName(contactData.name);
-        contact.setMiddleName(contactData.middle_name);
+        contact.setMiddleName(contactData.middleName);
         contact.setSurname(contactData.surname);
 
         const emailList = [];
@@ -369,7 +369,14 @@ export default (config) =>
         contact.setAddressList(addressList);
         contact.setNote(contactData.note);
 
-        request.setLabelsList(contactData.labelsList);
+        for (const label of contactData.labelsList) {
+          if (typeof label === 'object') {
+            request.addLabels(label.id);
+          } else {
+            request.addLabels(label);
+          }
+        }
+
         request.setContact(contact);
 
         this.client.upsertContact(request, this.metadata, (error, response) => {
