@@ -524,7 +524,10 @@ export default (config) =>
             if (code == 0) {
               resolve({
                 code: 0,
-                message: 'successfully'
+                uuid: response.getUuid(),
+                messageid: response.getMessageid(),
+                message: response.getMessage(),
+                date: new Date()
               });
             } else {
               reject({
