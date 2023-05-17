@@ -525,7 +525,7 @@ export default (config) =>
               resolve({
                 code: 0,
                 uuid: response.getUuid(),
-                messageid: response.getMessageid(),
+                messageid: response.getMessageIdHeader(),
                 message: response.getMessage(),
                 date: new Date()
               });
