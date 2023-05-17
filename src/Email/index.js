@@ -474,7 +474,7 @@ export default (config) =>
       }
 
       if (data.originalUuid) {
-        request.setOriginalUuid(data.replyTo);
+        request.setOriginalUuid(data.originalUuid);
       }
 
       return request;
