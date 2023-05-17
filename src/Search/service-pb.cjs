@@ -234,13 +234,15 @@ proto.yartu.ShareablePeople.toObject = function(includeInstance, msg) {
     isGroup: jspb.Message.getBooleanFieldWithDefault(msg, 1, false),
     isContact: jspb.Message.getBooleanFieldWithDefault(msg, 2, false),
     isYartuUser: jspb.Message.getBooleanFieldWithDefault(msg, 3, false),
-    id: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    isContactLabel: jspb.Message.getBooleanFieldWithDefault(msg, 4, false),
+    id: jspb.Message.getFieldWithDefault(msg, 5, 0),
     photo: msg.getPhoto_asB64(),
-    name: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    surname: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    email: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    text: jspb.Message.getFieldWithDefault(msg, 9, ""),
-    subtext: jspb.Message.getFieldWithDefault(msg, 10, "")
+    name: jspb.Message.getFieldWithDefault(msg, 7, ""),
+    surname: jspb.Message.getFieldWithDefault(msg, 8, ""),
+    email: jspb.Message.getFieldWithDefault(msg, 9, ""),
+    text: jspb.Message.getFieldWithDefault(msg, 10, ""),
+    subtext: jspb.Message.getFieldWithDefault(msg, 11, ""),
+    color: jspb.Message.getFieldWithDefault(msg, 12, "")
   };
 
   if (includeInstance) {
@@ -290,32 +292,40 @@ proto.yartu.ShareablePeople.deserializeBinaryFromReader = function(msg, reader) 
       msg.setIsYartuUser(value);
       break;
     case 4:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setIsContactLabel(value);
+      break;
+    case 5:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setId(value);
       break;
-    case 5:
+    case 6:
       var value = /** @type {!Uint8Array} */ (reader.readBytes());
       msg.setPhoto(value);
       break;
-    case 6:
+    case 7:
       var value = /** @type {string} */ (reader.readString());
       msg.setName(value);
       break;
-    case 7:
+    case 8:
       var value = /** @type {string} */ (reader.readString());
       msg.setSurname(value);
       break;
-    case 8:
+    case 9:
       var value = /** @type {string} */ (reader.readString());
       msg.setEmail(value);
       break;
-    case 9:
+    case 10:
       var value = /** @type {string} */ (reader.readString());
       msg.setText(value);
       break;
-    case 10:
+    case 11:
       var value = /** @type {string} */ (reader.readString());
       msg.setSubtext(value);
+      break;
+    case 12:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setColor(value);
       break;
     default:
       reader.skipField();
@@ -367,23 +377,23 @@ proto.yartu.ShareablePeople.serializeBinaryToWriter = function(message, writer) 
       f
     );
   }
-  f = message.getId();
-  if (f !== 0) {
-    writer.writeInt64(
+  f = message.getIsContactLabel();
+  if (f) {
+    writer.writeBool(
       4,
       f
     );
   }
-  f = /** @type {!(string|Uint8Array)} */ (jspb.Message.getField(message, 5));
-  if (f != null) {
-    writer.writeBytes(
+  f = message.getId();
+  if (f !== 0) {
+    writer.writeInt64(
       5,
       f
     );
   }
-  f = /** @type {string} */ (jspb.Message.getField(message, 6));
+  f = /** @type {!(string|Uint8Array)} */ (jspb.Message.getField(message, 6));
   if (f != null) {
-    writer.writeString(
+    writer.writeBytes(
       6,
       f
     );
@@ -413,6 +423,20 @@ proto.yartu.ShareablePeople.serializeBinaryToWriter = function(message, writer) 
   if (f != null) {
     writer.writeString(
       10,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 11));
+  if (f != null) {
+    writer.writeString(
+      11,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 12));
+  if (f != null) {
+    writer.writeString(
+      12,
       f
     );
   }
@@ -474,11 +498,29 @@ proto.yartu.ShareablePeople.prototype.setIsYartuUser = function(value) {
 
 
 /**
- * optional int64 id = 4;
+ * optional bool is_contact_label = 4;
+ * @return {boolean}
+ */
+proto.yartu.ShareablePeople.prototype.getIsContactLabel = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 4, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.yartu.ShareablePeople} returns this
+ */
+proto.yartu.ShareablePeople.prototype.setIsContactLabel = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 4, value);
+};
+
+
+/**
+ * optional int64 id = 5;
  * @return {number}
  */
 proto.yartu.ShareablePeople.prototype.getId = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
 };
 
 
@@ -487,21 +529,21 @@ proto.yartu.ShareablePeople.prototype.getId = function() {
  * @return {!proto.yartu.ShareablePeople} returns this
  */
 proto.yartu.ShareablePeople.prototype.setId = function(value) {
-  return jspb.Message.setProto3IntField(this, 4, value);
+  return jspb.Message.setProto3IntField(this, 5, value);
 };
 
 
 /**
- * optional bytes photo = 5;
+ * optional bytes photo = 6;
  * @return {string}
  */
 proto.yartu.ShareablePeople.prototype.getPhoto = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
 };
 
 
 /**
- * optional bytes photo = 5;
+ * optional bytes photo = 6;
  * This is a type-conversion wrapper around `getPhoto()`
  * @return {string}
  */
@@ -512,7 +554,7 @@ proto.yartu.ShareablePeople.prototype.getPhoto_asB64 = function() {
 
 
 /**
- * optional bytes photo = 5;
+ * optional bytes photo = 6;
  * Note that Uint8Array is not supported on all browsers.
  * @see http://caniuse.com/Uint8Array
  * This is a type-conversion wrapper around `getPhoto()`
@@ -529,42 +571,6 @@ proto.yartu.ShareablePeople.prototype.getPhoto_asU8 = function() {
  * @return {!proto.yartu.ShareablePeople} returns this
  */
 proto.yartu.ShareablePeople.prototype.setPhoto = function(value) {
-  return jspb.Message.setField(this, 5, value);
-};
-
-
-/**
- * Clears the field making it undefined.
- * @return {!proto.yartu.ShareablePeople} returns this
- */
-proto.yartu.ShareablePeople.prototype.clearPhoto = function() {
-  return jspb.Message.setField(this, 5, undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {boolean}
- */
-proto.yartu.ShareablePeople.prototype.hasPhoto = function() {
-  return jspb.Message.getField(this, 5) != null;
-};
-
-
-/**
- * optional string name = 6;
- * @return {string}
- */
-proto.yartu.ShareablePeople.prototype.getName = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.yartu.ShareablePeople} returns this
- */
-proto.yartu.ShareablePeople.prototype.setName = function(value) {
   return jspb.Message.setField(this, 6, value);
 };
 
@@ -573,7 +579,7 @@ proto.yartu.ShareablePeople.prototype.setName = function(value) {
  * Clears the field making it undefined.
  * @return {!proto.yartu.ShareablePeople} returns this
  */
-proto.yartu.ShareablePeople.prototype.clearName = function() {
+proto.yartu.ShareablePeople.prototype.clearPhoto = function() {
   return jspb.Message.setField(this, 6, undefined);
 };
 
@@ -582,16 +588,16 @@ proto.yartu.ShareablePeople.prototype.clearName = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu.ShareablePeople.prototype.hasName = function() {
+proto.yartu.ShareablePeople.prototype.hasPhoto = function() {
   return jspb.Message.getField(this, 6) != null;
 };
 
 
 /**
- * optional string surname = 7;
+ * optional string name = 7;
  * @return {string}
  */
-proto.yartu.ShareablePeople.prototype.getSurname = function() {
+proto.yartu.ShareablePeople.prototype.getName = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
 };
 
@@ -600,7 +606,7 @@ proto.yartu.ShareablePeople.prototype.getSurname = function() {
  * @param {string} value
  * @return {!proto.yartu.ShareablePeople} returns this
  */
-proto.yartu.ShareablePeople.prototype.setSurname = function(value) {
+proto.yartu.ShareablePeople.prototype.setName = function(value) {
   return jspb.Message.setField(this, 7, value);
 };
 
@@ -609,7 +615,7 @@ proto.yartu.ShareablePeople.prototype.setSurname = function(value) {
  * Clears the field making it undefined.
  * @return {!proto.yartu.ShareablePeople} returns this
  */
-proto.yartu.ShareablePeople.prototype.clearSurname = function() {
+proto.yartu.ShareablePeople.prototype.clearName = function() {
   return jspb.Message.setField(this, 7, undefined);
 };
 
@@ -618,16 +624,16 @@ proto.yartu.ShareablePeople.prototype.clearSurname = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu.ShareablePeople.prototype.hasSurname = function() {
+proto.yartu.ShareablePeople.prototype.hasName = function() {
   return jspb.Message.getField(this, 7) != null;
 };
 
 
 /**
- * optional string email = 8;
+ * optional string surname = 8;
  * @return {string}
  */
-proto.yartu.ShareablePeople.prototype.getEmail = function() {
+proto.yartu.ShareablePeople.prototype.getSurname = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
 };
 
@@ -636,7 +642,7 @@ proto.yartu.ShareablePeople.prototype.getEmail = function() {
  * @param {string} value
  * @return {!proto.yartu.ShareablePeople} returns this
  */
-proto.yartu.ShareablePeople.prototype.setEmail = function(value) {
+proto.yartu.ShareablePeople.prototype.setSurname = function(value) {
   return jspb.Message.setField(this, 8, value);
 };
 
@@ -645,7 +651,7 @@ proto.yartu.ShareablePeople.prototype.setEmail = function(value) {
  * Clears the field making it undefined.
  * @return {!proto.yartu.ShareablePeople} returns this
  */
-proto.yartu.ShareablePeople.prototype.clearEmail = function() {
+proto.yartu.ShareablePeople.prototype.clearSurname = function() {
   return jspb.Message.setField(this, 8, undefined);
 };
 
@@ -654,16 +660,16 @@ proto.yartu.ShareablePeople.prototype.clearEmail = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu.ShareablePeople.prototype.hasEmail = function() {
+proto.yartu.ShareablePeople.prototype.hasSurname = function() {
   return jspb.Message.getField(this, 8) != null;
 };
 
 
 /**
- * optional string text = 9;
+ * optional string email = 9;
  * @return {string}
  */
-proto.yartu.ShareablePeople.prototype.getText = function() {
+proto.yartu.ShareablePeople.prototype.getEmail = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 9, ""));
 };
 
@@ -672,7 +678,7 @@ proto.yartu.ShareablePeople.prototype.getText = function() {
  * @param {string} value
  * @return {!proto.yartu.ShareablePeople} returns this
  */
-proto.yartu.ShareablePeople.prototype.setText = function(value) {
+proto.yartu.ShareablePeople.prototype.setEmail = function(value) {
   return jspb.Message.setField(this, 9, value);
 };
 
@@ -681,7 +687,7 @@ proto.yartu.ShareablePeople.prototype.setText = function(value) {
  * Clears the field making it undefined.
  * @return {!proto.yartu.ShareablePeople} returns this
  */
-proto.yartu.ShareablePeople.prototype.clearText = function() {
+proto.yartu.ShareablePeople.prototype.clearEmail = function() {
   return jspb.Message.setField(this, 9, undefined);
 };
 
@@ -690,16 +696,16 @@ proto.yartu.ShareablePeople.prototype.clearText = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu.ShareablePeople.prototype.hasText = function() {
+proto.yartu.ShareablePeople.prototype.hasEmail = function() {
   return jspb.Message.getField(this, 9) != null;
 };
 
 
 /**
- * optional string subtext = 10;
+ * optional string text = 10;
  * @return {string}
  */
-proto.yartu.ShareablePeople.prototype.getSubtext = function() {
+proto.yartu.ShareablePeople.prototype.getText = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 10, ""));
 };
 
@@ -708,7 +714,7 @@ proto.yartu.ShareablePeople.prototype.getSubtext = function() {
  * @param {string} value
  * @return {!proto.yartu.ShareablePeople} returns this
  */
-proto.yartu.ShareablePeople.prototype.setSubtext = function(value) {
+proto.yartu.ShareablePeople.prototype.setText = function(value) {
   return jspb.Message.setField(this, 10, value);
 };
 
@@ -717,7 +723,7 @@ proto.yartu.ShareablePeople.prototype.setSubtext = function(value) {
  * Clears the field making it undefined.
  * @return {!proto.yartu.ShareablePeople} returns this
  */
-proto.yartu.ShareablePeople.prototype.clearSubtext = function() {
+proto.yartu.ShareablePeople.prototype.clearText = function() {
   return jspb.Message.setField(this, 10, undefined);
 };
 
@@ -726,8 +732,80 @@ proto.yartu.ShareablePeople.prototype.clearSubtext = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu.ShareablePeople.prototype.hasSubtext = function() {
+proto.yartu.ShareablePeople.prototype.hasText = function() {
   return jspb.Message.getField(this, 10) != null;
+};
+
+
+/**
+ * optional string subtext = 11;
+ * @return {string}
+ */
+proto.yartu.ShareablePeople.prototype.getSubtext = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 11, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.ShareablePeople} returns this
+ */
+proto.yartu.ShareablePeople.prototype.setSubtext = function(value) {
+  return jspb.Message.setField(this, 11, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.ShareablePeople} returns this
+ */
+proto.yartu.ShareablePeople.prototype.clearSubtext = function() {
+  return jspb.Message.setField(this, 11, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.ShareablePeople.prototype.hasSubtext = function() {
+  return jspb.Message.getField(this, 11) != null;
+};
+
+
+/**
+ * optional string color = 12;
+ * @return {string}
+ */
+proto.yartu.ShareablePeople.prototype.getColor = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 12, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.ShareablePeople} returns this
+ */
+proto.yartu.ShareablePeople.prototype.setColor = function(value) {
+  return jspb.Message.setField(this, 12, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.ShareablePeople} returns this
+ */
+proto.yartu.ShareablePeople.prototype.clearColor = function() {
+  return jspb.Message.setField(this, 12, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.ShareablePeople.prototype.hasColor = function() {
+  return jspb.Message.getField(this, 12) != null;
 };
 
 
