@@ -8837,7 +8837,7 @@ proto.yartu_mail.SaveDraftResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     code: jspb.Message.getFieldWithDefault(msg, 1, 0),
     uuid: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    messageid: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    messageIdHeader: jspb.Message.getFieldWithDefault(msg, 3, ""),
     message: jspb.Message.getFieldWithDefault(msg, 4, "")
   };
 
@@ -8884,8 +8884,8 @@ proto.yartu_mail.SaveDraftResponse.deserializeBinaryFromReader = function(msg, r
       msg.setUuid(value);
       break;
     case 3:
-      var value = /** @type {number} */ (reader.readInt64());
-      msg.setMessageid(value);
+      var value = /** @type {string} */ (reader.readString());
+      msg.setMessageIdHeader(value);
       break;
     case 4:
       var value = /** @type {string} */ (reader.readString());
@@ -8934,9 +8934,9 @@ proto.yartu_mail.SaveDraftResponse.serializeBinaryToWriter = function(message, w
       f
     );
   }
-  f = message.getMessageid();
-  if (f !== 0) {
-    writer.writeInt64(
+  f = message.getMessageIdHeader();
+  if (f.length > 0) {
+    writer.writeString(
       3,
       f
     );
@@ -8988,20 +8988,20 @@ proto.yartu_mail.SaveDraftResponse.prototype.setUuid = function(value) {
 
 
 /**
- * optional int64 messageId = 3;
- * @return {number}
+ * optional string message_id_header = 3;
+ * @return {string}
  */
-proto.yartu_mail.SaveDraftResponse.prototype.getMessageid = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+proto.yartu_mail.SaveDraftResponse.prototype.getMessageIdHeader = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
 
 /**
- * @param {number} value
+ * @param {string} value
  * @return {!proto.yartu_mail.SaveDraftResponse} returns this
  */
-proto.yartu_mail.SaveDraftResponse.prototype.setMessageid = function(value) {
-  return jspb.Message.setProto3IntField(this, 3, value);
+proto.yartu_mail.SaveDraftResponse.prototype.setMessageIdHeader = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 
