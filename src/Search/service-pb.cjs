@@ -1492,7 +1492,7 @@ proto.yartu.SearchFilter.prototype.clearValueList = function() {
  * @private {!Array<number>}
  * @const
  */
-proto.yartu.ListSearchShareablePeopleRequest.repeatedFields_ = [2];
+proto.yartu.ListSearchShareablePeopleRequest.repeatedFields_ = [2,3];
 
 
 
@@ -1527,6 +1527,7 @@ proto.yartu.ListSearchShareablePeopleRequest.toObject = function(includeInstance
   var f, obj = {
     search: jspb.Message.getFieldWithDefault(msg, 1, ""),
     typeList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f,
+    requiredFieldList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f,
     query: (f = msg.getQuery()) && proto.yartu.ShareableQuery.toObject(includeInstance, f)
   };
 
@@ -1573,6 +1574,10 @@ proto.yartu.ListSearchShareablePeopleRequest.deserializeBinaryFromReader = funct
       msg.addType(value);
       break;
     case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.addRequiredField(value);
+      break;
+    case 4:
       var value = new proto.yartu.ShareableQuery;
       reader.readMessage(value,proto.yartu.ShareableQuery.deserializeBinaryFromReader);
       msg.setQuery(value);
@@ -1620,10 +1625,17 @@ proto.yartu.ListSearchShareablePeopleRequest.serializeBinaryToWriter = function(
       f
     );
   }
+  f = message.getRequiredFieldList();
+  if (f.length > 0) {
+    writer.writeRepeatedString(
+      3,
+      f
+    );
+  }
   f = message.getQuery();
   if (f != null) {
     writer.writeMessage(
-      3,
+      4,
       f,
       proto.yartu.ShareableQuery.serializeBinaryToWriter
     );
@@ -1687,12 +1699,49 @@ proto.yartu.ListSearchShareablePeopleRequest.prototype.clearTypeList = function(
 
 
 /**
- * optional ShareableQuery query = 3;
+ * repeated string required_field = 3;
+ * @return {!Array<string>}
+ */
+proto.yartu.ListSearchShareablePeopleRequest.prototype.getRequiredFieldList = function() {
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 3));
+};
+
+
+/**
+ * @param {!Array<string>} value
+ * @return {!proto.yartu.ListSearchShareablePeopleRequest} returns this
+ */
+proto.yartu.ListSearchShareablePeopleRequest.prototype.setRequiredFieldList = function(value) {
+  return jspb.Message.setField(this, 3, value || []);
+};
+
+
+/**
+ * @param {string} value
+ * @param {number=} opt_index
+ * @return {!proto.yartu.ListSearchShareablePeopleRequest} returns this
+ */
+proto.yartu.ListSearchShareablePeopleRequest.prototype.addRequiredField = function(value, opt_index) {
+  return jspb.Message.addToRepeatedField(this, 3, value, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.yartu.ListSearchShareablePeopleRequest} returns this
+ */
+proto.yartu.ListSearchShareablePeopleRequest.prototype.clearRequiredFieldList = function() {
+  return this.setRequiredFieldList([]);
+};
+
+
+/**
+ * optional ShareableQuery query = 4;
  * @return {?proto.yartu.ShareableQuery}
  */
 proto.yartu.ListSearchShareablePeopleRequest.prototype.getQuery = function() {
   return /** @type{?proto.yartu.ShareableQuery} */ (
-    jspb.Message.getWrapperField(this, proto.yartu.ShareableQuery, 3));
+    jspb.Message.getWrapperField(this, proto.yartu.ShareableQuery, 4));
 };
 
 
@@ -1701,7 +1750,7 @@ proto.yartu.ListSearchShareablePeopleRequest.prototype.getQuery = function() {
  * @return {!proto.yartu.ListSearchShareablePeopleRequest} returns this
 */
 proto.yartu.ListSearchShareablePeopleRequest.prototype.setQuery = function(value) {
-  return jspb.Message.setWrapperField(this, 3, value);
+  return jspb.Message.setWrapperField(this, 4, value);
 };
 
 
@@ -1719,7 +1768,7 @@ proto.yartu.ListSearchShareablePeopleRequest.prototype.clearQuery = function() {
  * @return {boolean}
  */
 proto.yartu.ListSearchShareablePeopleRequest.prototype.hasQuery = function() {
-  return jspb.Message.getField(this, 3) != null;
+  return jspb.Message.getField(this, 4) != null;
 };
 
 
