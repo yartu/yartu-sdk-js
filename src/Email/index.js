@@ -473,6 +473,10 @@ export default (config) =>
         request.setInReplyTo(data.replyTo);
       }
 
+      if (data.originalUuid) {
+        request.setOriginalUuid(data.replyTo);
+      }
+
       return request;
     }
 
