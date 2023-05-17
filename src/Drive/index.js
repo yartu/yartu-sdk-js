@@ -1232,13 +1232,12 @@ export default (config) =>
             handleError(error, reject);
           } else {
             const code = response.getCode();
-            const info = response.getInfo().toObject();
-            const passwordNeeded = response.getPasswordNeeded();
-            const viewToken = response.getViewToken();
-            const dirent = response.getDirentList().map((data) => data.toObject());
             const message =  response.getMessage();
-
             if (code == 0) {
+              const info = response.getInfo().toObject();
+              const passwordNeeded = response.getPasswordNeeded();
+              const viewToken = response.getViewToken();
+              const dirent = response.getDirentList().map((data) => data.toObject());
               resolve({
                 type: 'publicShare',
                 code,
