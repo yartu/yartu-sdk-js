@@ -23,13 +23,22 @@ export default (config) =>
       this.activeSearch = null;
     }
 
-    searchShareablePeople = (search, type_list, query = {}) => {
+    searchShareablePeople = (
+      search,
+      type_list,
+      query = {},
+      requiredFields = [],
+      withoutMe = false
+    ) => {
       return new Promise((resolve, reject) => {
         const request = new ListSearchShareablePeopleRequest();
         const searchQuery = new ShareableQuery();
 
         request.setSearch(search);
         request.setQuery(searchQuery);
+        request.setRequiredFieldList(requiredFields);
+        request.setWithoutMe(withoutMe);
+
         for (const type of type_list) {
           request.addType(type);
         }
@@ -44,8 +53,16 @@ export default (config) =>
               const code = response.getCode();
 
               if (code == 0) {
-                const people = response.getPeopleList().map((data) => data.toObject());
-                people.forEach((p) => p.photo = p.photo ? 'data:image/png;base64,'.concat(p.photo) : null);
+                const people = response
+                  .getPeopleList()
+                  .map((data) => data.toObject());
+
+                people.forEach(
+                  (p) =>
+                    (p.photo = p.photo
+                      ? 'data:image/png;base64,'.concat(p.photo)
+                      : null)
+                );
 
                 resolve({
                   message: response.getMessage(),
