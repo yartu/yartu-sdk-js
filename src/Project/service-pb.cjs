@@ -3419,7 +3419,8 @@ proto.yartu.CardAttachment.toObject = function(includeInstance, msg) {
     displayName: jspb.Message.getFieldWithDefault(msg, 4, ""),
     name: jspb.Message.getFieldWithDefault(msg, 5, ""),
     size: jspb.Message.getFieldWithDefault(msg, 6, 0),
-    fileUuid: jspb.Message.getFieldWithDefault(msg, 7, "")
+    fileUuid: jspb.Message.getFieldWithDefault(msg, 7, ""),
+    token: jspb.Message.getFieldWithDefault(msg, 8, "")
   };
 
   if (includeInstance) {
@@ -3483,6 +3484,10 @@ proto.yartu.CardAttachment.deserializeBinaryFromReader = function(msg, reader) {
     case 7:
       var value = /** @type {string} */ (reader.readString());
       msg.setFileUuid(value);
+      break;
+    case 8:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setToken(value);
       break;
     default:
       reader.skipField();
@@ -3559,6 +3564,13 @@ proto.yartu.CardAttachment.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writeString(
       7,
+      f
+    );
+  }
+  f = message.getToken();
+  if (f.length > 0) {
+    writer.writeString(
+      8,
       f
     );
   }
@@ -3688,6 +3700,24 @@ proto.yartu.CardAttachment.prototype.getFileUuid = function() {
  */
 proto.yartu.CardAttachment.prototype.setFileUuid = function(value) {
   return jspb.Message.setProto3StringField(this, 7, value);
+};
+
+
+/**
+ * optional string token = 8;
+ * @return {string}
+ */
+proto.yartu.CardAttachment.prototype.getToken = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.CardAttachment} returns this
+ */
+proto.yartu.CardAttachment.prototype.setToken = function(value) {
+  return jspb.Message.setProto3StringField(this, 8, value);
 };
 
 
