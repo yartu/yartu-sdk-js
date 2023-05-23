@@ -469,6 +469,10 @@ export default (config) =>
         request.setBccList(bccList);
       }
 
+      if (data.priority) {
+        request.setPriority(data.priority);
+      }
+
       request.setAttachmentList(data.attachments);
 
       if (data.replyTo) {
