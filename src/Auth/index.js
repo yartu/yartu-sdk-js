@@ -74,6 +74,7 @@ export default (config) =>
             const code = response.getCode();
             const token = response.getToken();
             const services = response.getServiceList();
+            const apps = response.getAppList().map((data) => data.toObject());
 
             if (code == 0) {
               window.localStorage.setItem('yartu-token', token);
@@ -82,6 +83,7 @@ export default (config) =>
                 status: status_AUTH_OK,
                 working_status: response.getWorkingStatus(),
                 services: services,
+                apps: apps,
                 token: token
               });
             } else if (code == code_AUTH_TWO_FA_FORCE) {
