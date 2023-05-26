@@ -483,8 +483,13 @@ export default (config) =>
         request.setOriginalUuid(data.originalUuid);
       }
 
-      request.setReadnotification(!!data.readNotification);
-      request.setDeliverynotification(!!data.deliveryNotification);
+      if (data.readNotification) {
+        request.setReadnotification(data.readNotification);
+      }
+
+      if (data.deliveryNotification) {
+        request.setDeliverynotification(data.deliveryNotification);
+      }
 
       return request;
     }

@@ -11,6 +11,7 @@ import Note from '../Note';
 import Project from '../Project';
 import Search from '../Search';
 import Notification from '../Notification';
+import ExternalApp from '../ExternalApp';
 
 // TODO :: Check if Vue project
 import { inject } from 'vue';
@@ -46,6 +47,7 @@ class YartuApp {
     this.Project = new (Project())(config);
     this.Search = new (Search())(config);
     this.Notification = new (Notification())(config);
+    this.ExternalApp = new (ExternalApp())(config);
 
     this.Account.yartuSdk = this;
     this.Auth.yartuSdk = this;
@@ -56,6 +58,7 @@ class YartuApp {
     this.Email.yartuSdk = this;
     this.Note.yartuSdk = this;
     this.Project.yartuSdk = this;
+    this.ExternalApp.yartuSdk = this;
     this.Notification.Notification = this;
     this.refreshUser();
   }
@@ -91,6 +94,7 @@ class YartuApp {
     this.Project.metadata = { Authentication: yartu_token };
     this.Search.metadata = { Authentication: yartu_token };
     this.Notification.metadata = { Authentication: yartu_token };
+    this.ExternalApp.metadata = { Authentication: yartu_token };
   }
 }
 
