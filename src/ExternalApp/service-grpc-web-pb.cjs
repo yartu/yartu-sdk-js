@@ -135,5 +135,66 @@ proto.yartu.YAppPromiseClient.prototype.authorizeApp =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.GetAppTokenRequest,
+ *   !proto.yartu.GetAppTokenResponse>}
+ */
+const methodDescriptor_YApp_getAppToken = new grpc.web.MethodDescriptor(
+  '/yartu.YApp/getAppToken',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.GetAppTokenRequest,
+  proto.yartu.GetAppTokenResponse,
+  /**
+   * @param {!proto.yartu.GetAppTokenRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.GetAppTokenResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.GetAppTokenRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.GetAppTokenResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.GetAppTokenResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YAppClient.prototype.getAppToken =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YApp/getAppToken',
+      request,
+      metadata || {},
+      methodDescriptor_YApp_getAppToken,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.GetAppTokenRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.GetAppTokenResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YAppPromiseClient.prototype.getAppToken =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YApp/getAppToken',
+      request,
+      metadata || {},
+      methodDescriptor_YApp_getAppToken);
+};
+
+
 module.exports = proto.yartu;
 
