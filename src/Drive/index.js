@@ -1038,10 +1038,10 @@ export default (config) =>
                 .map((data) => {
                   const d = data.toObject();
                   if (d.repo && d.repo.customPermissionMap.length > 0) {
-                    d.repo.customPermissionMap = loadFromArray(d.repo.customPermissionMap);
+                    d.repo.customPermission = loadFromArray(d.repo.customPermissionMap);
                   }
                   if (d.dirent && d.dirent.customPermissionMap.length > 0) {
-                    d.dirent.customPermissionMap = loadFromArray(d.dirent.customPermissionMap);
+                    d.dirent.customPermission = loadFromArray(d.dirent.customPermissionMap);
                   }
                   return d;
                 });
