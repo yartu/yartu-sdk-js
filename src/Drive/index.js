@@ -52,7 +52,7 @@ import {
 } from './service-pb.cjs';
 
 import { YDriveClient } from './service-grpc-web-pb.cjs';
-import { handleError } from '../utils/helper';
+import { handleError, loadFromArray } from '../utils/helper';
 import { Group, Query, Shared, User } from '../utils/definitions_pb.cjs';
 
 export default (config) =>
@@ -1035,7 +1035,16 @@ export default (config) =>
             if (code == 0) {
               const dataList = response
                 .getDataList()
-                .map((data) => data.toObject());
+                .map((data) => {
+                  const d = data.toObject();
+                  if (d.repo && d.repo.customPermissionMap.length > 0) {
+                    d.repo.customPermission = loadFromArray(d.repo.customPermissionMap);
+                  }
+                  if (d.dirent && d.dirent.customPermissionMap.length > 0) {
+                    d.dirent.customPermission = loadFromArray(d.dirent.customPermissionMap);
+                  }
+                  return d;
+                });
 
               resolve({
                 code: 0,
