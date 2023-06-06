@@ -2582,7 +2582,8 @@ proto.yartu_mail.MailAttachment.toObject = function(includeInstance, msg) {
     encoding: jspb.Message.getFieldWithDefault(msg, 4, ""),
     size: jspb.Message.getFieldWithDefault(msg, 5, 0),
     filename: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    disposition: jspb.Message.getFieldWithDefault(msg, 7, "")
+    disposition: jspb.Message.getFieldWithDefault(msg, 7, ""),
+    id: jspb.Message.getFieldWithDefault(msg, 8, "")
   };
 
   if (includeInstance) {
@@ -2646,6 +2647,10 @@ proto.yartu_mail.MailAttachment.deserializeBinaryFromReader = function(msg, read
     case 7:
       var value = /** @type {string} */ (reader.readString());
       msg.setDisposition(value);
+      break;
+    case 8:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setId(value);
       break;
     default:
       reader.skipField();
@@ -2722,6 +2727,13 @@ proto.yartu_mail.MailAttachment.serializeBinaryToWriter = function(message, writ
   if (f.length > 0) {
     writer.writeString(
       7,
+      f
+    );
+  }
+  f = message.getId();
+  if (f.length > 0) {
+    writer.writeString(
+      8,
       f
     );
   }
@@ -2851,6 +2863,24 @@ proto.yartu_mail.MailAttachment.prototype.getDisposition = function() {
  */
 proto.yartu_mail.MailAttachment.prototype.setDisposition = function(value) {
   return jspb.Message.setProto3StringField(this, 7, value);
+};
+
+
+/**
+ * optional string id = 8;
+ * @return {string}
+ */
+proto.yartu_mail.MailAttachment.prototype.getId = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu_mail.MailAttachment} returns this
+ */
+proto.yartu_mail.MailAttachment.prototype.setId = function(value) {
+  return jspb.Message.setProto3StringField(this, 8, value);
 };
 
 
