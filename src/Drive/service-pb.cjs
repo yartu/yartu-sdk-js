@@ -23672,8 +23672,8 @@ proto.yartu.UpsertPublicShareRequest.serializeBinaryToWriter = function(message,
       f
     );
   }
-  f = message.getPassword();
-  if (f.length > 0) {
+  f = /** @type {string} */ (jspb.Message.getField(message, 5));
+  if (f != null) {
     writer.writeString(
       5,
       f
@@ -23789,7 +23789,25 @@ proto.yartu.UpsertPublicShareRequest.prototype.getPassword = function() {
  * @return {!proto.yartu.UpsertPublicShareRequest} returns this
  */
 proto.yartu.UpsertPublicShareRequest.prototype.setPassword = function(value) {
-  return jspb.Message.setProto3StringField(this, 5, value);
+  return jspb.Message.setField(this, 5, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.UpsertPublicShareRequest} returns this
+ */
+proto.yartu.UpsertPublicShareRequest.prototype.clearPassword = function() {
+  return jspb.Message.setField(this, 5, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.UpsertPublicShareRequest.prototype.hasPassword = function() {
+  return jspb.Message.getField(this, 5) != null;
 };
 
 
