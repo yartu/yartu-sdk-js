@@ -1158,14 +1158,17 @@ export default (config) =>
       });
     };
 
-    upsertPublicShare = (token, repoId = '', path = '', description = '', password = '', expireDate = '', downloadCountLimit = 0, ipaddress = '') => {
+    upsertPublicShare = (token, repoId = '', path = '', description = '', password = null, expireDate = '', downloadCountLimit = 0, ipaddress = '') => {
       return new Promise((resolve, reject) => {
         const request = new UpsertPublicShareRequest();
         request.setToken(token);
         request.setRepoId(repoId);
         request.setPath(path);
         request.setDescription(description);
-        request.setPassword(password);
+
+        if (password) {
+          request.setPassword(password);
+        }
 
         if (expireDate) {
           let expireDateData = '';
