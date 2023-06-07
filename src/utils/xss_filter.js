@@ -1,8 +1,10 @@
 // eslint-disable-next-line unicorn/filename-case
+// TODO :: all actions should be dynamic. from main @akucuk
 import sanitizeHtml from 'sanitize-html';
 
 export const xssOptions = (yartuAttach = {}) => {
-  return {
+  const imgInlineList = [];
+  const options = {
     allowedTags: [
       ...sanitizeHtml.defaults.allowedTags,
       'img',
@@ -17,13 +19,61 @@ export const xssOptions = (yartuAttach = {}) => {
       'tbody',
       'center',
       'font',
-      'title'
+      'title',
+      'link',
+      'head',
+      'html'
     ],
     allowedAttributes: {
-      '*': ['style', 'width', 'height'],
+      '*': [
+        'height',
+        'width',
+        'style',
+        'align',
+        'alink',
+        'alt',
+        'bgcolor',
+        'border',
+        'cellpadding',
+        'cellspacing',
+        'class',
+        'color',
+        'cols',
+        'colspan',
+        'coords',
+        'dir',
+        'face',
+        'hspace',
+        'ismap',
+        'lang',
+        'marginheight',
+        'marginwidth',
+        'multiple',
+        'nohref',
+        'noresize',
+        'noshade',
+        'nowrap',
+        'ref',
+        'rel',
+        'rev',
+        'rows',
+        'rowspan',
+        'scrolling',
+        'shape',
+        'span',
+        'summary',
+        'tabindex',
+        'title',
+        'usemap',
+        'valign',
+        'value',
+        'vlink',
+        'vspace',
+        'data-yartu-href',
+        'data-yartu-src'
+      ],
       a: ['href', 'target', 'data-yartu'],
       img: ['src', 'border', 'width', 'height', 'id', 'style', 'yartu-name'],
-      tbody: ['align', 'bgcolor', 'valign'],
       td: [
         'colspan',
         'headers',
@@ -53,19 +103,21 @@ export const xssOptions = (yartuAttach = {}) => {
         'width',
         'style'
       ],
+      link: ['href', 'rel'],
       div: ['align', 'data-signature', 'data-type'],
-      p: ['data-signature', 'data-type', 'data-signature', 'data-yartu']
+      p: ['data-signature', 'data-type', 'data-yartu']
     },
     allowedSchemes: ['http', 'https', 'mailto', 'tel'],
     allowedSchemesByTag: {
       img: ['data', 'src']
     },
-    // allowedStyles: {},
     transformTags: {
       a: (tagName, attribs) => {
         const attribute = { ...attribs };
         let href = `${attribute.href}`;
         const { host } = window.location;
+
+        attribute['data-yartu-href'] = href;
 
         if (
           href &&
@@ -75,7 +127,6 @@ export const xssOptions = (yartuAttach = {}) => {
           !href.includes('fax:')
         ) {
           try {
-            console.log('CHANGE URL');
             const aHost = new URL(href).host;
             if (host !== aHost) {
               const base64Url = Buffer.from(href, 'utf8').toString('base64');
@@ -102,11 +153,13 @@ export const xssOptions = (yartuAttach = {}) => {
         let source = attribs.src;
         if (source) {
           const yartuName = attribs['yartu-name'];
+          attribs['data-yartu-src'] = source;
 
           if (source.includes('cid:')) {
             attribs['yartu-name'] = 'yartu-attach-file';
             const cid = source.replace('cid:', '');
             source = `/file/attachment/${yartuAttach.uuid}?cid=${cid}`;
+            imgInlineList.push(cid);
           } else if (!yartuName) {
             attribs['yartu-name'] = 'yartu-image';
             if (source.includes('//')) {
@@ -129,13 +182,23 @@ export const xssOptions = (yartuAttach = {}) => {
       }
     }
   };
+  return {
+    options,
+    imgInlineList
+  };
 };
 
 export const sanitize = (uglyHtml, customOptions = {}, yartuAttach = {}) => {
-  return sanitizeHtml(uglyHtml, {
-    ...xssOptions(yartuAttach),
+  const { options, imgInlineList } = xssOptions(yartuAttach);
+  const sanitizeResponse = sanitizeHtml(uglyHtml, {
+    ...options,
     ...customOptions
   });
+
+  return {
+    sanitize: sanitizeResponse,
+    imgInlineList
+  };
 };
 
 export const sanitizeEmail = (emailData) => {
