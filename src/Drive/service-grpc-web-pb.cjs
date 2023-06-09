@@ -1177,6 +1177,67 @@ proto.yartu.YDrivePromiseClient.prototype.unlockDirent =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.RevertDirentTrashRequest,
+ *   !proto.yartu.RevertDirentTrashResponse>}
+ */
+const methodDescriptor_YDrive_revertDirentTrash = new grpc.web.MethodDescriptor(
+  '/yartu.YDrive/revertDirentTrash',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.RevertDirentTrashRequest,
+  proto.yartu.RevertDirentTrashResponse,
+  /**
+   * @param {!proto.yartu.RevertDirentTrashRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.RevertDirentTrashResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.RevertDirentTrashRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.RevertDirentTrashResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.RevertDirentTrashResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YDriveClient.prototype.revertDirentTrash =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YDrive/revertDirentTrash',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_revertDirentTrash,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.RevertDirentTrashRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.RevertDirentTrashResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YDrivePromiseClient.prototype.revertDirentTrash =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YDrive/revertDirentTrash',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_revertDirentTrash);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.UpsertDirectoryRequest,
  *   !proto.yartu.UpsertDirectoryResponse>}
  */
