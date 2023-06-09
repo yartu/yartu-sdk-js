@@ -2938,7 +2938,7 @@ proto.yartu_mail.MailMessage.toObject = function(includeInstance, msg) {
     recievedAt: jspb.Message.getFieldWithDefault(msg, 9, ""),
     isSeen: jspb.Message.getBooleanFieldWithDefault(msg, 10, false),
     isFlagged: jspb.Message.getBooleanFieldWithDefault(msg, 11, false),
-    isJunk: jspb.Message.getBooleanFieldWithDefault(msg, 12, false),
+    isAnswered: jspb.Message.getBooleanFieldWithDefault(msg, 12, false),
     isDraft: jspb.Message.getBooleanFieldWithDefault(msg, 13, false),
     attachmentList: jspb.Message.toObjectList(msg.getAttachmentList(),
     proto.yartu_mail.MailAttachment.toObject, includeInstance),
@@ -3032,7 +3032,7 @@ proto.yartu_mail.MailMessage.deserializeBinaryFromReader = function(msg, reader)
       break;
     case 12:
       var value = /** @type {boolean} */ (reader.readBool());
-      msg.setIsJunk(value);
+      msg.setIsAnswered(value);
       break;
     case 13:
       var value = /** @type {boolean} */ (reader.readBool());
@@ -3169,7 +3169,7 @@ proto.yartu_mail.MailMessage.serializeBinaryToWriter = function(message, writer)
       f
     );
   }
-  f = message.getIsJunk();
+  f = message.getIsAnswered();
   if (f) {
     writer.writeBool(
       12,
@@ -3501,10 +3501,10 @@ proto.yartu_mail.MailMessage.prototype.setIsFlagged = function(value) {
 
 
 /**
- * optional bool is_junk = 12;
+ * optional bool is_answered = 12;
  * @return {boolean}
  */
-proto.yartu_mail.MailMessage.prototype.getIsJunk = function() {
+proto.yartu_mail.MailMessage.prototype.getIsAnswered = function() {
   return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 12, false));
 };
 
@@ -3513,7 +3513,7 @@ proto.yartu_mail.MailMessage.prototype.getIsJunk = function() {
  * @param {boolean} value
  * @return {!proto.yartu_mail.MailMessage} returns this
  */
-proto.yartu_mail.MailMessage.prototype.setIsJunk = function(value) {
+proto.yartu_mail.MailMessage.prototype.setIsAnswered = function(value) {
   return jspb.Message.setProto3BooleanField(this, 12, value);
 };
 
