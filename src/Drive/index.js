@@ -23,6 +23,7 @@ import {
   DownloadDirentRequest,
   SetRepoPasswordRequest,
   TransferRepoRequest,
+  RevertDirentTrashRequest,
 
   // Share
   ListShareRequest,
@@ -1563,4 +1564,34 @@ export default (config) =>
         });
       });
     };
+
+    revertDirentTrash = (repoId, path, commitId) => {
+      return new Promise((resolve, reject) => {
+        const request = new RevertDirentTrashRequest();
+
+        request.setRepoId(repoId);
+        request.setPath(path);
+        request.setCommitId(commitId);
+
+        this.client.revertDirentTrash(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
   };
