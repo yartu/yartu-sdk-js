@@ -612,10 +612,10 @@ export default (config) =>
       return new Promise((resolve, reject) => {
         const request = new UpsertLabelToContactRequest();
 
-        if (contactType === 0) {
-          request.setContactId(contactId);
-        } else {
+        if (contactType === 1) {
           request.setUserId(contactId);
+        } else {
+          request.setContactId(contactId);
         }
 
         request.setLabelsList(labels);
@@ -650,10 +650,10 @@ export default (config) =>
       return new Promise((resolve, reject) => {
         const request = new StarContactRequest();
 
-        if (contactType === 0) {
-          request.setContactId(contactId);
-        } else {
+        if (contactType === 1) {
           request.setUserId(contactId);
+        } else {
+          request.setContactId(contactId);
         }
 
         request.setStarred(starred);
