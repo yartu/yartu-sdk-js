@@ -739,9 +739,9 @@ export default (config) =>
           if (contactData.emailList && Array.isArray(contactData.emailList)){
             for (const email of contactData.emailList) {
               const emailType = new davType();
-              emailType.setType(email.type);
-              emailType.setValue(email.value);
-              emailType.setIsDefault(email.is_default);
+              emailType.setType(email.type || 'personal');
+              emailType.setValue(email.value || '');
+              emailType.setIsDefault(email.is_default || false);
               emailList.push(emailType);
             }
           }
@@ -749,9 +749,9 @@ export default (config) =>
           if (contactData.phoneList && Array.isArray(contactData.phoneList)){
             for (const phone of contactData.phoneList) {
               const phoneType = new davType();
-              phoneType.setType(phone.type);
-              phoneType.setValue(phone.value);
-              phoneType.setIsDefault(phone.is_default);
+              phoneType.setType(phone?.type || 'personal');
+              phoneType.setValue(phone?.value || '');
+              phoneType.setIsDefault(phone?.is_default || false);
               phoneList.push(phoneType);
             }
           }
@@ -759,9 +759,9 @@ export default (config) =>
           if (contactData.webList && Array.isArray(contactData.webList)){
             for (const web of contactData.webList) {
               const webType = new davType();
-              webType.setType(web.type);
-              webType.setValue(web.value);
-              webType.setIsDefault(web.is_default);
+              webType.setType(web?.type || 'personal');
+              webType.setValue(web?.value || '');
+              webType.setIsDefault(web?.is_default || false);
               webList.push(webType);
             }
           }
@@ -770,13 +770,13 @@ export default (config) =>
           if (contactData.addressList && Array.isArray(contactData.addressList)){
             for (const address of contactData.addressList) {
               const addressType = new Address();
-              addressType.setType(address.type);
-              addressType.setStreet(address.street);
-              addressType.setCity(address.city);
-              addressType.setRegion(address.region);
-              addressType.setPostalcode(address.postalcode);
-              addressType.setCountry(address.country);
-              addressType.setIsDefault(address.default);
+              addressType.setType(address?.type || 'personal');
+              addressType.setIsDefault(address?.default || false);
+              addressType.setStreet(address?.street || '');
+              addressType.setCity(address?.city || '');
+              addressType.setRegion(address?.region || '');
+              addressType.setPostalcode(address?.postalcode || '');
+              addressType.setCountry(address?.country || '');
               addressList.push(addressType);
             }
           }
