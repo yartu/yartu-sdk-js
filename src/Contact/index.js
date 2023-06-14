@@ -292,9 +292,11 @@ export default (config) =>
             const code = response.getCode();
 
             if (code == 0) {
-              const dataList = response
-                .getDataList()
-                .map((data) => data.toObject());
+              const dataList = response.getDataList().map((data) => {
+                const contact = data.toObject();
+                contact.photo = contact.photo ? 'data:image/png;base64,'.concat(contact.photo) : null;
+                return contact;
+              });
               resolve({
                 data: dataList,
                 pagination: response.getPagination().toObject()
@@ -402,10 +404,16 @@ export default (config) =>
       });
     };
 
-    getContact = (contactId) => {
+    getContact = (contactId, selector = 'contact') => {
       return new Promise((resolve, reject) => {
         const request = new GetContactRequest();
-        request.setId(contactId);
+
+        if (selector === 'contact') {
+          request.setContactId(contactId);
+        } else {
+          request.setUserId(contactId);
+        }
+
         this.client.getContact(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
@@ -414,6 +422,7 @@ export default (config) =>
 
             if (code == 0) {
               const data = response.getData().toObject();
+              data.image = data.photo ? 'data:image/png;base64,'.concat(data.photo) : null;
               resolve({
                 data: data
               });
@@ -599,11 +608,18 @@ export default (config) =>
       });
     };
 
-    upsertLabelToContact = (contactId, labels) => {
+    upsertLabelToContact = (contactId, contactType, labels) => {
       return new Promise((resolve, reject) => {
         const request = new UpsertLabelToContactRequest();
-        request.setContactId(contactId);
+
+        if (contactType === 0) {
+          request.setContactId(contactId);
+        } else {
+          request.setUserId(contactId);
+        }
+
         request.setLabelsList(labels);
+
         this.client.upsertLabelToContact(
           request,
           this.metadata,
@@ -630,11 +646,18 @@ export default (config) =>
       });
     };
 
-    starContact = (contactId, starred) => {
+    starContact = (contactId, contactType, starred) => {
       return new Promise((resolve, reject) => {
         const request = new StarContactRequest();
-        request.setId(contactId);
+
+        if (contactType === 0) {
+          request.setContactId(contactId);
+        } else {
+          request.setUserId(contactId);
+        }
+
         request.setStarred(starred);
+
         this.client.starContact(
           request,
           this.metadata,
