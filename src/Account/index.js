@@ -67,10 +67,18 @@ export default (config) =>
             const code = response.getCode();
             if (code == 0) {
               const data = response.toObject();
+              let serviceSettings = response.getServiceSettings();
+              try {
+                serviceSettings = JSON.parse(serviceSettings.getJson());
+              } catch {
+                serviceSettings = {};
+              }
+
               data.image = data.image ? 'data:image/png;base64,'.concat(data.image) : null;
               resolve({
                 data: data,
-                message: response.getMessage()
+                message: response.getMessage(),
+                serviceSettings
               });
             } else {
               reject({
