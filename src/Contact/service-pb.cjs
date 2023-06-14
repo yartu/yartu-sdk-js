@@ -43,6 +43,7 @@ goog.exportSymbol('proto.yartu.ExportContactResponse', null, global);
 goog.exportSymbol('proto.yartu.GetAddressBookRequest', null, global);
 goog.exportSymbol('proto.yartu.GetAddressBookResponse', null, global);
 goog.exportSymbol('proto.yartu.GetContactRequest', null, global);
+goog.exportSymbol('proto.yartu.GetContactRequest.IdCase', null, global);
 goog.exportSymbol('proto.yartu.GetContactResponse', null, global);
 goog.exportSymbol('proto.yartu.GetLabelRequest', null, global);
 goog.exportSymbol('proto.yartu.GetLabelResponse', null, global);
@@ -70,6 +71,7 @@ goog.exportSymbol('proto.yartu.MoveContactResponse', null, global);
 goog.exportSymbol('proto.yartu.ShareAddressBookRequest', null, global);
 goog.exportSymbol('proto.yartu.ShareAddressBookResponse', null, global);
 goog.exportSymbol('proto.yartu.StarContactRequest', null, global);
+goog.exportSymbol('proto.yartu.StarContactRequest.IdCase', null, global);
 goog.exportSymbol('proto.yartu.StarContactResponse', null, global);
 goog.exportSymbol('proto.yartu.UnshareAddressBookRequest', null, global);
 goog.exportSymbol('proto.yartu.UnshareAddressBookResponse', null, global);
@@ -82,6 +84,7 @@ goog.exportSymbol('proto.yartu.UpsertFavoriteContactResponse', null, global);
 goog.exportSymbol('proto.yartu.UpsertLabelRequest', null, global);
 goog.exportSymbol('proto.yartu.UpsertLabelResponse', null, global);
 goog.exportSymbol('proto.yartu.UpsertLabelToContactRequest', null, global);
+goog.exportSymbol('proto.yartu.UpsertLabelToContactRequest.IdCase', null, global);
 goog.exportSymbol('proto.yartu.UpsertLabelToContactResponse', null, global);
 goog.exportSymbol('proto.yartu.UpsertSharedAddressBookRequest', null, global);
 goog.exportSymbol('proto.yartu.UpsertSharedAddressBookResponse', null, global);
@@ -643,7 +646,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.yartu.GetContactRequest = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, null, proto.yartu.GetContactRequest.oneofGroups_);
 };
 goog.inherits(proto.yartu.GetContactRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -937,7 +940,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.yartu.UpsertLabelToContactRequest = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.yartu.UpsertLabelToContactRequest.repeatedFields_, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.yartu.UpsertLabelToContactRequest.repeatedFields_, proto.yartu.UpsertLabelToContactRequest.oneofGroups_);
 };
 goog.inherits(proto.yartu.UpsertLabelToContactRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -1378,7 +1381,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.yartu.StarContactRequest = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, null, proto.yartu.StarContactRequest.oneofGroups_);
 };
 goog.inherits(proto.yartu.StarContactRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -3080,7 +3083,8 @@ proto.yartu.Contact.toObject = function(includeInstance, msg) {
     addressList: jspb.Message.toObjectList(msg.getAddressList(),
     proto.yartu.Address.toObject, includeInstance),
     note: jspb.Message.getFieldWithDefault(msg, 23, ""),
-    sharedWithMe: jspb.Message.getBooleanFieldWithDefault(msg, 24, false)
+    sharedWithMe: jspb.Message.getBooleanFieldWithDefault(msg, 24, false),
+    isYartuUser: jspb.Message.getBooleanFieldWithDefault(msg, 25, false)
   };
 
   if (includeInstance) {
@@ -3218,6 +3222,10 @@ proto.yartu.Contact.deserializeBinaryFromReader = function(msg, reader) {
     case 24:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setSharedWithMe(value);
+      break;
+    case 25:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setIsYartuUser(value);
       break;
     default:
       reader.skipField();
@@ -3419,6 +3427,13 @@ proto.yartu.Contact.serializeBinaryToWriter = function(message, writer) {
   if (f != null) {
     writer.writeBool(
       24,
+      f
+    );
+  }
+  f = /** @type {boolean} */ (jspb.Message.getField(message, 25));
+  if (f != null) {
+    writer.writeBool(
+      25,
       f
     );
   }
@@ -4177,6 +4192,42 @@ proto.yartu.Contact.prototype.clearSharedWithMe = function() {
  */
 proto.yartu.Contact.prototype.hasSharedWithMe = function() {
   return jspb.Message.getField(this, 24) != null;
+};
+
+
+/**
+ * optional bool is_yartu_user = 25;
+ * @return {boolean}
+ */
+proto.yartu.Contact.prototype.getIsYartuUser = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 25, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.yartu.Contact} returns this
+ */
+proto.yartu.Contact.prototype.setIsYartuUser = function(value) {
+  return jspb.Message.setField(this, 25, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.Contact} returns this
+ */
+proto.yartu.Contact.prototype.clearIsYartuUser = function() {
+  return jspb.Message.setField(this, 25, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.Contact.prototype.hasIsYartuUser = function() {
+  return jspb.Message.getField(this, 25) != null;
 };
 
 
@@ -7835,6 +7886,32 @@ proto.yartu.UpsertContactResponse.prototype.hasContact = function() {
 
 
 
+/**
+ * Oneof group definitions for this message. Each group defines the field
+ * numbers belonging to that group. When of these fields' value is set, all
+ * other fields in the group are cleared. During deserialization, if multiple
+ * fields are encountered for a group, only the last value seen will be kept.
+ * @private {!Array<!Array<number>>}
+ * @const
+ */
+proto.yartu.GetContactRequest.oneofGroups_ = [[1,2]];
+
+/**
+ * @enum {number}
+ */
+proto.yartu.GetContactRequest.IdCase = {
+  ID_NOT_SET: 0,
+  CONTACT_ID: 1,
+  USER_ID: 2
+};
+
+/**
+ * @return {proto.yartu.GetContactRequest.IdCase}
+ */
+proto.yartu.GetContactRequest.prototype.getIdCase = function() {
+  return /** @type {proto.yartu.GetContactRequest.IdCase} */(jspb.Message.computeOneofCase(this, proto.yartu.GetContactRequest.oneofGroups_[0]));
+};
+
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -7866,7 +7943,8 @@ proto.yartu.GetContactRequest.prototype.toObject = function(opt_includeInstance)
  */
 proto.yartu.GetContactRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0)
+    contactId: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    userId: jspb.Message.getFieldWithDefault(msg, 2, 0)
   };
 
   if (includeInstance) {
@@ -7905,7 +7983,11 @@ proto.yartu.GetContactRequest.deserializeBinaryFromReader = function(msg, reader
     switch (field) {
     case 1:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setId(value);
+      msg.setContactId(value);
+      break;
+    case 2:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setUserId(value);
       break;
     default:
       reader.skipField();
@@ -7936,10 +8018,17 @@ proto.yartu.GetContactRequest.prototype.serializeBinary = function() {
  */
 proto.yartu.GetContactRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getId();
-  if (f !== 0) {
+  f = /** @type {number} */ (jspb.Message.getField(message, 1));
+  if (f != null) {
     writer.writeInt64(
       1,
+      f
+    );
+  }
+  f = /** @type {number} */ (jspb.Message.getField(message, 2));
+  if (f != null) {
+    writer.writeInt64(
+      2,
       f
     );
   }
@@ -7947,10 +8036,10 @@ proto.yartu.GetContactRequest.serializeBinaryToWriter = function(message, writer
 
 
 /**
- * optional int64 id = 1;
+ * optional int64 contact_id = 1;
  * @return {number}
  */
-proto.yartu.GetContactRequest.prototype.getId = function() {
+proto.yartu.GetContactRequest.prototype.getContactId = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
@@ -7959,8 +8048,62 @@ proto.yartu.GetContactRequest.prototype.getId = function() {
  * @param {number} value
  * @return {!proto.yartu.GetContactRequest} returns this
  */
-proto.yartu.GetContactRequest.prototype.setId = function(value) {
-  return jspb.Message.setProto3IntField(this, 1, value);
+proto.yartu.GetContactRequest.prototype.setContactId = function(value) {
+  return jspb.Message.setOneofField(this, 1, proto.yartu.GetContactRequest.oneofGroups_[0], value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.GetContactRequest} returns this
+ */
+proto.yartu.GetContactRequest.prototype.clearContactId = function() {
+  return jspb.Message.setOneofField(this, 1, proto.yartu.GetContactRequest.oneofGroups_[0], undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.GetContactRequest.prototype.hasContactId = function() {
+  return jspb.Message.getField(this, 1) != null;
+};
+
+
+/**
+ * optional int64 user_id = 2;
+ * @return {number}
+ */
+proto.yartu.GetContactRequest.prototype.getUserId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu.GetContactRequest} returns this
+ */
+proto.yartu.GetContactRequest.prototype.setUserId = function(value) {
+  return jspb.Message.setOneofField(this, 2, proto.yartu.GetContactRequest.oneofGroups_[0], value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.GetContactRequest} returns this
+ */
+proto.yartu.GetContactRequest.prototype.clearUserId = function() {
+  return jspb.Message.setOneofField(this, 2, proto.yartu.GetContactRequest.oneofGroups_[0], undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.GetContactRequest.prototype.hasUserId = function() {
+  return jspb.Message.getField(this, 2) != null;
 };
 
 
@@ -10809,7 +10952,33 @@ proto.yartu.DeleteLabelResponse.prototype.hasMessage = function() {
  * @private {!Array<number>}
  * @const
  */
-proto.yartu.UpsertLabelToContactRequest.repeatedFields_ = [2];
+proto.yartu.UpsertLabelToContactRequest.repeatedFields_ = [3];
+
+/**
+ * Oneof group definitions for this message. Each group defines the field
+ * numbers belonging to that group. When of these fields' value is set, all
+ * other fields in the group are cleared. During deserialization, if multiple
+ * fields are encountered for a group, only the last value seen will be kept.
+ * @private {!Array<!Array<number>>}
+ * @const
+ */
+proto.yartu.UpsertLabelToContactRequest.oneofGroups_ = [[1,2]];
+
+/**
+ * @enum {number}
+ */
+proto.yartu.UpsertLabelToContactRequest.IdCase = {
+  ID_NOT_SET: 0,
+  CONTACT_ID: 1,
+  USER_ID: 2
+};
+
+/**
+ * @return {proto.yartu.UpsertLabelToContactRequest.IdCase}
+ */
+proto.yartu.UpsertLabelToContactRequest.prototype.getIdCase = function() {
+  return /** @type {proto.yartu.UpsertLabelToContactRequest.IdCase} */(jspb.Message.computeOneofCase(this, proto.yartu.UpsertLabelToContactRequest.oneofGroups_[0]));
+};
 
 
 
@@ -10843,7 +11012,8 @@ proto.yartu.UpsertLabelToContactRequest.prototype.toObject = function(opt_includ
 proto.yartu.UpsertLabelToContactRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     contactId: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    labelsList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f
+    userId: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    labelsList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -10885,6 +11055,10 @@ proto.yartu.UpsertLabelToContactRequest.deserializeBinaryFromReader = function(m
       msg.setContactId(value);
       break;
     case 2:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setUserId(value);
+      break;
+    case 3:
       var values = /** @type {!Array<number>} */ (reader.isDelimited() ? reader.readPackedInt64() : [reader.readInt64()]);
       for (var i = 0; i < values.length; i++) {
         msg.addLabels(values[i]);
@@ -10919,17 +11093,24 @@ proto.yartu.UpsertLabelToContactRequest.prototype.serializeBinary = function() {
  */
 proto.yartu.UpsertLabelToContactRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getContactId();
-  if (f !== 0) {
+  f = /** @type {number} */ (jspb.Message.getField(message, 1));
+  if (f != null) {
     writer.writeInt64(
       1,
+      f
+    );
+  }
+  f = /** @type {number} */ (jspb.Message.getField(message, 2));
+  if (f != null) {
+    writer.writeInt64(
+      2,
       f
     );
   }
   f = message.getLabelsList();
   if (f.length > 0) {
     writer.writePackedInt64(
-      2,
+      3,
       f
     );
   }
@@ -10950,16 +11131,70 @@ proto.yartu.UpsertLabelToContactRequest.prototype.getContactId = function() {
  * @return {!proto.yartu.UpsertLabelToContactRequest} returns this
  */
 proto.yartu.UpsertLabelToContactRequest.prototype.setContactId = function(value) {
-  return jspb.Message.setProto3IntField(this, 1, value);
+  return jspb.Message.setOneofField(this, 1, proto.yartu.UpsertLabelToContactRequest.oneofGroups_[0], value);
 };
 
 
 /**
- * repeated int64 labels = 2;
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.UpsertLabelToContactRequest} returns this
+ */
+proto.yartu.UpsertLabelToContactRequest.prototype.clearContactId = function() {
+  return jspb.Message.setOneofField(this, 1, proto.yartu.UpsertLabelToContactRequest.oneofGroups_[0], undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.UpsertLabelToContactRequest.prototype.hasContactId = function() {
+  return jspb.Message.getField(this, 1) != null;
+};
+
+
+/**
+ * optional int64 user_id = 2;
+ * @return {number}
+ */
+proto.yartu.UpsertLabelToContactRequest.prototype.getUserId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu.UpsertLabelToContactRequest} returns this
+ */
+proto.yartu.UpsertLabelToContactRequest.prototype.setUserId = function(value) {
+  return jspb.Message.setOneofField(this, 2, proto.yartu.UpsertLabelToContactRequest.oneofGroups_[0], value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.UpsertLabelToContactRequest} returns this
+ */
+proto.yartu.UpsertLabelToContactRequest.prototype.clearUserId = function() {
+  return jspb.Message.setOneofField(this, 2, proto.yartu.UpsertLabelToContactRequest.oneofGroups_[0], undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.UpsertLabelToContactRequest.prototype.hasUserId = function() {
+  return jspb.Message.getField(this, 2) != null;
+};
+
+
+/**
+ * repeated int64 labels = 3;
  * @return {!Array<number>}
  */
 proto.yartu.UpsertLabelToContactRequest.prototype.getLabelsList = function() {
-  return /** @type {!Array<number>} */ (jspb.Message.getRepeatedField(this, 2));
+  return /** @type {!Array<number>} */ (jspb.Message.getRepeatedField(this, 3));
 };
 
 
@@ -10968,7 +11203,7 @@ proto.yartu.UpsertLabelToContactRequest.prototype.getLabelsList = function() {
  * @return {!proto.yartu.UpsertLabelToContactRequest} returns this
  */
 proto.yartu.UpsertLabelToContactRequest.prototype.setLabelsList = function(value) {
-  return jspb.Message.setField(this, 2, value || []);
+  return jspb.Message.setField(this, 3, value || []);
 };
 
 
@@ -10978,7 +11213,7 @@ proto.yartu.UpsertLabelToContactRequest.prototype.setLabelsList = function(value
  * @return {!proto.yartu.UpsertLabelToContactRequest} returns this
  */
 proto.yartu.UpsertLabelToContactRequest.prototype.addLabels = function(value, opt_index) {
-  return jspb.Message.addToRepeatedField(this, 2, value, opt_index);
+  return jspb.Message.addToRepeatedField(this, 3, value, opt_index);
 };
 
 
@@ -15127,6 +15362,32 @@ proto.yartu.MoveContactResponse.prototype.hasMessage = function() {
 
 
 
+/**
+ * Oneof group definitions for this message. Each group defines the field
+ * numbers belonging to that group. When of these fields' value is set, all
+ * other fields in the group are cleared. During deserialization, if multiple
+ * fields are encountered for a group, only the last value seen will be kept.
+ * @private {!Array<!Array<number>>}
+ * @const
+ */
+proto.yartu.StarContactRequest.oneofGroups_ = [[1,2]];
+
+/**
+ * @enum {number}
+ */
+proto.yartu.StarContactRequest.IdCase = {
+  ID_NOT_SET: 0,
+  CONTACT_ID: 1,
+  USER_ID: 2
+};
+
+/**
+ * @return {proto.yartu.StarContactRequest.IdCase}
+ */
+proto.yartu.StarContactRequest.prototype.getIdCase = function() {
+  return /** @type {proto.yartu.StarContactRequest.IdCase} */(jspb.Message.computeOneofCase(this, proto.yartu.StarContactRequest.oneofGroups_[0]));
+};
+
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -15158,8 +15419,9 @@ proto.yartu.StarContactRequest.prototype.toObject = function(opt_includeInstance
  */
 proto.yartu.StarContactRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    starred: jspb.Message.getBooleanFieldWithDefault(msg, 2, false)
+    contactId: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    userId: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    starred: jspb.Message.getBooleanFieldWithDefault(msg, 3, false)
   };
 
   if (includeInstance) {
@@ -15198,9 +15460,13 @@ proto.yartu.StarContactRequest.deserializeBinaryFromReader = function(msg, reade
     switch (field) {
     case 1:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setId(value);
+      msg.setContactId(value);
       break;
     case 2:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setUserId(value);
+      break;
+    case 3:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setStarred(value);
       break;
@@ -15233,17 +15499,24 @@ proto.yartu.StarContactRequest.prototype.serializeBinary = function() {
  */
 proto.yartu.StarContactRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getId();
-  if (f !== 0) {
+  f = /** @type {number} */ (jspb.Message.getField(message, 1));
+  if (f != null) {
     writer.writeInt64(
       1,
+      f
+    );
+  }
+  f = /** @type {number} */ (jspb.Message.getField(message, 2));
+  if (f != null) {
+    writer.writeInt64(
+      2,
       f
     );
   }
   f = message.getStarred();
   if (f) {
     writer.writeBool(
-      2,
+      3,
       f
     );
   }
@@ -15251,10 +15524,10 @@ proto.yartu.StarContactRequest.serializeBinaryToWriter = function(message, write
 
 
 /**
- * optional int64 id = 1;
+ * optional int64 contact_id = 1;
  * @return {number}
  */
-proto.yartu.StarContactRequest.prototype.getId = function() {
+proto.yartu.StarContactRequest.prototype.getContactId = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
@@ -15263,17 +15536,71 @@ proto.yartu.StarContactRequest.prototype.getId = function() {
  * @param {number} value
  * @return {!proto.yartu.StarContactRequest} returns this
  */
-proto.yartu.StarContactRequest.prototype.setId = function(value) {
-  return jspb.Message.setProto3IntField(this, 1, value);
+proto.yartu.StarContactRequest.prototype.setContactId = function(value) {
+  return jspb.Message.setOneofField(this, 1, proto.yartu.StarContactRequest.oneofGroups_[0], value);
 };
 
 
 /**
- * optional bool starred = 2;
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.StarContactRequest} returns this
+ */
+proto.yartu.StarContactRequest.prototype.clearContactId = function() {
+  return jspb.Message.setOneofField(this, 1, proto.yartu.StarContactRequest.oneofGroups_[0], undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.StarContactRequest.prototype.hasContactId = function() {
+  return jspb.Message.getField(this, 1) != null;
+};
+
+
+/**
+ * optional int64 user_id = 2;
+ * @return {number}
+ */
+proto.yartu.StarContactRequest.prototype.getUserId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu.StarContactRequest} returns this
+ */
+proto.yartu.StarContactRequest.prototype.setUserId = function(value) {
+  return jspb.Message.setOneofField(this, 2, proto.yartu.StarContactRequest.oneofGroups_[0], value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.StarContactRequest} returns this
+ */
+proto.yartu.StarContactRequest.prototype.clearUserId = function() {
+  return jspb.Message.setOneofField(this, 2, proto.yartu.StarContactRequest.oneofGroups_[0], undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.StarContactRequest.prototype.hasUserId = function() {
+  return jspb.Message.getField(this, 2) != null;
+};
+
+
+/**
+ * optional bool starred = 3;
  * @return {boolean}
  */
 proto.yartu.StarContactRequest.prototype.getStarred = function() {
-  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 2, false));
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 3, false));
 };
 
 
@@ -15282,7 +15609,7 @@ proto.yartu.StarContactRequest.prototype.getStarred = function() {
  * @return {!proto.yartu.StarContactRequest} returns this
  */
 proto.yartu.StarContactRequest.prototype.setStarred = function(value) {
-  return jspb.Message.setProto3BooleanField(this, 2, value);
+  return jspb.Message.setProto3BooleanField(this, 3, value);
 };
 
 

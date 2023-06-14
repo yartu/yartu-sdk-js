@@ -2724,6 +2724,7 @@ proto.yartu.GetInfoResponse.toObject = function(includeInstance, msg) {
     permissionList: (f = jspb.Message.getRepeatedField(msg, 15)) == null ? undefined : f,
     message: jspb.Message.getFieldWithDefault(msg, 16, ""),
     notificationList: (f = jspb.Message.getRepeatedField(msg, 17)) == null ? undefined : f,
+    serviceSettings: (f = msg.getServiceSettings()) && common_grpc_definitions_pb.JSON.toObject(includeInstance, f),
     image: msg.getImage_asB64()
   };
 
@@ -2831,6 +2832,11 @@ proto.yartu.GetInfoResponse.deserializeBinaryFromReader = function(msg, reader) 
       msg.addNotification(value);
       break;
     case 18:
+      var value = new common_grpc_definitions_pb.JSON;
+      reader.readMessage(value,common_grpc_definitions_pb.JSON.deserializeBinaryFromReader);
+      msg.setServiceSettings(value);
+      break;
+    case 19:
       var value = /** @type {!Uint8Array} */ (reader.readBytes());
       msg.setImage(value);
       break;
@@ -2983,10 +2989,18 @@ proto.yartu.GetInfoResponse.serializeBinaryToWriter = function(message, writer) 
       f
     );
   }
+  f = message.getServiceSettings();
+  if (f != null) {
+    writer.writeMessage(
+      18,
+      f,
+      common_grpc_definitions_pb.JSON.serializeBinaryToWriter
+    );
+  }
   f = message.getImage_asU8();
   if (f.length > 0) {
     writer.writeBytes(
-      18,
+      19,
       f
     );
   }
@@ -3375,16 +3389,53 @@ proto.yartu.GetInfoResponse.prototype.clearNotificationList = function() {
 
 
 /**
- * optional bytes image = 18;
- * @return {string}
+ * optional JSON service_settings = 18;
+ * @return {?proto.JSON}
  */
-proto.yartu.GetInfoResponse.prototype.getImage = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 18, ""));
+proto.yartu.GetInfoResponse.prototype.getServiceSettings = function() {
+  return /** @type{?proto.JSON} */ (
+    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.JSON, 18));
 };
 
 
 /**
- * optional bytes image = 18;
+ * @param {?proto.JSON|undefined} value
+ * @return {!proto.yartu.GetInfoResponse} returns this
+*/
+proto.yartu.GetInfoResponse.prototype.setServiceSettings = function(value) {
+  return jspb.Message.setWrapperField(this, 18, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.yartu.GetInfoResponse} returns this
+ */
+proto.yartu.GetInfoResponse.prototype.clearServiceSettings = function() {
+  return this.setServiceSettings(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.GetInfoResponse.prototype.hasServiceSettings = function() {
+  return jspb.Message.getField(this, 18) != null;
+};
+
+
+/**
+ * optional bytes image = 19;
+ * @return {string}
+ */
+proto.yartu.GetInfoResponse.prototype.getImage = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 19, ""));
+};
+
+
+/**
+ * optional bytes image = 19;
  * This is a type-conversion wrapper around `getImage()`
  * @return {string}
  */
@@ -3395,7 +3446,7 @@ proto.yartu.GetInfoResponse.prototype.getImage_asB64 = function() {
 
 
 /**
- * optional bytes image = 18;
+ * optional bytes image = 19;
  * Note that Uint8Array is not supported on all browsers.
  * @see http://caniuse.com/Uint8Array
  * This is a type-conversion wrapper around `getImage()`
@@ -3412,7 +3463,7 @@ proto.yartu.GetInfoResponse.prototype.getImage_asU8 = function() {
  * @return {!proto.yartu.GetInfoResponse} returns this
  */
 proto.yartu.GetInfoResponse.prototype.setImage = function(value) {
-  return jspb.Message.setProto3BytesField(this, 18, value);
+  return jspb.Message.setProto3BytesField(this, 19, value);
 };
 
 
