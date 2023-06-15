@@ -739,9 +739,9 @@ export default (config) =>
           if (contactData.emailList && Array.isArray(contactData.emailList)){
             for (const email of contactData.emailList) {
               const emailType = new davType();
-              emailType.setType(email.type || 'personal');
-              emailType.setValue(email.value || '');
-              emailType.setIsDefault(email.is_default || false);
+              emailType.setType(email?.type || 'personal');
+              emailType.setValue(email?.value || '');
+              emailType.setIsDefault(email?.is_default || false);
               emailList.push(emailType);
             }
           }
