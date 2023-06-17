@@ -1161,8 +1161,10 @@ export default (config) =>
               const code = response.getCode();
 
               if (code == 0) {
+                const data = response.getData().toObject();
                 resolve({
-                  code: 0,
+                  code,
+                  data,
                   message: response.getMessage()
                 });
               } else {
@@ -1210,42 +1212,44 @@ export default (config) =>
     upsertCard(cardData = {}) {
       return new Promise((resolve, reject) => {
         const request = new UpsertCardRequest();
-        if (cardData.uuid) {
+        if ('uuid' in cardData) {
           request.setUuid(cardData.uuid);
         }
-        if (cardData.index) {
+        if ('index' in cardData) {
           request.setIndex(cardData.index);
         }
-        if (cardData.title) {
+        if ('title' in cardData) {
           request.setTitle(cardData.title);
         }
-        if (cardData.description) {
+        if ('description' in cardData) {
           request.setDescription(cardData.description);
         }
-        if (cardData.startDate) {
+        if ('startDate' in cardData) {
           request.setStartDate(cardData.startDate);
         }
-        if (cardData.isCompleted !== null) {
+        if ('isCompleted' in cardData) {
           request.setIsCompleted(cardData.isCompleted);
         }
-        if (cardData.isArchived) {
+        if ('isArchived' in cardData) {
           request.setIsArchived(cardData.isArchived);
         }
-        if (cardData.isCanceled) {
+        if ('isCanceled' in cardData) {
           request.setIsCanceled(cardData.isCanceled);
         }
-        if (cardData.color !== undefined && cardData.color !== null) {
+        if ('color' in cardData) {
           request.setColor(cardData.color);
         }
 
-        if (cardData.dueDate) {
-          const dueDate = cardData.dueDate.utc().format('YYYY-MM-DD HH:mm');
-          request.setDueDate(dueDate);
-        } else if (cardData.dueDate === null) {
-          request.setDueDate('clear');
+        if ('dueDate' in cardData) {
+          if (cardData.dueDate === null) {
+            request.setDueDate('clear');
+          } else {
+            const dueDate = cardData.dueDate.utc().format('YYYY-MM-DD HH:mm');
+            request.setDueDate(dueDate);
+          }
         }
 
-        if (cardData.column) {
+        if ('column' in cardData) {
           request.setColumnUuid(cardData.column.uuid);
         }
 
