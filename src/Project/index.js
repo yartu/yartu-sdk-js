@@ -1477,8 +1477,8 @@ export default (config) =>
               handleError(error, reject);
             } else {
               const code = response.getCode();
-              const data = response.getData().toObject();
               if (code == 0) {
+                const data = response.getData().toObject();
                 resolve({
                   code,
                   data,
