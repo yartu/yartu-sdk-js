@@ -9,6 +9,7 @@ import {
   ListEmailSignatureRequest,
   UpsertEmailSignatureRequest,
   DeleteEmailSignatureRequest,
+  UploadSignatureInlineImageRequest,
   // Template
   GetEmailTemplateRequest,
   ListEmailTemplateRequest,
@@ -197,6 +198,42 @@ export default (config) =>
         );
       });
     }
+
+    uploadSignatureInlineImage = (signatureId, attachmentName) => {
+      return new Promise((resolve, reject) => {
+        const request = new UploadSignatureInlineImageRequest();
+
+        request.setId(signatureId);
+        request.setName(attachmentName);
+
+        this.client.uploadSignatureInlineImage(
+          request,
+          this.metadata,
+          (error, response) => {
+            const code = response.getCode();
+            if (error) {
+              handleError(error, reject);
+            } else {
+              if (code == 0) {
+                resolve({
+                  code: code,
+                  token: response.getToken(),
+                  signatureId: response.getSignatureId(),
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  token: '',
+                  signatureId: 0,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    };
 
     upsertEmailSignature = (data) => {
       return new Promise((resolve, reject) => {
