@@ -2095,7 +2095,7 @@ export default (config) =>
           assignee.setSurname(user.surname);
           request.setAssignee(assignee);
         } else {
-          request.setUnasign(true);
+          request.setUnassign(true);
         }
 
         this.client.assignAllCheckListItems(request, this.metadata, (error, response) => {

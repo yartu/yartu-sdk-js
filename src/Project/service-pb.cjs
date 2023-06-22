@@ -28256,7 +28256,7 @@ proto.yartu.AssignAllCheckListItemsRequest.prototype.toObject = function(opt_inc
 proto.yartu.AssignAllCheckListItemsRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     checklistId: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    unasign: jspb.Message.getBooleanFieldWithDefault(msg, 2, false),
+    unassign: jspb.Message.getBooleanFieldWithDefault(msg, 2, false),
     assignee: (f = msg.getAssignee()) && common_grpc_definitions_pb.User.toObject(includeInstance, f)
   };
 
@@ -28300,7 +28300,7 @@ proto.yartu.AssignAllCheckListItemsRequest.deserializeBinaryFromReader = functio
       break;
     case 2:
       var value = /** @type {boolean} */ (reader.readBool());
-      msg.setUnasign(value);
+      msg.setUnassign(value);
       break;
     case 3:
       var value = new common_grpc_definitions_pb.User;
@@ -28343,7 +28343,7 @@ proto.yartu.AssignAllCheckListItemsRequest.serializeBinaryToWriter = function(me
       f
     );
   }
-  f = message.getUnasign();
+  f = message.getUnassign();
   if (f) {
     writer.writeBool(
       2,
@@ -28380,10 +28380,10 @@ proto.yartu.AssignAllCheckListItemsRequest.prototype.setChecklistId = function(v
 
 
 /**
- * optional bool unasign = 2;
+ * optional bool unassign = 2;
  * @return {boolean}
  */
-proto.yartu.AssignAllCheckListItemsRequest.prototype.getUnasign = function() {
+proto.yartu.AssignAllCheckListItemsRequest.prototype.getUnassign = function() {
   return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 2, false));
 };
 
@@ -28392,7 +28392,7 @@ proto.yartu.AssignAllCheckListItemsRequest.prototype.getUnasign = function() {
  * @param {boolean} value
  * @return {!proto.yartu.AssignAllCheckListItemsRequest} returns this
  */
-proto.yartu.AssignAllCheckListItemsRequest.prototype.setUnasign = function(value) {
+proto.yartu.AssignAllCheckListItemsRequest.prototype.setUnassign = function(value) {
   return jspb.Message.setProto3BooleanField(this, 2, value);
 };
 
