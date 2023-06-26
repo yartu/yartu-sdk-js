@@ -74,7 +74,19 @@ export default (config) =>
             const code = response.getCode();
             const token = response.getToken();
             const services = response.getServiceList();
-            const apps = response.getAppList().map((data) => data.toObject());
+            // const apps = response.getAppList().map((data) => data.toObject());
+            const apps = response.getAppList().map((data) => {
+              const appSettings = data.toObject();
+              if (
+                appSettings.settings &&
+                appSettings.settings?.type === 'json'
+              ) {
+                appSettings.settings = JSON.parse(appSettings.settings.json);
+              }
+              return appSettings;
+            });
+
+            const widgets = response.getWidgetList();
 
             if (code == 0) {
               window.localStorage.setItem('yartu-token', token);
@@ -83,6 +95,7 @@ export default (config) =>
                 status: status_AUTH_OK,
                 working_status: response.getWorkingStatus(),
                 services: services,
+                widgets,
                 apps: apps,
                 token: token
               });
