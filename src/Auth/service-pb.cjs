@@ -1369,7 +1369,7 @@ proto.yartu.LoginRequest.prototype.hasDeviceId = function() {
  * @private {!Array<number>}
  * @const
  */
-proto.yartu.LoginResponse.repeatedFields_ = [3,4,8];
+proto.yartu.LoginResponse.repeatedFields_ = [3,4,8,9];
 
 
 
@@ -1411,7 +1411,8 @@ proto.yartu.LoginResponse.toObject = function(includeInstance, msg) {
     workingStatus: jspb.Message.getFieldWithDefault(msg, 6, ""),
     roleName: jspb.Message.getFieldWithDefault(msg, 7, ""),
     permissionList: (f = jspb.Message.getRepeatedField(msg, 8)) == null ? undefined : f,
-    message: jspb.Message.getFieldWithDefault(msg, 9, "")
+    widgetList: (f = jspb.Message.getRepeatedField(msg, 9)) == null ? undefined : f,
+    message: jspb.Message.getFieldWithDefault(msg, 10, "")
   };
 
   if (includeInstance) {
@@ -1482,6 +1483,10 @@ proto.yartu.LoginResponse.deserializeBinaryFromReader = function(msg, reader) {
       msg.addPermission(value);
       break;
     case 9:
+      var value = /** @type {string} */ (reader.readString());
+      msg.addWidget(value);
+      break;
+    case 10:
       var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
@@ -1571,10 +1576,17 @@ proto.yartu.LoginResponse.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = /** @type {string} */ (jspb.Message.getField(message, 9));
+  f = message.getWidgetList();
+  if (f.length > 0) {
+    writer.writeRepeatedString(
+      9,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 10));
   if (f != null) {
     writer.writeString(
-      9,
+      10,
       f
     );
   }
@@ -1820,11 +1832,48 @@ proto.yartu.LoginResponse.prototype.clearPermissionList = function() {
 
 
 /**
- * optional string message = 9;
+ * repeated string widget = 9;
+ * @return {!Array<string>}
+ */
+proto.yartu.LoginResponse.prototype.getWidgetList = function() {
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 9));
+};
+
+
+/**
+ * @param {!Array<string>} value
+ * @return {!proto.yartu.LoginResponse} returns this
+ */
+proto.yartu.LoginResponse.prototype.setWidgetList = function(value) {
+  return jspb.Message.setField(this, 9, value || []);
+};
+
+
+/**
+ * @param {string} value
+ * @param {number=} opt_index
+ * @return {!proto.yartu.LoginResponse} returns this
+ */
+proto.yartu.LoginResponse.prototype.addWidget = function(value, opt_index) {
+  return jspb.Message.addToRepeatedField(this, 9, value, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.yartu.LoginResponse} returns this
+ */
+proto.yartu.LoginResponse.prototype.clearWidgetList = function() {
+  return this.setWidgetList([]);
+};
+
+
+/**
+ * optional string message = 10;
  * @return {string}
  */
 proto.yartu.LoginResponse.prototype.getMessage = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 9, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 10, ""));
 };
 
 
@@ -1833,7 +1882,7 @@ proto.yartu.LoginResponse.prototype.getMessage = function() {
  * @return {!proto.yartu.LoginResponse} returns this
  */
 proto.yartu.LoginResponse.prototype.setMessage = function(value) {
-  return jspb.Message.setField(this, 9, value);
+  return jspb.Message.setField(this, 10, value);
 };
 
 
@@ -1842,7 +1891,7 @@ proto.yartu.LoginResponse.prototype.setMessage = function(value) {
  * @return {!proto.yartu.LoginResponse} returns this
  */
 proto.yartu.LoginResponse.prototype.clearMessage = function() {
-  return jspb.Message.setField(this, 9, undefined);
+  return jspb.Message.setField(this, 10, undefined);
 };
 
 
@@ -1851,7 +1900,7 @@ proto.yartu.LoginResponse.prototype.clearMessage = function() {
  * @return {boolean}
  */
 proto.yartu.LoginResponse.prototype.hasMessage = function() {
-  return jspb.Message.getField(this, 9) != null;
+  return jspb.Message.getField(this, 10) != null;
 };
 
 

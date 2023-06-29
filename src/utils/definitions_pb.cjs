@@ -2932,7 +2932,9 @@ proto.App.toObject = function(includeInstance, msg) {
     isActive: jspb.Message.getBooleanFieldWithDefault(msg, 2, false),
     appType: jspb.Message.getFieldWithDefault(msg, 3, ""),
     icon: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    uuid: jspb.Message.getFieldWithDefault(msg, 5, "")
+    uuid: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    settings: (f = msg.getSettings()) && proto.JSON.toObject(includeInstance, f),
+    url: jspb.Message.getFieldWithDefault(msg, 7, "")
   };
 
   if (includeInstance) {
@@ -2988,6 +2990,15 @@ proto.App.deserializeBinaryFromReader = function(msg, reader) {
     case 5:
       var value = /** @type {string} */ (reader.readString());
       msg.setUuid(value);
+      break;
+    case 6:
+      var value = new proto.JSON;
+      reader.readMessage(value,proto.JSON.deserializeBinaryFromReader);
+      msg.setSettings(value);
+      break;
+    case 7:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setUrl(value);
       break;
     default:
       reader.skipField();
@@ -3050,6 +3061,21 @@ proto.App.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writeString(
       5,
+      f
+    );
+  }
+  f = message.getSettings();
+  if (f != null) {
+    writer.writeMessage(
+      6,
+      f,
+      proto.JSON.serializeBinaryToWriter
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 7));
+  if (f != null) {
+    writer.writeString(
+      7,
       f
     );
   }
@@ -3143,6 +3169,79 @@ proto.App.prototype.getUuid = function() {
  */
 proto.App.prototype.setUuid = function(value) {
   return jspb.Message.setProto3StringField(this, 5, value);
+};
+
+
+/**
+ * optional JSON settings = 6;
+ * @return {?proto.JSON}
+ */
+proto.App.prototype.getSettings = function() {
+  return /** @type{?proto.JSON} */ (
+    jspb.Message.getWrapperField(this, proto.JSON, 6));
+};
+
+
+/**
+ * @param {?proto.JSON|undefined} value
+ * @return {!proto.App} returns this
+*/
+proto.App.prototype.setSettings = function(value) {
+  return jspb.Message.setWrapperField(this, 6, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.App} returns this
+ */
+proto.App.prototype.clearSettings = function() {
+  return this.setSettings(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.App.prototype.hasSettings = function() {
+  return jspb.Message.getField(this, 6) != null;
+};
+
+
+/**
+ * optional string url = 7;
+ * @return {string}
+ */
+proto.App.prototype.getUrl = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.App} returns this
+ */
+proto.App.prototype.setUrl = function(value) {
+  return jspb.Message.setField(this, 7, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.App} returns this
+ */
+proto.App.prototype.clearUrl = function() {
+  return jspb.Message.setField(this, 7, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.App.prototype.hasUrl = function() {
+  return jspb.Message.getField(this, 7) != null;
 };
 
 
