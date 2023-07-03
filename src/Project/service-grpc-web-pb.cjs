@@ -445,67 +445,6 @@ proto.yartu.YProjectPromiseClient.prototype.deleteProject =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
- *   !proto.yartu.DuplicateProjectRequest,
- *   !proto.yartu.DuplicateProjectResponse>}
- */
-const methodDescriptor_YProject_duplicateProject = new grpc.web.MethodDescriptor(
-  '/yartu.YProject/duplicateProject',
-  grpc.web.MethodType.UNARY,
-  proto.yartu.DuplicateProjectRequest,
-  proto.yartu.DuplicateProjectResponse,
-  /**
-   * @param {!proto.yartu.DuplicateProjectRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.yartu.DuplicateProjectResponse.deserializeBinary
-);
-
-
-/**
- * @param {!proto.yartu.DuplicateProjectRequest} request The
- *     request proto
- * @param {?Object<string, string>} metadata User defined
- *     call metadata
- * @param {function(?grpc.web.RpcError, ?proto.yartu.DuplicateProjectResponse)}
- *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.yartu.DuplicateProjectResponse>|undefined}
- *     The XHR Node Readable Stream
- */
-proto.yartu.YProjectClient.prototype.duplicateProject =
-    function(request, metadata, callback) {
-  return this.client_.rpcCall(this.hostname_ +
-      '/yartu.YProject/duplicateProject',
-      request,
-      metadata || {},
-      methodDescriptor_YProject_duplicateProject,
-      callback);
-};
-
-
-/**
- * @param {!proto.yartu.DuplicateProjectRequest} request The
- *     request proto
- * @param {?Object<string, string>=} metadata User defined
- *     call metadata
- * @return {!Promise<!proto.yartu.DuplicateProjectResponse>}
- *     Promise that resolves to the response
- */
-proto.yartu.YProjectPromiseClient.prototype.duplicateProject =
-    function(request, metadata) {
-  return this.client_.unaryCall(this.hostname_ +
-      '/yartu.YProject/duplicateProject',
-      request,
-      metadata || {},
-      methodDescriptor_YProject_duplicateProject);
-};
-
-
-/**
- * @const
- * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.ArchiveProjectRequest,
  *   !proto.yartu.ArchiveProjectResponse>}
  */
