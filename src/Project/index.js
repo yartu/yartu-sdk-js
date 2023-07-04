@@ -2189,5 +2189,134 @@ export default (config) =>
       });
     }
 
+    shareAllBoards(projectUUID, boardUUIDList, shareList) {
+      return new Promise((resolve, reject) => {
+        const request = new ShareBoardRequest();
+        request.setProjectUuid(projectUUID);
+        request.setBoardUuidList(boardUUIDList);
+
+        const UserShareList = [];
+        shareList.forEach(s => {
+          const shared = new Shared();
+          shared.setId(s.shared_id);
+          shared.setPermission(String(s.permission));
+
+          if (s?.isYartuUser) {
+            const user = new User();
+            user.setId(s.id);
+            user.setUsername(s.email);
+            user.setName(s.name);
+            user.setSurname(s.surname);
+
+            shared.setUser(user);
+
+          } else if (s?.isGroup) {
+
+            const group = new Group();
+            group.setId(s.id);
+            group.setName(s.name);
+            group.setEmailAlias(s.email);
+
+            shared.setGroup(group);
+          } else {
+            console.log('@yartu/sdk/ shareBoard method not supports external users and Realm share features for now!');
+          }
+
+          UserShareList.push(shared);
+        });
+
+        request.setSharedList(UserShareList);
+
+        this.client.shareAllBoards(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code: 0,
+                // success: response.getSuccessList().map((data) => data.toObject()),
+                // error: response.getErrorList().map((data) => data.toObject()),
+                // TODO :: @ramazan add success repeated field to proto and backend service !
+                // TODO :: @ramazan add error repeated field to proto and backend service !
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    deleteShareAllBoards(projectUUID, boardUUIDList, shareList) {
+      return new Promise((resolve, reject) => {
+        const request = new ShareBoardRequest();
+        request.setProjectUuid(projectUUID);
+        request.setBoardUuidList(boardUUIDList);
+
+        const UserShareList = [];
+        shareList.forEach(s => {
+          const shared = new Shared();
+          shared.setId(s.shared_id);
+          shared.setPermission(String(s.permission));
+
+          if (s?.isYartuUser) {
+            const user = new User();
+            user.setId(s.id);
+            user.setUsername(s.email);
+            user.setName(s.name);
+            user.setSurname(s.surname);
+
+            shared.setUser(user);
+
+          } else if (s?.isGroup) {
+
+            const group = new Group();
+            group.setId(s.id);
+            group.setName(s.name);
+            group.setEmailAlias(s.email);
+
+            shared.setGroup(group);
+          } else {
+            console.log('@yartu/sdk/ shareBoard method not supports external users and Realm share features for now!');
+          }
+
+          UserShareList.push(shared);
+        });
+
+        request.setSharedList(UserShareList);
+
+        this.client.deleteShareAllBoards(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code: 0,
+                // success: response.getSuccessList().map((data) => data.toObject()),
+                // error: response.getErrorList().map((data) => data.toObject()),
+                // TODO :: @ramazan add success repeated field to proto and backend service !
+                // TODO :: @ramazan add error repeated field to proto and backend service !
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+
   };
 

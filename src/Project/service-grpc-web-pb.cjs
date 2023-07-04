@@ -567,6 +567,128 @@ proto.yartu.YProjectPromiseClient.prototype.starProject =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.ShareAllBoardsRequest,
+ *   !proto.yartu.ShareAllBoardsResponse>}
+ */
+const methodDescriptor_YProject_shareAllBoards = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/shareAllBoards',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.ShareAllBoardsRequest,
+  proto.yartu.ShareAllBoardsResponse,
+  /**
+   * @param {!proto.yartu.ShareAllBoardsRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.ShareAllBoardsResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.ShareAllBoardsRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ShareAllBoardsResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ShareAllBoardsResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.shareAllBoards =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/shareAllBoards',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_shareAllBoards,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.ShareAllBoardsRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.ShareAllBoardsResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.shareAllBoards =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/shareAllBoards',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_shareAllBoards);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.DeleteShareAllBoardsRequest,
+ *   !proto.yartu.DeleteShareAllBoardsResponse>}
+ */
+const methodDescriptor_YProject_deleteShareAllBoards = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/deleteShareAllBoards',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.DeleteShareAllBoardsRequest,
+  proto.yartu.DeleteShareAllBoardsResponse,
+  /**
+   * @param {!proto.yartu.DeleteShareAllBoardsRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.DeleteShareAllBoardsResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.DeleteShareAllBoardsRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.DeleteShareAllBoardsResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.DeleteShareAllBoardsResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.deleteShareAllBoards =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/deleteShareAllBoards',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_deleteShareAllBoards,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.DeleteShareAllBoardsRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.DeleteShareAllBoardsResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.deleteShareAllBoards =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/deleteShareAllBoards',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_deleteShareAllBoards);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.ListThreadRequest,
  *   !proto.yartu.ListThreadResponse>}
  */
