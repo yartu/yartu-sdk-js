@@ -17,6 +17,7 @@ import {
   GetPublicConferenceRequest,
   StartPublicConferenceRequest,
   DuplicateConferenceRequest,
+  LockConferenceRequest
 } from './service-pb.cjs';
 
 import { Query } from '../utils/definitions_pb.cjs';
@@ -121,11 +122,12 @@ export default (config) =>
       });
     }
 
-    startConference(conferenceUuid) {
+    startConference(conferenceUuid, passwrod = '') {
       return new Promise((resolve, reject) => {
 
         const request = new StartConferenceRequest();
         request.setUuid(conferenceUuid);
+        request.setPassword(passwrod);
 
         this.client.startConference(request, this.metadata, (error, response) => {
           if (error) {
@@ -307,6 +309,7 @@ export default (config) =>
 
         for (const participant of conferenceData.participantsList) {
           const sessionParticipant = new SessionParticipant();
+          sessionParticipant.setEmail(participant.email);
           sessionParticipant.setUsername(participant.username);
           sessionParticipant.setIsGroup(participant.isGroup);
           sessionParticipant.setParticipantType(participant.participant_type);
@@ -563,6 +566,35 @@ export default (config) =>
                 code,
                 message: response.getMessage(),
                 uuid: response.getUuid(),
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    lockConference(conferenceUuid, locked = false) {
+      return new Promise((resolve, reject) => {
+
+        const request = new LockConferenceRequest();
+        request.setUuid(conferenceUuid);
+        request.setLocked(locked);
+
+        this.client.lockConference(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage(),
               });
             } else {
               reject({
