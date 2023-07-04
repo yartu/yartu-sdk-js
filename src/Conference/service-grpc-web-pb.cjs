@@ -1115,5 +1115,66 @@ proto.yartu.YConferencePromiseClient.prototype.getPublicConference =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.LockConferenceRequest,
+ *   !proto.yartu.LockConferenceResponse>}
+ */
+const methodDescriptor_YConference_lockConference = new grpc.web.MethodDescriptor(
+  '/yartu.YConference/lockConference',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.LockConferenceRequest,
+  proto.yartu.LockConferenceResponse,
+  /**
+   * @param {!proto.yartu.LockConferenceRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.LockConferenceResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.LockConferenceRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.LockConferenceResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.LockConferenceResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YConferenceClient.prototype.lockConference =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YConference/lockConference',
+      request,
+      metadata || {},
+      methodDescriptor_YConference_lockConference,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.LockConferenceRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.LockConferenceResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YConferencePromiseClient.prototype.lockConference =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YConference/lockConference',
+      request,
+      metadata || {},
+      methodDescriptor_YConference_lockConference);
+};
+
+
 module.exports = proto.yartu;
 
