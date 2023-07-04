@@ -121,7 +121,7 @@ export const xssOptions = (yartuAttach = {}) => {
 
         if (
           href &&
-          !href.includes('/public-url/') &&
+          !href.includes('/public/url/') &&
           !href.includes('mailto:') &&
           !href.includes('tel:') &&
           !href.includes('fax:')
@@ -130,7 +130,7 @@ export const xssOptions = (yartuAttach = {}) => {
             const aHost = new URL(href).host;
             if (host !== aHost) {
               const base64Url = Buffer.from(href, 'utf8').toString('base64');
-              href = `/#/public-url/?u=${base64Url}`;
+              href = `/#/public/url/?u=${base64Url}`;
             }
           } catch {
             // pass
