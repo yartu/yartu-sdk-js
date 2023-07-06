@@ -1790,11 +1790,12 @@ export default (config) =>
       });
     }
 
-    listCardActivity(cardId) {
+    listCardActivity(cardId, isCommmet) {
       return new Promise((resolve, reject) => {
         const request = new ListCardActivityRequest();
 
         request.setId(cardId);
+        request.setIsComment(isCommmet);
 
         this.client.listCardActivity(request, this.metadata, (error, response) => {
           if (error) {
