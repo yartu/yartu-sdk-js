@@ -15,6 +15,8 @@ import {
   DuplicateProjectRequest,
   ArchiveProjectRequest,
   StarProjectRequest,
+  ShareAllBoardsRequest,
+  DeleteShareAllBoardsRequest,
 
   // Thread services
   ListThreadRequest,
@@ -1788,11 +1790,12 @@ export default (config) =>
       });
     }
 
-    listCardActivity(cardId) {
+    listCardActivity(cardId, isCommmet) {
       return new Promise((resolve, reject) => {
         const request = new ListCardActivityRequest();
 
         request.setId(cardId);
+        request.setIsComment(isCommmet);
 
         this.client.listCardActivity(request, this.metadata, (error, response) => {
           if (error) {
@@ -2191,7 +2194,7 @@ export default (config) =>
 
     shareAllBoards(projectUUID, boardUUIDList, shareList) {
       return new Promise((resolve, reject) => {
-        const request = new ShareBoardRequest();
+        const request = new ShareAllBoardsRequest();
         request.setProjectUuid(projectUUID);
         request.setBoardUuidList(boardUUIDList);
 
@@ -2255,7 +2258,7 @@ export default (config) =>
 
     deleteShareAllBoards(projectUUID, boardUUIDList, shareList) {
       return new Promise((resolve, reject) => {
-        const request = new ShareBoardRequest();
+        const request = new DeleteShareAllBoardsRequest();
         request.setProjectUuid(projectUUID);
         request.setBoardUuidList(boardUUIDList);
 
@@ -2316,7 +2319,5 @@ export default (config) =>
         });
       });
     }
-
-
   };
 
