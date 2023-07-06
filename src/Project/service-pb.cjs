@@ -4433,7 +4433,7 @@ proto.yartu.CardChecklist.prototype.clearItemsList = function() {
  * @private {!Array<number>}
  * @const
  */
-proto.yartu.CardActivity.repeatedFields_ = [8,9];
+proto.yartu.CardActivity.repeatedFields_ = [9,10];
 
 
 
@@ -4468,12 +4468,13 @@ proto.yartu.CardActivity.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, 0),
     activityType: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    content: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    createdAt: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    removedAt: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    isEdited: jspb.Message.getBooleanFieldWithDefault(msg, 6, false),
+    isComment: jspb.Message.getBooleanFieldWithDefault(msg, 3, false),
+    content: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    createdAt: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    removedAt: jspb.Message.getFieldWithDefault(msg, 6, ""),
+    isEdited: jspb.Message.getBooleanFieldWithDefault(msg, 7, false),
     user: (f = msg.getUser()) && common_grpc_definitions_pb.User.toObject(includeInstance, f),
-    mentionList: (f = jspb.Message.getRepeatedField(msg, 8)) == null ? undefined : f,
+    mentionList: (f = jspb.Message.getRepeatedField(msg, 9)) == null ? undefined : f,
     interactionsList: jspb.Message.toObjectList(msg.getInteractionsList(),
     proto.yartu.MessageInteraction.toObject, includeInstance)
   };
@@ -4521,31 +4522,35 @@ proto.yartu.CardActivity.deserializeBinaryFromReader = function(msg, reader) {
       msg.setActivityType(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setContent(value);
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setIsComment(value);
       break;
     case 4:
       var value = /** @type {string} */ (reader.readString());
-      msg.setCreatedAt(value);
+      msg.setContent(value);
       break;
     case 5:
       var value = /** @type {string} */ (reader.readString());
-      msg.setRemovedAt(value);
+      msg.setCreatedAt(value);
       break;
     case 6:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setRemovedAt(value);
+      break;
+    case 7:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setIsEdited(value);
       break;
-    case 7:
+    case 8:
       var value = new common_grpc_definitions_pb.User;
       reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
       msg.setUser(value);
       break;
-    case 8:
+    case 9:
       var value = /** @type {string} */ (reader.readString());
       msg.addMention(value);
       break;
-    case 9:
+    case 10:
       var value = new proto.yartu.MessageInteraction;
       reader.readMessage(value,proto.yartu.MessageInteraction.deserializeBinaryFromReader);
       msg.addInteractions(value);
@@ -4593,38 +4598,45 @@ proto.yartu.CardActivity.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getContent();
-  if (f.length > 0) {
-    writer.writeString(
+  f = message.getIsComment();
+  if (f) {
+    writer.writeBool(
       3,
       f
     );
   }
-  f = message.getCreatedAt();
+  f = message.getContent();
   if (f.length > 0) {
     writer.writeString(
       4,
       f
     );
   }
-  f = message.getRemovedAt();
+  f = message.getCreatedAt();
   if (f.length > 0) {
     writer.writeString(
       5,
       f
     );
   }
-  f = /** @type {boolean} */ (jspb.Message.getField(message, 6));
+  f = message.getRemovedAt();
+  if (f.length > 0) {
+    writer.writeString(
+      6,
+      f
+    );
+  }
+  f = /** @type {boolean} */ (jspb.Message.getField(message, 7));
   if (f != null) {
     writer.writeBool(
-      6,
+      7,
       f
     );
   }
   f = message.getUser();
   if (f != null) {
     writer.writeMessage(
-      7,
+      8,
       f,
       common_grpc_definitions_pb.User.serializeBinaryToWriter
     );
@@ -4632,14 +4644,14 @@ proto.yartu.CardActivity.serializeBinaryToWriter = function(message, writer) {
   f = message.getMentionList();
   if (f.length > 0) {
     writer.writeRepeatedString(
-      8,
+      9,
       f
     );
   }
   f = message.getInteractionsList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
-      9,
+      10,
       f,
       proto.yartu.MessageInteraction.serializeBinaryToWriter
     );
@@ -4684,28 +4696,28 @@ proto.yartu.CardActivity.prototype.setActivityType = function(value) {
 
 
 /**
- * optional string content = 3;
+ * optional bool is_comment = 3;
+ * @return {boolean}
+ */
+proto.yartu.CardActivity.prototype.getIsComment = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 3, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.yartu.CardActivity} returns this
+ */
+proto.yartu.CardActivity.prototype.setIsComment = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 3, value);
+};
+
+
+/**
+ * optional string content = 4;
  * @return {string}
  */
 proto.yartu.CardActivity.prototype.getContent = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.yartu.CardActivity} returns this
- */
-proto.yartu.CardActivity.prototype.setContent = function(value) {
-  return jspb.Message.setProto3StringField(this, 3, value);
-};
-
-
-/**
- * optional string created_at = 4;
- * @return {string}
- */
-proto.yartu.CardActivity.prototype.getCreatedAt = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
 };
 
@@ -4714,16 +4726,16 @@ proto.yartu.CardActivity.prototype.getCreatedAt = function() {
  * @param {string} value
  * @return {!proto.yartu.CardActivity} returns this
  */
-proto.yartu.CardActivity.prototype.setCreatedAt = function(value) {
+proto.yartu.CardActivity.prototype.setContent = function(value) {
   return jspb.Message.setProto3StringField(this, 4, value);
 };
 
 
 /**
- * optional string removed_at = 5;
+ * optional string created_at = 5;
  * @return {string}
  */
-proto.yartu.CardActivity.prototype.getRemovedAt = function() {
+proto.yartu.CardActivity.prototype.getCreatedAt = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
 };
 
@@ -4732,17 +4744,35 @@ proto.yartu.CardActivity.prototype.getRemovedAt = function() {
  * @param {string} value
  * @return {!proto.yartu.CardActivity} returns this
  */
-proto.yartu.CardActivity.prototype.setRemovedAt = function(value) {
+proto.yartu.CardActivity.prototype.setCreatedAt = function(value) {
   return jspb.Message.setProto3StringField(this, 5, value);
 };
 
 
 /**
- * optional bool is_edited = 6;
+ * optional string removed_at = 6;
+ * @return {string}
+ */
+proto.yartu.CardActivity.prototype.getRemovedAt = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.CardActivity} returns this
+ */
+proto.yartu.CardActivity.prototype.setRemovedAt = function(value) {
+  return jspb.Message.setProto3StringField(this, 6, value);
+};
+
+
+/**
+ * optional bool is_edited = 7;
  * @return {boolean}
  */
 proto.yartu.CardActivity.prototype.getIsEdited = function() {
-  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 6, false));
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 7, false));
 };
 
 
@@ -4751,7 +4781,7 @@ proto.yartu.CardActivity.prototype.getIsEdited = function() {
  * @return {!proto.yartu.CardActivity} returns this
  */
 proto.yartu.CardActivity.prototype.setIsEdited = function(value) {
-  return jspb.Message.setField(this, 6, value);
+  return jspb.Message.setField(this, 7, value);
 };
 
 
@@ -4760,7 +4790,7 @@ proto.yartu.CardActivity.prototype.setIsEdited = function(value) {
  * @return {!proto.yartu.CardActivity} returns this
  */
 proto.yartu.CardActivity.prototype.clearIsEdited = function() {
-  return jspb.Message.setField(this, 6, undefined);
+  return jspb.Message.setField(this, 7, undefined);
 };
 
 
@@ -4769,17 +4799,17 @@ proto.yartu.CardActivity.prototype.clearIsEdited = function() {
  * @return {boolean}
  */
 proto.yartu.CardActivity.prototype.hasIsEdited = function() {
-  return jspb.Message.getField(this, 6) != null;
+  return jspb.Message.getField(this, 7) != null;
 };
 
 
 /**
- * optional User user = 7;
+ * optional User user = 8;
  * @return {?proto.User}
  */
 proto.yartu.CardActivity.prototype.getUser = function() {
   return /** @type{?proto.User} */ (
-    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.User, 7));
+    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.User, 8));
 };
 
 
@@ -4788,7 +4818,7 @@ proto.yartu.CardActivity.prototype.getUser = function() {
  * @return {!proto.yartu.CardActivity} returns this
 */
 proto.yartu.CardActivity.prototype.setUser = function(value) {
-  return jspb.Message.setWrapperField(this, 7, value);
+  return jspb.Message.setWrapperField(this, 8, value);
 };
 
 
@@ -4806,16 +4836,16 @@ proto.yartu.CardActivity.prototype.clearUser = function() {
  * @return {boolean}
  */
 proto.yartu.CardActivity.prototype.hasUser = function() {
-  return jspb.Message.getField(this, 7) != null;
+  return jspb.Message.getField(this, 8) != null;
 };
 
 
 /**
- * repeated string mention = 8;
+ * repeated string mention = 9;
  * @return {!Array<string>}
  */
 proto.yartu.CardActivity.prototype.getMentionList = function() {
-  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 8));
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 9));
 };
 
 
@@ -4824,7 +4854,7 @@ proto.yartu.CardActivity.prototype.getMentionList = function() {
  * @return {!proto.yartu.CardActivity} returns this
  */
 proto.yartu.CardActivity.prototype.setMentionList = function(value) {
-  return jspb.Message.setField(this, 8, value || []);
+  return jspb.Message.setField(this, 9, value || []);
 };
 
 
@@ -4834,7 +4864,7 @@ proto.yartu.CardActivity.prototype.setMentionList = function(value) {
  * @return {!proto.yartu.CardActivity} returns this
  */
 proto.yartu.CardActivity.prototype.addMention = function(value, opt_index) {
-  return jspb.Message.addToRepeatedField(this, 8, value, opt_index);
+  return jspb.Message.addToRepeatedField(this, 9, value, opt_index);
 };
 
 
@@ -4848,12 +4878,12 @@ proto.yartu.CardActivity.prototype.clearMentionList = function() {
 
 
 /**
- * repeated MessageInteraction interactions = 9;
+ * repeated MessageInteraction interactions = 10;
  * @return {!Array<!proto.yartu.MessageInteraction>}
  */
 proto.yartu.CardActivity.prototype.getInteractionsList = function() {
   return /** @type{!Array<!proto.yartu.MessageInteraction>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.yartu.MessageInteraction, 9));
+    jspb.Message.getRepeatedWrapperField(this, proto.yartu.MessageInteraction, 10));
 };
 
 
@@ -4862,7 +4892,7 @@ proto.yartu.CardActivity.prototype.getInteractionsList = function() {
  * @return {!proto.yartu.CardActivity} returns this
 */
 proto.yartu.CardActivity.prototype.setInteractionsList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 9, value);
+  return jspb.Message.setRepeatedWrapperField(this, 10, value);
 };
 
 
@@ -4872,7 +4902,7 @@ proto.yartu.CardActivity.prototype.setInteractionsList = function(value) {
  * @return {!proto.yartu.MessageInteraction}
  */
 proto.yartu.CardActivity.prototype.addInteractions = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 9, opt_value, proto.yartu.MessageInteraction, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 10, opt_value, proto.yartu.MessageInteraction, opt_index);
 };
 
 
@@ -32032,7 +32062,8 @@ proto.yartu.ListCardActivityRequest.prototype.toObject = function(opt_includeIns
  */
 proto.yartu.ListCardActivityRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0)
+    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    isComment: jspb.Message.getBooleanFieldWithDefault(msg, 2, false)
   };
 
   if (includeInstance) {
@@ -32073,6 +32104,10 @@ proto.yartu.ListCardActivityRequest.deserializeBinaryFromReader = function(msg, 
       var value = /** @type {number} */ (reader.readInt64());
       msg.setId(value);
       break;
+    case 2:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setIsComment(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -32109,6 +32144,13 @@ proto.yartu.ListCardActivityRequest.serializeBinaryToWriter = function(message, 
       f
     );
   }
+  f = message.getIsComment();
+  if (f) {
+    writer.writeBool(
+      2,
+      f
+    );
+  }
 };
 
 
@@ -32127,6 +32169,24 @@ proto.yartu.ListCardActivityRequest.prototype.getId = function() {
  */
 proto.yartu.ListCardActivityRequest.prototype.setId = function(value) {
   return jspb.Message.setProto3IntField(this, 1, value);
+};
+
+
+/**
+ * optional bool is_comment = 2;
+ * @return {boolean}
+ */
+proto.yartu.ListCardActivityRequest.prototype.getIsComment = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 2, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.yartu.ListCardActivityRequest} returns this
+ */
+proto.yartu.ListCardActivityRequest.prototype.setIsComment = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 2, value);
 };
 
 
