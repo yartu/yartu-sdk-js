@@ -4467,7 +4467,7 @@ proto.yartu.CardActivity.prototype.toObject = function(opt_includeInstance) {
 proto.yartu.CardActivity.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    activityType: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    activityType: jspb.Message.getFieldWithDefault(msg, 2, ""),
     isComment: jspb.Message.getBooleanFieldWithDefault(msg, 3, false),
     content: jspb.Message.getFieldWithDefault(msg, 4, ""),
     createdAt: jspb.Message.getFieldWithDefault(msg, 5, ""),
@@ -4518,7 +4518,7 @@ proto.yartu.CardActivity.deserializeBinaryFromReader = function(msg, reader) {
       msg.setId(value);
       break;
     case 2:
-      var value = /** @type {number} */ (reader.readInt64());
+      var value = /** @type {string} */ (reader.readString());
       msg.setActivityType(value);
       break;
     case 3:
@@ -4592,8 +4592,8 @@ proto.yartu.CardActivity.serializeBinaryToWriter = function(message, writer) {
     );
   }
   f = message.getActivityType();
-  if (f !== 0) {
-    writer.writeInt64(
+  if (f.length > 0) {
+    writer.writeString(
       2,
       f
     );
@@ -4678,20 +4678,20 @@ proto.yartu.CardActivity.prototype.setId = function(value) {
 
 
 /**
- * optional int64 activity_type = 2;
- * @return {number}
+ * optional string activity_type = 2;
+ * @return {string}
  */
 proto.yartu.CardActivity.prototype.getActivityType = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
 /**
- * @param {number} value
+ * @param {string} value
  * @return {!proto.yartu.CardActivity} returns this
  */
 proto.yartu.CardActivity.prototype.setActivityType = function(value) {
-  return jspb.Message.setProto3IntField(this, 2, value);
+  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
