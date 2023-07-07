@@ -1803,9 +1803,22 @@ export default (config) =>
           } else {
             const code = response.getCode();
             if (code == 0) {
+              const activities = response.getActivityList();
+
+              const data = [];
+              activities.forEach((a) => {
+                const ao = a.toObject();
+                try {
+                  const activityData = JSON.parse(ao.content);
+                  data.push({ ...ao, content: activityData });
+                } catch (err) {
+                  data.push(ao);
+                }
+              });
+
               resolve({
                 code,
-                activitys: response.getActivityList().map((a) => a.toObject()),
+                activities: data,
                 message: response.getMessage()
               })
             } else {
