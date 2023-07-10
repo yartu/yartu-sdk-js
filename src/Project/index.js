@@ -105,9 +105,10 @@ export default (config) =>
 
     constructor(config) {
       this.endpoint = config.endpoint;
+      this.tabId = config.tabId;
       this.client = new YProjectClient(this.endpoint, '', '');
       const yartu_token = window.localStorage.getItem('yartu-token');
-      this.metadata = { Authentication: yartu_token };
+      this.metadata = { Authentication: yartu_token, tabId: this.tabId };
     }
 
     getProjectHome() {

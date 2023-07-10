@@ -69,6 +69,7 @@ class YartuApp {
 
   refreshUser() {
     const yartu_token = window.localStorage.getItem('yartu-token');
+    const tabId = window.sessionStorage.getItem('yartu') || '';
     if (yartu_token) {
       try {
         const user_data = jwt_decode(yartu_token);
@@ -84,17 +85,17 @@ class YartuApp {
       this.user = undefined;
     }
 
-    this.Account.metadata = { Authentication: yartu_token };
-    this.Calendar.metadata = { Authentication: yartu_token };
-    this.Conference.metadata = { Authentication: yartu_token };
-    this.Contact.metadata = { Authentication: yartu_token };
-    this.Drive.metadata = { Authentication: yartu_token };
-    this.Email.metadata = { Authentication: yartu_token };
-    this.Note.metadata = { Authentication: yartu_token };
-    this.Project.metadata = { Authentication: yartu_token };
-    this.Search.metadata = { Authentication: yartu_token };
-    this.Notification.metadata = { Authentication: yartu_token };
-    this.ExternalApp.metadata = { Authentication: yartu_token };
+    this.Account.metadata = { tabId, Authentication: yartu_token };
+    this.Calendar.metadata = { tabId, Authentication: yartu_token };
+    this.Conference.metadata = { tabId, Authentication: yartu_token };
+    this.Contact.metadata = { tabId, Authentication: yartu_token };
+    this.Drive.metadata = { tabId, Authentication: yartu_token };
+    this.Email.metadata = { tabId, Authentication: yartu_token };
+    this.Note.metadata = { tabId, Authentication: yartu_token };
+    this.Project.metadata = { tabId, Authentication: yartu_token };
+    this.Search.metadata = { tabId, Authentication: yartu_token };
+    this.Notification.metadata = { tabId, Authentication: yartu_token };
+    this.ExternalApp.metadata = { tabId, Authentication: yartu_token };
   }
 }
 
