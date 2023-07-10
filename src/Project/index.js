@@ -54,7 +54,12 @@ import {
   UnshareBoardRequest,
   // UpsertSharedBoardRequest,
   DeleteSharedBoardRequest,
-  ListSharedBoardRequest,
+  ListSharedBoardRequest,  // unused ?
+
+  ListPublicBoardShareRequest,
+  GetPublicBoardRequest,
+  UpsertPublicBoardShareRequest,
+  DeletePublicBoardShareRequest,
 
   // CardLabelServices
   ListCardLabelRequest,
@@ -1119,6 +1124,133 @@ export default (config) =>
       });
     }
 
+    listPublicBoardShare(boardUUID) {
+      return new Promise((resolve, reject) => {
+        const request = new ListPublicBoardShareRequest();
+        request.setBoardUuid(boardUUID);
+
+        this.client.listPublicBoardShare(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              const data = response.getDataList().map((data) => data.toObject());;
+              resolve({
+                code: 0,
+                data,
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    getPublicBoard(token, password, accessToken) {
+      return new Promise((resolve, reject) => {
+        const request = new GetPublicBoardRequest();
+        request.setToken(token);
+        request.setPassword(password);
+        request.setAccessToken(accessToken);
+
+        this.client.getPublicBoard(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              const data = response.getData().toObject();
+              const passwordNeeded = response.getPasswordNeeded();
+
+              resolve({
+                code: 0,
+                data,
+                passwordNeeded,
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    upsertPublicBoardShare(id, boardUUID, description, password, expireDate, ipaddress) {
+      return new Promise((resolve, reject) => {
+        const request = new UpsertPublicBoardShareRequest();
+
+        request.setId(id);
+        request.setBoardUuid(boardUUID);
+        request.setDescription(description);
+        request.setPassword(password);
+        request.setExpireDate(expireDate);
+        request.setIpaddress(ipaddress);
+
+        this.client.upsertPublicBoardShare(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              const data = response.getData().toObject();
+              resolve({
+                code: 0,
+                data,
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    deletePublicBoardShare(boardUUID, publicBoardShareId) {
+      return new Promise((resolve, reject) => {
+        const request = new DeletePublicBoardShareRequest();
+
+        request.setId(publicBoardShareId);
+        request.setBoardUuid(boardUUID);
+
+        this.client.deletePublicBoardShare(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code: 0,
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
     listCardLabel(boardUUID) {
       return new Promise((resolve, reject) => {
         const request = new ListCardLabelRequest();
@@ -1128,9 +1260,9 @@ export default (config) =>
             handleError(error, reject);
           } else {
             const code = response.getCode();
-            const data = response.getCardLabelList().map((data) => data.toObject());;
 
             if (code == 0) {
+              const data = response.getCardLabelList().map((data) => data.toObject());;
               resolve({
                 code: 0,
                 data,

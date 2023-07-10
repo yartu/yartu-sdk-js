@@ -2214,6 +2214,250 @@ proto.yartu.YProjectPromiseClient.prototype.listSharedBoard =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.ListPublicBoardShareRequest,
+ *   !proto.yartu.ListPublicBoardShareResponse>}
+ */
+const methodDescriptor_YProject_listPublicBoardShare = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/listPublicBoardShare',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.ListPublicBoardShareRequest,
+  proto.yartu.ListPublicBoardShareResponse,
+  /**
+   * @param {!proto.yartu.ListPublicBoardShareRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.ListPublicBoardShareResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.ListPublicBoardShareRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ListPublicBoardShareResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ListPublicBoardShareResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.listPublicBoardShare =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/listPublicBoardShare',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_listPublicBoardShare,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.ListPublicBoardShareRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.ListPublicBoardShareResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.listPublicBoardShare =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/listPublicBoardShare',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_listPublicBoardShare);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.GetPublicBoardRequest,
+ *   !proto.yartu.GetPublicBoardResponse>}
+ */
+const methodDescriptor_YProject_getPublicBoard = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/getPublicBoard',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.GetPublicBoardRequest,
+  proto.yartu.GetPublicBoardResponse,
+  /**
+   * @param {!proto.yartu.GetPublicBoardRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.GetPublicBoardResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.GetPublicBoardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.GetPublicBoardResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.GetPublicBoardResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.getPublicBoard =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/getPublicBoard',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_getPublicBoard,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.GetPublicBoardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.GetPublicBoardResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.getPublicBoard =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/getPublicBoard',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_getPublicBoard);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.UpsertPublicBoardShareRequest,
+ *   !proto.yartu.UpsertPublicBoardShareResponse>}
+ */
+const methodDescriptor_YProject_upsertPublicBoardShare = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/upsertPublicBoardShare',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.UpsertPublicBoardShareRequest,
+  proto.yartu.UpsertPublicBoardShareResponse,
+  /**
+   * @param {!proto.yartu.UpsertPublicBoardShareRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.UpsertPublicBoardShareResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.UpsertPublicBoardShareRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.UpsertPublicBoardShareResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.UpsertPublicBoardShareResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.upsertPublicBoardShare =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/upsertPublicBoardShare',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_upsertPublicBoardShare,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.UpsertPublicBoardShareRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.UpsertPublicBoardShareResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.upsertPublicBoardShare =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/upsertPublicBoardShare',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_upsertPublicBoardShare);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.DeletePublicBoardShareRequest,
+ *   !proto.yartu.DeletePublicBoardShareResponse>}
+ */
+const methodDescriptor_YProject_deletePublicBoardShare = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/deletePublicBoardShare',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.DeletePublicBoardShareRequest,
+  proto.yartu.DeletePublicBoardShareResponse,
+  /**
+   * @param {!proto.yartu.DeletePublicBoardShareRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.DeletePublicBoardShareResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.DeletePublicBoardShareRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.DeletePublicBoardShareResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.DeletePublicBoardShareResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.deletePublicBoardShare =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/deletePublicBoardShare',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_deletePublicBoardShare,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.DeletePublicBoardShareRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.DeletePublicBoardShareResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.deletePublicBoardShare =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/deletePublicBoardShare',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_deletePublicBoardShare);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.ListCardLabelRequest,
  *   !proto.yartu.ListCardLabelResponse>}
  */
@@ -4038,6 +4282,67 @@ proto.yartu.YProjectPromiseClient.prototype.getProjectFiles =
       request,
       metadata || {},
       methodDescriptor_YProject_getProjectFiles);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.ListBoardActivityRequest,
+ *   !proto.yartu.ListBoardActivityResponse>}
+ */
+const methodDescriptor_YProject_listBoardActivity = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/listBoardActivity',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.ListBoardActivityRequest,
+  proto.yartu.ListBoardActivityResponse,
+  /**
+   * @param {!proto.yartu.ListBoardActivityRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.ListBoardActivityResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.ListBoardActivityRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ListBoardActivityResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ListBoardActivityResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.listBoardActivity =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/listBoardActivity',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_listBoardActivity,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.ListBoardActivityRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.ListBoardActivityResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.listBoardActivity =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/listBoardActivity',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_listBoardActivity);
 };
 
 
