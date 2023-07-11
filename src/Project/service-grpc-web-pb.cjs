@@ -2275,67 +2275,6 @@ proto.yartu.YProjectPromiseClient.prototype.listPublicBoardShare =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
- *   !proto.yartu.GetPublicBoardRequest,
- *   !proto.yartu.GetPublicBoardResponse>}
- */
-const methodDescriptor_YProject_getPublicBoard = new grpc.web.MethodDescriptor(
-  '/yartu.YProject/getPublicBoard',
-  grpc.web.MethodType.UNARY,
-  proto.yartu.GetPublicBoardRequest,
-  proto.yartu.GetPublicBoardResponse,
-  /**
-   * @param {!proto.yartu.GetPublicBoardRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.yartu.GetPublicBoardResponse.deserializeBinary
-);
-
-
-/**
- * @param {!proto.yartu.GetPublicBoardRequest} request The
- *     request proto
- * @param {?Object<string, string>} metadata User defined
- *     call metadata
- * @param {function(?grpc.web.RpcError, ?proto.yartu.GetPublicBoardResponse)}
- *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.yartu.GetPublicBoardResponse>|undefined}
- *     The XHR Node Readable Stream
- */
-proto.yartu.YProjectClient.prototype.getPublicBoard =
-    function(request, metadata, callback) {
-  return this.client_.rpcCall(this.hostname_ +
-      '/yartu.YProject/getPublicBoard',
-      request,
-      metadata || {},
-      methodDescriptor_YProject_getPublicBoard,
-      callback);
-};
-
-
-/**
- * @param {!proto.yartu.GetPublicBoardRequest} request The
- *     request proto
- * @param {?Object<string, string>=} metadata User defined
- *     call metadata
- * @return {!Promise<!proto.yartu.GetPublicBoardResponse>}
- *     Promise that resolves to the response
- */
-proto.yartu.YProjectPromiseClient.prototype.getPublicBoard =
-    function(request, metadata) {
-  return this.client_.unaryCall(this.hostname_ +
-      '/yartu.YProject/getPublicBoard',
-      request,
-      metadata || {},
-      methodDescriptor_YProject_getPublicBoard);
-};
-
-
-/**
- * @const
- * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.UpsertPublicBoardShareRequest,
  *   !proto.yartu.UpsertPublicBoardShareResponse>}
  */
@@ -4343,6 +4282,250 @@ proto.yartu.YProjectPromiseClient.prototype.listBoardActivity =
       request,
       metadata || {},
       methodDescriptor_YProject_listBoardActivity);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.GetPublicBoardRequest,
+ *   !proto.yartu.GetPublicBoardResponse>}
+ */
+const methodDescriptor_YProject_getPublicBoard = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/getPublicBoard',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.GetPublicBoardRequest,
+  proto.yartu.GetPublicBoardResponse,
+  /**
+   * @param {!proto.yartu.GetPublicBoardRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.GetPublicBoardResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.GetPublicBoardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.GetPublicBoardResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.GetPublicBoardResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.getPublicBoard =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/getPublicBoard',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_getPublicBoard,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.GetPublicBoardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.GetPublicBoardResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.getPublicBoard =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/getPublicBoard',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_getPublicBoard);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.GetPublicCardRequest,
+ *   !proto.yartu.GetPublicCardResponse>}
+ */
+const methodDescriptor_YProject_getPublicCard = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/getPublicCard',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.GetPublicCardRequest,
+  proto.yartu.GetPublicCardResponse,
+  /**
+   * @param {!proto.yartu.GetPublicCardRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.GetPublicCardResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.GetPublicCardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.GetPublicCardResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.GetPublicCardResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.getPublicCard =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/getPublicCard',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_getPublicCard,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.GetPublicCardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.GetPublicCardResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.getPublicCard =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/getPublicCard',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_getPublicCard);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.ListPublicCardActivityRequest,
+ *   !proto.yartu.ListPublicCardActivityResponse>}
+ */
+const methodDescriptor_YProject_listPublicCardActivity = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/listPublicCardActivity',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.ListPublicCardActivityRequest,
+  proto.yartu.ListPublicCardActivityResponse,
+  /**
+   * @param {!proto.yartu.ListPublicCardActivityRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.ListPublicCardActivityResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.ListPublicCardActivityRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ListPublicCardActivityResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ListPublicCardActivityResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.listPublicCardActivity =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/listPublicCardActivity',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_listPublicCardActivity,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.ListPublicCardActivityRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.ListPublicCardActivityResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.listPublicCardActivity =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/listPublicCardActivity',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_listPublicCardActivity);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.ListPublicCardAttachmentRequest,
+ *   !proto.yartu.ListPublicCardAttachmentResponse>}
+ */
+const methodDescriptor_YProject_listPublicCardAttachment = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/listPublicCardAttachment',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.ListPublicCardAttachmentRequest,
+  proto.yartu.ListPublicCardAttachmentResponse,
+  /**
+   * @param {!proto.yartu.ListPublicCardAttachmentRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.ListPublicCardAttachmentResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.ListPublicCardAttachmentRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ListPublicCardAttachmentResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ListPublicCardAttachmentResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.listPublicCardAttachment =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/listPublicCardAttachment',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_listPublicCardAttachment,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.ListPublicCardAttachmentRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.ListPublicCardAttachmentResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.listPublicCardAttachment =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/listPublicCardAttachment',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_listPublicCardAttachment);
 };
 
 

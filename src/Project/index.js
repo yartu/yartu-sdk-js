@@ -56,11 +56,6 @@ import {
   DeleteSharedBoardRequest,
   ListSharedBoardRequest,  // unused ?
 
-  ListPublicBoardShareRequest,
-  GetPublicBoardRequest,
-  UpsertPublicBoardShareRequest,
-  DeletePublicBoardShareRequest,
-
   // CardLabelServices
   ListCardLabelRequest,
   UpsertCardLabelRequest,
@@ -94,6 +89,17 @@ import {
   UpsertCardAttachmentRequest,
   DeleteCardAttachmentRequest,
   ListCardAttachmentRequest,
+
+  // Public (Share) services
+  ListPublicBoardShareRequest,
+  UpsertPublicBoardShareRequest,
+  DeletePublicBoardShareRequest,
+
+  // Public (Get) services
+  GetPublicBoardRequest,
+  GetPublicCardRequest,
+  ListPublicCardActivityRequest,
+  ListPublicCardAttachmentRequest,
 
 } from './service-pb.cjs';
 
@@ -1140,40 +1146,6 @@ export default (config) =>
               resolve({
                 code: 0,
                 data,
-                message: response.getMessage()
-              });
-            } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
-            }
-          }
-        });
-      });
-    }
-
-    getPublicBoard(token, password, accessToken) {
-      return new Promise((resolve, reject) => {
-        const request = new GetPublicBoardRequest();
-        request.setToken(token);
-        request.setPassword(password);
-        request.setAccessToken(accessToken);
-
-        this.client.getPublicBoard(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-
-            if (code == 0) {
-              const data = response.getData().toObject();
-              const passwordNeeded = response.getPasswordNeeded();
-
-              resolve({
-                code: 0,
-                data,
-                passwordNeeded,
                 message: response.getMessage()
               });
             } else {
@@ -2465,5 +2437,156 @@ export default (config) =>
         });
       });
     }
+
+    // Public (GET) Services
+    getPublicBoard(token, password, accessToken) {
+      return new Promise((resolve, reject) => {
+        const request = new GetPublicBoardRequest();
+        request.setToken(token);
+        request.setPassword(password);
+        request.setAccessToken(accessToken);
+
+        this.client.getPublicBoard(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              const data = response.getData().toObject();
+              const passwordNeeded = response.getPasswordNeeded();
+
+              resolve({
+                code: 0,
+                data,
+                passwordNeeded,
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    getPublicCard(boardToken = '', accessToken = '', cardId = 0) {
+      return new Promise((resolve, reject) => {
+        const request = new GetPublicCardRequest();
+        request.setId(cardId);
+        request.setBoardToken(boardToken);
+        request.setAccessToken(accessToken);
+
+        this.client.getPublicCard(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code,
+                card: response.getCard().toObject(),
+              })
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    listPublicCardActivity(boardToken = '', accessToken = '', cardId, isCommmet) {
+      return new Promise((resolve, reject) => {
+        const request = new ListPublicCardActivityRequest();
+
+        request.setId(cardId);
+        request.setIsComment(isCommmet);
+        request.setBoardToken(boardToken);
+        request.setAccessToken(accessToken);
+
+        this.client.listPublicCardActivity(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              const activities = response.getActivityList();
+
+              const data = [];
+              activities.forEach((a) => {
+                const ao = a.toObject();
+                try {
+                  const activityData = JSON.parse(ao.content);
+                  data.push({ ...ao, content: activityData });
+                } catch (err) {
+                  data.push(ao);
+                }
+              });
+
+              resolve({
+                code,
+                activities: data,
+                message: response.getMessage()
+              })
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    listPublicCardAttachment(boardToken = '', accessToken = '', cardId, isCommmet) {
+      return new Promise((resolve, reject) => {
+        const request = new ListPublicCardAttachmentRequest();
+
+        request.setId(cardId);
+        request.setBoardToken(boardToken);
+        request.setAccessToken(accessToken);
+
+        this.client.listPublicCardAttachment(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              const activities = response.getActivityList();
+
+              const data = [];
+              activities.forEach((a) => {
+                const ao = a.toObject();
+                try {
+                  const activityData = JSON.parse(ao.content);
+                  data.push({ ...ao, content: activityData });
+                } catch (err) {
+                  data.push(ao);
+                }
+              });
+
+              resolve({
+                code,
+                activities: data,
+                message: response.getMessage()
+              })
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
   };
 
