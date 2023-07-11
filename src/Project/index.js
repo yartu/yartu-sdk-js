@@ -84,6 +84,7 @@ import {
   DuplicateCardRequest,
   MoveCardToAnotherBoardRequest,
   CopyCardToAnotherBoardRequest,
+  SubscribeCardRequest,
 
   // CardAttachment services
   UpsertCardAttachmentRequest,
@@ -2302,6 +2303,34 @@ export default (config) =>
             } else {
               reject({
                 code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    subscribeCard(cardId) {
+      return new Promise((resolve, reject) => {
+        const request = new SubscribeCardRequest();
+        request.setCardId(cardId);
+
+        this.client.subscribeCard(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code,
+                subscribed: response.getSubscribed(),
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                subscribed: false,
                 message: response.getMessage()
               });
             }
