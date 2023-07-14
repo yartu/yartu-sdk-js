@@ -4105,6 +4105,67 @@ proto.yartu.YProjectPromiseClient.prototype.moveCard =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.SubscribeCardRequest,
+ *   !proto.yartu.SubscribeCardResponse>}
+ */
+const methodDescriptor_YProject_subscribeCard = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/subscribeCard',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.SubscribeCardRequest,
+  proto.yartu.SubscribeCardResponse,
+  /**
+   * @param {!proto.yartu.SubscribeCardRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.SubscribeCardResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.SubscribeCardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.SubscribeCardResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.SubscribeCardResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.subscribeCard =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/subscribeCard',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_subscribeCard,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.SubscribeCardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.SubscribeCardResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.subscribeCard =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/subscribeCard',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_subscribeCard);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.GetProjectorOrBoardUserListRequest,
  *   !proto.yartu.GetProjectorOrBoardUserListResponse>}
  */
