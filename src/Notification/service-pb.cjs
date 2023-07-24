@@ -307,7 +307,7 @@ proto.yartu.Notification.toObject = function(includeInstance, msg) {
     href: jspb.Message.getFieldWithDefault(msg, 8, ""),
     notificationType: jspb.Message.getFieldWithDefault(msg, 9, ""),
     createdAt: jspb.Message.getFieldWithDefault(msg, 10, ""),
-    modelId: jspb.Message.getFieldWithDefault(msg, 11, 0),
+    modelId: jspb.Message.getFieldWithDefault(msg, 11, ""),
     canceledAt: jspb.Message.getFieldWithDefault(msg, 12, ""),
     isCritical: jspb.Message.getBooleanFieldWithDefault(msg, 13, false),
     isRead: jspb.Message.getBooleanFieldWithDefault(msg, 14, false),
@@ -392,7 +392,7 @@ proto.yartu.Notification.deserializeBinaryFromReader = function(msg, reader) {
       msg.setCreatedAt(value);
       break;
     case 11:
-      var value = /** @type {number} */ (reader.readInt64());
+      var value = /** @type {string} */ (reader.readString());
       msg.setModelId(value);
       break;
     case 12:
@@ -518,8 +518,8 @@ proto.yartu.Notification.serializeBinaryToWriter = function(message, writer) {
     );
   }
   f = message.getModelId();
-  if (f !== 0) {
-    writer.writeInt64(
+  if (f.length > 0) {
+    writer.writeString(
       11,
       f
     );
@@ -782,20 +782,20 @@ proto.yartu.Notification.prototype.setCreatedAt = function(value) {
 
 
 /**
- * optional int64 model_id = 11;
- * @return {number}
+ * optional string model_id = 11;
+ * @return {string}
  */
 proto.yartu.Notification.prototype.getModelId = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 11, 0));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 11, ""));
 };
 
 
 /**
- * @param {number} value
+ * @param {string} value
  * @return {!proto.yartu.Notification} returns this
  */
 proto.yartu.Notification.prototype.setModelId = function(value) {
-  return jspb.Message.setProto3IntField(this, 11, value);
+  return jspb.Message.setProto3StringField(this, 11, value);
 };
 
 
