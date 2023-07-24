@@ -1223,7 +1223,7 @@ proto.Department.prototype.setIsActive = function(value) {
  * @private {!Array<number>}
  * @const
  */
-proto.Realm.repeatedFields_ = [6,9];
+proto.Realm.repeatedFields_ = [7,10];
 
 
 
@@ -1259,14 +1259,15 @@ proto.Realm.toObject = function(includeInstance, msg) {
     id: jspb.Message.getFieldWithDefault(msg, 1, 0),
     domain: jspb.Message.getFieldWithDefault(msg, 2, ""),
     hostname: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    owner: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    loginType: jspb.Message.getFieldWithDefault(msg, 5, 0),
-    serviceList: (f = jspb.Message.getRepeatedField(msg, 6)) == null ? undefined : f,
+    logo: msg.getLogo_asB64(),
+    owner: jspb.Message.getFieldWithDefault(msg, 5, 0),
+    loginType: jspb.Message.getFieldWithDefault(msg, 6, 0),
+    serviceList: (f = jspb.Message.getRepeatedField(msg, 7)) == null ? undefined : f,
     settings: (f = msg.getSettings()) && proto.JSON.toObject(includeInstance, f),
     serviceSettings: (f = msg.getServiceSettings()) && proto.JSON.toObject(includeInstance, f),
-    aliasList: (f = jspb.Message.getRepeatedField(msg, 9)) == null ? undefined : f,
-    isDefault: jspb.Message.getBooleanFieldWithDefault(msg, 10, false),
-    isActive: jspb.Message.getBooleanFieldWithDefault(msg, 11, false)
+    aliasList: (f = jspb.Message.getRepeatedField(msg, 10)) == null ? undefined : f,
+    isDefault: jspb.Message.getBooleanFieldWithDefault(msg, 11, false),
+    isActive: jspb.Message.getBooleanFieldWithDefault(msg, 12, false)
   };
 
   if (includeInstance) {
@@ -1316,36 +1317,40 @@ proto.Realm.deserializeBinaryFromReader = function(msg, reader) {
       msg.setHostname(value);
       break;
     case 4:
-      var value = /** @type {number} */ (reader.readInt64());
-      msg.setOwner(value);
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      msg.setLogo(value);
       break;
     case 5:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setLoginType(value);
+      msg.setOwner(value);
       break;
     case 6:
-      var value = /** @type {string} */ (reader.readString());
-      msg.addService(value);
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setLoginType(value);
       break;
     case 7:
-      var value = new proto.JSON;
-      reader.readMessage(value,proto.JSON.deserializeBinaryFromReader);
-      msg.setSettings(value);
+      var value = /** @type {string} */ (reader.readString());
+      msg.addService(value);
       break;
     case 8:
       var value = new proto.JSON;
       reader.readMessage(value,proto.JSON.deserializeBinaryFromReader);
-      msg.setServiceSettings(value);
+      msg.setSettings(value);
       break;
     case 9:
+      var value = new proto.JSON;
+      reader.readMessage(value,proto.JSON.deserializeBinaryFromReader);
+      msg.setServiceSettings(value);
+      break;
+    case 10:
       var value = /** @type {string} */ (reader.readString());
       msg.addAlias(value);
       break;
-    case 10:
+    case 11:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setIsDefault(value);
       break;
-    case 11:
+    case 12:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setIsActive(value);
       break;
@@ -1399,36 +1404,35 @@ proto.Realm.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getOwner();
-  if (f !== 0) {
-    writer.writeInt64(
+  f = /** @type {!(string|Uint8Array)} */ (jspb.Message.getField(message, 4));
+  if (f != null) {
+    writer.writeBytes(
       4,
       f
     );
   }
-  f = message.getLoginType();
+  f = message.getOwner();
   if (f !== 0) {
     writer.writeInt64(
       5,
       f
     );
   }
-  f = message.getServiceList();
-  if (f.length > 0) {
-    writer.writeRepeatedString(
+  f = message.getLoginType();
+  if (f !== 0) {
+    writer.writeInt64(
       6,
       f
     );
   }
-  f = message.getSettings();
-  if (f != null) {
-    writer.writeMessage(
+  f = message.getServiceList();
+  if (f.length > 0) {
+    writer.writeRepeatedString(
       7,
-      f,
-      proto.JSON.serializeBinaryToWriter
+      f
     );
   }
-  f = message.getServiceSettings();
+  f = message.getSettings();
   if (f != null) {
     writer.writeMessage(
       8,
@@ -1436,24 +1440,32 @@ proto.Realm.serializeBinaryToWriter = function(message, writer) {
       proto.JSON.serializeBinaryToWriter
     );
   }
+  f = message.getServiceSettings();
+  if (f != null) {
+    writer.writeMessage(
+      9,
+      f,
+      proto.JSON.serializeBinaryToWriter
+    );
+  }
   f = message.getAliasList();
   if (f.length > 0) {
     writer.writeRepeatedString(
-      9,
+      10,
       f
     );
   }
   f = message.getIsDefault();
   if (f) {
     writer.writeBool(
-      10,
+      11,
       f
     );
   }
   f = message.getIsActive();
   if (f) {
     writer.writeBool(
-      11,
+      12,
       f
     );
   }
@@ -1515,28 +1527,70 @@ proto.Realm.prototype.setHostname = function(value) {
 
 
 /**
- * optional int64 owner = 4;
+ * optional bytes logo = 4;
+ * @return {string}
+ */
+proto.Realm.prototype.getLogo = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * optional bytes logo = 4;
+ * This is a type-conversion wrapper around `getLogo()`
+ * @return {string}
+ */
+proto.Realm.prototype.getLogo_asB64 = function() {
+  return /** @type {string} */ (jspb.Message.bytesAsB64(
+      this.getLogo()));
+};
+
+
+/**
+ * optional bytes logo = 4;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getLogo()`
+ * @return {!Uint8Array}
+ */
+proto.Realm.prototype.getLogo_asU8 = function() {
+  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
+      this.getLogo()));
+};
+
+
+/**
+ * @param {!(string|Uint8Array)} value
+ * @return {!proto.Realm} returns this
+ */
+proto.Realm.prototype.setLogo = function(value) {
+  return jspb.Message.setField(this, 4, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.Realm} returns this
+ */
+proto.Realm.prototype.clearLogo = function() {
+  return jspb.Message.setField(this, 4, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.Realm.prototype.hasLogo = function() {
+  return jspb.Message.getField(this, 4) != null;
+};
+
+
+/**
+ * optional int64 owner = 5;
  * @return {number}
  */
 proto.Realm.prototype.getOwner = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
-};
-
-
-/**
- * @param {number} value
- * @return {!proto.Realm} returns this
- */
-proto.Realm.prototype.setOwner = function(value) {
-  return jspb.Message.setProto3IntField(this, 4, value);
-};
-
-
-/**
- * optional int64 login_type = 5;
- * @return {number}
- */
-proto.Realm.prototype.getLoginType = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
 };
 
@@ -1545,17 +1599,35 @@ proto.Realm.prototype.getLoginType = function() {
  * @param {number} value
  * @return {!proto.Realm} returns this
  */
-proto.Realm.prototype.setLoginType = function(value) {
+proto.Realm.prototype.setOwner = function(value) {
   return jspb.Message.setProto3IntField(this, 5, value);
 };
 
 
 /**
- * repeated string service = 6;
+ * optional int64 login_type = 6;
+ * @return {number}
+ */
+proto.Realm.prototype.getLoginType = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.Realm} returns this
+ */
+proto.Realm.prototype.setLoginType = function(value) {
+  return jspb.Message.setProto3IntField(this, 6, value);
+};
+
+
+/**
+ * repeated string service = 7;
  * @return {!Array<string>}
  */
 proto.Realm.prototype.getServiceList = function() {
-  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 6));
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 7));
 };
 
 
@@ -1564,7 +1636,7 @@ proto.Realm.prototype.getServiceList = function() {
  * @return {!proto.Realm} returns this
  */
 proto.Realm.prototype.setServiceList = function(value) {
-  return jspb.Message.setField(this, 6, value || []);
+  return jspb.Message.setField(this, 7, value || []);
 };
 
 
@@ -1574,7 +1646,7 @@ proto.Realm.prototype.setServiceList = function(value) {
  * @return {!proto.Realm} returns this
  */
 proto.Realm.prototype.addService = function(value, opt_index) {
-  return jspb.Message.addToRepeatedField(this, 6, value, opt_index);
+  return jspb.Message.addToRepeatedField(this, 7, value, opt_index);
 };
 
 
@@ -1588,12 +1660,12 @@ proto.Realm.prototype.clearServiceList = function() {
 
 
 /**
- * optional JSON settings = 7;
+ * optional JSON settings = 8;
  * @return {?proto.JSON}
  */
 proto.Realm.prototype.getSettings = function() {
   return /** @type{?proto.JSON} */ (
-    jspb.Message.getWrapperField(this, proto.JSON, 7));
+    jspb.Message.getWrapperField(this, proto.JSON, 8));
 };
 
 
@@ -1602,7 +1674,7 @@ proto.Realm.prototype.getSettings = function() {
  * @return {!proto.Realm} returns this
 */
 proto.Realm.prototype.setSettings = function(value) {
-  return jspb.Message.setWrapperField(this, 7, value);
+  return jspb.Message.setWrapperField(this, 8, value);
 };
 
 
@@ -1620,17 +1692,17 @@ proto.Realm.prototype.clearSettings = function() {
  * @return {boolean}
  */
 proto.Realm.prototype.hasSettings = function() {
-  return jspb.Message.getField(this, 7) != null;
+  return jspb.Message.getField(this, 8) != null;
 };
 
 
 /**
- * optional JSON service_settings = 8;
+ * optional JSON service_settings = 9;
  * @return {?proto.JSON}
  */
 proto.Realm.prototype.getServiceSettings = function() {
   return /** @type{?proto.JSON} */ (
-    jspb.Message.getWrapperField(this, proto.JSON, 8));
+    jspb.Message.getWrapperField(this, proto.JSON, 9));
 };
 
 
@@ -1639,7 +1711,7 @@ proto.Realm.prototype.getServiceSettings = function() {
  * @return {!proto.Realm} returns this
 */
 proto.Realm.prototype.setServiceSettings = function(value) {
-  return jspb.Message.setWrapperField(this, 8, value);
+  return jspb.Message.setWrapperField(this, 9, value);
 };
 
 
@@ -1657,16 +1729,16 @@ proto.Realm.prototype.clearServiceSettings = function() {
  * @return {boolean}
  */
 proto.Realm.prototype.hasServiceSettings = function() {
-  return jspb.Message.getField(this, 8) != null;
+  return jspb.Message.getField(this, 9) != null;
 };
 
 
 /**
- * repeated string alias = 9;
+ * repeated string alias = 10;
  * @return {!Array<string>}
  */
 proto.Realm.prototype.getAliasList = function() {
-  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 9));
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 10));
 };
 
 
@@ -1675,7 +1747,7 @@ proto.Realm.prototype.getAliasList = function() {
  * @return {!proto.Realm} returns this
  */
 proto.Realm.prototype.setAliasList = function(value) {
-  return jspb.Message.setField(this, 9, value || []);
+  return jspb.Message.setField(this, 10, value || []);
 };
 
 
@@ -1685,7 +1757,7 @@ proto.Realm.prototype.setAliasList = function(value) {
  * @return {!proto.Realm} returns this
  */
 proto.Realm.prototype.addAlias = function(value, opt_index) {
-  return jspb.Message.addToRepeatedField(this, 9, value, opt_index);
+  return jspb.Message.addToRepeatedField(this, 10, value, opt_index);
 };
 
 
@@ -1699,28 +1771,10 @@ proto.Realm.prototype.clearAliasList = function() {
 
 
 /**
- * optional bool is_default = 10;
+ * optional bool is_default = 11;
  * @return {boolean}
  */
 proto.Realm.prototype.getIsDefault = function() {
-  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 10, false));
-};
-
-
-/**
- * @param {boolean} value
- * @return {!proto.Realm} returns this
- */
-proto.Realm.prototype.setIsDefault = function(value) {
-  return jspb.Message.setProto3BooleanField(this, 10, value);
-};
-
-
-/**
- * optional bool is_active = 11;
- * @return {boolean}
- */
-proto.Realm.prototype.getIsActive = function() {
   return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 11, false));
 };
 
@@ -1729,8 +1783,26 @@ proto.Realm.prototype.getIsActive = function() {
  * @param {boolean} value
  * @return {!proto.Realm} returns this
  */
-proto.Realm.prototype.setIsActive = function(value) {
+proto.Realm.prototype.setIsDefault = function(value) {
   return jspb.Message.setProto3BooleanField(this, 11, value);
+};
+
+
+/**
+ * optional bool is_active = 12;
+ * @return {boolean}
+ */
+proto.Realm.prototype.getIsActive = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 12, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.Realm} returns this
+ */
+proto.Realm.prototype.setIsActive = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 12, value);
 };
 
 
