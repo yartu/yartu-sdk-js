@@ -2416,7 +2416,8 @@ proto.yartu.UserBasic.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, 0),
     username: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    name: jspb.Message.getFieldWithDefault(msg, 3, "")
+    name: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    surname: jspb.Message.getFieldWithDefault(msg, 4, "")
   };
 
   if (includeInstance) {
@@ -2465,6 +2466,10 @@ proto.yartu.UserBasic.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {string} */ (reader.readString());
       msg.setName(value);
       break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setSurname(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -2512,6 +2517,13 @@ proto.yartu.UserBasic.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writeString(
       3,
+      f
+    );
+  }
+  f = message.getSurname();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
       f
     );
   }
@@ -2569,6 +2581,24 @@ proto.yartu.UserBasic.prototype.getName = function() {
  */
 proto.yartu.UserBasic.prototype.setName = function(value) {
   return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional string surname = 4;
+ * @return {string}
+ */
+proto.yartu.UserBasic.prototype.getSurname = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.UserBasic} returns this
+ */
+proto.yartu.UserBasic.prototype.setSurname = function(value) {
+  return jspb.Message.setProto3StringField(this, 4, value);
 };
 
 
