@@ -1349,11 +1349,15 @@ export default (config) =>
         }
 
         if ('dueDate' in cardData) {
-          if (cardData.dueDate === null) {
-            request.setDueDate('clear');
+          if (cardData.dueDate) {
+            try {
+              const dueDate = cardData.dueDate.utc().format('YYYY-MM-DD HH:mm');
+              request.setDueDate(dueDate);
+            } catch (err) {
+              console.log('upsertCard service error: ', err);
+            }
           } else {
-            const dueDate = cardData.dueDate.utc().format('YYYY-MM-DD HH:mm');
-            request.setDueDate(dueDate);
+            request.setDueDate('');
           }
         }
 
