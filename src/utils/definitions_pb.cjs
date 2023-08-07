@@ -2262,7 +2262,8 @@ proto.User.toObject = function(includeInstance, msg) {
     quotas: (f = msg.getQuotas()) && proto.JSON.toObject(includeInstance, f),
     serviceSettings: (f = msg.getServiceSettings()) && proto.JSON.toObject(includeInstance, f),
     loginTypes: (f = msg.getLoginTypes()) && proto.JSON.toObject(includeInstance, f),
-    emailQuota: (f = msg.getEmailQuota()) && proto.EmailQuota.toObject(includeInstance, f)
+    emailQuota: (f = msg.getEmailQuota()) && proto.EmailQuota.toObject(includeInstance, f),
+    driveQuota: (f = msg.getDriveQuota()) && proto.DriveQuota.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -2398,6 +2399,11 @@ proto.User.deserializeBinaryFromReader = function(msg, reader) {
       var value = new proto.EmailQuota;
       reader.readMessage(value,proto.EmailQuota.deserializeBinaryFromReader);
       msg.setEmailQuota(value);
+      break;
+    case 25:
+      var value = new proto.DriveQuota;
+      reader.readMessage(value,proto.DriveQuota.deserializeBinaryFromReader);
+      msg.setDriveQuota(value);
       break;
     default:
       reader.skipField();
@@ -2598,6 +2604,14 @@ proto.User.serializeBinaryToWriter = function(message, writer) {
       24,
       f,
       proto.EmailQuota.serializeBinaryToWriter
+    );
+  }
+  f = message.getDriveQuota();
+  if (f != null) {
+    writer.writeMessage(
+      25,
+      f,
+      proto.DriveQuota.serializeBinaryToWriter
     );
   }
 };
@@ -3218,6 +3232,43 @@ proto.User.prototype.clearEmailQuota = function() {
  */
 proto.User.prototype.hasEmailQuota = function() {
   return jspb.Message.getField(this, 24) != null;
+};
+
+
+/**
+ * optional DriveQuota drive_quota = 25;
+ * @return {?proto.DriveQuota}
+ */
+proto.User.prototype.getDriveQuota = function() {
+  return /** @type{?proto.DriveQuota} */ (
+    jspb.Message.getWrapperField(this, proto.DriveQuota, 25));
+};
+
+
+/**
+ * @param {?proto.DriveQuota|undefined} value
+ * @return {!proto.User} returns this
+*/
+proto.User.prototype.setDriveQuota = function(value) {
+  return jspb.Message.setWrapperField(this, 25, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.User} returns this
+ */
+proto.User.prototype.clearDriveQuota = function() {
+  return this.setDriveQuota(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.User.prototype.hasDriveQuota = function() {
+  return jspb.Message.getField(this, 25) != null;
 };
 
 
