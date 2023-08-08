@@ -34,7 +34,9 @@ import {
   GetSharedMailBoxRequest,
   ListSharedMailBoxRequest,
   UpsertSharedMailBoxRequest,
-  DeleteSharedMailBoxRequest
+  DeleteSharedMailBoxRequest,
+  // Mobile preferences
+  GetMobileConfigRequest
 } from './service-pb.cjs';
 
 import { YAccountClient } from './service-grpc-web-pb.cjs';
@@ -880,6 +882,40 @@ export default (config) =>
         request.setUniqueId(data.uniqueId);
 
         this.client.deleteSharedMailBox(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+
+              if (code == 0) {
+                resolve({
+                  data: response.toObject(),
+                  code: 0
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
+    getMobileConfig = (config = {}) => {
+      return new Promise((resolve, reject) => {
+        const request = new GetMobileConfigRequest();
+
+        request.setEmail(config.email);
+        request.setContact(config.contact);
+        request.setCalendar(config.calendar);
+
+        this.client.getMobileConfig(
           request,
           this.metadata,
           (error, response) => {
