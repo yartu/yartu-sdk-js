@@ -164,6 +164,7 @@ export default (config) =>
         request.setDescription(calendarObjectData.description);
         request.setFreq(calendarObjectData.freq);
         request.setComponenttype(calendarObjectData.componenttype);
+        request.setSendInvite(calendarObjectData.setSendInvite);
 
         const attendes = [];
         for (const attendee of calendarObjectData.attendeesList) {
