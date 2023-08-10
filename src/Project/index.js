@@ -2154,11 +2154,11 @@ export default (config) =>
       });
     }
 
-    deleteColumn(boardId, columnId) {
+    deleteColumn(boardUUID, columnId) {
       return new Promise((resolve, reject) => {
         const request = new DeleteColumnRequest();
 
-        request.setBoardId(boardId);
+        request.setBoardUuid(boardUUID);
         request.setId(columnId);
 
         this.client.deleteColumn(request, this.metadata, (error, response) => {

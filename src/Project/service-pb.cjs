@@ -21836,7 +21836,7 @@ proto.yartu.DeleteColumnRequest.prototype.toObject = function(opt_includeInstanc
 proto.yartu.DeleteColumnRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    boardId: jspb.Message.getFieldWithDefault(msg, 2, 0)
+    boardUuid: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -21878,8 +21878,8 @@ proto.yartu.DeleteColumnRequest.deserializeBinaryFromReader = function(msg, read
       msg.setId(value);
       break;
     case 2:
-      var value = /** @type {number} */ (reader.readInt64());
-      msg.setBoardId(value);
+      var value = /** @type {string} */ (reader.readString());
+      msg.setBoardUuid(value);
       break;
     default:
       reader.skipField();
@@ -21917,9 +21917,9 @@ proto.yartu.DeleteColumnRequest.serializeBinaryToWriter = function(message, writ
       f
     );
   }
-  f = message.getBoardId();
-  if (f !== 0) {
-    writer.writeInt64(
+  f = message.getBoardUuid();
+  if (f.length > 0) {
+    writer.writeString(
       2,
       f
     );
@@ -21946,20 +21946,20 @@ proto.yartu.DeleteColumnRequest.prototype.setId = function(value) {
 
 
 /**
- * optional int64 board_id = 2;
- * @return {number}
+ * optional string board_uuid = 2;
+ * @return {string}
  */
-proto.yartu.DeleteColumnRequest.prototype.getBoardId = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+proto.yartu.DeleteColumnRequest.prototype.getBoardUuid = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
 /**
- * @param {number} value
+ * @param {string} value
  * @return {!proto.yartu.DeleteColumnRequest} returns this
  */
-proto.yartu.DeleteColumnRequest.prototype.setBoardId = function(value) {
-  return jspb.Message.setProto3IntField(this, 2, value);
+proto.yartu.DeleteColumnRequest.prototype.setBoardUuid = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
