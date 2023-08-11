@@ -6621,7 +6621,8 @@ proto.yartu.UpsertCalendarObjectRequest.toObject = function(includeInstance, msg
     busy: jspb.Message.getFieldWithDefault(msg, 15, 0),
     status: jspb.Message.getFieldWithDefault(msg, 16, 0),
     componenttype: jspb.Message.getFieldWithDefault(msg, 17, ""),
-    order: jspb.Message.getFieldWithDefault(msg, 18, 0)
+    order: jspb.Message.getFieldWithDefault(msg, 18, 0),
+    sendInvite: jspb.Message.getBooleanFieldWithDefault(msg, 19, false)
   };
 
   if (includeInstance) {
@@ -6731,6 +6732,10 @@ proto.yartu.UpsertCalendarObjectRequest.deserializeBinaryFromReader = function(m
     case 18:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setOrder(value);
+      break;
+    case 19:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setSendInvite(value);
       break;
     default:
       reader.skipField();
@@ -6886,6 +6891,13 @@ proto.yartu.UpsertCalendarObjectRequest.serializeBinaryToWriter = function(messa
   if (f !== 0) {
     writer.writeInt64(
       18,
+      f
+    );
+  }
+  f = /** @type {boolean} */ (jspb.Message.getField(message, 19));
+  if (f != null) {
+    writer.writeBool(
+      19,
       f
     );
   }
@@ -7289,6 +7301,42 @@ proto.yartu.UpsertCalendarObjectRequest.prototype.getOrder = function() {
  */
 proto.yartu.UpsertCalendarObjectRequest.prototype.setOrder = function(value) {
   return jspb.Message.setProto3IntField(this, 18, value);
+};
+
+
+/**
+ * optional bool send_invite = 19;
+ * @return {boolean}
+ */
+proto.yartu.UpsertCalendarObjectRequest.prototype.getSendInvite = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 19, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.yartu.UpsertCalendarObjectRequest} returns this
+ */
+proto.yartu.UpsertCalendarObjectRequest.prototype.setSendInvite = function(value) {
+  return jspb.Message.setField(this, 19, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.UpsertCalendarObjectRequest} returns this
+ */
+proto.yartu.UpsertCalendarObjectRequest.prototype.clearSendInvite = function() {
+  return jspb.Message.setField(this, 19, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.UpsertCalendarObjectRequest.prototype.hasSendInvite = function() {
+  return jspb.Message.getField(this, 19) != null;
 };
 
 
@@ -8400,7 +8448,8 @@ proto.yartu.DeleteCalendarObjectRequest.prototype.toObject = function(opt_includ
  */
 proto.yartu.DeleteCalendarObjectRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0)
+    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    sendInvite: jspb.Message.getBooleanFieldWithDefault(msg, 2, false)
   };
 
   if (includeInstance) {
@@ -8441,6 +8490,10 @@ proto.yartu.DeleteCalendarObjectRequest.deserializeBinaryFromReader = function(m
       var value = /** @type {number} */ (reader.readInt64());
       msg.setId(value);
       break;
+    case 2:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setSendInvite(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -8477,6 +8530,13 @@ proto.yartu.DeleteCalendarObjectRequest.serializeBinaryToWriter = function(messa
       f
     );
   }
+  f = /** @type {boolean} */ (jspb.Message.getField(message, 2));
+  if (f != null) {
+    writer.writeBool(
+      2,
+      f
+    );
+  }
 };
 
 
@@ -8495,6 +8555,42 @@ proto.yartu.DeleteCalendarObjectRequest.prototype.getId = function() {
  */
 proto.yartu.DeleteCalendarObjectRequest.prototype.setId = function(value) {
   return jspb.Message.setProto3IntField(this, 1, value);
+};
+
+
+/**
+ * optional bool send_invite = 2;
+ * @return {boolean}
+ */
+proto.yartu.DeleteCalendarObjectRequest.prototype.getSendInvite = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 2, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.yartu.DeleteCalendarObjectRequest} returns this
+ */
+proto.yartu.DeleteCalendarObjectRequest.prototype.setSendInvite = function(value) {
+  return jspb.Message.setField(this, 2, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.DeleteCalendarObjectRequest} returns this
+ */
+proto.yartu.DeleteCalendarObjectRequest.prototype.clearSendInvite = function() {
+  return jspb.Message.setField(this, 2, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.DeleteCalendarObjectRequest.prototype.hasSendInvite = function() {
+  return jspb.Message.getField(this, 2) != null;
 };
 
 
