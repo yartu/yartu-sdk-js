@@ -15,6 +15,7 @@ import {
 
   UpsertCalendarObjectDatesRequest,
   UpsertCalendarObjectSplitRequest,
+  ReplyEventRequest,
 } from './service-pb.cjs';
 
 import { YCalendarClient } from './service-grpc-web-pb.cjs';
@@ -450,8 +451,6 @@ export default (config) =>
       });
     }
 
-
-
     listCalendarSharedList(calendarId) {
       return new Promise((resolve, reject) => {
         const request = new ShareCalendarRequest();
@@ -468,6 +467,32 @@ export default (config) =>
               resolve({
                 users: dataList,
               });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    replyEvent(calendarObjectUid, status) {
+      return new Promise((resolve, reject) => {
+        const request = new ReplyEventRequest();
+
+        request.setUid(calendarObjectUid);
+        request.setStatus(status);
+
+        this.client.replyEvent(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve(response.toObject());
             } else {
               reject({
                 code: code,
