@@ -2127,7 +2127,7 @@ export default (config) =>
         const request = new UpsertColumnRequest();
 
         request.setId(columnData.id);
-        request.setBoardId(columnData.boardId);
+        request.setBoardUuid(columnData.boardUuid);
         request.setName(columnData.name);
         request.setColor(columnData.color);
         request.setIndex(columnData.index);
