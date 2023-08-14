@@ -930,5 +930,66 @@ proto.yartu.YCalendarPromiseClient.prototype.upsertCalendarObjectSplit =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.ReplyEventRequest,
+ *   !proto.yartu.ReplyEventResponse>}
+ */
+const methodDescriptor_YCalendar_replyEvent = new grpc.web.MethodDescriptor(
+  '/yartu.YCalendar/replyEvent',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.ReplyEventRequest,
+  proto.yartu.ReplyEventResponse,
+  /**
+   * @param {!proto.yartu.ReplyEventRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.ReplyEventResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.ReplyEventRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ReplyEventResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ReplyEventResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YCalendarClient.prototype.replyEvent =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YCalendar/replyEvent',
+      request,
+      metadata || {},
+      methodDescriptor_YCalendar_replyEvent,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.ReplyEventRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.ReplyEventResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YCalendarPromiseClient.prototype.replyEvent =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YCalendar/replyEvent',
+      request,
+      metadata || {},
+      methodDescriptor_YCalendar_replyEvent);
+};
+
+
 module.exports = proto.yartu;
 
