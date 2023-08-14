@@ -21375,7 +21375,7 @@ proto.yartu.UpsertColumnRequest.prototype.toObject = function(opt_includeInstanc
 proto.yartu.UpsertColumnRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    boardId: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    boardUuid: jspb.Message.getFieldWithDefault(msg, 2, ""),
     name: jspb.Message.getFieldWithDefault(msg, 3, ""),
     color: jspb.Message.getFieldWithDefault(msg, 4, ""),
     index: jspb.Message.getFieldWithDefault(msg, 5, 0)
@@ -21420,8 +21420,8 @@ proto.yartu.UpsertColumnRequest.deserializeBinaryFromReader = function(msg, read
       msg.setId(value);
       break;
     case 2:
-      var value = /** @type {number} */ (reader.readInt64());
-      msg.setBoardId(value);
+      var value = /** @type {string} */ (reader.readString());
+      msg.setBoardUuid(value);
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
@@ -21471,9 +21471,9 @@ proto.yartu.UpsertColumnRequest.serializeBinaryToWriter = function(message, writ
       f
     );
   }
-  f = message.getBoardId();
-  if (f !== 0) {
-    writer.writeInt64(
+  f = message.getBoardUuid();
+  if (f.length > 0) {
+    writer.writeString(
       2,
       f
     );
@@ -21521,20 +21521,20 @@ proto.yartu.UpsertColumnRequest.prototype.setId = function(value) {
 
 
 /**
- * optional int64 board_id = 2;
- * @return {number}
+ * optional string board_uuid = 2;
+ * @return {string}
  */
-proto.yartu.UpsertColumnRequest.prototype.getBoardId = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+proto.yartu.UpsertColumnRequest.prototype.getBoardUuid = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
 /**
- * @param {number} value
+ * @param {string} value
  * @return {!proto.yartu.UpsertColumnRequest} returns this
  */
-proto.yartu.UpsertColumnRequest.prototype.setBoardId = function(value) {
-  return jspb.Message.setProto3IntField(this, 2, value);
+proto.yartu.UpsertColumnRequest.prototype.setBoardUuid = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
