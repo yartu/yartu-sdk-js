@@ -1176,5 +1176,66 @@ proto.yartu.YConferencePromiseClient.prototype.lockConference =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.CallYartuUserRequest,
+ *   !proto.yartu.CallYartuUserResponse>}
+ */
+const methodDescriptor_YConference_callYartuUser = new grpc.web.MethodDescriptor(
+  '/yartu.YConference/callYartuUser',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.CallYartuUserRequest,
+  proto.yartu.CallYartuUserResponse,
+  /**
+   * @param {!proto.yartu.CallYartuUserRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.CallYartuUserResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.CallYartuUserRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.CallYartuUserResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.CallYartuUserResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YConferenceClient.prototype.callYartuUser =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YConference/callYartuUser',
+      request,
+      metadata || {},
+      methodDescriptor_YConference_callYartuUser,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.CallYartuUserRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.CallYartuUserResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YConferencePromiseClient.prototype.callYartuUser =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YConference/callYartuUser',
+      request,
+      metadata || {},
+      methodDescriptor_YConference_callYartuUser);
+};
+
+
 module.exports = proto.yartu;
 
