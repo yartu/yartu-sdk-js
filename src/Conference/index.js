@@ -18,7 +18,8 @@ import {
   StartPublicConferenceRequest,
   DuplicateConferenceRequest,
   LockConferenceRequest,
-  CallYartuUserRequest
+  CallYartuUserRequest,
+  ReceiveCallRequest,
 } from './service-pb.cjs';
 
 import { Query } from '../utils/definitions_pb.cjs';
@@ -647,4 +648,32 @@ export default (config) =>
       });
     }
 
+    receiveCall(sessionUuid, status) {
+      return new Promise((resolve, reject) => {
+        const request = new ReceiveCallRequest();
+
+        request.setUuid(sessionUuid);
+        request.setStatus(status);
+
+        this.client.receiveCall(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage(),
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage(),
+              });
+            }
+          }
+        });
+      });
+    }
   };
