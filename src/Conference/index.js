@@ -19,7 +19,7 @@ import {
   DuplicateConferenceRequest,
   LockConferenceRequest,
   CallYartuUserRequest,
-  ReceiveCallRequest,
+  TakeCallRequest,
 } from './service-pb.cjs';
 
 import { Query } from '../utils/definitions_pb.cjs';
@@ -648,14 +648,14 @@ export default (config) =>
       });
     }
 
-    receiveCall(sessionUuid, status) {
+    takeCall(sessionUuid, status) {
       return new Promise((resolve, reject) => {
-        const request = new ReceiveCallRequest();
+        const request = new TakeCallRequest();
 
         request.setUuid(sessionUuid);
         request.setStatus(status);
 
-        this.client.receiveCall(request, this.metadata, (error, response) => {
+        this.client.takeCall(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
           } else {
