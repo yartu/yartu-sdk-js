@@ -17,7 +17,8 @@ import {
   GetPublicConferenceRequest,
   StartPublicConferenceRequest,
   DuplicateConferenceRequest,
-  LockConferenceRequest
+  LockConferenceRequest,
+  CallYartuUserRequest
 } from './service-pb.cjs';
 
 import { Query } from '../utils/definitions_pb.cjs';
@@ -600,6 +601,45 @@ export default (config) =>
               reject({
                 code: code,
                 message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    callYartuUser(conferenceData) {
+      return new Promise((resolve, reject) => {
+        const request = new CallYartuUserRequest();
+
+        // request.setTimezone(conferenceData.timezone);
+
+        const participant = conferenceData.participant
+        const sessionParticipant = new SessionParticipant();
+        sessionParticipant.setEmail(participant.email);
+        sessionParticipant.setUsername(participant.username);
+        sessionParticipant.setIsGroup(participant.isGroup);
+        sessionParticipant.setParticipantType(participant.participant_type);
+        request.setParticipant(sessionParticipant);
+
+        this.client.callYartuUser(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage(),
+                key: response.getKey(),
+                conference: response.toObject().session,
+                isUserOnline: response.getIsUserOnline(),
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage(),
               });
             }
           }
