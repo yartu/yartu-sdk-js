@@ -16,6 +16,7 @@ import {
   UpsertCalendarObjectDatesRequest,
   UpsertCalendarObjectSplitRequest,
   ReplyEventRequest,
+  SendInviteRequest,
 } from './service-pb.cjs';
 
 import { YCalendarClient } from './service-grpc-web-pb.cjs';
@@ -166,12 +167,13 @@ export default (config) =>
         request.setFreq(calendarObjectData.freq);
         request.setComponenttype(calendarObjectData.componenttype);
         request.setSendInvite(calendarObjectData.setSendInvite);
+        request.setMessage(calendarObjectData.message);
 
         const attendes = [];
         for (const attendee of calendarObjectData.attendeesList) {
           // DELETED': -1, 'NEEDS-ACTION': 0, 'ACCEPTED': 1, 'DECLINED': 2, 'TENTATIVE': 3
           const attendeeObject = new Attendee();
-          attendeeObject.setEmail(attendee.email)
+          attendeeObject.setEmail(attendee.email);
           attendeeObject.setStatus('NEEDS-ACTION');
           attendes.push(attendeeObject);
         }
@@ -481,11 +483,39 @@ export default (config) =>
     replyEvent(calendarObjectUid, status) {
       return new Promise((resolve, reject) => {
         const request = new ReplyEventRequest();
-
+        console.log('calendarObjectUid', calendarObjectUid);
+        console.log('status', status);
         request.setUid(calendarObjectUid);
         request.setStatus(status);
 
         this.client.replyEvent(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve(response.toObject());
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    sendInvite(calendarObjectId, toUser = '', externalMessage = '') {
+      return new Promise((resolve, reject) => {
+        const request = new SendInviteRequest();
+
+        request.setId(calendarObjectId);
+        request.setTo(toUser);
+        request.setMessage(externalMessage);
+
+        this.client.sendInvite(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
           } else {
