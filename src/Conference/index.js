@@ -634,6 +634,7 @@ export default (config) =>
                 message: response.getMessage(),
                 key: response.getKey(),
                 conference: response.toObject().session,
+                isUserOnline: response.getIsUserOnline(),
               });
             } else {
               reject({

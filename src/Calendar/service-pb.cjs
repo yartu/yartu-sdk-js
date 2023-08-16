@@ -2421,7 +2421,7 @@ proto.yartu.Calendar.prototype.setOwner = function(value) {
  * @private {!Array<number>}
  * @const
  */
-proto.yartu.CalendarObject.repeatedFields_ = [20,22];
+proto.yartu.CalendarObject.repeatedFields_ = [19,21];
 
 
 
@@ -2457,36 +2457,35 @@ proto.yartu.CalendarObject.toObject = function(includeInstance, msg) {
     id: jspb.Message.getFieldWithDefault(msg, 1, 0),
     calendarId: jspb.Message.getFieldWithDefault(msg, 2, 0),
     uri: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    uid: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    etag: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    firstoccurence: jspb.Message.getFieldWithDefault(msg, 6, 0),
-    lastoccurence: jspb.Message.getFieldWithDefault(msg, 7, 0),
-    calendardata: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    access: jspb.Message.getFieldWithDefault(msg, 9, ""),
-    color: jspb.Message.getFieldWithDefault(msg, 10, ""),
-    bordercolor: jspb.Message.getFieldWithDefault(msg, 11, ""),
-    share: jspb.Message.getFieldWithDefault(msg, 12, ""),
-    editable: jspb.Message.getBooleanFieldWithDefault(msg, 13, false),
-    summary: jspb.Message.getFieldWithDefault(msg, 14, ""),
-    location: jspb.Message.getFieldWithDefault(msg, 15, ""),
-    description: jspb.Message.getFieldWithDefault(msg, 16, ""),
-    organizer: jspb.Message.getFieldWithDefault(msg, 17, ""),
-    rrule: jspb.Message.getFieldWithDefault(msg, 18, ""),
-    freq: jspb.Message.getFieldWithDefault(msg, 19, ""),
+    etag: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    firstoccurence: jspb.Message.getFieldWithDefault(msg, 5, 0),
+    lastoccurence: jspb.Message.getFieldWithDefault(msg, 6, 0),
+    calendardata: jspb.Message.getFieldWithDefault(msg, 7, ""),
+    access: jspb.Message.getFieldWithDefault(msg, 8, ""),
+    color: jspb.Message.getFieldWithDefault(msg, 9, ""),
+    bordercolor: jspb.Message.getFieldWithDefault(msg, 10, ""),
+    share: jspb.Message.getFieldWithDefault(msg, 11, ""),
+    editable: jspb.Message.getBooleanFieldWithDefault(msg, 12, false),
+    summary: jspb.Message.getFieldWithDefault(msg, 13, ""),
+    location: jspb.Message.getFieldWithDefault(msg, 14, ""),
+    description: jspb.Message.getFieldWithDefault(msg, 15, ""),
+    organizer: jspb.Message.getFieldWithDefault(msg, 16, ""),
+    rrule: jspb.Message.getFieldWithDefault(msg, 17, ""),
+    freq: jspb.Message.getFieldWithDefault(msg, 18, ""),
     attendeesList: jspb.Message.toObjectList(msg.getAttendeesList(),
     proto.yartu.Attendee.toObject, includeInstance),
-    allday: jspb.Message.getBooleanFieldWithDefault(msg, 21, false),
+    allday: jspb.Message.getBooleanFieldWithDefault(msg, 20, false),
     alarmList: jspb.Message.toObjectList(msg.getAlarmList(),
     proto.yartu.Alarm.toObject, includeInstance),
-    source: jspb.Message.getFieldWithDefault(msg, 23, ""),
-    conference: jspb.Message.getFieldWithDefault(msg, 24, 0),
-    busy: jspb.Message.getFieldWithDefault(msg, 25, 0),
-    status: jspb.Message.getFieldWithDefault(msg, 26, 0),
-    componenttype: jspb.Message.getFieldWithDefault(msg, 27, ""),
-    start: jspb.Message.getFieldWithDefault(msg, 28, ""),
-    end: jspb.Message.getFieldWithDefault(msg, 29, ""),
+    source: jspb.Message.getFieldWithDefault(msg, 22, ""),
+    conference: jspb.Message.getFieldWithDefault(msg, 23, 0),
+    busy: jspb.Message.getFieldWithDefault(msg, 24, 0),
+    status: jspb.Message.getFieldWithDefault(msg, 25, 0),
+    componenttype: jspb.Message.getFieldWithDefault(msg, 26, ""),
+    start: jspb.Message.getFieldWithDefault(msg, 27, ""),
+    end: jspb.Message.getFieldWithDefault(msg, 28, ""),
     duration: (f = msg.getDuration()) && proto.yartu.Duration.toObject(includeInstance, f),
-    groupid: jspb.Message.getFieldWithDefault(msg, 31, "")
+    groupid: jspb.Message.getFieldWithDefault(msg, 30, "")
   };
 
   if (includeInstance) {
@@ -2537,116 +2536,112 @@ proto.yartu.CalendarObject.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 4:
       var value = /** @type {string} */ (reader.readString());
-      msg.setUid(value);
-      break;
-    case 5:
-      var value = /** @type {string} */ (reader.readString());
       msg.setEtag(value);
       break;
-    case 6:
+    case 5:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setFirstoccurence(value);
       break;
-    case 7:
+    case 6:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setLastoccurence(value);
       break;
-    case 8:
+    case 7:
       var value = /** @type {string} */ (reader.readString());
       msg.setCalendardata(value);
       break;
-    case 9:
+    case 8:
       var value = /** @type {string} */ (reader.readString());
       msg.setAccess(value);
       break;
-    case 10:
+    case 9:
       var value = /** @type {string} */ (reader.readString());
       msg.setColor(value);
       break;
-    case 11:
+    case 10:
       var value = /** @type {string} */ (reader.readString());
       msg.setBordercolor(value);
       break;
-    case 12:
+    case 11:
       var value = /** @type {string} */ (reader.readString());
       msg.setShare(value);
       break;
-    case 13:
+    case 12:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setEditable(value);
       break;
-    case 14:
+    case 13:
       var value = /** @type {string} */ (reader.readString());
       msg.setSummary(value);
       break;
-    case 15:
+    case 14:
       var value = /** @type {string} */ (reader.readString());
       msg.setLocation(value);
       break;
-    case 16:
+    case 15:
       var value = /** @type {string} */ (reader.readString());
       msg.setDescription(value);
       break;
-    case 17:
+    case 16:
       var value = /** @type {string} */ (reader.readString());
       msg.setOrganizer(value);
       break;
-    case 18:
+    case 17:
       var value = /** @type {string} */ (reader.readString());
       msg.setRrule(value);
       break;
-    case 19:
+    case 18:
       var value = /** @type {string} */ (reader.readString());
       msg.setFreq(value);
       break;
-    case 20:
+    case 19:
       var value = new proto.yartu.Attendee;
       reader.readMessage(value,proto.yartu.Attendee.deserializeBinaryFromReader);
       msg.addAttendees(value);
       break;
-    case 21:
+    case 20:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setAllday(value);
       break;
-    case 22:
+    case 21:
       var value = new proto.yartu.Alarm;
       reader.readMessage(value,proto.yartu.Alarm.deserializeBinaryFromReader);
       msg.addAlarm(value);
       break;
-    case 23:
+    case 22:
       var value = /** @type {string} */ (reader.readString());
       msg.setSource(value);
       break;
-    case 24:
+    case 23:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setConference(value);
       break;
-    case 25:
+    case 24:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setBusy(value);
       break;
-    case 26:
+    case 25:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setStatus(value);
       break;
-    case 27:
+    case 26:
       var value = /** @type {string} */ (reader.readString());
       msg.setComponenttype(value);
       break;
-    case 28:
+    case 27:
       var value = /** @type {string} */ (reader.readString());
       msg.setStart(value);
       break;
-    case 29:
+    case 28:
       var value = /** @type {string} */ (reader.readString());
       msg.setEnd(value);
       break;
-    case 30:
+    case 29:
       var value = new proto.yartu.Duration;
       reader.readMessage(value,proto.yartu.Duration.deserializeBinaryFromReader);
       msg.setDuration(value);
       break;
-    case 31:
+    case 30:
       var value = /** @type {string} */ (reader.readString());
       msg.setGroupid(value);
       break;
@@ -2700,99 +2695,99 @@ proto.yartu.CalendarObject.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getUid();
+  f = message.getEtag();
   if (f.length > 0) {
     writer.writeString(
       4,
       f
     );
   }
-  f = message.getEtag();
-  if (f.length > 0) {
-    writer.writeString(
-      5,
-      f
-    );
-  }
   f = message.getFirstoccurence();
   if (f !== 0) {
     writer.writeInt64(
-      6,
+      5,
       f
     );
   }
   f = message.getLastoccurence();
   if (f !== 0) {
     writer.writeInt64(
-      7,
+      6,
       f
     );
   }
   f = message.getCalendardata();
   if (f.length > 0) {
     writer.writeString(
-      8,
+      7,
       f
     );
   }
   f = message.getAccess();
   if (f.length > 0) {
     writer.writeString(
-      9,
+      8,
       f
     );
   }
   f = message.getColor();
   if (f.length > 0) {
     writer.writeString(
-      10,
+      9,
       f
     );
   }
   f = message.getBordercolor();
   if (f.length > 0) {
     writer.writeString(
-      11,
+      10,
       f
     );
   }
   f = message.getShare();
   if (f.length > 0) {
     writer.writeString(
-      12,
+      11,
       f
     );
   }
   f = message.getEditable();
   if (f) {
     writer.writeBool(
-      13,
+      12,
       f
     );
   }
   f = message.getSummary();
   if (f.length > 0) {
     writer.writeString(
-      14,
+      13,
       f
     );
   }
   f = message.getLocation();
   if (f.length > 0) {
     writer.writeString(
-      15,
+      14,
       f
     );
   }
   f = message.getDescription();
   if (f.length > 0) {
     writer.writeString(
-      16,
+      15,
       f
     );
   }
   f = message.getOrganizer();
   if (f.length > 0) {
+    writer.writeString(
+      16,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 17));
+  if (f != null) {
     writer.writeString(
       17,
       f
@@ -2805,17 +2800,10 @@ proto.yartu.CalendarObject.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = /** @type {string} */ (jspb.Message.getField(message, 19));
-  if (f != null) {
-    writer.writeString(
-      19,
-      f
-    );
-  }
   f = message.getAttendeesList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
-      20,
+      19,
       f,
       proto.yartu.Attendee.serializeBinaryToWriter
     );
@@ -2823,14 +2811,14 @@ proto.yartu.CalendarObject.serializeBinaryToWriter = function(message, writer) {
   f = message.getAllday();
   if (f) {
     writer.writeBool(
-      21,
+      20,
       f
     );
   }
   f = message.getAlarmList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
-      22,
+      21,
       f,
       proto.yartu.Alarm.serializeBinaryToWriter
     );
@@ -2838,56 +2826,56 @@ proto.yartu.CalendarObject.serializeBinaryToWriter = function(message, writer) {
   f = message.getSource();
   if (f.length > 0) {
     writer.writeString(
-      23,
+      22,
       f
     );
   }
   f = message.getConference();
   if (f !== 0) {
     writer.writeInt64(
-      24,
+      23,
       f
     );
   }
   f = message.getBusy();
   if (f !== 0) {
     writer.writeInt64(
-      25,
+      24,
       f
     );
   }
   f = message.getStatus();
   if (f !== 0) {
     writer.writeInt64(
-      26,
+      25,
       f
     );
   }
   f = message.getComponenttype();
   if (f.length > 0) {
     writer.writeString(
-      27,
+      26,
       f
     );
   }
   f = message.getStart();
   if (f.length > 0) {
     writer.writeString(
-      28,
+      27,
       f
     );
   }
   f = message.getEnd();
   if (f.length > 0) {
     writer.writeString(
-      29,
+      28,
       f
     );
   }
   f = message.getDuration();
   if (f != null) {
     writer.writeMessage(
-      30,
+      29,
       f,
       proto.yartu.Duration.serializeBinaryToWriter
     );
@@ -2895,7 +2883,7 @@ proto.yartu.CalendarObject.serializeBinaryToWriter = function(message, writer) {
   f = message.getGroupid();
   if (f.length > 0) {
     writer.writeString(
-      31,
+      30,
       f
     );
   }
@@ -2957,10 +2945,10 @@ proto.yartu.CalendarObject.prototype.setUri = function(value) {
 
 
 /**
- * optional string uid = 4;
+ * optional string etag = 4;
  * @return {string}
  */
-proto.yartu.CalendarObject.prototype.getUid = function() {
+proto.yartu.CalendarObject.prototype.getEtag = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
 };
 
@@ -2969,35 +2957,17 @@ proto.yartu.CalendarObject.prototype.getUid = function() {
  * @param {string} value
  * @return {!proto.yartu.CalendarObject} returns this
  */
-proto.yartu.CalendarObject.prototype.setUid = function(value) {
+proto.yartu.CalendarObject.prototype.setEtag = function(value) {
   return jspb.Message.setProto3StringField(this, 4, value);
 };
 
 
 /**
- * optional string etag = 5;
- * @return {string}
- */
-proto.yartu.CalendarObject.prototype.getEtag = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.yartu.CalendarObject} returns this
- */
-proto.yartu.CalendarObject.prototype.setEtag = function(value) {
-  return jspb.Message.setProto3StringField(this, 5, value);
-};
-
-
-/**
- * optional int64 firstoccurence = 6;
+ * optional int64 firstoccurence = 5;
  * @return {number}
  */
 proto.yartu.CalendarObject.prototype.getFirstoccurence = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
 };
 
 
@@ -3006,16 +2976,16 @@ proto.yartu.CalendarObject.prototype.getFirstoccurence = function() {
  * @return {!proto.yartu.CalendarObject} returns this
  */
 proto.yartu.CalendarObject.prototype.setFirstoccurence = function(value) {
-  return jspb.Message.setProto3IntField(this, 6, value);
+  return jspb.Message.setProto3IntField(this, 5, value);
 };
 
 
 /**
- * optional int64 lastoccurence = 7;
+ * optional int64 lastoccurence = 6;
  * @return {number}
  */
 proto.yartu.CalendarObject.prototype.getLastoccurence = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 7, 0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
 };
 
 
@@ -3024,16 +2994,16 @@ proto.yartu.CalendarObject.prototype.getLastoccurence = function() {
  * @return {!proto.yartu.CalendarObject} returns this
  */
 proto.yartu.CalendarObject.prototype.setLastoccurence = function(value) {
-  return jspb.Message.setProto3IntField(this, 7, value);
+  return jspb.Message.setProto3IntField(this, 6, value);
 };
 
 
 /**
- * optional string calendardata = 8;
+ * optional string calendardata = 7;
  * @return {string}
  */
 proto.yartu.CalendarObject.prototype.getCalendardata = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
 };
 
 
@@ -3042,16 +3012,16 @@ proto.yartu.CalendarObject.prototype.getCalendardata = function() {
  * @return {!proto.yartu.CalendarObject} returns this
  */
 proto.yartu.CalendarObject.prototype.setCalendardata = function(value) {
-  return jspb.Message.setProto3StringField(this, 8, value);
+  return jspb.Message.setProto3StringField(this, 7, value);
 };
 
 
 /**
- * optional string access = 9;
+ * optional string access = 8;
  * @return {string}
  */
 proto.yartu.CalendarObject.prototype.getAccess = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 9, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
 };
 
 
@@ -3060,16 +3030,16 @@ proto.yartu.CalendarObject.prototype.getAccess = function() {
  * @return {!proto.yartu.CalendarObject} returns this
  */
 proto.yartu.CalendarObject.prototype.setAccess = function(value) {
-  return jspb.Message.setProto3StringField(this, 9, value);
+  return jspb.Message.setProto3StringField(this, 8, value);
 };
 
 
 /**
- * optional string color = 10;
+ * optional string color = 9;
  * @return {string}
  */
 proto.yartu.CalendarObject.prototype.getColor = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 10, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 9, ""));
 };
 
 
@@ -3078,16 +3048,16 @@ proto.yartu.CalendarObject.prototype.getColor = function() {
  * @return {!proto.yartu.CalendarObject} returns this
  */
 proto.yartu.CalendarObject.prototype.setColor = function(value) {
-  return jspb.Message.setProto3StringField(this, 10, value);
+  return jspb.Message.setProto3StringField(this, 9, value);
 };
 
 
 /**
- * optional string borderColor = 11;
+ * optional string borderColor = 10;
  * @return {string}
  */
 proto.yartu.CalendarObject.prototype.getBordercolor = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 11, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 10, ""));
 };
 
 
@@ -3096,16 +3066,16 @@ proto.yartu.CalendarObject.prototype.getBordercolor = function() {
  * @return {!proto.yartu.CalendarObject} returns this
  */
 proto.yartu.CalendarObject.prototype.setBordercolor = function(value) {
-  return jspb.Message.setProto3StringField(this, 11, value);
+  return jspb.Message.setProto3StringField(this, 10, value);
 };
 
 
 /**
- * optional string share = 12;
+ * optional string share = 11;
  * @return {string}
  */
 proto.yartu.CalendarObject.prototype.getShare = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 12, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 11, ""));
 };
 
 
@@ -3114,16 +3084,16 @@ proto.yartu.CalendarObject.prototype.getShare = function() {
  * @return {!proto.yartu.CalendarObject} returns this
  */
 proto.yartu.CalendarObject.prototype.setShare = function(value) {
-  return jspb.Message.setProto3StringField(this, 12, value);
+  return jspb.Message.setProto3StringField(this, 11, value);
 };
 
 
 /**
- * optional bool editable = 13;
+ * optional bool editable = 12;
  * @return {boolean}
  */
 proto.yartu.CalendarObject.prototype.getEditable = function() {
-  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 13, false));
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 12, false));
 };
 
 
@@ -3132,16 +3102,16 @@ proto.yartu.CalendarObject.prototype.getEditable = function() {
  * @return {!proto.yartu.CalendarObject} returns this
  */
 proto.yartu.CalendarObject.prototype.setEditable = function(value) {
-  return jspb.Message.setProto3BooleanField(this, 13, value);
+  return jspb.Message.setProto3BooleanField(this, 12, value);
 };
 
 
 /**
- * optional string summary = 14;
+ * optional string summary = 13;
  * @return {string}
  */
 proto.yartu.CalendarObject.prototype.getSummary = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 14, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 13, ""));
 };
 
 
@@ -3150,16 +3120,16 @@ proto.yartu.CalendarObject.prototype.getSummary = function() {
  * @return {!proto.yartu.CalendarObject} returns this
  */
 proto.yartu.CalendarObject.prototype.setSummary = function(value) {
-  return jspb.Message.setProto3StringField(this, 14, value);
+  return jspb.Message.setProto3StringField(this, 13, value);
 };
 
 
 /**
- * optional string location = 15;
+ * optional string location = 14;
  * @return {string}
  */
 proto.yartu.CalendarObject.prototype.getLocation = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 15, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 14, ""));
 };
 
 
@@ -3168,16 +3138,16 @@ proto.yartu.CalendarObject.prototype.getLocation = function() {
  * @return {!proto.yartu.CalendarObject} returns this
  */
 proto.yartu.CalendarObject.prototype.setLocation = function(value) {
-  return jspb.Message.setProto3StringField(this, 15, value);
+  return jspb.Message.setProto3StringField(this, 14, value);
 };
 
 
 /**
- * optional string description = 16;
+ * optional string description = 15;
  * @return {string}
  */
 proto.yartu.CalendarObject.prototype.getDescription = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 16, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 15, ""));
 };
 
 
@@ -3186,16 +3156,16 @@ proto.yartu.CalendarObject.prototype.getDescription = function() {
  * @return {!proto.yartu.CalendarObject} returns this
  */
 proto.yartu.CalendarObject.prototype.setDescription = function(value) {
-  return jspb.Message.setProto3StringField(this, 16, value);
+  return jspb.Message.setProto3StringField(this, 15, value);
 };
 
 
 /**
- * optional string organizer = 17;
+ * optional string organizer = 16;
  * @return {string}
  */
 proto.yartu.CalendarObject.prototype.getOrganizer = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 17, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 16, ""));
 };
 
 
@@ -3204,16 +3174,16 @@ proto.yartu.CalendarObject.prototype.getOrganizer = function() {
  * @return {!proto.yartu.CalendarObject} returns this
  */
 proto.yartu.CalendarObject.prototype.setOrganizer = function(value) {
-  return jspb.Message.setProto3StringField(this, 17, value);
+  return jspb.Message.setProto3StringField(this, 16, value);
 };
 
 
 /**
- * optional string rrule = 18;
+ * optional string rrule = 17;
  * @return {string}
  */
 proto.yartu.CalendarObject.prototype.getRrule = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 18, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 17, ""));
 };
 
 
@@ -3222,7 +3192,7 @@ proto.yartu.CalendarObject.prototype.getRrule = function() {
  * @return {!proto.yartu.CalendarObject} returns this
  */
 proto.yartu.CalendarObject.prototype.setRrule = function(value) {
-  return jspb.Message.setField(this, 18, value);
+  return jspb.Message.setField(this, 17, value);
 };
 
 
@@ -3231,7 +3201,7 @@ proto.yartu.CalendarObject.prototype.setRrule = function(value) {
  * @return {!proto.yartu.CalendarObject} returns this
  */
 proto.yartu.CalendarObject.prototype.clearRrule = function() {
-  return jspb.Message.setField(this, 18, undefined);
+  return jspb.Message.setField(this, 17, undefined);
 };
 
 
@@ -3240,16 +3210,16 @@ proto.yartu.CalendarObject.prototype.clearRrule = function() {
  * @return {boolean}
  */
 proto.yartu.CalendarObject.prototype.hasRrule = function() {
-  return jspb.Message.getField(this, 18) != null;
+  return jspb.Message.getField(this, 17) != null;
 };
 
 
 /**
- * optional string freq = 19;
+ * optional string freq = 18;
  * @return {string}
  */
 proto.yartu.CalendarObject.prototype.getFreq = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 19, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 18, ""));
 };
 
 
@@ -3258,7 +3228,7 @@ proto.yartu.CalendarObject.prototype.getFreq = function() {
  * @return {!proto.yartu.CalendarObject} returns this
  */
 proto.yartu.CalendarObject.prototype.setFreq = function(value) {
-  return jspb.Message.setField(this, 19, value);
+  return jspb.Message.setField(this, 18, value);
 };
 
 
@@ -3267,7 +3237,7 @@ proto.yartu.CalendarObject.prototype.setFreq = function(value) {
  * @return {!proto.yartu.CalendarObject} returns this
  */
 proto.yartu.CalendarObject.prototype.clearFreq = function() {
-  return jspb.Message.setField(this, 19, undefined);
+  return jspb.Message.setField(this, 18, undefined);
 };
 
 
@@ -3276,17 +3246,17 @@ proto.yartu.CalendarObject.prototype.clearFreq = function() {
  * @return {boolean}
  */
 proto.yartu.CalendarObject.prototype.hasFreq = function() {
-  return jspb.Message.getField(this, 19) != null;
+  return jspb.Message.getField(this, 18) != null;
 };
 
 
 /**
- * repeated Attendee attendees = 20;
+ * repeated Attendee attendees = 19;
  * @return {!Array<!proto.yartu.Attendee>}
  */
 proto.yartu.CalendarObject.prototype.getAttendeesList = function() {
   return /** @type{!Array<!proto.yartu.Attendee>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.yartu.Attendee, 20));
+    jspb.Message.getRepeatedWrapperField(this, proto.yartu.Attendee, 19));
 };
 
 
@@ -3295,7 +3265,7 @@ proto.yartu.CalendarObject.prototype.getAttendeesList = function() {
  * @return {!proto.yartu.CalendarObject} returns this
 */
 proto.yartu.CalendarObject.prototype.setAttendeesList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 20, value);
+  return jspb.Message.setRepeatedWrapperField(this, 19, value);
 };
 
 
@@ -3305,7 +3275,7 @@ proto.yartu.CalendarObject.prototype.setAttendeesList = function(value) {
  * @return {!proto.yartu.Attendee}
  */
 proto.yartu.CalendarObject.prototype.addAttendees = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 20, opt_value, proto.yartu.Attendee, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 19, opt_value, proto.yartu.Attendee, opt_index);
 };
 
 
@@ -3319,11 +3289,11 @@ proto.yartu.CalendarObject.prototype.clearAttendeesList = function() {
 
 
 /**
- * optional bool allDay = 21;
+ * optional bool allDay = 20;
  * @return {boolean}
  */
 proto.yartu.CalendarObject.prototype.getAllday = function() {
-  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 21, false));
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 20, false));
 };
 
 
@@ -3332,17 +3302,17 @@ proto.yartu.CalendarObject.prototype.getAllday = function() {
  * @return {!proto.yartu.CalendarObject} returns this
  */
 proto.yartu.CalendarObject.prototype.setAllday = function(value) {
-  return jspb.Message.setProto3BooleanField(this, 21, value);
+  return jspb.Message.setProto3BooleanField(this, 20, value);
 };
 
 
 /**
- * repeated Alarm alarm = 22;
+ * repeated Alarm alarm = 21;
  * @return {!Array<!proto.yartu.Alarm>}
  */
 proto.yartu.CalendarObject.prototype.getAlarmList = function() {
   return /** @type{!Array<!proto.yartu.Alarm>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.yartu.Alarm, 22));
+    jspb.Message.getRepeatedWrapperField(this, proto.yartu.Alarm, 21));
 };
 
 
@@ -3351,7 +3321,7 @@ proto.yartu.CalendarObject.prototype.getAlarmList = function() {
  * @return {!proto.yartu.CalendarObject} returns this
 */
 proto.yartu.CalendarObject.prototype.setAlarmList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 22, value);
+  return jspb.Message.setRepeatedWrapperField(this, 21, value);
 };
 
 
@@ -3361,7 +3331,7 @@ proto.yartu.CalendarObject.prototype.setAlarmList = function(value) {
  * @return {!proto.yartu.Alarm}
  */
 proto.yartu.CalendarObject.prototype.addAlarm = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 22, opt_value, proto.yartu.Alarm, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 21, opt_value, proto.yartu.Alarm, opt_index);
 };
 
 
@@ -3375,11 +3345,11 @@ proto.yartu.CalendarObject.prototype.clearAlarmList = function() {
 
 
 /**
- * optional string source = 23;
+ * optional string source = 22;
  * @return {string}
  */
 proto.yartu.CalendarObject.prototype.getSource = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 23, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 22, ""));
 };
 
 
@@ -3388,16 +3358,16 @@ proto.yartu.CalendarObject.prototype.getSource = function() {
  * @return {!proto.yartu.CalendarObject} returns this
  */
 proto.yartu.CalendarObject.prototype.setSource = function(value) {
-  return jspb.Message.setProto3StringField(this, 23, value);
+  return jspb.Message.setProto3StringField(this, 22, value);
 };
 
 
 /**
- * optional int64 conference = 24;
+ * optional int64 conference = 23;
  * @return {number}
  */
 proto.yartu.CalendarObject.prototype.getConference = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 24, 0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 23, 0));
 };
 
 
@@ -3406,16 +3376,16 @@ proto.yartu.CalendarObject.prototype.getConference = function() {
  * @return {!proto.yartu.CalendarObject} returns this
  */
 proto.yartu.CalendarObject.prototype.setConference = function(value) {
-  return jspb.Message.setProto3IntField(this, 24, value);
+  return jspb.Message.setProto3IntField(this, 23, value);
 };
 
 
 /**
- * optional int64 busy = 25;
+ * optional int64 busy = 24;
  * @return {number}
  */
 proto.yartu.CalendarObject.prototype.getBusy = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 25, 0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 24, 0));
 };
 
 
@@ -3424,16 +3394,16 @@ proto.yartu.CalendarObject.prototype.getBusy = function() {
  * @return {!proto.yartu.CalendarObject} returns this
  */
 proto.yartu.CalendarObject.prototype.setBusy = function(value) {
-  return jspb.Message.setProto3IntField(this, 25, value);
+  return jspb.Message.setProto3IntField(this, 24, value);
 };
 
 
 /**
- * optional int64 status = 26;
+ * optional int64 status = 25;
  * @return {number}
  */
 proto.yartu.CalendarObject.prototype.getStatus = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 26, 0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 25, 0));
 };
 
 
@@ -3442,16 +3412,16 @@ proto.yartu.CalendarObject.prototype.getStatus = function() {
  * @return {!proto.yartu.CalendarObject} returns this
  */
 proto.yartu.CalendarObject.prototype.setStatus = function(value) {
-  return jspb.Message.setProto3IntField(this, 26, value);
+  return jspb.Message.setProto3IntField(this, 25, value);
 };
 
 
 /**
- * optional string componenttype = 27;
+ * optional string componenttype = 26;
  * @return {string}
  */
 proto.yartu.CalendarObject.prototype.getComponenttype = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 27, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 26, ""));
 };
 
 
@@ -3460,16 +3430,16 @@ proto.yartu.CalendarObject.prototype.getComponenttype = function() {
  * @return {!proto.yartu.CalendarObject} returns this
  */
 proto.yartu.CalendarObject.prototype.setComponenttype = function(value) {
-  return jspb.Message.setProto3StringField(this, 27, value);
+  return jspb.Message.setProto3StringField(this, 26, value);
 };
 
 
 /**
- * optional string start = 28;
+ * optional string start = 27;
  * @return {string}
  */
 proto.yartu.CalendarObject.prototype.getStart = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 28, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 27, ""));
 };
 
 
@@ -3478,16 +3448,16 @@ proto.yartu.CalendarObject.prototype.getStart = function() {
  * @return {!proto.yartu.CalendarObject} returns this
  */
 proto.yartu.CalendarObject.prototype.setStart = function(value) {
-  return jspb.Message.setProto3StringField(this, 28, value);
+  return jspb.Message.setProto3StringField(this, 27, value);
 };
 
 
 /**
- * optional string end = 29;
+ * optional string end = 28;
  * @return {string}
  */
 proto.yartu.CalendarObject.prototype.getEnd = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 29, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 28, ""));
 };
 
 
@@ -3496,17 +3466,17 @@ proto.yartu.CalendarObject.prototype.getEnd = function() {
  * @return {!proto.yartu.CalendarObject} returns this
  */
 proto.yartu.CalendarObject.prototype.setEnd = function(value) {
-  return jspb.Message.setProto3StringField(this, 29, value);
+  return jspb.Message.setProto3StringField(this, 28, value);
 };
 
 
 /**
- * optional Duration duration = 30;
+ * optional Duration duration = 29;
  * @return {?proto.yartu.Duration}
  */
 proto.yartu.CalendarObject.prototype.getDuration = function() {
   return /** @type{?proto.yartu.Duration} */ (
-    jspb.Message.getWrapperField(this, proto.yartu.Duration, 30));
+    jspb.Message.getWrapperField(this, proto.yartu.Duration, 29));
 };
 
 
@@ -3515,7 +3485,7 @@ proto.yartu.CalendarObject.prototype.getDuration = function() {
  * @return {!proto.yartu.CalendarObject} returns this
 */
 proto.yartu.CalendarObject.prototype.setDuration = function(value) {
-  return jspb.Message.setWrapperField(this, 30, value);
+  return jspb.Message.setWrapperField(this, 29, value);
 };
 
 
@@ -3533,16 +3503,16 @@ proto.yartu.CalendarObject.prototype.clearDuration = function() {
  * @return {boolean}
  */
 proto.yartu.CalendarObject.prototype.hasDuration = function() {
-  return jspb.Message.getField(this, 30) != null;
+  return jspb.Message.getField(this, 29) != null;
 };
 
 
 /**
- * optional string groupId = 31;
+ * optional string groupId = 30;
  * @return {string}
  */
 proto.yartu.CalendarObject.prototype.getGroupid = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 31, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 30, ""));
 };
 
 
@@ -3551,7 +3521,7 @@ proto.yartu.CalendarObject.prototype.getGroupid = function() {
  * @return {!proto.yartu.CalendarObject} returns this
  */
 proto.yartu.CalendarObject.prototype.setGroupid = function(value) {
-  return jspb.Message.setProto3StringField(this, 31, value);
+  return jspb.Message.setProto3StringField(this, 30, value);
 };
 
 
