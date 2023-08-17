@@ -1723,5 +1723,66 @@ proto.yartu.YAccountPromiseClient.prototype.getMobileConfig =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.CheckUserOnlineRequest,
+ *   !proto.yartu.CheckUserOnlineResponse>}
+ */
+const methodDescriptor_YAccount_checkUserOnline = new grpc.web.MethodDescriptor(
+  '/yartu.YAccount/checkUserOnline',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.CheckUserOnlineRequest,
+  proto.yartu.CheckUserOnlineResponse,
+  /**
+   * @param {!proto.yartu.CheckUserOnlineRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.CheckUserOnlineResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.CheckUserOnlineRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.CheckUserOnlineResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.CheckUserOnlineResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YAccountClient.prototype.checkUserOnline =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YAccount/checkUserOnline',
+      request,
+      metadata || {},
+      methodDescriptor_YAccount_checkUserOnline,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.CheckUserOnlineRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.CheckUserOnlineResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YAccountPromiseClient.prototype.checkUserOnline =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YAccount/checkUserOnline',
+      request,
+      metadata || {},
+      methodDescriptor_YAccount_checkUserOnline);
+};
+
+
 module.exports = proto.yartu;
 

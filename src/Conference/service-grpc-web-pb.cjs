@@ -1237,5 +1237,127 @@ proto.yartu.YConferencePromiseClient.prototype.callYartuUser =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.TakeCallRequest,
+ *   !proto.yartu.TakeCallResponse>}
+ */
+const methodDescriptor_YConference_takeCall = new grpc.web.MethodDescriptor(
+  '/yartu.YConference/takeCall',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.TakeCallRequest,
+  proto.yartu.TakeCallResponse,
+  /**
+   * @param {!proto.yartu.TakeCallRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.TakeCallResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.TakeCallRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.TakeCallResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.TakeCallResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YConferenceClient.prototype.takeCall =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YConference/takeCall',
+      request,
+      metadata || {},
+      methodDescriptor_YConference_takeCall,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.TakeCallRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.TakeCallResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YConferencePromiseClient.prototype.takeCall =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YConference/takeCall',
+      request,
+      metadata || {},
+      methodDescriptor_YConference_takeCall);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.CancelCallRequest,
+ *   !proto.yartu.CancelCallResponse>}
+ */
+const methodDescriptor_YConference_cancelCall = new grpc.web.MethodDescriptor(
+  '/yartu.YConference/cancelCall',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.CancelCallRequest,
+  proto.yartu.CancelCallResponse,
+  /**
+   * @param {!proto.yartu.CancelCallRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.CancelCallResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.CancelCallRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.CancelCallResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.CancelCallResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YConferenceClient.prototype.cancelCall =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YConference/cancelCall',
+      request,
+      metadata || {},
+      methodDescriptor_YConference_cancelCall,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.CancelCallRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.CancelCallResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YConferencePromiseClient.prototype.cancelCall =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YConference/cancelCall',
+      request,
+      metadata || {},
+      methodDescriptor_YConference_cancelCall);
+};
+
+
 module.exports = proto.yartu;
 

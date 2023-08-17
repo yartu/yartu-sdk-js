@@ -991,5 +991,66 @@ proto.yartu.YCalendarPromiseClient.prototype.replyEvent =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.SendInviteRequest,
+ *   !proto.yartu.SendInviteResponse>}
+ */
+const methodDescriptor_YCalendar_sendInvite = new grpc.web.MethodDescriptor(
+  '/yartu.YCalendar/sendInvite',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.SendInviteRequest,
+  proto.yartu.SendInviteResponse,
+  /**
+   * @param {!proto.yartu.SendInviteRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.SendInviteResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.SendInviteRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.SendInviteResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.SendInviteResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YCalendarClient.prototype.sendInvite =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YCalendar/sendInvite',
+      request,
+      metadata || {},
+      methodDescriptor_YCalendar_sendInvite,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.SendInviteRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.SendInviteResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YCalendarPromiseClient.prototype.sendInvite =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YCalendar/sendInvite',
+      request,
+      metadata || {},
+      methodDescriptor_YCalendar_sendInvite);
+};
+
+
 module.exports = proto.yartu;
 
