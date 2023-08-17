@@ -37,7 +37,7 @@ import {
   DeleteSharedMailBoxRequest,
   // Mobile preferences
   GetMobileConfigRequest,
-  IsUserOnlineRequest,
+  CheckUserOnlineRequest,
 } from './service-pb.cjs';
 
 import { YAccountClient } from './service-grpc-web-pb.cjs';
@@ -942,16 +942,16 @@ export default (config) =>
       });
     };
 
-    isUserOnline = (userIdOrUsername) => {
+    checkUserOnline = (userIdOrUsername) => {
       return new Promise((resolve, reject) => {
-        const request = new IsUserOnlineRequest();
+        const request = new CheckUserOnlineRequest();
         if (Number.isInteger(userIdOrUsername)) {
           request.setUserId(userIdOrUsername)
         } else {
           request.setUsername(userIdOrUsername);
         }
 
-        this.client.isUserOnline(request, this.metadata, (error, response) => {
+        this.client.checkUserOnline(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
           } else {
