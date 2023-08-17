@@ -20,6 +20,7 @@ import {
   LockConferenceRequest,
   CallYartuUserRequest,
   TakeCallRequest,
+  CancelCallRequest
 } from './service-pb.cjs';
 
 import { Query } from '../utils/definitions_pb.cjs';
@@ -641,10 +642,9 @@ export default (config) =>
 
             if (code == 0) {
               resolve({
-                code,
+                code: code,
                 message: response.getMessage(),
-                key: response.getKey(),
-                conference: response.toObject().session,
+                session: response.getSession().toObject(),
                 isUserOnline: response.getIsUserOnline(),
               });
             } else {
@@ -666,6 +666,34 @@ export default (config) =>
         request.setStatus(status);
 
         this.client.takeCall(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage(),
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage(),
+              });
+            }
+          }
+        });
+      });
+    }
+
+    cancelCall(sessionUuid) {
+      return new Promise((resolve, reject) => {
+        const request = new CancelCallRequest();
+
+        request.setUuid(sessionUuid);
+
+        this.client.cancelCall(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
           } else {
