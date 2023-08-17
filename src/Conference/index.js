@@ -613,14 +613,24 @@ export default (config) =>
       return new Promise((resolve, reject) => {
         const request = new CallYartuUserRequest();
 
-        // request.setTimezone(conferenceData.timezone);
-
-        const participant = conferenceData.participant
         const sessionParticipant = new SessionParticipant();
-        sessionParticipant.setEmail(participant.email);
-        sessionParticipant.setUsername(participant.username);
-        sessionParticipant.setIsGroup(participant.isGroup);
-        sessionParticipant.setParticipantType(participant.participant_type);
+
+        if (conferenceData.id) {
+          sessionParticipant.setId(conferenceData.id);
+        }
+
+        if (conferenceData.email) {
+          sessionParticipant.setEmail(conferenceData.email);
+        }
+
+        if (conferenceData.username) {
+          sessionParticipant.setUsername(conferenceData.username);
+        }
+
+        if (conferenceData.isGroup) {
+          sessionParticipant.setIsGroup(participant.isGroup);
+        }
+
         request.setParticipant(sessionParticipant);
 
         this.client.callYartuUser(request, this.metadata, (error, response) => {

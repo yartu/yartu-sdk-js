@@ -962,7 +962,7 @@ export default (config) =>
               resolve({
                 code: code,
                 message: response.getMessage(),
-                user: user,
+                user: user.toObject(),
                 isOnline: isOnline,
               });
             } else {
