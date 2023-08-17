@@ -36,7 +36,8 @@ import {
   UpsertSharedMailBoxRequest,
   DeleteSharedMailBoxRequest,
   // Mobile preferences
-  GetMobileConfigRequest
+  GetMobileConfigRequest,
+  IsUserOnlineRequest,
 } from './service-pb.cjs';
 
 import { YAccountClient } from './service-grpc-web-pb.cjs';
@@ -940,4 +941,39 @@ export default (config) =>
         );
       });
     };
+
+    isUserOnline = (userIdOrUsername) => {
+      return new Promise((resolve, reject) => {
+        const request = new IsUserOnlineRequest();
+        if (Number.isInteger(userIdOrUsername)) {
+          request.setUserId(userIdOrUsername)
+        } else {
+          request.setUsername(userIdOrUsername);
+        }
+
+        this.client.isUserOnline(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              const user = response.getUser();
+              const isOnline = response.getIsOnline();
+              resolve({
+                code: code,
+                message: response.getMessage(),
+                user: user,
+                isOnline: isOnline,
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
   };
