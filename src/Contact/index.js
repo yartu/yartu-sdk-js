@@ -292,11 +292,12 @@ export default (config) =>
             const code = response.getCode();
 
             if (code == 0) {
-              const dataList = response.getDataList().map((data) => {
-                const contact = data.toObject();
-                contact.photo = contact.photo ? 'data:image/png;base64,'.concat(contact.photo) : null;
-                return contact;
-              });
+              const dataList = response.getDataList().map((data) => data.toObject());
+              // const dataList = response.getDataList().map((data) => {
+              //   const contact = data.toObject();
+              //   contact.photo = contact.photo ? 'data:image/png;base64,'.concat(contact.photo) : null;
+              //   return contact;
+              // });
               resolve({
                 data: dataList,
                 pagination: response.getPagination().toObject()
@@ -423,7 +424,7 @@ export default (config) =>
 
             if (code == 0) {
               const data = response.getData().toObject();
-              data.image = data.photo ? 'data:image/png;base64,'.concat(data.photo) : null;
+              // data.image = data.photo ? 'data:image/png;base64,'.concat(data.photo) : null;
               resolve({
                 data: data
               });
