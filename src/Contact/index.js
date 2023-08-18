@@ -327,6 +327,7 @@ export default (config) =>
         contact.setName(contactData.name);
         contact.setMiddleName(contactData.middleName);
         contact.setSurname(contactData.surname);
+        contact.setPhoto(contactData.photo);
 
         const emailList = [];
         for (const email of contactData.emailList) {
