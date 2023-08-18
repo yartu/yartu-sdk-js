@@ -689,6 +689,67 @@ proto.yartu.YDrivePromiseClient.prototype.getRepoTrash =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.RevertRepoRequest,
+ *   !proto.yartu.RevertRepoResponse>}
+ */
+const methodDescriptor_YDrive_revertRepo = new grpc.web.MethodDescriptor(
+  '/yartu.YDrive/revertRepo',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.RevertRepoRequest,
+  proto.yartu.RevertRepoResponse,
+  /**
+   * @param {!proto.yartu.RevertRepoRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.RevertRepoResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.RevertRepoRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.RevertRepoResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.RevertRepoResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YDriveClient.prototype.revertRepo =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YDrive/revertRepo',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_revertRepo,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.RevertRepoRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.RevertRepoResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YDrivePromiseClient.prototype.revertRepo =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YDrive/revertRepo',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_revertRepo);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.GetDirentRequest,
  *   !proto.yartu.GetDirentResponse>}
  */

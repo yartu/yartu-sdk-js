@@ -6,6 +6,7 @@ import {
   ListRepoRequest,
   UpsertRepoRequest,
   DeleteRepoRequest,
+  RevertRepoRequest,
   GetRepoHistoryRequest,
   GetRepoTrashRequest,
   ListDirentRequest,
@@ -206,6 +207,32 @@ export default (config) =>
         request.setId(repoId);
 
         this.client.deleteRepo(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code: 0
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
+    revertRepo = (repoId, commitId) => {
+      return new Promise((resolve, reject) => {
+        const request = new RevertRepoRequest();
+        request.setRepoId(repoId);
+        request.setCommitId(commitId);
+
+        this.client.revertRepo(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
           } else {
