@@ -2058,6 +2058,9 @@ export default (config) =>
           assignee.setName(checkListItem.assignee.name);
           assignee.setSurname(checkListItem.assignee.surname);
           request.setAssignee(assignee);
+        } else if (checkListItem.assignee === null){
+          const assignee = new User();
+          request.setAssignee(assignee);
         }
 
         if (checkListItem.labelList && checkListItem.labelList.length > 0 ) {
