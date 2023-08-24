@@ -201,6 +201,67 @@ proto.yartu.YNotificationPromiseClient.prototype.upsertNotification =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.ReadNotificationRequest,
+ *   !proto.yartu.ReadNotificationResponse>}
+ */
+const methodDescriptor_YNotification_readNotification = new grpc.web.MethodDescriptor(
+  '/yartu.YNotification/readNotification',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.ReadNotificationRequest,
+  proto.yartu.ReadNotificationResponse,
+  /**
+   * @param {!proto.yartu.ReadNotificationRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.ReadNotificationResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.ReadNotificationRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ReadNotificationResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ReadNotificationResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YNotificationClient.prototype.readNotification =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YNotification/readNotification',
+      request,
+      metadata || {},
+      methodDescriptor_YNotification_readNotification,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.ReadNotificationRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.ReadNotificationResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YNotificationPromiseClient.prototype.readNotification =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YNotification/readNotification',
+      request,
+      metadata || {},
+      methodDescriptor_YNotification_readNotification);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.DeleteNotificationRequest,
  *   !proto.yartu.DeleteNotificationResponse>}
  */

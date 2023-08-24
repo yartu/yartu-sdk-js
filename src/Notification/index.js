@@ -1,6 +1,9 @@
 import {
   ListNotificationRequest,
   UpsertNotificationRequest,
+  ReadNotificationRequest,
+  DeleteNotificationRequest,
+
 } from './service-pb.cjs';
 
 import { YNotificationClient } from './service-grpc-web-pb.cjs';
@@ -91,4 +94,72 @@ export default (config) =>
       });
     }
 
+    readNotification(notificationUUIDs) {
+      return new Promise((resolve, reject) => {
+        const request = new ReadNotificationRequest();
+
+        if (Array.isArray(notificationUUIDs)) {
+          request.setUuidList(notificationUUIDs);
+        } else {
+          request.setUuidList([notificationUUIDs]);
+        }
+
+        this.client.readNotification(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code: 0,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    }
+
+    deleteNotification(notificationUUIDs) {
+      return new Promise((resolve, reject) => {
+        const request = new DeleteNotificationRequest();
+        if (Array.isArray(notificationUUIDs)) {
+          request.setUuidList(notificationUUIDs);
+        } else {
+          request.setUuidList([notificationUUIDs]);
+        }
+
+        this.client.deleteNotification(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code: 0,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    }
   };
