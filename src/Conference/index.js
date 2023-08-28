@@ -47,6 +47,7 @@ export default (config) =>
         const queryData = new Query();
 
         request.setQuery(queryData);
+        request.setIsInvited(query.isInvited);
 
         this.client.listConference(request, this.metadata, (error, response) => {
           if (error) {

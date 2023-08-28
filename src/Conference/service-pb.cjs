@@ -2388,7 +2388,8 @@ proto.yartu.ListConferenceRequest.prototype.toObject = function(opt_includeInsta
  */
 proto.yartu.ListConferenceRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    query: (f = msg.getQuery()) && common_grpc_definitions_pb.Query.toObject(includeInstance, f)
+    query: (f = msg.getQuery()) && common_grpc_definitions_pb.Query.toObject(includeInstance, f),
+    isInvited: jspb.Message.getBooleanFieldWithDefault(msg, 2, false)
   };
 
   if (includeInstance) {
@@ -2430,6 +2431,10 @@ proto.yartu.ListConferenceRequest.deserializeBinaryFromReader = function(msg, re
       reader.readMessage(value,common_grpc_definitions_pb.Query.deserializeBinaryFromReader);
       msg.setQuery(value);
       break;
+    case 2:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setIsInvited(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -2465,6 +2470,13 @@ proto.yartu.ListConferenceRequest.serializeBinaryToWriter = function(message, wr
       1,
       f,
       common_grpc_definitions_pb.Query.serializeBinaryToWriter
+    );
+  }
+  f = message.getIsInvited();
+  if (f) {
+    writer.writeBool(
+      2,
+      f
     );
   }
 };
@@ -2504,6 +2516,24 @@ proto.yartu.ListConferenceRequest.prototype.clearQuery = function() {
  */
 proto.yartu.ListConferenceRequest.prototype.hasQuery = function() {
   return jspb.Message.getField(this, 1) != null;
+};
+
+
+/**
+ * optional bool is_invited = 2;
+ * @return {boolean}
+ */
+proto.yartu.ListConferenceRequest.prototype.getIsInvited = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 2, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.yartu.ListConferenceRequest} returns this
+ */
+proto.yartu.ListConferenceRequest.prototype.setIsInvited = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 2, value);
 };
 
 
