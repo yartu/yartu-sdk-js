@@ -393,6 +393,7 @@ export default (config) =>
         const request = new UpsertNoteRequest();
 
         request.setId(noteData.id);
+        request.setConferenceSessionId(noteData.conferenceSessionId);
         request.setTitle(noteData.title);
         request.setContent(noteData.content);
         request.setColor(noteData.color);
