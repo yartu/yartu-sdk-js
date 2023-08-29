@@ -20,7 +20,8 @@ import {
   LockConferenceRequest,
   CallYartuUserRequest,
   TakeCallRequest,
-  CancelCallRequest
+  CancelCallRequest,
+  CopyConferenceRecordToDriveRequest,
 } from './service-pb.cjs';
 
 import { Query } from '../utils/definitions_pb.cjs';
@@ -715,4 +716,38 @@ export default (config) =>
         });
       });
     }
+
+    copyConferenceRecordToDrive(sessionId, recordUUID, repoId, path) {
+      return new Promise((resolve, reject) => {
+
+        const request = new CopyConferenceRecordToDriveRequest();
+        request.setSessionId(sessionId);
+        request.setRecordUuid(recordUUID);
+        request.setRepoId(repoId);
+        request.setPath(path);
+
+        this.client.copyConferenceRecordToDrive(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage(),
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+
+
   };

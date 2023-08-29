@@ -1359,5 +1359,66 @@ proto.yartu.YConferencePromiseClient.prototype.cancelCall =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.CopyConferenceRecordToDriveRequest,
+ *   !proto.yartu.CopyConferenceRecordToDriveResponse>}
+ */
+const methodDescriptor_YConference_copyConferenceRecordToDrive = new grpc.web.MethodDescriptor(
+  '/yartu.YConference/copyConferenceRecordToDrive',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.CopyConferenceRecordToDriveRequest,
+  proto.yartu.CopyConferenceRecordToDriveResponse,
+  /**
+   * @param {!proto.yartu.CopyConferenceRecordToDriveRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.CopyConferenceRecordToDriveResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.CopyConferenceRecordToDriveRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.CopyConferenceRecordToDriveResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.CopyConferenceRecordToDriveResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YConferenceClient.prototype.copyConferenceRecordToDrive =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YConference/copyConferenceRecordToDrive',
+      request,
+      metadata || {},
+      methodDescriptor_YConference_copyConferenceRecordToDrive,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.CopyConferenceRecordToDriveRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.CopyConferenceRecordToDriveResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YConferencePromiseClient.prototype.copyConferenceRecordToDrive =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YConference/copyConferenceRecordToDrive',
+      request,
+      metadata || {},
+      methodDescriptor_YConference_copyConferenceRecordToDrive);
+};
+
+
 module.exports = proto.yartu;
 
