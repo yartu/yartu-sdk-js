@@ -6,7 +6,13 @@ import {
   UpsertCustomerMemberRequest,
   DeleteCustomerMemberRequest,
   ResetCustomerMemberPasswordRequest,
-  ChangeCustomerMemberStatusRequest
+  ChangeCustomerMemberStatusRequest,
+  UpsertCustomerGroupRequest,
+  DeleteCustomerGroupRequest,
+  ListCustomerGroupsRequest,
+  UpsertCustomerGroupMemberRequest,
+  DeleteCustomerGroupMemberRequest,
+  ListCustomerGroupMembersRequest,
 } from './service-pb.cjs';
 
 import { YCustomerClient } from './service-grpc-web-pb.cjs';
@@ -296,4 +302,228 @@ export default (config) =>
         );
       });
     };
+
+    upsertCustomerGroup = (groupData) => {
+      return new Promise((resolve, reject) => {
+        const request = new UpsertCustomerGroupRequest();
+
+        request.setRealmId(groupData.realmId);
+        request.setId(groupData.id);
+        request.setName(groupData.name);
+        request.setHasEmailAlias(groupData.hasEmailAlias);
+        request.setEmailAlias(groupData.emailAlias);
+        request.setIsPrivate(groupData.isPrivate);
+        request.setIsActive(groupData.isActive);
+        request.setHasAddressbook(groupData.hasAddressbook);
+        request.setHasCalendar(groupData.hasCalendar);
+        request.setHasDrive(groupData.hasDrive);
+        request.setDriveQuota(groupData.driveQuota);
+
+        this.client.upsertCustomerGroup(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                const data = response.getData().toObject();
+                resolve({
+                  code: 0,
+                  data,
+                  message: response.getMessage(),
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
+    deleteCustomerGroup = (realmId, groupId) => {
+      return new Promise((resolve, reject) => {
+        const request = new DeleteCustomerGroupRequest();
+
+        request.setRealmId(realmId);
+        request.setGroupId(groupId);
+
+        this.client.deleteCustomerGroup(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code: 0,
+                  message: response.getMessage(),
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
+    listCustomerGroups = (queryRequest) => {
+      return new Promise((resolve, reject) => {
+        const request = new ListCustomerGroupsRequest();
+
+        const query = new Query();
+        query.setQuery(queryRequest.query);
+        query.setPage(queryRequest.page);
+        query.setPerPage(queryRequest.perPage);
+        query.setSortBy(queryRequest.sortBy);
+
+        request.setRealmId(queryRequest.realmId);
+        request.setQuery(query);
+
+        this.client.listCustomerGroups(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                const dataList = response.getDataList().map((data) => data.toObject());
+                resolve({
+                  code: 0,
+                  data: dataList,
+                  pagination: response.getPagination().toObject(),
+                  message: response.getMessage(),
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
+    upsertCustomerGroupMember = (realmId, groupId, usernames) => {
+      return new Promise((resolve, reject) => {
+        const request = new UpsertCustomerGroupMemberRequest();
+
+        request.setRealmId(realmId);
+        request.setId(groupId);
+        request.setUserList(usernames);
+
+        this.client.upsertCustomerGroupMember(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code: 0,
+                  message: response.getMessage(),
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
+    deleteCustomerGroupMember = (realmId, groupId, usernames) => {
+      return new Promise((resolve, reject) => {
+        const request = new DeleteCustomerGroupMemberRequest();
+
+        request.setRealmId(realmId);
+        request.setId(groupId);
+        request.setUserList(usernames);
+
+        this.client.deleteCustomerGroupMember(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code: 0,
+                  message: response.getMessage(),
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
+    listCustomerGroupMembers = (queryRequest) => {
+      return new Promise((resolve, reject) => {
+        const request = new ListCustomerGroupMembersRequest();
+
+        const query = new Query();
+        query.setQuery(queryRequest.query);
+        query.setPage(queryRequest.page);
+        query.setPerPage(queryRequest.perPage);
+        query.setSortBy(queryRequest.sortBy);
+
+        request.setRealmId(queryRequest.realmId);
+        request.setQuery(query);
+
+        this.client.listCustomerGroupMembers(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                const dataList = response.getDataList().map((data) => data.toObject());
+                resolve({
+                  code: 0,
+                  data: dataList,
+                  pagination: response.getPagination().toObject(),
+                  message: response.getMessage(),
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
   };
