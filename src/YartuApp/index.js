@@ -11,6 +11,7 @@ import Note from '../Note';
 import Project from '../Project';
 import Search from '../Search';
 import Notification from '../Notification';
+import Customer from '../Customer';
 import ExternalApp from '../ExternalApp';
 
 // TODO :: Check if Vue project
@@ -47,6 +48,7 @@ class YartuApp {
     this.Project = new (Project())(config);
     this.Search = new (Search())(config);
     this.Notification = new (Notification())(config);
+    this.Customer = new (Customer())(config);
     this.ExternalApp = new (ExternalApp())(config);
 
     this.Account.yartuSdk = this;
@@ -59,6 +61,7 @@ class YartuApp {
     this.Note.yartuSdk = this;
     this.Project.yartuSdk = this;
     this.ExternalApp.yartuSdk = this;
+    this.Customer.yartuSdk = this;
     this.Notification.Notification = this;
     this.refreshUser();
   }
@@ -95,6 +98,7 @@ class YartuApp {
     this.Project.metadata = { tabId, Authentication: yartu_token };
     this.Search.metadata = { tabId, Authentication: yartu_token };
     this.Notification.metadata = { tabId, Authentication: yartu_token };
+    this.Customer.metadata = { tabId, Authentication: yartu_token };
     this.ExternalApp.metadata = { tabId, Authentication: yartu_token };
   }
 }
