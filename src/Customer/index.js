@@ -307,17 +307,33 @@ export default (config) =>
       return new Promise((resolve, reject) => {
         const request = new UpsertCustomerGroupRequest();
 
-        request.setRealmId(groupData.realmId);
         request.setId(groupData.id);
         request.setName(groupData.name);
-        request.setHasEmailAlias(groupData.hasEmailAlias);
-        request.setEmailAlias(groupData.emailAlias);
+        request.setRealmId(groupData.realmId);
         request.setIsPrivate(groupData.isPrivate);
         request.setIsActive(groupData.isActive);
-        request.setHasAddressbook(groupData.hasAddressbook);
-        request.setHasCalendar(groupData.hasCalendar);
-        request.setHasDrive(groupData.hasDrive);
-        request.setDriveQuota(groupData.driveQuota);
+
+        if ('hasEmailAlias' in groupData) {
+          request.setHasEmailAlias(groupData.hasEmailAlias);
+          if (groupData.hasEmailAlias) {
+            request.setEmailAlias(groupData?.emailAlias);
+          }
+        }
+
+        if ('hasDrive' in groupData) {
+          request.setHasDrive(groupData.hasDrive);
+          // if (groupData.hasDrive) {
+          //   request.setDriveQuota(groupData.driveQuota);
+          // }
+        }
+
+        if ('hasAddressbook' in groupData) {
+          request.setHasAddressbook(groupData.hasAddressbook);
+        }
+
+        if ('hasCalendar' in groupData) {
+          request.setHasCalendar(groupData.hasCalendar);
+        }
 
         this.client.upsertCustomerGroup(
           request,
@@ -496,6 +512,7 @@ export default (config) =>
         query.setSortBy(queryRequest.sortBy);
 
         request.setRealmId(queryRequest.realmId);
+        request.setGroupId(queryRequest.groupId);
         request.setQuery(query);
 
         this.client.listCustomerGroupMembers(
@@ -506,18 +523,21 @@ export default (config) =>
               handleError(error, reject);
             } else {
               const code = response.getCode();
-              if (code == 0) {
-                const dataList = response.getDataList().map((data) => data.toObject());
+              if (code === 0) {
+                const userList = response.getUserList().map((data) => data.toObject());
+                const pagination = response.getPagination().toObject();
+                const group = response.getGroup().toObject();
                 resolve({
-                  code: 0,
-                  data: dataList,
-                  pagination: response.getPagination().toObject(),
-                  message: response.getMessage(),
+                  code,
+                  pagination,
+                  group,
+                  users: userList,
                 });
               } else {
+                // eslint-disable-next-line prefer-promise-reject-errors
                 reject({
-                  code: code,
-                  message: response.getMessage()
+                  code,
+                  message: response.getMessage(),
                 });
               }
             }
