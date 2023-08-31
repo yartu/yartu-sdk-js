@@ -13,6 +13,14 @@ import {
   UpsertCustomerGroupMemberRequest,
   DeleteCustomerGroupMemberRequest,
   ListCustomerGroupMembersRequest,
+
+  // EmailAlias services
+  ListCustomerEmailAliasRequest,
+  UpsertCustomerEmailAliasRequest,
+  DeleteCustomerEmailAliasRequest,
+  ListCustomerEmailAliasAddressRequest,
+  DeleteCustomerEmailAliasAddressRequest,
+  UpsertCustomerEmailAliasAddressRequest,
 } from './service-pb.cjs';
 
 import { YCustomerClient } from './service-grpc-web-pb.cjs';
@@ -532,6 +540,229 @@ export default (config) =>
                   pagination,
                   group,
                   users: userList,
+                });
+              } else {
+                // eslint-disable-next-line prefer-promise-reject-errors
+                reject({
+                  code,
+                  message: response.getMessage(),
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
+    listCustomerEmailAlias = (queryRequest) => {
+      return new Promise((resolve, reject) => {
+        const request = new ListCustomerEmailAliasRequest();
+
+        const query = new Query();
+        query.setQuery(queryRequest.query);
+        query.setPage(queryRequest.page);
+        query.setPerPage(queryRequest.perPage);
+        query.setSortBy(queryRequest.sortBy);
+
+        request.setRealmId(queryRequest.realmId);
+        request.setQuery(query);
+
+        this.client.listCustomerEmailAlias(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code === 0) {
+                const aliasList = response.getAliasList().map((data) => data.toObject());
+                const pagination = response.getPagination().toObject();
+                resolve({
+                  code,
+                  pagination,
+                  aliasList,
+                });
+              } else {
+                // eslint-disable-next-line prefer-promise-reject-errors
+                reject({
+                  code,
+                  message: response.getMessage(),
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
+    upsertCustomerEmailAlias = (aliasData) => {
+      return new Promise((resolve, reject) => {
+        const request = new UpsertCustomerEmailAliasRequest();
+
+        request.setRealmId(aliasData.realmId);
+        request.setId(aliasData.id);
+        request.setEmail(aliasData.email);
+        request.setIsActive(aliasData.isActive);
+
+        this.client.upsertCustomerEmailAlias(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code === 0) {
+                const alias = response.getAlias().toObject();
+                resolve({
+                  code,
+                  alias,
+                });
+              } else {
+                // eslint-disable-next-line prefer-promise-reject-errors
+                reject({
+                  code,
+                  message: response.getMessage(),
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
+    deleteCustomerEmailAlias = (queryRequest) => {
+      return new Promise((resolve, reject) => {
+        const request = new DeleteCustomerEmailAliasRequest();
+
+        request.setId(queryRequest.id);
+        request.setRealmId(queryRequest.realmId);
+
+        this.client.deleteCustomerEmailAlias(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code === 0) {
+                resolve({
+                  code,
+                  message: response.getMessage(),
+                });
+              } else {
+                // eslint-disable-next-line prefer-promise-reject-errors
+                reject({
+                  code,
+                  message: response.getMessage(),
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
+    listCustomerEmailAliasAddress = (queryRequest) => {
+      return new Promise((resolve, reject) => {
+        const request = new ListCustomerEmailAliasAddressRequest();
+
+        const query = new Query();
+        query.setQuery(queryRequest.query);
+        query.setPage(queryRequest.page);
+        query.setPerPage(queryRequest.perPage);
+        query.setSortBy(queryRequest.sortBy);
+
+        request.setId(queryRequest.id);
+        request.setRealmId(queryRequest.realmId);
+        request.setQuery(query);
+
+        this.client.listCustomerEmailAliasAddress(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code === 0) {
+                const email = response.getEmail();
+                const toList = response.getToList();
+                resolve({
+                  code,
+                  message: response.getMessage(),
+                  email,
+                  toList,
+                });
+              } else {
+                // eslint-disable-next-line prefer-promise-reject-errors
+                reject({
+                  code,
+                  message: response.getMessage(),
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
+    deleteCustomerEmailAliasAddress = (queryRequest) => {
+      return new Promise((resolve, reject) => {
+        const request = new DeleteCustomerEmailAliasAddressRequest();
+
+        request.setId(queryRequest.id);
+        request.setRealmId(queryRequest.realmId);
+        request.setEmail(queryRequest.email);
+
+        this.client.deleteCustomerEmailAliasAddress(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code === 0) {
+                resolve({
+                  code,
+                  message: response.getMessage(),
+                });
+              } else {
+                // eslint-disable-next-line prefer-promise-reject-errors
+                reject({
+                  code,
+                  message: response.getMessage(),
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
+    upsertCustomerEmailAliasAddress = (queryRequest) => {
+      return new Promise((resolve, reject) => {
+        const request = new UpsertCustomerEmailAliasAddressRequest();
+
+        request.setId(queryRequest.id);
+        request.setRealmId(queryRequest.realmId);
+        request.setEmail(queryRequest.email);
+
+        this.client.upsertCustomerEmailAliasAddress(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code === 0) {
+                resolve({
+                  code,
+                  message: response.getMessage(),
                 });
               } else {
                 // eslint-disable-next-line prefer-promise-reject-errors

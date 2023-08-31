@@ -930,5 +930,371 @@ proto.yartu.YCustomerPromiseClient.prototype.listCustomerGroupMembers =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.ListCustomerEmailAliasRequest,
+ *   !proto.yartu.ListCustomerEmailAliasResponse>}
+ */
+const methodDescriptor_YCustomer_listCustomerEmailAlias = new grpc.web.MethodDescriptor(
+  '/yartu.YCustomer/listCustomerEmailAlias',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.ListCustomerEmailAliasRequest,
+  proto.yartu.ListCustomerEmailAliasResponse,
+  /**
+   * @param {!proto.yartu.ListCustomerEmailAliasRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.ListCustomerEmailAliasResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.ListCustomerEmailAliasRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ListCustomerEmailAliasResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ListCustomerEmailAliasResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YCustomerClient.prototype.listCustomerEmailAlias =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YCustomer/listCustomerEmailAlias',
+      request,
+      metadata || {},
+      methodDescriptor_YCustomer_listCustomerEmailAlias,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.ListCustomerEmailAliasRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.ListCustomerEmailAliasResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YCustomerPromiseClient.prototype.listCustomerEmailAlias =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YCustomer/listCustomerEmailAlias',
+      request,
+      metadata || {},
+      methodDescriptor_YCustomer_listCustomerEmailAlias);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.UpsertCustomerEmailAliasRequest,
+ *   !proto.yartu.UpsertCustomerEmailAliasResponse>}
+ */
+const methodDescriptor_YCustomer_upsertCustomerEmailAlias = new grpc.web.MethodDescriptor(
+  '/yartu.YCustomer/upsertCustomerEmailAlias',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.UpsertCustomerEmailAliasRequest,
+  proto.yartu.UpsertCustomerEmailAliasResponse,
+  /**
+   * @param {!proto.yartu.UpsertCustomerEmailAliasRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.UpsertCustomerEmailAliasResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.UpsertCustomerEmailAliasRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.UpsertCustomerEmailAliasResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.UpsertCustomerEmailAliasResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YCustomerClient.prototype.upsertCustomerEmailAlias =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YCustomer/upsertCustomerEmailAlias',
+      request,
+      metadata || {},
+      methodDescriptor_YCustomer_upsertCustomerEmailAlias,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.UpsertCustomerEmailAliasRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.UpsertCustomerEmailAliasResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YCustomerPromiseClient.prototype.upsertCustomerEmailAlias =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YCustomer/upsertCustomerEmailAlias',
+      request,
+      metadata || {},
+      methodDescriptor_YCustomer_upsertCustomerEmailAlias);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.DeleteCustomerEmailAliasRequest,
+ *   !proto.yartu.DeleteCustomerEmailAliasResponse>}
+ */
+const methodDescriptor_YCustomer_deleteCustomerEmailAlias = new grpc.web.MethodDescriptor(
+  '/yartu.YCustomer/deleteCustomerEmailAlias',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.DeleteCustomerEmailAliasRequest,
+  proto.yartu.DeleteCustomerEmailAliasResponse,
+  /**
+   * @param {!proto.yartu.DeleteCustomerEmailAliasRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.DeleteCustomerEmailAliasResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.DeleteCustomerEmailAliasRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.DeleteCustomerEmailAliasResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.DeleteCustomerEmailAliasResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YCustomerClient.prototype.deleteCustomerEmailAlias =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YCustomer/deleteCustomerEmailAlias',
+      request,
+      metadata || {},
+      methodDescriptor_YCustomer_deleteCustomerEmailAlias,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.DeleteCustomerEmailAliasRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.DeleteCustomerEmailAliasResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YCustomerPromiseClient.prototype.deleteCustomerEmailAlias =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YCustomer/deleteCustomerEmailAlias',
+      request,
+      metadata || {},
+      methodDescriptor_YCustomer_deleteCustomerEmailAlias);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.ListCustomerEmailAliasAddressRequest,
+ *   !proto.yartu.ListCustomerEmailAliasAddressResponse>}
+ */
+const methodDescriptor_YCustomer_listCustomerEmailAliasAddress = new grpc.web.MethodDescriptor(
+  '/yartu.YCustomer/listCustomerEmailAliasAddress',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.ListCustomerEmailAliasAddressRequest,
+  proto.yartu.ListCustomerEmailAliasAddressResponse,
+  /**
+   * @param {!proto.yartu.ListCustomerEmailAliasAddressRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.ListCustomerEmailAliasAddressResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.ListCustomerEmailAliasAddressRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ListCustomerEmailAliasAddressResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ListCustomerEmailAliasAddressResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YCustomerClient.prototype.listCustomerEmailAliasAddress =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YCustomer/listCustomerEmailAliasAddress',
+      request,
+      metadata || {},
+      methodDescriptor_YCustomer_listCustomerEmailAliasAddress,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.ListCustomerEmailAliasAddressRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.ListCustomerEmailAliasAddressResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YCustomerPromiseClient.prototype.listCustomerEmailAliasAddress =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YCustomer/listCustomerEmailAliasAddress',
+      request,
+      metadata || {},
+      methodDescriptor_YCustomer_listCustomerEmailAliasAddress);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.DeleteCustomerEmailAliasAddressRequest,
+ *   !proto.yartu.DeleteCustomerEmailAliasAddressResponse>}
+ */
+const methodDescriptor_YCustomer_deleteCustomerEmailAliasAddress = new grpc.web.MethodDescriptor(
+  '/yartu.YCustomer/deleteCustomerEmailAliasAddress',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.DeleteCustomerEmailAliasAddressRequest,
+  proto.yartu.DeleteCustomerEmailAliasAddressResponse,
+  /**
+   * @param {!proto.yartu.DeleteCustomerEmailAliasAddressRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.DeleteCustomerEmailAliasAddressResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.DeleteCustomerEmailAliasAddressRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.DeleteCustomerEmailAliasAddressResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.DeleteCustomerEmailAliasAddressResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YCustomerClient.prototype.deleteCustomerEmailAliasAddress =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YCustomer/deleteCustomerEmailAliasAddress',
+      request,
+      metadata || {},
+      methodDescriptor_YCustomer_deleteCustomerEmailAliasAddress,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.DeleteCustomerEmailAliasAddressRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.DeleteCustomerEmailAliasAddressResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YCustomerPromiseClient.prototype.deleteCustomerEmailAliasAddress =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YCustomer/deleteCustomerEmailAliasAddress',
+      request,
+      metadata || {},
+      methodDescriptor_YCustomer_deleteCustomerEmailAliasAddress);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.UpsertCustomerEmailAliasAddressRequest,
+ *   !proto.yartu.UpsertCustomerEmailAliasAddressResponse>}
+ */
+const methodDescriptor_YCustomer_upsertCustomerEmailAliasAddress = new grpc.web.MethodDescriptor(
+  '/yartu.YCustomer/upsertCustomerEmailAliasAddress',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.UpsertCustomerEmailAliasAddressRequest,
+  proto.yartu.UpsertCustomerEmailAliasAddressResponse,
+  /**
+   * @param {!proto.yartu.UpsertCustomerEmailAliasAddressRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.UpsertCustomerEmailAliasAddressResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.UpsertCustomerEmailAliasAddressRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.UpsertCustomerEmailAliasAddressResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.UpsertCustomerEmailAliasAddressResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YCustomerClient.prototype.upsertCustomerEmailAliasAddress =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YCustomer/upsertCustomerEmailAliasAddress',
+      request,
+      metadata || {},
+      methodDescriptor_YCustomer_upsertCustomerEmailAliasAddress,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.UpsertCustomerEmailAliasAddressRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.UpsertCustomerEmailAliasAddressResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YCustomerPromiseClient.prototype.upsertCustomerEmailAliasAddress =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YCustomer/upsertCustomerEmailAliasAddress',
+      request,
+      metadata || {},
+      methodDescriptor_YCustomer_upsertCustomerEmailAliasAddress);
+};
+
+
 module.exports = proto.yartu;
 
