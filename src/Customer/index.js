@@ -632,12 +632,12 @@ export default (config) =>
       });
     };
 
-    deleteCustomerEmailAlias = (queryRequest) => {
+    deleteCustomerEmailAlias = (aliasData) => {
       return new Promise((resolve, reject) => {
         const request = new DeleteCustomerEmailAliasRequest();
 
-        request.setId(queryRequest.id);
-        request.setRealmId(queryRequest.realmId);
+        request.setId(aliasData.id);
+        request.setRealmId(aliasData.realmId);
 
         this.client.deleteCustomerEmailAlias(
           request,
@@ -709,13 +709,13 @@ export default (config) =>
       });
     };
 
-    deleteCustomerEmailAliasAddress = (queryRequest) => {
+    deleteCustomerEmailAliasAddress = (aliasData) => {
       return new Promise((resolve, reject) => {
         const request = new DeleteCustomerEmailAliasAddressRequest();
 
-        request.setId(queryRequest.id);
-        request.setRealmId(queryRequest.realmId);
-        request.setEmail(queryRequest.email);
+        request.setId(aliasData.id);
+        request.setRealmId(aliasData.realmId);
+        request.setEmail(aliasData.email);
 
         this.client.deleteCustomerEmailAliasAddress(
           request,
@@ -743,13 +743,13 @@ export default (config) =>
       });
     };
 
-    upsertCustomerEmailAliasAddress = (queryRequest) => {
+    upsertCustomerEmailAliasAddress = (aliasData) => {
       return new Promise((resolve, reject) => {
         const request = new UpsertCustomerEmailAliasAddressRequest();
 
-        request.setId(queryRequest.id);
-        request.setRealmId(queryRequest.realmId);
-        request.setEmail(queryRequest.email);
+        request.setId(aliasData.id);
+        request.setRealmId(aliasData.realmId);
+        request.setEmail(aliasData.email);
 
         this.client.upsertCustomerEmailAliasAddress(
           request,
