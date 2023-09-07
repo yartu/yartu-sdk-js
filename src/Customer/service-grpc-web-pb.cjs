@@ -1296,5 +1296,249 @@ proto.yartu.YCustomerPromiseClient.prototype.upsertCustomerEmailAliasAddress =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.CheckDomainAddressRequest,
+ *   !proto.yartu.CheckDomainAddressResponse>}
+ */
+const methodDescriptor_YCustomer_checkDomainAddress = new grpc.web.MethodDescriptor(
+  '/yartu.YCustomer/checkDomainAddress',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.CheckDomainAddressRequest,
+  proto.yartu.CheckDomainAddressResponse,
+  /**
+   * @param {!proto.yartu.CheckDomainAddressRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.CheckDomainAddressResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.CheckDomainAddressRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.CheckDomainAddressResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.CheckDomainAddressResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YCustomerClient.prototype.checkDomainAddress =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YCustomer/checkDomainAddress',
+      request,
+      metadata || {},
+      methodDescriptor_YCustomer_checkDomainAddress,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.CheckDomainAddressRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.CheckDomainAddressResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YCustomerPromiseClient.prototype.checkDomainAddress =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YCustomer/checkDomainAddress',
+      request,
+      metadata || {},
+      methodDescriptor_YCustomer_checkDomainAddress);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.GetRegisterFormRequest,
+ *   !proto.yartu.GetRegisterFormResponse>}
+ */
+const methodDescriptor_YCustomer_getRegisterForm = new grpc.web.MethodDescriptor(
+  '/yartu.YCustomer/getRegisterForm',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.GetRegisterFormRequest,
+  proto.yartu.GetRegisterFormResponse,
+  /**
+   * @param {!proto.yartu.GetRegisterFormRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.GetRegisterFormResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.GetRegisterFormRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.GetRegisterFormResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.GetRegisterFormResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YCustomerClient.prototype.getRegisterForm =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YCustomer/getRegisterForm',
+      request,
+      metadata || {},
+      methodDescriptor_YCustomer_getRegisterForm,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.GetRegisterFormRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.GetRegisterFormResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YCustomerPromiseClient.prototype.getRegisterForm =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YCustomer/getRegisterForm',
+      request,
+      metadata || {},
+      methodDescriptor_YCustomer_getRegisterForm);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.UpsertRegisterFormRequest,
+ *   !proto.yartu.UpsertRegisterFormResponse>}
+ */
+const methodDescriptor_YCustomer_upsertRegisterForm = new grpc.web.MethodDescriptor(
+  '/yartu.YCustomer/upsertRegisterForm',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.UpsertRegisterFormRequest,
+  proto.yartu.UpsertRegisterFormResponse,
+  /**
+   * @param {!proto.yartu.UpsertRegisterFormRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.UpsertRegisterFormResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.UpsertRegisterFormRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.UpsertRegisterFormResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.UpsertRegisterFormResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YCustomerClient.prototype.upsertRegisterForm =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YCustomer/upsertRegisterForm',
+      request,
+      metadata || {},
+      methodDescriptor_YCustomer_upsertRegisterForm,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.UpsertRegisterFormRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.UpsertRegisterFormResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YCustomerPromiseClient.prototype.upsertRegisterForm =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YCustomer/upsertRegisterForm',
+      request,
+      metadata || {},
+      methodDescriptor_YCustomer_upsertRegisterForm);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.ListPackagesRequest,
+ *   !proto.yartu.ListPackagesResponse>}
+ */
+const methodDescriptor_YCustomer_listPackages = new grpc.web.MethodDescriptor(
+  '/yartu.YCustomer/listPackages',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.ListPackagesRequest,
+  proto.yartu.ListPackagesResponse,
+  /**
+   * @param {!proto.yartu.ListPackagesRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.ListPackagesResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.ListPackagesRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ListPackagesResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ListPackagesResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YCustomerClient.prototype.listPackages =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YCustomer/listPackages',
+      request,
+      metadata || {},
+      methodDescriptor_YCustomer_listPackages,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.ListPackagesRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.ListPackagesResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YCustomerPromiseClient.prototype.listPackages =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YCustomer/listPackages',
+      request,
+      metadata || {},
+      methodDescriptor_YCustomer_listPackages);
+};
+
+
 module.exports = proto.yartu;
 
