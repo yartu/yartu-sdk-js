@@ -13,14 +13,15 @@ import {
   UpsertCustomerGroupMemberRequest,
   DeleteCustomerGroupMemberRequest,
   ListCustomerGroupMembersRequest,
-
-  // EmailAlias services
   ListCustomerEmailAliasRequest,
   UpsertCustomerEmailAliasRequest,
   DeleteCustomerEmailAliasRequest,
   ListCustomerEmailAliasAddressRequest,
   DeleteCustomerEmailAliasAddressRequest,
   UpsertCustomerEmailAliasAddressRequest,
+  CheckDomainAddressRequest,
+  UpsertRegisterFormRequest,
+  ListPackagesRequest
 } from './service-pb.cjs';
 
 import { YCustomerClient } from './service-grpc-web-pb.cjs';
@@ -275,9 +276,6 @@ export default (config) =>
         const request = new ChangeCustomerMemberStatusRequest();
 
         realmId = Number.parseInt(realmId, 10);
-
-        console.log('DATA', data);
-
         request.setRealmId(realmId);
         request.setIdList(userIds);
 
@@ -777,4 +775,161 @@ export default (config) =>
       });
     };
 
+    listPackages = () => {
+      return new Promise((resolve, reject) => {
+        const request = new ListPackagesRequest();
+
+        this.client.listPackages(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              const packageList = response
+                .getYartuPackageList()
+                .map((packageProto) => {
+                  const packageDetail = packageProto.toObject();
+                  return {
+                    ...packageDetail,
+                    price: JSON.parse(packageDetail.price.json),
+                    features: JSON.parse(packageDetail.features.json)
+                  };
+                });
+
+              resolve({
+                code: 0,
+                packageList
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
+    checkDomainAddress = (domain) => {
+      return new Promise((resolve, reject) => {
+        const request = new CheckDomainAddressRequest();
+
+        request.setDomain(domain);
+
+        this.client.checkDomainAddress(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve(response.toObject());
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
+    upsertRegisterForm = (formData = {}) => {
+      return new Promise((resolve, reject) => {
+        const request = new UpsertRegisterFormRequest();
+
+        if (formData.domain) {
+          request.setDomain(formData.domain);
+        }
+
+        if (formData.packageId) {
+          request.setPackageId(formData.packageId.toString());
+        }
+
+        if (formData.packagePeriod) {
+          request.setPackagePeriod(formData.packagePeriod);
+        }
+
+        if (formData.name) {
+          request.setName(formData.name);
+        }
+
+        if (formData.surname) {
+          request.setSurname(formData.surname);
+        }
+
+        if (formData.phone) {
+          request.setPhone(formData.phone);
+        }
+
+        if (formData.username) {
+          request.setUsername(formData.username);
+        }
+
+        if (formData.password) {
+          request.setPassword(formData.password);
+        }
+
+        if (formData.currentEmail) {
+          request.setCurrentEmail(formData.currentEmail);
+        }
+
+        if (formData.userCount) {
+          request.setUserCount(formData.userCount);
+        }
+
+        if (formData.taxType) {
+          request.setTaxType(formData.taxType);
+        }
+
+        if (formData.taxName) {
+          request.setTaxName(formData.taxName);
+        }
+
+        if (formData.taxSurname) {
+          request.setTaxSurname(formData.taxSurname);
+        }
+
+        if (formData.taxPhone) {
+          request.setTaxPhone(formData.taxPhone);
+        }
+
+        if (formData.taxAddress) {
+          request.setTaxAddress(formData.taxAddress);
+        }
+
+        if (formData.taxLocation) {
+          request.setTaxLocation(formData.taxLocation);
+        }
+
+        if (formData.step) {
+          request.setStep(formData.step);
+        }
+
+        this.client.upsertRegisterForm(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve(response.toObject());
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    };
   };
