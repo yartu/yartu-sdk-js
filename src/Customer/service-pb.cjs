@@ -2027,7 +2027,9 @@ proto.yartu.ContractFeatureDetail.toObject = function(includeInstance, msg) {
     perUserDriveQuota: jspb.Message.getFieldWithDefault(msg, 5, 0),
     perUserEmailQuota: jspb.Message.getFieldWithDefault(msg, 6, 0),
     maxGroupCount: jspb.Message.getFieldWithDefault(msg, 7, 0),
-    maxGroupMemberCount: jspb.Message.getFieldWithDefault(msg, 8, 0)
+    maxGroupMemberCount: jspb.Message.getFieldWithDefault(msg, 8, 0),
+    maxEmailAliasCount: jspb.Message.getFieldWithDefault(msg, 9, 0),
+    maxEmailAliasAddressCount: jspb.Message.getFieldWithDefault(msg, 10, 0)
   };
 
   if (includeInstance) {
@@ -2095,6 +2097,14 @@ proto.yartu.ContractFeatureDetail.deserializeBinaryFromReader = function(msg, re
     case 8:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setMaxGroupMemberCount(value);
+      break;
+    case 9:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setMaxEmailAliasCount(value);
+      break;
+    case 10:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setMaxEmailAliasAddressCount(value);
       break;
     default:
       reader.skipField();
@@ -2178,6 +2188,20 @@ proto.yartu.ContractFeatureDetail.serializeBinaryToWriter = function(message, wr
   if (f != null) {
     writer.writeInt64(
       8,
+      f
+    );
+  }
+  f = /** @type {number} */ (jspb.Message.getField(message, 9));
+  if (f != null) {
+    writer.writeInt64(
+      9,
+      f
+    );
+  }
+  f = /** @type {number} */ (jspb.Message.getField(message, 10));
+  if (f != null) {
+    writer.writeInt64(
+      10,
       f
     );
   }
@@ -2469,6 +2493,78 @@ proto.yartu.ContractFeatureDetail.prototype.clearMaxGroupMemberCount = function(
  */
 proto.yartu.ContractFeatureDetail.prototype.hasMaxGroupMemberCount = function() {
   return jspb.Message.getField(this, 8) != null;
+};
+
+
+/**
+ * optional int64 max_email_alias_count = 9;
+ * @return {number}
+ */
+proto.yartu.ContractFeatureDetail.prototype.getMaxEmailAliasCount = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 9, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu.ContractFeatureDetail} returns this
+ */
+proto.yartu.ContractFeatureDetail.prototype.setMaxEmailAliasCount = function(value) {
+  return jspb.Message.setField(this, 9, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.ContractFeatureDetail} returns this
+ */
+proto.yartu.ContractFeatureDetail.prototype.clearMaxEmailAliasCount = function() {
+  return jspb.Message.setField(this, 9, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.ContractFeatureDetail.prototype.hasMaxEmailAliasCount = function() {
+  return jspb.Message.getField(this, 9) != null;
+};
+
+
+/**
+ * optional int64 max_email_alias_address_count = 10;
+ * @return {number}
+ */
+proto.yartu.ContractFeatureDetail.prototype.getMaxEmailAliasAddressCount = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 10, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu.ContractFeatureDetail} returns this
+ */
+proto.yartu.ContractFeatureDetail.prototype.setMaxEmailAliasAddressCount = function(value) {
+  return jspb.Message.setField(this, 10, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.ContractFeatureDetail} returns this
+ */
+proto.yartu.ContractFeatureDetail.prototype.clearMaxEmailAliasAddressCount = function() {
+  return jspb.Message.setField(this, 10, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.ContractFeatureDetail.prototype.hasMaxEmailAliasAddressCount = function() {
+  return jspb.Message.getField(this, 10) != null;
 };
 
 
