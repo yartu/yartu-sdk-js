@@ -21,7 +21,9 @@ import {
   UpsertCustomerEmailAliasAddressRequest,
   CheckDomainAddressRequest,
   UpsertRegisterFormRequest,
-  ListPackagesRequest
+  ListPackagesRequest,
+  GetRegisterFormRequest,
+  GetPaymentSessionRequest
 } from './service-pb.cjs';
 
 import { YCustomerClient } from './service-grpc-web-pb.cjs';
@@ -354,7 +356,7 @@ export default (config) =>
                 resolve({
                   code: 0,
                   data,
-                  message: response.getMessage(),
+                  message: response.getMessage()
                 });
               } else {
                 reject({
@@ -386,7 +388,7 @@ export default (config) =>
               if (code == 0) {
                 resolve({
                   code: 0,
-                  message: response.getMessage(),
+                  message: response.getMessage()
                 });
               } else {
                 reject({
@@ -422,12 +424,14 @@ export default (config) =>
             } else {
               const code = response.getCode();
               if (code == 0) {
-                const dataList = response.getDataList().map((data) => data.toObject());
+                const dataList = response
+                  .getDataList()
+                  .map((data) => data.toObject());
                 resolve({
                   code: 0,
                   data: dataList,
                   pagination: response.getPagination().toObject(),
-                  message: response.getMessage(),
+                  message: response.getMessage()
                 });
               } else {
                 reject({
@@ -460,7 +464,7 @@ export default (config) =>
               if (code == 0) {
                 resolve({
                   code: 0,
-                  message: response.getMessage(),
+                  message: response.getMessage()
                 });
               } else {
                 reject({
@@ -493,7 +497,7 @@ export default (config) =>
               if (code == 0) {
                 resolve({
                   code: 0,
-                  message: response.getMessage(),
+                  message: response.getMessage()
                 });
               } else {
                 reject({
@@ -530,20 +534,22 @@ export default (config) =>
             } else {
               const code = response.getCode();
               if (code === 0) {
-                const userList = response.getUserList().map((data) => data.toObject());
+                const userList = response
+                  .getUserList()
+                  .map((data) => data.toObject());
                 const pagination = response.getPagination().toObject();
                 const group = response.getGroup().toObject();
                 resolve({
                   code,
                   pagination,
                   group,
-                  users: userList,
+                  users: userList
                 });
               } else {
                 // eslint-disable-next-line prefer-promise-reject-errors
                 reject({
                   code,
-                  message: response.getMessage(),
+                  message: response.getMessage()
                 });
               }
             }
@@ -574,18 +580,20 @@ export default (config) =>
             } else {
               const code = response.getCode();
               if (code === 0) {
-                const aliasList = response.getAliasList().map((data) => data.toObject());
+                const aliasList = response
+                  .getAliasList()
+                  .map((data) => data.toObject());
                 const pagination = response.getPagination().toObject();
                 resolve({
                   code,
                   pagination,
-                  aliasList,
+                  aliasList
                 });
               } else {
                 // eslint-disable-next-line prefer-promise-reject-errors
                 reject({
                   code,
-                  message: response.getMessage(),
+                  message: response.getMessage()
                 });
               }
             }
@@ -615,13 +623,13 @@ export default (config) =>
                 const alias = response.getAlias().toObject();
                 resolve({
                   code,
-                  alias,
+                  alias
                 });
               } else {
                 // eslint-disable-next-line prefer-promise-reject-errors
                 reject({
                   code,
-                  message: response.getMessage(),
+                  message: response.getMessage()
                 });
               }
             }
@@ -648,13 +656,13 @@ export default (config) =>
               if (code === 0) {
                 resolve({
                   code,
-                  message: response.getMessage(),
+                  message: response.getMessage()
                 });
               } else {
                 // eslint-disable-next-line prefer-promise-reject-errors
                 reject({
                   code,
-                  message: response.getMessage(),
+                  message: response.getMessage()
                 });
               }
             }
@@ -692,13 +700,13 @@ export default (config) =>
                   code,
                   message: response.getMessage(),
                   email,
-                  toList,
+                  toList
                 });
               } else {
                 // eslint-disable-next-line prefer-promise-reject-errors
                 reject({
                   code,
-                  message: response.getMessage(),
+                  message: response.getMessage()
                 });
               }
             }
@@ -726,13 +734,13 @@ export default (config) =>
               if (code === 0) {
                 resolve({
                   code,
-                  message: response.getMessage(),
+                  message: response.getMessage()
                 });
               } else {
                 // eslint-disable-next-line prefer-promise-reject-errors
                 reject({
                   code,
-                  message: response.getMessage(),
+                  message: response.getMessage()
                 });
               }
             }
@@ -760,13 +768,13 @@ export default (config) =>
               if (code === 0) {
                 resolve({
                   code,
-                  message: response.getMessage(),
+                  message: response.getMessage()
                 });
               } else {
                 // eslint-disable-next-line prefer-promise-reject-errors
                 reject({
                   code,
-                  message: response.getMessage(),
+                  message: response.getMessage()
                 });
               }
             }
@@ -907,11 +915,83 @@ export default (config) =>
           request.setTaxLocation(formData.taxLocation);
         }
 
+        if (formData.taxNo) {
+          request.setTaxNo(formData.taxNo);
+        }
+
+        if (formData.taxEmail) {
+          request.setTaxEmail(formData.taxEmail);
+        }
+
         if (formData.step) {
           request.setStep(formData.step);
         }
 
         this.client.upsertRegisterForm(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve(response.toObject());
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
+    getRegisterForm = () => {
+      return new Promise((resolve, reject) => {
+        const request = new GetRegisterFormRequest();
+
+        this.client.getRegisterForm(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                const data = response.toObject();
+                console.log('!!!!!!!!!1', data);
+                if (data.form.yartuPackage?.price?.json) {
+                  data.form.yartuPackage.price = JSON.parse(
+                    data.form.yartuPackage.price.json
+                  );
+                  // data.prce = JSON.parse(data.prce.json);
+                }
+                resolve(data);
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
+    getPaymentSession = (domain, maskedPan, cvv) => {
+      return new Promise((resolve, reject) => {
+        const request = new GetPaymentSessionRequest();
+
+        request.setDomain(domain);
+        request.setMaskedPan(maskedPan);
+        request.setCvv(cvv);
+
+        this.client.getPaymentSession(
           request,
           this.metadata,
           (error, response) => {
