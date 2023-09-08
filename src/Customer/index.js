@@ -22,7 +22,8 @@ import {
   CheckDomainAddressRequest,
   UpsertRegisterFormRequest,
   ListPackagesRequest,
-  GetRegisterFormRequest
+  GetRegisterFormRequest,
+  GetPaymentSessionRequest
 } from './service-pb.cjs';
 
 import { YCustomerClient } from './service-grpc-web-pb.cjs';
@@ -918,6 +919,10 @@ export default (config) =>
           request.setTaxNo(formData.taxNo);
         }
 
+        if (formData.taxEmail) {
+          request.setTaxEmail(formData.taxEmail);
+        }
+
         if (formData.step) {
           request.setStep(formData.step);
         }
@@ -949,6 +954,44 @@ export default (config) =>
         const request = new GetRegisterFormRequest();
 
         this.client.getRegisterForm(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                const data = response.toObject();
+                console.log('!!!!!!!!!1', data);
+                if (data.form.yartuPackage?.price?.json) {
+                  data.form.yartuPackage.price = JSON.parse(
+                    data.form.yartuPackage.price.json
+                  );
+                  // data.prce = JSON.parse(data.prce.json);
+                }
+                resolve(data);
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
+    getPaymentSession = (domain, maskedPan, cvv) => {
+      return new Promise((resolve, reject) => {
+        const request = new GetPaymentSessionRequest();
+
+        request.setDomain(domain);
+        request.setMaskedPan(maskedPan);
+        request.setCvv(cvv);
+
+        this.client.getPaymentSession(
           request,
           this.metadata,
           (error, response) => {
