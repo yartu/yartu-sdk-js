@@ -1813,12 +1813,13 @@ proto.yartu.Package.toObject = function(includeInstance, msg) {
     code: jspb.Message.getFieldWithDefault(msg, 3, ""),
     uuid: jspb.Message.getFieldWithDefault(msg, 4, ""),
     features: (f = msg.getFeatures()) && common_grpc_definitions_pb.JSON.toObject(includeInstance, f),
+    details: (f = msg.getDetails()) && common_grpc_definitions_pb.JSON.toObject(includeInstance, f),
     price: (f = msg.getPrice()) && common_grpc_definitions_pb.JSON.toObject(includeInstance, f),
-    isPublic: jspb.Message.getBooleanFieldWithDefault(msg, 7, false),
-    isActive: jspb.Message.getBooleanFieldWithDefault(msg, 8, false),
-    isMostPopular: jspb.Message.getBooleanFieldWithDefault(msg, 9, false),
-    minUserCount: jspb.Message.getFieldWithDefault(msg, 10, 0),
-    maxUserCount: jspb.Message.getFieldWithDefault(msg, 11, 0)
+    isPublic: jspb.Message.getBooleanFieldWithDefault(msg, 8, false),
+    isActive: jspb.Message.getBooleanFieldWithDefault(msg, 9, false),
+    isMostPopular: jspb.Message.getBooleanFieldWithDefault(msg, 10, false),
+    minUserCount: jspb.Message.getFieldWithDefault(msg, 11, 0),
+    maxUserCount: jspb.Message.getFieldWithDefault(msg, 12, 0)
   };
 
   if (includeInstance) {
@@ -1879,25 +1880,30 @@ proto.yartu.Package.deserializeBinaryFromReader = function(msg, reader) {
     case 6:
       var value = new common_grpc_definitions_pb.JSON;
       reader.readMessage(value,common_grpc_definitions_pb.JSON.deserializeBinaryFromReader);
-      msg.setPrice(value);
+      msg.setDetails(value);
       break;
     case 7:
-      var value = /** @type {boolean} */ (reader.readBool());
-      msg.setIsPublic(value);
+      var value = new common_grpc_definitions_pb.JSON;
+      reader.readMessage(value,common_grpc_definitions_pb.JSON.deserializeBinaryFromReader);
+      msg.setPrice(value);
       break;
     case 8:
       var value = /** @type {boolean} */ (reader.readBool());
-      msg.setIsActive(value);
+      msg.setIsPublic(value);
       break;
     case 9:
       var value = /** @type {boolean} */ (reader.readBool());
-      msg.setIsMostPopular(value);
+      msg.setIsActive(value);
       break;
     case 10:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setIsMostPopular(value);
+      break;
+    case 11:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setMinUserCount(value);
       break;
-    case 11:
+    case 12:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setMaxUserCount(value);
       break;
@@ -1966,7 +1972,7 @@ proto.yartu.Package.serializeBinaryToWriter = function(message, writer) {
       common_grpc_definitions_pb.JSON.serializeBinaryToWriter
     );
   }
-  f = message.getPrice();
+  f = message.getDetails();
   if (f != null) {
     writer.writeMessage(
       6,
@@ -1974,11 +1980,12 @@ proto.yartu.Package.serializeBinaryToWriter = function(message, writer) {
       common_grpc_definitions_pb.JSON.serializeBinaryToWriter
     );
   }
-  f = /** @type {boolean} */ (jspb.Message.getField(message, 7));
+  f = message.getPrice();
   if (f != null) {
-    writer.writeBool(
+    writer.writeMessage(
       7,
-      f
+      f,
+      common_grpc_definitions_pb.JSON.serializeBinaryToWriter
     );
   }
   f = /** @type {boolean} */ (jspb.Message.getField(message, 8));
@@ -1995,9 +2002,9 @@ proto.yartu.Package.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = /** @type {number} */ (jspb.Message.getField(message, 10));
+  f = /** @type {boolean} */ (jspb.Message.getField(message, 10));
   if (f != null) {
-    writer.writeInt64(
+    writer.writeBool(
       10,
       f
     );
@@ -2006,6 +2013,13 @@ proto.yartu.Package.serializeBinaryToWriter = function(message, writer) {
   if (f != null) {
     writer.writeInt64(
       11,
+      f
+    );
+  }
+  f = /** @type {number} */ (jspb.Message.getField(message, 12));
+  if (f != null) {
+    writer.writeInt64(
+      12,
       f
     );
   }
@@ -2158,10 +2172,10 @@ proto.yartu.Package.prototype.hasFeatures = function() {
 
 
 /**
- * optional JSON price = 6;
+ * optional JSON details = 6;
  * @return {?proto.JSON}
  */
-proto.yartu.Package.prototype.getPrice = function() {
+proto.yartu.Package.prototype.getDetails = function() {
   return /** @type{?proto.JSON} */ (
     jspb.Message.getWrapperField(this, common_grpc_definitions_pb.JSON, 6));
 };
@@ -2171,8 +2185,45 @@ proto.yartu.Package.prototype.getPrice = function() {
  * @param {?proto.JSON|undefined} value
  * @return {!proto.yartu.Package} returns this
 */
-proto.yartu.Package.prototype.setPrice = function(value) {
+proto.yartu.Package.prototype.setDetails = function(value) {
   return jspb.Message.setWrapperField(this, 6, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.yartu.Package} returns this
+ */
+proto.yartu.Package.prototype.clearDetails = function() {
+  return this.setDetails(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.Package.prototype.hasDetails = function() {
+  return jspb.Message.getField(this, 6) != null;
+};
+
+
+/**
+ * optional JSON price = 7;
+ * @return {?proto.JSON}
+ */
+proto.yartu.Package.prototype.getPrice = function() {
+  return /** @type{?proto.JSON} */ (
+    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.JSON, 7));
+};
+
+
+/**
+ * @param {?proto.JSON|undefined} value
+ * @return {!proto.yartu.Package} returns this
+*/
+proto.yartu.Package.prototype.setPrice = function(value) {
+  return jspb.Message.setWrapperField(this, 7, value);
 };
 
 
@@ -2190,51 +2241,15 @@ proto.yartu.Package.prototype.clearPrice = function() {
  * @return {boolean}
  */
 proto.yartu.Package.prototype.hasPrice = function() {
-  return jspb.Message.getField(this, 6) != null;
-};
-
-
-/**
- * optional bool is_public = 7;
- * @return {boolean}
- */
-proto.yartu.Package.prototype.getIsPublic = function() {
-  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 7, false));
-};
-
-
-/**
- * @param {boolean} value
- * @return {!proto.yartu.Package} returns this
- */
-proto.yartu.Package.prototype.setIsPublic = function(value) {
-  return jspb.Message.setField(this, 7, value);
-};
-
-
-/**
- * Clears the field making it undefined.
- * @return {!proto.yartu.Package} returns this
- */
-proto.yartu.Package.prototype.clearIsPublic = function() {
-  return jspb.Message.setField(this, 7, undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {boolean}
- */
-proto.yartu.Package.prototype.hasIsPublic = function() {
   return jspb.Message.getField(this, 7) != null;
 };
 
 
 /**
- * optional bool is_active = 8;
+ * optional bool is_public = 8;
  * @return {boolean}
  */
-proto.yartu.Package.prototype.getIsActive = function() {
+proto.yartu.Package.prototype.getIsPublic = function() {
   return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 8, false));
 };
 
@@ -2243,7 +2258,7 @@ proto.yartu.Package.prototype.getIsActive = function() {
  * @param {boolean} value
  * @return {!proto.yartu.Package} returns this
  */
-proto.yartu.Package.prototype.setIsActive = function(value) {
+proto.yartu.Package.prototype.setIsPublic = function(value) {
   return jspb.Message.setField(this, 8, value);
 };
 
@@ -2252,7 +2267,7 @@ proto.yartu.Package.prototype.setIsActive = function(value) {
  * Clears the field making it undefined.
  * @return {!proto.yartu.Package} returns this
  */
-proto.yartu.Package.prototype.clearIsActive = function() {
+proto.yartu.Package.prototype.clearIsPublic = function() {
   return jspb.Message.setField(this, 8, undefined);
 };
 
@@ -2261,16 +2276,16 @@ proto.yartu.Package.prototype.clearIsActive = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu.Package.prototype.hasIsActive = function() {
+proto.yartu.Package.prototype.hasIsPublic = function() {
   return jspb.Message.getField(this, 8) != null;
 };
 
 
 /**
- * optional bool is_most_popular = 9;
+ * optional bool is_active = 9;
  * @return {boolean}
  */
-proto.yartu.Package.prototype.getIsMostPopular = function() {
+proto.yartu.Package.prototype.getIsActive = function() {
   return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 9, false));
 };
 
@@ -2279,7 +2294,7 @@ proto.yartu.Package.prototype.getIsMostPopular = function() {
  * @param {boolean} value
  * @return {!proto.yartu.Package} returns this
  */
-proto.yartu.Package.prototype.setIsMostPopular = function(value) {
+proto.yartu.Package.prototype.setIsActive = function(value) {
   return jspb.Message.setField(this, 9, value);
 };
 
@@ -2288,7 +2303,7 @@ proto.yartu.Package.prototype.setIsMostPopular = function(value) {
  * Clears the field making it undefined.
  * @return {!proto.yartu.Package} returns this
  */
-proto.yartu.Package.prototype.clearIsMostPopular = function() {
+proto.yartu.Package.prototype.clearIsActive = function() {
   return jspb.Message.setField(this, 9, undefined);
 };
 
@@ -2297,25 +2312,25 @@ proto.yartu.Package.prototype.clearIsMostPopular = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu.Package.prototype.hasIsMostPopular = function() {
+proto.yartu.Package.prototype.hasIsActive = function() {
   return jspb.Message.getField(this, 9) != null;
 };
 
 
 /**
- * optional int64 min_user_count = 10;
- * @return {number}
+ * optional bool is_most_popular = 10;
+ * @return {boolean}
  */
-proto.yartu.Package.prototype.getMinUserCount = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 10, 0));
+proto.yartu.Package.prototype.getIsMostPopular = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 10, false));
 };
 
 
 /**
- * @param {number} value
+ * @param {boolean} value
  * @return {!proto.yartu.Package} returns this
  */
-proto.yartu.Package.prototype.setMinUserCount = function(value) {
+proto.yartu.Package.prototype.setIsMostPopular = function(value) {
   return jspb.Message.setField(this, 10, value);
 };
 
@@ -2324,7 +2339,7 @@ proto.yartu.Package.prototype.setMinUserCount = function(value) {
  * Clears the field making it undefined.
  * @return {!proto.yartu.Package} returns this
  */
-proto.yartu.Package.prototype.clearMinUserCount = function() {
+proto.yartu.Package.prototype.clearIsMostPopular = function() {
   return jspb.Message.setField(this, 10, undefined);
 };
 
@@ -2333,16 +2348,16 @@ proto.yartu.Package.prototype.clearMinUserCount = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu.Package.prototype.hasMinUserCount = function() {
+proto.yartu.Package.prototype.hasIsMostPopular = function() {
   return jspb.Message.getField(this, 10) != null;
 };
 
 
 /**
- * optional int64 max_user_count = 11;
+ * optional int64 min_user_count = 11;
  * @return {number}
  */
-proto.yartu.Package.prototype.getMaxUserCount = function() {
+proto.yartu.Package.prototype.getMinUserCount = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 11, 0));
 };
 
@@ -2351,7 +2366,7 @@ proto.yartu.Package.prototype.getMaxUserCount = function() {
  * @param {number} value
  * @return {!proto.yartu.Package} returns this
  */
-proto.yartu.Package.prototype.setMaxUserCount = function(value) {
+proto.yartu.Package.prototype.setMinUserCount = function(value) {
   return jspb.Message.setField(this, 11, value);
 };
 
@@ -2360,7 +2375,7 @@ proto.yartu.Package.prototype.setMaxUserCount = function(value) {
  * Clears the field making it undefined.
  * @return {!proto.yartu.Package} returns this
  */
-proto.yartu.Package.prototype.clearMaxUserCount = function() {
+proto.yartu.Package.prototype.clearMinUserCount = function() {
   return jspb.Message.setField(this, 11, undefined);
 };
 
@@ -2369,8 +2384,44 @@ proto.yartu.Package.prototype.clearMaxUserCount = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu.Package.prototype.hasMaxUserCount = function() {
+proto.yartu.Package.prototype.hasMinUserCount = function() {
   return jspb.Message.getField(this, 11) != null;
+};
+
+
+/**
+ * optional int64 max_user_count = 12;
+ * @return {number}
+ */
+proto.yartu.Package.prototype.getMaxUserCount = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 12, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu.Package} returns this
+ */
+proto.yartu.Package.prototype.setMaxUserCount = function(value) {
+  return jspb.Message.setField(this, 12, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.Package} returns this
+ */
+proto.yartu.Package.prototype.clearMaxUserCount = function() {
+  return jspb.Message.setField(this, 12, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.Package.prototype.hasMaxUserCount = function() {
+  return jspb.Message.getField(this, 12) != null;
 };
 
 
@@ -2407,15 +2458,18 @@ proto.yartu.ContractFeatureDetail.prototype.toObject = function(opt_includeInsta
 proto.yartu.ContractFeatureDetail.toObject = function(includeInstance, msg) {
   var f, obj = {
     period: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    maxUserCount: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    totalQuota: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    packageRevision: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    perUserDriveQuota: jspb.Message.getFieldWithDefault(msg, 5, 0),
-    perUserEmailQuota: jspb.Message.getFieldWithDefault(msg, 6, 0),
+    totalQuota: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    packageRevision: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    perUserDriveQuota: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    perUserEmailQuota: jspb.Message.getFieldWithDefault(msg, 5, 0),
+    maxUserCount: jspb.Message.getFieldWithDefault(msg, 6, 0),
     maxGroupCount: jspb.Message.getFieldWithDefault(msg, 7, 0),
     maxGroupMemberCount: jspb.Message.getFieldWithDefault(msg, 8, 0),
     maxEmailAliasCount: jspb.Message.getFieldWithDefault(msg, 9, 0),
-    maxEmailAliasAddressCount: jspb.Message.getFieldWithDefault(msg, 10, 0)
+    maxEmailAliasAddressCount: jspb.Message.getFieldWithDefault(msg, 10, 0),
+    maxConferenceAttendees: jspb.Message.getFieldWithDefault(msg, 11, 0),
+    maxProjectCount: jspb.Message.getFieldWithDefault(msg, 12, 0),
+    maxProjectBoardCount: jspb.Message.getFieldWithDefault(msg, 13, 0)
   };
 
   if (includeInstance) {
@@ -2458,23 +2512,23 @@ proto.yartu.ContractFeatureDetail.deserializeBinaryFromReader = function(msg, re
       break;
     case 2:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setMaxUserCount(value);
+      msg.setTotalQuota(value);
       break;
     case 3:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setTotalQuota(value);
+      msg.setPackageRevision(value);
       break;
     case 4:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setPackageRevision(value);
+      msg.setPerUserDriveQuota(value);
       break;
     case 5:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setPerUserDriveQuota(value);
+      msg.setPerUserEmailQuota(value);
       break;
     case 6:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setPerUserEmailQuota(value);
+      msg.setMaxUserCount(value);
       break;
     case 7:
       var value = /** @type {number} */ (reader.readInt64());
@@ -2491,6 +2545,18 @@ proto.yartu.ContractFeatureDetail.deserializeBinaryFromReader = function(msg, re
     case 10:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setMaxEmailAliasAddressCount(value);
+      break;
+    case 11:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setMaxConferenceAttendees(value);
+      break;
+    case 12:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setMaxProjectCount(value);
+      break;
+    case 13:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setMaxProjectBoardCount(value);
       break;
     default:
       reader.skipField();
@@ -2591,6 +2657,27 @@ proto.yartu.ContractFeatureDetail.serializeBinaryToWriter = function(message, wr
       f
     );
   }
+  f = /** @type {number} */ (jspb.Message.getField(message, 11));
+  if (f != null) {
+    writer.writeInt64(
+      11,
+      f
+    );
+  }
+  f = /** @type {number} */ (jspb.Message.getField(message, 12));
+  if (f != null) {
+    writer.writeInt64(
+      12,
+      f
+    );
+  }
+  f = /** @type {number} */ (jspb.Message.getField(message, 13));
+  if (f != null) {
+    writer.writeInt64(
+      13,
+      f
+    );
+  }
 };
 
 
@@ -2631,10 +2718,10 @@ proto.yartu.ContractFeatureDetail.prototype.hasPeriod = function() {
 
 
 /**
- * optional int64 max_user_count = 2;
+ * optional int64 total_quota = 2;
  * @return {number}
  */
-proto.yartu.ContractFeatureDetail.prototype.getMaxUserCount = function() {
+proto.yartu.ContractFeatureDetail.prototype.getTotalQuota = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
 };
 
@@ -2643,7 +2730,7 @@ proto.yartu.ContractFeatureDetail.prototype.getMaxUserCount = function() {
  * @param {number} value
  * @return {!proto.yartu.ContractFeatureDetail} returns this
  */
-proto.yartu.ContractFeatureDetail.prototype.setMaxUserCount = function(value) {
+proto.yartu.ContractFeatureDetail.prototype.setTotalQuota = function(value) {
   return jspb.Message.setField(this, 2, value);
 };
 
@@ -2652,7 +2739,7 @@ proto.yartu.ContractFeatureDetail.prototype.setMaxUserCount = function(value) {
  * Clears the field making it undefined.
  * @return {!proto.yartu.ContractFeatureDetail} returns this
  */
-proto.yartu.ContractFeatureDetail.prototype.clearMaxUserCount = function() {
+proto.yartu.ContractFeatureDetail.prototype.clearTotalQuota = function() {
   return jspb.Message.setField(this, 2, undefined);
 };
 
@@ -2661,16 +2748,16 @@ proto.yartu.ContractFeatureDetail.prototype.clearMaxUserCount = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu.ContractFeatureDetail.prototype.hasMaxUserCount = function() {
+proto.yartu.ContractFeatureDetail.prototype.hasTotalQuota = function() {
   return jspb.Message.getField(this, 2) != null;
 };
 
 
 /**
- * optional int64 total_quota = 3;
+ * optional int64 package_revision = 3;
  * @return {number}
  */
-proto.yartu.ContractFeatureDetail.prototype.getTotalQuota = function() {
+proto.yartu.ContractFeatureDetail.prototype.getPackageRevision = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
 };
 
@@ -2679,7 +2766,7 @@ proto.yartu.ContractFeatureDetail.prototype.getTotalQuota = function() {
  * @param {number} value
  * @return {!proto.yartu.ContractFeatureDetail} returns this
  */
-proto.yartu.ContractFeatureDetail.prototype.setTotalQuota = function(value) {
+proto.yartu.ContractFeatureDetail.prototype.setPackageRevision = function(value) {
   return jspb.Message.setField(this, 3, value);
 };
 
@@ -2688,7 +2775,7 @@ proto.yartu.ContractFeatureDetail.prototype.setTotalQuota = function(value) {
  * Clears the field making it undefined.
  * @return {!proto.yartu.ContractFeatureDetail} returns this
  */
-proto.yartu.ContractFeatureDetail.prototype.clearTotalQuota = function() {
+proto.yartu.ContractFeatureDetail.prototype.clearPackageRevision = function() {
   return jspb.Message.setField(this, 3, undefined);
 };
 
@@ -2697,16 +2784,16 @@ proto.yartu.ContractFeatureDetail.prototype.clearTotalQuota = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu.ContractFeatureDetail.prototype.hasTotalQuota = function() {
+proto.yartu.ContractFeatureDetail.prototype.hasPackageRevision = function() {
   return jspb.Message.getField(this, 3) != null;
 };
 
 
 /**
- * optional int64 package_revision = 4;
+ * optional int64 per_user_drive_quota = 4;
  * @return {number}
  */
-proto.yartu.ContractFeatureDetail.prototype.getPackageRevision = function() {
+proto.yartu.ContractFeatureDetail.prototype.getPerUserDriveQuota = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
 };
 
@@ -2715,7 +2802,7 @@ proto.yartu.ContractFeatureDetail.prototype.getPackageRevision = function() {
  * @param {number} value
  * @return {!proto.yartu.ContractFeatureDetail} returns this
  */
-proto.yartu.ContractFeatureDetail.prototype.setPackageRevision = function(value) {
+proto.yartu.ContractFeatureDetail.prototype.setPerUserDriveQuota = function(value) {
   return jspb.Message.setField(this, 4, value);
 };
 
@@ -2724,7 +2811,7 @@ proto.yartu.ContractFeatureDetail.prototype.setPackageRevision = function(value)
  * Clears the field making it undefined.
  * @return {!proto.yartu.ContractFeatureDetail} returns this
  */
-proto.yartu.ContractFeatureDetail.prototype.clearPackageRevision = function() {
+proto.yartu.ContractFeatureDetail.prototype.clearPerUserDriveQuota = function() {
   return jspb.Message.setField(this, 4, undefined);
 };
 
@@ -2733,16 +2820,16 @@ proto.yartu.ContractFeatureDetail.prototype.clearPackageRevision = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu.ContractFeatureDetail.prototype.hasPackageRevision = function() {
+proto.yartu.ContractFeatureDetail.prototype.hasPerUserDriveQuota = function() {
   return jspb.Message.getField(this, 4) != null;
 };
 
 
 /**
- * optional int64 per_user_drive_quota = 5;
+ * optional int64 per_user_email_quota = 5;
  * @return {number}
  */
-proto.yartu.ContractFeatureDetail.prototype.getPerUserDriveQuota = function() {
+proto.yartu.ContractFeatureDetail.prototype.getPerUserEmailQuota = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
 };
 
@@ -2751,7 +2838,7 @@ proto.yartu.ContractFeatureDetail.prototype.getPerUserDriveQuota = function() {
  * @param {number} value
  * @return {!proto.yartu.ContractFeatureDetail} returns this
  */
-proto.yartu.ContractFeatureDetail.prototype.setPerUserDriveQuota = function(value) {
+proto.yartu.ContractFeatureDetail.prototype.setPerUserEmailQuota = function(value) {
   return jspb.Message.setField(this, 5, value);
 };
 
@@ -2760,7 +2847,7 @@ proto.yartu.ContractFeatureDetail.prototype.setPerUserDriveQuota = function(valu
  * Clears the field making it undefined.
  * @return {!proto.yartu.ContractFeatureDetail} returns this
  */
-proto.yartu.ContractFeatureDetail.prototype.clearPerUserDriveQuota = function() {
+proto.yartu.ContractFeatureDetail.prototype.clearPerUserEmailQuota = function() {
   return jspb.Message.setField(this, 5, undefined);
 };
 
@@ -2769,16 +2856,16 @@ proto.yartu.ContractFeatureDetail.prototype.clearPerUserDriveQuota = function() 
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu.ContractFeatureDetail.prototype.hasPerUserDriveQuota = function() {
+proto.yartu.ContractFeatureDetail.prototype.hasPerUserEmailQuota = function() {
   return jspb.Message.getField(this, 5) != null;
 };
 
 
 /**
- * optional int64 per_user_email_quota = 6;
+ * optional int64 max_user_count = 6;
  * @return {number}
  */
-proto.yartu.ContractFeatureDetail.prototype.getPerUserEmailQuota = function() {
+proto.yartu.ContractFeatureDetail.prototype.getMaxUserCount = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
 };
 
@@ -2787,7 +2874,7 @@ proto.yartu.ContractFeatureDetail.prototype.getPerUserEmailQuota = function() {
  * @param {number} value
  * @return {!proto.yartu.ContractFeatureDetail} returns this
  */
-proto.yartu.ContractFeatureDetail.prototype.setPerUserEmailQuota = function(value) {
+proto.yartu.ContractFeatureDetail.prototype.setMaxUserCount = function(value) {
   return jspb.Message.setField(this, 6, value);
 };
 
@@ -2796,7 +2883,7 @@ proto.yartu.ContractFeatureDetail.prototype.setPerUserEmailQuota = function(valu
  * Clears the field making it undefined.
  * @return {!proto.yartu.ContractFeatureDetail} returns this
  */
-proto.yartu.ContractFeatureDetail.prototype.clearPerUserEmailQuota = function() {
+proto.yartu.ContractFeatureDetail.prototype.clearMaxUserCount = function() {
   return jspb.Message.setField(this, 6, undefined);
 };
 
@@ -2805,7 +2892,7 @@ proto.yartu.ContractFeatureDetail.prototype.clearPerUserEmailQuota = function() 
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu.ContractFeatureDetail.prototype.hasPerUserEmailQuota = function() {
+proto.yartu.ContractFeatureDetail.prototype.hasMaxUserCount = function() {
   return jspb.Message.getField(this, 6) != null;
 };
 
@@ -2951,6 +3038,114 @@ proto.yartu.ContractFeatureDetail.prototype.clearMaxEmailAliasAddressCount = fun
  */
 proto.yartu.ContractFeatureDetail.prototype.hasMaxEmailAliasAddressCount = function() {
   return jspb.Message.getField(this, 10) != null;
+};
+
+
+/**
+ * optional int64 max_conference_attendees = 11;
+ * @return {number}
+ */
+proto.yartu.ContractFeatureDetail.prototype.getMaxConferenceAttendees = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 11, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu.ContractFeatureDetail} returns this
+ */
+proto.yartu.ContractFeatureDetail.prototype.setMaxConferenceAttendees = function(value) {
+  return jspb.Message.setField(this, 11, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.ContractFeatureDetail} returns this
+ */
+proto.yartu.ContractFeatureDetail.prototype.clearMaxConferenceAttendees = function() {
+  return jspb.Message.setField(this, 11, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.ContractFeatureDetail.prototype.hasMaxConferenceAttendees = function() {
+  return jspb.Message.getField(this, 11) != null;
+};
+
+
+/**
+ * optional int64 max_project_count = 12;
+ * @return {number}
+ */
+proto.yartu.ContractFeatureDetail.prototype.getMaxProjectCount = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 12, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu.ContractFeatureDetail} returns this
+ */
+proto.yartu.ContractFeatureDetail.prototype.setMaxProjectCount = function(value) {
+  return jspb.Message.setField(this, 12, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.ContractFeatureDetail} returns this
+ */
+proto.yartu.ContractFeatureDetail.prototype.clearMaxProjectCount = function() {
+  return jspb.Message.setField(this, 12, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.ContractFeatureDetail.prototype.hasMaxProjectCount = function() {
+  return jspb.Message.getField(this, 12) != null;
+};
+
+
+/**
+ * optional int64 max_project_board_count = 13;
+ * @return {number}
+ */
+proto.yartu.ContractFeatureDetail.prototype.getMaxProjectBoardCount = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 13, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu.ContractFeatureDetail} returns this
+ */
+proto.yartu.ContractFeatureDetail.prototype.setMaxProjectBoardCount = function(value) {
+  return jspb.Message.setField(this, 13, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.ContractFeatureDetail} returns this
+ */
+proto.yartu.ContractFeatureDetail.prototype.clearMaxProjectBoardCount = function() {
+  return jspb.Message.setField(this, 13, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.ContractFeatureDetail.prototype.hasMaxProjectBoardCount = function() {
+  return jspb.Message.getField(this, 13) != null;
 };
 
 
@@ -4969,7 +5164,8 @@ proto.yartu.RegisterFormLog.toObject = function(includeInstance, msg) {
     taxNo: jspb.Message.getFieldWithDefault(msg, 18, ""),
     taxEmail: jspb.Message.getFieldWithDefault(msg, 19, ""),
     lastStep: jspb.Message.getFieldWithDefault(msg, 20, 0),
-    actionDateAts: (f = msg.getActionDateAts()) && common_grpc_definitions_pb.JSON.toObject(includeInstance, f)
+    actionDateAts: (f = msg.getActionDateAts()) && common_grpc_definitions_pb.JSON.toObject(includeInstance, f),
+    taxAddressTitle: jspb.Message.getFieldWithDefault(msg, 22, "")
   };
 
   if (includeInstance) {
@@ -5091,6 +5287,10 @@ proto.yartu.RegisterFormLog.deserializeBinaryFromReader = function(msg, reader) 
       var value = new common_grpc_definitions_pb.JSON;
       reader.readMessage(value,common_grpc_definitions_pb.JSON.deserializeBinaryFromReader);
       msg.setActionDateAts(value);
+      break;
+    case 22:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setTaxAddressTitle(value);
       break;
     default:
       reader.skipField();
@@ -5268,6 +5468,13 @@ proto.yartu.RegisterFormLog.serializeBinaryToWriter = function(message, writer) 
       21,
       f,
       common_grpc_definitions_pb.JSON.serializeBinaryToWriter
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 22));
+  if (f != null) {
+    writer.writeString(
+      22,
+      f
     );
   }
 };
@@ -6028,6 +6235,42 @@ proto.yartu.RegisterFormLog.prototype.clearActionDateAts = function() {
  */
 proto.yartu.RegisterFormLog.prototype.hasActionDateAts = function() {
   return jspb.Message.getField(this, 21) != null;
+};
+
+
+/**
+ * optional string tax_address_title = 22;
+ * @return {string}
+ */
+proto.yartu.RegisterFormLog.prototype.getTaxAddressTitle = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 22, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.RegisterFormLog} returns this
+ */
+proto.yartu.RegisterFormLog.prototype.setTaxAddressTitle = function(value) {
+  return jspb.Message.setField(this, 22, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.RegisterFormLog} returns this
+ */
+proto.yartu.RegisterFormLog.prototype.clearTaxAddressTitle = function() {
+  return jspb.Message.setField(this, 22, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.RegisterFormLog.prototype.hasTaxAddressTitle = function() {
+  return jspb.Message.getField(this, 22) != null;
 };
 
 
@@ -14755,7 +14998,7 @@ proto.yartu.GetRegisterFormRequest.prototype.toObject = function(opt_includeInst
  */
 proto.yartu.GetRegisterFormRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-
+    domain: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -14792,6 +15035,10 @@ proto.yartu.GetRegisterFormRequest.deserializeBinaryFromReader = function(msg, r
     }
     var field = reader.getFieldNumber();
     switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setDomain(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -14821,6 +15068,31 @@ proto.yartu.GetRegisterFormRequest.prototype.serializeBinary = function() {
  */
 proto.yartu.GetRegisterFormRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getDomain();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string domain = 1;
+ * @return {string}
+ */
+proto.yartu.GetRegisterFormRequest.prototype.getDomain = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.GetRegisterFormRequest} returns this
+ */
+proto.yartu.GetRegisterFormRequest.prototype.setDomain = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
@@ -15103,7 +15375,8 @@ proto.yartu.UpsertRegisterFormRequest.toObject = function(includeInstance, msg) 
     taxNo: jspb.Message.getFieldWithDefault(msg, 16, ""),
     taxLocation: jspb.Message.getFieldWithDefault(msg, 17, ""),
     taxEmail: jspb.Message.getFieldWithDefault(msg, 18, ""),
-    step: jspb.Message.getFieldWithDefault(msg, 19, 0)
+    step: jspb.Message.getFieldWithDefault(msg, 19, 0),
+    taxAddressTitle: jspb.Message.getFieldWithDefault(msg, 20, "")
   };
 
   if (includeInstance) {
@@ -15215,6 +15488,10 @@ proto.yartu.UpsertRegisterFormRequest.deserializeBinaryFromReader = function(msg
     case 19:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setStep(value);
+      break;
+    case 20:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setTaxAddressTitle(value);
       break;
     default:
       reader.skipField();
@@ -15375,6 +15652,13 @@ proto.yartu.UpsertRegisterFormRequest.serializeBinaryToWriter = function(message
   if (f != null) {
     writer.writeInt64(
       19,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 20));
+  if (f != null) {
+    writer.writeString(
+      20,
       f
     );
   }
@@ -16062,6 +16346,42 @@ proto.yartu.UpsertRegisterFormRequest.prototype.clearStep = function() {
  */
 proto.yartu.UpsertRegisterFormRequest.prototype.hasStep = function() {
   return jspb.Message.getField(this, 19) != null;
+};
+
+
+/**
+ * optional string tax_address_title = 20;
+ * @return {string}
+ */
+proto.yartu.UpsertRegisterFormRequest.prototype.getTaxAddressTitle = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 20, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.UpsertRegisterFormRequest} returns this
+ */
+proto.yartu.UpsertRegisterFormRequest.prototype.setTaxAddressTitle = function(value) {
+  return jspb.Message.setField(this, 20, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.UpsertRegisterFormRequest} returns this
+ */
+proto.yartu.UpsertRegisterFormRequest.prototype.clearTaxAddressTitle = function() {
+  return jspb.Message.setField(this, 20, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.UpsertRegisterFormRequest.prototype.hasTaxAddressTitle = function() {
+  return jspb.Message.getField(this, 20) != null;
 };
 
 
