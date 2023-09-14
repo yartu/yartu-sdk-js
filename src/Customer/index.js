@@ -800,7 +800,8 @@ export default (config) =>
                   return {
                     ...packageDetail,
                     price: JSON.parse(packageDetail.price.json),
-                    features: JSON.parse(packageDetail.features.json)
+                    features: JSON.parse(packageDetail.features.json),
+                    details: JSON.parse(packageDetail.details.json)
                   };
                 });
 
@@ -927,6 +928,10 @@ export default (config) =>
           request.setStep(formData.step);
         }
 
+        if (formData.taxAddressTitle) {
+          request.setTaxAddressTitle(formData.taxAddressTitle);
+        }
+
         this.client.upsertRegisterForm(
           request,
           this.metadata,
@@ -949,9 +954,11 @@ export default (config) =>
       });
     };
 
-    getRegisterForm = () => {
+    getRegisterForm = (domain) => {
       return new Promise((resolve, reject) => {
         const request = new GetRegisterFormRequest();
+
+        request.setDomain(domain);
 
         this.client.getRegisterForm(
           request,
@@ -963,7 +970,6 @@ export default (config) =>
               const code = response.getCode();
               if (code == 0) {
                 const data = response.toObject();
-                console.log('!!!!!!!!!1', data);
                 if (data.form.yartuPackage?.price?.json) {
                   data.form.yartuPackage.price = JSON.parse(
                     data.form.yartuPackage.price.json
