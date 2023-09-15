@@ -1464,7 +1464,8 @@ proto.yartu.AddressBook.toObject = function(includeInstance, msg) {
     common_grpc_definitions_pb.Shared.toObject, includeInstance),
     createdAt: jspb.Message.getFieldWithDefault(msg, 11, ""),
     updatedAt: jspb.Message.getFieldWithDefault(msg, 12, ""),
-    isSharedWithMe: jspb.Message.getBooleanFieldWithDefault(msg, 13, false)
+    isSharedWithMe: jspb.Message.getBooleanFieldWithDefault(msg, 13, false),
+    permission: jspb.Message.getFieldWithDefault(msg, 14, "")
   };
 
   if (includeInstance) {
@@ -1555,6 +1556,10 @@ proto.yartu.AddressBook.deserializeBinaryFromReader = function(msg, reader) {
     case 13:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setIsSharedWithMe(value);
+      break;
+    case 14:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setPermission(value);
       break;
     default:
       reader.skipField();
@@ -1676,6 +1681,13 @@ proto.yartu.AddressBook.serializeBinaryToWriter = function(message, writer) {
   if (f != null) {
     writer.writeBool(
       13,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 14));
+  if (f != null) {
+    writer.writeString(
+      14,
       f
     );
   }
@@ -1989,6 +2001,42 @@ proto.yartu.AddressBook.prototype.clearIsSharedWithMe = function() {
  */
 proto.yartu.AddressBook.prototype.hasIsSharedWithMe = function() {
   return jspb.Message.getField(this, 13) != null;
+};
+
+
+/**
+ * optional string permission = 14;
+ * @return {string}
+ */
+proto.yartu.AddressBook.prototype.getPermission = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 14, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.AddressBook} returns this
+ */
+proto.yartu.AddressBook.prototype.setPermission = function(value) {
+  return jspb.Message.setField(this, 14, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.AddressBook} returns this
+ */
+proto.yartu.AddressBook.prototype.clearPermission = function() {
+  return jspb.Message.setField(this, 14, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.AddressBook.prototype.hasPermission = function() {
+  return jspb.Message.getField(this, 14) != null;
 };
 
 
