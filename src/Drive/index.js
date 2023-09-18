@@ -14,6 +14,7 @@ import {
   UpsertDirectoryRequest,
   UpsertFileRequest,
   UploadFileRequest,
+  SaveEmailAttachmentToDriveRequest,
   DownloadFileRequest,
   GetFileHistoryRequest,
   GetOfficeFileRequest,
@@ -683,6 +684,38 @@ export default (config) =>
               resolve({
                 code: code,
                 tokens: tokenList
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
+    saveEmailAttachmentToDrive = (email_uuid, file_place, file_name, repo_id, parent_path) => {
+      return new Promise((resolve, reject) => {
+        const request = new SaveEmailAttachmentToDriveRequest();
+
+        request.setEmailUuid(email_uuid);
+        request.setFilePlace(file_place);
+        request.setFileName(file_name);
+        request.setRepoId(repo_id);
+        request.setParentPath(parent_path);
+
+
+        this.client.saveEmailAttachmentToDrive(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code: code,
+                message: response.getMessage()
               });
             } else {
               reject({

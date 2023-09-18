@@ -400,7 +400,9 @@ export default (config) =>
         if (typeof noteData.reminder === 'object' && noteData.reminder) {
           // in this line noteData.reminder object is a dayjs object
           // so we can call the format function.
-          request.setReminder(noteData?.reminder.format('YYYY-MM-DD HH:mm'));
+          request.setReminder(
+            noteData?.reminder?.utc().format('YYYY-MM-DD HH:mm')
+          );
         }
         request.setNotebookId(noteData.notebookId);
         request.setIsPinned(noteData.isPinned);
