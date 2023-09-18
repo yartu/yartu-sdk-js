@@ -1665,6 +1665,67 @@ proto.yartu.YDrivePromiseClient.prototype.getOfficeFile =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.SaveEmailAttachmentToDriveRequest,
+ *   !proto.yartu.SaveEmailAttachmentToDriveResponse>}
+ */
+const methodDescriptor_YDrive_saveEmailAttachmentToDrive = new grpc.web.MethodDescriptor(
+  '/yartu.YDrive/saveEmailAttachmentToDrive',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.SaveEmailAttachmentToDriveRequest,
+  proto.yartu.SaveEmailAttachmentToDriveResponse,
+  /**
+   * @param {!proto.yartu.SaveEmailAttachmentToDriveRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.SaveEmailAttachmentToDriveResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.SaveEmailAttachmentToDriveRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.SaveEmailAttachmentToDriveResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.SaveEmailAttachmentToDriveResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YDriveClient.prototype.saveEmailAttachmentToDrive =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YDrive/saveEmailAttachmentToDrive',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_saveEmailAttachmentToDrive,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.SaveEmailAttachmentToDriveRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.SaveEmailAttachmentToDriveResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YDrivePromiseClient.prototype.saveEmailAttachmentToDrive =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YDrive/saveEmailAttachmentToDrive',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_saveEmailAttachmentToDrive);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.ListShareRequest,
  *   !proto.yartu.ListShareResponse>}
  */
