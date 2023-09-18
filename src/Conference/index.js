@@ -641,15 +641,18 @@ export default (config) =>
             handleError(error, reject);
           } else {
             const code = response.getCode();
-
-            if (code == 0) {
-              resolve({
-                code: code,
-                message: response.getMessage(),
-                session: response.getSession().toObject(),
-                isUserOnline: response.getIsUserOnline(),
-              });
-            } else {
+            const session = response.getSession();
+            try {
+              if (code == 0) {
+                resolve({
+                  code: code,
+                  message: response.getMessage(),
+                  session: session ? session.toObject() : {},
+                  isUserOnline: response.getIsUserOnline(),
+                });
+              }
+            } catch (err) {
+              console.log(err);
               reject({
                 code: code,
                 message: response.getMessage(),
