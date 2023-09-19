@@ -2489,13 +2489,20 @@ export default (config) =>
             const code = response.getCode();
 
             if (code == 0) {
-              const data = response.getData().toObject();
+              let data = null;
+              let boardAccessToken = null;
               const passwordNeeded = response.getPasswordNeeded();
-
+              if (!passwordNeeded) {
+                data = response.getData().toObject();
+              }
+              if (password) {
+                boardAccessToken = response.getBoardAccessToken();
+              }
               resolve({
                 code: 0,
                 data,
                 passwordNeeded,
+                boardAccessToken,
                 message: response.getMessage()
               });
             } else {

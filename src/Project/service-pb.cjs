@@ -38998,7 +38998,8 @@ proto.yartu.GetPublicBoardResponse.toObject = function(includeInstance, msg) {
     code: jspb.Message.getFieldWithDefault(msg, 1, 0),
     message: jspb.Message.getFieldWithDefault(msg, 2, ""),
     data: (f = msg.getData()) && proto.yartu.Board.toObject(includeInstance, f),
-    passwordNeeded: jspb.Message.getBooleanFieldWithDefault(msg, 4, false)
+    passwordNeeded: jspb.Message.getBooleanFieldWithDefault(msg, 4, false),
+    boardAccessToken: jspb.Message.getFieldWithDefault(msg, 5, "")
   };
 
   if (includeInstance) {
@@ -39051,6 +39052,10 @@ proto.yartu.GetPublicBoardResponse.deserializeBinaryFromReader = function(msg, r
     case 4:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setPasswordNeeded(value);
+      break;
+    case 5:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setBoardAccessToken(value);
       break;
     default:
       reader.skipField();
@@ -39107,6 +39112,13 @@ proto.yartu.GetPublicBoardResponse.serializeBinaryToWriter = function(message, w
   if (f) {
     writer.writeBool(
       4,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 5));
+  if (f != null) {
+    writer.writeString(
+      5,
       f
     );
   }
@@ -39219,6 +39231,42 @@ proto.yartu.GetPublicBoardResponse.prototype.getPasswordNeeded = function() {
  */
 proto.yartu.GetPublicBoardResponse.prototype.setPasswordNeeded = function(value) {
   return jspb.Message.setProto3BooleanField(this, 4, value);
+};
+
+
+/**
+ * optional string board_access_token = 5;
+ * @return {string}
+ */
+proto.yartu.GetPublicBoardResponse.prototype.getBoardAccessToken = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.GetPublicBoardResponse} returns this
+ */
+proto.yartu.GetPublicBoardResponse.prototype.setBoardAccessToken = function(value) {
+  return jspb.Message.setField(this, 5, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.GetPublicBoardResponse} returns this
+ */
+proto.yartu.GetPublicBoardResponse.prototype.clearBoardAccessToken = function() {
+  return jspb.Message.setField(this, 5, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.GetPublicBoardResponse.prototype.hasBoardAccessToken = function() {
+  return jspb.Message.getField(this, 5) != null;
 };
 
 
