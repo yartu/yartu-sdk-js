@@ -37,6 +37,8 @@ import {
   ListTaskRequest,
   CompleteTaskRequest,
 
+  SaveNoteToDriveRequest,
+
 } from './service-pb.cjs';
 
 import { YNoteClient } from './service-grpc-web-pb.cjs';
@@ -1137,4 +1139,36 @@ export default (config) =>
       });
     }
 
+    saveNoteToDrive = (noteId, repoId, parentPath) => {
+      return new Promise((resolve, reject) => {
+        const request = new SaveNoteToDriveRequest();
+
+        request.setId(noteId);
+        request.setRepoId(repoId);
+        request.setParentPath(parentPath);
+
+        this.client.saveNoteToDrive(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    }
   }
