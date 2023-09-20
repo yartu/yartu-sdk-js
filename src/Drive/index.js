@@ -51,6 +51,7 @@ import {
   // Client
   ListConnectedClientRequest,
   SignOutClientRequest,
+  SaveToMyDriveRequest,
 
 } from './service-pb.cjs';
 
@@ -1653,5 +1654,35 @@ export default (config) =>
         });
       });
     };
+
+    saveToMyDrive = (token, repoId, path) => {
+      return new Promise((resolve, reject) => {
+        const request = new SaveToMyDriveRequest();
+
+        request.setToken(token);
+        request.setDstRepoId(repoId)
+        request.setDstPath(path)
+
+        this.client.saveToMyDrive(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
 
   };
