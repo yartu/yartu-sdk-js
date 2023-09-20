@@ -2702,6 +2702,67 @@ proto.yartu.YDrivePromiseClient.prototype.getUploadPoint =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.SaveToMyDriveRequest,
+ *   !proto.yartu.SaveToMyDriveResponse>}
+ */
+const methodDescriptor_YDrive_saveToMyDrive = new grpc.web.MethodDescriptor(
+  '/yartu.YDrive/saveToMyDrive',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.SaveToMyDriveRequest,
+  proto.yartu.SaveToMyDriveResponse,
+  /**
+   * @param {!proto.yartu.SaveToMyDriveRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.SaveToMyDriveResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.SaveToMyDriveRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.SaveToMyDriveResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.SaveToMyDriveResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YDriveClient.prototype.saveToMyDrive =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YDrive/saveToMyDrive',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_saveToMyDrive,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.SaveToMyDriveRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.SaveToMyDriveResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YDrivePromiseClient.prototype.saveToMyDrive =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YDrive/saveToMyDrive',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_saveToMyDrive);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.ListConnectedClientRequest,
  *   !proto.yartu.ListConnectedClientResponse>}
  */

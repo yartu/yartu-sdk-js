@@ -1967,5 +1967,66 @@ proto.yartu.YNotePromiseClient.prototype.completeTask =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.SaveNoteToDriveRequest,
+ *   !proto.yartu.SaveNoteToDriveResponse>}
+ */
+const methodDescriptor_YNote_saveNoteToDrive = new grpc.web.MethodDescriptor(
+  '/yartu.YNote/saveNoteToDrive',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.SaveNoteToDriveRequest,
+  proto.yartu.SaveNoteToDriveResponse,
+  /**
+   * @param {!proto.yartu.SaveNoteToDriveRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.SaveNoteToDriveResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.SaveNoteToDriveRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.SaveNoteToDriveResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.SaveNoteToDriveResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YNoteClient.prototype.saveNoteToDrive =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YNote/saveNoteToDrive',
+      request,
+      metadata || {},
+      methodDescriptor_YNote_saveNoteToDrive,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.SaveNoteToDriveRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.SaveNoteToDriveResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YNotePromiseClient.prototype.saveNoteToDrive =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YNote/saveNoteToDrive',
+      request,
+      metadata || {},
+      methodDescriptor_YNote_saveNoteToDrive);
+};
+
+
 module.exports = proto.yartu;
 
