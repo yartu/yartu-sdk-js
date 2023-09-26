@@ -503,5 +503,66 @@ proto.yartu.YAuthPromiseClient.prototype.getServices =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.ForcedPasswordChangeRequest,
+ *   !proto.yartu.ForcedPasswordChangeResponse>}
+ */
+const methodDescriptor_YAuth_forcedPasswordChange = new grpc.web.MethodDescriptor(
+  '/yartu.YAuth/forcedPasswordChange',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.ForcedPasswordChangeRequest,
+  proto.yartu.ForcedPasswordChangeResponse,
+  /**
+   * @param {!proto.yartu.ForcedPasswordChangeRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.ForcedPasswordChangeResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.ForcedPasswordChangeRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ForcedPasswordChangeResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ForcedPasswordChangeResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YAuthClient.prototype.forcedPasswordChange =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YAuth/forcedPasswordChange',
+      request,
+      metadata || {},
+      methodDescriptor_YAuth_forcedPasswordChange,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.ForcedPasswordChangeRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.ForcedPasswordChangeResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YAuthPromiseClient.prototype.forcedPasswordChange =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YAuth/forcedPasswordChange',
+      request,
+      metadata || {},
+      methodDescriptor_YAuth_forcedPasswordChange);
+};
+
+
 module.exports = proto.yartu;
 

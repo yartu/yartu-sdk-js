@@ -15,7 +15,8 @@ import {
   ChallengeRequest,
   GetCapabilitiesRequest,
   LoginRequest,
-  OtpLoginRequest
+  OtpLoginRequest,
+  ForcedPasswordChangeRequest,
 } from './service-pb.cjs';
 import { YAuthClient } from './service-grpc-web-pb.cjs';
 
@@ -111,6 +112,35 @@ export default (config) =>
               });
             } else if (code == code_AUTH_TWO_FA_NEEDED) {
               resolve({ status: status_AUTH_TWO_FA_NEEDED, token: token });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
+    forcedPasswordChange = (username, oldPassword, newPassword) => {
+      return new Promise((resolve, reject) => {
+        const request = new ForcedPasswordChangeRequest();
+        request.setUsername(username);
+        request.setOldPassword(oldPassword);
+        request.setNewPassword(newPassword);
+        // request.setDeviceId('df5aed00-7f89-4fb9-8efb-58add9e99323');
+
+        this.client.forcedPasswordChange(request, {}, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code: 0,
+                message: response.getMessage()
+              });
             } else {
               reject({
                 code: code,
