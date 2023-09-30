@@ -37,13 +37,15 @@ export default (config) =>
               const code = response.getCode();
 
               if (code == 0) {
-                const notificationList = response.getNotificationList().map((data) => {
-                  const not = data.toObject();
-                  if (not.meta.type === 'json') {
-                    not.meta = JSON.parse(not.meta.json);
-                  }
-                  return not;
-                });
+                const notificationList = response
+                  .getNotificationList()
+                  .map((data) => {
+                    const not = data.toObject();
+                    if (not.meta.type === 'json') {
+                      not.meta = JSON.parse(not.meta.json);
+                    }
+                    return not;
+                  });
                 resolve({
                   notifications: notificationList,
                   code: 0,
