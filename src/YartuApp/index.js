@@ -37,14 +37,14 @@ class YartuApp {
 
   constructor(config) {
     this.initialize(config);
-    this.initializeModules();
+    this.initializeModules(config);
   }
 
   initialize(config) {
     this.grpcEndpoint = config.endpoint;
   }
 
-  initializeModules() {
+  initializeModules(config) {
     this.Account = new (Account())(config);
     this.Auth = new (Auth())(config);
     this.Calendar = new (Calendar())(config);
@@ -76,7 +76,7 @@ class YartuApp {
 
   refreshEndpoint(config) {
     this.initialize(config);
-    this.initializeModules();
+    this.initializeModules(config);
   }
 
   refreshUser() {
