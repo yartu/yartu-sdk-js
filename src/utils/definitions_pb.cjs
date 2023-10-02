@@ -2287,7 +2287,8 @@ proto.User.toObject = function(includeInstance, msg) {
     hasEmailQuota: jspb.Message.getBooleanFieldWithDefault(msg, 24, false),
     emailQuota: (f = msg.getEmailQuota()) && proto.EmailQuota.toObject(includeInstance, f),
     hasDriveQuota: jspb.Message.getBooleanFieldWithDefault(msg, 26, false),
-    driveQuota: (f = msg.getDriveQuota()) && proto.DriveQuota.toObject(includeInstance, f)
+    driveQuota: (f = msg.getDriveQuota()) && proto.DriveQuota.toObject(includeInstance, f),
+    image: jspb.Message.getFieldWithDefault(msg, 28, "")
   };
 
   if (includeInstance) {
@@ -2436,6 +2437,10 @@ proto.User.deserializeBinaryFromReader = function(msg, reader) {
       var value = new proto.DriveQuota;
       reader.readMessage(value,proto.DriveQuota.deserializeBinaryFromReader);
       msg.setDriveQuota(value);
+      break;
+    case 28:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setImage(value);
       break;
     default:
       reader.skipField();
@@ -2658,6 +2663,13 @@ proto.User.serializeBinaryToWriter = function(message, writer) {
       27,
       f,
       proto.DriveQuota.serializeBinaryToWriter
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 28));
+  if (f != null) {
+    writer.writeString(
+      28,
+      f
     );
   }
 };
@@ -3387,6 +3399,42 @@ proto.User.prototype.clearDriveQuota = function() {
  */
 proto.User.prototype.hasDriveQuota = function() {
   return jspb.Message.getField(this, 27) != null;
+};
+
+
+/**
+ * optional string image = 28;
+ * @return {string}
+ */
+proto.User.prototype.getImage = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 28, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.User} returns this
+ */
+proto.User.prototype.setImage = function(value) {
+  return jspb.Message.setField(this, 28, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.User} returns this
+ */
+proto.User.prototype.clearImage = function() {
+  return jspb.Message.setField(this, 28, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.User.prototype.hasImage = function() {
+  return jspb.Message.getField(this, 28) != null;
 };
 
 
