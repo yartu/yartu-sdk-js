@@ -128,9 +128,7 @@ const useYartuSdk = () => {
 
 const installYartuApp = {
   install: (Vue, config = {}) => {
-    let yartuSdk = config.initalizedYartuSdk
-      ? config.initalizedYartuSdk
-      : new YartuApp(config);
+    let yartuSdk = config.initalizedYartuSdk ?? new YartuApp(config);
     Vue.config.globalProperties.$yartuSdk = yartuSdk;
     if (typeof window !== 'undefined') {
       window.$yartuSdk = yartuSdk;
