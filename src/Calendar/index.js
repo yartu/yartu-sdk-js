@@ -275,12 +275,24 @@ export default (config) =>
         request.setSplitMode(splitData.splitMode);
         request.setActionMode(splitData.actionMode);
         request.setOrder(splitData.order);
-        
-        if (splitData.newStart) {
+
+        if (splitData?.summary) {
+          request.setSummary(splitData.summary);
+        }
+
+        if (splitData?.location) {
+          request.setLocation(splitData.location);
+        }
+
+        if (splitData?.description) {
+          request.setDescription(splitData.description);
+        }
+
+        if (splitData?.newStart) {
           request.setNewDateStart(splitData.newStart);
         }
 
-        if (splitData.newEnd) {
+        if (splitData?.newEnd) {
           request.setNewDateEnd(splitData.newEnd);
         }
 
@@ -533,4 +545,4 @@ export default (config) =>
         });
       });
     }
-};
+  };
