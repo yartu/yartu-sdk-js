@@ -7441,7 +7441,10 @@ proto.yartu.UpsertCalendarObjectSplitRequest.toObject = function(includeInstance
     uid: jspb.Message.getFieldWithDefault(msg, 5, ""),
     splitMode: jspb.Message.getFieldWithDefault(msg, 6, ""),
     actionMode: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    order: jspb.Message.getFieldWithDefault(msg, 8, 0)
+    order: jspb.Message.getFieldWithDefault(msg, 8, 0),
+    summary: jspb.Message.getFieldWithDefault(msg, 9, ""),
+    location: jspb.Message.getFieldWithDefault(msg, 10, ""),
+    description: jspb.Message.getFieldWithDefault(msg, 11, "")
   };
 
   if (includeInstance) {
@@ -7509,6 +7512,18 @@ proto.yartu.UpsertCalendarObjectSplitRequest.deserializeBinaryFromReader = funct
     case 8:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setOrder(value);
+      break;
+    case 9:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setSummary(value);
+      break;
+    case 10:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setLocation(value);
+      break;
+    case 11:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setDescription(value);
       break;
     default:
       reader.skipField();
@@ -7592,6 +7607,27 @@ proto.yartu.UpsertCalendarObjectSplitRequest.serializeBinaryToWriter = function(
   if (f !== 0) {
     writer.writeInt64(
       8,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 9));
+  if (f != null) {
+    writer.writeString(
+      9,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 10));
+  if (f != null) {
+    writer.writeString(
+      10,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 11));
+  if (f != null) {
+    writer.writeString(
+      11,
       f
     );
   }
@@ -7739,6 +7775,114 @@ proto.yartu.UpsertCalendarObjectSplitRequest.prototype.getOrder = function() {
  */
 proto.yartu.UpsertCalendarObjectSplitRequest.prototype.setOrder = function(value) {
   return jspb.Message.setProto3IntField(this, 8, value);
+};
+
+
+/**
+ * optional string summary = 9;
+ * @return {string}
+ */
+proto.yartu.UpsertCalendarObjectSplitRequest.prototype.getSummary = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 9, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.UpsertCalendarObjectSplitRequest} returns this
+ */
+proto.yartu.UpsertCalendarObjectSplitRequest.prototype.setSummary = function(value) {
+  return jspb.Message.setField(this, 9, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.UpsertCalendarObjectSplitRequest} returns this
+ */
+proto.yartu.UpsertCalendarObjectSplitRequest.prototype.clearSummary = function() {
+  return jspb.Message.setField(this, 9, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.UpsertCalendarObjectSplitRequest.prototype.hasSummary = function() {
+  return jspb.Message.getField(this, 9) != null;
+};
+
+
+/**
+ * optional string location = 10;
+ * @return {string}
+ */
+proto.yartu.UpsertCalendarObjectSplitRequest.prototype.getLocation = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 10, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.UpsertCalendarObjectSplitRequest} returns this
+ */
+proto.yartu.UpsertCalendarObjectSplitRequest.prototype.setLocation = function(value) {
+  return jspb.Message.setField(this, 10, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.UpsertCalendarObjectSplitRequest} returns this
+ */
+proto.yartu.UpsertCalendarObjectSplitRequest.prototype.clearLocation = function() {
+  return jspb.Message.setField(this, 10, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.UpsertCalendarObjectSplitRequest.prototype.hasLocation = function() {
+  return jspb.Message.getField(this, 10) != null;
+};
+
+
+/**
+ * optional string description = 11;
+ * @return {string}
+ */
+proto.yartu.UpsertCalendarObjectSplitRequest.prototype.getDescription = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 11, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.UpsertCalendarObjectSplitRequest} returns this
+ */
+proto.yartu.UpsertCalendarObjectSplitRequest.prototype.setDescription = function(value) {
+  return jspb.Message.setField(this, 11, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.UpsertCalendarObjectSplitRequest} returns this
+ */
+proto.yartu.UpsertCalendarObjectSplitRequest.prototype.clearDescription = function() {
+  return jspb.Message.setField(this, 11, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.UpsertCalendarObjectSplitRequest.prototype.hasDescription = function() {
+  return jspb.Message.getField(this, 11) != null;
 };
 
 
