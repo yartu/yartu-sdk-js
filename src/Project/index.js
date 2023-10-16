@@ -2492,11 +2492,9 @@ export default (config) =>
               let data = null;
               let boardAccessToken = null;
               const passwordNeeded = response.getPasswordNeeded();
+              boardAccessToken = response.getBoardAccessToken();
               if (!passwordNeeded) {
                 data = response.getData().toObject();
-              }
-              if (password) {
-                boardAccessToken = response.getBoardAccessToken();
               }
               resolve({
                 code: 0,
