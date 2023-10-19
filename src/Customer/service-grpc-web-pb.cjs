@@ -1601,5 +1601,66 @@ proto.yartu.YCustomerPromiseClient.prototype.getPaymentSession =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.ListInvoiceTemplateRequest,
+ *   !proto.yartu.ListInvoiceTemplateResponse>}
+ */
+const methodDescriptor_YCustomer_listInvoiceTemplate = new grpc.web.MethodDescriptor(
+  '/yartu.YCustomer/listInvoiceTemplate',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.ListInvoiceTemplateRequest,
+  proto.yartu.ListInvoiceTemplateResponse,
+  /**
+   * @param {!proto.yartu.ListInvoiceTemplateRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.ListInvoiceTemplateResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.ListInvoiceTemplateRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ListInvoiceTemplateResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ListInvoiceTemplateResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YCustomerClient.prototype.listInvoiceTemplate =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YCustomer/listInvoiceTemplate',
+      request,
+      metadata || {},
+      methodDescriptor_YCustomer_listInvoiceTemplate,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.ListInvoiceTemplateRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.ListInvoiceTemplateResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YCustomerPromiseClient.prototype.listInvoiceTemplate =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YCustomer/listInvoiceTemplate',
+      request,
+      metadata || {},
+      methodDescriptor_YCustomer_listInvoiceTemplate);
+};
+
+
 module.exports = proto.yartu;
 

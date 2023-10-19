@@ -23,7 +23,8 @@ import {
   UpsertRegisterFormRequest,
   ListPackagesRequest,
   GetRegisterFormRequest,
-  GetPaymentSessionRequest
+  GetPaymentSessionRequest,
+  ListInvoiceTemplateRequest,
 } from './service-pb.cjs';
 
 import { YCustomerClient } from './service-grpc-web-pb.cjs';
@@ -91,10 +92,18 @@ export default (config) =>
             } else {
               const code = response.getCode();
               if (code == 0) {
+                const customerRealm = response.getCustomerRealm().toObject();
+                try {
+                  customerRealm['packageDetail']['features'] = JSON.parse(customerRealm['packageDetail']['features']['json']);
+                  customerRealm['packageDetail']['details'] = JSON.parse(customerRealm['packageDetail']['details']['json']);
+                  customerRealm['packageDetail']['price'] = JSON.parse(customerRealm['packageDetail']['price']['json']);
+                } catch (err) {
+                  console.error('[YARTU-SDK] getCustomerRealm: exception:', err);
+                }
                 resolve({
                   code: 0,
                   message: response.getMessage(),
-                  customerRealm: response.getCustomerRealm().toObject()
+                  customerRealm,
                 });
               } else {
                 reject({
@@ -696,11 +705,12 @@ export default (config) =>
               if (code === 0) {
                 const email = response.getEmail();
                 const toList = response.getToList();
+                // const pagination = response.getPagination().toObject();
                 resolve({
                   code,
                   message: response.getMessage(),
                   email,
-                  toList
+                  toList,
                 });
               } else {
                 // eslint-disable-next-line prefer-promise-reject-errors
@@ -1016,6 +1026,35 @@ export default (config) =>
             }
           }
         );
+      });
+    };
+
+    listInvoiceTemplate = () => {
+      return new Promise((resolve, reject) => {
+        const request = new ListInvoiceTemplateRequest();
+
+        this.client.listInvoiceTemplate(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              const dataList = response
+                .getDataList()
+                .map((data) => data.toObject());
+
+              resolve({
+                code: 0,
+                data: dataList,
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
       });
     };
   };
