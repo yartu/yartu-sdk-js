@@ -20371,7 +20371,7 @@ proto.yartu.DriveSharedObject.toObject = function(includeInstance, msg) {
   var f, obj = {
     repo: (f = msg.getRepo()) && proto.yartu.Repo.toObject(includeInstance, f),
     dirent: (f = msg.getDirent()) && proto.yartu.Dirent.toObject(includeInstance, f),
-    owner: (f = msg.getOwner()) && common_grpc_definitions_pb.User.toObject(includeInstance, f),
+    owner: (f = msg.getOwner()) && proto.yartu.UserBasic.toObject(includeInstance, f),
     shareList: jspb.Message.toObjectList(msg.getShareList(),
     common_grpc_definitions_pb.Shared.toObject, includeInstance)
   };
@@ -20421,8 +20421,8 @@ proto.yartu.DriveSharedObject.deserializeBinaryFromReader = function(msg, reader
       msg.setDirent(value);
       break;
     case 3:
-      var value = new common_grpc_definitions_pb.User;
-      reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
+      var value = new proto.yartu.UserBasic;
+      reader.readMessage(value,proto.yartu.UserBasic.deserializeBinaryFromReader);
       msg.setOwner(value);
       break;
     case 4:
@@ -20480,7 +20480,7 @@ proto.yartu.DriveSharedObject.serializeBinaryToWriter = function(message, writer
     writer.writeMessage(
       3,
       f,
-      common_grpc_definitions_pb.User.serializeBinaryToWriter
+      proto.yartu.UserBasic.serializeBinaryToWriter
     );
   }
   f = message.getShareList();
@@ -20569,17 +20569,17 @@ proto.yartu.DriveSharedObject.prototype.hasDirent = function() {
 
 
 /**
- * optional User owner = 3;
- * @return {?proto.User}
+ * optional UserBasic owner = 3;
+ * @return {?proto.yartu.UserBasic}
  */
 proto.yartu.DriveSharedObject.prototype.getOwner = function() {
-  return /** @type{?proto.User} */ (
-    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.User, 3));
+  return /** @type{?proto.yartu.UserBasic} */ (
+    jspb.Message.getWrapperField(this, proto.yartu.UserBasic, 3));
 };
 
 
 /**
- * @param {?proto.User|undefined} value
+ * @param {?proto.yartu.UserBasic|undefined} value
  * @return {!proto.yartu.DriveSharedObject} returns this
 */
 proto.yartu.DriveSharedObject.prototype.setOwner = function(value) {
