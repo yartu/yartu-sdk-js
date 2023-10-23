@@ -22934,7 +22934,7 @@ proto.yartu.SharedWithMeRequest.prototype.toObject = function(opt_includeInstanc
  */
 proto.yartu.SharedWithMeRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-
+    returnShares: jspb.Message.getBooleanFieldWithDefault(msg, 1, false)
   };
 
   if (includeInstance) {
@@ -22971,6 +22971,10 @@ proto.yartu.SharedWithMeRequest.deserializeBinaryFromReader = function(msg, read
     }
     var field = reader.getFieldNumber();
     switch (field) {
+    case 1:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setReturnShares(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -23000,6 +23004,31 @@ proto.yartu.SharedWithMeRequest.prototype.serializeBinary = function() {
  */
 proto.yartu.SharedWithMeRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getReturnShares();
+  if (f) {
+    writer.writeBool(
+      1,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional bool return_shares = 1;
+ * @return {boolean}
+ */
+proto.yartu.SharedWithMeRequest.prototype.getReturnShares = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 1, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.yartu.SharedWithMeRequest} returns this
+ */
+proto.yartu.SharedWithMeRequest.prototype.setReturnShares = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 1, value);
 };
 
 
