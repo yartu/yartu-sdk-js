@@ -1662,5 +1662,66 @@ proto.yartu.YCustomerPromiseClient.prototype.listInvoiceTemplate =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.GetDebtAmountRequest,
+ *   !proto.yartu.GetDebtAmountResponse>}
+ */
+const methodDescriptor_YCustomer_getDebtAmount = new grpc.web.MethodDescriptor(
+  '/yartu.YCustomer/getDebtAmount',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.GetDebtAmountRequest,
+  proto.yartu.GetDebtAmountResponse,
+  /**
+   * @param {!proto.yartu.GetDebtAmountRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.GetDebtAmountResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.GetDebtAmountRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.GetDebtAmountResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.GetDebtAmountResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YCustomerClient.prototype.getDebtAmount =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YCustomer/getDebtAmount',
+      request,
+      metadata || {},
+      methodDescriptor_YCustomer_getDebtAmount,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.GetDebtAmountRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.GetDebtAmountResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YCustomerPromiseClient.prototype.getDebtAmount =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YCustomer/getDebtAmount',
+      request,
+      metadata || {},
+      methodDescriptor_YCustomer_getDebtAmount);
+};
+
+
 module.exports = proto.yartu;
 
