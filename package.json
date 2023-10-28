@@ -11,8 +11,8 @@
     "Yartu Information Technologies AS <info@yartu.io> (https://www.yartu.io)"
   ],
   "devDependencies": {
-    "@commitlint/cli": "^17.8.1",
-    "@commitlint/config-conventional": "^17.8.1",
+    "@commitlint/cli": "^18.2.0",
+    "@commitlint/config-conventional": "^18.1.0",
     "codecov": "^3.8.3",
     "cross-env": "^7.0.3",
     "eslint": "^8.52.0",
