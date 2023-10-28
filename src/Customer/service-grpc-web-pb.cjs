@@ -1665,61 +1665,61 @@ proto.yartu.YCustomerPromiseClient.prototype.listInvoiceTemplate =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
- *   !proto.yartu.GetDebtAmountRequest,
- *   !proto.yartu.GetDebtAmountResponse>}
+ *   !proto.yartu.GetPackageChangeDataRequest,
+ *   !proto.yartu.GetPackageChangeDataResponse>}
  */
-const methodDescriptor_YCustomer_getDebtAmount = new grpc.web.MethodDescriptor(
-  '/yartu.YCustomer/getDebtAmount',
+const methodDescriptor_YCustomer_getPackageChangeData = new grpc.web.MethodDescriptor(
+  '/yartu.YCustomer/getPackageChangeData',
   grpc.web.MethodType.UNARY,
-  proto.yartu.GetDebtAmountRequest,
-  proto.yartu.GetDebtAmountResponse,
+  proto.yartu.GetPackageChangeDataRequest,
+  proto.yartu.GetPackageChangeDataResponse,
   /**
-   * @param {!proto.yartu.GetDebtAmountRequest} request
+   * @param {!proto.yartu.GetPackageChangeDataRequest} request
    * @return {!Uint8Array}
    */
   function(request) {
     return request.serializeBinary();
   },
-  proto.yartu.GetDebtAmountResponse.deserializeBinary
+  proto.yartu.GetPackageChangeDataResponse.deserializeBinary
 );
 
 
 /**
- * @param {!proto.yartu.GetDebtAmountRequest} request The
+ * @param {!proto.yartu.GetPackageChangeDataRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.RpcError, ?proto.yartu.GetDebtAmountResponse)}
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.GetPackageChangeDataResponse)}
  *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.yartu.GetDebtAmountResponse>|undefined}
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.GetPackageChangeDataResponse>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.yartu.YCustomerClient.prototype.getDebtAmount =
+proto.yartu.YCustomerClient.prototype.getPackageChangeData =
     function(request, metadata, callback) {
   return this.client_.rpcCall(this.hostname_ +
-      '/yartu.YCustomer/getDebtAmount',
+      '/yartu.YCustomer/getPackageChangeData',
       request,
       metadata || {},
-      methodDescriptor_YCustomer_getDebtAmount,
+      methodDescriptor_YCustomer_getPackageChangeData,
       callback);
 };
 
 
 /**
- * @param {!proto.yartu.GetDebtAmountRequest} request The
+ * @param {!proto.yartu.GetPackageChangeDataRequest} request The
  *     request proto
  * @param {?Object<string, string>=} metadata User defined
  *     call metadata
- * @return {!Promise<!proto.yartu.GetDebtAmountResponse>}
+ * @return {!Promise<!proto.yartu.GetPackageChangeDataResponse>}
  *     Promise that resolves to the response
  */
-proto.yartu.YCustomerPromiseClient.prototype.getDebtAmount =
+proto.yartu.YCustomerPromiseClient.prototype.getPackageChangeData =
     function(request, metadata) {
   return this.client_.unaryCall(this.hostname_ +
-      '/yartu.YCustomer/getDebtAmount',
+      '/yartu.YCustomer/getPackageChangeData',
       request,
       metadata || {},
-      methodDescriptor_YCustomer_getDebtAmount);
+      methodDescriptor_YCustomer_getPackageChangeData);
 };
 
 
