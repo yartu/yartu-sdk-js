@@ -890,7 +890,11 @@ export default (config) =>
             if (code == 0) {
               const data = response
                 .getShareList()
-                .map((data) => data.toObject());
+                .map((data) => {
+                  const d = data.toObject();
+                  d.customPermission = loadFromArray(d.customPermissionMap);
+                  return d;
+                });
               const type = response.getType(); // type can be "repo", "dir" or "file"
               resolve({
                 code: code,
