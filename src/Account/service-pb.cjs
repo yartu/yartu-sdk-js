@@ -5286,7 +5286,8 @@ proto.yartu.UpsertAccountResponse.prototype.toObject = function(opt_includeInsta
 proto.yartu.UpsertAccountResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, "")
+    message: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    newToken: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -5331,6 +5332,10 @@ proto.yartu.UpsertAccountResponse.deserializeBinaryFromReader = function(msg, re
       var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setNewToken(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -5371,6 +5376,13 @@ proto.yartu.UpsertAccountResponse.serializeBinaryToWriter = function(message, wr
   if (f != null) {
     writer.writeString(
       2,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 3));
+  if (f != null) {
+    writer.writeString(
+      3,
       f
     );
   }
@@ -5428,6 +5440,42 @@ proto.yartu.UpsertAccountResponse.prototype.clearMessage = function() {
  */
 proto.yartu.UpsertAccountResponse.prototype.hasMessage = function() {
   return jspb.Message.getField(this, 2) != null;
+};
+
+
+/**
+ * optional string new_token = 3;
+ * @return {string}
+ */
+proto.yartu.UpsertAccountResponse.prototype.getNewToken = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.UpsertAccountResponse} returns this
+ */
+proto.yartu.UpsertAccountResponse.prototype.setNewToken = function(value) {
+  return jspb.Message.setField(this, 3, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.UpsertAccountResponse} returns this
+ */
+proto.yartu.UpsertAccountResponse.prototype.clearNewToken = function() {
+  return jspb.Message.setField(this, 3, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.UpsertAccountResponse.prototype.hasNewToken = function() {
+  return jspb.Message.getField(this, 3) != null;
 };
 
 

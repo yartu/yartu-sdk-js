@@ -144,7 +144,7 @@ export default (config) =>
         }
 
         if (data.notifications !== null) {
-          request.setNotificationList(data.notifications)
+          request.setNotificationList(data.notifications);
         }
 
         this.client.upsertAccount(request, this.metadata, (error, response) => {
