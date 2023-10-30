@@ -24,6 +24,7 @@ import {
   ListPackagesRequest,
   GetRegisterFormRequest,
   GetPaymentSessionRequest,
+  ListInvoicesRequest,
   ListInvoiceTemplateRequest,
 } from './service-pb.cjs';
 
@@ -1026,6 +1027,36 @@ export default (config) =>
             }
           }
         );
+      });
+    };
+
+    listInvoices = (domain) => {
+      return new Promise((resolve, reject) => {
+        const request = new ListInvoicesRequest();
+        request.setDomain(domain);
+
+        this.client.listInvoices(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              const dataList = response
+                .getDataList()
+                .map((data) => data.toObject());
+
+              resolve({
+                code: 0,
+                data: dataList,
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
       });
     };
 
