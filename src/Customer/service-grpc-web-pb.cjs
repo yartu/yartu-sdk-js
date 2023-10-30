@@ -1723,5 +1723,66 @@ proto.yartu.YCustomerPromiseClient.prototype.getPackageChangeData =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.ListInvoicesRequest,
+ *   !proto.yartu.ListInvoicesResponse>}
+ */
+const methodDescriptor_YCustomer_listInvoices = new grpc.web.MethodDescriptor(
+  '/yartu.YCustomer/listInvoices',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.ListInvoicesRequest,
+  proto.yartu.ListInvoicesResponse,
+  /**
+   * @param {!proto.yartu.ListInvoicesRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.ListInvoicesResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.ListInvoicesRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ListInvoicesResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ListInvoicesResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YCustomerClient.prototype.listInvoices =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YCustomer/listInvoices',
+      request,
+      metadata || {},
+      methodDescriptor_YCustomer_listInvoices,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.ListInvoicesRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.ListInvoicesResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YCustomerPromiseClient.prototype.listInvoices =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YCustomer/listInvoices',
+      request,
+      metadata || {},
+      methodDescriptor_YCustomer_listInvoices);
+};
+
+
 module.exports = proto.yartu;
 
