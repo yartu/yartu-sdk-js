@@ -6,7 +6,8 @@ import {
   status_AUTH_NEEDED,
   status_AUTH_OK,
   status_AUTH_TWO_FA_NEEDED,
-  status_AUTH_TWO_FA_FORCE, status_RESET_PASSWORD_NEEDED
+  status_AUTH_TWO_FA_FORCE,
+  status_RESET_PASSWORD_NEEDED
 } from '../utils/codes';
 
 import { handleError } from '../utils/helper';
@@ -16,7 +17,7 @@ import {
   GetCapabilitiesRequest,
   LoginRequest,
   OtpLoginRequest,
-  ForcedPasswordChangeRequest,
+  ForcedPasswordChangeRequest
 } from './service-pb.cjs';
 import { YAuthClient } from './service-grpc-web-pb.cjs';
 
