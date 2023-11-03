@@ -76,6 +76,8 @@ export default (config) =>
             const code = response.getCode();
             const token = response.getToken();
             const services = response.getServiceList();
+            const isPaid = response.getIsPaid();
+            const paidLogs = response.getPaidLogsList();
             const apps = response.getAppList().map((data) => {
               const appSettings = data.toObject();
               if (
@@ -98,12 +100,14 @@ export default (config) =>
                 services: services,
                 widgets,
                 apps: apps,
-                token: token
+                token: token,
+                isPaid,
+                paidLogs
               });
             } else if (code == status_RESET_PASSWORD_NEEDED) {
               resolve({
                 status: status_RESET_PASSWORD_NEEDED,
-                resetPasswordNeeded: true,
+                resetPasswordNeeded: true
               });
             } else if (code == code_AUTH_TWO_FA_FORCE) {
               resolve({
