@@ -21,6 +21,7 @@ import {
   UpsertCustomerEmailAliasAddressRequest,
   CheckDomainAddressRequest,
   UpsertRegisterFormRequest,
+  GetPackageRequest,
   ListPackagesRequest,
   GetRegisterFormRequest,
   GetPaymentSessionRequest,
@@ -791,6 +792,38 @@ export default (config) =>
             }
           }
         );
+      });
+    };
+
+    getPackage = () => {
+      return new Promise((resolve, reject) => {
+        const request = new GetPackageRequest();
+
+        this.client.getPackage(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              let packageData = response.getPackage().toObject();
+              packageData = {
+                  ...packageData,
+                  price: JSON.parse(packageData.price.json),
+                  features: JSON.parse(packageData.features.json),
+                  details: JSON.parse(packageData.details.json)
+              }
+              resolve({
+                code: 0,
+                package: packageData,
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
       });
     };
 
