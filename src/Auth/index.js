@@ -1,13 +1,14 @@
 import jwt_decode from 'jwt-decode';
 
 import {
+  status_NOT_PAID,
   code_AUTH_TWO_FA_FORCE,
   code_AUTH_TWO_FA_NEEDED,
   status_AUTH_NEEDED,
   status_AUTH_OK,
   status_AUTH_TWO_FA_NEEDED,
   status_AUTH_TWO_FA_FORCE,
-  status_RESET_PASSWORD_NEEDED
+  status_RESET_PASSWORD_NEEDED, status_ROUTE_TO_PAYMENT
 } from '../utils/codes';
 
 import { handleError } from '../utils/helper';
@@ -76,6 +77,11 @@ export default (config) =>
             const code = response.getCode();
             const token = response.getToken();
             const services = response.getServiceList();
+            const isPaid = response.getIsPaid();
+            const paidLogs = response.getPaidLogsList();
+            const domain = response.getDomain();
+            const username = response.getUsername();
+            const packageId = response.getPackageId();
             const apps = response.getAppList().map((data) => {
               const appSettings = data.toObject();
               if (
@@ -98,12 +104,14 @@ export default (config) =>
                 services: services,
                 widgets,
                 apps: apps,
-                token: token
+                token: token,
+                isPaid,
+                paidLogs
               });
             } else if (code == status_RESET_PASSWORD_NEEDED) {
               resolve({
                 status: status_RESET_PASSWORD_NEEDED,
-                resetPasswordNeeded: true,
+                resetPasswordNeeded: true
               });
             } else if (code == code_AUTH_TWO_FA_FORCE) {
               resolve({
@@ -113,6 +121,21 @@ export default (config) =>
               });
             } else if (code == code_AUTH_TWO_FA_NEEDED) {
               resolve({ status: status_AUTH_TWO_FA_NEEDED, token: token });
+            } else if (code == status_NOT_PAID) {
+              resolve({
+                status: status_NOT_PAID,
+                invoiceIsNotPaid: true,
+                message: response.getMessage()
+              });
+            } else if (code == status_ROUTE_TO_PAYMENT) {
+              resolve({
+                status: status_RESET_PASSWORD_NEEDED,
+                routeToPaymentScreen: true,
+                domain,
+                packageId,
+                username,
+                message: response.getMessage()
+              });
             } else {
               reject({
                 code: code,
