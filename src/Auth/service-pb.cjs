@@ -1413,7 +1413,7 @@ proto.yartu.LoginRequest.prototype.hasDeviceId = function() {
  * @private {!Array<number>}
  * @const
  */
-proto.yartu.LoginResponse.repeatedFields_ = [3,4,8,9,14];
+proto.yartu.LoginResponse.repeatedFields_ = [3,4,8,9,15];
 
 
 
@@ -1458,8 +1458,9 @@ proto.yartu.LoginResponse.toObject = function(includeInstance, msg) {
     widgetList: (f = jspb.Message.getRepeatedField(msg, 9)) == null ? undefined : f,
     message: jspb.Message.getFieldWithDefault(msg, 10, ""),
     domain: jspb.Message.getFieldWithDefault(msg, 11, ""),
-    packageId: jspb.Message.getFieldWithDefault(msg, 12, 0),
-    isPaid: jspb.Message.getBooleanFieldWithDefault(msg, 13, false),
+    username: jspb.Message.getFieldWithDefault(msg, 12, ""),
+    packageId: jspb.Message.getFieldWithDefault(msg, 13, 0),
+    isPaid: jspb.Message.getBooleanFieldWithDefault(msg, 14, false),
     paidLogsList: jspb.Message.toObjectList(msg.getPaidLogsList(),
     common_grpc_definitions_pb.PaidLog.toObject, includeInstance)
   };
@@ -1544,14 +1545,18 @@ proto.yartu.LoginResponse.deserializeBinaryFromReader = function(msg, reader) {
       msg.setDomain(value);
       break;
     case 12:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setUsername(value);
+      break;
+    case 13:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setPackageId(value);
       break;
-    case 13:
+    case 14:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setIsPaid(value);
       break;
-    case 14:
+    case 15:
       var value = new common_grpc_definitions_pb.PaidLog;
       reader.readMessage(value,common_grpc_definitions_pb.PaidLog.deserializeBinaryFromReader);
       msg.addPaidLogs(value);
@@ -1663,24 +1668,31 @@ proto.yartu.LoginResponse.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = /** @type {number} */ (jspb.Message.getField(message, 12));
+  f = /** @type {string} */ (jspb.Message.getField(message, 12));
   if (f != null) {
-    writer.writeInt64(
+    writer.writeString(
       12,
       f
     );
   }
-  f = /** @type {boolean} */ (jspb.Message.getField(message, 13));
+  f = /** @type {number} */ (jspb.Message.getField(message, 13));
+  if (f != null) {
+    writer.writeInt64(
+      13,
+      f
+    );
+  }
+  f = /** @type {boolean} */ (jspb.Message.getField(message, 14));
   if (f != null) {
     writer.writeBool(
-      13,
+      14,
       f
     );
   }
   f = message.getPaidLogsList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
-      14,
+      15,
       f,
       common_grpc_definitions_pb.PaidLog.serializeBinaryToWriter
     );
@@ -2036,19 +2048,19 @@ proto.yartu.LoginResponse.prototype.hasDomain = function() {
 
 
 /**
- * optional int64 package_id = 12;
- * @return {number}
+ * optional string username = 12;
+ * @return {string}
  */
-proto.yartu.LoginResponse.prototype.getPackageId = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 12, 0));
+proto.yartu.LoginResponse.prototype.getUsername = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 12, ""));
 };
 
 
 /**
- * @param {number} value
+ * @param {string} value
  * @return {!proto.yartu.LoginResponse} returns this
  */
-proto.yartu.LoginResponse.prototype.setPackageId = function(value) {
+proto.yartu.LoginResponse.prototype.setUsername = function(value) {
   return jspb.Message.setField(this, 12, value);
 };
 
@@ -2057,7 +2069,7 @@ proto.yartu.LoginResponse.prototype.setPackageId = function(value) {
  * Clears the field making it undefined.
  * @return {!proto.yartu.LoginResponse} returns this
  */
-proto.yartu.LoginResponse.prototype.clearPackageId = function() {
+proto.yartu.LoginResponse.prototype.clearUsername = function() {
   return jspb.Message.setField(this, 12, undefined);
 };
 
@@ -2066,25 +2078,25 @@ proto.yartu.LoginResponse.prototype.clearPackageId = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu.LoginResponse.prototype.hasPackageId = function() {
+proto.yartu.LoginResponse.prototype.hasUsername = function() {
   return jspb.Message.getField(this, 12) != null;
 };
 
 
 /**
- * optional bool is_paid = 13;
- * @return {boolean}
+ * optional int64 package_id = 13;
+ * @return {number}
  */
-proto.yartu.LoginResponse.prototype.getIsPaid = function() {
-  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 13, false));
+proto.yartu.LoginResponse.prototype.getPackageId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 13, 0));
 };
 
 
 /**
- * @param {boolean} value
+ * @param {number} value
  * @return {!proto.yartu.LoginResponse} returns this
  */
-proto.yartu.LoginResponse.prototype.setIsPaid = function(value) {
+proto.yartu.LoginResponse.prototype.setPackageId = function(value) {
   return jspb.Message.setField(this, 13, value);
 };
 
@@ -2093,7 +2105,7 @@ proto.yartu.LoginResponse.prototype.setIsPaid = function(value) {
  * Clears the field making it undefined.
  * @return {!proto.yartu.LoginResponse} returns this
  */
-proto.yartu.LoginResponse.prototype.clearIsPaid = function() {
+proto.yartu.LoginResponse.prototype.clearPackageId = function() {
   return jspb.Message.setField(this, 13, undefined);
 };
 
@@ -2102,18 +2114,54 @@ proto.yartu.LoginResponse.prototype.clearIsPaid = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu.LoginResponse.prototype.hasIsPaid = function() {
+proto.yartu.LoginResponse.prototype.hasPackageId = function() {
   return jspb.Message.getField(this, 13) != null;
 };
 
 
 /**
- * repeated PaidLog paid_logs = 14;
+ * optional bool is_paid = 14;
+ * @return {boolean}
+ */
+proto.yartu.LoginResponse.prototype.getIsPaid = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 14, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.yartu.LoginResponse} returns this
+ */
+proto.yartu.LoginResponse.prototype.setIsPaid = function(value) {
+  return jspb.Message.setField(this, 14, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.LoginResponse} returns this
+ */
+proto.yartu.LoginResponse.prototype.clearIsPaid = function() {
+  return jspb.Message.setField(this, 14, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.LoginResponse.prototype.hasIsPaid = function() {
+  return jspb.Message.getField(this, 14) != null;
+};
+
+
+/**
+ * repeated PaidLog paid_logs = 15;
  * @return {!Array<!proto.PaidLog>}
  */
 proto.yartu.LoginResponse.prototype.getPaidLogsList = function() {
   return /** @type{!Array<!proto.PaidLog>} */ (
-    jspb.Message.getRepeatedWrapperField(this, common_grpc_definitions_pb.PaidLog, 14));
+    jspb.Message.getRepeatedWrapperField(this, common_grpc_definitions_pb.PaidLog, 15));
 };
 
 
@@ -2122,7 +2170,7 @@ proto.yartu.LoginResponse.prototype.getPaidLogsList = function() {
  * @return {!proto.yartu.LoginResponse} returns this
 */
 proto.yartu.LoginResponse.prototype.setPaidLogsList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 14, value);
+  return jspb.Message.setRepeatedWrapperField(this, 15, value);
 };
 
 
@@ -2132,7 +2180,7 @@ proto.yartu.LoginResponse.prototype.setPaidLogsList = function(value) {
  * @return {!proto.PaidLog}
  */
 proto.yartu.LoginResponse.prototype.addPaidLogs = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 14, opt_value, proto.PaidLog, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 15, opt_value, proto.PaidLog, opt_index);
 };
 
 

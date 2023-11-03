@@ -80,6 +80,7 @@ export default (config) =>
             const isPaid = response.getIsPaid();
             const paidLogs = response.getPaidLogsList();
             const domain = response.getDomain();
+            const username = response.getUsername();
             const packageId = response.getPackageId();
             const apps = response.getAppList().map((data) => {
               const appSettings = data.toObject();
@@ -132,6 +133,7 @@ export default (config) =>
                 routeToPaymentScreen: true,
                 domain,
                 packageId,
+                username,
                 message: response.getMessage()
               });
             } else {
