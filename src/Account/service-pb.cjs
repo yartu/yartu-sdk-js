@@ -3194,7 +3194,7 @@ proto.yartu.GetInfoResponse.toObject = function(includeInstance, msg) {
     proto.yartu.RealmManager.toObject, includeInstance),
     anyNotPaidRealm: jspb.Message.getBooleanFieldWithDefault(msg, 21, false),
     paidLogsList: jspb.Message.toObjectList(msg.getPaidLogsList(),
-    common_grpc_definitions_pb.paidLog.toObject, includeInstance)
+    common_grpc_definitions_pb.PaidLog.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -3319,8 +3319,8 @@ proto.yartu.GetInfoResponse.deserializeBinaryFromReader = function(msg, reader) 
       msg.setAnyNotPaidRealm(value);
       break;
     case 22:
-      var value = new common_grpc_definitions_pb.paidLog;
-      reader.readMessage(value,common_grpc_definitions_pb.paidLog.deserializeBinaryFromReader);
+      var value = new common_grpc_definitions_pb.PaidLog;
+      reader.readMessage(value,common_grpc_definitions_pb.PaidLog.deserializeBinaryFromReader);
       msg.addPaidLogs(value);
       break;
     default:
@@ -3507,7 +3507,7 @@ proto.yartu.GetInfoResponse.serializeBinaryToWriter = function(message, writer) 
     writer.writeRepeatedMessage(
       22,
       f,
-      common_grpc_definitions_pb.paidLog.serializeBinaryToWriter
+      common_grpc_definitions_pb.PaidLog.serializeBinaryToWriter
     );
   }
 };
@@ -4048,17 +4048,17 @@ proto.yartu.GetInfoResponse.prototype.hasAnyNotPaidRealm = function() {
 
 
 /**
- * repeated paidLog paid_logs = 22;
- * @return {!Array<!proto.paidLog>}
+ * repeated PaidLog paid_logs = 22;
+ * @return {!Array<!proto.PaidLog>}
  */
 proto.yartu.GetInfoResponse.prototype.getPaidLogsList = function() {
-  return /** @type{!Array<!proto.paidLog>} */ (
-    jspb.Message.getRepeatedWrapperField(this, common_grpc_definitions_pb.paidLog, 22));
+  return /** @type{!Array<!proto.PaidLog>} */ (
+    jspb.Message.getRepeatedWrapperField(this, common_grpc_definitions_pb.PaidLog, 22));
 };
 
 
 /**
- * @param {!Array<!proto.paidLog>} value
+ * @param {!Array<!proto.PaidLog>} value
  * @return {!proto.yartu.GetInfoResponse} returns this
 */
 proto.yartu.GetInfoResponse.prototype.setPaidLogsList = function(value) {
@@ -4067,12 +4067,12 @@ proto.yartu.GetInfoResponse.prototype.setPaidLogsList = function(value) {
 
 
 /**
- * @param {!proto.paidLog=} opt_value
+ * @param {!proto.PaidLog=} opt_value
  * @param {number=} opt_index
- * @return {!proto.paidLog}
+ * @return {!proto.PaidLog}
  */
 proto.yartu.GetInfoResponse.prototype.addPaidLogs = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 22, opt_value, proto.paidLog, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 22, opt_value, proto.PaidLog, opt_index);
 };
 
 

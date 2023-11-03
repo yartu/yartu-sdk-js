@@ -1461,7 +1461,7 @@ proto.yartu.LoginResponse.toObject = function(includeInstance, msg) {
     packageDetail: (f = msg.getPackageDetail()) && common_grpc_definitions_pb.Package.toObject(includeInstance, f),
     isPaid: jspb.Message.getBooleanFieldWithDefault(msg, 13, false),
     paidLogsList: jspb.Message.toObjectList(msg.getPaidLogsList(),
-    common_grpc_definitions_pb.paidLog.toObject, includeInstance)
+    common_grpc_definitions_pb.PaidLog.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -1553,8 +1553,8 @@ proto.yartu.LoginResponse.deserializeBinaryFromReader = function(msg, reader) {
       msg.setIsPaid(value);
       break;
     case 14:
-      var value = new common_grpc_definitions_pb.paidLog;
-      reader.readMessage(value,common_grpc_definitions_pb.paidLog.deserializeBinaryFromReader);
+      var value = new common_grpc_definitions_pb.PaidLog;
+      reader.readMessage(value,common_grpc_definitions_pb.PaidLog.deserializeBinaryFromReader);
       msg.addPaidLogs(value);
       break;
     default:
@@ -1684,7 +1684,7 @@ proto.yartu.LoginResponse.serializeBinaryToWriter = function(message, writer) {
     writer.writeRepeatedMessage(
       14,
       f,
-      common_grpc_definitions_pb.paidLog.serializeBinaryToWriter
+      common_grpc_definitions_pb.PaidLog.serializeBinaryToWriter
     );
   }
 };
@@ -2111,17 +2111,17 @@ proto.yartu.LoginResponse.prototype.hasIsPaid = function() {
 
 
 /**
- * repeated paidLog paid_logs = 14;
- * @return {!Array<!proto.paidLog>}
+ * repeated PaidLog paid_logs = 14;
+ * @return {!Array<!proto.PaidLog>}
  */
 proto.yartu.LoginResponse.prototype.getPaidLogsList = function() {
-  return /** @type{!Array<!proto.paidLog>} */ (
-    jspb.Message.getRepeatedWrapperField(this, common_grpc_definitions_pb.paidLog, 14));
+  return /** @type{!Array<!proto.PaidLog>} */ (
+    jspb.Message.getRepeatedWrapperField(this, common_grpc_definitions_pb.PaidLog, 14));
 };
 
 
 /**
- * @param {!Array<!proto.paidLog>} value
+ * @param {!Array<!proto.PaidLog>} value
  * @return {!proto.yartu.LoginResponse} returns this
 */
 proto.yartu.LoginResponse.prototype.setPaidLogsList = function(value) {
@@ -2130,12 +2130,12 @@ proto.yartu.LoginResponse.prototype.setPaidLogsList = function(value) {
 
 
 /**
- * @param {!proto.paidLog=} opt_value
+ * @param {!proto.PaidLog=} opt_value
  * @param {number=} opt_index
- * @return {!proto.paidLog}
+ * @return {!proto.PaidLog}
  */
 proto.yartu.LoginResponse.prototype.addPaidLogs = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 14, opt_value, proto.paidLog, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 14, opt_value, proto.PaidLog, opt_index);
 };
 
 
