@@ -1482,6 +1482,67 @@ proto.yartu.YCustomerPromiseClient.prototype.upsertRegisterForm =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.GetPackageRequest,
+ *   !proto.yartu.GetPackageResponse>}
+ */
+const methodDescriptor_YCustomer_getPackage = new grpc.web.MethodDescriptor(
+  '/yartu.YCustomer/getPackage',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.GetPackageRequest,
+  proto.yartu.GetPackageResponse,
+  /**
+   * @param {!proto.yartu.GetPackageRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.GetPackageResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.GetPackageRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.GetPackageResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.GetPackageResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YCustomerClient.prototype.getPackage =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YCustomer/getPackage',
+      request,
+      metadata || {},
+      methodDescriptor_YCustomer_getPackage,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.GetPackageRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.GetPackageResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YCustomerPromiseClient.prototype.getPackage =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YCustomer/getPackage',
+      request,
+      metadata || {},
+      methodDescriptor_YCustomer_getPackage);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.ListPackagesRequest,
  *   !proto.yartu.ListPackagesResponse>}
  */

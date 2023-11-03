@@ -3138,7 +3138,7 @@ proto.yartu.RealmManager.prototype.hasRealm = function() {
  * @private {!Array<number>}
  * @const
  */
-proto.yartu.GetInfoResponse.repeatedFields_ = [15,17,20];
+proto.yartu.GetInfoResponse.repeatedFields_ = [15,17,20,22];
 
 
 
@@ -3191,7 +3191,10 @@ proto.yartu.GetInfoResponse.toObject = function(includeInstance, msg) {
     serviceSettings: (f = msg.getServiceSettings()) && common_grpc_definitions_pb.JSON.toObject(includeInstance, f),
     image: msg.getImage_asB64(),
     managerList: jspb.Message.toObjectList(msg.getManagerList(),
-    proto.yartu.RealmManager.toObject, includeInstance)
+    proto.yartu.RealmManager.toObject, includeInstance),
+    anyNotPaidRealm: jspb.Message.getBooleanFieldWithDefault(msg, 21, false),
+    paidLogsList: jspb.Message.toObjectList(msg.getPaidLogsList(),
+    common_grpc_definitions_pb.PaidLog.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -3310,6 +3313,15 @@ proto.yartu.GetInfoResponse.deserializeBinaryFromReader = function(msg, reader) 
       var value = new proto.yartu.RealmManager;
       reader.readMessage(value,proto.yartu.RealmManager.deserializeBinaryFromReader);
       msg.addManager(value);
+      break;
+    case 21:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setAnyNotPaidRealm(value);
+      break;
+    case 22:
+      var value = new common_grpc_definitions_pb.PaidLog;
+      reader.readMessage(value,common_grpc_definitions_pb.PaidLog.deserializeBinaryFromReader);
+      msg.addPaidLogs(value);
       break;
     default:
       reader.skipField();
@@ -3481,6 +3493,21 @@ proto.yartu.GetInfoResponse.serializeBinaryToWriter = function(message, writer) 
       20,
       f,
       proto.yartu.RealmManager.serializeBinaryToWriter
+    );
+  }
+  f = /** @type {boolean} */ (jspb.Message.getField(message, 21));
+  if (f != null) {
+    writer.writeBool(
+      21,
+      f
+    );
+  }
+  f = message.getPaidLogsList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      22,
+      f,
+      common_grpc_definitions_pb.PaidLog.serializeBinaryToWriter
     );
   }
 };
@@ -3981,6 +4008,80 @@ proto.yartu.GetInfoResponse.prototype.addManager = function(opt_value, opt_index
  */
 proto.yartu.GetInfoResponse.prototype.clearManagerList = function() {
   return this.setManagerList([]);
+};
+
+
+/**
+ * optional bool any_not_paid_realm = 21;
+ * @return {boolean}
+ */
+proto.yartu.GetInfoResponse.prototype.getAnyNotPaidRealm = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 21, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.yartu.GetInfoResponse} returns this
+ */
+proto.yartu.GetInfoResponse.prototype.setAnyNotPaidRealm = function(value) {
+  return jspb.Message.setField(this, 21, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.GetInfoResponse} returns this
+ */
+proto.yartu.GetInfoResponse.prototype.clearAnyNotPaidRealm = function() {
+  return jspb.Message.setField(this, 21, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.GetInfoResponse.prototype.hasAnyNotPaidRealm = function() {
+  return jspb.Message.getField(this, 21) != null;
+};
+
+
+/**
+ * repeated PaidLog paid_logs = 22;
+ * @return {!Array<!proto.PaidLog>}
+ */
+proto.yartu.GetInfoResponse.prototype.getPaidLogsList = function() {
+  return /** @type{!Array<!proto.PaidLog>} */ (
+    jspb.Message.getRepeatedWrapperField(this, common_grpc_definitions_pb.PaidLog, 22));
+};
+
+
+/**
+ * @param {!Array<!proto.PaidLog>} value
+ * @return {!proto.yartu.GetInfoResponse} returns this
+*/
+proto.yartu.GetInfoResponse.prototype.setPaidLogsList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 22, value);
+};
+
+
+/**
+ * @param {!proto.PaidLog=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.PaidLog}
+ */
+proto.yartu.GetInfoResponse.prototype.addPaidLogs = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 22, opt_value, proto.PaidLog, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.yartu.GetInfoResponse} returns this
+ */
+proto.yartu.GetInfoResponse.prototype.clearPaidLogsList = function() {
+  return this.setPaidLogsList([]);
 };
 
 
