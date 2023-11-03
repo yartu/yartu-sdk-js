@@ -1456,7 +1456,11 @@ proto.yartu.LoginResponse.toObject = function(includeInstance, msg) {
     roleName: jspb.Message.getFieldWithDefault(msg, 7, ""),
     permissionList: (f = jspb.Message.getRepeatedField(msg, 8)) == null ? undefined : f,
     widgetList: (f = jspb.Message.getRepeatedField(msg, 9)) == null ? undefined : f,
-    message: jspb.Message.getFieldWithDefault(msg, 10, "")
+    message: jspb.Message.getFieldWithDefault(msg, 10, ""),
+    domain: jspb.Message.getFieldWithDefault(msg, 11, ""),
+    packageDetails: jspb.Message.getFieldWithDefault(msg, 12, 0),
+    anyNotPaidRealm: jspb.Message.getBooleanFieldWithDefault(msg, 13, false),
+    packageDetail: (f = msg.getPackageDetail()) && common_grpc_definitions_pb.Package.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -1533,6 +1537,23 @@ proto.yartu.LoginResponse.deserializeBinaryFromReader = function(msg, reader) {
     case 10:
       var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
+      break;
+    case 11:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setDomain(value);
+      break;
+    case 12:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setPackageDetails(value);
+      break;
+    case 13:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setAnyNotPaidRealm(value);
+      break;
+    case 15:
+      var value = new common_grpc_definitions_pb.Package;
+      reader.readMessage(value,common_grpc_definitions_pb.Package.deserializeBinaryFromReader);
+      msg.setPackageDetail(value);
       break;
     default:
       reader.skipField();
@@ -1632,6 +1653,35 @@ proto.yartu.LoginResponse.serializeBinaryToWriter = function(message, writer) {
     writer.writeString(
       10,
       f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 11));
+  if (f != null) {
+    writer.writeString(
+      11,
+      f
+    );
+  }
+  f = /** @type {number} */ (jspb.Message.getField(message, 12));
+  if (f != null) {
+    writer.writeInt64(
+      12,
+      f
+    );
+  }
+  f = /** @type {boolean} */ (jspb.Message.getField(message, 13));
+  if (f != null) {
+    writer.writeBool(
+      13,
+      f
+    );
+  }
+  f = message.getPackageDetail();
+  if (f != null) {
+    writer.writeMessage(
+      15,
+      f,
+      common_grpc_definitions_pb.Package.serializeBinaryToWriter
     );
   }
 };
@@ -1945,6 +1995,151 @@ proto.yartu.LoginResponse.prototype.clearMessage = function() {
  */
 proto.yartu.LoginResponse.prototype.hasMessage = function() {
   return jspb.Message.getField(this, 10) != null;
+};
+
+
+/**
+ * optional string domain = 11;
+ * @return {string}
+ */
+proto.yartu.LoginResponse.prototype.getDomain = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 11, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.LoginResponse} returns this
+ */
+proto.yartu.LoginResponse.prototype.setDomain = function(value) {
+  return jspb.Message.setField(this, 11, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.LoginResponse} returns this
+ */
+proto.yartu.LoginResponse.prototype.clearDomain = function() {
+  return jspb.Message.setField(this, 11, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.LoginResponse.prototype.hasDomain = function() {
+  return jspb.Message.getField(this, 11) != null;
+};
+
+
+/**
+ * optional int64 package_details = 12;
+ * @return {number}
+ */
+proto.yartu.LoginResponse.prototype.getPackageDetails = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 12, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu.LoginResponse} returns this
+ */
+proto.yartu.LoginResponse.prototype.setPackageDetails = function(value) {
+  return jspb.Message.setField(this, 12, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.LoginResponse} returns this
+ */
+proto.yartu.LoginResponse.prototype.clearPackageDetails = function() {
+  return jspb.Message.setField(this, 12, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.LoginResponse.prototype.hasPackageDetails = function() {
+  return jspb.Message.getField(this, 12) != null;
+};
+
+
+/**
+ * optional bool any_not_paid_realm = 13;
+ * @return {boolean}
+ */
+proto.yartu.LoginResponse.prototype.getAnyNotPaidRealm = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 13, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.yartu.LoginResponse} returns this
+ */
+proto.yartu.LoginResponse.prototype.setAnyNotPaidRealm = function(value) {
+  return jspb.Message.setField(this, 13, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.LoginResponse} returns this
+ */
+proto.yartu.LoginResponse.prototype.clearAnyNotPaidRealm = function() {
+  return jspb.Message.setField(this, 13, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.LoginResponse.prototype.hasAnyNotPaidRealm = function() {
+  return jspb.Message.getField(this, 13) != null;
+};
+
+
+/**
+ * optional Package package_detail = 15;
+ * @return {?proto.Package}
+ */
+proto.yartu.LoginResponse.prototype.getPackageDetail = function() {
+  return /** @type{?proto.Package} */ (
+    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.Package, 15));
+};
+
+
+/**
+ * @param {?proto.Package|undefined} value
+ * @return {!proto.yartu.LoginResponse} returns this
+*/
+proto.yartu.LoginResponse.prototype.setPackageDetail = function(value) {
+  return jspb.Message.setWrapperField(this, 15, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.yartu.LoginResponse} returns this
+ */
+proto.yartu.LoginResponse.prototype.clearPackageDetail = function() {
+  return this.setPackageDetail(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.LoginResponse.prototype.hasPackageDetail = function() {
+  return jspb.Message.getField(this, 15) != null;
 };
 
 
