@@ -1458,7 +1458,7 @@ proto.yartu.LoginResponse.toObject = function(includeInstance, msg) {
     widgetList: (f = jspb.Message.getRepeatedField(msg, 9)) == null ? undefined : f,
     message: jspb.Message.getFieldWithDefault(msg, 10, ""),
     domain: jspb.Message.getFieldWithDefault(msg, 11, ""),
-    packageDetail: (f = msg.getPackageDetail()) && common_grpc_definitions_pb.Package.toObject(includeInstance, f),
+    packageId: jspb.Message.getFieldWithDefault(msg, 12, 0),
     isPaid: jspb.Message.getBooleanFieldWithDefault(msg, 13, false),
     paidLogsList: jspb.Message.toObjectList(msg.getPaidLogsList(),
     common_grpc_definitions_pb.PaidLog.toObject, includeInstance)
@@ -1544,9 +1544,8 @@ proto.yartu.LoginResponse.deserializeBinaryFromReader = function(msg, reader) {
       msg.setDomain(value);
       break;
     case 12:
-      var value = new common_grpc_definitions_pb.Package;
-      reader.readMessage(value,common_grpc_definitions_pb.Package.deserializeBinaryFromReader);
-      msg.setPackageDetail(value);
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setPackageId(value);
       break;
     case 13:
       var value = /** @type {boolean} */ (reader.readBool());
@@ -1664,12 +1663,11 @@ proto.yartu.LoginResponse.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getPackageDetail();
+  f = /** @type {number} */ (jspb.Message.getField(message, 12));
   if (f != null) {
-    writer.writeMessage(
+    writer.writeInt64(
       12,
-      f,
-      common_grpc_definitions_pb.Package.serializeBinaryToWriter
+      f
     );
   }
   f = /** @type {boolean} */ (jspb.Message.getField(message, 13));
@@ -2038,30 +2036,29 @@ proto.yartu.LoginResponse.prototype.hasDomain = function() {
 
 
 /**
- * optional Package package_detail = 12;
- * @return {?proto.Package}
+ * optional int64 package_id = 12;
+ * @return {number}
  */
-proto.yartu.LoginResponse.prototype.getPackageDetail = function() {
-  return /** @type{?proto.Package} */ (
-    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.Package, 12));
+proto.yartu.LoginResponse.prototype.getPackageId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 12, 0));
 };
 
 
 /**
- * @param {?proto.Package|undefined} value
+ * @param {number} value
  * @return {!proto.yartu.LoginResponse} returns this
-*/
-proto.yartu.LoginResponse.prototype.setPackageDetail = function(value) {
-  return jspb.Message.setWrapperField(this, 12, value);
+ */
+proto.yartu.LoginResponse.prototype.setPackageId = function(value) {
+  return jspb.Message.setField(this, 12, value);
 };
 
 
 /**
- * Clears the message field making it undefined.
+ * Clears the field making it undefined.
  * @return {!proto.yartu.LoginResponse} returns this
  */
-proto.yartu.LoginResponse.prototype.clearPackageDetail = function() {
-  return this.setPackageDetail(undefined);
+proto.yartu.LoginResponse.prototype.clearPackageId = function() {
+  return jspb.Message.setField(this, 12, undefined);
 };
 
 
@@ -2069,7 +2066,7 @@ proto.yartu.LoginResponse.prototype.clearPackageDetail = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu.LoginResponse.prototype.hasPackageDetail = function() {
+proto.yartu.LoginResponse.prototype.hasPackageId = function() {
   return jspb.Message.getField(this, 12) != null;
 };
 

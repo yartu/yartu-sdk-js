@@ -79,6 +79,8 @@ export default (config) =>
             const services = response.getServiceList();
             const isPaid = response.getIsPaid();
             const paidLogs = response.getPaidLogsList();
+            const domain = response.getDomain();
+            const packageId = response.getPackageId();
             const apps = response.getAppList().map((data) => {
               const appSettings = data.toObject();
               if (
@@ -128,6 +130,8 @@ export default (config) =>
               resolve({
                 status: status_RESET_PASSWORD_NEEDED,
                 routeToPaymentScreen: true,
+                domain,
+                packageId,
                 message: response.getMessage()
               });
             } else {
