@@ -78,7 +78,18 @@ export default (config) =>
                 serviceSettings = {};
               }
 
-              data.image = data.image ? 'data:image/png;base64,'.concat(data.image) : null;
+              if (data.paidLogsList.length > 0) {
+                data.paidLogsList = data.paidLogsList.map((l) => {
+                  const logs = JSON.parse(l.logs.json);
+                  l.logs = logs;
+                  return l;
+                });
+              }
+
+              data.image = data.image
+                ? 'data:image/png;base64,'.concat(data.image)
+                : null;
+
               resolve({
                 data: data,
                 message: response.getMessage(),
