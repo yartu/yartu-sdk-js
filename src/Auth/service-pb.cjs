@@ -1462,7 +1462,8 @@ proto.yartu.LoginResponse.toObject = function(includeInstance, msg) {
     packageId: jspb.Message.getFieldWithDefault(msg, 13, 0),
     isPaid: jspb.Message.getBooleanFieldWithDefault(msg, 14, false),
     paidLogsList: jspb.Message.toObjectList(msg.getPaidLogsList(),
-    common_grpc_definitions_pb.PaidLog.toObject, includeInstance)
+    common_grpc_definitions_pb.PaidLog.toObject, includeInstance),
+    latePaymentToken: jspb.Message.getFieldWithDefault(msg, 16, "")
   };
 
   if (includeInstance) {
@@ -1560,6 +1561,10 @@ proto.yartu.LoginResponse.deserializeBinaryFromReader = function(msg, reader) {
       var value = new common_grpc_definitions_pb.PaidLog;
       reader.readMessage(value,common_grpc_definitions_pb.PaidLog.deserializeBinaryFromReader);
       msg.addPaidLogs(value);
+      break;
+    case 16:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setLatePaymentToken(value);
       break;
     default:
       reader.skipField();
@@ -1695,6 +1700,13 @@ proto.yartu.LoginResponse.serializeBinaryToWriter = function(message, writer) {
       15,
       f,
       common_grpc_definitions_pb.PaidLog.serializeBinaryToWriter
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 16));
+  if (f != null) {
+    writer.writeString(
+      16,
+      f
     );
   }
 };
@@ -2190,6 +2202,42 @@ proto.yartu.LoginResponse.prototype.addPaidLogs = function(opt_value, opt_index)
  */
 proto.yartu.LoginResponse.prototype.clearPaidLogsList = function() {
   return this.setPaidLogsList([]);
+};
+
+
+/**
+ * optional string late_payment_token = 16;
+ * @return {string}
+ */
+proto.yartu.LoginResponse.prototype.getLatePaymentToken = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 16, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.LoginResponse} returns this
+ */
+proto.yartu.LoginResponse.prototype.setLatePaymentToken = function(value) {
+  return jspb.Message.setField(this, 16, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.LoginResponse} returns this
+ */
+proto.yartu.LoginResponse.prototype.clearLatePaymentToken = function() {
+  return jspb.Message.setField(this, 16, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.LoginResponse.prototype.hasLatePaymentToken = function() {
+  return jspb.Message.getField(this, 16) != null;
 };
 
 
