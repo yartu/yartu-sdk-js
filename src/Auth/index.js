@@ -82,6 +82,7 @@ export default (config) =>
             const domain = response.getDomain();
             const username = response.getUsername();
             const packageId = response.getPackageId();
+            const latePaymentToken = response.getLatePaymentToken();
             const apps = response.getAppList().map((data) => {
               const appSettings = data.toObject();
               if (
@@ -106,26 +107,34 @@ export default (config) =>
                 apps: apps,
                 token: token,
                 isPaid,
-                paidLogs
+                paidLogs,
+                latePaymentToken
               });
             } else if (code == status_RESET_PASSWORD_NEEDED) {
               resolve({
                 status: status_RESET_PASSWORD_NEEDED,
-                resetPasswordNeeded: true
+                resetPasswordNeeded: true,
+                latePaymentToken
               });
             } else if (code == code_AUTH_TWO_FA_FORCE) {
               resolve({
                 status: status_AUTH_TWO_FA_FORCE,
                 token: token,
-                two_fa_image: response.getOtpImage()
+                two_fa_image: response.getOtpImage(),
+                latePaymentToken
               });
             } else if (code == code_AUTH_TWO_FA_NEEDED) {
-              resolve({ status: status_AUTH_TWO_FA_NEEDED, token: token });
+              resolve({
+                status: status_AUTH_TWO_FA_NEEDED,
+                token: token,
+                latePaymentToken
+              });
             } else if (code == status_NOT_PAID) {
               resolve({
                 status: status_NOT_PAID,
                 invoiceIsNotPaid: true,
-                message: response.getMessage()
+                message: response.getMessage(),
+                latePaymentToken
               });
             } else if (code == status_ROUTE_TO_PAYMENT) {
               resolve({
@@ -134,12 +143,13 @@ export default (config) =>
                 domain,
                 packageId,
                 username,
-                message: response.getMessage()
+                message: response.getMessage(),
+                latePaymentToken
               });
             } else {
               reject({
                 code: code,
-                message: response.getMessage()
+                message: response.getMessage(),
               });
             }
           }
