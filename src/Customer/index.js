@@ -22,6 +22,7 @@ import {
   CheckDomainAddressRequest,
   UpsertRegisterFormRequest,
   GetPackageRequest,
+  GetContractRequest,
   ListPackagesRequest,
   GetRegisterFormRequest,
   GetPaymentSessionRequest,
@@ -815,6 +816,33 @@ export default (config) =>
               resolve({
                 code: 0,
                 package: packageData,
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
+    getContract = (token) => {
+      return new Promise((resolve, reject) => {
+        const request = new GetContractRequest();
+        request.setToken(token);
+
+        this.client.getContract(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              let contractData = response.getContract().toObject();
+              resolve({
+                code: 0,
+                contact: contractData,
               });
             } else {
               reject({
