@@ -842,7 +842,7 @@ export default (config) =>
               let contractData = response.getContract().toObject();
               resolve({
                 code: 0,
-                contact: contractData,
+                contract: contractData,
               });
             } else {
               reject({
