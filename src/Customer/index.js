@@ -843,13 +843,12 @@ export default (config) =>
               contractData.packageDetail = {
                 ...contractData.packageDetail,
                 price: JSON.parse(contractData.packageDetail.price.json),
-                features: JSON.parse(contractData.packageDetail.features.json),
-                details: JSON.parse(contractData.packageDetail.details.json)
-              }
+                features: JSON.parse(contractData.packageDetail.features.json)
+              };
 
               resolve({
                 code: 0,
-                contract: contractData,
+                contract: contractData
               });
             } else {
               reject({
