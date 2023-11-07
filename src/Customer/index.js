@@ -22,6 +22,7 @@ import {
   CheckDomainAddressRequest,
   UpsertRegisterFormRequest,
   GetPackageRequest,
+  GetContractRequest,
   ListPackagesRequest,
   GetRegisterFormRequest,
   GetPaymentSessionRequest,
@@ -807,14 +808,47 @@ export default (config) =>
             if (code == 0) {
               let packageData = response.getPackage().toObject();
               packageData = {
-                  ...packageData,
-                  price: JSON.parse(packageData.price.json),
-                  features: JSON.parse(packageData.features.json),
-                  details: JSON.parse(packageData.details.json)
+                ...packageData,
+                price: JSON.parse(packageData.price.json),
+                features: JSON.parse(packageData.features.json),
+                details: JSON.parse(packageData.details.json)
               }
               resolve({
                 code: 0,
                 package: packageData,
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
+    getContract = (token) => {
+      return new Promise((resolve, reject) => {
+        const request = new GetContractRequest();
+        request.setToken(token);
+
+        this.client.getContract(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              let contractData = response.getContract().toObject();
+              contractData.packageDetail = {
+                ...contractData.packageDetail,
+                price: JSON.parse(contractData.packageDetail.price.json),
+                features: JSON.parse(contractData.packageDetail.features.json)
+              };
+
+              resolve({
+                code: 0,
+                contract: contractData
               });
             } else {
               reject({

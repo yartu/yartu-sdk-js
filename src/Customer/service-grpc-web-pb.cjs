@@ -1543,6 +1543,67 @@ proto.yartu.YCustomerPromiseClient.prototype.getPackage =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.GetContractRequest,
+ *   !proto.yartu.GetContractResponse>}
+ */
+const methodDescriptor_YCustomer_getContract = new grpc.web.MethodDescriptor(
+  '/yartu.YCustomer/getContract',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.GetContractRequest,
+  proto.yartu.GetContractResponse,
+  /**
+   * @param {!proto.yartu.GetContractRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.GetContractResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.GetContractRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.GetContractResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.GetContractResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YCustomerClient.prototype.getContract =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YCustomer/getContract',
+      request,
+      metadata || {},
+      methodDescriptor_YCustomer_getContract,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.GetContractRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.GetContractResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YCustomerPromiseClient.prototype.getContract =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YCustomer/getContract',
+      request,
+      metadata || {},
+      methodDescriptor_YCustomer_getContract);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.ListPackagesRequest,
  *   !proto.yartu.ListPackagesResponse>}
  */
