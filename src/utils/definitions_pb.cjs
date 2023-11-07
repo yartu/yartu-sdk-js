@@ -2515,7 +2515,7 @@ proto.User.toObject = function(includeInstance, msg) {
     surname: jspb.Message.getFieldWithDefault(msg, 5, ""),
     loginId: jspb.Message.getFieldWithDefault(msg, 6, ""),
     uniqueId: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    oid: jspb.Message.getFieldWithDefault(msg, 8, ""),
+    ldapDn: jspb.Message.getFieldWithDefault(msg, 8, ""),
     serviceList: (f = jspb.Message.getRepeatedField(msg, 9)) == null ? undefined : f,
     widgetList: (f = jspb.Message.getRepeatedField(msg, 10)) == null ? undefined : f,
     role: jspb.Message.getFieldWithDefault(msg, 11, 0),
@@ -2602,7 +2602,7 @@ proto.User.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 8:
       var value = /** @type {string} */ (reader.readString());
-      msg.setOid(value);
+      msg.setLdapDn(value);
       break;
     case 9:
       var value = /** @type {string} */ (reader.readString());
@@ -2767,7 +2767,7 @@ proto.User.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getOid();
+  f = message.getLdapDn();
   if (f.length > 0) {
     writer.writeString(
       8,
@@ -3049,10 +3049,10 @@ proto.User.prototype.setUniqueId = function(value) {
 
 
 /**
- * optional string oid = 8;
+ * optional string ldap_dn = 8;
  * @return {string}
  */
-proto.User.prototype.getOid = function() {
+proto.User.prototype.getLdapDn = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
 };
 
@@ -3061,7 +3061,7 @@ proto.User.prototype.getOid = function() {
  * @param {string} value
  * @return {!proto.User} returns this
  */
-proto.User.prototype.setOid = function(value) {
+proto.User.prototype.setLdapDn = function(value) {
   return jspb.Message.setProto3StringField(this, 8, value);
 };
 
@@ -4734,7 +4734,7 @@ proto.GroupAdmin.toObject = function(includeInstance, msg) {
     hasEmailAlias: jspb.Message.getBooleanFieldWithDefault(msg, 7, false),
     emailAlias: jspb.Message.getFieldWithDefault(msg, 8, ""),
     driveId: jspb.Message.getFieldWithDefault(msg, 9, 0),
-    oid: jspb.Message.getFieldWithDefault(msg, 10, ""),
+    ldapDn: jspb.Message.getFieldWithDefault(msg, 10, ""),
     usersCount: jspb.Message.getFieldWithDefault(msg, 11, 0),
     hasDrive: jspb.Message.getBooleanFieldWithDefault(msg, 12, false),
     hasAddressbook: jspb.Message.getBooleanFieldWithDefault(msg, 13, false),
@@ -4819,7 +4819,7 @@ proto.GroupAdmin.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 10:
       var value = /** @type {string} */ (reader.readString());
-      msg.setOid(value);
+      msg.setLdapDn(value);
       break;
     case 11:
       var value = /** @type {number} */ (reader.readInt64());
@@ -4944,7 +4944,7 @@ proto.GroupAdmin.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getOid();
+  f = message.getLdapDn();
   if (f.length > 0) {
     writer.writeString(
       10,
@@ -5223,10 +5223,10 @@ proto.GroupAdmin.prototype.setDriveId = function(value) {
 
 
 /**
- * optional string oid = 10;
+ * optional string ldap_dn = 10;
  * @return {string}
  */
-proto.GroupAdmin.prototype.getOid = function() {
+proto.GroupAdmin.prototype.getLdapDn = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 10, ""));
 };
 
@@ -5235,7 +5235,7 @@ proto.GroupAdmin.prototype.getOid = function() {
  * @param {string} value
  * @return {!proto.GroupAdmin} returns this
  */
-proto.GroupAdmin.prototype.setOid = function(value) {
+proto.GroupAdmin.prototype.setLdapDn = function(value) {
   return jspb.Message.setProto3StringField(this, 10, value);
 };
 
