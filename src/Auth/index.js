@@ -77,6 +77,7 @@ export default (config) =>
             const code = response.getCode();
             const token = response.getToken();
             const services = response.getServiceList();
+            const widgets = response.getWidgetList();
             const isPaid = response.getIsPaid();
             const paidLogs = response.getPaidLogsList();
             const domain = response.getDomain();
@@ -93,8 +94,6 @@ export default (config) =>
               }
               return appSettings;
             });
-
-            const widgets = response.getWidgetList();
 
             if (code == 0) {
               window.localStorage.setItem('yartu-token', token);
