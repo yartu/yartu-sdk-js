@@ -39,6 +39,7 @@ import {
   DuplicateBoardRequest,
   CopyBoardRequest,
   MoveBoardRequest,
+  ListBoardActivityRequest,
 
   // Board Template services
   ListBoardTemplateRequest,
@@ -107,6 +108,7 @@ import {
 import {Group, Query, Shared, User, UserModifyMeta} from '../utils/definitions_pb.cjs';
 import { YProjectClient } from './service-grpc-web-pb.cjs';
 import { handleError } from '../utils/helper';
+import {ListNoteRequest, NoteMetaQuery} from "../Note/service-pb.cjs";
 
 export default (config) =>
   class Project {
@@ -812,6 +814,61 @@ export default (config) =>
                 board,
                 userPermission: response.getUserPermission(),
               });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    listBoardActivity(boardUUID, queryRequest) {
+      return new Promise((resolve, reject) => {
+        const request = new ListBoardActivityRequest();
+        request.setBoardUuid(boardUUID);
+        const query = new Query();
+
+        if (queryRequest?.sortBy) {
+          query.setSortBy(queryRequest.sortBy);
+        }
+
+        if (queryRequest?.perPage) {
+          query.setPerPage(queryRequest.perPage);
+        }
+
+        if (queryRequest?.page) {
+          query.setPage(queryRequest.page);
+        }
+        request.setQuery(query);
+
+        this.client.listBoardActivity(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              const activities = response.getActivityList();
+
+              const data = [];
+              activities.forEach((a) => {
+                const ao = a.toObject();
+                try {
+                  const activityData = JSON.parse(ao.content);
+                  data.push({ ...ao, content: activityData });
+                } catch (err) {
+                  data.push(ao);
+                }
+              });
+
+              resolve({
+                code,
+                activities: data,
+                pagination: response.getPagination().toObject(),
+                message: response.getMessage()
+              })
             } else {
               reject({
                 code: code,
