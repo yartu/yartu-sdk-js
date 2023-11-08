@@ -57,7 +57,7 @@ import {
 
 import { YDriveClient } from './service-grpc-web-pb.cjs';
 import { handleError, loadFromArray } from '../utils/helper';
-import { Group, Query, Shared, User } from '../utils/definitions_pb.cjs';
+import { User, UserBasic, GroupBasic, Shared, Query } from '../utils/definitions_pb.cjs';
 
 export default (config) =>
   class Drive {
@@ -941,20 +941,20 @@ export default (config) =>
           }
 
           if (s?.isYartuUser) {
-            const user = new User();
-            user.setId(s.id);
-            user.setUsername(s.email);
-            user.setName(s.name);
-            user.setSurname(s.surname);
+            const userBasic = new UserBasic();
+            userBasic.setId(s.id);
+            userBasic.setUsername(s.email);
+            userBasic.setName(s.name);
+            userBasic.setSurname(s.surname);
 
-            shared.setUser(user);
+            shared.setUser(userBasic);
           } else if (s?.isGroup) {
-            const group = new Group();
-            group.setId(s.id);
-            group.setName(s.name);
-            group.setEmailAlias(s.email);
+            const groupBasic = new GroupBasic();
+            groupBasic.setId(s.id);
+            groupBasic.setName(s.name);
+            groupBasic.setEmailAlias(s.email);
 
-            shared.setGroup(group);
+            shared.setGroup(groupBasic);
           } else {
             console.log(
               '@yartu/sdk/Drive share method not supports external users and Realm share features for now!'
@@ -1030,27 +1030,21 @@ export default (config) =>
         const sharedList = [];
         for (const s of shareList) {
           const shared = new Shared();
-          // shared.setId(s.shared_id);
-
-          // TODO :: set Permission map text ??
-          // shared.setPermission(s.permission);
-
           if (s?.isYartuUser) {
-            const user = new User();
-            user.setId(s.id);
-            user.setUsername(s.email);
-            user.setName(s.name);
-            user.setSurname(s.surname);
+            const userBasic = new UserBasic();
+            userBasic.setId(s.id);
+            userBasic.setUsername(s.email);
+            userBasic.setName(s.name);
+            userBasic.setSurname(s.surname);
 
-            console.log('AAAAA:user', user, s);
-            shared.setUser(user);
+            shared.setUser(userBasic);
           } else if (s?.isGroup) {
-            const group = new Group();
-            group.setId(s.id);
-            group.setName(s.name);
-            group.setEmailAlias(s.email);
+            const groupBasic = new GroupBasic();
+            groupBasic.setId(s.id);
+            groupBasic.setName(s.name);
+            groupBasic.setEmailAlias(s.email);
 
-            shared.setGroup(group);
+            shared.setGroup(groupBasic);
           } else {
             console.log(
               '@yartu/sdk/Drive deleteShare method not supports external users and Realm share features for now!'

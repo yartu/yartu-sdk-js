@@ -1452,8 +1452,8 @@ proto.yartu.AddressBook.prototype.toObject = function(opt_includeInstance) {
 proto.yartu.AddressBook.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    user: (f = msg.getUser()) && common_grpc_definitions_pb.User.toObject(includeInstance, f),
-    group: (f = msg.getGroup()) && common_grpc_definitions_pb.Group.toObject(includeInstance, f),
+    user: (f = msg.getUser()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f),
+    group: (f = msg.getGroup()) && common_grpc_definitions_pb.GroupBasic.toObject(includeInstance, f),
     principaluri: jspb.Message.getFieldWithDefault(msg, 4, ""),
     displayname: jspb.Message.getFieldWithDefault(msg, 5, ""),
     uri: jspb.Message.getFieldWithDefault(msg, 6, ""),
@@ -1507,13 +1507,13 @@ proto.yartu.AddressBook.deserializeBinaryFromReader = function(msg, reader) {
       msg.setId(value);
       break;
     case 2:
-      var value = new common_grpc_definitions_pb.User;
-      reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
+      var value = new common_grpc_definitions_pb.UserBasic;
+      reader.readMessage(value,common_grpc_definitions_pb.UserBasic.deserializeBinaryFromReader);
       msg.setUser(value);
       break;
     case 3:
-      var value = new common_grpc_definitions_pb.Group;
-      reader.readMessage(value,common_grpc_definitions_pb.Group.deserializeBinaryFromReader);
+      var value = new common_grpc_definitions_pb.GroupBasic;
+      reader.readMessage(value,common_grpc_definitions_pb.GroupBasic.deserializeBinaryFromReader);
       msg.setGroup(value);
       break;
     case 4:
@@ -1602,7 +1602,7 @@ proto.yartu.AddressBook.serializeBinaryToWriter = function(message, writer) {
     writer.writeMessage(
       2,
       f,
-      common_grpc_definitions_pb.User.serializeBinaryToWriter
+      common_grpc_definitions_pb.UserBasic.serializeBinaryToWriter
     );
   }
   f = message.getGroup();
@@ -1610,7 +1610,7 @@ proto.yartu.AddressBook.serializeBinaryToWriter = function(message, writer) {
     writer.writeMessage(
       3,
       f,
-      common_grpc_definitions_pb.Group.serializeBinaryToWriter
+      common_grpc_definitions_pb.GroupBasic.serializeBinaryToWriter
     );
   }
   f = message.getPrincipaluri();
@@ -1713,17 +1713,17 @@ proto.yartu.AddressBook.prototype.setId = function(value) {
 
 
 /**
- * optional User user = 2;
- * @return {?proto.User}
+ * optional UserBasic user = 2;
+ * @return {?proto.UserBasic}
  */
 proto.yartu.AddressBook.prototype.getUser = function() {
-  return /** @type{?proto.User} */ (
-    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.User, 2));
+  return /** @type{?proto.UserBasic} */ (
+    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.UserBasic, 2));
 };
 
 
 /**
- * @param {?proto.User|undefined} value
+ * @param {?proto.UserBasic|undefined} value
  * @return {!proto.yartu.AddressBook} returns this
 */
 proto.yartu.AddressBook.prototype.setUser = function(value) {
@@ -1750,17 +1750,17 @@ proto.yartu.AddressBook.prototype.hasUser = function() {
 
 
 /**
- * optional Group group = 3;
- * @return {?proto.Group}
+ * optional GroupBasic group = 3;
+ * @return {?proto.GroupBasic}
  */
 proto.yartu.AddressBook.prototype.getGroup = function() {
-  return /** @type{?proto.Group} */ (
-    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.Group, 3));
+  return /** @type{?proto.GroupBasic} */ (
+    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.GroupBasic, 3));
 };
 
 
 /**
- * @param {?proto.Group|undefined} value
+ * @param {?proto.GroupBasic|undefined} value
  * @return {!proto.yartu.AddressBook} returns this
 */
 proto.yartu.AddressBook.prototype.setGroup = function(value) {

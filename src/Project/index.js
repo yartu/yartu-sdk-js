@@ -105,10 +105,10 @@ import {
 
 } from './service-pb.cjs';
 
-import {Group, Query, Shared, User, UserModifyMeta} from '../utils/definitions_pb.cjs';
+import { UserBasic, GroupBasic, Shared, Query, UserModifyMeta} from '../utils/definitions_pb.cjs';
 import { YProjectClient } from './service-grpc-web-pb.cjs';
 import { handleError } from '../utils/helper';
-import {ListNoteRequest, NoteMetaQuery} from "../Note/service-pb.cjs";
+import { ListNoteRequest, NoteMetaQuery } from "../Note/service-pb.cjs";
 
 export default (config) =>
   class Project {
@@ -478,7 +478,7 @@ export default (config) =>
         if (threadData.userList && threadData.userList.length > 0) {
           const participantList = [];
           threadData.userList.forEach(s => {
-            const user = new User();
+            const user = new UserBasic();
             user.setId(s.id);
             user.setUsername(s.email);
             user.setName(s.name);
@@ -906,22 +906,22 @@ export default (config) =>
             // shared.setId(s.shared_id); // because we not update shared data
             shared.setPermission(String(s.permission.value));
             if (s?.isYartuUser) {
-              const user = new User();
-              user.setId(s.id);
-              user.setUsername(s.email);
-              user.setName(s.name);
-              user.setSurname(s.surname);
+              const userBasic = new UserBasic();
+              userBasic.setId(s.id);
+              userBasic.setUsername(s.email);
+              userBasic.setName(s.name);
+              userBasic.setSurname(s.surname);
 
-              shared.setUser(user);
+              shared.setUser(userBasic);
 
             } else if (s?.isGroup) {
 
-              const group = new Group();
-              group.setId(s.id);
-              group.setName(s.name);
-              group.setEmailAlias(s.email);
+              const groupBasic = new GroupBasic();
+              groupBasic.setId(s.id);
+              groupBasic.setName(s.name);
+              groupBasic.setEmailAlias(s.email);
 
-              shared.setGroup(group);
+              shared.setGroup(groupBasic);
 
             } else {
               console.log('@yartu/sdk/ shareBoard method not supports external users and Realm share features for now!');
@@ -1078,22 +1078,22 @@ export default (config) =>
           shared.setPermission(String(s.permission));
 
           if (s?.isYartuUser) {
-            const user = new User();
+            const userBasic = new UserBasic();
             user.setId(s.id);
             user.setUsername(s.email);
             user.setName(s.name);
             user.setSurname(s.surname);
 
-            shared.setUser(user);
+            shared.setBasicUser(userBasic);
 
           } else if (s?.isGroup) {
 
-            const group = new Group();
-            group.setId(s.id);
-            group.setName(s.name);
-            group.setEmailAlias(s.email);
+            const groupBasic = new GroupBasic();
+            groupBasic.setId(s.id);
+            groupBasic.setName(s.name);
+            groupBasic.setEmailAlias(s.email);
 
-            shared.setGroup(group);
+            shared.setGroup(groupBasic);
           } else {
             console.log('@yartu/sdk/ shareBoard method not supports external users and Realm share features for now!');
           }
@@ -2109,14 +2109,14 @@ export default (config) =>
         request.setIsCompleted(checkListItem.isCompleted);
 
         if (checkListItem.assignee) {
-          const assignee = new User();
+          const assignee = new UserBasic();
           assignee.setId(checkListItem.assignee.id);
           assignee.setUsername(checkListItem.assignee.email || checkListItem.assignee.username);
           assignee.setName(checkListItem.assignee.name);
           assignee.setSurname(checkListItem.assignee.surname);
           request.setAssignee(assignee);
         } else if (checkListItem.assignee === null){
-          const assignee = new User();
+          const assignee = new UserBasic();
           request.setAssignee(assignee);
         }
 
@@ -2274,7 +2274,7 @@ export default (config) =>
         request.setChecklistId(checkListId);
 
         if (user) {
-          const assignee = new User();
+          const assignee = new UserBasic();
           assignee.setId(user.id);
           assignee.setUsername(user.email || user.username);
           assignee.setName(user.name);
@@ -2416,22 +2416,22 @@ export default (config) =>
           shared.setPermission(String(s.permission));
 
           if (s?.isYartuUser) {
-            const user = new User();
+            const userBasic = new UserBasic();
             user.setId(s.id);
             user.setUsername(s.email);
             user.setName(s.name);
             user.setSurname(s.surname);
 
-            shared.setUser(user);
+            shared.setBasicUser(userBasic);
 
           } else if (s?.isGroup) {
 
-            const group = new Group();
-            group.setId(s.id);
-            group.setName(s.name);
-            group.setEmailAlias(s.email);
+            const groupBasic = new GroupBasic();
+            groupBasic.setId(s.id);
+            groupBasic.setName(s.name);
+            groupBasic.setEmailAlias(s.email);
 
-            shared.setGroup(group);
+            shared.setGroup(groupBasic);
           } else {
             console.log('@yartu/sdk/ shareBoard method not supports external users and Realm share features for now!');
           }
@@ -2480,22 +2480,22 @@ export default (config) =>
           shared.setPermission(String(s.permission));
 
           if (s?.isYartuUser) {
-            const user = new User();
+            const userBasic = new UserBasic();
             user.setId(s.id);
             user.setUsername(s.email);
             user.setName(s.name);
             user.setSurname(s.surname);
 
-            shared.setUser(user);
+            shared.setBasicUser(userBasic);
 
           } else if (s?.isGroup) {
 
-            const group = new Group();
-            group.setId(s.id);
-            group.setName(s.name);
-            group.setEmailAlias(s.email);
+            const groupBasic = new GroupBasic();
+            groupBasic.setId(s.id);
+            groupBasic.setName(s.name);
+            groupBasic.setEmailAlias(s.email);
 
-            shared.setGroup(group);
+            shared.setGroup(groupBasic);
           } else {
             console.log('@yartu/sdk/ shareBoard method not supports external users and Realm share features for now!');
           }
