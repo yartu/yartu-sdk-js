@@ -4200,8 +4200,8 @@ proto.yartu.CardChecklistItem.toObject = function(includeInstance, msg) {
     createdAt: jspb.Message.getFieldWithDefault(msg, 6, ""),
     completedAt: jspb.Message.getFieldWithDefault(msg, 7, ""),
     canceledAt: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    assignee: (f = msg.getAssignee()) && common_grpc_definitions_pb.User.toObject(includeInstance, f),
-    completedBy: (f = msg.getCompletedBy()) && common_grpc_definitions_pb.User.toObject(includeInstance, f),
+    assignee: (f = msg.getAssignee()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f),
+    completedBy: (f = msg.getCompletedBy()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f),
     labelList: jspb.Message.toObjectList(msg.getLabelList(),
     proto.yartu.CardLabel.toObject, includeInstance)
   };
@@ -4273,13 +4273,13 @@ proto.yartu.CardChecklistItem.deserializeBinaryFromReader = function(msg, reader
       msg.setCanceledAt(value);
       break;
     case 9:
-      var value = new common_grpc_definitions_pb.User;
-      reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
+      var value = new common_grpc_definitions_pb.UserBasic;
+      reader.readMessage(value,common_grpc_definitions_pb.UserBasic.deserializeBinaryFromReader);
       msg.setAssignee(value);
       break;
     case 10:
-      var value = new common_grpc_definitions_pb.User;
-      reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
+      var value = new common_grpc_definitions_pb.UserBasic;
+      reader.readMessage(value,common_grpc_definitions_pb.UserBasic.deserializeBinaryFromReader);
       msg.setCompletedBy(value);
       break;
     case 11:
@@ -4377,7 +4377,7 @@ proto.yartu.CardChecklistItem.serializeBinaryToWriter = function(message, writer
     writer.writeMessage(
       9,
       f,
-      common_grpc_definitions_pb.User.serializeBinaryToWriter
+      common_grpc_definitions_pb.UserBasic.serializeBinaryToWriter
     );
   }
   f = message.getCompletedBy();
@@ -4385,7 +4385,7 @@ proto.yartu.CardChecklistItem.serializeBinaryToWriter = function(message, writer
     writer.writeMessage(
       10,
       f,
-      common_grpc_definitions_pb.User.serializeBinaryToWriter
+      common_grpc_definitions_pb.UserBasic.serializeBinaryToWriter
     );
   }
   f = message.getLabelList();
@@ -4544,17 +4544,17 @@ proto.yartu.CardChecklistItem.prototype.setCanceledAt = function(value) {
 
 
 /**
- * optional User assignee = 9;
- * @return {?proto.User}
+ * optional UserBasic assignee = 9;
+ * @return {?proto.UserBasic}
  */
 proto.yartu.CardChecklistItem.prototype.getAssignee = function() {
-  return /** @type{?proto.User} */ (
-    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.User, 9));
+  return /** @type{?proto.UserBasic} */ (
+    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.UserBasic, 9));
 };
 
 
 /**
- * @param {?proto.User|undefined} value
+ * @param {?proto.UserBasic|undefined} value
  * @return {!proto.yartu.CardChecklistItem} returns this
 */
 proto.yartu.CardChecklistItem.prototype.setAssignee = function(value) {
@@ -4581,17 +4581,17 @@ proto.yartu.CardChecklistItem.prototype.hasAssignee = function() {
 
 
 /**
- * optional User completed_by = 10;
- * @return {?proto.User}
+ * optional UserBasic completed_by = 10;
+ * @return {?proto.UserBasic}
  */
 proto.yartu.CardChecklistItem.prototype.getCompletedBy = function() {
-  return /** @type{?proto.User} */ (
-    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.User, 10));
+  return /** @type{?proto.UserBasic} */ (
+    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.UserBasic, 10));
 };
 
 
 /**
- * @param {?proto.User|undefined} value
+ * @param {?proto.UserBasic|undefined} value
  * @return {!proto.yartu.CardChecklistItem} returns this
 */
 proto.yartu.CardChecklistItem.prototype.setCompletedBy = function(value) {
@@ -4696,7 +4696,7 @@ proto.yartu.CardChecklist.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, 0),
     title: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    user: (f = msg.getUser()) && common_grpc_definitions_pb.User.toObject(includeInstance, f),
+    user: (f = msg.getUser()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f),
     createdAt: jspb.Message.getFieldWithDefault(msg, 4, ""),
     itemsList: jspb.Message.toObjectList(msg.getItemsList(),
     proto.yartu.CardChecklistItem.toObject, includeInstance)
@@ -4745,8 +4745,8 @@ proto.yartu.CardChecklist.deserializeBinaryFromReader = function(msg, reader) {
       msg.setTitle(value);
       break;
     case 3:
-      var value = new common_grpc_definitions_pb.User;
-      reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
+      var value = new common_grpc_definitions_pb.UserBasic;
+      reader.readMessage(value,common_grpc_definitions_pb.UserBasic.deserializeBinaryFromReader);
       msg.setUser(value);
       break;
     case 4:
@@ -4806,7 +4806,7 @@ proto.yartu.CardChecklist.serializeBinaryToWriter = function(message, writer) {
     writer.writeMessage(
       3,
       f,
-      common_grpc_definitions_pb.User.serializeBinaryToWriter
+      common_grpc_definitions_pb.UserBasic.serializeBinaryToWriter
     );
   }
   f = message.getCreatedAt();
@@ -4864,17 +4864,17 @@ proto.yartu.CardChecklist.prototype.setTitle = function(value) {
 
 
 /**
- * optional User user = 3;
- * @return {?proto.User}
+ * optional UserBasic user = 3;
+ * @return {?proto.UserBasic}
  */
 proto.yartu.CardChecklist.prototype.getUser = function() {
-  return /** @type{?proto.User} */ (
-    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.User, 3));
+  return /** @type{?proto.UserBasic} */ (
+    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.UserBasic, 3));
 };
 
 
 /**
- * @param {?proto.User|undefined} value
+ * @param {?proto.UserBasic|undefined} value
  * @return {!proto.yartu.CardChecklist} returns this
 */
 proto.yartu.CardChecklist.prototype.setUser = function(value) {
@@ -5002,7 +5002,7 @@ proto.yartu.CardActivity.toObject = function(includeInstance, msg) {
     createdAt: jspb.Message.getFieldWithDefault(msg, 5, ""),
     removedAt: jspb.Message.getFieldWithDefault(msg, 6, ""),
     isEdited: jspb.Message.getBooleanFieldWithDefault(msg, 7, false),
-    user: (f = msg.getUser()) && common_grpc_definitions_pb.User.toObject(includeInstance, f),
+    user: (f = msg.getUser()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f),
     mentionList: (f = jspb.Message.getRepeatedField(msg, 9)) == null ? undefined : f,
     interactionsList: jspb.Message.toObjectList(msg.getInteractionsList(),
     proto.yartu.MessageInteraction.toObject, includeInstance)
@@ -5071,8 +5071,8 @@ proto.yartu.CardActivity.deserializeBinaryFromReader = function(msg, reader) {
       msg.setIsEdited(value);
       break;
     case 8:
-      var value = new common_grpc_definitions_pb.User;
-      reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
+      var value = new common_grpc_definitions_pb.UserBasic;
+      reader.readMessage(value,common_grpc_definitions_pb.UserBasic.deserializeBinaryFromReader);
       msg.setUser(value);
       break;
     case 9:
@@ -5167,7 +5167,7 @@ proto.yartu.CardActivity.serializeBinaryToWriter = function(message, writer) {
     writer.writeMessage(
       8,
       f,
-      common_grpc_definitions_pb.User.serializeBinaryToWriter
+      common_grpc_definitions_pb.UserBasic.serializeBinaryToWriter
     );
   }
   f = message.getMentionList();
@@ -5333,17 +5333,17 @@ proto.yartu.CardActivity.prototype.hasIsEdited = function() {
 
 
 /**
- * optional User user = 8;
- * @return {?proto.User}
+ * optional UserBasic user = 8;
+ * @return {?proto.UserBasic}
  */
 proto.yartu.CardActivity.prototype.getUser = function() {
-  return /** @type{?proto.User} */ (
-    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.User, 8));
+  return /** @type{?proto.UserBasic} */ (
+    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.UserBasic, 8));
 };
 
 
 /**
- * @param {?proto.User|undefined} value
+ * @param {?proto.UserBasic|undefined} value
  * @return {!proto.yartu.CardActivity} returns this
 */
 proto.yartu.CardActivity.prototype.setUser = function(value) {
@@ -6277,9 +6277,9 @@ proto.yartu.Card.toObject = function(includeInstance, msg) {
     createdAt: jspb.Message.getFieldWithDefault(msg, 12, ""),
     updatedAt: jspb.Message.getFieldWithDefault(msg, 13, ""),
     columnId: jspb.Message.getFieldWithDefault(msg, 14, 0),
-    owner: (f = msg.getOwner()) && common_grpc_definitions_pb.User.toObject(includeInstance, f),
+    owner: (f = msg.getOwner()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f),
     usersList: jspb.Message.toObjectList(msg.getUsersList(),
-    common_grpc_definitions_pb.User.toObject, includeInstance),
+    common_grpc_definitions_pb.UserBasic.toObject, includeInstance),
     attachmentList: jspb.Message.toObjectList(msg.getAttachmentList(),
     proto.yartu.CardAttachment.toObject, includeInstance),
     labelList: jspb.Message.toObjectList(msg.getLabelList(),
@@ -6389,13 +6389,13 @@ proto.yartu.Card.deserializeBinaryFromReader = function(msg, reader) {
       msg.setColumnId(value);
       break;
     case 15:
-      var value = new common_grpc_definitions_pb.User;
-      reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
+      var value = new common_grpc_definitions_pb.UserBasic;
+      reader.readMessage(value,common_grpc_definitions_pb.UserBasic.deserializeBinaryFromReader);
       msg.setOwner(value);
       break;
     case 16:
-      var value = new common_grpc_definitions_pb.User;
-      reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
+      var value = new common_grpc_definitions_pb.UserBasic;
+      reader.readMessage(value,common_grpc_definitions_pb.UserBasic.deserializeBinaryFromReader);
       msg.addUsers(value);
       break;
     case 17:
@@ -6587,7 +6587,7 @@ proto.yartu.Card.serializeBinaryToWriter = function(message, writer) {
     writer.writeMessage(
       15,
       f,
-      common_grpc_definitions_pb.User.serializeBinaryToWriter
+      common_grpc_definitions_pb.UserBasic.serializeBinaryToWriter
     );
   }
   f = message.getUsersList();
@@ -6595,7 +6595,7 @@ proto.yartu.Card.serializeBinaryToWriter = function(message, writer) {
     writer.writeRepeatedMessage(
       16,
       f,
-      common_grpc_definitions_pb.User.serializeBinaryToWriter
+      common_grpc_definitions_pb.UserBasic.serializeBinaryToWriter
     );
   }
   f = message.getAttachmentList();
@@ -7071,17 +7071,17 @@ proto.yartu.Card.prototype.setColumnId = function(value) {
 
 
 /**
- * optional User owner = 15;
- * @return {?proto.User}
+ * optional UserBasic owner = 15;
+ * @return {?proto.UserBasic}
  */
 proto.yartu.Card.prototype.getOwner = function() {
-  return /** @type{?proto.User} */ (
-    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.User, 15));
+  return /** @type{?proto.UserBasic} */ (
+    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.UserBasic, 15));
 };
 
 
 /**
- * @param {?proto.User|undefined} value
+ * @param {?proto.UserBasic|undefined} value
  * @return {!proto.yartu.Card} returns this
 */
 proto.yartu.Card.prototype.setOwner = function(value) {
@@ -7108,17 +7108,17 @@ proto.yartu.Card.prototype.hasOwner = function() {
 
 
 /**
- * repeated User users = 16;
- * @return {!Array<!proto.User>}
+ * repeated UserBasic users = 16;
+ * @return {!Array<!proto.UserBasic>}
  */
 proto.yartu.Card.prototype.getUsersList = function() {
-  return /** @type{!Array<!proto.User>} */ (
-    jspb.Message.getRepeatedWrapperField(this, common_grpc_definitions_pb.User, 16));
+  return /** @type{!Array<!proto.UserBasic>} */ (
+    jspb.Message.getRepeatedWrapperField(this, common_grpc_definitions_pb.UserBasic, 16));
 };
 
 
 /**
- * @param {!Array<!proto.User>} value
+ * @param {!Array<!proto.UserBasic>} value
  * @return {!proto.yartu.Card} returns this
 */
 proto.yartu.Card.prototype.setUsersList = function(value) {
@@ -7127,12 +7127,12 @@ proto.yartu.Card.prototype.setUsersList = function(value) {
 
 
 /**
- * @param {!proto.User=} opt_value
+ * @param {!proto.UserBasic=} opt_value
  * @param {number=} opt_index
- * @return {!proto.User}
+ * @return {!proto.UserBasic}
  */
 proto.yartu.Card.prototype.addUsers = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 16, opt_value, proto.User, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 16, opt_value, proto.UserBasic, opt_index);
 };
 
 
@@ -7978,18 +7978,18 @@ proto.yartu.Board.toObject = function(includeInstance, msg) {
     proto.yartu.Column.toObject, includeInstance),
     permission: (f = msg.getPermission()) && common_grpc_definitions_pb.JSON.toObject(includeInstance, f),
     userList: jspb.Message.toObjectList(msg.getUserList(),
-    common_grpc_definitions_pb.User.toObject, includeInstance),
+    common_grpc_definitions_pb.UserBasic.toObject, includeInstance),
     cardCount: jspb.Message.getFieldWithDefault(msg, 10, 0),
     usersCount: jspb.Message.getFieldWithDefault(msg, 11, 0),
     completedCardCount: jspb.Message.getFieldWithDefault(msg, 12, 0),
     description: jspb.Message.getFieldWithDefault(msg, 13, ""),
-    owner: (f = msg.getOwner()) && common_grpc_definitions_pb.User.toObject(includeInstance, f),
+    owner: (f = msg.getOwner()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f),
     labelList: jspb.Message.toObjectList(msg.getLabelList(),
     proto.yartu.CardLabel.toObject, includeInstance),
     sharedList: jspb.Message.toObjectList(msg.getSharedList(),
     common_grpc_definitions_pb.Shared.toObject, includeInstance),
     assignableUserList: jspb.Message.toObjectList(msg.getAssignableUserList(),
-    common_grpc_definitions_pb.User.toObject, includeInstance),
+    common_grpc_definitions_pb.UserBasic.toObject, includeInstance),
     checklistItemCount: jspb.Message.getFieldWithDefault(msg, 18, 0),
     countOfMyUnfinishedTasks: jspb.Message.getFieldWithDefault(msg, 19, 0)
   };
@@ -8063,8 +8063,8 @@ proto.yartu.Board.deserializeBinaryFromReader = function(msg, reader) {
       msg.setPermission(value);
       break;
     case 9:
-      var value = new common_grpc_definitions_pb.User;
-      reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
+      var value = new common_grpc_definitions_pb.UserBasic;
+      reader.readMessage(value,common_grpc_definitions_pb.UserBasic.deserializeBinaryFromReader);
       msg.addUser(value);
       break;
     case 10:
@@ -8084,8 +8084,8 @@ proto.yartu.Board.deserializeBinaryFromReader = function(msg, reader) {
       msg.setDescription(value);
       break;
     case 14:
-      var value = new common_grpc_definitions_pb.User;
-      reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
+      var value = new common_grpc_definitions_pb.UserBasic;
+      reader.readMessage(value,common_grpc_definitions_pb.UserBasic.deserializeBinaryFromReader);
       msg.setOwner(value);
       break;
     case 15:
@@ -8099,8 +8099,8 @@ proto.yartu.Board.deserializeBinaryFromReader = function(msg, reader) {
       msg.addShared(value);
       break;
     case 17:
-      var value = new common_grpc_definitions_pb.User;
-      reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
+      var value = new common_grpc_definitions_pb.UserBasic;
+      reader.readMessage(value,common_grpc_definitions_pb.UserBasic.deserializeBinaryFromReader);
       msg.addAssignableUser(value);
       break;
     case 18:
@@ -8203,7 +8203,7 @@ proto.yartu.Board.serializeBinaryToWriter = function(message, writer) {
     writer.writeRepeatedMessage(
       9,
       f,
-      common_grpc_definitions_pb.User.serializeBinaryToWriter
+      common_grpc_definitions_pb.UserBasic.serializeBinaryToWriter
     );
   }
   f = /** @type {number} */ (jspb.Message.getField(message, 10));
@@ -8239,7 +8239,7 @@ proto.yartu.Board.serializeBinaryToWriter = function(message, writer) {
     writer.writeMessage(
       14,
       f,
-      common_grpc_definitions_pb.User.serializeBinaryToWriter
+      common_grpc_definitions_pb.UserBasic.serializeBinaryToWriter
     );
   }
   f = message.getLabelList();
@@ -8263,7 +8263,7 @@ proto.yartu.Board.serializeBinaryToWriter = function(message, writer) {
     writer.writeRepeatedMessage(
       17,
       f,
-      common_grpc_definitions_pb.User.serializeBinaryToWriter
+      common_grpc_definitions_pb.UserBasic.serializeBinaryToWriter
     );
   }
   f = /** @type {number} */ (jspb.Message.getField(message, 18));
@@ -8467,17 +8467,17 @@ proto.yartu.Board.prototype.hasPermission = function() {
 
 
 /**
- * repeated User user = 9;
- * @return {!Array<!proto.User>}
+ * repeated UserBasic user = 9;
+ * @return {!Array<!proto.UserBasic>}
  */
 proto.yartu.Board.prototype.getUserList = function() {
-  return /** @type{!Array<!proto.User>} */ (
-    jspb.Message.getRepeatedWrapperField(this, common_grpc_definitions_pb.User, 9));
+  return /** @type{!Array<!proto.UserBasic>} */ (
+    jspb.Message.getRepeatedWrapperField(this, common_grpc_definitions_pb.UserBasic, 9));
 };
 
 
 /**
- * @param {!Array<!proto.User>} value
+ * @param {!Array<!proto.UserBasic>} value
  * @return {!proto.yartu.Board} returns this
 */
 proto.yartu.Board.prototype.setUserList = function(value) {
@@ -8486,12 +8486,12 @@ proto.yartu.Board.prototype.setUserList = function(value) {
 
 
 /**
- * @param {!proto.User=} opt_value
+ * @param {!proto.UserBasic=} opt_value
  * @param {number=} opt_index
- * @return {!proto.User}
+ * @return {!proto.UserBasic}
  */
 proto.yartu.Board.prototype.addUser = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 9, opt_value, proto.User, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 9, opt_value, proto.UserBasic, opt_index);
 };
 
 
@@ -8613,17 +8613,17 @@ proto.yartu.Board.prototype.setDescription = function(value) {
 
 
 /**
- * optional User owner = 14;
- * @return {?proto.User}
+ * optional UserBasic owner = 14;
+ * @return {?proto.UserBasic}
  */
 proto.yartu.Board.prototype.getOwner = function() {
-  return /** @type{?proto.User} */ (
-    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.User, 14));
+  return /** @type{?proto.UserBasic} */ (
+    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.UserBasic, 14));
 };
 
 
 /**
- * @param {?proto.User|undefined} value
+ * @param {?proto.UserBasic|undefined} value
  * @return {!proto.yartu.Board} returns this
 */
 proto.yartu.Board.prototype.setOwner = function(value) {
@@ -8726,17 +8726,17 @@ proto.yartu.Board.prototype.clearSharedList = function() {
 
 
 /**
- * repeated User assignable_user = 17;
- * @return {!Array<!proto.User>}
+ * repeated UserBasic assignable_user = 17;
+ * @return {!Array<!proto.UserBasic>}
  */
 proto.yartu.Board.prototype.getAssignableUserList = function() {
-  return /** @type{!Array<!proto.User>} */ (
-    jspb.Message.getRepeatedWrapperField(this, common_grpc_definitions_pb.User, 17));
+  return /** @type{!Array<!proto.UserBasic>} */ (
+    jspb.Message.getRepeatedWrapperField(this, common_grpc_definitions_pb.UserBasic, 17));
 };
 
 
 /**
- * @param {!Array<!proto.User>} value
+ * @param {!Array<!proto.UserBasic>} value
  * @return {!proto.yartu.Board} returns this
 */
 proto.yartu.Board.prototype.setAssignableUserList = function(value) {
@@ -8745,12 +8745,12 @@ proto.yartu.Board.prototype.setAssignableUserList = function(value) {
 
 
 /**
- * @param {!proto.User=} opt_value
+ * @param {!proto.UserBasic=} opt_value
  * @param {number=} opt_index
- * @return {!proto.User}
+ * @return {!proto.UserBasic}
  */
 proto.yartu.Board.prototype.addAssignableUser = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 17, opt_value, proto.User, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 17, opt_value, proto.UserBasic, opt_index);
 };
 
 
@@ -8878,7 +8878,7 @@ proto.yartu.BoardTemplate.toObject = function(includeInstance, msg) {
     uuid: jspb.Message.getFieldWithDefault(msg, 2, ""),
     name: jspb.Message.getFieldWithDefault(msg, 3, ""),
     isDefault: jspb.Message.getBooleanFieldWithDefault(msg, 4, false),
-    owner: (f = msg.getOwner()) && common_grpc_definitions_pb.User.toObject(includeInstance, f),
+    owner: (f = msg.getOwner()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f),
     columnsList: jspb.Message.toObjectList(msg.getColumnsList(),
     proto.yartu.Column.toObject, includeInstance)
   };
@@ -8934,8 +8934,8 @@ proto.yartu.BoardTemplate.deserializeBinaryFromReader = function(msg, reader) {
       msg.setIsDefault(value);
       break;
     case 5:
-      var value = new common_grpc_definitions_pb.User;
-      reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
+      var value = new common_grpc_definitions_pb.UserBasic;
+      reader.readMessage(value,common_grpc_definitions_pb.UserBasic.deserializeBinaryFromReader);
       msg.setOwner(value);
       break;
     case 6:
@@ -9005,7 +9005,7 @@ proto.yartu.BoardTemplate.serializeBinaryToWriter = function(message, writer) {
     writer.writeMessage(
       5,
       f,
-      common_grpc_definitions_pb.User.serializeBinaryToWriter
+      common_grpc_definitions_pb.UserBasic.serializeBinaryToWriter
     );
   }
   f = message.getColumnsList();
@@ -9092,17 +9092,17 @@ proto.yartu.BoardTemplate.prototype.setIsDefault = function(value) {
 
 
 /**
- * optional User owner = 5;
- * @return {?proto.User}
+ * optional UserBasic owner = 5;
+ * @return {?proto.UserBasic}
  */
 proto.yartu.BoardTemplate.prototype.getOwner = function() {
-  return /** @type{?proto.User} */ (
-    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.User, 5));
+  return /** @type{?proto.UserBasic} */ (
+    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.UserBasic, 5));
 };
 
 
 /**
- * @param {?proto.User|undefined} value
+ * @param {?proto.UserBasic|undefined} value
  * @return {!proto.yartu.BoardTemplate} returns this
 */
 proto.yartu.BoardTemplate.prototype.setOwner = function(value) {
@@ -9210,7 +9210,7 @@ proto.yartu.Project.toObject = function(includeInstance, msg) {
     name: jspb.Message.getFieldWithDefault(msg, 3, ""),
     color: jspb.Message.getFieldWithDefault(msg, 4, ""),
     icon: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    owner: (f = msg.getOwner()) && common_grpc_definitions_pb.User.toObject(includeInstance, f),
+    owner: (f = msg.getOwner()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f),
     isStarred: jspb.Message.getBooleanFieldWithDefault(msg, 7, false),
     boardList: jspb.Message.toObjectList(msg.getBoardList(),
     proto.yartu.Board.toObject, includeInstance),
@@ -9276,8 +9276,8 @@ proto.yartu.Project.deserializeBinaryFromReader = function(msg, reader) {
       msg.setIcon(value);
       break;
     case 6:
-      var value = new common_grpc_definitions_pb.User;
-      reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
+      var value = new common_grpc_definitions_pb.UserBasic;
+      reader.readMessage(value,common_grpc_definitions_pb.UserBasic.deserializeBinaryFromReader);
       msg.setOwner(value);
       break;
     case 7:
@@ -9378,7 +9378,7 @@ proto.yartu.Project.serializeBinaryToWriter = function(message, writer) {
     writer.writeMessage(
       6,
       f,
-      common_grpc_definitions_pb.User.serializeBinaryToWriter
+      common_grpc_definitions_pb.UserBasic.serializeBinaryToWriter
     );
   }
   f = message.getIsStarred();
@@ -9525,17 +9525,17 @@ proto.yartu.Project.prototype.setIcon = function(value) {
 
 
 /**
- * optional User owner = 6;
- * @return {?proto.User}
+ * optional UserBasic owner = 6;
+ * @return {?proto.UserBasic}
  */
 proto.yartu.Project.prototype.getOwner = function() {
-  return /** @type{?proto.User} */ (
-    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.User, 6));
+  return /** @type{?proto.UserBasic} */ (
+    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.UserBasic, 6));
 };
 
 
 /**
- * @param {?proto.User|undefined} value
+ * @param {?proto.UserBasic|undefined} value
  * @return {!proto.yartu.Project} returns this
 */
 proto.yartu.Project.prototype.setOwner = function(value) {
@@ -9847,9 +9847,9 @@ proto.yartu.Thread.toObject = function(includeInstance, msg) {
     unreadCount: jspb.Message.getFieldWithDefault(msg, 8, 0),
     totalCount: jspb.Message.getFieldWithDefault(msg, 9, 0),
     createdAt: jspb.Message.getFieldWithDefault(msg, 10, ""),
-    owner: (f = msg.getOwner()) && common_grpc_definitions_pb.User.toObject(includeInstance, f),
+    owner: (f = msg.getOwner()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f),
     userList: jspb.Message.toObjectList(msg.getUserList(),
-    common_grpc_definitions_pb.User.toObject, includeInstance)
+    common_grpc_definitions_pb.UserBasic.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -9927,13 +9927,13 @@ proto.yartu.Thread.deserializeBinaryFromReader = function(msg, reader) {
       msg.setCreatedAt(value);
       break;
     case 11:
-      var value = new common_grpc_definitions_pb.User;
-      reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
+      var value = new common_grpc_definitions_pb.UserBasic;
+      reader.readMessage(value,common_grpc_definitions_pb.UserBasic.deserializeBinaryFromReader);
       msg.setOwner(value);
       break;
     case 12:
-      var value = new common_grpc_definitions_pb.User;
-      reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
+      var value = new common_grpc_definitions_pb.UserBasic;
+      reader.readMessage(value,common_grpc_definitions_pb.UserBasic.deserializeBinaryFromReader);
       msg.addUser(value);
       break;
     default:
@@ -10040,7 +10040,7 @@ proto.yartu.Thread.serializeBinaryToWriter = function(message, writer) {
     writer.writeMessage(
       11,
       f,
-      common_grpc_definitions_pb.User.serializeBinaryToWriter
+      common_grpc_definitions_pb.UserBasic.serializeBinaryToWriter
     );
   }
   f = message.getUserList();
@@ -10048,7 +10048,7 @@ proto.yartu.Thread.serializeBinaryToWriter = function(message, writer) {
     writer.writeRepeatedMessage(
       12,
       f,
-      common_grpc_definitions_pb.User.serializeBinaryToWriter
+      common_grpc_definitions_pb.UserBasic.serializeBinaryToWriter
     );
   }
 };
@@ -10253,17 +10253,17 @@ proto.yartu.Thread.prototype.setCreatedAt = function(value) {
 
 
 /**
- * optional User owner = 11;
- * @return {?proto.User}
+ * optional UserBasic owner = 11;
+ * @return {?proto.UserBasic}
  */
 proto.yartu.Thread.prototype.getOwner = function() {
-  return /** @type{?proto.User} */ (
-    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.User, 11));
+  return /** @type{?proto.UserBasic} */ (
+    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.UserBasic, 11));
 };
 
 
 /**
- * @param {?proto.User|undefined} value
+ * @param {?proto.UserBasic|undefined} value
  * @return {!proto.yartu.Thread} returns this
 */
 proto.yartu.Thread.prototype.setOwner = function(value) {
@@ -10290,17 +10290,17 @@ proto.yartu.Thread.prototype.hasOwner = function() {
 
 
 /**
- * repeated User user = 12;
- * @return {!Array<!proto.User>}
+ * repeated UserBasic user = 12;
+ * @return {!Array<!proto.UserBasic>}
  */
 proto.yartu.Thread.prototype.getUserList = function() {
-  return /** @type{!Array<!proto.User>} */ (
-    jspb.Message.getRepeatedWrapperField(this, common_grpc_definitions_pb.User, 12));
+  return /** @type{!Array<!proto.UserBasic>} */ (
+    jspb.Message.getRepeatedWrapperField(this, common_grpc_definitions_pb.UserBasic, 12));
 };
 
 
 /**
- * @param {!Array<!proto.User>} value
+ * @param {!Array<!proto.UserBasic>} value
  * @return {!proto.yartu.Thread} returns this
 */
 proto.yartu.Thread.prototype.setUserList = function(value) {
@@ -10309,12 +10309,12 @@ proto.yartu.Thread.prototype.setUserList = function(value) {
 
 
 /**
- * @param {!proto.User=} opt_value
+ * @param {!proto.UserBasic=} opt_value
  * @param {number=} opt_index
- * @return {!proto.User}
+ * @return {!proto.UserBasic}
  */
 proto.yartu.Thread.prototype.addUser = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 12, opt_value, proto.User, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 12, opt_value, proto.UserBasic, opt_index);
 };
 
 
@@ -10558,7 +10558,7 @@ proto.yartu.ThreadMessage.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, 0),
     uuid: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    user: (f = msg.getUser()) && common_grpc_definitions_pb.User.toObject(includeInstance, f),
+    user: (f = msg.getUser()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f),
     message: jspb.Message.getFieldWithDefault(msg, 4, ""),
     createdAt: jspb.Message.getFieldWithDefault(msg, 5, ""),
     removedAt: jspb.Message.getFieldWithDefault(msg, 6, ""),
@@ -10611,8 +10611,8 @@ proto.yartu.ThreadMessage.deserializeBinaryFromReader = function(msg, reader) {
       msg.setUuid(value);
       break;
     case 3:
-      var value = new common_grpc_definitions_pb.User;
-      reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
+      var value = new common_grpc_definitions_pb.UserBasic;
+      reader.readMessage(value,common_grpc_definitions_pb.UserBasic.deserializeBinaryFromReader);
       msg.setUser(value);
       break;
     case 4:
@@ -10688,7 +10688,7 @@ proto.yartu.ThreadMessage.serializeBinaryToWriter = function(message, writer) {
     writer.writeMessage(
       3,
       f,
-      common_grpc_definitions_pb.User.serializeBinaryToWriter
+      common_grpc_definitions_pb.UserBasic.serializeBinaryToWriter
     );
   }
   f = message.getMessage();
@@ -10774,17 +10774,17 @@ proto.yartu.ThreadMessage.prototype.setUuid = function(value) {
 
 
 /**
- * optional User user = 3;
- * @return {?proto.User}
+ * optional UserBasic user = 3;
+ * @return {?proto.UserBasic}
  */
 proto.yartu.ThreadMessage.prototype.getUser = function() {
-  return /** @type{?proto.User} */ (
-    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.User, 3));
+  return /** @type{?proto.UserBasic} */ (
+    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.UserBasic, 3));
 };
 
 
 /**
- * @param {?proto.User|undefined} value
+ * @param {?proto.UserBasic|undefined} value
  * @return {!proto.yartu.ThreadMessage} returns this
 */
 proto.yartu.ThreadMessage.prototype.setUser = function(value) {
@@ -11009,7 +11009,7 @@ proto.yartu.PublicBoardShare.toObject = function(includeInstance, msg) {
     id: jspb.Message.getFieldWithDefault(msg, 1, 0),
     token: jspb.Message.getFieldWithDefault(msg, 2, ""),
     board: (f = msg.getBoard()) && proto.yartu.Board.toObject(includeInstance, f),
-    user: (f = msg.getUser()) && common_grpc_definitions_pb.User.toObject(includeInstance, f),
+    user: (f = msg.getUser()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f),
     viewCount: jspb.Message.getFieldWithDefault(msg, 5, 0),
     viewCountLimit: jspb.Message.getFieldWithDefault(msg, 6, 0),
     ipaddress: jspb.Message.getFieldWithDefault(msg, 7, ""),
@@ -11066,8 +11066,8 @@ proto.yartu.PublicBoardShare.deserializeBinaryFromReader = function(msg, reader)
       msg.setBoard(value);
       break;
     case 4:
-      var value = new common_grpc_definitions_pb.User;
-      reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
+      var value = new common_grpc_definitions_pb.UserBasic;
+      reader.readMessage(value,common_grpc_definitions_pb.UserBasic.deserializeBinaryFromReader);
       msg.setUser(value);
       break;
     case 5:
@@ -11150,7 +11150,7 @@ proto.yartu.PublicBoardShare.serializeBinaryToWriter = function(message, writer)
     writer.writeMessage(
       4,
       f,
-      common_grpc_definitions_pb.User.serializeBinaryToWriter
+      common_grpc_definitions_pb.UserBasic.serializeBinaryToWriter
     );
   }
   f = message.getViewCount();
@@ -11272,17 +11272,17 @@ proto.yartu.PublicBoardShare.prototype.hasBoard = function() {
 
 
 /**
- * optional User user = 4;
- * @return {?proto.User}
+ * optional UserBasic user = 4;
+ * @return {?proto.UserBasic}
  */
 proto.yartu.PublicBoardShare.prototype.getUser = function() {
-  return /** @type{?proto.User} */ (
-    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.User, 4));
+  return /** @type{?proto.UserBasic} */ (
+    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.UserBasic, 4));
 };
 
 
 /**
- * @param {?proto.User|undefined} value
+ * @param {?proto.UserBasic|undefined} value
  * @return {!proto.yartu.PublicBoardShare} returns this
 */
 proto.yartu.PublicBoardShare.prototype.setUser = function(value) {
@@ -15733,7 +15733,7 @@ proto.yartu.UpsertThreadRequest.toObject = function(includeInstance, msg) {
     isPinned: jspb.Message.getBooleanFieldWithDefault(msg, 6, false),
     isPrivate: jspb.Message.getBooleanFieldWithDefault(msg, 7, false),
     participantList: jspb.Message.toObjectList(msg.getParticipantList(),
-    common_grpc_definitions_pb.User.toObject, includeInstance)
+    common_grpc_definitions_pb.UserBasic.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -15799,8 +15799,8 @@ proto.yartu.UpsertThreadRequest.deserializeBinaryFromReader = function(msg, read
       msg.setIsPrivate(value);
       break;
     case 8:
-      var value = new common_grpc_definitions_pb.User;
-      reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
+      var value = new common_grpc_definitions_pb.UserBasic;
+      reader.readMessage(value,common_grpc_definitions_pb.UserBasic.deserializeBinaryFromReader);
       msg.addParticipant(value);
       break;
     default:
@@ -15886,7 +15886,7 @@ proto.yartu.UpsertThreadRequest.serializeBinaryToWriter = function(message, writ
     writer.writeRepeatedMessage(
       8,
       f,
-      common_grpc_definitions_pb.User.serializeBinaryToWriter
+      common_grpc_definitions_pb.UserBasic.serializeBinaryToWriter
     );
   }
 };
@@ -16073,17 +16073,17 @@ proto.yartu.UpsertThreadRequest.prototype.setIsPrivate = function(value) {
 
 
 /**
- * repeated User participant = 8;
- * @return {!Array<!proto.User>}
+ * repeated UserBasic participant = 8;
+ * @return {!Array<!proto.UserBasic>}
  */
 proto.yartu.UpsertThreadRequest.prototype.getParticipantList = function() {
-  return /** @type{!Array<!proto.User>} */ (
-    jspb.Message.getRepeatedWrapperField(this, common_grpc_definitions_pb.User, 8));
+  return /** @type{!Array<!proto.UserBasic>} */ (
+    jspb.Message.getRepeatedWrapperField(this, common_grpc_definitions_pb.UserBasic, 8));
 };
 
 
 /**
- * @param {!Array<!proto.User>} value
+ * @param {!Array<!proto.UserBasic>} value
  * @return {!proto.yartu.UpsertThreadRequest} returns this
 */
 proto.yartu.UpsertThreadRequest.prototype.setParticipantList = function(value) {
@@ -16092,12 +16092,12 @@ proto.yartu.UpsertThreadRequest.prototype.setParticipantList = function(value) {
 
 
 /**
- * @param {!proto.User=} opt_value
+ * @param {!proto.UserBasic=} opt_value
  * @param {number=} opt_index
- * @return {!proto.User}
+ * @return {!proto.UserBasic}
  */
 proto.yartu.UpsertThreadRequest.prototype.addParticipant = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 8, opt_value, proto.User, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 8, opt_value, proto.UserBasic, opt_index);
 };
 
 
@@ -25011,7 +25011,7 @@ proto.yartu.UpsertCardUsersResponse.toObject = function(includeInstance, msg) {
     resultList: jspb.Message.toObjectList(msg.getResultList(),
     common_grpc_definitions_pb.UserModifyResult.toObject, includeInstance),
     usersList: jspb.Message.toObjectList(msg.getUsersList(),
-    common_grpc_definitions_pb.User.toObject, includeInstance),
+    common_grpc_definitions_pb.UserBasic.toObject, includeInstance),
     message: jspb.Message.getFieldWithDefault(msg, 4, "")
   };
 
@@ -25059,8 +25059,8 @@ proto.yartu.UpsertCardUsersResponse.deserializeBinaryFromReader = function(msg, 
       msg.addResult(value);
       break;
     case 3:
-      var value = new common_grpc_definitions_pb.User;
-      reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
+      var value = new common_grpc_definitions_pb.UserBasic;
+      reader.readMessage(value,common_grpc_definitions_pb.UserBasic.deserializeBinaryFromReader);
       msg.addUsers(value);
       break;
     case 4:
@@ -25116,7 +25116,7 @@ proto.yartu.UpsertCardUsersResponse.serializeBinaryToWriter = function(message, 
     writer.writeRepeatedMessage(
       3,
       f,
-      common_grpc_definitions_pb.User.serializeBinaryToWriter
+      common_grpc_definitions_pb.UserBasic.serializeBinaryToWriter
     );
   }
   f = message.getMessage();
@@ -25186,17 +25186,17 @@ proto.yartu.UpsertCardUsersResponse.prototype.clearResultList = function() {
 
 
 /**
- * repeated User users = 3;
- * @return {!Array<!proto.User>}
+ * repeated UserBasic users = 3;
+ * @return {!Array<!proto.UserBasic>}
  */
 proto.yartu.UpsertCardUsersResponse.prototype.getUsersList = function() {
-  return /** @type{!Array<!proto.User>} */ (
-    jspb.Message.getRepeatedWrapperField(this, common_grpc_definitions_pb.User, 3));
+  return /** @type{!Array<!proto.UserBasic>} */ (
+    jspb.Message.getRepeatedWrapperField(this, common_grpc_definitions_pb.UserBasic, 3));
 };
 
 
 /**
- * @param {!Array<!proto.User>} value
+ * @param {!Array<!proto.UserBasic>} value
  * @return {!proto.yartu.UpsertCardUsersResponse} returns this
 */
 proto.yartu.UpsertCardUsersResponse.prototype.setUsersList = function(value) {
@@ -25205,12 +25205,12 @@ proto.yartu.UpsertCardUsersResponse.prototype.setUsersList = function(value) {
 
 
 /**
- * @param {!proto.User=} opt_value
+ * @param {!proto.UserBasic=} opt_value
  * @param {number=} opt_index
- * @return {!proto.User}
+ * @return {!proto.UserBasic}
  */
 proto.yartu.UpsertCardUsersResponse.prototype.addUsers = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 3, opt_value, proto.User, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 3, opt_value, proto.UserBasic, opt_index);
 };
 
 
@@ -27916,7 +27916,7 @@ proto.yartu.UpsertCheckListItemRequest.toObject = function(includeInstance, msg)
     index: jspb.Message.getFieldWithDefault(msg, 5, 0),
     dueDate: jspb.Message.getFieldWithDefault(msg, 6, ""),
     isCompleted: jspb.Message.getBooleanFieldWithDefault(msg, 7, false),
-    assignee: (f = msg.getAssignee()) && common_grpc_definitions_pb.User.toObject(includeInstance, f),
+    assignee: (f = msg.getAssignee()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f),
     labelList: jspb.Message.toObjectList(msg.getLabelList(),
     proto.yartu.CardLabel.toObject, includeInstance)
   };
@@ -27984,8 +27984,8 @@ proto.yartu.UpsertCheckListItemRequest.deserializeBinaryFromReader = function(ms
       msg.setIsCompleted(value);
       break;
     case 9:
-      var value = new common_grpc_definitions_pb.User;
-      reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
+      var value = new common_grpc_definitions_pb.UserBasic;
+      reader.readMessage(value,common_grpc_definitions_pb.UserBasic.deserializeBinaryFromReader);
       msg.setAssignee(value);
       break;
     case 8:
@@ -28076,7 +28076,7 @@ proto.yartu.UpsertCheckListItemRequest.serializeBinaryToWriter = function(messag
     writer.writeMessage(
       9,
       f,
-      common_grpc_definitions_pb.User.serializeBinaryToWriter
+      common_grpc_definitions_pb.UserBasic.serializeBinaryToWriter
     );
   }
   f = message.getLabelList();
@@ -28307,17 +28307,17 @@ proto.yartu.UpsertCheckListItemRequest.prototype.hasIsCompleted = function() {
 
 
 /**
- * optional User assignee = 9;
- * @return {?proto.User}
+ * optional UserBasic assignee = 9;
+ * @return {?proto.UserBasic}
  */
 proto.yartu.UpsertCheckListItemRequest.prototype.getAssignee = function() {
-  return /** @type{?proto.User} */ (
-    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.User, 9));
+  return /** @type{?proto.UserBasic} */ (
+    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.UserBasic, 9));
 };
 
 
 /**
- * @param {?proto.User|undefined} value
+ * @param {?proto.UserBasic|undefined} value
  * @return {!proto.yartu.UpsertCheckListItemRequest} returns this
 */
 proto.yartu.UpsertCheckListItemRequest.prototype.setAssignee = function(value) {
@@ -28934,7 +28934,7 @@ proto.yartu.AssignAllCheckListItemsRequest.toObject = function(includeInstance, 
   var f, obj = {
     checklistId: jspb.Message.getFieldWithDefault(msg, 1, 0),
     unassign: jspb.Message.getBooleanFieldWithDefault(msg, 2, false),
-    assignee: (f = msg.getAssignee()) && common_grpc_definitions_pb.User.toObject(includeInstance, f)
+    assignee: (f = msg.getAssignee()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -28980,8 +28980,8 @@ proto.yartu.AssignAllCheckListItemsRequest.deserializeBinaryFromReader = functio
       msg.setUnassign(value);
       break;
     case 3:
-      var value = new common_grpc_definitions_pb.User;
-      reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
+      var value = new common_grpc_definitions_pb.UserBasic;
+      reader.readMessage(value,common_grpc_definitions_pb.UserBasic.deserializeBinaryFromReader);
       msg.setAssignee(value);
       break;
     default:
@@ -29032,7 +29032,7 @@ proto.yartu.AssignAllCheckListItemsRequest.serializeBinaryToWriter = function(me
     writer.writeMessage(
       3,
       f,
-      common_grpc_definitions_pb.User.serializeBinaryToWriter
+      common_grpc_definitions_pb.UserBasic.serializeBinaryToWriter
     );
   }
 };
@@ -29075,17 +29075,17 @@ proto.yartu.AssignAllCheckListItemsRequest.prototype.setUnassign = function(valu
 
 
 /**
- * optional User assignee = 3;
- * @return {?proto.User}
+ * optional UserBasic assignee = 3;
+ * @return {?proto.UserBasic}
  */
 proto.yartu.AssignAllCheckListItemsRequest.prototype.getAssignee = function() {
-  return /** @type{?proto.User} */ (
-    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.User, 3));
+  return /** @type{?proto.UserBasic} */ (
+    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.UserBasic, 3));
 };
 
 
 /**
- * @param {?proto.User|undefined} value
+ * @param {?proto.UserBasic|undefined} value
  * @return {!proto.yartu.AssignAllCheckListItemsRequest} returns this
 */
 proto.yartu.AssignAllCheckListItemsRequest.prototype.setAssignee = function(value) {
@@ -30074,7 +30074,7 @@ proto.yartu.JoinCardResponse.toObject = function(includeInstance, msg) {
     code: jspb.Message.getFieldWithDefault(msg, 1, 0),
     message: jspb.Message.getFieldWithDefault(msg, 2, ""),
     dataList: jspb.Message.toObjectList(msg.getDataList(),
-    common_grpc_definitions_pb.User.toObject, includeInstance)
+    common_grpc_definitions_pb.UserBasic.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -30120,8 +30120,8 @@ proto.yartu.JoinCardResponse.deserializeBinaryFromReader = function(msg, reader)
       msg.setMessage(value);
       break;
     case 3:
-      var value = new common_grpc_definitions_pb.User;
-      reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
+      var value = new common_grpc_definitions_pb.UserBasic;
+      reader.readMessage(value,common_grpc_definitions_pb.UserBasic.deserializeBinaryFromReader);
       msg.addData(value);
       break;
     default:
@@ -30172,7 +30172,7 @@ proto.yartu.JoinCardResponse.serializeBinaryToWriter = function(message, writer)
     writer.writeRepeatedMessage(
       3,
       f,
-      common_grpc_definitions_pb.User.serializeBinaryToWriter
+      common_grpc_definitions_pb.UserBasic.serializeBinaryToWriter
     );
   }
 };
@@ -30215,17 +30215,17 @@ proto.yartu.JoinCardResponse.prototype.setMessage = function(value) {
 
 
 /**
- * repeated User data = 3;
- * @return {!Array<!proto.User>}
+ * repeated UserBasic data = 3;
+ * @return {!Array<!proto.UserBasic>}
  */
 proto.yartu.JoinCardResponse.prototype.getDataList = function() {
-  return /** @type{!Array<!proto.User>} */ (
-    jspb.Message.getRepeatedWrapperField(this, common_grpc_definitions_pb.User, 3));
+  return /** @type{!Array<!proto.UserBasic>} */ (
+    jspb.Message.getRepeatedWrapperField(this, common_grpc_definitions_pb.UserBasic, 3));
 };
 
 
 /**
- * @param {!Array<!proto.User>} value
+ * @param {!Array<!proto.UserBasic>} value
  * @return {!proto.yartu.JoinCardResponse} returns this
 */
 proto.yartu.JoinCardResponse.prototype.setDataList = function(value) {
@@ -30234,12 +30234,12 @@ proto.yartu.JoinCardResponse.prototype.setDataList = function(value) {
 
 
 /**
- * @param {!proto.User=} opt_value
+ * @param {!proto.UserBasic=} opt_value
  * @param {number=} opt_index
- * @return {!proto.User}
+ * @return {!proto.UserBasic}
  */
 proto.yartu.JoinCardResponse.prototype.addData = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 3, opt_value, proto.User, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 3, opt_value, proto.UserBasic, opt_index);
 };
 
 
@@ -30424,7 +30424,7 @@ proto.yartu.LeaveCardResponse.toObject = function(includeInstance, msg) {
     code: jspb.Message.getFieldWithDefault(msg, 1, 0),
     message: jspb.Message.getFieldWithDefault(msg, 2, ""),
     dataList: jspb.Message.toObjectList(msg.getDataList(),
-    common_grpc_definitions_pb.User.toObject, includeInstance)
+    common_grpc_definitions_pb.UserBasic.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -30470,8 +30470,8 @@ proto.yartu.LeaveCardResponse.deserializeBinaryFromReader = function(msg, reader
       msg.setMessage(value);
       break;
     case 3:
-      var value = new common_grpc_definitions_pb.User;
-      reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
+      var value = new common_grpc_definitions_pb.UserBasic;
+      reader.readMessage(value,common_grpc_definitions_pb.UserBasic.deserializeBinaryFromReader);
       msg.addData(value);
       break;
     default:
@@ -30522,7 +30522,7 @@ proto.yartu.LeaveCardResponse.serializeBinaryToWriter = function(message, writer
     writer.writeRepeatedMessage(
       3,
       f,
-      common_grpc_definitions_pb.User.serializeBinaryToWriter
+      common_grpc_definitions_pb.UserBasic.serializeBinaryToWriter
     );
   }
 };
@@ -30565,17 +30565,17 @@ proto.yartu.LeaveCardResponse.prototype.setMessage = function(value) {
 
 
 /**
- * repeated User data = 3;
- * @return {!Array<!proto.User>}
+ * repeated UserBasic data = 3;
+ * @return {!Array<!proto.UserBasic>}
  */
 proto.yartu.LeaveCardResponse.prototype.getDataList = function() {
-  return /** @type{!Array<!proto.User>} */ (
-    jspb.Message.getRepeatedWrapperField(this, common_grpc_definitions_pb.User, 3));
+  return /** @type{!Array<!proto.UserBasic>} */ (
+    jspb.Message.getRepeatedWrapperField(this, common_grpc_definitions_pb.UserBasic, 3));
 };
 
 
 /**
- * @param {!Array<!proto.User>} value
+ * @param {!Array<!proto.UserBasic>} value
  * @return {!proto.yartu.LeaveCardResponse} returns this
 */
 proto.yartu.LeaveCardResponse.prototype.setDataList = function(value) {
@@ -30584,12 +30584,12 @@ proto.yartu.LeaveCardResponse.prototype.setDataList = function(value) {
 
 
 /**
- * @param {!proto.User=} opt_value
+ * @param {!proto.UserBasic=} opt_value
  * @param {number=} opt_index
- * @return {!proto.User}
+ * @return {!proto.UserBasic}
  */
 proto.yartu.LeaveCardResponse.prototype.addData = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 3, opt_value, proto.User, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 3, opt_value, proto.UserBasic, opt_index);
 };
 
 
@@ -35771,7 +35771,7 @@ proto.yartu.GetProjectorOrBoardUserListResponse.toObject = function(includeInsta
     code: jspb.Message.getFieldWithDefault(msg, 1, 0),
     message: jspb.Message.getFieldWithDefault(msg, 2, ""),
     dataList: jspb.Message.toObjectList(msg.getDataList(),
-    common_grpc_definitions_pb.User.toObject, includeInstance)
+    common_grpc_definitions_pb.UserBasic.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -35817,8 +35817,8 @@ proto.yartu.GetProjectorOrBoardUserListResponse.deserializeBinaryFromReader = fu
       msg.setMessage(value);
       break;
     case 3:
-      var value = new common_grpc_definitions_pb.User;
-      reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
+      var value = new common_grpc_definitions_pb.UserBasic;
+      reader.readMessage(value,common_grpc_definitions_pb.UserBasic.deserializeBinaryFromReader);
       msg.addData(value);
       break;
     default:
@@ -35869,7 +35869,7 @@ proto.yartu.GetProjectorOrBoardUserListResponse.serializeBinaryToWriter = functi
     writer.writeRepeatedMessage(
       3,
       f,
-      common_grpc_definitions_pb.User.serializeBinaryToWriter
+      common_grpc_definitions_pb.UserBasic.serializeBinaryToWriter
     );
   }
 };
@@ -35912,17 +35912,17 @@ proto.yartu.GetProjectorOrBoardUserListResponse.prototype.setMessage = function(
 
 
 /**
- * repeated User data = 3;
- * @return {!Array<!proto.User>}
+ * repeated UserBasic data = 3;
+ * @return {!Array<!proto.UserBasic>}
  */
 proto.yartu.GetProjectorOrBoardUserListResponse.prototype.getDataList = function() {
-  return /** @type{!Array<!proto.User>} */ (
-    jspb.Message.getRepeatedWrapperField(this, common_grpc_definitions_pb.User, 3));
+  return /** @type{!Array<!proto.UserBasic>} */ (
+    jspb.Message.getRepeatedWrapperField(this, common_grpc_definitions_pb.UserBasic, 3));
 };
 
 
 /**
- * @param {!Array<!proto.User>} value
+ * @param {!Array<!proto.UserBasic>} value
  * @return {!proto.yartu.GetProjectorOrBoardUserListResponse} returns this
 */
 proto.yartu.GetProjectorOrBoardUserListResponse.prototype.setDataList = function(value) {
@@ -35931,12 +35931,12 @@ proto.yartu.GetProjectorOrBoardUserListResponse.prototype.setDataList = function
 
 
 /**
- * @param {!proto.User=} opt_value
+ * @param {!proto.UserBasic=} opt_value
  * @param {number=} opt_index
- * @return {!proto.User}
+ * @return {!proto.UserBasic}
  */
 proto.yartu.GetProjectorOrBoardUserListResponse.prototype.addData = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 3, opt_value, proto.User, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 3, opt_value, proto.UserBasic, opt_index);
 };
 
 

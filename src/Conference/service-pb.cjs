@@ -1501,7 +1501,7 @@ proto.yartu.Session.toObject = function(includeInstance, msg) {
     sessionType: jspb.Message.getFieldWithDefault(msg, 3, 0),
     uuid: jspb.Message.getFieldWithDefault(msg, 4, ""),
     name: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    owner: (f = msg.getOwner()) && common_grpc_definitions_pb.User.toObject(includeInstance, f),
+    owner: (f = msg.getOwner()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f),
     startedAt: jspb.Message.getFieldWithDefault(msg, 7, ""),
     finishedAt: jspb.Message.getFieldWithDefault(msg, 8, ""),
     scheduledToStartAt: jspb.Message.getFieldWithDefault(msg, 9, ""),
@@ -1578,8 +1578,8 @@ proto.yartu.Session.deserializeBinaryFromReader = function(msg, reader) {
       msg.setName(value);
       break;
     case 6:
-      var value = new common_grpc_definitions_pb.User;
-      reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
+      var value = new common_grpc_definitions_pb.UserBasic;
+      reader.readMessage(value,common_grpc_definitions_pb.UserBasic.deserializeBinaryFromReader);
       msg.setOwner(value);
       break;
     case 7:
@@ -1725,7 +1725,7 @@ proto.yartu.Session.serializeBinaryToWriter = function(message, writer) {
     writer.writeMessage(
       6,
       f,
-      common_grpc_definitions_pb.User.serializeBinaryToWriter
+      common_grpc_definitions_pb.UserBasic.serializeBinaryToWriter
     );
   }
   f = message.getStartedAt();
@@ -1950,17 +1950,17 @@ proto.yartu.Session.prototype.setName = function(value) {
 
 
 /**
- * optional User owner = 6;
- * @return {?proto.User}
+ * optional UserBasic owner = 6;
+ * @return {?proto.UserBasic}
  */
 proto.yartu.Session.prototype.getOwner = function() {
-  return /** @type{?proto.User} */ (
-    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.User, 6));
+  return /** @type{?proto.UserBasic} */ (
+    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.UserBasic, 6));
 };
 
 
 /**
- * @param {?proto.User|undefined} value
+ * @param {?proto.UserBasic|undefined} value
  * @return {!proto.yartu.Session} returns this
 */
 proto.yartu.Session.prototype.setOwner = function(value) {

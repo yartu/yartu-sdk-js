@@ -34,7 +34,7 @@ import {
 } from './service-pb.cjs';
 
 import { YContactClient } from './service-grpc-web-pb.cjs';
-import {Group, Query, Shared, User} from '../utils/definitions_pb.cjs';
+import { UserBasic, GroupBasic, Shared, Query } from '../utils/definitions_pb.cjs';
 import { handleError } from '../utils/helper';
 
 
@@ -157,22 +157,22 @@ export default (config) =>
           shared.setPermission(s.permission);
 
           if (s?.isYartuUser) {
-            const user = new User();
-            user.setId(s.id);
-            user.setUsername(s.email);
-            user.setName(s.name);
-            user.setSurname(s.surname);
+            const userBasic = new UserBasic();
+            userBasic.setId(s.id);
+            userBasic.setUsername(s.email);
+            userBasic.setName(s.name);
+            userBasic.setSurname(s.surname);
 
-            shared.setUser(user);
+            shared.setUser(userBasic);
 
           } else if (s?.isGroup) {
 
-            const group = new Group();
-            group.setId(s.id);
-            group.setName(s.name);
-            group.setEmailAlias(s.email);
+            const groupBasic = new GroupBasic();
+            groupBasic.setId(s.id);
+            groupBasic.setName(s.name);
+            groupBasic.setEmailAlias(s.email);
 
-            shared.setGroup(group);
+            shared.setGroup(groupBasic);
           } else {
             console.log('@yartu/sdk/ shareAddressBook method not supports external users and Realm share features for now!');
           }

@@ -2736,7 +2736,7 @@ proto.yartu.NoteLabel.toObject = function(includeInstance, msg) {
     id: jspb.Message.getFieldWithDefault(msg, 1, 0),
     name: jspb.Message.getFieldWithDefault(msg, 2, ""),
     color: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    user: (f = msg.getUser()) && common_grpc_definitions_pb.User.toObject(includeInstance, f)
+    user: (f = msg.getUser()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -2786,8 +2786,8 @@ proto.yartu.NoteLabel.deserializeBinaryFromReader = function(msg, reader) {
       msg.setColor(value);
       break;
     case 4:
-      var value = new common_grpc_definitions_pb.User;
-      reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
+      var value = new common_grpc_definitions_pb.UserBasic;
+      reader.readMessage(value,common_grpc_definitions_pb.UserBasic.deserializeBinaryFromReader);
       msg.setUser(value);
       break;
     default:
@@ -2845,7 +2845,7 @@ proto.yartu.NoteLabel.serializeBinaryToWriter = function(message, writer) {
     writer.writeMessage(
       4,
       f,
-      common_grpc_definitions_pb.User.serializeBinaryToWriter
+      common_grpc_definitions_pb.UserBasic.serializeBinaryToWriter
     );
   }
 };
@@ -2960,17 +2960,17 @@ proto.yartu.NoteLabel.prototype.hasColor = function() {
 
 
 /**
- * optional User user = 4;
- * @return {?proto.User}
+ * optional UserBasic user = 4;
+ * @return {?proto.UserBasic}
  */
 proto.yartu.NoteLabel.prototype.getUser = function() {
-  return /** @type{?proto.User} */ (
-    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.User, 4));
+  return /** @type{?proto.UserBasic} */ (
+    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.UserBasic, 4));
 };
 
 
 /**
- * @param {?proto.User|undefined} value
+ * @param {?proto.UserBasic|undefined} value
  * @return {!proto.yartu.NoteLabel} returns this
 */
 proto.yartu.NoteLabel.prototype.setUser = function(value) {
@@ -3037,7 +3037,7 @@ proto.yartu.Notebook.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, 0),
     name: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    user: (f = msg.getUser()) && common_grpc_definitions_pb.User.toObject(includeInstance, f),
+    user: (f = msg.getUser()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f),
     sharedCount: jspb.Message.getFieldWithDefault(msg, 4, 0),
     createdAt: jspb.Message.getFieldWithDefault(msg, 5, ""),
     updatedAt: jspb.Message.getFieldWithDefault(msg, 6, ""),
@@ -3090,8 +3090,8 @@ proto.yartu.Notebook.deserializeBinaryFromReader = function(msg, reader) {
       msg.setName(value);
       break;
     case 3:
-      var value = new common_grpc_definitions_pb.User;
-      reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
+      var value = new common_grpc_definitions_pb.UserBasic;
+      reader.readMessage(value,common_grpc_definitions_pb.UserBasic.deserializeBinaryFromReader);
       msg.setUser(value);
       break;
     case 4:
@@ -3167,7 +3167,7 @@ proto.yartu.Notebook.serializeBinaryToWriter = function(message, writer) {
     writer.writeMessage(
       3,
       f,
-      common_grpc_definitions_pb.User.serializeBinaryToWriter
+      common_grpc_definitions_pb.UserBasic.serializeBinaryToWriter
     );
   }
   f = message.getSharedCount();
@@ -3253,17 +3253,17 @@ proto.yartu.Notebook.prototype.setName = function(value) {
 
 
 /**
- * optional User user = 3;
- * @return {?proto.User}
+ * optional UserBasic user = 3;
+ * @return {?proto.UserBasic}
  */
 proto.yartu.Notebook.prototype.getUser = function() {
-  return /** @type{?proto.User} */ (
-    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.User, 3));
+  return /** @type{?proto.UserBasic} */ (
+    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.UserBasic, 3));
 };
 
 
 /**
- * @param {?proto.User|undefined} value
+ * @param {?proto.UserBasic|undefined} value
  * @return {!proto.yartu.Notebook} returns this
 */
 proto.yartu.Notebook.prototype.setUser = function(value) {
@@ -3470,7 +3470,7 @@ proto.yartu.Task.toObject = function(includeInstance, msg) {
     id: jspb.Message.getFieldWithDefault(msg, 1, 0),
     content: jspb.Message.getFieldWithDefault(msg, 2, ""),
     completedAt: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    completedBy: (f = msg.getCompletedBy()) && common_grpc_definitions_pb.User.toObject(includeInstance, f),
+    completedBy: (f = msg.getCompletedBy()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f),
     priority: jspb.Message.getFieldWithDefault(msg, 5, 0),
     reminder: jspb.Message.getFieldWithDefault(msg, 6, ""),
     deadline: jspb.Message.getFieldWithDefault(msg, 7, ""),
@@ -3529,8 +3529,8 @@ proto.yartu.Task.deserializeBinaryFromReader = function(msg, reader) {
       msg.setCompletedAt(value);
       break;
     case 4:
-      var value = new common_grpc_definitions_pb.User;
-      reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
+      var value = new common_grpc_definitions_pb.UserBasic;
+      reader.readMessage(value,common_grpc_definitions_pb.UserBasic.deserializeBinaryFromReader);
       msg.setCompletedBy(value);
       break;
     case 5:
@@ -3624,7 +3624,7 @@ proto.yartu.Task.serializeBinaryToWriter = function(message, writer) {
     writer.writeMessage(
       4,
       f,
-      common_grpc_definitions_pb.User.serializeBinaryToWriter
+      common_grpc_definitions_pb.UserBasic.serializeBinaryToWriter
     );
   }
   f = message.getPriority();
@@ -3748,17 +3748,17 @@ proto.yartu.Task.prototype.setCompletedAt = function(value) {
 
 
 /**
- * optional User completed_by = 4;
- * @return {?proto.User}
+ * optional UserBasic completed_by = 4;
+ * @return {?proto.UserBasic}
  */
 proto.yartu.Task.prototype.getCompletedBy = function() {
-  return /** @type{?proto.User} */ (
-    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.User, 4));
+  return /** @type{?proto.UserBasic} */ (
+    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.UserBasic, 4));
 };
 
 
 /**
- * @param {?proto.User|undefined} value
+ * @param {?proto.UserBasic|undefined} value
  * @return {!proto.yartu.Task} returns this
 */
 proto.yartu.Task.prototype.setCompletedBy = function(value) {
@@ -3987,7 +3987,7 @@ proto.yartu.Note.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, 0),
     notebook: (f = msg.getNotebook()) && proto.yartu.Notebook.toObject(includeInstance, f),
-    user: (f = msg.getUser()) && common_grpc_definitions_pb.User.toObject(includeInstance, f),
+    user: (f = msg.getUser()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f),
     title: jspb.Message.getFieldWithDefault(msg, 4, ""),
     content: jspb.Message.getFieldWithDefault(msg, 5, ""),
     snippet: jspb.Message.getFieldWithDefault(msg, 6, ""),
@@ -3997,8 +3997,8 @@ proto.yartu.Note.toObject = function(includeInstance, msg) {
     isStarred: jspb.Message.getBooleanFieldWithDefault(msg, 10, false),
     isArchived: jspb.Message.getBooleanFieldWithDefault(msg, 11, false),
     noteType: jspb.Message.getFieldWithDefault(msg, 12, ""),
-    modifiedBy: (f = msg.getModifiedBy()) && common_grpc_definitions_pb.User.toObject(includeInstance, f),
-    createdBy: (f = msg.getCreatedBy()) && common_grpc_definitions_pb.User.toObject(includeInstance, f),
+    modifiedBy: (f = msg.getModifiedBy()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f),
+    createdBy: (f = msg.getCreatedBy()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f),
     conferenceSession: jspb.Message.getFieldWithDefault(msg, 15, 0),
     labelsList: jspb.Message.toObjectList(msg.getLabelsList(),
     proto.yartu.NoteLabel.toObject, includeInstance),
@@ -4055,8 +4055,8 @@ proto.yartu.Note.deserializeBinaryFromReader = function(msg, reader) {
       msg.setNotebook(value);
       break;
     case 3:
-      var value = new common_grpc_definitions_pb.User;
-      reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
+      var value = new common_grpc_definitions_pb.UserBasic;
+      reader.readMessage(value,common_grpc_definitions_pb.UserBasic.deserializeBinaryFromReader);
       msg.setUser(value);
       break;
     case 4:
@@ -4096,13 +4096,13 @@ proto.yartu.Note.deserializeBinaryFromReader = function(msg, reader) {
       msg.setNoteType(value);
       break;
     case 13:
-      var value = new common_grpc_definitions_pb.User;
-      reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
+      var value = new common_grpc_definitions_pb.UserBasic;
+      reader.readMessage(value,common_grpc_definitions_pb.UserBasic.deserializeBinaryFromReader);
       msg.setModifiedBy(value);
       break;
     case 14:
-      var value = new common_grpc_definitions_pb.User;
-      reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
+      var value = new common_grpc_definitions_pb.UserBasic;
+      reader.readMessage(value,common_grpc_definitions_pb.UserBasic.deserializeBinaryFromReader);
       msg.setCreatedBy(value);
       break;
     case 15:
@@ -4188,7 +4188,7 @@ proto.yartu.Note.serializeBinaryToWriter = function(message, writer) {
     writer.writeMessage(
       3,
       f,
-      common_grpc_definitions_pb.User.serializeBinaryToWriter
+      common_grpc_definitions_pb.UserBasic.serializeBinaryToWriter
     );
   }
   f = message.getTitle();
@@ -4259,7 +4259,7 @@ proto.yartu.Note.serializeBinaryToWriter = function(message, writer) {
     writer.writeMessage(
       13,
       f,
-      common_grpc_definitions_pb.User.serializeBinaryToWriter
+      common_grpc_definitions_pb.UserBasic.serializeBinaryToWriter
     );
   }
   f = message.getCreatedBy();
@@ -4267,7 +4267,7 @@ proto.yartu.Note.serializeBinaryToWriter = function(message, writer) {
     writer.writeMessage(
       14,
       f,
-      common_grpc_definitions_pb.User.serializeBinaryToWriter
+      common_grpc_definitions_pb.UserBasic.serializeBinaryToWriter
     );
   }
   f = /** @type {number} */ (jspb.Message.getField(message, 15));
@@ -4387,17 +4387,17 @@ proto.yartu.Note.prototype.hasNotebook = function() {
 
 
 /**
- * optional User user = 3;
- * @return {?proto.User}
+ * optional UserBasic user = 3;
+ * @return {?proto.UserBasic}
  */
 proto.yartu.Note.prototype.getUser = function() {
-  return /** @type{?proto.User} */ (
-    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.User, 3));
+  return /** @type{?proto.UserBasic} */ (
+    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.UserBasic, 3));
 };
 
 
 /**
- * @param {?proto.User|undefined} value
+ * @param {?proto.UserBasic|undefined} value
  * @return {!proto.yartu.Note} returns this
 */
 proto.yartu.Note.prototype.setUser = function(value) {
@@ -4586,17 +4586,17 @@ proto.yartu.Note.prototype.setNoteType = function(value) {
 
 
 /**
- * optional User modified_by = 13;
- * @return {?proto.User}
+ * optional UserBasic modified_by = 13;
+ * @return {?proto.UserBasic}
  */
 proto.yartu.Note.prototype.getModifiedBy = function() {
-  return /** @type{?proto.User} */ (
-    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.User, 13));
+  return /** @type{?proto.UserBasic} */ (
+    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.UserBasic, 13));
 };
 
 
 /**
- * @param {?proto.User|undefined} value
+ * @param {?proto.UserBasic|undefined} value
  * @return {!proto.yartu.Note} returns this
 */
 proto.yartu.Note.prototype.setModifiedBy = function(value) {
@@ -4623,17 +4623,17 @@ proto.yartu.Note.prototype.hasModifiedBy = function() {
 
 
 /**
- * optional User created_by = 14;
- * @return {?proto.User}
+ * optional UserBasic created_by = 14;
+ * @return {?proto.UserBasic}
  */
 proto.yartu.Note.prototype.getCreatedBy = function() {
-  return /** @type{?proto.User} */ (
-    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.User, 14));
+  return /** @type{?proto.UserBasic} */ (
+    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.UserBasic, 14));
 };
 
 
 /**
- * @param {?proto.User|undefined} value
+ * @param {?proto.UserBasic|undefined} value
  * @return {!proto.yartu.Note} returns this
 */
 proto.yartu.Note.prototype.setCreatedBy = function(value) {

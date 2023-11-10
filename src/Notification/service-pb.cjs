@@ -343,8 +343,8 @@ proto.yartu.Notification.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, 0),
     uuid: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    user: (f = msg.getUser()) && common_grpc_definitions_pb.User.toObject(includeInstance, f),
-    fromUser: (f = msg.getFromUser()) && common_grpc_definitions_pb.User.toObject(includeInstance, f),
+    user: (f = msg.getUser()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f),
+    fromUser: (f = msg.getFromUser()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f),
     app: jspb.Message.getFieldWithDefault(msg, 5, ""),
     title: jspb.Message.getFieldWithDefault(msg, 6, ""),
     content: jspb.Message.getFieldWithDefault(msg, 7, ""),
@@ -402,13 +402,13 @@ proto.yartu.Notification.deserializeBinaryFromReader = function(msg, reader) {
       msg.setUuid(value);
       break;
     case 3:
-      var value = new common_grpc_definitions_pb.User;
-      reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
+      var value = new common_grpc_definitions_pb.UserBasic;
+      reader.readMessage(value,common_grpc_definitions_pb.UserBasic.deserializeBinaryFromReader);
       msg.setUser(value);
       break;
     case 4:
-      var value = new common_grpc_definitions_pb.User;
-      reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
+      var value = new common_grpc_definitions_pb.UserBasic;
+      reader.readMessage(value,common_grpc_definitions_pb.UserBasic.deserializeBinaryFromReader);
       msg.setFromUser(value);
       break;
     case 5:
@@ -508,7 +508,7 @@ proto.yartu.Notification.serializeBinaryToWriter = function(message, writer) {
     writer.writeMessage(
       3,
       f,
-      common_grpc_definitions_pb.User.serializeBinaryToWriter
+      common_grpc_definitions_pb.UserBasic.serializeBinaryToWriter
     );
   }
   f = message.getFromUser();
@@ -516,7 +516,7 @@ proto.yartu.Notification.serializeBinaryToWriter = function(message, writer) {
     writer.writeMessage(
       4,
       f,
-      common_grpc_definitions_pb.User.serializeBinaryToWriter
+      common_grpc_definitions_pb.UserBasic.serializeBinaryToWriter
     );
   }
   f = message.getApp();
@@ -644,17 +644,17 @@ proto.yartu.Notification.prototype.setUuid = function(value) {
 
 
 /**
- * optional User user = 3;
- * @return {?proto.User}
+ * optional UserBasic user = 3;
+ * @return {?proto.UserBasic}
  */
 proto.yartu.Notification.prototype.getUser = function() {
-  return /** @type{?proto.User} */ (
-    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.User, 3));
+  return /** @type{?proto.UserBasic} */ (
+    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.UserBasic, 3));
 };
 
 
 /**
- * @param {?proto.User|undefined} value
+ * @param {?proto.UserBasic|undefined} value
  * @return {!proto.yartu.Notification} returns this
 */
 proto.yartu.Notification.prototype.setUser = function(value) {
@@ -681,17 +681,17 @@ proto.yartu.Notification.prototype.hasUser = function() {
 
 
 /**
- * optional User from_user = 4;
- * @return {?proto.User}
+ * optional UserBasic from_user = 4;
+ * @return {?proto.UserBasic}
  */
 proto.yartu.Notification.prototype.getFromUser = function() {
-  return /** @type{?proto.User} */ (
-    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.User, 4));
+  return /** @type{?proto.UserBasic} */ (
+    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.UserBasic, 4));
 };
 
 
 /**
- * @param {?proto.User|undefined} value
+ * @param {?proto.UserBasic|undefined} value
  * @return {!proto.yartu.Notification} returns this
 */
 proto.yartu.Notification.prototype.setFromUser = function(value) {
