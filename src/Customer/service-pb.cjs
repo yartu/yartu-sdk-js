@@ -6664,7 +6664,8 @@ proto.yartu.ListCustomerMemberRequest.prototype.toObject = function(opt_includeI
  */
 proto.yartu.ListCustomerMemberRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    realmId: jspb.Message.getFieldWithDefault(msg, 1, 0)
+    realmId: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    query: (f = msg.getQuery()) && common_grpc_definitions_pb.Query.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -6705,6 +6706,11 @@ proto.yartu.ListCustomerMemberRequest.deserializeBinaryFromReader = function(msg
       var value = /** @type {number} */ (reader.readInt64());
       msg.setRealmId(value);
       break;
+    case 2:
+      var value = new common_grpc_definitions_pb.Query;
+      reader.readMessage(value,common_grpc_definitions_pb.Query.deserializeBinaryFromReader);
+      msg.setQuery(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -6741,6 +6747,14 @@ proto.yartu.ListCustomerMemberRequest.serializeBinaryToWriter = function(message
       f
     );
   }
+  f = message.getQuery();
+  if (f != null) {
+    writer.writeMessage(
+      2,
+      f,
+      common_grpc_definitions_pb.Query.serializeBinaryToWriter
+    );
+  }
 };
 
 
@@ -6759,6 +6773,43 @@ proto.yartu.ListCustomerMemberRequest.prototype.getRealmId = function() {
  */
 proto.yartu.ListCustomerMemberRequest.prototype.setRealmId = function(value) {
   return jspb.Message.setProto3IntField(this, 1, value);
+};
+
+
+/**
+ * optional Query query = 2;
+ * @return {?proto.Query}
+ */
+proto.yartu.ListCustomerMemberRequest.prototype.getQuery = function() {
+  return /** @type{?proto.Query} */ (
+    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.Query, 2));
+};
+
+
+/**
+ * @param {?proto.Query|undefined} value
+ * @return {!proto.yartu.ListCustomerMemberRequest} returns this
+*/
+proto.yartu.ListCustomerMemberRequest.prototype.setQuery = function(value) {
+  return jspb.Message.setWrapperField(this, 2, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.yartu.ListCustomerMemberRequest} returns this
+ */
+proto.yartu.ListCustomerMemberRequest.prototype.clearQuery = function() {
+  return this.setQuery(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.ListCustomerMemberRequest.prototype.hasQuery = function() {
+  return jspb.Message.getField(this, 2) != null;
 };
 
 
@@ -6804,7 +6855,8 @@ proto.yartu.ListCustomerMemberResponse.toObject = function(includeInstance, msg)
     code: jspb.Message.getFieldWithDefault(msg, 1, 0),
     userList: jspb.Message.toObjectList(msg.getUserList(),
     common_grpc_definitions_pb.User.toObject, includeInstance),
-    message: jspb.Message.getFieldWithDefault(msg, 3, "")
+    pagination: (f = msg.getPagination()) && common_grpc_definitions_pb.PaginationMeta.toObject(includeInstance, f),
+    message: jspb.Message.getFieldWithDefault(msg, 4, "")
   };
 
   if (includeInstance) {
@@ -6851,6 +6903,11 @@ proto.yartu.ListCustomerMemberResponse.deserializeBinaryFromReader = function(ms
       msg.addUser(value);
       break;
     case 3:
+      var value = new common_grpc_definitions_pb.PaginationMeta;
+      reader.readMessage(value,common_grpc_definitions_pb.PaginationMeta.deserializeBinaryFromReader);
+      msg.setPagination(value);
+      break;
+    case 4:
       var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
@@ -6898,10 +6955,18 @@ proto.yartu.ListCustomerMemberResponse.serializeBinaryToWriter = function(messag
       common_grpc_definitions_pb.User.serializeBinaryToWriter
     );
   }
-  f = /** @type {string} */ (jspb.Message.getField(message, 3));
+  f = message.getPagination();
+  if (f != null) {
+    writer.writeMessage(
+      3,
+      f,
+      common_grpc_definitions_pb.PaginationMeta.serializeBinaryToWriter
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 4));
   if (f != null) {
     writer.writeString(
-      3,
+      4,
       f
     );
   }
@@ -6965,11 +7030,48 @@ proto.yartu.ListCustomerMemberResponse.prototype.clearUserList = function() {
 
 
 /**
- * optional string message = 3;
+ * optional PaginationMeta pagination = 3;
+ * @return {?proto.PaginationMeta}
+ */
+proto.yartu.ListCustomerMemberResponse.prototype.getPagination = function() {
+  return /** @type{?proto.PaginationMeta} */ (
+    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.PaginationMeta, 3));
+};
+
+
+/**
+ * @param {?proto.PaginationMeta|undefined} value
+ * @return {!proto.yartu.ListCustomerMemberResponse} returns this
+*/
+proto.yartu.ListCustomerMemberResponse.prototype.setPagination = function(value) {
+  return jspb.Message.setWrapperField(this, 3, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.yartu.ListCustomerMemberResponse} returns this
+ */
+proto.yartu.ListCustomerMemberResponse.prototype.clearPagination = function() {
+  return this.setPagination(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.ListCustomerMemberResponse.prototype.hasPagination = function() {
+  return jspb.Message.getField(this, 3) != null;
+};
+
+
+/**
+ * optional string message = 4;
  * @return {string}
  */
 proto.yartu.ListCustomerMemberResponse.prototype.getMessage = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
 };
 
 
@@ -6978,7 +7080,7 @@ proto.yartu.ListCustomerMemberResponse.prototype.getMessage = function() {
  * @return {!proto.yartu.ListCustomerMemberResponse} returns this
  */
 proto.yartu.ListCustomerMemberResponse.prototype.setMessage = function(value) {
-  return jspb.Message.setField(this, 3, value);
+  return jspb.Message.setField(this, 4, value);
 };
 
 
@@ -6987,7 +7089,7 @@ proto.yartu.ListCustomerMemberResponse.prototype.setMessage = function(value) {
  * @return {!proto.yartu.ListCustomerMemberResponse} returns this
  */
 proto.yartu.ListCustomerMemberResponse.prototype.clearMessage = function() {
-  return jspb.Message.setField(this, 3, undefined);
+  return jspb.Message.setField(this, 4, undefined);
 };
 
 
@@ -6996,7 +7098,7 @@ proto.yartu.ListCustomerMemberResponse.prototype.clearMessage = function() {
  * @return {boolean}
  */
 proto.yartu.ListCustomerMemberResponse.prototype.hasMessage = function() {
-  return jspb.Message.getField(this, 3) != null;
+  return jspb.Message.getField(this, 4) != null;
 };
 
 
