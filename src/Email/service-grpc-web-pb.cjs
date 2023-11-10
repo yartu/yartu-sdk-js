@@ -989,5 +989,66 @@ proto.yartu_mail.YEmailPromiseClient.prototype.search =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu_mail.SyncRequest,
+ *   !proto.yartu_mail.SyncResponse>}
+ */
+const methodDescriptor_YEmail_sync = new grpc.web.MethodDescriptor(
+  '/yartu_mail.YEmail/sync',
+  grpc.web.MethodType.UNARY,
+  proto.yartu_mail.SyncRequest,
+  proto.yartu_mail.SyncResponse,
+  /**
+   * @param {!proto.yartu_mail.SyncRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu_mail.SyncResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu_mail.SyncRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu_mail.SyncResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu_mail.SyncResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu_mail.YEmailClient.prototype.sync =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu_mail.YEmail/sync',
+      request,
+      metadata || {},
+      methodDescriptor_YEmail_sync,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu_mail.SyncRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu_mail.SyncResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu_mail.YEmailPromiseClient.prototype.sync =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu_mail.YEmail/sync',
+      request,
+      metadata || {},
+      methodDescriptor_YEmail_sync);
+};
+
+
 module.exports = proto.yartu_mail;
 
