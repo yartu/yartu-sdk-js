@@ -121,12 +121,24 @@ export default (config) =>
       });
     };
 
-    listCustomerMember = (realmId) => {
+    listCustomerMember = (realmId, queryRequest) => {
       return new Promise((resolve, reject) => {
         const request = new ListCustomerMemberRequest();
+        const query = new Query();
 
         realmId = Number.parseInt(realmId, 10);
         request.setRealmId(realmId);
+
+        if (queryRequest?.sortBy) {
+          query.setSortBy(queryRequest.sortBy);
+        }
+        if (queryRequest?.perPage) {
+          query.setPerPage(queryRequest.perPage);
+        }
+        if (queryRequest?.page) {
+          query.setPage(queryRequest.page);
+        }
+        request.setQuery(query);
 
         this.client.listCustomerMember(
           request,
