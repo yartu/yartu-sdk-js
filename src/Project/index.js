@@ -103,6 +103,9 @@ import {
   ListPublicCardActivityRequest,
   ListPublicCardAttachmentRequest,
 
+  // Board Statistics
+  GetBoardUserStatisticsRequest,
+
 } from './service-pb.cjs';
 
 import { UserBasic, GroupBasic, Shared, Query, UserModifyMeta} from '../utils/definitions_pb.cjs';
@@ -478,12 +481,12 @@ export default (config) =>
         if (threadData.userList && threadData.userList.length > 0) {
           const participantList = [];
           threadData.userList.forEach(s => {
-            const user = new UserBasic();
-            user.setId(s.id);
-            user.setUsername(s.email);
-            user.setName(s.name);
-            user.setSurname(s.surname);
-            participantList.push(user)
+            const userBasic = new UserBasic();
+            userBasic.setId(s.id);
+            userBasic.setUsername(s.email);
+            userBasic.setName(s.name);
+            userBasic.setSurname(s.surname);
+            participantList.push(userBasic)
           });
           request.setParticipantList(participantList);
         }
@@ -825,6 +828,39 @@ export default (config) =>
       });
     }
 
+    getBoardUserStatistics(boardUUID) {
+      return new Promise((resolve, reject) => {
+
+        const request = new GetBoardUserStatisticsRequest();
+        request.setBoardUuid(boardUUID);
+
+        this.client.getBoardUserStatistics(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              let statistic = response.getStatistic().toObject();
+              try {
+                statistic = JSON.parse(statistic['json']);
+              } catch (err) {
+                console.log(err);
+              }
+              resolve({
+                code,
+                statistic,
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
     listBoardActivity(boardUUID, queryRequest) {
       return new Promise((resolve, reject) => {
         const request = new ListBoardActivityRequest();
@@ -1079,12 +1115,12 @@ export default (config) =>
 
           if (s?.isYartuUser) {
             const userBasic = new UserBasic();
-            user.setId(s.id);
-            user.setUsername(s.email);
-            user.setName(s.name);
-            user.setSurname(s.surname);
+            userBasic.setId(s.id);
+            userBasic.setUsername(s.email);
+            userBasic.setName(s.name);
+            userBasic.setSurname(s.surname);
 
-            shared.setBasicUser(userBasic);
+            shared.setUser(userBasic);
 
           } else if (s?.isGroup) {
 
@@ -2417,12 +2453,12 @@ export default (config) =>
 
           if (s?.isYartuUser) {
             const userBasic = new UserBasic();
-            user.setId(s.id);
-            user.setUsername(s.email);
-            user.setName(s.name);
-            user.setSurname(s.surname);
+            userBasic.setId(s.id);
+            userBasic.setUsername(s.email);
+            userBasic.setName(s.name);
+            userBasic.setSurname(s.surname);
 
-            shared.setBasicUser(userBasic);
+            shared.setUser(userBasic);
 
           } else if (s?.isGroup) {
 
@@ -2481,12 +2517,12 @@ export default (config) =>
 
           if (s?.isYartuUser) {
             const userBasic = new UserBasic();
-            user.setId(s.id);
-            user.setUsername(s.email);
-            user.setName(s.name);
-            user.setSurname(s.surname);
+            userBasic.setId(s.id);
+            userBasic.setUsername(s.email);
+            userBasic.setName(s.name);
+            userBasic.setSurname(s.surname);
 
-            shared.setBasicUser(userBasic);
+            shared.setUser(userBasic);
 
           } else if (s?.isGroup) {
 
