@@ -27,12 +27,12 @@ import {
   GetRegisterFormRequest,
   GetPaymentSessionRequest,
   ListInvoicesRequest,
-  ListInvoiceTemplateRequest,
+  ListInvoiceTemplateRequest
 } from './service-pb.cjs';
 
 import { YCustomerClient } from './service-grpc-web-pb.cjs';
 import { Group, Query, Shared, User } from '../utils/definitions_pb.cjs';
-import { handleError } from '../utils/helper';
+import { handleError, toByte } from '../utils/helper';
 
 export default (config) =>
   class Customer {
@@ -206,6 +206,25 @@ export default (config) =>
         request.setName(userData.name);
         request.setSurname(userData.surname);
         request.setServiceList(userData.serviceList || []);
+
+        let driveQuota = 0;
+        if (userData.hasDriveQuota) {
+          driveQuota = toByte(
+            userData.driveQuota.quota,
+            userData.driveQuota.selector
+          );
+        }
+
+        let emailQuota = 0;
+        if (userData.hasEmailQuota) {
+          emailQuota = toByte(
+            userData.emailQuota.quota,
+            userData.emailQuota.selector
+          );
+        }
+
+        request.setDriveQuota(driveQuota);
+        request.setEmailQuota(emailQuota);
 
         if (userData.password) {
           request.setPassword(userData.password);

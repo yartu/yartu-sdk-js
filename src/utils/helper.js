@@ -18,6 +18,13 @@ const handleError = (error, reject) => {
 //   }
 //   this.arrClean = true;
 // };
+
+const toByte = (size, type) => {
+  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+  const index = sizes.indexOf(type);
+  return Number.parseInt(size, 10) * 1024 ** index;
+};
+
 const loadFromArray = (unmappedArrArr) => {
   const resp = {};
   for (let i = 0; i < unmappedArrArr.length; i++) {
@@ -28,4 +35,4 @@ const loadFromArray = (unmappedArrArr) => {
   return resp;
 };
 
-export { handleError, loadFromArray };
+export { handleError, loadFromArray, toByte };
