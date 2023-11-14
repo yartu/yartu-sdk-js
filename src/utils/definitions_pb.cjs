@@ -2557,7 +2557,8 @@ proto.User.toObject = function(includeInstance, msg) {
     emailQuota: (f = msg.getEmailQuota()) && proto.EmailQuota.toObject(includeInstance, f),
     hasDriveQuota: jspb.Message.getBooleanFieldWithDefault(msg, 26, false),
     driveQuota: (f = msg.getDriveQuota()) && proto.DriveQuota.toObject(includeInstance, f),
-    image: jspb.Message.getFieldWithDefault(msg, 28, "")
+    image: jspb.Message.getFieldWithDefault(msg, 28, ""),
+    isRealmManager: jspb.Message.getBooleanFieldWithDefault(msg, 29, false)
   };
 
   if (includeInstance) {
@@ -2710,6 +2711,10 @@ proto.User.deserializeBinaryFromReader = function(msg, reader) {
     case 28:
       var value = /** @type {string} */ (reader.readString());
       msg.setImage(value);
+      break;
+    case 29:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setIsRealmManager(value);
       break;
     default:
       reader.skipField();
@@ -2938,6 +2943,13 @@ proto.User.serializeBinaryToWriter = function(message, writer) {
   if (f != null) {
     writer.writeString(
       28,
+      f
+    );
+  }
+  f = /** @type {boolean} */ (jspb.Message.getField(message, 29));
+  if (f != null) {
+    writer.writeBool(
+      29,
       f
     );
   }
@@ -3704,6 +3716,42 @@ proto.User.prototype.clearImage = function() {
  */
 proto.User.prototype.hasImage = function() {
   return jspb.Message.getField(this, 28) != null;
+};
+
+
+/**
+ * optional bool is_realm_manager = 29;
+ * @return {boolean}
+ */
+proto.User.prototype.getIsRealmManager = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 29, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.User} returns this
+ */
+proto.User.prototype.setIsRealmManager = function(value) {
+  return jspb.Message.setField(this, 29, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.User} returns this
+ */
+proto.User.prototype.clearIsRealmManager = function() {
+  return jspb.Message.setField(this, 29, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.User.prototype.hasIsRealmManager = function() {
+  return jspb.Message.getField(this, 29) != null;
 };
 
 

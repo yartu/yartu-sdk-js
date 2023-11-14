@@ -4,6 +4,7 @@ import {
   ListCustomerMemberRequest,
   GetCustomerMemberRequest,
   UpsertCustomerMemberRequest,
+  ToggleCustomerMemberAsRealmManagerRequest,
   DeleteCustomerMemberRequest,
   ResetCustomerMemberPasswordRequest,
   ChangeCustomerMemberStatusRequest,
@@ -212,6 +213,33 @@ export default (config) =>
         }
 
         this.client.upsertCustomerMember(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve(response.toObject());
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
+    toggleCustomerMemberAsRealmManager = (userId) => {
+      return new Promise((resolve, reject) => {
+        const request = new ToggleCustomerMemberAsRealmManagerRequest();
+        request.setId(userId);
+
+        this.client.toggleCustomerMemberAsRealmManager(
           request,
           this.metadata,
           (error, response) => {
