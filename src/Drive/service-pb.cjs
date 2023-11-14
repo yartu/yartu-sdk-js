@@ -4078,7 +4078,8 @@ proto.yartu.Dirent.toObject = function(includeInstance, msg) {
     lock: (f = msg.getLock()) && proto.yartu.LockInfo.toObject(includeInstance, f),
     deletedTime: jspb.Message.getFieldWithDefault(msg, 20, 0),
     scanStat: jspb.Message.getFieldWithDefault(msg, 21, ""),
-    commitId: jspb.Message.getFieldWithDefault(msg, 22, "")
+    commitId: jspb.Message.getFieldWithDefault(msg, 22, ""),
+    isGroupShared: jspb.Message.getBooleanFieldWithDefault(msg, 23, false)
   };
 
   if (includeInstance) {
@@ -4210,6 +4211,10 @@ proto.yartu.Dirent.deserializeBinaryFromReader = function(msg, reader) {
     case 22:
       var value = /** @type {string} */ (reader.readString());
       msg.setCommitId(value);
+      break;
+    case 23:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setIsGroupShared(value);
       break;
     default:
       reader.skipField();
@@ -4394,6 +4399,13 @@ proto.yartu.Dirent.serializeBinaryToWriter = function(message, writer) {
   if (f != null) {
     writer.writeString(
       22,
+      f
+    );
+  }
+  f = /** @type {boolean} */ (jspb.Message.getField(message, 23));
+  if (f != null) {
+    writer.writeBool(
+      23,
       f
     );
   }
@@ -4966,6 +4978,42 @@ proto.yartu.Dirent.prototype.clearCommitId = function() {
  */
 proto.yartu.Dirent.prototype.hasCommitId = function() {
   return jspb.Message.getField(this, 22) != null;
+};
+
+
+/**
+ * optional bool is_group_shared = 23;
+ * @return {boolean}
+ */
+proto.yartu.Dirent.prototype.getIsGroupShared = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 23, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.yartu.Dirent} returns this
+ */
+proto.yartu.Dirent.prototype.setIsGroupShared = function(value) {
+  return jspb.Message.setField(this, 23, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.Dirent} returns this
+ */
+proto.yartu.Dirent.prototype.clearIsGroupShared = function() {
+  return jspb.Message.setField(this, 23, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.Dirent.prototype.hasIsGroupShared = function() {
+  return jspb.Message.getField(this, 23) != null;
 };
 
 

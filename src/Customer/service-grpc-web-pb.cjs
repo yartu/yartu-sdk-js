@@ -384,6 +384,67 @@ proto.yartu.YCustomerPromiseClient.prototype.upsertCustomerMember =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.ToggleCustomerMemberAsRealmManagerRequest,
+ *   !proto.yartu.ToggleCustomerMemberAsRealmManagerResponse>}
+ */
+const methodDescriptor_YCustomer_toggleCustomerMemberAsRealmManager = new grpc.web.MethodDescriptor(
+  '/yartu.YCustomer/toggleCustomerMemberAsRealmManager',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.ToggleCustomerMemberAsRealmManagerRequest,
+  proto.yartu.ToggleCustomerMemberAsRealmManagerResponse,
+  /**
+   * @param {!proto.yartu.ToggleCustomerMemberAsRealmManagerRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.ToggleCustomerMemberAsRealmManagerResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.ToggleCustomerMemberAsRealmManagerRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ToggleCustomerMemberAsRealmManagerResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ToggleCustomerMemberAsRealmManagerResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YCustomerClient.prototype.toggleCustomerMemberAsRealmManager =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YCustomer/toggleCustomerMemberAsRealmManager',
+      request,
+      metadata || {},
+      methodDescriptor_YCustomer_toggleCustomerMemberAsRealmManager,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.ToggleCustomerMemberAsRealmManagerRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.ToggleCustomerMemberAsRealmManagerResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YCustomerPromiseClient.prototype.toggleCustomerMemberAsRealmManager =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YCustomer/toggleCustomerMemberAsRealmManager',
+      request,
+      metadata || {},
+      methodDescriptor_YCustomer_toggleCustomerMemberAsRealmManager);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.DeleteCustomerMemberRequest,
  *   !proto.yartu.DeleteCustomerMemberResponse>}
  */
