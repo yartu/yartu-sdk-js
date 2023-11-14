@@ -104,7 +104,7 @@ import {
   ListPublicCardAttachmentRequest,
 
   // Board Statistics
-  GetBoardUserStatisticsRequest,
+  GetBoardStatisticsRequest,
 
 } from './service-pb.cjs';
 
@@ -828,13 +828,14 @@ export default (config) =>
       });
     }
 
-    getBoardUserStatistics(boardUUID) {
+    getBoardStatistics(boardUUID, statisticType) {
       return new Promise((resolve, reject) => {
 
-        const request = new GetBoardUserStatisticsRequest();
+        const request = new GetBoardStatisticsRequest();
         request.setBoardUuid(boardUUID);
+        request.setStatisticType(statisticType);
 
-        this.client.getBoardUserStatistics(request, this.metadata, (error, response) => {
+        this.client.getBoardStatistics(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
           } else {

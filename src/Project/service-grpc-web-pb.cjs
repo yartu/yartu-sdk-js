@@ -4590,5 +4590,66 @@ proto.yartu.YProjectPromiseClient.prototype.listPublicCardAttachment =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.GetBoardStatisticsRequest,
+ *   !proto.yartu.GetBoardStatisticsResponse>}
+ */
+const methodDescriptor_YProject_getBoardStatistics = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/getBoardStatistics',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.GetBoardStatisticsRequest,
+  proto.yartu.GetBoardStatisticsResponse,
+  /**
+   * @param {!proto.yartu.GetBoardStatisticsRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.GetBoardStatisticsResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.GetBoardStatisticsRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.GetBoardStatisticsResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.GetBoardStatisticsResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.getBoardStatistics =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/getBoardStatistics',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_getBoardStatistics,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.GetBoardStatisticsRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.GetBoardStatisticsResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.getBoardStatistics =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/getBoardStatistics',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_getBoardStatistics);
+};
+
+
 module.exports = proto.yartu;
 
