@@ -11,11 +11,11 @@
     "Yartu Information Technologies AS <info@yartu.io> (https://www.yartu.io)"
   ],
   "devDependencies": {
-    "@commitlint/cli": "^18.4.1",
-    "@commitlint/config-conventional": "^18.4.0",
+    "@commitlint/cli": "^18.4.3",
+    "@commitlint/config-conventional": "^18.4.3",
     "codecov": "^3.8.3",
     "cross-env": "^7.0.3",
-    "eslint": "^8.53.0",
+    "eslint": "^8.54.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-compat": "^4.2.0",
     "eslint-plugin-import": "^2.29.0",
