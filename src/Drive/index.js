@@ -3,12 +3,15 @@
 import {
   GetRecentRequest,
   GetQuotaRequest,
+  // Repo
   ListRepoRequest,
   UpsertRepoRequest,
   DeleteRepoRequest,
   RevertRepoRequest,
   GetRepoHistoryRequest,
   GetRepoTrashRequest,
+  GetRepoDownloadInfoRequest,
+
   ListDirentRequest,
   StarDirentRequest,
   UpsertDirectoryRequest,
@@ -344,6 +347,38 @@ export default (config) =>
                   more: response.getMore(),
                   scanStat: response.getScanStat(),
                   message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
+    getRepoDownloadInfo = (repoId = '') => {
+      return new Promise((resolve, reject) => {
+        const request = new GetRepoDownloadInfoRequest();
+        request.setRepoId(repoId);
+
+        this.client.getRepoDownloadInfo(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+
+              if (code == 0) {
+                resolve({
+                  code: 0,
+                  repo: response.getRepo().toObject(),
+                  more: response.getToken()
                 });
               } else {
                 reject({
