@@ -378,7 +378,7 @@ export default (config) =>
                 resolve({
                   code: 0,
                   repo: response.getRepo().toObject(),
-                  more: response.getToken()
+                  token: response.getToken()
                 });
               } else {
                 reject({
