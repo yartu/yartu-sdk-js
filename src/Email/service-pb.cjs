@@ -2990,7 +2990,8 @@ proto.yartu_mail.MailMessage.toObject = function(includeInstance, msg) {
     messageId: jspb.Message.getFieldWithDefault(msg, 16, ""),
     threadId: jspb.Message.getFieldWithDefault(msg, 17, ""),
     body: jspb.Message.getFieldWithDefault(msg, 18, ""),
-    deletedAt: jspb.Message.getFieldWithDefault(msg, 19, "")
+    updatedAt: jspb.Message.getFieldWithDefault(msg, 19, ""),
+    deletedAt: jspb.Message.getFieldWithDefault(msg, 20, "")
   };
 
   if (includeInstance) {
@@ -3105,6 +3106,10 @@ proto.yartu_mail.MailMessage.deserializeBinaryFromReader = function(msg, reader)
       msg.setBody(value);
       break;
     case 19:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setUpdatedAt(value);
+      break;
+    case 20:
       var value = /** @type {string} */ (reader.readString());
       msg.setDeletedAt(value);
       break;
@@ -3272,6 +3277,13 @@ proto.yartu_mail.MailMessage.serializeBinaryToWriter = function(message, writer)
   if (f != null) {
     writer.writeString(
       19,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 20));
+  if (f != null) {
+    writer.writeString(
+      20,
       f
     );
   }
@@ -3758,10 +3770,10 @@ proto.yartu_mail.MailMessage.prototype.hasBody = function() {
 
 
 /**
- * optional string deleted_at = 19;
+ * optional string updated_at = 19;
  * @return {string}
  */
-proto.yartu_mail.MailMessage.prototype.getDeletedAt = function() {
+proto.yartu_mail.MailMessage.prototype.getUpdatedAt = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 19, ""));
 };
 
@@ -3770,7 +3782,7 @@ proto.yartu_mail.MailMessage.prototype.getDeletedAt = function() {
  * @param {string} value
  * @return {!proto.yartu_mail.MailMessage} returns this
  */
-proto.yartu_mail.MailMessage.prototype.setDeletedAt = function(value) {
+proto.yartu_mail.MailMessage.prototype.setUpdatedAt = function(value) {
   return jspb.Message.setField(this, 19, value);
 };
 
@@ -3779,7 +3791,7 @@ proto.yartu_mail.MailMessage.prototype.setDeletedAt = function(value) {
  * Clears the field making it undefined.
  * @return {!proto.yartu_mail.MailMessage} returns this
  */
-proto.yartu_mail.MailMessage.prototype.clearDeletedAt = function() {
+proto.yartu_mail.MailMessage.prototype.clearUpdatedAt = function() {
   return jspb.Message.setField(this, 19, undefined);
 };
 
@@ -3788,8 +3800,44 @@ proto.yartu_mail.MailMessage.prototype.clearDeletedAt = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.yartu_mail.MailMessage.prototype.hasDeletedAt = function() {
+proto.yartu_mail.MailMessage.prototype.hasUpdatedAt = function() {
   return jspb.Message.getField(this, 19) != null;
+};
+
+
+/**
+ * optional string deleted_at = 20;
+ * @return {string}
+ */
+proto.yartu_mail.MailMessage.prototype.getDeletedAt = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 20, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu_mail.MailMessage} returns this
+ */
+proto.yartu_mail.MailMessage.prototype.setDeletedAt = function(value) {
+  return jspb.Message.setField(this, 20, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu_mail.MailMessage} returns this
+ */
+proto.yartu_mail.MailMessage.prototype.clearDeletedAt = function() {
+  return jspb.Message.setField(this, 20, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu_mail.MailMessage.prototype.hasDeletedAt = function() {
+  return jspb.Message.getField(this, 20) != null;
 };
 
 
