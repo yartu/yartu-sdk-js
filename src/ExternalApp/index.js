@@ -33,7 +33,8 @@ export default (config) =>
                 code,
                 token: response.getToken(),
                 url: response.getUrl(),
-                message: response.getMessage()
+                appUuid: response.getAppUuid(),
+                message: response.getMessage(),
               });
             } else {
               reject({
