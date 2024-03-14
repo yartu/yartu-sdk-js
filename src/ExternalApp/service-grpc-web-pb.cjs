@@ -196,5 +196,66 @@ proto.yartu.YAppPromiseClient.prototype.getAppToken =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.SendNotificationFromExternalAppRequest,
+ *   !proto.yartu.SendNotificationFromExternalAppResponse>}
+ */
+const methodDescriptor_YApp_sendNotificationFromExternalApp = new grpc.web.MethodDescriptor(
+  '/yartu.YApp/sendNotificationFromExternalApp',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.SendNotificationFromExternalAppRequest,
+  proto.yartu.SendNotificationFromExternalAppResponse,
+  /**
+   * @param {!proto.yartu.SendNotificationFromExternalAppRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.SendNotificationFromExternalAppResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.SendNotificationFromExternalAppRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.SendNotificationFromExternalAppResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.SendNotificationFromExternalAppResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YAppClient.prototype.sendNotificationFromExternalApp =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YApp/sendNotificationFromExternalApp',
+      request,
+      metadata || {},
+      methodDescriptor_YApp_sendNotificationFromExternalApp,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.SendNotificationFromExternalAppRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.SendNotificationFromExternalAppResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YAppPromiseClient.prototype.sendNotificationFromExternalApp =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YApp/sendNotificationFromExternalApp',
+      request,
+      metadata || {},
+      methodDescriptor_YApp_sendNotificationFromExternalApp);
+};
+
+
 module.exports = proto.yartu;
 
