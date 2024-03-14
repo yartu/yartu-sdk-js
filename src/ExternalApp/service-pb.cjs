@@ -500,7 +500,8 @@ proto.yartu.GetAppTokenResponse.toObject = function(includeInstance, msg) {
     code: jspb.Message.getFieldWithDefault(msg, 1, 0),
     token: jspb.Message.getFieldWithDefault(msg, 2, ""),
     url: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    message: jspb.Message.getFieldWithDefault(msg, 4, "")
+    message: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    appUuid: jspb.Message.getFieldWithDefault(msg, 5, "")
   };
 
   if (includeInstance) {
@@ -552,6 +553,10 @@ proto.yartu.GetAppTokenResponse.deserializeBinaryFromReader = function(msg, read
     case 4:
       var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
+      break;
+    case 5:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setAppUuid(value);
       break;
     default:
       reader.skipField();
@@ -607,6 +612,13 @@ proto.yartu.GetAppTokenResponse.serializeBinaryToWriter = function(message, writ
   if (f != null) {
     writer.writeString(
       4,
+      f
+    );
+  }
+  f = message.getAppUuid();
+  if (f.length > 0) {
+    writer.writeString(
+      5,
       f
     );
   }
@@ -700,6 +712,24 @@ proto.yartu.GetAppTokenResponse.prototype.clearMessage = function() {
  */
 proto.yartu.GetAppTokenResponse.prototype.hasMessage = function() {
   return jspb.Message.getField(this, 4) != null;
+};
+
+
+/**
+ * optional string app_uuid = 5;
+ * @return {string}
+ */
+proto.yartu.GetAppTokenResponse.prototype.getAppUuid = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.GetAppTokenResponse} returns this
+ */
+proto.yartu.GetAppTokenResponse.prototype.setAppUuid = function(value) {
+  return jspb.Message.setProto3StringField(this, 5, value);
 };
 
 
