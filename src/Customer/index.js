@@ -28,7 +28,8 @@ import {
   GetRegisterFormRequest,
   GetPaymentSessionRequest,
   ListInvoicesRequest,
-  ListInvoiceTemplateRequest
+  ListInvoiceTemplateRequest,
+  ExportCustomerRequest
 } from './service-pb.cjs';
 
 import { YCustomerClient } from './service-grpc-web-pb.cjs';
@@ -139,6 +140,10 @@ export default (config) =>
         if (queryRequest?.page) {
           query.setPage(queryRequest.page);
         }
+        if (queryRequest?.query) {
+          query.setQuery(queryRequest.query);
+        }
+
         request.setQuery(query);
 
         this.client.listCustomerMember(
@@ -155,6 +160,39 @@ export default (config) =>
                 reject({
                   code: code,
                   message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
+    exportCustomer = (realmId) => {
+      return new Promise((resolve, reject) => {
+        const request = new ExportCustomerRequest();
+
+        request.setRealmId(realmId);
+
+        this.client.exportCustomer(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              console.log('service:error:', error);
+              reject({ ...error });
+            } else {
+              const code = response.getCode();
+              if (code === 0) {
+                resolve({
+                  code,
+                  file: response.getData_asB64()
+                });
+              } else {
+                // eslint-disable-next-line prefer-promise-reject-errors
+                reject({
+                  code,
+                  file: undefined
                 });
               }
             }
