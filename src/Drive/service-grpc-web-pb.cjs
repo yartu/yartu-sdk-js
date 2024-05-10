@@ -1604,6 +1604,67 @@ proto.yartu.YDrivePromiseClient.prototype.downloadFile =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.DownloadHistoryFileRequest,
+ *   !proto.yartu.DownloadHistoryFileResponse>}
+ */
+const methodDescriptor_YDrive_downloadHistoryFile = new grpc.web.MethodDescriptor(
+  '/yartu.YDrive/downloadHistoryFile',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.DownloadHistoryFileRequest,
+  proto.yartu.DownloadHistoryFileResponse,
+  /**
+   * @param {!proto.yartu.DownloadHistoryFileRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.DownloadHistoryFileResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.DownloadHistoryFileRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.DownloadHistoryFileResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.DownloadHistoryFileResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YDriveClient.prototype.downloadHistoryFile =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YDrive/downloadHistoryFile',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_downloadHistoryFile,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.DownloadHistoryFileRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.DownloadHistoryFileResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YDrivePromiseClient.prototype.downloadHistoryFile =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YDrive/downloadHistoryFile',
+      request,
+      metadata || {},
+      methodDescriptor_YDrive_downloadHistoryFile);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.GetFileHistoryRequest,
  *   !proto.yartu.GetFileHistoryResponse>}
  */
