@@ -19,6 +19,7 @@ import {
   UploadFileRequest,
   SaveEmailAttachmentToDriveRequest,
   DownloadFileRequest,
+  DownloadHistoryFileRequest,
   GetFileHistoryRequest,
   GetOfficeFileRequest,
   GetDirentRequest,
@@ -782,6 +783,34 @@ export default (config) =>
             if (code == 0) {
               const token = response.getToken();
 
+              resolve({
+                code: code,
+                token: token
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
+    downloadHistoryFile = (repoId, objId) => {
+      return new Promise((resolve, reject) => {
+        const request = new DownloadHistoryFileRequest();
+        request.setRepoId(repoId);
+        request.setObjId(objId);
+
+        this.client.downloadHistoryFile(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              const token = response.getToken();
               resolve({
                 code: code,
                 token: token
