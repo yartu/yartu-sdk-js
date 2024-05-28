@@ -18,7 +18,8 @@ import {
   GetCapabilitiesRequest,
   LoginRequest,
   OtpLoginRequest,
-  ForcedPasswordChangeRequest
+  ForcedPasswordChangeRequest,
+  CheckUserTokenRequest
 } from './service-pb.cjs';
 import { YAuthClient } from './service-grpc-web-pb.cjs';
 
@@ -291,8 +292,105 @@ export default (config) =>
       return false;
     };
 
+    checkUserToken = (token) => {
+      return new Promise((resolve, reject) => {
+        const request = new CheckUserTokenRequest();
+        request.setToken(token);
+
+        this.client.checkUserToken(request, {}, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            const token = response.getToken();
+            const services = response.getServiceList();
+            const widgets = response.getWidgetList();
+            const isPaid = response.getIsPaid();
+            const paidLogs = response.getPaidLogsList();
+            const domain = response.getDomain();
+            const username = response.getUsername();
+            const userId = response.getUserId();
+            const packageId = response.getPackageId();
+            const latePaymentToken = response.getLatePaymentToken();
+            const apps = response.getAppList().map((data) => {
+              const appSettings = data.toObject();
+              if (
+                appSettings.settings &&
+                appSettings.settings?.type === 'json'
+              ) {
+                appSettings.settings = JSON.parse(appSettings.settings.json);
+              }
+              return appSettings;
+            });
+            if (code == 0) {
+              resolve({
+                status: status_AUTH_OK,
+                working_status: response.getWorkingStatus(),
+                services: services,
+                widgets,
+                apps: apps,
+                token: token,
+                isPaid,
+                paidLogs,
+                latePaymentToken,
+                user: {
+                  user_id: userId,
+                  username
+                }
+              });
+            } else if (code == status_RESET_PASSWORD_NEEDED) {
+              resolve({
+                status: status_RESET_PASSWORD_NEEDED,
+                resetPasswordNeeded: true,
+                latePaymentToken
+              });
+            } else if (code == code_AUTH_TWO_FA_FORCE) {
+              resolve({
+                status: status_AUTH_TWO_FA_FORCE,
+                token: token,
+                two_fa_image: response.getOtpImage(),
+                latePaymentToken
+              });
+            } else if (code == code_AUTH_TWO_FA_NEEDED) {
+              resolve({
+                status: status_AUTH_TWO_FA_NEEDED,
+                token: token,
+                latePaymentToken
+              });
+            } else if (code == status_NOT_PAID) {
+              resolve({
+                status: status_NOT_PAID,
+                invoiceIsNotPaid: true,
+                message: response.getMessage(),
+                latePaymentToken
+              });
+            } else if (code == status_ROUTE_TO_PAYMENT) {
+              resolve({
+                status: status_RESET_PASSWORD_NEEDED,
+                routeToPaymentScreen: true,
+                domain,
+                packageId,
+                username,
+                message: response.getMessage(),
+                latePaymentToken
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage(),
+              });
+            }
+          }
+        });
+      });
+    };
+
     logout = () => {
-      localStorage.clear();
+      for (const storageKey of Object.keys(localStorage)) {
+        if (storageKey !== 'yartuStore-auth') {
+          localStorage.removeItem(storageKey);
+        }
+      }
       this.yartuSdk.refreshUser();
     };
   };
