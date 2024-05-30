@@ -2,6 +2,7 @@ import { Query } from '../utils/definitions_pb.cjs';
 
 import {
   ListSearchShareablePeopleRequest,
+  ListSearchShareablePeopleBulkRequest,
   ShareableQuery,
   SearchFilter,
   SearchRequest
@@ -44,6 +45,63 @@ export default (config) =>
         }
 
         this.client.listSearchShareablePeople(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+
+              if (code == 0) {
+                const people = response
+                  .getPeopleList()
+                  .map((data) => data.toObject());
+
+                people.forEach(
+                  (p) =>
+                    (p.photo = p.photo
+                      ? 'data:image/png;base64,'.concat(p.photo)
+                      : null)
+                );
+
+                resolve({
+                  message: response.getMessage(),
+                  people
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
+    searchShareablePeopleBulk = (
+      searchList,
+      type_list,
+      query = {},
+      requiredFields = [],
+      withoutMe = false
+    ) => {
+      return new Promise((resolve, reject) => {
+        const request = new ListSearchShareablePeopleBulkRequest();
+        const searchQuery = new ShareableQuery();
+
+        request.setSearchList(searchList);
+        request.setQuery(searchQuery);
+        request.setRequiredFieldList(requiredFields);
+        request.setWithoutMe(withoutMe);
+
+        for (const type of type_list) {
+          request.addType(type);
+        }
+
+        this.client.listSearchShareablePeopleBulk(
           request,
           this.metadata,
           (error, response) => {

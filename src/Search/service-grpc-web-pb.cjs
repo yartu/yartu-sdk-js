@@ -140,6 +140,67 @@ proto.yartu.YSearchPromiseClient.prototype.listSearchShareablePeople =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.ListSearchShareablePeopleBulkRequest,
+ *   !proto.yartu.ListSearchShareablePeopleBulkResponse>}
+ */
+const methodDescriptor_YSearch_listSearchShareablePeopleBulk = new grpc.web.MethodDescriptor(
+  '/yartu.YSearch/listSearchShareablePeopleBulk',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.ListSearchShareablePeopleBulkRequest,
+  proto.yartu.ListSearchShareablePeopleBulkResponse,
+  /**
+   * @param {!proto.yartu.ListSearchShareablePeopleBulkRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.ListSearchShareablePeopleBulkResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.ListSearchShareablePeopleBulkRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ListSearchShareablePeopleBulkResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ListSearchShareablePeopleBulkResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YSearchClient.prototype.listSearchShareablePeopleBulk =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YSearch/listSearchShareablePeopleBulk',
+      request,
+      metadata || {},
+      methodDescriptor_YSearch_listSearchShareablePeopleBulk,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.ListSearchShareablePeopleBulkRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.ListSearchShareablePeopleBulkResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YSearchPromiseClient.prototype.listSearchShareablePeopleBulk =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YSearch/listSearchShareablePeopleBulk',
+      request,
+      metadata || {},
+      methodDescriptor_YSearch_listSearchShareablePeopleBulk);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.SearchRequest,
  *   !proto.yartu.SearchResponse>}
  */
