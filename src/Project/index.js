@@ -1,7 +1,7 @@
 import {
   //
   CardLabel,
-
+  //
   GetProjectHomeRequest,
   GetMyTaskRequest,
   GetProjectorOrBoardUserListRequest,
@@ -55,7 +55,7 @@ import {
   UnshareBoardRequest,
   // UpsertSharedBoardRequest,
   DeleteSharedBoardRequest,
-  ListSharedBoardRequest,  // unused ?
+  ListSharedBoardRequest, // unused ?
 
   // CardLabelServices
   ListCardLabelRequest,
@@ -104,14 +104,19 @@ import {
   ListPublicCardAttachmentRequest,
 
   // Board Statistics
-  GetBoardStatisticsRequest,
-
+  GetBoardStatisticsRequest
 } from './service-pb.cjs';
 
-import { UserBasic, GroupBasic, Shared, Query, UserModifyMeta} from '../utils/definitions_pb.cjs';
+import {
+  UserBasic,
+  GroupBasic,
+  Shared,
+  Query,
+  UserModifyMeta
+} from '../utils/definitions_pb.cjs';
 import { YProjectClient } from './service-grpc-web-pb.cjs';
 import { handleError } from '../utils/helper';
-import { ListNoteRequest, NoteMetaQuery } from "../Note/service-pb.cjs";
+import { ListNoteRequest, NoteMetaQuery } from '../Note/service-pb.cjs';
 
 export default (config) =>
   class Project {
@@ -132,34 +137,45 @@ export default (config) =>
       return new Promise((resolve, reject) => {
         const request = new GetProjectHomeRequest();
 
-
-        this.client.getProjectHome(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-            const starredProjectList = response.getStarredProjectList().map((d) => d.toObject());
-            const recentProjectList = response.getRecentProjectList().map((d) => d.toObject());
-            const recentBoardList = response.getRecentBoardList().map((d) => d.toObject());
-            const upcomingDeadlineList = response.getUpcomingDeadlineList().map((d) => d.toObject());
-
-            if (code == 0) {
-              resolve({
-                code,
-                starredProjectList,
-                recentProjectList,
-                recentBoardList,
-                upcomingDeadlineList,
-                message: response.getMessage()
-              })
+        this.client.getProjectHome(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+              const starredProjectList = response
+                .getStarredProjectList()
+                .map((d) => d.toObject());
+              const recentProjectList = response
+                .getRecentProjectList()
+                .map((d) => d.toObject());
+              const recentBoardList = response
+                .getRecentBoardList()
+                .map((d) => d.toObject());
+              const upcomingDeadlineList = response
+                .getUpcomingDeadlineList()
+                .map((d) => d.toObject());
+
+              if (code == 0) {
+                resolve({
+                  code,
+                  starredProjectList,
+                  recentProjectList,
+                  recentBoardList,
+                  upcomingDeadlineList,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     }
 
@@ -172,10 +188,18 @@ export default (config) =>
             handleError(error, reject);
           } else {
             const code = response.getCode();
-            const allTasksList = response.getAllTasksList().map((d) => d.toObject());
-            const doTodayList = response.getDoTodayList().map((d) => d.toObject());
-            const overdueList = response.getOverdueList().map((d) => d.toObject());
-            const upcomingDeadlineList = response.getUpcomingDeadlineList().map((d) => d.toObject());
+            const allTasksList = response
+              .getAllTasksList()
+              .map((d) => d.toObject());
+            const doTodayList = response
+              .getDoTodayList()
+              .map((d) => d.toObject());
+            const overdueList = response
+              .getOverdueList()
+              .map((d) => d.toObject());
+            const upcomingDeadlineList = response
+              .getUpcomingDeadlineList()
+              .map((d) => d.toObject());
             if (code == 0) {
               resolve({
                 code,
@@ -184,7 +208,7 @@ export default (config) =>
                 overdueList,
                 upcomingDeadlineList,
                 message: response.getMessage()
-              })
+              });
             } else {
               reject({
                 code: code,
@@ -196,8 +220,12 @@ export default (config) =>
       });
     }
 
-    listProject(getAll = false, getArchived = false, starred = false, query = {}) {
-
+    listProject(
+      getAll = false,
+      getArchived = false,
+      starred = false,
+      query = {}
+    ) {
       return new Promise((resolve, reject) => {
         const request = new ListProjectRequest();
         const queryRequset = new Query();
@@ -219,9 +247,8 @@ export default (config) =>
 
               resolve({
                 code,
-                projects,
+                projects
               });
-
             } else {
               reject({
                 code: code,
@@ -247,8 +274,8 @@ export default (config) =>
             if (code == 0) {
               resolve({
                 code,
-                project: response.getProject().toObject(),
-              })
+                project: response.getProject().toObject()
+              });
             } else {
               reject({
                 code: code,
@@ -277,8 +304,8 @@ export default (config) =>
               resolve({
                 code,
                 message: response.getMessage(),
-                project: response.getProject().toObject(),
-              })
+                project: response.getProject().toObject()
+              });
             } else {
               reject({
                 code: code,
@@ -304,7 +331,7 @@ export default (config) =>
               resolve({
                 code,
                 message: response.getMessage()
-              })
+              });
             } else {
               reject({
                 code: code,
@@ -393,7 +420,7 @@ export default (config) =>
               resolve({
                 code,
                 message: response.getMessage()
-              })
+              });
             } else {
               reject({
                 code: code,
@@ -405,7 +432,7 @@ export default (config) =>
       });
     }
 
-    listThread(project_uuid, query =  {}) {
+    listThread(project_uuid, query = {}) {
       return new Promise((resolve, reject) => {
         const request = new ListThreadRequest();
         const queryRequest = new Query();
@@ -421,7 +448,9 @@ export default (config) =>
             if (code == 0) {
               resolve({
                 code,
-                threads: response.getThreadList().map((thread) => thread.toObject()),
+                threads: response
+                  .getThreadList()
+                  .map((thread) => thread.toObject())
               });
             } else {
               reject({
@@ -436,7 +465,6 @@ export default (config) =>
 
     getThread(threadUUID) {
       return new Promise((resolve, reject) => {
-
         const request = new GetThreadRequest();
         request.setThreadUuid(threadUUID);
 
@@ -480,13 +508,13 @@ export default (config) =>
 
         if (threadData.userList && threadData.userList.length > 0) {
           const participantList = [];
-          threadData.userList.forEach(s => {
+          threadData.userList.forEach((s) => {
             const userBasic = new UserBasic();
             userBasic.setId(s.id);
             userBasic.setUsername(s.email);
             userBasic.setName(s.name);
             userBasic.setSurname(s.surname);
-            participantList.push(userBasic)
+            participantList.push(userBasic);
           });
           request.setParticipantList(participantList);
         }
@@ -502,7 +530,7 @@ export default (config) =>
                 code,
                 data,
                 message: response.getMessage()
-              })
+              });
             } else {
               reject({
                 code: code,
@@ -528,7 +556,7 @@ export default (config) =>
               resolve({
                 code,
                 message: response.getMessage()
-              })
+              });
             } else {
               reject({
                 code: code,
@@ -540,9 +568,13 @@ export default (config) =>
       });
     }
 
-    listThreadMessage(threadUUID, fromId = 0, scrollDirection = 'bottom',  query) {
+    listThreadMessage(
+      threadUUID,
+      fromId = 0,
+      scrollDirection = 'bottom',
+      query
+    ) {
       return new Promise((resolve, reject) => {
-
         const request = new ListThreadMessageRequest();
 
         const queryRequest = new Query();
@@ -569,10 +601,12 @@ export default (config) =>
               if (code == 0) {
                 resolve({
                   code,
-                  messages: response.getThreadMessageList().map((m) => m.toObject()),
+                  messages: response
+                    .getThreadMessageList()
+                    .map((m) => m.toObject()),
                   unreadCount: response.getUnreadCount(),
                   totalCount: response.getTotalCount(),
-                  lastReadId: response.getLastReadId(),
+                  lastReadId: response.getLastReadId()
                 });
               } else {
                 reject({
@@ -586,13 +620,18 @@ export default (config) =>
       });
     }
 
-    sendThreadMessage(threadUUID, message, answeredMessageUUID, lastReadId = 0) {
+    sendThreadMessage(
+      threadUUID,
+      message,
+      answeredMessageUUID,
+      lastReadId = 0
+    ) {
       return new Promise((resolve, reject) => {
         const request = new SendThreadMessageRequest();
         request.setThreadUuid(threadUUID);
         request.setMessage(message.message);
         request.setLastReadId(lastReadId);
-        if (message?.uuid){
+        if (message?.uuid) {
           request.setUuid(message?.uuid);
         }
         request.setAnsweredMessageUuid(answeredMessageUUID);
@@ -605,7 +644,9 @@ export default (config) =>
             } else {
               const code = response.getCode();
               if (code == 0) {
-                const dataList = response.getDataList().map((data) => data.toObject());
+                const dataList = response
+                  .getDataList()
+                  .map((data) => data.toObject());
                 resolve({
                   code: 0,
                   data: dataList,
@@ -691,25 +732,29 @@ export default (config) =>
         const request = new DeleteThreadMessageRequest();
         request.setUuid(MessageUUID);
 
-        this.client.deleteThreadMessage(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-
-            if (code == 0) {
-              resolve({
-                code,
-                message: response.getMessage()
-              })
+        this.client.deleteThreadMessage(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+
+              if (code == 0) {
+                resolve({
+                  code,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     }
 
@@ -727,7 +772,7 @@ export default (config) =>
               resolve({
                 code,
                 message: response.getMessage()
-              })
+              });
             } else {
               reject({
                 code: code,
@@ -743,25 +788,31 @@ export default (config) =>
       return new Promise((resolve, reject) => {
         const request = new ListBoardTemplateRequest();
 
-        this.client.listBoardTemplate(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-            if (code == 0) {
-              resolve({
-                code,
-                templates: response.getTemplatesList().map((t) => t.toObject()),
-                message: response.getMessage(),
-              })
+        this.client.listBoardTemplate(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code,
+                  templates: response
+                    .getTemplatesList()
+                    .map((t) => t.toObject()),
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     }
 
@@ -773,30 +824,33 @@ export default (config) =>
         request.setId(templateData.id);
         request.setName(templateData.name);
 
-        this.client.upsertBoardTemplate(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-            if (code == 0) {
-              resolve({
-                code,
-                message: response.getMessage()
-              })
+        this.client.upsertBoardTemplate(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     }
 
     getBoard(uuid) {
       return new Promise((resolve, reject) => {
-
         const request = new GetBoardRequest();
         request.setUuid(uuid);
 
@@ -809,13 +863,13 @@ export default (config) =>
               const board = response.getBoard().toObject();
               try {
                 board['permission'] = JSON.parse(board['permission']['json']);
-              } catch (err) {
-                console.log(err);
+              } catch (error_) {
+                console.log(`[error] on getBoard, err: ${error_}`);
               }
               resolve({
                 code,
                 board,
-                userPermission: response.getUserPermission(),
+                userPermission: response.getUserPermission()
               });
             } else {
               reject({
@@ -830,35 +884,38 @@ export default (config) =>
 
     getBoardStatistics(boardUUID, statisticType) {
       return new Promise((resolve, reject) => {
-
         const request = new GetBoardStatisticsRequest();
         request.setBoardUuid(boardUUID);
         request.setStatisticType(statisticType);
 
-        this.client.getBoardStatistics(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-            if (code == 0) {
-              let statistic = response.getStatistic().toObject();
-              try {
-                statistic = JSON.parse(statistic['json']);
-              } catch (err) {
-                console.log(err);
-              }
-              resolve({
-                code,
-                statistic,
-              });
+        this.client.getBoardStatistics(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+              if (code == 0) {
+                let statistic = response.getStatistic().toObject();
+                try {
+                  statistic = JSON.parse(statistic['json']);
+                } catch (error_) {
+                  console.log(`[error] on getBoardStatistics, err: ${error_}`);
+                }
+                resolve({
+                  code,
+                  statistic
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     }
 
@@ -881,45 +938,49 @@ export default (config) =>
         }
         request.setQuery(query);
 
-        this.client.listBoardActivity(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-            if (code == 0) {
-              const activities = response.getActivityList();
-
-              const data = [];
-              activities.forEach((a) => {
-                const ao = a.toObject();
-                try {
-                  const activityData = JSON.parse(ao.content);
-                  data.push({ ...ao, content: activityData });
-                } catch (err) {
-                  data.push(ao);
-                }
-              });
-
-              resolve({
-                code,
-                activities: data,
-                pagination: response.getPagination().toObject(),
-                message: response.getMessage()
-              })
+        this.client.listBoardActivity(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+              if (code == 0) {
+                const activities = response.getActivityList();
+
+                const data = [];
+                activities.forEach((a) => {
+                  const ao = a.toObject();
+                  try {
+                    const activityData = JSON.parse(ao.content);
+                    data.push({ ...ao, content: activityData });
+                  } catch (error_) {
+                    console.log(`[error] on listBoardActivity, err: ${error_}`);
+                    data.push(ao);
+                  }
+                });
+
+                resolve({
+                  code,
+                  activities: data,
+                  pagination: response.getPagination().toObject(),
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     }
 
     upsertBoard(boardData = {}) {
       return new Promise((resolve, reject) => {
-
         const request = new UpsertBoardRequest();
 
         request.setUuid(boardData.uuid);
@@ -938,7 +999,7 @@ export default (config) =>
 
         if (!boardData.uuid) {
           const ShareList = [];
-          boardData.sharedList.forEach(s => {
+          boardData.sharedList.forEach((s) => {
             const shared = new Shared();
             // shared.setId(s.shared_id); // because we not update shared data
             shared.setPermission(String(s.permission.value));
@@ -950,18 +1011,17 @@ export default (config) =>
               userBasic.setSurname(s.surname);
 
               shared.setUser(userBasic);
-
             } else if (s?.isGroup) {
-
               const groupBasic = new GroupBasic();
               groupBasic.setId(s.id);
               groupBasic.setName(s.name);
               groupBasic.setEmailAlias(s.email);
 
               shared.setGroup(groupBasic);
-
             } else {
-              console.log('@yartu/sdk/ shareBoard method not supports external users and Realm share features for now!');
+              console.log(
+                '@yartu/sdk/ shareBoard method not supports external users and Realm share features for now!'
+              );
             }
 
             ShareList.push(shared);
@@ -969,7 +1029,6 @@ export default (config) =>
 
           request.setSharedList(ShareList);
         }
-
 
         // request.setName(member);
         // request.setPermission(permission);
@@ -983,7 +1042,7 @@ export default (config) =>
                 code,
                 board: response.getBoard().toObject(),
                 message: response.getMessage()
-              })
+              });
             } else {
               reject({
                 code: code,
@@ -997,34 +1056,36 @@ export default (config) =>
 
     duplicateBoard(boardUUID) {
       return new Promise((resolve, reject) => {
-
         const request = new DuplicateBoardRequest();
         request.setUuid(boardUUID);
 
-        this.client.duplicateBoard(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-            if (code == 0) {
-              resolve({
-                code,
-                message: response.getMessage()
-              });
+        this.client.duplicateBoard(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     }
 
     copyBoard(soureceBoardUUID, destinationProjectUUID) {
       return new Promise((resolve, reject) => {
-
         const request = new CopyBoardRequest();
         request.setSourceBoardUuid(soureceBoardUUID);
         request.setDestinationProjectUuid(destinationProjectUUID);
@@ -1052,7 +1113,6 @@ export default (config) =>
 
     moveBoard(soureceBoardUUID, destinationProjectUUID) {
       return new Promise((resolve, reject) => {
-
         const request = new MoveBoardRequest();
         request.setSourceBoardUuid(soureceBoardUUID);
         request.setDestinationProjectUuid(destinationProjectUUID);
@@ -1092,7 +1152,7 @@ export default (config) =>
               resolve({
                 code,
                 message: response.getMessage()
-              })
+              });
             } else {
               reject({
                 code: code,
@@ -1109,7 +1169,7 @@ export default (config) =>
         const request = new ShareBoardRequest();
         request.setId(boardId);
         const UserShareList = [];
-        shareList.forEach(s => {
+        shareList.forEach((s) => {
           const shared = new Shared();
           shared.setId(s.shared_id);
           shared.setPermission(String(s.permission));
@@ -1122,9 +1182,7 @@ export default (config) =>
             userBasic.setSurname(s.surname);
 
             shared.setUser(userBasic);
-
           } else if (s?.isGroup) {
-
             const groupBasic = new GroupBasic();
             groupBasic.setId(s.id);
             groupBasic.setName(s.name);
@@ -1132,9 +1190,10 @@ export default (config) =>
 
             shared.setGroup(groupBasic);
           } else {
-            console.log('@yartu/sdk/ shareBoard method not supports external users and Realm share features for now!');
+            console.log(
+              '@yartu/sdk/ shareBoard method not supports external users and Realm share features for now!'
+            );
           }
-
 
           UserShareList.push(shared);
         });
@@ -1203,25 +1262,29 @@ export default (config) =>
         request.setIsYartuUser(sharedBoard.isYartuUser);
         request.setIsGroup(sharedBoard.isGroup);
 
-        this.client.deleteSharedBoard(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-
-            if (code == 0) {
-              resolve({
-                code: 0,
-                message: response.getMessage()
-              });
+        this.client.deleteSharedBoard(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+
+              if (code == 0) {
+                resolve({
+                  code: 0,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     }
 
@@ -1230,31 +1293,44 @@ export default (config) =>
         const request = new ListPublicBoardShareRequest();
         request.setBoardUuid(boardUUID);
 
-        this.client.listPublicBoardShare(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-
-            if (code == 0) {
-              const data = response.getDataList().map((data) => data.toObject());;
-              resolve({
-                code: 0,
-                data,
-                message: response.getMessage()
-              });
+        this.client.listPublicBoardShare(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+
+              if (code == 0) {
+                const data = response
+                  .getDataList()
+                  .map((data) => data.toObject());
+                resolve({
+                  code: 0,
+                  data,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     }
 
-    upsertPublicBoardShare(id, boardUUID, description, password, expireDate, ipaddress) {
+    upsertPublicBoardShare(
+      id,
+      boardUUID,
+      description,
+      password,
+      expireDate,
+      ipaddress
+    ) {
       return new Promise((resolve, reject) => {
         const request = new UpsertPublicBoardShareRequest();
 
@@ -1265,27 +1341,31 @@ export default (config) =>
         request.setExpireDate(expireDate);
         request.setIpaddress(ipaddress);
 
-        this.client.upsertPublicBoardShare(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-
-            if (code == 0) {
-              const data = response.getData().toObject();
-              resolve({
-                code: 0,
-                data,
-                message: response.getMessage()
-              });
+        this.client.upsertPublicBoardShare(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+
+              if (code == 0) {
+                const data = response.getData().toObject();
+                resolve({
+                  code: 0,
+                  data,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     }
 
@@ -1296,25 +1376,29 @@ export default (config) =>
         request.setId(publicBoardShareId);
         request.setBoardUuid(boardUUID);
 
-        this.client.deletePublicBoardShare(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-
-            if (code == 0) {
-              resolve({
-                code: 0,
-                message: response.getMessage()
-              });
+        this.client.deletePublicBoardShare(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+
+              if (code == 0) {
+                resolve({
+                  code: 0,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     }
 
@@ -1329,7 +1413,9 @@ export default (config) =>
             const code = response.getCode();
 
             if (code == 0) {
-              const data = response.getCardLabelList().map((data) => data.toObject());;
+              const data = response
+                .getCardLabelList()
+                .map((data) => data.toObject());
               resolve({
                 code: 0,
                 data,
@@ -1447,8 +1533,8 @@ export default (config) =>
             try {
               const dueDate = cardData.dueDate.utc().format('YYYY-MM-DD HH:mm');
               request.setDueDate(dueDate);
-            } catch (err) {
-              console.log('upsertCard service error: ', err);
+            } catch (error_) {
+              console.log(`[error] on upsertCard, err: ${error_}`);
             }
           } else {
             request.setDueDate('');
@@ -1499,7 +1585,7 @@ export default (config) =>
                 resolve({
                   code: 0,
                   message: 'successfully',
-                  uploadToken: response.getUploadToken(),
+                  uploadToken: response.getUploadToken()
                 });
               } else {
                 reject({
@@ -1530,7 +1616,7 @@ export default (config) =>
               if (code == 0) {
                 resolve({
                   code: 0,
-                  message: 'successfully',
+                  message: 'successfully'
                 });
               } else {
                 reject({
@@ -1558,11 +1644,13 @@ export default (config) =>
             } else {
               const code = response.getCode();
               if (code == 0) {
-                const dataList = response.getDataList().map((data) => data.toObject());
+                const dataList = response
+                  .getDataList()
+                  .map((data) => data.toObject());
                 resolve({
                   code: 0,
                   data: dataList,
-                  message: 'successfully',
+                  message: 'successfully'
                 });
               } else {
                 reject({
@@ -1589,7 +1677,7 @@ export default (config) =>
               resolve({
                 code,
                 message: response.getMessage()
-              })
+              });
             } else {
               reject({
                 code: code,
@@ -1614,7 +1702,7 @@ export default (config) =>
               resolve({
                 code,
                 message: response.getMessage()
-              })
+              });
             } else {
               reject({
                 code: code,
@@ -1651,8 +1739,8 @@ export default (config) =>
                 resolve({
                   code,
                   users: response.getUsersList().map((u) => u.toObject()),
-                  results: response.getResultList().map((r) => r.toObject()),
-                })
+                  results: response.getResultList().map((r) => r.toObject())
+                });
               } else {
                 reject({
                   code: code,
@@ -1689,7 +1777,7 @@ export default (config) =>
                   code,
                   data,
                   message: response.getMessage()
-                })
+                });
               } else {
                 reject({
                   code: code,
@@ -1719,8 +1807,8 @@ export default (config) =>
               const code = response.getCode();
               if (code == 0) {
                 resolve({
-                  code,
-                })
+                  code
+                });
               } else {
                 reject({
                   code: code,
@@ -1753,8 +1841,8 @@ export default (config) =>
                 const data = response.getData().toObject();
                 resolve({
                   code,
-                  data,
-                })
+                  data
+                });
               } else {
                 reject({
                   code: code,
@@ -1784,8 +1872,8 @@ export default (config) =>
               const code = response.getCode();
               if (code == 0) {
                 resolve({
-                  code,
-                })
+                  code
+                });
               } else {
                 reject({
                   code: code,
@@ -1813,8 +1901,8 @@ export default (config) =>
             const code = response.getCode();
             if (code == 0) {
               resolve({
-                code,
-              })
+                code
+              });
             } else {
               reject({
                 code: code,
@@ -1839,8 +1927,8 @@ export default (config) =>
             if (code == 0) {
               resolve({
                 code,
-                card: response.getCard().toObject(),
-              })
+                card: response.getCard().toObject()
+              });
             } else {
               reject({
                 code: code,
@@ -1862,12 +1950,14 @@ export default (config) =>
           } else {
             const code = response.getCode();
             if (code == 0) {
-              const dataList = response.getDataList().map((data) => data.toObject());
+              const dataList = response
+                .getDataList()
+                .map((data) => data.toObject());
               resolve({
                 code,
                 data: dataList,
                 message: response.getMessage()
-              })
+              });
             } else {
               reject({
                 code: code,
@@ -1889,12 +1979,14 @@ export default (config) =>
           } else {
             const code = response.getCode();
             if (code == 0) {
-              const dataList = response.getDataList().map((data) => data.toObject());
+              const dataList = response
+                .getDataList()
+                .map((data) => data.toObject());
               resolve({
                 code,
                 data: dataList,
                 message: response.getMessage()
-              })
+              });
             } else {
               reject({
                 code: code,
@@ -1922,7 +2014,7 @@ export default (config) =>
               resolve({
                 code,
                 message: response.getMessage()
-              })
+              });
             } else {
               reject({
                 code: code,
@@ -1934,7 +2026,12 @@ export default (config) =>
       });
     }
 
-    moveCardToAnotherBoard(sourceCardId, destinationBoardId, destinationColumnId, newIndex) {
+    moveCardToAnotherBoard(
+      sourceCardId,
+      destinationBoardId,
+      destinationColumnId,
+      newIndex
+    ) {
       return new Promise((resolve, reject) => {
         const request = new MoveCardToAnotherBoardRequest();
         request.setSourceCardId(sourceCardId);
@@ -1942,29 +2039,38 @@ export default (config) =>
         request.setDestinationColumnId(destinationColumnId);
         request.setNewIndex(newIndex);
 
-        this.client.moveCardToAnotherBoard(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-
-            if (code == 0) {
-              resolve({
-                code,
-                message: response.getMessage()
-              })
+        this.client.moveCardToAnotherBoard(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+
+              if (code == 0) {
+                resolve({
+                  code,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     }
 
-    copyCardToAnotherBoard(sourceCardId, destinationBoardId, destinationColumnId, newIndex) {
+    copyCardToAnotherBoard(
+      sourceCardId,
+      destinationBoardId,
+      destinationColumnId,
+      newIndex
+    ) {
       return new Promise((resolve, reject) => {
         const request = new CopyCardToAnotherBoardRequest();
         request.setSourceCardId(sourceCardId);
@@ -1972,25 +2078,29 @@ export default (config) =>
         request.setDestinationColumnId(destinationColumnId);
         request.setNewIndex(newIndex);
 
-        this.client.copyCardToAnotherBoard(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-
-            if (code == 0) {
-              resolve({
-                code,
-                message: response.getMessage()
-              })
+        this.client.copyCardToAnotherBoard(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+
+              if (code == 0) {
+                resolve({
+                  code,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     }
 
@@ -2001,38 +2111,43 @@ export default (config) =>
         request.setId(cardId);
         request.setIsComment(isCommmet);
 
-        this.client.listCardActivity(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-            if (code == 0) {
-              const activities = response.getActivityList();
-
-              const data = [];
-              activities.forEach((a) => {
-                const ao = a.toObject();
-                try {
-                  const activityData = JSON.parse(ao.content);
-                  data.push({ ...ao, content: activityData });
-                } catch (err) {
-                  data.push(ao);
-                }
-              });
-
-              resolve({
-                code,
-                activities: data,
-                message: response.getMessage()
-              })
+        this.client.listCardActivity(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+              if (code == 0) {
+                const activities = response.getActivityList();
+
+                const data = [];
+                activities.forEach((a) => {
+                  const ao = a.toObject();
+                  try {
+                    const activityData = JSON.parse(ao.content);
+                    data.push({ ...ao, content: activityData });
+                  } catch (error_) {
+                    console.log(`[error] on listCardActivity, err: ${error_}`);
+                    data.push(ao);
+                  }
+                });
+
+                resolve({
+                  code,
+                  activities: data,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     }
 
@@ -2042,26 +2157,32 @@ export default (config) =>
 
         request.setBoardUuid(boardUUID);
 
-        this.client.listArchivedCard(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-            if (code == 0) {
-              const dataList = response.getDataList().map((data) => data.toObject());
-              resolve({
-                code,
-                data: dataList,
-                message: response.getMessage()
-              })
+        this.client.listArchivedCard(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+              if (code == 0) {
+                const dataList = response
+                  .getDataList()
+                  .map((data) => data.toObject());
+                resolve({
+                  code,
+                  data: dataList,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     }
 
@@ -2073,26 +2194,30 @@ export default (config) =>
         request.setId(checkList.id);
         request.setTitle(checkList.title);
 
-        this.client.upsertCheckList(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-            if (code == 0) {
-              const data = response.getData().toObject()
-              resolve({
-                code,
-                data: data,
-                message: response.getMessage()
-              })
+        this.client.upsertCheckList(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+              if (code == 0) {
+                const data = response.getData().toObject();
+                resolve({
+                  code,
+                  data: data,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     }
 
@@ -2101,24 +2226,28 @@ export default (config) =>
         const request = new DeleteCheckListRequest();
         request.setId(checkListId);
 
-        this.client.deleteCheckList(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-            if (code == 0) {
-              resolve({
-                code,
-                message: response.getMessage()
-              })
+        this.client.deleteCheckList(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     }
 
@@ -2135,11 +2264,9 @@ export default (config) =>
 
         if (checkListItem.dueDate) {
           let dueDate = '';
-          if(checkListItem.dueDate?.$d) {
-            dueDate = checkListItem.dueDate.format('YYYY-MM-DD HH:mm');
-          } else {
-            dueDate = checkListItem.dueDate;
-          }
+          dueDate = checkListItem.dueDate?.$d
+            ? checkListItem.dueDate.format('YYYY-MM-DD HH:mm')
+            : checkListItem.dueDate;
           request.setDueDate(dueDate);
         }
 
@@ -2148,16 +2275,18 @@ export default (config) =>
         if (checkListItem.assignee) {
           const assignee = new UserBasic();
           assignee.setId(checkListItem.assignee.id);
-          assignee.setUsername(checkListItem.assignee.email || checkListItem.assignee.username);
+          assignee.setUsername(
+            checkListItem.assignee.email || checkListItem.assignee.username
+          );
           assignee.setName(checkListItem.assignee.name);
           assignee.setSurname(checkListItem.assignee.surname);
           request.setAssignee(assignee);
-        } else if (checkListItem.assignee === null){
+        } else if (checkListItem.assignee === null) {
           const assignee = new UserBasic();
           request.setAssignee(assignee);
         }
 
-        if (checkListItem.labelList && checkListItem.labelList.length > 0 ) {
+        if (checkListItem.labelList && checkListItem.labelList.length > 0) {
           const cardLabelList = [];
           checkListItem.labelList.forEach((l) => {
             const label = new CardLabel();
@@ -2170,26 +2299,30 @@ export default (config) =>
           request.setLabelList(cardLabelList);
         }
 
-        this.client.upsertCheckListItem(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-            if (code == 0) {
-              const data = response.getData().toObject()
-              resolve({
-                code,
-                data: data,
-                message: response.getMessage()
-              })
+        this.client.upsertCheckListItem(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+              if (code == 0) {
+                const data = response.getData().toObject();
+                resolve({
+                  code,
+                  data: data,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     }
 
@@ -2198,24 +2331,28 @@ export default (config) =>
         const request = new DeleteCheckListItemRequest();
         request.setId(checkListItemId);
 
-        this.client.deleteCheckListItem(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-            if (code == 0) {
-              resolve({
-                code,
-                message: response.getMessage()
-              })
+        this.client.deleteCheckListItem(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     }
 
@@ -2238,8 +2375,8 @@ export default (config) =>
               resolve({
                 code,
                 message: response.getMessage(),
-                column: response.getColumn().toObject(),
-              })
+                column: response.getColumn().toObject()
+              });
             } else {
               reject({
                 code: code,
@@ -2266,8 +2403,8 @@ export default (config) =>
             if (code == 0) {
               resolve({
                 code,
-                message: response.getMessage(),
-              })
+                message: response.getMessage()
+              });
             } else {
               reject({
                 code,
@@ -2284,24 +2421,28 @@ export default (config) =>
         const request = new ArchiveAllCardsInColumnRequest();
         request.setColumnId(columnId);
 
-        this.client.archiveAllCardsInColumn(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-            if (code == 0) {
-              resolve({
-                code,
-                message: response.getMessage(),
-              })
+        this.client.archiveAllCardsInColumn(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     }
 
@@ -2321,24 +2462,28 @@ export default (config) =>
           request.setUnassign(true);
         }
 
-        this.client.assignAllCheckListItems(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-            if (code == 0) {
-              resolve({
-                code,
-                message: response.getMessage()
-              })
+        this.client.assignAllCheckListItems(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     }
 
@@ -2349,31 +2494,36 @@ export default (config) =>
           // board uuid is enough to fetch data
           //  so if user was sent projectUUID with boardUUID we can ignore projectUUID
           request.setBoardUuid(boardUUID);
-        }
-        else if (projectUUID) {
+        } else if (projectUUID) {
           request.setProjectUuid(projectUUID);
         }
 
-        this.client.getProjectorOrBoardUserList(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-            if (code == 0) {
-              const dataList = response.getDataList().map((data) => data.toObject());
-              resolve({
-                code,
-                data: dataList,
-                message: response.getMessage()
-              })
+        this.client.getProjectorOrBoardUserList(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+              if (code == 0) {
+                const dataList = response
+                  .getDataList()
+                  .map((data) => data.toObject());
+                resolve({
+                  code,
+                  data: dataList,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     }
 
@@ -2384,31 +2534,36 @@ export default (config) =>
           // board uuid is enough to fetch data
           //  so if user was sent projectUUID with boardUUID we can ignore projectUUID
           request.setBoardUuid(boardUUID);
-        }
-        else if (projectUUID) {
+        } else if (projectUUID) {
           request.setProjectUuid(projectUUID);
         }
 
-        this.client.getProjectFiles(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-            if (code == 0) {
-              const dataList = response.getDataList().map((data) => data.toObject());
-              resolve({
-                code,
-                data: dataList,
-                message: response.getMessage()
-              })
+        this.client.getProjectFiles(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+              if (code == 0) {
+                const dataList = response
+                  .getDataList()
+                  .map((data) => data.toObject());
+                resolve({
+                  code,
+                  data: dataList,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     }
 
@@ -2447,7 +2602,7 @@ export default (config) =>
         request.setBoardUuidList(boardUUIDList);
 
         const UserShareList = [];
-        shareList.forEach(s => {
+        shareList.forEach((s) => {
           const shared = new Shared();
           shared.setId(s.shared_id);
           shared.setPermission(String(s.permission));
@@ -2460,9 +2615,7 @@ export default (config) =>
             userBasic.setSurname(s.surname);
 
             shared.setUser(userBasic);
-
           } else if (s?.isGroup) {
-
             const groupBasic = new GroupBasic();
             groupBasic.setId(s.id);
             groupBasic.setName(s.name);
@@ -2470,7 +2623,9 @@ export default (config) =>
 
             shared.setGroup(groupBasic);
           } else {
-            console.log('@yartu/sdk/ shareBoard method not supports external users and Realm share features for now!');
+            console.log(
+              '@yartu/sdk/ shareBoard method not supports external users and Realm share features for now!'
+            );
           }
 
           UserShareList.push(shared);
@@ -2478,29 +2633,33 @@ export default (config) =>
 
         request.setSharedList(UserShareList);
 
-        this.client.shareAllBoards(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-
-            if (code == 0) {
-              resolve({
-                code: 0,
-                // success: response.getSuccessList().map((data) => data.toObject()),
-                // error: response.getErrorList().map((data) => data.toObject()),
-                // TODO :: @ramazan add success repeated field to proto and backend service !
-                // TODO :: @ramazan add error repeated field to proto and backend service !
-                message: response.getMessage()
-              });
+        this.client.shareAllBoards(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+
+              if (code == 0) {
+                resolve({
+                  code: 0,
+                  // success: response.getSuccessList().map((data) => data.toObject()),
+                  // error: response.getErrorList().map((data) => data.toObject()),
+                  // TODO :: @ramazan add success repeated field to proto and backend service !
+                  // TODO :: @ramazan add error repeated field to proto and backend service !
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     }
 
@@ -2511,7 +2670,7 @@ export default (config) =>
         request.setBoardUuidList(boardUUIDList);
 
         const UserShareList = [];
-        shareList.forEach(s => {
+        shareList.forEach((s) => {
           const shared = new Shared();
           shared.setId(s.shared_id);
           shared.setPermission(String(s.permission));
@@ -2524,9 +2683,7 @@ export default (config) =>
             userBasic.setSurname(s.surname);
 
             shared.setUser(userBasic);
-
           } else if (s?.isGroup) {
-
             const groupBasic = new GroupBasic();
             groupBasic.setId(s.id);
             groupBasic.setName(s.name);
@@ -2534,7 +2691,9 @@ export default (config) =>
 
             shared.setGroup(groupBasic);
           } else {
-            console.log('@yartu/sdk/ shareBoard method not supports external users and Realm share features for now!');
+            console.log(
+              '@yartu/sdk/ shareBoard method not supports external users and Realm share features for now!'
+            );
           }
 
           UserShareList.push(shared);
@@ -2542,29 +2701,33 @@ export default (config) =>
 
         request.setSharedList(UserShareList);
 
-        this.client.deleteShareAllBoards(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-
-            if (code == 0) {
-              resolve({
-                code: 0,
-                // success: response.getSuccessList().map((data) => data.toObject()),
-                // error: response.getErrorList().map((data) => data.toObject()),
-                // TODO :: @ramazan add success repeated field to proto and backend service !
-                // TODO :: @ramazan add error repeated field to proto and backend service !
-                message: response.getMessage()
-              });
+        this.client.deleteShareAllBoards(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+
+              if (code == 0) {
+                resolve({
+                  code: 0,
+                  // success: response.getSuccessList().map((data) => data.toObject()),
+                  // error: response.getErrorList().map((data) => data.toObject()),
+                  // TODO :: @ramazan add success repeated field to proto and backend service !
+                  // TODO :: @ramazan add error repeated field to proto and backend service !
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     }
 
@@ -2576,35 +2739,39 @@ export default (config) =>
         request.setPassword(password);
         request.setAccessToken(accessToken);
 
-        this.client.getPublicBoard(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-
-            if (code == 0) {
-              let data = null;
-              let boardAccessToken = null;
-              const passwordNeeded = response.getPasswordNeeded();
-              boardAccessToken = response.getBoardAccessToken();
-              if (!passwordNeeded) {
-                data = response.getData().toObject();
-              }
-              resolve({
-                code: 0,
-                data,
-                passwordNeeded,
-                boardAccessToken,
-                message: response.getMessage()
-              });
+        this.client.getPublicBoard(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+
+              if (code == 0) {
+                let data = null;
+                let boardAccessToken = null;
+                const passwordNeeded = response.getPasswordNeeded();
+                boardAccessToken = response.getBoardAccessToken();
+                if (!passwordNeeded) {
+                  data = response.getData().toObject();
+                }
+                resolve({
+                  code: 0,
+                  data,
+                  passwordNeeded,
+                  boardAccessToken,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     }
 
@@ -2623,8 +2790,8 @@ export default (config) =>
             if (code == 0) {
               resolve({
                 code,
-                card: response.getCard().toObject(),
-              })
+                card: response.getCard().toObject()
+              });
             } else {
               reject({
                 code: code,
@@ -2636,7 +2803,12 @@ export default (config) =>
       });
     }
 
-    listPublicCardActivity(boardToken = '', accessToken = '', cardId, isCommmet) {
+    listPublicCardActivity(
+      boardToken = '',
+      accessToken = '',
+      cardId,
+      isCommmet
+    ) {
       return new Promise((resolve, reject) => {
         const request = new ListPublicCardActivityRequest();
 
@@ -2645,42 +2817,54 @@ export default (config) =>
         request.setBoardToken(boardToken);
         request.setAccessToken(accessToken);
 
-        this.client.listPublicCardActivity(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-            if (code == 0) {
-              const activities = response.getActivityList();
-
-              const data = [];
-              activities.forEach((a) => {
-                const ao = a.toObject();
-                try {
-                  const activityData = JSON.parse(ao.content);
-                  data.push({ ...ao, content: activityData });
-                } catch (err) {
-                  data.push(ao);
-                }
-              });
-
-              resolve({
-                code,
-                activities: data,
-                message: response.getMessage()
-              })
+        this.client.listPublicCardActivity(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+              if (code == 0) {
+                const activities = response.getActivityList();
+
+                const data = [];
+                activities.forEach((a) => {
+                  const ao = a.toObject();
+                  try {
+                    const activityData = JSON.parse(ao.content);
+                    data.push({ ...ao, content: activityData });
+                  } catch (error_) {
+                    console.log(
+                      `[error] on listPublicCardActivity, err: ${error_}`
+                    );
+                    data.push(ao);
+                  }
+                });
+
+                resolve({
+                  code,
+                  activities: data,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     }
 
-    listPublicCardAttachment(boardToken = '', accessToken = '', cardId, isCommmet) {
+    listPublicCardAttachment(
+      boardToken = '',
+      accessToken = '',
+      cardId,
+      isCommmet
+    ) {
       return new Promise((resolve, reject) => {
         const request = new ListPublicCardAttachmentRequest();
 
@@ -2688,40 +2872,45 @@ export default (config) =>
         request.setBoardToken(boardToken);
         request.setAccessToken(accessToken);
 
-        this.client.listPublicCardAttachment(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-            if (code == 0) {
-              const activities = response.getActivityList();
-
-              const data = [];
-              activities.forEach((a) => {
-                const ao = a.toObject();
-                try {
-                  const activityData = JSON.parse(ao.content);
-                  data.push({ ...ao, content: activityData });
-                } catch (err) {
-                  data.push(ao);
-                }
-              });
-
-              resolve({
-                code,
-                activities: data,
-                message: response.getMessage()
-              })
+        this.client.listPublicCardAttachment(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+              if (code == 0) {
+                const activities = response.getActivityList();
+
+                const data = [];
+                activities.forEach((a) => {
+                  const ao = a.toObject();
+                  try {
+                    const activityData = JSON.parse(ao.content);
+                    data.push({ ...ao, content: activityData });
+                  } catch (error_) {
+                    console.log(
+                      `[error] on listPublicCardAttachment, err: ${error_}`
+                    );
+                    data.push(ao);
+                  }
+                });
+
+                resolve({
+                  code,
+                  activities: data,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     }
-
   };
-

@@ -11,7 +11,7 @@ import {
   GetRepoHistoryRequest,
   GetRepoTrashRequest,
   GetRepoDownloadInfoRequest,
-
+  // Dirent
   ListDirentRequest,
   StarDirentRequest,
   UpsertDirectoryRequest,
@@ -55,13 +55,18 @@ import {
   // Client
   ListConnectedClientRequest,
   SignOutClientRequest,
-  SaveToMyDriveRequest,
-
+  SaveToMyDriveRequest
 } from './service-pb.cjs';
 
 import { YDriveClient } from './service-grpc-web-pb.cjs';
 import { handleError, loadFromArray } from '../utils/helper';
-import { User, UserBasic, GroupBasic, Shared, Query } from '../utils/definitions_pb.cjs';
+import {
+  User,
+  UserBasic,
+  GroupBasic,
+  Shared,
+  Query
+} from '../utils/definitions_pb.cjs';
 
 export default (config) =>
   class Drive {
@@ -309,7 +314,13 @@ export default (config) =>
       });
     };
 
-    getRepoTrash = (repoId = '', path = '', commitId = '', showDays = 0, scanStat = '') => {
+    getRepoTrash = (
+      repoId = '',
+      path = '',
+      commitId = '',
+      showDays = 0,
+      scanStat = ''
+    ) => {
       return new Promise((resolve, reject) => {
         const request = new GetRepoTrashRequest();
         request.setRepoId(repoId);
@@ -318,46 +329,44 @@ export default (config) =>
         request.setShowDays(showDays);
         request.setScanStat(scanStat);
 
-        this.client.getRepoTrash(
-          request,
-          this.metadata,
-          (error, response) => {
-            if (error) {
-              handleError(error, reject);
-            } else {
-              const code = response.getCode();
+        this.client.getRepoTrash(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
 
-              if (code == 0) {
-                const fileList = [];
-                const dirList = [];
-                const dataList = response.getDataList().map((data) => data.toObject());
-                response.getDataList().map((data) => {
-                  let dirent = data.toObject();
-                  dirent.path = `${dirent.parentDir}${dirent.name}`;
-                  if (dirent.isFile) {
-                    fileList.push({ ...dirent, id: dirent.objId, type: 'file'});
-                  } else {
-                    dirList.push({ ...dirent, id: dirent.objId, type: 'dir'});
-                  }
-                });
-                resolve({
-                  code: 0,
-                  data: dataList,
-                  files: fileList,
-                  dirs: dirList,
-                  more: response.getMore(),
-                  scanStat: response.getScanStat(),
-                  message: response.getMessage()
-                });
-              } else {
-                reject({
-                  code: code,
-                  message: response.getMessage()
-                });
-              }
+            if (code == 0) {
+              const fileList = [];
+              const dirList = [];
+              const dataList = response
+                .getDataList()
+                .map((data) => data.toObject());
+              response.getDataList().map((data) => {
+                let dirent = data.toObject();
+                dirent.path = `${dirent.parentDir}${dirent.name}`;
+                if (dirent.isFile) {
+                  fileList.push({ ...dirent, id: dirent.objId, type: 'file' });
+                } else {
+                  dirList.push({ ...dirent, id: dirent.objId, type: 'dir' });
+                }
+              });
+              resolve({
+                code: 0,
+                data: dataList,
+                files: fileList,
+                dirs: dirList,
+                more: response.getMore(),
+                scanStat: response.getScanStat(),
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
             }
           }
-        );
+        });
       });
     };
 
@@ -470,12 +479,22 @@ export default (config) =>
       force = false,
       expire = 0,
       isDraft = false,
-      commitId = '',
+      commitId = ''
     ) => {
       return new Promise((resolve, reject) => {
         const request = new UpsertDirentRequest();
 
-        if (!['create-dir', 'create-file', 'rename', 'move', 'copy', 'delete', 'revert'].includes(operation)) {
+        if (
+          ![
+            'create-dir',
+            'create-file',
+            'rename',
+            'move',
+            'copy',
+            'delete',
+            'revert'
+          ].includes(operation)
+        ) {
           reject({
             code: 100
           });
@@ -654,7 +673,6 @@ export default (config) =>
         const request = new UpsertFileRequest();
 
         if (
-
           !['create', 'rename', 'move', 'copy', 'delete'].includes(operation)
         ) {
           reject({
@@ -733,7 +751,13 @@ export default (config) =>
       });
     };
 
-    saveEmailAttachmentToDrive = (email_uuid, file_place, file_name, repo_id, parent_path) => {
+    saveEmailAttachmentToDrive = (
+      email_uuid,
+      file_place,
+      file_name,
+      repo_id,
+      parent_path
+    ) => {
       return new Promise((resolve, reject) => {
         const request = new SaveEmailAttachmentToDriveRequest();
 
@@ -743,25 +767,28 @@ export default (config) =>
         request.setRepoId(repo_id);
         request.setParentPath(parent_path);
 
-
-        this.client.saveEmailAttachmentToDrive(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-            if (code == 0) {
-              resolve({
-                code: code,
-                message: response.getMessage()
-              });
+        this.client.saveEmailAttachmentToDrive(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code: code,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     };
 
@@ -804,25 +831,29 @@ export default (config) =>
         request.setRepoId(repoId);
         request.setObjId(objId);
 
-        this.client.downloadHistoryFile(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-            if (code == 0) {
-              const token = response.getToken();
-              resolve({
-                code: code,
-                token: token
-              });
+        this.client.downloadHistoryFile(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+              if (code == 0) {
+                const token = response.getToken();
+                resolve({
+                  code: code,
+                  token: token
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     };
 
@@ -883,7 +914,9 @@ export default (config) =>
               const officeToken = response.getOfficeToken();
               const fileToken = response.getFileToken();
               const jwtToken = response.getJwtToken();
-              const shareList = response.getShareList().map((data) => data.toObject());
+              const shareList = response
+                .getShareList()
+                .map((data) => data.toObject());
 
               resolve({
                 code: code,
@@ -892,7 +925,7 @@ export default (config) =>
                 officeToken,
                 fileToken,
                 jwtToken,
-                shareList,
+                shareList
               });
             } else {
               reject({
@@ -952,13 +985,11 @@ export default (config) =>
             const code = response.getCode();
 
             if (code == 0) {
-              const data = response
-                .getShareList()
-                .map((data) => {
-                  const d = data.toObject();
-                  d.customPermission = loadFromArray(d.customPermissionMap);
-                  return d;
-                });
+              const data = response.getShareList().map((data) => {
+                const d = data.toObject();
+                d.customPermission = loadFromArray(d.customPermissionMap);
+                return d;
+              });
               const type = response.getType(); // type can be "repo", "dir" or "file"
               resolve({
                 code: code,
@@ -978,12 +1009,16 @@ export default (config) =>
     };
 
     share = (repoId, path, description, shareList) => {
-      console.log('------------------------------------------------------------------');
+      console.log(
+        '------------------------------------------------------------------'
+      );
       console.log('repoId:', repoId);
       console.log('path:', path);
       console.log('description:', description);
       console.log('shareList:', shareList);
-      console.log('------------------------------------------------------------------');
+      console.log(
+        '------------------------------------------------------------------'
+      );
       return new Promise((resolve, reject) => {
         const request = new ShareRequest();
         request.setRepoId(repoId);
@@ -1157,18 +1192,20 @@ export default (config) =>
           } else {
             const code = response.getCode();
             if (code == 0) {
-              const dataList = response
-                .getDataList()
-                .map((data) => {
-                  const d = data.toObject();
-                  if (d.repo && d.repo.customPermissionMap.length > 0) {
-                    d.repo.customPermission = loadFromArray(d.repo.customPermissionMap);
-                  }
-                  if (d.dirent && d.dirent.customPermissionMap.length > 0) {
-                    d.dirent.customPermission = loadFromArray(d.dirent.customPermissionMap);
-                  }
-                  return d;
-                });
+              const dataList = response.getDataList().map((data) => {
+                const d = data.toObject();
+                if (d.repo && d.repo.customPermissionMap.length > 0) {
+                  d.repo.customPermission = loadFromArray(
+                    d.repo.customPermissionMap
+                  );
+                }
+                if (d.dirent && d.dirent.customPermissionMap.length > 0) {
+                  d.dirent.customPermission = loadFromArray(
+                    d.dirent.customPermissionMap
+                  );
+                }
+                return d;
+              });
 
               resolve({
                 code: 0,
@@ -1225,30 +1262,34 @@ export default (config) =>
         request.setPathList(paths);
         request.setAsList(asList);
 
-        this.client.downloadDirent(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-
-            if (code == 0) {
-              const tokenList = response
-                .getTokenList()
-                .map((data) => data.toObject());
-
-              resolve({
-                code: 0,
-                data: tokenList,
-                message: response.getMessage()
-              });
+        this.client.downloadDirent(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+
+              if (code == 0) {
+                const tokenList = response
+                  .getTokenList()
+                  .map((data) => data.toObject());
+
+                resolve({
+                  code: 0,
+                  data: tokenList,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     };
 
@@ -1260,29 +1301,44 @@ export default (config) =>
         request.setPath(path);
         request.setShowExpired(showExpired);
 
-        this.client.listPublicShare(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-            if (code == 0) {
-              const dataList = response.getDataList().map((data) => data.toObject());
-              resolve({
-                code,
-                data: dataList,
-              });
+        this.client.listPublicShare(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+              if (code == 0) {
+                const dataList = response
+                  .getDataList()
+                  .map((data) => data.toObject());
+                resolve({
+                  code,
+                  data: dataList
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     };
 
-    upsertPublicShare = (token, repoId = '', path = '', description = '', password = null, expireDate = '', downloadCountLimit = 0, ipaddress = '') => {
+    upsertPublicShare = (
+      token,
+      repoId = '',
+      path = '',
+      description = '',
+      password = null,
+      expireDate = '',
+      downloadCountLimit = 0,
+      ipaddress = ''
+    ) => {
       return new Promise((resolve, reject) => {
         const request = new UpsertPublicShareRequest();
         request.setToken(token);
@@ -1296,7 +1352,7 @@ export default (config) =>
 
         if (expireDate) {
           let expireDateData = '';
-          if(expireDate?.$d) {
+          if (expireDate?.$d) {
             expireDateData = expireDate.format('YYYY-MM-DD HH:mm');
           } else {
             expireDateData = expireDate;
@@ -1307,26 +1363,30 @@ export default (config) =>
         request.setDownloadCountLimit(downloadCountLimit);
         request.setIpaddress(ipaddress);
 
-        this.client.upsertPublicShare(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-            if (code == 0) {
-              const data = response.getData().toObject();
-              resolve({
-                code,
-                data,
-                message: response.getMessage()
-              });
+        this.client.upsertPublicShare(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+              if (code == 0) {
+                const data = response.getData().toObject();
+                resolve({
+                  code,
+                  data,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     };
 
@@ -1335,24 +1395,28 @@ export default (config) =>
         const request = new DeletePublicShareRequest();
         request.setToken(token);
 
-        this.client.deletePublicShare(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-            if (code == 0) {
-              resolve({
-                code: code,
-                message: response.getMessage()
-              });
+        this.client.deletePublicShare(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code: code,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     };
 
@@ -1363,34 +1427,40 @@ export default (config) =>
         request.setPassword(password);
         request.setPath(path);
 
-        this.client.getPublicShare(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-            const message =  response.getMessage();
-            if (code == 0) {
-              const info = response.getInfo().toObject();
-              const passwordNeeded = response.getPasswordNeeded();
-              const viewToken = response.getViewToken();
-              const dirent = response.getDirentList().map((data) => data.toObject());
-              resolve({
-                type: 'publicShare',
-                code,
-                info,
-                passwordNeeded,
-                viewToken,
-                dirent,
-                message,
-              });
+        this.client.getPublicShare(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code,
-                message,
-              });
+              const code = response.getCode();
+              const message = response.getMessage();
+              if (code == 0) {
+                const info = response.getInfo().toObject();
+                const passwordNeeded = response.getPasswordNeeded();
+                const viewToken = response.getViewToken();
+                const dirent = response
+                  .getDirentList()
+                  .map((data) => data.toObject());
+                resolve({
+                  type: 'publicShare',
+                  code,
+                  info,
+                  passwordNeeded,
+                  viewToken,
+                  dirent,
+                  message
+                });
+              } else {
+                reject({
+                  code,
+                  message
+                });
+              }
             }
           }
-        });
+        );
       });
     };
 
@@ -1401,33 +1471,36 @@ export default (config) =>
         request.setPassword(password);
         request.setPath(path);
 
-        this.client.getPublicShareDownload(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-
-            const code = response.getCode();
-            const downloadToken = response.getToken();
-            const isZip = response.getIsZip();
-            const passwordNeeded = response.getPasswordNeeded();
-            const message =  response.getMessage();
-
-            if (code == 0) {
-              resolve({
-                code,
-                downloadToken,
-                passwordNeeded,
-                isZip,
-                message,
-              });
+        this.client.getPublicShareDownload(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code,
-                message,
-              });
+              const code = response.getCode();
+              const downloadToken = response.getToken();
+              const isZip = response.getIsZip();
+              const passwordNeeded = response.getPasswordNeeded();
+              const message = response.getMessage();
+
+              if (code == 0) {
+                resolve({
+                  code,
+                  downloadToken,
+                  passwordNeeded,
+                  isZip,
+                  message
+                });
+              } else {
+                reject({
+                  code,
+                  message
+                });
+              }
             }
           }
-        });
+        );
       });
     };
 
@@ -1438,26 +1511,32 @@ export default (config) =>
         request.setRepoId(repoId);
         request.setPath(path);
 
-        this.client.listUploadPoint(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-            if (code == 0) {
-              const dataList = response.getDataList().map((data) => data.toObject());
-              resolve({
-                code,
-                data: dataList,
-                message: response.getMessage(),
-              });
+        this.client.listUploadPoint(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage(),
-              });
+              const code = response.getCode();
+              if (code == 0) {
+                const dataList = response
+                  .getDataList()
+                  .map((data) => data.toObject());
+                resolve({
+                  code,
+                  data: dataList,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     };
 
@@ -1473,38 +1552,42 @@ export default (config) =>
 
         if (uploadPointData.expireDate) {
           let expireDate = '';
-          if(uploadPointData.expireDate?.$d) {
+          if (uploadPointData.expireDate?.$d) {
             expireDate = uploadPointData.expireDate.format('YYYY-MM-DD HH:mm');
           } else {
             expireDate = uploadPointData.expireDate;
           }
-        request.setExpireDate(expireDate);
+          request.setExpireDate(expireDate);
         }
 
         request.setFileCountLimit(uploadPointData.fileCountLimit);
         request.setFileSizeLimit(uploadPointData.fileSizeLimit);
         request.setExtensionListList(uploadPointData.extensionList);
 
-        this.client.upsertUploadPoint(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-            if (code == 0) {
-              const data = response.getData().toObject();
-              resolve({
-                code,
-                data,
-                message: response.getMessage()
-              });
+        this.client.upsertUploadPoint(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+              if (code == 0) {
+                const data = response.getData().toObject();
+                resolve({
+                  code,
+                  data,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     };
 
@@ -1513,24 +1596,28 @@ export default (config) =>
         const request = new DeleteUploadPointRequest();
         request.setToken(token);
 
-        this.client.deleteUploadPoint(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-            if (code == 0) {
-              resolve({
-                code: code,
-                message: response.getMessage()
-              });
+        this.client.deleteUploadPoint(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code: code,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     };
 
@@ -1540,32 +1627,36 @@ export default (config) =>
         request.setToken(token);
         request.setPassword(password);
 
-        this.client.getUploadPoint(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-            if (code == 0) {
-              const data = response.getData().toObject();
-              const passwordNeeded = response.getPasswordNeeded();
-              const uploadKey = response.getUploadKey();
-
-              resolve({
-                type: 'uploadPoint',
-                code,
-                data,
-                passwordNeeded,
-                uploadKey,
-                message: response.getMessage()
-              });
+        this.client.getUploadPoint(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+              if (code == 0) {
+                const data = response.getData().toObject();
+                const passwordNeeded = response.getPasswordNeeded();
+                const uploadKey = response.getUploadKey();
+
+                resolve({
+                  type: 'uploadPoint',
+                  code,
+                  data,
+                  passwordNeeded,
+                  uploadKey,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     };
 
@@ -1574,25 +1665,31 @@ export default (config) =>
       return new Promise((resolve, reject) => {
         const request = new ListConnectedClientRequest();
 
-        this.client.listConnectedClient(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-            if (code == 0) {
-              const dataList = response.getDataList().map((data) => data.toObject());
-              resolve({
-                code,
-                data: dataList,
-              });
+        this.client.listConnectedClient(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+              if (code == 0) {
+                const dataList = response
+                  .getDataList()
+                  .map((data) => data.toObject());
+                resolve({
+                  code,
+                  data: dataList
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     };
 
@@ -1631,26 +1728,30 @@ export default (config) =>
         request.setRepoId(repoId);
         request.setPassword(password);
 
-        this.client.setRepoPassword(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-            if (code == 0) {
-              resolve({
-                code,
-                status: response.getStatus(),
-                message: response.getMessage()
-              });
+        this.client.setRepoPassword(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                status: false,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code,
+                  status: response.getStatus(),
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  status: false,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     };
 
@@ -1696,24 +1797,28 @@ export default (config) =>
         request.setPath(path);
         request.setCommitId(commitId);
 
-        this.client.revertDirentTrash(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-            if (code == 0) {
-              resolve({
-                code,
-                message: response.getMessage()
-              });
+        this.client.revertDirentTrash(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     };
 
@@ -1722,8 +1827,8 @@ export default (config) =>
         const request = new SaveToMyDriveRequest();
 
         request.setToken(token);
-        request.setDstRepoId(repoId)
-        request.setDstPath(path)
+        request.setDstRepoId(repoId);
+        request.setDstPath(path);
 
         this.client.saveToMyDrive(request, this.metadata, (error, response) => {
           if (error) {
@@ -1745,6 +1850,4 @@ export default (config) =>
         });
       });
     };
-
-
   };

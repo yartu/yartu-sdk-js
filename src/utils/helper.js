@@ -25,10 +25,9 @@ const toByte = (size, type) => {
   return Number.parseInt(size, 10) * 1024 ** index;
 };
 
-const loadFromArray = (unmappedArrArr) => {
+const loadFromArray = (unmappedArray) => {
   const resp = {};
-  for (let i = 0; i < unmappedArrArr.length; i++) {
-    const record = unmappedArrArr[i];
+  for (const record of unmappedArray) {
     const key = record[0];
     resp[key] = record[1];
   }

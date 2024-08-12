@@ -2,8 +2,7 @@ import {
   ListNotificationRequest,
   UpsertNotificationRequest,
   ReadNotificationRequest,
-  DeleteNotificationRequest,
-
+  DeleteNotificationRequest
 } from './service-pb.cjs';
 
 import { YNotificationClient } from './service-grpc-web-pb.cjs';

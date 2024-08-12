@@ -619,14 +619,18 @@ export default (config) =>
               const code = response.getCode();
 
               if (code == 0) {
-                const results = response.getDataList().map((data) => data.toObject());
-                const emails = response.getEmailList().map((email) => email.toObject());
+                const results = response
+                  .getDataList()
+                  .map((data) => data.toObject());
+                const emails = response
+                  .getEmailList()
+                  .map((email) => email.toObject());
                 const pagination = response.getPagination().toObject();
                 resolve({
                   message: response.getMessage(),
                   results,
                   emails,
-                  pagination,
+                  pagination
                 });
               } else {
                 reject({

@@ -34,7 +34,7 @@ export default (config) =>
                 token: response.getToken(),
                 url: response.getUrl(),
                 appUuid: response.getAppUuid(),
-                message: response.getMessage(),
+                message: response.getMessage()
               });
             } else {
               reject({

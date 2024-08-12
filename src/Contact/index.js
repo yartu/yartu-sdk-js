@@ -5,15 +5,15 @@ import {
   Label,
   davType,
   Address,
-
+  //
   ListAddressBookRequest,
   UpsertAddressBookRequest,
   DeleteAddressBookRequest,
   ShareAddressBookRequest,
   UnshareAddressBookRequest,
-
+  //
   DeleteSharedAddressBookRequest,
-
+  //
   ListContactRequest,
   UpsertContactRequest,
   GetContactRequest,
@@ -21,22 +21,26 @@ import {
   ExportContactRequest,
   ImportContactRequest,
   MoveContactRequest,
-
+  //
   UpsertLabelToContactRequest,
   StarContactRequest,
-
+  //
   UpsertLabelRequest,
   ListLabelRequest,
   GetLabelRequest,
   DeleteLabelRequest,
-
-  ListDuplicateContactRequest,
+  //
+  ListDuplicateContactRequest
 } from './service-pb.cjs';
 
 import { YContactClient } from './service-grpc-web-pb.cjs';
-import { UserBasic, GroupBasic, Shared, Query } from '../utils/definitions_pb.cjs';
+import {
+  UserBasic,
+  GroupBasic,
+  Shared,
+  Query
+} from '../utils/definitions_pb.cjs';
 import { handleError } from '../utils/helper';
-
 
 export default (config) =>
   class Contact {
@@ -151,7 +155,7 @@ export default (config) =>
         const request = new ShareAddressBookRequest();
         request.setId(addressBookId);
         const UserShareList = [];
-        shareList.forEach(s => {
+        shareList.forEach((s) => {
           const shared = new Shared();
           shared.setId(s.shared_id);
           shared.setPermission(s.permission);
@@ -164,9 +168,7 @@ export default (config) =>
             userBasic.setSurname(s.surname);
 
             shared.setUser(userBasic);
-
           } else if (s?.isGroup) {
-
             const groupBasic = new GroupBasic();
             groupBasic.setId(s.id);
             groupBasic.setName(s.name);
@@ -174,7 +176,9 @@ export default (config) =>
 
             shared.setGroup(groupBasic);
           } else {
-            console.log('@yartu/sdk/ shareAddressBook method not supports external users and Realm share features for now!');
+            console.log(
+              '@yartu/sdk/ shareAddressBook method not supports external users and Realm share features for now!'
+            );
           }
 
           UserShareList.push(shared);
@@ -182,58 +186,66 @@ export default (config) =>
 
         request.setSharedList(UserShareList);
 
-        this.client.shareAddressBook(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-
-            if (code == 0) {
-              resolve({
-                code: 0,
-                // success: response.getSuccessList().map((data) => data.toObject()),
-                // error: response.getErrorList().map((data) => data.toObject()),
-                // TODO :: @ramazan add success repeated field to proto and backend service !
-                // TODO :: @ramazan add error repeated field to proto and backend service !
-                message: response.getMessage()
-              });
+        this.client.shareAddressBook(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+
+              if (code == 0) {
+                resolve({
+                  code: 0,
+                  // success: response.getSuccessList().map((data) => data.toObject()),
+                  // error: response.getErrorList().map((data) => data.toObject()),
+                  // TODO :: @ramazan add success repeated field to proto and backend service !
+                  // TODO :: @ramazan add error repeated field to proto and backend service !
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
-    }
+    };
 
     unshareAddressBook = (addressBookId) => {
       return new Promise((resolve, reject) => {
         const request = new UnshareAddressBookRequest();
         request.setId(addressBookId);
 
-        this.client.unshareAddressBook(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-
-            if (code == 0) {
-              resolve({
-                code: 0,
-                message: response.getMessage()
-              });
+        this.client.unshareAddressBook(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+
+              if (code == 0) {
+                resolve({
+                  code: 0,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
-    }
+    };
 
     deleteSharedAddressBook = (addressBookId, sharedAddressBookId) => {
       return new Promise((resolve, reject) => {
@@ -241,27 +253,31 @@ export default (config) =>
         request.setId(addressBookId);
         request.setSharedAddressBookId(sharedAddressBookId);
 
-        this.client.deleteSharedAddressBook(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-
-            if (code == 0) {
-              resolve({
-                code: 0,
-                message: response.getMessage()
-              });
+        this.client.deleteSharedAddressBook(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+
+              if (code == 0) {
+                resolve({
+                  code: 0,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
-    }
+    };
 
     listContact = (addressBookId, queryRequest = {}) => {
       return new Promise((resolve, reject) => {
@@ -292,7 +308,9 @@ export default (config) =>
             const code = response.getCode();
 
             if (code == 0) {
-              const dataList = response.getDataList().map((data) => data.toObject());
+              const dataList = response
+                .getDataList()
+                .map((data) => data.toObject());
               // const dataList = response.getDataList().map((data) => {
               //   const contact = data.toObject();
               //   contact.photo = contact.photo ? 'data:image/png;base64,'.concat(contact.photo) : null;
@@ -660,29 +678,25 @@ export default (config) =>
 
         request.setStarred(starred);
 
-        this.client.starContact(
-          request,
-          this.metadata,
-          (error, response) => {
-            if (error) {
-              handleError(error, reject);
-            } else {
-              const code = response.getCode();
+        this.client.starContact(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
 
-              if (code == 0) {
-                resolve({
-                  code: 0,
-                  message: response.getMessage()
-                });
-              } else {
-                reject({
-                  code: code,
-                  message: response.getMessage()
-                });
-              }
+            if (code == 0) {
+              resolve({
+                code: 0,
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
             }
           }
-        );
+        });
       });
     };
 
@@ -738,7 +752,7 @@ export default (config) =>
           contact.setSurname(contactData.surname);
 
           const emailList = [];
-          if (contactData.emailList && Array.isArray(contactData.emailList)){
+          if (contactData.emailList && Array.isArray(contactData.emailList)) {
             for (const email of contactData.emailList) {
               const emailType = new davType();
               emailType.setType(email?.type || 'personal');
@@ -748,7 +762,7 @@ export default (config) =>
             }
           }
           const phoneList = [];
-          if (contactData.phoneList && Array.isArray(contactData.phoneList)){
+          if (contactData.phoneList && Array.isArray(contactData.phoneList)) {
             for (const phone of contactData.phoneList) {
               const phoneType = new davType();
               phoneType.setType(phone?.type || 'personal');
@@ -758,7 +772,7 @@ export default (config) =>
             }
           }
           const webList = [];
-          if (contactData.webList && Array.isArray(contactData.webList)){
+          if (contactData.webList && Array.isArray(contactData.webList)) {
             for (const web of contactData.webList) {
               const webType = new davType();
               webType.setType(web?.type || 'personal');
@@ -769,7 +783,10 @@ export default (config) =>
           }
 
           const addressList = [];
-          if (contactData.addressList && Array.isArray(contactData.addressList)){
+          if (
+            contactData.addressList &&
+            Array.isArray(contactData.addressList)
+          ) {
             for (const address of contactData.addressList) {
               const addressType = new Address();
               addressType.setType(address?.type || 'personal');
@@ -838,29 +855,32 @@ export default (config) =>
         //
         // request.setAddressBookId(addressBookId);
 
-        this.client.listDuplicateContact(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-
-            if (code == 0) {
-              const dataList = response
-                .getDataList()
-                .map((data) => data.toObject());
-              resolve({
-                data: dataList,
-                pagination: response.getPagination().toObject()
-              });
+        this.client.listDuplicateContact(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+
+              if (code == 0) {
+                const dataList = response
+                  .getDataList()
+                  .map((data) => data.toObject());
+                resolve({
+                  data: dataList,
+                  pagination: response.getPagination().toObject()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     };
-
   };

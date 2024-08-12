@@ -1,27 +1,27 @@
 import {
   dateRange,
   Attendee,
-
+  //
   ListCalendarRequest,
   DeleteCalendarRequest,
   UpsertCalendarRequest,
   ShareCalendarRequest,
   UnshareCalendarRequest,
   DeleteSharedCalendarRequest,
-
+  //
   ListCalendarObjectRequest,
   UpsertCalendarObjectRequest,
   GetCalendarObjectRequest,
-
+  //
   UpsertCalendarObjectDatesRequest,
   UpsertCalendarObjectSplitRequest,
   ReplyEventRequest,
-  SendInviteRequest,
+  SendInviteRequest
 } from './service-pb.cjs';
 
 import { YCalendarClient } from './service-grpc-web-pb.cjs';
 import { handleError } from '../utils/helper';
-import { UserBasic, GroupBasic, Shared } from "../utils/definitions_pb.cjs";
+import { UserBasic, GroupBasic, Shared } from '../utils/definitions_pb.cjs';
 
 export default (config) =>
   class Calendar {
@@ -45,9 +45,11 @@ export default (config) =>
           } else {
             const code = response.getCode();
             if (code == 0) {
-              const dataList = response.getDataList().map((data) => data.toObject());
+              const dataList = response
+                .getDataList()
+                .map((data) => data.toObject());
               resolve({
-                calendars: dataList,
+                calendars: dataList
               });
             } else {
               reject({
@@ -63,28 +65,32 @@ export default (config) =>
     deleteCalendar(calendarId) {
       return new Promise((resolve, reject) => {
         const request = new DeleteCalendarRequest();
-        request.setId(calendarId)
-        this.client.deleteCalendar(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-            if (code == 0) {
-              resolve({
-                code: 0,
-              });
+        request.setId(calendarId);
+        this.client.deleteCalendar(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code: 0
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     }
 
-    listCalendarObject(calendars=[], range = {}) {
+    listCalendarObject(calendars = [], range = {}) {
       return new Promise((resolve, reject) => {
         const request = new ListCalendarObjectRequest();
         const rangeRequest = new dateRange();
@@ -93,32 +99,36 @@ export default (config) =>
         request.setRange(rangeRequest);
         request.setCalendarsList(calendars);
 
-        this.client.listCalendarObject(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-
-            if (code == 0) {
-              const dataList = response.getDataList().map((data) => {
-                const result = data.toObject();
-                result.rrule = data.hasRrule() ? data.getRrule() : null;
-                result.exdate = result.exdateList;
-                result.groupId = data.getGroupid();
-                return result;
-              });
-
-              resolve({
-                calendarObjects: dataList,
-              });
+        this.client.listCalendarObject(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+
+              if (code == 0) {
+                const dataList = response.getDataList().map((data) => {
+                  const result = data.toObject();
+                  result.rrule = data.hasRrule() ? data.getRrule() : null;
+                  result.exdate = result.exdateList;
+                  result.groupId = data.getGroupid();
+                  return result;
+                });
+
+                resolve({
+                  calendarObjects: dataList
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     }
 
@@ -131,25 +141,29 @@ export default (config) =>
         request.setCalendarcolor(calendarData.calendarcolor);
         request.setCaldav(calendarData.caldav);
 
-        this.client.upsertCalendar(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-
-            if (code == 0) {
-              resolve({
-                code: 0,
-                message: 'success'
-              });
+        this.client.upsertCalendar(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+
+              if (code == 0) {
+                resolve({
+                  code: 0,
+                  message: 'success'
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     }
 
@@ -189,25 +203,29 @@ export default (config) =>
         request.setId(calendarObjectData.id);
         request.setCalendarId(calendarObjectData.calendar_id);
 
-        this.client.upsertCalendarObject(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-
-            if (code == 0) {
-              resolve({
-                code: 0,
-                message: 'success'
-              });
+        this.client.upsertCalendarObject(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+
+              if (code == 0) {
+                resolve({
+                  code: 0,
+                  message: 'success'
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     }
 
@@ -216,25 +234,29 @@ export default (config) =>
         const request = new GetCalendarObjectRequest();
         request.setId(calendarObjectId);
 
-        this.client.getCalendarObject(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-
-            if (code == 0) {
-              const data = response.getData().toObject()
-              resolve({
-                calendarObject: data,
-              });
+        this.client.getCalendarObject(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+
+              if (code == 0) {
+                const data = response.getData().toObject();
+                resolve({
+                  calendarObject: data
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     }
 
@@ -245,24 +267,28 @@ export default (config) =>
         request.setStart(start);
         request.setEnd(end);
 
-        this.client.upsertCalendarObjectDates(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-            if (code == 0) {
-              resolve({
-                code: 0,
-                message: response.getMessage()
-              });
+        this.client.upsertCalendarObjectDates(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code: 0,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     }
 
@@ -300,27 +326,31 @@ export default (config) =>
           request.setUid(splitData.uid);
         }
 
-        this.client.upsertCalendarObjectSplit(request, this.metadata, (error, response) => {
-          if (error) {
-            reject({
-              code: -1,
-              message: error.message
-            });
-          } else {
-            const code = response.getCode();
-            if (code == 0) {
-              resolve({
-                code: 0,
-                message: response.getMessage()
+        this.client.upsertCalendarObjectSplit(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              reject({
+                code: -1,
+                message: error.message
               });
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code: 0,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     }
 
@@ -329,25 +359,29 @@ export default (config) =>
         const request = new GetCalendarObjectRequest();
         request.setId(calendarObjectId);
 
-        this.client.deleteCalendarObject(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-
-            if (code == 0) {
-              resolve({
-                code: 0,
-                message: response.getMessage()
-              });
+        this.client.deleteCalendarObject(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+
+              if (code == 0) {
+                resolve({
+                  code: 0,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     }
 
@@ -357,7 +391,7 @@ export default (config) =>
         request.setId(calendarId);
 
         const UserShareList = [];
-        shareList.forEach(s => {
+        shareList.forEach((s) => {
           const shared = new Shared();
           if (s?.isYartuUser) {
             const userBasic = new UserBasic();
@@ -367,9 +401,7 @@ export default (config) =>
             userBasic.setSurname(s.surname);
 
             shared.setUser(userBasic);
-
           } else if (s?.isGroup) {
-
             const groupBasic = new GroupBasic();
             groupBasic.setId(s.id);
             groupBasic.setName(s.name);
@@ -377,7 +409,9 @@ export default (config) =>
 
             shared.setGroup(groupBasic);
           } else {
-            console.log('@yartu/sdk/ shareNotebook method not supports external users and Realm share features for now!');
+            console.log(
+              '@yartu/sdk/ shareNotebook method not supports external users and Realm share features for now!'
+            );
           }
 
           shared.setPermission(s.permission);
@@ -395,7 +429,9 @@ export default (config) =>
             if (code == 0) {
               resolve({
                 code: 0,
-                success: response.getSuccessList().map((data) => data.toObject()),
+                success: response
+                  .getSuccessList()
+                  .map((data) => data.toObject()),
                 error: response.getErrorList().map((data) => data.toObject()),
                 message: response.getMessage()
               });
@@ -415,25 +451,29 @@ export default (config) =>
         const request = new UnshareCalendarRequest();
         request.setId(calendarId);
 
-        this.client.unshareCalendar(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-
-            if (code == 0) {
-              resolve({
-                code: 0,
-                message: response.getMessage()
-              });
+        this.client.unshareCalendar(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+
+              if (code == 0) {
+                resolve({
+                  code: 0,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     }
 
@@ -443,25 +483,29 @@ export default (config) =>
         request.setId(calendarId);
         request.setSharedCalendarId(sharedCalendarId);
 
-        this.client.deleteSharedCalendar(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-
-            if (code == 0) {
-              resolve({
-                code: 0,
-                message: response.getMessage()
-              });
+        this.client.deleteSharedCalendar(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+
+              if (code == 0) {
+                resolve({
+                  code: 0,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     }
 
@@ -470,25 +514,31 @@ export default (config) =>
         const request = new ShareCalendarRequest();
         request.setId(calendarId);
 
-        this.client.listCalendarSharedList(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-
-            if (code == 0) {
-              const dataList = response.getDataList().map((data) => data.toObject());
-              resolve({
-                users: dataList,
-              });
+        this.client.listCalendarSharedList(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+
+              if (code == 0) {
+                const dataList = response
+                  .getDataList()
+                  .map((data) => data.toObject());
+                resolve({
+                  users: dataList
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     }
 

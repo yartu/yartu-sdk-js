@@ -37,7 +37,7 @@ import {
   DeleteSharedMailBoxRequest,
   // Mobile preferences
   GetMobileConfigRequest,
-  CheckUserOnlineRequest,
+  CheckUserOnlineRequest
 } from './service-pb.cjs';
 
 import { YAccountClient } from './service-grpc-web-pb.cjs';
@@ -957,34 +957,37 @@ export default (config) =>
       return new Promise((resolve, reject) => {
         const request = new CheckUserOnlineRequest();
         if (Number.isInteger(userIdOrUsername)) {
-          request.setUserId(userIdOrUsername)
+          request.setUserId(userIdOrUsername);
         } else {
           request.setUsername(userIdOrUsername);
         }
 
-        this.client.checkUserOnline(request, this.metadata, (error, response) => {
-          if (error) {
-            handleError(error, reject);
-          } else {
-            const code = response.getCode();
-            if (code == 0) {
-              const user = response.getUser();
-              const isOnline = response.getIsOnline();
-              resolve({
-                code: code,
-                message: response.getMessage(),
-                user: user.toObject(),
-                isOnline: isOnline,
-              });
+        this.client.checkUserOnline(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
             } else {
-              reject({
-                code: code,
-                message: response.getMessage()
-              });
+              const code = response.getCode();
+              if (code == 0) {
+                const user = response.getUser();
+                const isOnline = response.getIsOnline();
+                resolve({
+                  code: code,
+                  message: response.getMessage(),
+                  user: user.toObject(),
+                  isOnline: isOnline
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
             }
           }
-        });
+        );
       });
     };
-
   };
