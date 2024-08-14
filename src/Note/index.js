@@ -413,9 +413,9 @@ export default (config) =>
 
         const taskList = [];
         const divDom = document.createElement('div');
-        e.innerHTML = noteData.content;
+        divDom.innerHTML = noteData.content;
 
-        let bindedTasks = divDom.querySelector('.task');
+        let bindedTasks = divDom.querySelectorAll('.task');
         for (const bindedTask of bindedTasks) {
           if (!bindedTask.attributes.random_id.nodeValue) continue;
 
@@ -465,7 +465,7 @@ export default (config) =>
                 const divDom = document.createElement('div');
                 divDom.innerHTML = note.content;
                 const savedTasks = note.tasksList;
-                let bindedTasks = divDom.querySelector('.task');
+                let bindedTasks = divDom.querySelectorAll('.task');
                 for (const bindedTask of bindedTasks) {
                   if (bindedTask.attributes.task_id.nodeValue == 0) {
                     try {
@@ -480,7 +480,7 @@ export default (config) =>
                     }
                   }
                 }
-                note.content = e.innerHTML;
+                note.content = divDom.innerHTML;
               }
 
               resolve({
