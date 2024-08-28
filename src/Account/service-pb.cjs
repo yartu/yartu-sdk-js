@@ -15581,7 +15581,7 @@ proto.yartu.CheckUserOnlineResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     code: jspb.Message.getFieldWithDefault(msg, 1, 0),
     message: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    user: (f = msg.getUser()) && common_grpc_definitions_pb.User.toObject(includeInstance, f),
+    user: (f = msg.getUser()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f),
     isOnline: jspb.Message.getBooleanFieldWithDefault(msg, 4, false)
   };
 
@@ -15628,8 +15628,8 @@ proto.yartu.CheckUserOnlineResponse.deserializeBinaryFromReader = function(msg, 
       msg.setMessage(value);
       break;
     case 3:
-      var value = new common_grpc_definitions_pb.User;
-      reader.readMessage(value,common_grpc_definitions_pb.User.deserializeBinaryFromReader);
+      var value = new common_grpc_definitions_pb.UserBasic;
+      reader.readMessage(value,common_grpc_definitions_pb.UserBasic.deserializeBinaryFromReader);
       msg.setUser(value);
       break;
     case 4:
@@ -15684,7 +15684,7 @@ proto.yartu.CheckUserOnlineResponse.serializeBinaryToWriter = function(message, 
     writer.writeMessage(
       3,
       f,
-      common_grpc_definitions_pb.User.serializeBinaryToWriter
+      common_grpc_definitions_pb.UserBasic.serializeBinaryToWriter
     );
   }
   f = message.getIsOnline();
@@ -15734,17 +15734,17 @@ proto.yartu.CheckUserOnlineResponse.prototype.setMessage = function(value) {
 
 
 /**
- * optional User user = 3;
- * @return {?proto.User}
+ * optional UserBasic user = 3;
+ * @return {?proto.UserBasic}
  */
 proto.yartu.CheckUserOnlineResponse.prototype.getUser = function() {
-  return /** @type{?proto.User} */ (
-    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.User, 3));
+  return /** @type{?proto.UserBasic} */ (
+    jspb.Message.getWrapperField(this, common_grpc_definitions_pb.UserBasic, 3));
 };
 
 
 /**
- * @param {?proto.User|undefined} value
+ * @param {?proto.UserBasic|undefined} value
  * @return {!proto.yartu.CheckUserOnlineResponse} returns this
 */
 proto.yartu.CheckUserOnlineResponse.prototype.setUser = function(value) {
