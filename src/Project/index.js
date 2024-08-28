@@ -2126,8 +2126,12 @@ export default (config) =>
                 activities.forEach((a) => {
                   const ao = a.toObject();
                   try {
-                    const activityData = JSON.parse(ao.content);
-                    data.push({ ...ao, content: activityData });
+                    if (ao.isComment) {
+                      data.push(ao);
+                    } else {
+                      const activityData = JSON.parse(ao.content);
+                      data.push({ ...ao, content: activityData });
+                    }
                   } catch (error_) {
                     console.log(`[error] on listCardActivity, err: ${error_}`);
                     data.push(ao);
