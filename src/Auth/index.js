@@ -281,7 +281,9 @@ export default (config) =>
           const userData = jwt_decode(yartu_token);
           if (userData.exp !== 0 && userData.exp < Date.now() / 1000) {
             // User token expired, remove token from localstorage
-            window.localStorage.removeItem(yartu_token);
+            window.localStorage.removeItem('yartu-token');
+            // window.localStorage.removeItem('yartuStore-common');
+            // window.localStorage.removeItem('yartuStore-preferences');
           } else {
             return true;
           }
