@@ -7328,11 +7328,12 @@ proto.yartu.SessionRecord.prototype.toObject = function(opt_includeInstance) {
 proto.yartu.SessionRecord.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    session: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    fileId: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    sessionId: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    sessionName: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    fileId: jspb.Message.getFieldWithDefault(msg, 4, ""),
     file: (f = msg.getFile()) && proto.yartu.RecordFile.toObject(includeInstance, f),
-    isReady: jspb.Message.getBooleanFieldWithDefault(msg, 5, false),
-    duration: jspb.Message.getFieldWithDefault(msg, 6, 0)
+    isReady: jspb.Message.getBooleanFieldWithDefault(msg, 6, false),
+    duration: jspb.Message.getFieldWithDefault(msg, 7, 0)
   };
 
   if (includeInstance) {
@@ -7374,23 +7375,27 @@ proto.yartu.SessionRecord.deserializeBinaryFromReader = function(msg, reader) {
       msg.setId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setSession(value);
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setSessionId(value);
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
-      msg.setFileId(value);
+      msg.setSessionName(value);
       break;
     case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setFileId(value);
+      break;
+    case 5:
       var value = new proto.yartu.RecordFile;
       reader.readMessage(value,proto.yartu.RecordFile.deserializeBinaryFromReader);
       msg.setFile(value);
       break;
-    case 5:
+    case 6:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setIsReady(value);
       break;
-    case 6:
+    case 7:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setDuration(value);
       break;
@@ -7430,24 +7435,31 @@ proto.yartu.SessionRecord.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getSession();
-  if (f.length > 0) {
-    writer.writeString(
+  f = message.getSessionId();
+  if (f !== 0) {
+    writer.writeInt64(
       2,
       f
     );
   }
-  f = message.getFileId();
+  f = message.getSessionName();
   if (f.length > 0) {
     writer.writeString(
       3,
       f
     );
   }
+  f = message.getFileId();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
+      f
+    );
+  }
   f = message.getFile();
   if (f != null) {
     writer.writeMessage(
-      4,
+      5,
       f,
       proto.yartu.RecordFile.serializeBinaryToWriter
     );
@@ -7455,14 +7467,14 @@ proto.yartu.SessionRecord.serializeBinaryToWriter = function(message, writer) {
   f = message.getIsReady();
   if (f) {
     writer.writeBool(
-      5,
+      6,
       f
     );
   }
   f = message.getDuration();
   if (f !== 0) {
     writer.writeInt64(
-      6,
+      7,
       f
     );
   }
@@ -7488,28 +7500,28 @@ proto.yartu.SessionRecord.prototype.setId = function(value) {
 
 
 /**
- * optional string session = 2;
- * @return {string}
+ * optional int64 session_id = 2;
+ * @return {number}
  */
-proto.yartu.SessionRecord.prototype.getSession = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+proto.yartu.SessionRecord.prototype.getSessionId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
 };
 
 
 /**
- * @param {string} value
+ * @param {number} value
  * @return {!proto.yartu.SessionRecord} returns this
  */
-proto.yartu.SessionRecord.prototype.setSession = function(value) {
-  return jspb.Message.setProto3StringField(this, 2, value);
+proto.yartu.SessionRecord.prototype.setSessionId = function(value) {
+  return jspb.Message.setProto3IntField(this, 2, value);
 };
 
 
 /**
- * optional string file_id = 3;
+ * optional string session_name = 3;
  * @return {string}
  */
-proto.yartu.SessionRecord.prototype.getFileId = function() {
+proto.yartu.SessionRecord.prototype.getSessionName = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
@@ -7518,18 +7530,36 @@ proto.yartu.SessionRecord.prototype.getFileId = function() {
  * @param {string} value
  * @return {!proto.yartu.SessionRecord} returns this
  */
-proto.yartu.SessionRecord.prototype.setFileId = function(value) {
+proto.yartu.SessionRecord.prototype.setSessionName = function(value) {
   return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 
 /**
- * optional RecordFile file = 4;
+ * optional string file_id = 4;
+ * @return {string}
+ */
+proto.yartu.SessionRecord.prototype.getFileId = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.SessionRecord} returns this
+ */
+proto.yartu.SessionRecord.prototype.setFileId = function(value) {
+  return jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional RecordFile file = 5;
  * @return {?proto.yartu.RecordFile}
  */
 proto.yartu.SessionRecord.prototype.getFile = function() {
   return /** @type{?proto.yartu.RecordFile} */ (
-    jspb.Message.getWrapperField(this, proto.yartu.RecordFile, 4));
+    jspb.Message.getWrapperField(this, proto.yartu.RecordFile, 5));
 };
 
 
@@ -7538,7 +7568,7 @@ proto.yartu.SessionRecord.prototype.getFile = function() {
  * @return {!proto.yartu.SessionRecord} returns this
 */
 proto.yartu.SessionRecord.prototype.setFile = function(value) {
-  return jspb.Message.setWrapperField(this, 4, value);
+  return jspb.Message.setWrapperField(this, 5, value);
 };
 
 
@@ -7556,16 +7586,16 @@ proto.yartu.SessionRecord.prototype.clearFile = function() {
  * @return {boolean}
  */
 proto.yartu.SessionRecord.prototype.hasFile = function() {
-  return jspb.Message.getField(this, 4) != null;
+  return jspb.Message.getField(this, 5) != null;
 };
 
 
 /**
- * optional bool is_ready = 5;
+ * optional bool is_ready = 6;
  * @return {boolean}
  */
 proto.yartu.SessionRecord.prototype.getIsReady = function() {
-  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 5, false));
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 6, false));
 };
 
 
@@ -7574,16 +7604,16 @@ proto.yartu.SessionRecord.prototype.getIsReady = function() {
  * @return {!proto.yartu.SessionRecord} returns this
  */
 proto.yartu.SessionRecord.prototype.setIsReady = function(value) {
-  return jspb.Message.setProto3BooleanField(this, 5, value);
+  return jspb.Message.setProto3BooleanField(this, 6, value);
 };
 
 
 /**
- * optional int64 duration = 6;
+ * optional int64 duration = 7;
  * @return {number}
  */
 proto.yartu.SessionRecord.prototype.getDuration = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 7, 0));
 };
 
 
@@ -7592,7 +7622,7 @@ proto.yartu.SessionRecord.prototype.getDuration = function() {
  * @return {!proto.yartu.SessionRecord} returns this
  */
 proto.yartu.SessionRecord.prototype.setDuration = function(value) {
-  return jspb.Message.setProto3IntField(this, 6, value);
+  return jspb.Message.setProto3IntField(this, 7, value);
 };
 
 
