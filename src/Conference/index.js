@@ -21,6 +21,7 @@ import {
   CallYartuUserRequest,
   TakeCallRequest,
   CancelCallRequest,
+  ConvertToScheduledConferenceRequest,
   CopyConferenceRecordToDriveRequest
 } from './service-pb.cjs';
 
@@ -723,6 +724,35 @@ export default (config) =>
         request.setStatus(status);
 
         this.client.takeCall(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    convertToScheduledConference(sessionUuid, name) {
+      return new Promise((resolve, reject) => {
+        const request = new ConvertToScheduledConferenceRequest();
+
+        request.setUuid(sessionUuid);
+        request.setName(name);
+
+        this.client.convertToScheduledConference(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
           } else {
