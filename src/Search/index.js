@@ -153,11 +153,14 @@ export default (config) =>
 
         for (const filter of filters) {
           const searchFilter = new SearchFilter();
-          searchFilter.setSelector(filter.selector);
-          searchFilter.addValue(filter.value);
-          request.addFilter(searchFilter);
-        }
+          const { selector, value } = filter;
 
+          if (value && value.length > 0) {
+            searchFilter.setSelector(selector);
+            searchFilter.setValueList(value);
+            request.addFilter(searchFilter);
+          }
+        }
         queryRequest.setQuery(query.query);
         request.setQuery(queryRequest);
 
