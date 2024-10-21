@@ -510,6 +510,14 @@ export default (config) =>
         if (operation == 'copy' || operation == 'move') {
           request.setDstRepoId(dstRepoId);
           request.setDstDir(dstDir);
+          const currentPath = pathList.join('/');
+          if (operation == 'move' && repoId === dstRepoId && currentPath === dstDir) {
+            reject({
+              code: 400,
+              message: 'Bad request, you cant move directory to same destionation'
+            });
+          }
+
         } else if (operation == 'lock') {
           request.setExpire(expire);
         }
@@ -1822,13 +1830,17 @@ export default (config) =>
       });
     };
 
-    saveToMyDrive = (token, repoId, path) => {
+    saveToMyDrive = (token, destinationRepoId, destinationPath, sourcePath = null) => {
       return new Promise((resolve, reject) => {
         const request = new SaveToMyDriveRequest();
 
         request.setToken(token);
-        request.setDstRepoId(repoId);
-        request.setDstPath(path);
+        request.setDstRepoId(destinationRepoId);
+        request.setDstPath(destinationPath);
+
+        if (sourcePath) {
+          request.setSrcPath(sourcePath);
+        }
 
         this.client.saveToMyDrive(request, this.metadata, (error, response) => {
           if (error) {
