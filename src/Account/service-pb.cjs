@@ -3138,7 +3138,7 @@ proto.yartu.RealmManager.prototype.hasRealm = function() {
  * @private {!Array<number>}
  * @const
  */
-proto.yartu.GetInfoResponse.repeatedFields_ = [15,17,20,22];
+proto.yartu.GetInfoResponse.repeatedFields_ = [15,17,20,22,23];
 
 
 
@@ -3194,7 +3194,8 @@ proto.yartu.GetInfoResponse.toObject = function(includeInstance, msg) {
     proto.yartu.RealmManager.toObject, includeInstance),
     anyNotPaidRealm: jspb.Message.getBooleanFieldWithDefault(msg, 21, false),
     paidLogsList: jspb.Message.toObjectList(msg.getPaidLogsList(),
-    common_grpc_definitions_pb.PaidLog.toObject, includeInstance)
+    common_grpc_definitions_pb.PaidLog.toObject, includeInstance),
+    loginTypesList: (f = jspb.Message.getRepeatedField(msg, 23)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -3322,6 +3323,10 @@ proto.yartu.GetInfoResponse.deserializeBinaryFromReader = function(msg, reader) 
       var value = new common_grpc_definitions_pb.PaidLog;
       reader.readMessage(value,common_grpc_definitions_pb.PaidLog.deserializeBinaryFromReader);
       msg.addPaidLogs(value);
+      break;
+    case 23:
+      var value = /** @type {string} */ (reader.readString());
+      msg.addLoginTypes(value);
       break;
     default:
       reader.skipField();
@@ -3508,6 +3513,13 @@ proto.yartu.GetInfoResponse.serializeBinaryToWriter = function(message, writer) 
       22,
       f,
       common_grpc_definitions_pb.PaidLog.serializeBinaryToWriter
+    );
+  }
+  f = message.getLoginTypesList();
+  if (f.length > 0) {
+    writer.writeRepeatedString(
+      23,
+      f
     );
   }
 };
@@ -4082,6 +4094,43 @@ proto.yartu.GetInfoResponse.prototype.addPaidLogs = function(opt_value, opt_inde
  */
 proto.yartu.GetInfoResponse.prototype.clearPaidLogsList = function() {
   return this.setPaidLogsList([]);
+};
+
+
+/**
+ * repeated string login_types = 23;
+ * @return {!Array<string>}
+ */
+proto.yartu.GetInfoResponse.prototype.getLoginTypesList = function() {
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 23));
+};
+
+
+/**
+ * @param {!Array<string>} value
+ * @return {!proto.yartu.GetInfoResponse} returns this
+ */
+proto.yartu.GetInfoResponse.prototype.setLoginTypesList = function(value) {
+  return jspb.Message.setField(this, 23, value || []);
+};
+
+
+/**
+ * @param {string} value
+ * @param {number=} opt_index
+ * @return {!proto.yartu.GetInfoResponse} returns this
+ */
+proto.yartu.GetInfoResponse.prototype.addLoginTypes = function(value, opt_index) {
+  return jspb.Message.addToRepeatedField(this, 23, value, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.yartu.GetInfoResponse} returns this
+ */
+proto.yartu.GetInfoResponse.prototype.clearLoginTypesList = function() {
+  return this.setLoginTypesList([]);
 };
 
 
