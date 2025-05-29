@@ -687,6 +687,67 @@ proto.yartu_mail.YEmailPromiseClient.prototype.deleteMessage =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu_mail.NotifyReadMessageRequest,
+ *   !proto.yartu_mail.NotifyReadMessageResponse>}
+ */
+const methodDescriptor_YEmail_notifyReadMessage = new grpc.web.MethodDescriptor(
+  '/yartu_mail.YEmail/notifyReadMessage',
+  grpc.web.MethodType.UNARY,
+  proto.yartu_mail.NotifyReadMessageRequest,
+  proto.yartu_mail.NotifyReadMessageResponse,
+  /**
+   * @param {!proto.yartu_mail.NotifyReadMessageRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu_mail.NotifyReadMessageResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu_mail.NotifyReadMessageRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu_mail.NotifyReadMessageResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu_mail.NotifyReadMessageResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu_mail.YEmailClient.prototype.notifyReadMessage =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu_mail.YEmail/notifyReadMessage',
+      request,
+      metadata || {},
+      methodDescriptor_YEmail_notifyReadMessage,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu_mail.NotifyReadMessageRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu_mail.NotifyReadMessageResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu_mail.YEmailPromiseClient.prototype.notifyReadMessage =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu_mail.YEmail/notifyReadMessage',
+      request,
+      metadata || {},
+      methodDescriptor_YEmail_notifyReadMessage);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu_mail.SaveDraftRequest,
  *   !proto.yartu_mail.SaveDraftResponse>}
  */

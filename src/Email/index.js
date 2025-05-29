@@ -11,6 +11,7 @@ import {
   UpsertFolderRequest,
   UploadAttachmentRequest,
   DeleteFolderRequest,
+  NotifyReadMessageRequest,
   EmptyFolderRequest,
   BulkActionFolderRequest,
   GetInfoRequest,
@@ -268,6 +269,32 @@ export default (config) =>
         const request = new MoveMessageRequest();
         request.setUuidList(emailUuidList);
         this.client.deleteMessage(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                code: 0
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    notifyReadMessage(emailUuid, action='reject') {
+      return new Promise((resolve, reject) => {
+        const request = new NotifyReadMessageRequest();
+        request.setUuid(emailUuid);
+        request.setAction(action);
+        this.client.notifyReadMessage(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
           } else {
