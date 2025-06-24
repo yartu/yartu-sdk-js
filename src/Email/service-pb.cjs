@@ -6613,8 +6613,8 @@ proto.yartu_mail.SendMessageRequest.toObject = function(includeInstance, msg) {
     textBody: jspb.Message.getFieldWithDefault(msg, 7, ""),
     attachmentList: (f = jspb.Message.getRepeatedField(msg, 8)) == null ? undefined : f,
     inReplyTo: jspb.Message.getFieldWithDefault(msg, 9, ""),
-    deliverynotification: jspb.Message.getBooleanFieldWithDefault(msg, 10, false),
-    readnotification: jspb.Message.getBooleanFieldWithDefault(msg, 11, false),
+    deliveryNotification: jspb.Message.getBooleanFieldWithDefault(msg, 10, false),
+    readNotification: jspb.Message.getBooleanFieldWithDefault(msg, 11, false),
     priority: jspb.Message.getFieldWithDefault(msg, 12, 0),
     originalUuid: jspb.Message.getFieldWithDefault(msg, 13, "")
   };
@@ -6691,11 +6691,11 @@ proto.yartu_mail.SendMessageRequest.deserializeBinaryFromReader = function(msg, 
       break;
     case 10:
       var value = /** @type {boolean} */ (reader.readBool());
-      msg.setDeliverynotification(value);
+      msg.setDeliveryNotification(value);
       break;
     case 11:
       var value = /** @type {boolean} */ (reader.readBool());
-      msg.setReadnotification(value);
+      msg.setReadNotification(value);
       break;
     case 12:
       var value = /** @type {number} */ (reader.readInt64());
@@ -6797,14 +6797,14 @@ proto.yartu_mail.SendMessageRequest.serializeBinaryToWriter = function(message, 
       f
     );
   }
-  f = message.getDeliverynotification();
+  f = message.getDeliveryNotification();
   if (f) {
     writer.writeBool(
       10,
       f
     );
   }
-  f = message.getReadnotification();
+  f = message.getReadNotification();
   if (f) {
     writer.writeBool(
       11,
@@ -7067,10 +7067,10 @@ proto.yartu_mail.SendMessageRequest.prototype.setInReplyTo = function(value) {
 
 
 /**
- * optional bool deliveryNotification = 10;
+ * optional bool delivery_notification = 10;
  * @return {boolean}
  */
-proto.yartu_mail.SendMessageRequest.prototype.getDeliverynotification = function() {
+proto.yartu_mail.SendMessageRequest.prototype.getDeliveryNotification = function() {
   return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 10, false));
 };
 
@@ -7079,16 +7079,16 @@ proto.yartu_mail.SendMessageRequest.prototype.getDeliverynotification = function
  * @param {boolean} value
  * @return {!proto.yartu_mail.SendMessageRequest} returns this
  */
-proto.yartu_mail.SendMessageRequest.prototype.setDeliverynotification = function(value) {
+proto.yartu_mail.SendMessageRequest.prototype.setDeliveryNotification = function(value) {
   return jspb.Message.setProto3BooleanField(this, 10, value);
 };
 
 
 /**
- * optional bool readNotification = 11;
+ * optional bool read_notification = 11;
  * @return {boolean}
  */
-proto.yartu_mail.SendMessageRequest.prototype.getReadnotification = function() {
+proto.yartu_mail.SendMessageRequest.prototype.getReadNotification = function() {
   return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 11, false));
 };
 
@@ -7097,7 +7097,7 @@ proto.yartu_mail.SendMessageRequest.prototype.getReadnotification = function() {
  * @param {boolean} value
  * @return {!proto.yartu_mail.SendMessageRequest} returns this
  */
-proto.yartu_mail.SendMessageRequest.prototype.setReadnotification = function(value) {
+proto.yartu_mail.SendMessageRequest.prototype.setReadNotification = function(value) {
   return jspb.Message.setProto3BooleanField(this, 11, value);
 };
 

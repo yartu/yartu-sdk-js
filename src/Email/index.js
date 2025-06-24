@@ -511,11 +511,11 @@ export default (config) =>
       }
 
       if (data.readNotification) {
-        request.setReadnotification(data.readNotification);
+        request.setReadNotification(data.readNotification);
       }
 
       if (data.deliveryNotification) {
-        request.setDeliverynotification(data.deliveryNotification);
+        request.setDeliveryNotification(data.deliveryNotification);
       }
 
       return request;
