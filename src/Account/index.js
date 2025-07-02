@@ -37,7 +37,10 @@ import {
   DeleteSharedMailBoxRequest,
   // Mobile preferences
   GetMobileConfigRequest,
-  CheckUserOnlineRequest
+  CheckUserOnlineRequest,
+  // Application Tokens
+  ListApplicationTokenRequest,
+  UpsertApplicationTokenRequest,
 } from './service-pb.cjs';
 
 import { YAccountClient } from './service-grpc-web-pb.cjs';
@@ -978,6 +981,74 @@ export default (config) =>
                   message: response.getMessage(),
                   user: user.toObject(),
                   isOnline: isOnline
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
+    listApplicationToken() {
+      return new Promise((resolve, reject) => {
+        const request = new ListApplicationTokenRequest();
+
+        this.client.listApplicationToken(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              resolve({
+                data: response.toObject(),
+                code: 0
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    upsertApplicationToken = (data, action="create") => {
+      return new Promise((resolve, reject) => {
+        const request = new UpsertApplicationTokenRequest();
+
+        request.setAction(action);
+        if(action != "create") {
+          request.setTokenId = data.id;
+        } else {
+          request.setTokenType(data.tokenType);
+        }
+        request.setName(data.name);
+        request.setPermission(data.permission);
+        request.setIsActive(data.isActive);
+        if(data.expires) {
+          request.setExpires(data.expires);
+        }
+
+        this.client.upsertApplicationToken(
+          request,
+          this.metadata,
+          (error, response) => {
+            const code = response.getCode();
+            if (error) {
+              handleError(error, reject);
+            } else {
+              if (code == 0) {
+                resolve({
+                  code: code,
+                  data: response.toObject(),
                 });
               } else {
                 reject({
