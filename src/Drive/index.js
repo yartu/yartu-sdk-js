@@ -1463,6 +1463,7 @@ export default (config) =>
                   info,
                   passwordNeeded,
                   viewToken,
+                  uploadKey: response.getUploadKey(),
                   dirent,
                   message
                 });
