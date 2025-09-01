@@ -1981,7 +1981,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.yartu.PublicShare = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.yartu.PublicShare.repeatedFields_, null);
 };
 goog.inherits(proto.yartu.PublicShare, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -24235,6 +24235,13 @@ proto.yartu.SharedByMeResponse.prototype.hasMessage = function() {
 
 
 
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.yartu.PublicShare.repeatedFields_ = [20];
+
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -24281,7 +24288,11 @@ proto.yartu.PublicShare.toObject = function(includeInstance, msg) {
     downloadCount: jspb.Message.getFieldWithDefault(msg, 13, 0),
     downloadCountLimit: jspb.Message.getFieldWithDefault(msg, 14, 0),
     ipaddress: jspb.Message.getFieldWithDefault(msg, 15, ""),
-    expired: jspb.Message.getBooleanFieldWithDefault(msg, 16, false)
+    expired: jspb.Message.getBooleanFieldWithDefault(msg, 16, false),
+    allowUpload: jspb.Message.getBooleanFieldWithDefault(msg, 17, false),
+    uploadCountLimit: jspb.Message.getFieldWithDefault(msg, 18, 0),
+    uploadSizeLimit: jspb.Message.getFieldWithDefault(msg, 19, 0),
+    extensionList: (f = jspb.Message.getRepeatedField(msg, 20)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -24381,6 +24392,22 @@ proto.yartu.PublicShare.deserializeBinaryFromReader = function(msg, reader) {
     case 16:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setExpired(value);
+      break;
+    case 17:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setAllowUpload(value);
+      break;
+    case 18:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setUploadCountLimit(value);
+      break;
+    case 19:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setUploadSizeLimit(value);
+      break;
+    case 20:
+      var value = /** @type {string} */ (reader.readString());
+      msg.addExtension$(value);
       break;
     default:
       reader.skipField();
@@ -24520,6 +24547,34 @@ proto.yartu.PublicShare.serializeBinaryToWriter = function(message, writer) {
   if (f) {
     writer.writeBool(
       16,
+      f
+    );
+  }
+  f = message.getAllowUpload();
+  if (f) {
+    writer.writeBool(
+      17,
+      f
+    );
+  }
+  f = message.getUploadCountLimit();
+  if (f !== 0) {
+    writer.writeInt64(
+      18,
+      f
+    );
+  }
+  f = message.getUploadSizeLimit();
+  if (f !== 0) {
+    writer.writeInt64(
+      19,
+      f
+    );
+  }
+  f = message.getExtensionList();
+  if (f.length > 0) {
+    writer.writeRepeatedString(
+      20,
       f
     );
   }
@@ -24811,6 +24866,97 @@ proto.yartu.PublicShare.prototype.getExpired = function() {
  */
 proto.yartu.PublicShare.prototype.setExpired = function(value) {
   return jspb.Message.setProto3BooleanField(this, 16, value);
+};
+
+
+/**
+ * optional bool allow_upload = 17;
+ * @return {boolean}
+ */
+proto.yartu.PublicShare.prototype.getAllowUpload = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 17, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.yartu.PublicShare} returns this
+ */
+proto.yartu.PublicShare.prototype.setAllowUpload = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 17, value);
+};
+
+
+/**
+ * optional int64 upload_count_limit = 18;
+ * @return {number}
+ */
+proto.yartu.PublicShare.prototype.getUploadCountLimit = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 18, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu.PublicShare} returns this
+ */
+proto.yartu.PublicShare.prototype.setUploadCountLimit = function(value) {
+  return jspb.Message.setProto3IntField(this, 18, value);
+};
+
+
+/**
+ * optional int64 upload_size_limit = 19;
+ * @return {number}
+ */
+proto.yartu.PublicShare.prototype.getUploadSizeLimit = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 19, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu.PublicShare} returns this
+ */
+proto.yartu.PublicShare.prototype.setUploadSizeLimit = function(value) {
+  return jspb.Message.setProto3IntField(this, 19, value);
+};
+
+
+/**
+ * repeated string extension = 20;
+ * @return {!Array<string>}
+ */
+proto.yartu.PublicShare.prototype.getExtensionList = function() {
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 20));
+};
+
+
+/**
+ * @param {!Array<string>} value
+ * @return {!proto.yartu.PublicShare} returns this
+ */
+proto.yartu.PublicShare.prototype.setExtensionList = function(value) {
+  return jspb.Message.setField(this, 20, value || []);
+};
+
+
+/**
+ * @param {string} value
+ * @param {number=} opt_index
+ * @return {!proto.yartu.PublicShare} returns this
+ */
+proto.yartu.PublicShare.prototype.addExtension$ = function(value, opt_index) {
+  return jspb.Message.addToRepeatedField(this, 20, value, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.yartu.PublicShare} returns this
+ */
+proto.yartu.PublicShare.prototype.clearExtensionList = function() {
+  return this.setExtensionList([]);
 };
 
 
@@ -26700,7 +26846,8 @@ proto.yartu.GetPublicShareResponse.toObject = function(includeInstance, msg) {
     proto.yartu.PublicShareDirent.toObject, includeInstance),
     passwordNeeded: jspb.Message.getBooleanFieldWithDefault(msg, 4, false),
     viewToken: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    message: jspb.Message.getFieldWithDefault(msg, 6, "")
+    message: jspb.Message.getFieldWithDefault(msg, 6, ""),
+    uploadKey: jspb.Message.getFieldWithDefault(msg, 7, "")
   };
 
   if (includeInstance) {
@@ -26762,6 +26909,10 @@ proto.yartu.GetPublicShareResponse.deserializeBinaryFromReader = function(msg, r
     case 6:
       var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
+      break;
+    case 7:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setUploadKey(value);
       break;
     default:
       reader.skipField();
@@ -26833,6 +26984,13 @@ proto.yartu.GetPublicShareResponse.serializeBinaryToWriter = function(message, w
   if (f != null) {
     writer.writeString(
       6,
+      f
+    );
+  }
+  f = message.getUploadKey();
+  if (f.length > 0) {
+    writer.writeString(
+      7,
       f
     );
   }
@@ -27001,6 +27159,24 @@ proto.yartu.GetPublicShareResponse.prototype.clearMessage = function() {
  */
 proto.yartu.GetPublicShareResponse.prototype.hasMessage = function() {
   return jspb.Message.getField(this, 6) != null;
+};
+
+
+/**
+ * optional string upload_key = 7;
+ * @return {string}
+ */
+proto.yartu.GetPublicShareResponse.prototype.getUploadKey = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.GetPublicShareResponse} returns this
+ */
+proto.yartu.GetPublicShareResponse.prototype.setUploadKey = function(value) {
+  return jspb.Message.setProto3StringField(this, 7, value);
 };
 
 
