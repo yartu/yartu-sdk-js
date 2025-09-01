@@ -1464,9 +1464,6 @@ export default (config) =>
                   passwordNeeded,
                   viewToken,
                   dirent,
-                  allowUpload: response.getAllowUpload(),
-                  uploadCountLimit: response.getUploadCountLimit(),
-                  uploadSizeLimit: response.getUploadSizeLimit(),
                   message
                 });
               } else {
