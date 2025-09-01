@@ -2065,7 +2065,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.yartu.UpsertPublicShareRequest = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.yartu.UpsertPublicShareRequest.repeatedFields_, null);
 };
 goog.inherits(proto.yartu.UpsertPublicShareRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -25699,6 +25699,13 @@ proto.yartu.ListPublicShareResponse.prototype.hasMessage = function() {
 
 
 
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.yartu.UpsertPublicShareRequest.repeatedFields_ = [12];
+
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -25737,7 +25744,11 @@ proto.yartu.UpsertPublicShareRequest.toObject = function(includeInstance, msg) {
     password: jspb.Message.getFieldWithDefault(msg, 5, ""),
     expireDate: jspb.Message.getFieldWithDefault(msg, 6, ""),
     downloadCountLimit: jspb.Message.getFieldWithDefault(msg, 7, 0),
-    ipaddress: jspb.Message.getFieldWithDefault(msg, 8, "")
+    ipaddress: jspb.Message.getFieldWithDefault(msg, 8, ""),
+    allowUpload: jspb.Message.getBooleanFieldWithDefault(msg, 9, false),
+    uploadCountLimit: jspb.Message.getFieldWithDefault(msg, 10, 0),
+    uploadSizeLimit: jspb.Message.getFieldWithDefault(msg, 11, 0),
+    extensionList: (f = jspb.Message.getRepeatedField(msg, 12)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -25805,6 +25816,22 @@ proto.yartu.UpsertPublicShareRequest.deserializeBinaryFromReader = function(msg,
     case 8:
       var value = /** @type {string} */ (reader.readString());
       msg.setIpaddress(value);
+      break;
+    case 9:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setAllowUpload(value);
+      break;
+    case 10:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setUploadCountLimit(value);
+      break;
+    case 11:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setUploadSizeLimit(value);
+      break;
+    case 12:
+      var value = /** @type {string} */ (reader.readString());
+      msg.addExtension$(value);
       break;
     default:
       reader.skipField();
@@ -25888,6 +25915,34 @@ proto.yartu.UpsertPublicShareRequest.serializeBinaryToWriter = function(message,
   if (f.length > 0) {
     writer.writeString(
       8,
+      f
+    );
+  }
+  f = message.getAllowUpload();
+  if (f) {
+    writer.writeBool(
+      9,
+      f
+    );
+  }
+  f = message.getUploadCountLimit();
+  if (f !== 0) {
+    writer.writeInt64(
+      10,
+      f
+    );
+  }
+  f = message.getUploadSizeLimit();
+  if (f !== 0) {
+    writer.writeInt64(
+      11,
+      f
+    );
+  }
+  f = message.getExtensionList();
+  if (f.length > 0) {
+    writer.writeRepeatedString(
+      12,
       f
     );
   }
@@ -26053,6 +26108,97 @@ proto.yartu.UpsertPublicShareRequest.prototype.getIpaddress = function() {
  */
 proto.yartu.UpsertPublicShareRequest.prototype.setIpaddress = function(value) {
   return jspb.Message.setProto3StringField(this, 8, value);
+};
+
+
+/**
+ * optional bool allow_upload = 9;
+ * @return {boolean}
+ */
+proto.yartu.UpsertPublicShareRequest.prototype.getAllowUpload = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 9, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.yartu.UpsertPublicShareRequest} returns this
+ */
+proto.yartu.UpsertPublicShareRequest.prototype.setAllowUpload = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 9, value);
+};
+
+
+/**
+ * optional int64 upload_count_limit = 10;
+ * @return {number}
+ */
+proto.yartu.UpsertPublicShareRequest.prototype.getUploadCountLimit = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 10, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu.UpsertPublicShareRequest} returns this
+ */
+proto.yartu.UpsertPublicShareRequest.prototype.setUploadCountLimit = function(value) {
+  return jspb.Message.setProto3IntField(this, 10, value);
+};
+
+
+/**
+ * optional int64 upload_size_limit = 11;
+ * @return {number}
+ */
+proto.yartu.UpsertPublicShareRequest.prototype.getUploadSizeLimit = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 11, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu.UpsertPublicShareRequest} returns this
+ */
+proto.yartu.UpsertPublicShareRequest.prototype.setUploadSizeLimit = function(value) {
+  return jspb.Message.setProto3IntField(this, 11, value);
+};
+
+
+/**
+ * repeated string extension = 12;
+ * @return {!Array<string>}
+ */
+proto.yartu.UpsertPublicShareRequest.prototype.getExtensionList = function() {
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 12));
+};
+
+
+/**
+ * @param {!Array<string>} value
+ * @return {!proto.yartu.UpsertPublicShareRequest} returns this
+ */
+proto.yartu.UpsertPublicShareRequest.prototype.setExtensionList = function(value) {
+  return jspb.Message.setField(this, 12, value || []);
+};
+
+
+/**
+ * @param {string} value
+ * @param {number=} opt_index
+ * @return {!proto.yartu.UpsertPublicShareRequest} returns this
+ */
+proto.yartu.UpsertPublicShareRequest.prototype.addExtension$ = function(value, opt_index) {
+  return jspb.Message.addToRepeatedField(this, 12, value, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.yartu.UpsertPublicShareRequest} returns this
+ */
+proto.yartu.UpsertPublicShareRequest.prototype.clearExtensionList = function() {
+  return this.setExtensionList([]);
 };
 
 

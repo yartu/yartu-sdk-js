@@ -1345,7 +1345,10 @@ export default (config) =>
       password = null,
       expireDate = '',
       downloadCountLimit = 0,
-      ipaddress = ''
+      ipaddress = '',
+      allowUpload = null,
+      uploadCountLimit = 0,
+      uploadSizeLimit = 0
     ) => {
       return new Promise((resolve, reject) => {
         const request = new UpsertPublicShareRequest();
@@ -1370,6 +1373,9 @@ export default (config) =>
 
         request.setDownloadCountLimit(downloadCountLimit);
         request.setIpaddress(ipaddress);
+        request.setAllowUpload(allowUpload);
+        request.setUploadCountLimit(uploadCountLimit);
+        request.setUploadSizeLimit(uploadSizeLimit);
 
         this.client.upsertPublicShare(
           request,
@@ -1458,6 +1464,9 @@ export default (config) =>
                   passwordNeeded,
                   viewToken,
                   dirent,
+                  allowUpload: response.getAllowUpload(),
+                  uploadCountLimit: response.getUploadCountLimit(),
+                  uploadSizeLimit: response.getUploadSizeLimit(),
                   message
                 });
               } else {
