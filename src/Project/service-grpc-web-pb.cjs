@@ -201,6 +201,250 @@ proto.yartu.YProjectPromiseClient.prototype.getMyTask =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.ListProjectLabelRequest,
+ *   !proto.yartu.ListProjectLabelResponse>}
+ */
+const methodDescriptor_YProject_listProjectLabel = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/listProjectLabel',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.ListProjectLabelRequest,
+  proto.yartu.ListProjectLabelResponse,
+  /**
+   * @param {!proto.yartu.ListProjectLabelRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.ListProjectLabelResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.ListProjectLabelRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ListProjectLabelResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ListProjectLabelResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.listProjectLabel =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/listProjectLabel',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_listProjectLabel,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.ListProjectLabelRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.ListProjectLabelResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.listProjectLabel =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/listProjectLabel',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_listProjectLabel);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.UpsertProjectLabelRequest,
+ *   !proto.yartu.UpsertProjectLabelResponse>}
+ */
+const methodDescriptor_YProject_upsertProjectLabel = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/upsertProjectLabel',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.UpsertProjectLabelRequest,
+  proto.yartu.UpsertProjectLabelResponse,
+  /**
+   * @param {!proto.yartu.UpsertProjectLabelRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.UpsertProjectLabelResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.UpsertProjectLabelRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.UpsertProjectLabelResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.UpsertProjectLabelResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.upsertProjectLabel =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/upsertProjectLabel',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_upsertProjectLabel,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.UpsertProjectLabelRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.UpsertProjectLabelResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.upsertProjectLabel =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/upsertProjectLabel',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_upsertProjectLabel);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.DeleteProjectLabelRequest,
+ *   !proto.yartu.DeleteProjectLabelResponse>}
+ */
+const methodDescriptor_YProject_deleteProjectLabel = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/deleteProjectLabel',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.DeleteProjectLabelRequest,
+  proto.yartu.DeleteProjectLabelResponse,
+  /**
+   * @param {!proto.yartu.DeleteProjectLabelRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.DeleteProjectLabelResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.DeleteProjectLabelRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.DeleteProjectLabelResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.DeleteProjectLabelResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.deleteProjectLabel =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/deleteProjectLabel',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_deleteProjectLabel,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.DeleteProjectLabelRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.DeleteProjectLabelResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.deleteProjectLabel =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/deleteProjectLabel',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_deleteProjectLabel);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.MoveProjectLabelRequest,
+ *   !proto.yartu.MoveProjectLabelResponse>}
+ */
+const methodDescriptor_YProject_moveProjectLabel = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/moveProjectLabel',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.MoveProjectLabelRequest,
+  proto.yartu.MoveProjectLabelResponse,
+  /**
+   * @param {!proto.yartu.MoveProjectLabelRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.MoveProjectLabelResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.MoveProjectLabelRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.MoveProjectLabelResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.MoveProjectLabelResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.moveProjectLabel =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/moveProjectLabel',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_moveProjectLabel,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.MoveProjectLabelRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.MoveProjectLabelResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.moveProjectLabel =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/moveProjectLabel',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_moveProjectLabel);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.ListProjectRequest,
  *   !proto.yartu.ListProjectResponse>}
  */
@@ -2580,6 +2824,67 @@ proto.yartu.YProjectPromiseClient.prototype.deleteCardLabel =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.MoveCardLabelRequest,
+ *   !proto.yartu.MoveCardLabelResponse>}
+ */
+const methodDescriptor_YProject_moveCardLabel = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/moveCardLabel',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.MoveCardLabelRequest,
+  proto.yartu.MoveCardLabelResponse,
+  /**
+   * @param {!proto.yartu.MoveCardLabelRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.MoveCardLabelResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.MoveCardLabelRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.MoveCardLabelResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.MoveCardLabelResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.moveCardLabel =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/moveCardLabel',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_moveCardLabel,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.MoveCardLabelRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.MoveCardLabelResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.moveCardLabel =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/moveCardLabel',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_moveCardLabel);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.GetCardRequest,
  *   !proto.yartu.GetCardResponse>}
  */
@@ -3977,6 +4282,67 @@ proto.yartu.YProjectPromiseClient.prototype.deleteCheckListItem =
       request,
       metadata || {},
       methodDescriptor_YProject_deleteCheckListItem);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.MoveChecklistItemRequest,
+ *   !proto.yartu.MoveChecklistItemResponse>}
+ */
+const methodDescriptor_YProject_moveChecklistItem = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/moveChecklistItem',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.MoveChecklistItemRequest,
+  proto.yartu.MoveChecklistItemResponse,
+  /**
+   * @param {!proto.yartu.MoveChecklistItemRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.MoveChecklistItemResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.MoveChecklistItemRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.MoveChecklistItemResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.MoveChecklistItemResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.moveChecklistItem =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/moveChecklistItem',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_moveChecklistItem,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.MoveChecklistItemRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.MoveChecklistItemResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.moveChecklistItem =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/moveChecklistItem',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_moveChecklistItem);
 };
 
 
