@@ -12,6 +12,7 @@ import {
   UpsertProjectLabelRequest,
   DeleteProjectLabelRequest,
   MoveProjectLabelRequest,
+  AddLabelToProjectRequest,
 
   ListProjectRequest,
   GetProjectRequest,
@@ -308,6 +309,37 @@ export default (config) =>
                 resolve({
                   code: 0,
                   message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    }
+
+    addLabelToProject(uuid, label_id) {
+      return new Promise((resolve, reject) => {
+        const request = new AddLabelToProjectRequest();
+
+        request.setUuid(uuid);
+        request.setLabelId(label_id);
+
+        this.client.addLabelToProject(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code
                 });
               } else {
                 reject({
