@@ -8,6 +8,11 @@ import {
   GetProjectFilesRequest,
 
   // Project services
+  ListProjectLabelRequest,
+  UpsertProjectLabelRequest,
+  DeleteProjectLabelRequest,
+  MoveProjectLabelRequest,
+
   ListProjectRequest,
   GetProjectRequest,
   UpsertProjectRequest,
@@ -80,8 +85,10 @@ import {
   DeleteCheckListRequest,
   UpsertCheckListItemRequest,
   DeleteCheckListItemRequest,
+  MoveChecklistItemRequest,
   AssignAllCheckListItemsRequest,
   MoveCardRequest,
+  MoveCardLabelRequest,
   DuplicateCardRequest,
   MoveCardToAnotherBoardRequest,
   CopyCardToAnotherBoardRequest,
@@ -208,6 +215,127 @@ export default (config) =>
                 overdueList,
                 upcomingDeadlineList,
                 message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    listProjectLabel() {
+      return new Promise((resolve, reject) => {
+        const request = new ListProjectLabelRequest();
+        this.client.listProjectLabel(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+
+            if (code == 0) {
+              const data = response
+                .getProjectLabelList()
+                .map((data) => data.toObject());
+              resolve({
+                code: 0,
+                data,
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
+    upsertProjectLabel(labelData) {
+      return new Promise((resolve, reject) => {
+        const request = new UpsertProjectLabelRequest();
+        request.setId(labelData.id);
+        request.setName(labelData.name);
+        request.setColor(labelData.color);
+        request.setIsPublic(labelData.isPublic);
+        this.client.upsertProjectLabel(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+
+              if (code == 0) {
+                const data = response.getData().toObject();
+                resolve({
+                  code,
+                  data,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    }
+
+    deleteProjectLabel(id) {
+      return new Promise((resolve, reject) => {
+        const request = new DeleteProjectLabelRequest();
+        request.setId(id);
+        this.client.deleteProjectLabel(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+
+              if (code == 0) {
+                resolve({
+                  code: 0,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    }
+
+    moveProjectLabel(labelId, index) {
+      return new Promise((resolve, reject) => {
+        const request = new MoveProjectLabelRequest();
+
+        request.setId(labelId);
+        request.setIndex(index);
+
+        this.client.moveProjectLabel(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code
               });
             } else {
               reject({
@@ -1914,6 +2042,33 @@ export default (config) =>
       });
     }
 
+    moveCardLabel(labelId, index) {
+      return new Promise((resolve, reject) => {
+        const request = new MoveCardLabelRequest();
+
+        request.setId(labelId);
+        request.setIndex(index);
+
+        this.client.moveCardLabel(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
     getCard(cardId) {
       return new Promise((resolve, reject) => {
         const request = new GetCardRequest();
@@ -2357,6 +2512,33 @@ export default (config) =>
             }
           }
         );
+      });
+    }
+
+    moveChecklistItem(clId, index) {
+      return new Promise((resolve, reject) => {
+        const request = new MoveChecklistItemRequest();
+
+        request.setId(clId);
+        request.setIndex(index);
+
+        this.client.moveChecklistItem(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
       });
     }
 
