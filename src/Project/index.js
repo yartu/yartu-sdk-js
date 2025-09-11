@@ -1324,6 +1324,33 @@ export default (config) =>
       });
     }
 
+    moveBoardIndex(boardId, index) {
+      return new Promise((resolve, reject) => {
+        const request = new MoveBoardIndexRequest();
+
+        request.setId(boardId);
+        request.setIndex(index);
+
+        this.client.moveBoardIndex(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    }
+
     shareBoard(boardId, shareList) {
       return new Promise((resolve, reject) => {
         const request = new ShareBoardRequest();

@@ -1909,6 +1909,67 @@ proto.yartu.YProjectPromiseClient.prototype.deleteBoard =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.MoveBoardIndexRequest,
+ *   !proto.yartu.MoveBoardIndexResponse>}
+ */
+const methodDescriptor_YProject_moveBoardIndex = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/moveBoardIndex',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.MoveBoardIndexRequest,
+  proto.yartu.MoveBoardIndexResponse,
+  /**
+   * @param {!proto.yartu.MoveBoardIndexRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.MoveBoardIndexResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.MoveBoardIndexRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.MoveBoardIndexResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.MoveBoardIndexResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.moveBoardIndex =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/moveBoardIndex',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_moveBoardIndex,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.MoveBoardIndexRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.MoveBoardIndexResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.moveBoardIndex =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/moveBoardIndex',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_moveBoardIndex);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.ListBoardTemplateRequest,
  *   !proto.yartu.ListBoardTemplateResponse>}
  */
