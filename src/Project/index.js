@@ -42,6 +42,7 @@ import {
   GetBoardRequest,
   UpsertBoardRequest,
   DeleteBoardRequest,
+  MoveBoardIndexRequest,
   DuplicateBoardRequest,
   CopyBoardRequest,
   MoveBoardRequest,
