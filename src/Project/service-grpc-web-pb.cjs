@@ -445,6 +445,67 @@ proto.yartu.YProjectPromiseClient.prototype.moveProjectLabel =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.AddLabelToProjectRequest,
+ *   !proto.yartu.AddLabelToProjectResponse>}
+ */
+const methodDescriptor_YProject_addLabelToProject = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/addLabelToProject',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.AddLabelToProjectRequest,
+  proto.yartu.AddLabelToProjectResponse,
+  /**
+   * @param {!proto.yartu.AddLabelToProjectRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.AddLabelToProjectResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.AddLabelToProjectRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.AddLabelToProjectResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.AddLabelToProjectResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YProjectClient.prototype.addLabelToProject =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YProject/addLabelToProject',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_addLabelToProject,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.AddLabelToProjectRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.AddLabelToProjectResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YProjectPromiseClient.prototype.addLabelToProject =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YProject/addLabelToProject',
+      request,
+      metadata || {},
+      methodDescriptor_YProject_addLabelToProject);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.ListProjectRequest,
  *   !proto.yartu.ListProjectResponse>}
  */
