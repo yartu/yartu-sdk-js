@@ -4349,61 +4349,61 @@ proto.yartu.YProjectPromiseClient.prototype.deleteCheckListItem =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
- *   !proto.yartu.MoveChecklistItemRequest,
- *   !proto.yartu.MoveChecklistItemResponse>}
+ *   !proto.yartu.MoveCheckListItemRequest,
+ *   !proto.yartu.MoveCheckListItemResponse>}
  */
-const methodDescriptor_YProject_moveChecklistItem = new grpc.web.MethodDescriptor(
-  '/yartu.YProject/moveChecklistItem',
+const methodDescriptor_YProject_moveCheckListItem = new grpc.web.MethodDescriptor(
+  '/yartu.YProject/moveCheckListItem',
   grpc.web.MethodType.UNARY,
-  proto.yartu.MoveChecklistItemRequest,
-  proto.yartu.MoveChecklistItemResponse,
+  proto.yartu.MoveCheckListItemRequest,
+  proto.yartu.MoveCheckListItemResponse,
   /**
-   * @param {!proto.yartu.MoveChecklistItemRequest} request
+   * @param {!proto.yartu.MoveCheckListItemRequest} request
    * @return {!Uint8Array}
    */
   function(request) {
     return request.serializeBinary();
   },
-  proto.yartu.MoveChecklistItemResponse.deserializeBinary
+  proto.yartu.MoveCheckListItemResponse.deserializeBinary
 );
 
 
 /**
- * @param {!proto.yartu.MoveChecklistItemRequest} request The
+ * @param {!proto.yartu.MoveCheckListItemRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.RpcError, ?proto.yartu.MoveChecklistItemResponse)}
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.MoveCheckListItemResponse)}
  *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.yartu.MoveChecklistItemResponse>|undefined}
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.MoveCheckListItemResponse>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.yartu.YProjectClient.prototype.moveChecklistItem =
+proto.yartu.YProjectClient.prototype.moveCheckListItem =
     function(request, metadata, callback) {
   return this.client_.rpcCall(this.hostname_ +
-      '/yartu.YProject/moveChecklistItem',
+      '/yartu.YProject/moveCheckListItem',
       request,
       metadata || {},
-      methodDescriptor_YProject_moveChecklistItem,
+      methodDescriptor_YProject_moveCheckListItem,
       callback);
 };
 
 
 /**
- * @param {!proto.yartu.MoveChecklistItemRequest} request The
+ * @param {!proto.yartu.MoveCheckListItemRequest} request The
  *     request proto
  * @param {?Object<string, string>=} metadata User defined
  *     call metadata
- * @return {!Promise<!proto.yartu.MoveChecklistItemResponse>}
+ * @return {!Promise<!proto.yartu.MoveCheckListItemResponse>}
  *     Promise that resolves to the response
  */
-proto.yartu.YProjectPromiseClient.prototype.moveChecklistItem =
+proto.yartu.YProjectPromiseClient.prototype.moveCheckListItem =
     function(request, metadata) {
   return this.client_.unaryCall(this.hostname_ +
-      '/yartu.YProject/moveChecklistItem',
+      '/yartu.YProject/moveCheckListItem',
       request,
       metadata || {},
-      methodDescriptor_YProject_moveChecklistItem);
+      methodDescriptor_YProject_moveCheckListItem);
 };
 
 

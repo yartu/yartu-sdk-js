@@ -2575,9 +2575,9 @@ export default (config) =>
       });
     }
 
-    moveChecklistItem(clId, index) {
+    moveCheckListItem(clId, index) {
       return new Promise((resolve, reject) => {
-        const request = new MoveChecklistItemRequest();
+        const request = new MoveCheckListItemRequest();
 
         request.setId(clId);
         request.setIndex(index);
