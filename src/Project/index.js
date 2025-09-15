@@ -87,7 +87,7 @@ import {
   DeleteCheckListRequest,
   UpsertCheckListItemRequest,
   DeleteCheckListItemRequest,
-  MoveChecklistItemRequest,
+  MoveCheckListItemRequest,
   AssignAllCheckListItemsRequest,
   MoveCardRequest,
   MoveCardLabelRequest,
@@ -2582,7 +2582,7 @@ export default (config) =>
         request.setId(clId);
         request.setIndex(index);
 
-        this.client.moveChecklistItem(request, this.metadata, (error, response) => {
+        this.client.moveCheckListItem(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
           } else {
