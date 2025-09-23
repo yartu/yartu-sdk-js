@@ -1700,9 +1700,6 @@ export default (config) =>
         if ('description' in cardData) {
           request.setDescription(cardData.description);
         }
-        if ('startDate' in cardData) {
-          request.setStartDate(cardData.startDate);
-        }
         if ('isCompleted' in cardData) {
           request.setIsCompleted(cardData.isCompleted);
         }
@@ -1714,6 +1711,19 @@ export default (config) =>
         }
         if ('color' in cardData) {
           request.setColor(cardData.color);
+        }
+
+        if ('startDate' in cardData) {
+          if (cardData.startDate) {
+            try {
+              const startDate = cardData.startDate.utc().format('YYYY-MM-DD HH:mm');
+              request.setStartDate(startDate);
+            } catch (error_) {
+              console.log(`[error] on upsertCard, err: ${error_}`);
+            }
+          } else {
+            request.setStartDate('');
+          }
         }
 
         if ('dueDate' in cardData) {
