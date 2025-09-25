@@ -13165,7 +13165,7 @@ proto.yartu.ListProjectLabelRequest.prototype.toObject = function(opt_includeIns
  */
 proto.yartu.ListProjectLabelRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-
+    getAll: jspb.Message.getBooleanFieldWithDefault(msg, 1, false)
   };
 
   if (includeInstance) {
@@ -13202,6 +13202,10 @@ proto.yartu.ListProjectLabelRequest.deserializeBinaryFromReader = function(msg, 
     }
     var field = reader.getFieldNumber();
     switch (field) {
+    case 1:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setGetAll(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -13231,6 +13235,31 @@ proto.yartu.ListProjectLabelRequest.prototype.serializeBinary = function() {
  */
 proto.yartu.ListProjectLabelRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getGetAll();
+  if (f) {
+    writer.writeBool(
+      1,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional bool get_all = 1;
+ * @return {boolean}
+ */
+proto.yartu.ListProjectLabelRequest.prototype.getGetAll = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 1, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.yartu.ListProjectLabelRequest} returns this
+ */
+proto.yartu.ListProjectLabelRequest.prototype.setGetAll = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 1, value);
 };
 
 
