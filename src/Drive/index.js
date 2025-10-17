@@ -1869,4 +1869,39 @@ export default (config) =>
         });
       });
     };
+
+    saveToMyDriveInternalFile = (app, file_uuid, destinationRepoId, destinationPath, sourcePath = null) => {
+      return new Promise((resolve, reject) => {
+        const request = new SaveToMyDriveRequest();
+
+        request.setApp(app);
+        request.setFileUuid(file_uuid);
+        request.setDstRepoId(destinationRepoId);
+        request.setDstPath(destinationPath);
+
+        if (sourcePath) {
+          request.setSrcPath(sourcePath);
+        }
+
+        this.client.saveToMyDriveInternalFile(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code,
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
+      });
+    };
+
   };
