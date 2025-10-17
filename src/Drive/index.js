@@ -55,7 +55,8 @@ import {
   // Client
   ListConnectedClientRequest,
   SignOutClientRequest,
-  SaveToMyDriveRequest
+  SaveToMyDriveRequest,
+  SaveToMyDriveInternalFileRequest,
 } from './service-pb.cjs';
 
 import { YDriveClient } from './service-grpc-web-pb.cjs';
@@ -1872,7 +1873,7 @@ export default (config) =>
 
     saveToMyDriveInternalFile = (app, file_uuid, destinationRepoId, destinationPath, sourcePath = null) => {
       return new Promise((resolve, reject) => {
-        const request = new SaveToMyDriveRequest();
+        const request = new SaveToMyDriveInternalFileRequest();
 
         request.setApp(app);
         request.setFileUuid(file_uuid);
