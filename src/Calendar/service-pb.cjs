@@ -1803,7 +1803,7 @@ proto.yartu.CalendarUserShareResult.prototype.setUsername = function(value) {
  * @private {!Array<number>}
  * @const
  */
-proto.yartu.CalendarObject.repeatedFields_ = [20,22];
+proto.yartu.CalendarObject.repeatedFields_ = [20,22,32];
 
 
 
@@ -1868,7 +1868,8 @@ proto.yartu.CalendarObject.toObject = function(includeInstance, msg) {
     start: jspb.Message.getFieldWithDefault(msg, 28, ""),
     end: jspb.Message.getFieldWithDefault(msg, 29, ""),
     duration: (f = msg.getDuration()) && proto.yartu.Duration.toObject(includeInstance, f),
-    groupid: jspb.Message.getFieldWithDefault(msg, 31, "")
+    groupid: jspb.Message.getFieldWithDefault(msg, 31, ""),
+    notesList: (f = jspb.Message.getRepeatedField(msg, 32)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -2031,6 +2032,12 @@ proto.yartu.CalendarObject.deserializeBinaryFromReader = function(msg, reader) {
     case 31:
       var value = /** @type {string} */ (reader.readString());
       msg.setGroupid(value);
+      break;
+    case 32:
+      var values = /** @type {!Array<number>} */ (reader.isDelimited() ? reader.readPackedInt64() : [reader.readInt64()]);
+      for (var i = 0; i < values.length; i++) {
+        msg.addNotes(values[i]);
+      }
       break;
     default:
       reader.skipField();
@@ -2278,6 +2285,13 @@ proto.yartu.CalendarObject.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writeString(
       31,
+      f
+    );
+  }
+  f = message.getNotesList();
+  if (f.length > 0) {
+    writer.writePackedInt64(
+      32,
       f
     );
   }
@@ -2934,6 +2948,43 @@ proto.yartu.CalendarObject.prototype.getGroupid = function() {
  */
 proto.yartu.CalendarObject.prototype.setGroupid = function(value) {
   return jspb.Message.setProto3StringField(this, 31, value);
+};
+
+
+/**
+ * repeated int64 notes = 32;
+ * @return {!Array<number>}
+ */
+proto.yartu.CalendarObject.prototype.getNotesList = function() {
+  return /** @type {!Array<number>} */ (jspb.Message.getRepeatedField(this, 32));
+};
+
+
+/**
+ * @param {!Array<number>} value
+ * @return {!proto.yartu.CalendarObject} returns this
+ */
+proto.yartu.CalendarObject.prototype.setNotesList = function(value) {
+  return jspb.Message.setField(this, 32, value || []);
+};
+
+
+/**
+ * @param {number} value
+ * @param {number=} opt_index
+ * @return {!proto.yartu.CalendarObject} returns this
+ */
+proto.yartu.CalendarObject.prototype.addNotes = function(value, opt_index) {
+  return jspb.Message.addToRepeatedField(this, 32, value, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.yartu.CalendarObject} returns this
+ */
+proto.yartu.CalendarObject.prototype.clearNotesList = function() {
+  return this.setNotesList([]);
 };
 
 

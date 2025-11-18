@@ -37,7 +37,8 @@ import {
   ListTaskRequest,
   CompleteTaskRequest,
   //
-  SaveNoteToDriveRequest
+  SaveNoteToDriveRequest,
+  BindNoteWithEventRequest
 } from './service-pb.cjs';
 
 import { YNoteClient } from './service-grpc-web-pb.cjs';
@@ -1104,6 +1105,39 @@ export default (config) =>
         request.setParentPath(parentPath);
 
         this.client.saveNoteToDrive(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    };
+
+    bindNoteWithEvent = (noteId, eventId, clear=false) => {
+      return new Promise((resolve, reject) => {
+        const request = new BindNoteWithEventRequest();
+
+        request.setId(noteId);
+        request.setEventId(eventId);
+        request.setClear(clear);
+
+        this.client.bindNoteWithEvent(
           request,
           this.metadata,
           (error, response) => {

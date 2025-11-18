@@ -2028,5 +2028,66 @@ proto.yartu.YNotePromiseClient.prototype.saveNoteToDrive =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.BindNoteWithEventRequest,
+ *   !proto.yartu.BindNoteWithEventResponse>}
+ */
+const methodDescriptor_YNote_bindNoteWithEvent = new grpc.web.MethodDescriptor(
+  '/yartu.YNote/bindNoteWithEvent',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.BindNoteWithEventRequest,
+  proto.yartu.BindNoteWithEventResponse,
+  /**
+   * @param {!proto.yartu.BindNoteWithEventRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.BindNoteWithEventResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.BindNoteWithEventRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.BindNoteWithEventResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.BindNoteWithEventResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YNoteClient.prototype.bindNoteWithEvent =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YNote/bindNoteWithEvent',
+      request,
+      metadata || {},
+      methodDescriptor_YNote_bindNoteWithEvent,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.BindNoteWithEventRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.BindNoteWithEventResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YNotePromiseClient.prototype.bindNoteWithEvent =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YNote/bindNoteWithEvent',
+      request,
+      metadata || {},
+      methodDescriptor_YNote_bindNoteWithEvent);
+};
+
+
 module.exports = proto.yartu;
 
