@@ -4871,7 +4871,8 @@ proto.yartu.CardChecklistItem.toObject = function(includeInstance, msg) {
     assignee: (f = msg.getAssignee()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f),
     completedBy: (f = msg.getCompletedBy()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f),
     labelList: jspb.Message.toObjectList(msg.getLabelList(),
-    proto.yartu.CardLabel.toObject, includeInstance)
+    proto.yartu.CardLabel.toObject, includeInstance),
+    effort: jspb.Message.getFieldWithDefault(msg, 12, 0)
   };
 
   if (includeInstance) {
@@ -4954,6 +4955,10 @@ proto.yartu.CardChecklistItem.deserializeBinaryFromReader = function(msg, reader
       var value = new proto.yartu.CardLabel;
       reader.readMessage(value,proto.yartu.CardLabel.deserializeBinaryFromReader);
       msg.addLabel(value);
+      break;
+    case 12:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setEffort(value);
       break;
     default:
       reader.skipField();
@@ -5062,6 +5067,13 @@ proto.yartu.CardChecklistItem.serializeBinaryToWriter = function(message, writer
       11,
       f,
       proto.yartu.CardLabel.serializeBinaryToWriter
+    );
+  }
+  f = message.getEffort();
+  if (f !== 0) {
+    writer.writeInt64(
+      12,
+      f
     );
   }
 };
@@ -5320,6 +5332,24 @@ proto.yartu.CardChecklistItem.prototype.addLabel = function(opt_value, opt_index
  */
 proto.yartu.CardChecklistItem.prototype.clearLabelList = function() {
   return this.setLabelList([]);
+};
+
+
+/**
+ * optional int64 effort = 12;
+ * @return {number}
+ */
+proto.yartu.CardChecklistItem.prototype.getEffort = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 12, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu.CardChecklistItem} returns this
+ */
+proto.yartu.CardChecklistItem.prototype.setEffort = function(value) {
+  return jspb.Message.setProto3IntField(this, 12, value);
 };
 
 
@@ -6963,7 +6993,9 @@ proto.yartu.Card.toObject = function(includeInstance, msg) {
     labelCount: jspb.Message.getFieldWithDefault(msg, 25, 0),
     activityCount: jspb.Message.getFieldWithDefault(msg, 26, 0),
     checklistCount: jspb.Message.getFieldWithDefault(msg, 27, 0),
-    subscribersList: (f = jspb.Message.getRepeatedField(msg, 28)) == null ? undefined : f
+    subscribersList: (f = jspb.Message.getRepeatedField(msg, 28)) == null ? undefined : f,
+    effort: jspb.Message.getFieldWithDefault(msg, 29, 0),
+    checklistEffort: jspb.Message.getFieldWithDefault(msg, 30, 0)
   };
 
   if (includeInstance) {
@@ -7122,6 +7154,14 @@ proto.yartu.Card.deserializeBinaryFromReader = function(msg, reader) {
       for (var i = 0; i < values.length; i++) {
         msg.addSubscribers(values[i]);
       }
+      break;
+    case 29:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setEffort(value);
+      break;
+    case 30:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setChecklistEffort(value);
       break;
     default:
       reader.skipField();
@@ -7354,6 +7394,20 @@ proto.yartu.Card.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writePackedInt64(
       28,
+      f
+    );
+  }
+  f = message.getEffort();
+  if (f !== 0) {
+    writer.writeInt64(
+      29,
+      f
+    );
+  }
+  f = message.getChecklistEffort();
+  if (f !== 0) {
+    writer.writeInt64(
+      30,
       f
     );
   }
@@ -8254,6 +8308,42 @@ proto.yartu.Card.prototype.addSubscribers = function(value, opt_index) {
  */
 proto.yartu.Card.prototype.clearSubscribersList = function() {
   return this.setSubscribersList([]);
+};
+
+
+/**
+ * optional int64 effort = 29;
+ * @return {number}
+ */
+proto.yartu.Card.prototype.getEffort = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 29, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu.Card} returns this
+ */
+proto.yartu.Card.prototype.setEffort = function(value) {
+  return jspb.Message.setProto3IntField(this, 29, value);
+};
+
+
+/**
+ * optional int64 checklist_effort = 30;
+ * @return {number}
+ */
+proto.yartu.Card.prototype.getChecklistEffort = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 30, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu.Card} returns this
+ */
+proto.yartu.Card.prototype.setChecklistEffort = function(value) {
+  return jspb.Message.setProto3IntField(this, 30, value);
 };
 
 
@@ -26919,7 +27009,8 @@ proto.yartu.UpsertCardRequest.toObject = function(includeInstance, msg) {
     isCompleted: jspb.Message.getBooleanFieldWithDefault(msg, 8, false),
     isArchived: jspb.Message.getBooleanFieldWithDefault(msg, 9, false),
     isCanceled: jspb.Message.getBooleanFieldWithDefault(msg, 10, false),
-    color: jspb.Message.getFieldWithDefault(msg, 11, "")
+    color: jspb.Message.getFieldWithDefault(msg, 11, ""),
+    effort: jspb.Message.getFieldWithDefault(msg, 12, 0)
   };
 
   if (includeInstance) {
@@ -26999,6 +27090,10 @@ proto.yartu.UpsertCardRequest.deserializeBinaryFromReader = function(msg, reader
     case 11:
       var value = /** @type {string} */ (reader.readString());
       msg.setColor(value);
+      break;
+    case 12:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setEffort(value);
       break;
     default:
       reader.skipField();
@@ -27103,6 +27198,13 @@ proto.yartu.UpsertCardRequest.serializeBinaryToWriter = function(message, writer
   if (f != null) {
     writer.writeString(
       11,
+      f
+    );
+  }
+  f = /** @type {number} */ (jspb.Message.getField(message, 12));
+  if (f != null) {
+    writer.writeInt64(
+      12,
       f
     );
   }
@@ -27466,6 +27568,42 @@ proto.yartu.UpsertCardRequest.prototype.clearColor = function() {
  */
 proto.yartu.UpsertCardRequest.prototype.hasColor = function() {
   return jspb.Message.getField(this, 11) != null;
+};
+
+
+/**
+ * optional int64 effort = 12;
+ * @return {number}
+ */
+proto.yartu.UpsertCardRequest.prototype.getEffort = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 12, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu.UpsertCardRequest} returns this
+ */
+proto.yartu.UpsertCardRequest.prototype.setEffort = function(value) {
+  return jspb.Message.setField(this, 12, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.UpsertCardRequest} returns this
+ */
+proto.yartu.UpsertCardRequest.prototype.clearEffort = function() {
+  return jspb.Message.setField(this, 12, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.UpsertCardRequest.prototype.hasEffort = function() {
+  return jspb.Message.getField(this, 12) != null;
 };
 
 
@@ -31146,7 +31284,8 @@ proto.yartu.UpsertCheckListItemRequest.toObject = function(includeInstance, msg)
     isCompleted: jspb.Message.getBooleanFieldWithDefault(msg, 7, false),
     assignee: (f = msg.getAssignee()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f),
     labelList: jspb.Message.toObjectList(msg.getLabelList(),
-    proto.yartu.CardLabel.toObject, includeInstance)
+    proto.yartu.CardLabel.toObject, includeInstance),
+    effort: jspb.Message.getFieldWithDefault(msg, 10, 0)
   };
 
   if (includeInstance) {
@@ -31220,6 +31359,10 @@ proto.yartu.UpsertCheckListItemRequest.deserializeBinaryFromReader = function(ms
       var value = new proto.yartu.CardLabel;
       reader.readMessage(value,proto.yartu.CardLabel.deserializeBinaryFromReader);
       msg.addLabel(value);
+      break;
+    case 10:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setEffort(value);
       break;
     default:
       reader.skipField();
@@ -31313,6 +31456,13 @@ proto.yartu.UpsertCheckListItemRequest.serializeBinaryToWriter = function(messag
       8,
       f,
       proto.yartu.CardLabel.serializeBinaryToWriter
+    );
+  }
+  f = /** @type {number} */ (jspb.Message.getField(message, 10));
+  if (f != null) {
+    writer.writeInt64(
+      10,
+      f
     );
   }
 };
@@ -31606,6 +31756,42 @@ proto.yartu.UpsertCheckListItemRequest.prototype.addLabel = function(opt_value, 
  */
 proto.yartu.UpsertCheckListItemRequest.prototype.clearLabelList = function() {
   return this.setLabelList([]);
+};
+
+
+/**
+ * optional int64 effort = 10;
+ * @return {number}
+ */
+proto.yartu.UpsertCheckListItemRequest.prototype.getEffort = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 10, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.yartu.UpsertCheckListItemRequest} returns this
+ */
+proto.yartu.UpsertCheckListItemRequest.prototype.setEffort = function(value) {
+  return jspb.Message.setField(this, 10, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.UpsertCheckListItemRequest} returns this
+ */
+proto.yartu.UpsertCheckListItemRequest.prototype.clearEffort = function() {
+  return jspb.Message.setField(this, 10, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.UpsertCheckListItemRequest.prototype.hasEffort = function() {
+  return jspb.Message.getField(this, 10) != null;
 };
 
 

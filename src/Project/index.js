@@ -229,9 +229,13 @@ export default (config) =>
       });
     }
 
-    listProjectLabel() {
+    listProjectLabel(getAll) {
       return new Promise((resolve, reject) => {
         const request = new ListProjectLabelRequest();
+        if (getAll) {
+          request.setGetAll(getAll);
+        }
+
         this.client.listProjectLabel(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
@@ -1743,6 +1747,10 @@ export default (config) =>
           request.setColumnUuid(cardData.column.uuid);
         }
 
+        if ('effort' in cardData) {
+          request.setEffort(cardData.effort);
+        }
+
         this.client.upsertCard(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
@@ -2490,6 +2498,10 @@ export default (config) =>
         request.setTitle(checkListItem.title);
         request.setPriority(checkListItem.priority);
         request.setIndex(checkListItem.index);
+
+        if ('effort' in cardData) {
+          request.setEffort(cardData.effort);
+        }
 
         if (checkListItem.dueDate) {
           let dueDate = '';

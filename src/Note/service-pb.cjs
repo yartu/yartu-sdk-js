@@ -16884,7 +16884,8 @@ proto.yartu.BindNoteWithEventRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, 0),
     eventId: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    clear: jspb.Message.getBooleanFieldWithDefault(msg, 3, false)
+    clear: jspb.Message.getBooleanFieldWithDefault(msg, 3, false),
+    isPublic: jspb.Message.getBooleanFieldWithDefault(msg, 4, false)
   };
 
   if (includeInstance) {
@@ -16933,6 +16934,10 @@ proto.yartu.BindNoteWithEventRequest.deserializeBinaryFromReader = function(msg,
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setClear(value);
       break;
+    case 4:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setIsPublic(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -16980,6 +16985,13 @@ proto.yartu.BindNoteWithEventRequest.serializeBinaryToWriter = function(message,
   if (f) {
     writer.writeBool(
       3,
+      f
+    );
+  }
+  f = message.getIsPublic();
+  if (f) {
+    writer.writeBool(
+      4,
       f
     );
   }
@@ -17037,6 +17049,24 @@ proto.yartu.BindNoteWithEventRequest.prototype.getClear = function() {
  */
 proto.yartu.BindNoteWithEventRequest.prototype.setClear = function(value) {
   return jspb.Message.setProto3BooleanField(this, 3, value);
+};
+
+
+/**
+ * optional bool is_public = 4;
+ * @return {boolean}
+ */
+proto.yartu.BindNoteWithEventRequest.prototype.getIsPublic = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 4, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.yartu.BindNoteWithEventRequest} returns this
+ */
+proto.yartu.BindNoteWithEventRequest.prototype.setIsPublic = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 4, value);
 };
 
 
