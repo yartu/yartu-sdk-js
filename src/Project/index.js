@@ -2499,8 +2499,8 @@ export default (config) =>
         request.setPriority(checkListItem.priority);
         request.setIndex(checkListItem.index);
 
-        if ('effort' in cardData) {
-          request.setEffort(cardData.effort);
+        if ('effort' in checkListItem) {
+          request.setEffort(checkListItem.effort);
         }
 
         if (checkListItem.dueDate) {
