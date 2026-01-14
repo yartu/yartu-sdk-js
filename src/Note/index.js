@@ -1129,13 +1129,14 @@ export default (config) =>
       });
     };
 
-    bindNoteWithEvent = (noteId, eventId, clear=false) => {
+    bindNoteWithEvent = (noteId, eventId, clear=false, isPublic=false) => {
       return new Promise((resolve, reject) => {
         const request = new BindNoteWithEventRequest();
 
         request.setId(noteId);
         request.setEventId(eventId);
         request.setClear(clear);
+        request.setIsPublic(isPublic);
 
         this.client.bindNoteWithEvent(
           request,
