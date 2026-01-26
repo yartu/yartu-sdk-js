@@ -496,7 +496,7 @@ export default (config) =>
             'revert'
           ].includes(operation)
         ) {
-          reject({
+          return reject({
             code: 100
           });
         }
@@ -513,7 +513,7 @@ export default (config) =>
           request.setDstDir(dstDir);
           const currentPath = pathList.join('/');
           if (operation == 'move' && repoId === dstRepoId && currentPath === dstDir) {
-            reject({
+            return reject({
               code: 400,
               message: 'Bad request, you cant move directory to same destionation'
             });
@@ -624,7 +624,7 @@ export default (config) =>
         if (
           !['create', 'rename', 'move', 'copy', 'delete'].includes(operation)
         ) {
-          reject({
+          return reject({
             code: 100
           });
         }
@@ -684,7 +684,7 @@ export default (config) =>
         if (
           !['create', 'rename', 'move', 'copy', 'delete'].includes(operation)
         ) {
-          reject({
+          return reject({
             code: 100
           });
         }
