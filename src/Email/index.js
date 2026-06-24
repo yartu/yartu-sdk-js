@@ -23,7 +23,7 @@ import {
 import { YEmailClient } from './service-grpc-web-pb.cjs';
 import { handleError } from '../utils/helper';
 
-import { sanitizeEmail } from '../utils/xss_filter.js';
+import { sanitizeEmail } from '../utils/xss-filter.js';
 
 export default (config) =>
   class Email {

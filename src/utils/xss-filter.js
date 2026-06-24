@@ -1,4 +1,3 @@
-// eslint-disable-next-line unicorn/filename-case
 import DOMPurify from 'dompurify';
 
 const purify = DOMPurify(window);

@@ -198,7 +198,6 @@ export default (config) =>
                   file: response.getData_asB64()
                 });
               } else {
-                // eslint-disable-next-line prefer-promise-reject-errors
                 reject({
                   code,
                   file: undefined
@@ -664,7 +663,6 @@ export default (config) =>
                   users: userList
                 });
               } else {
-                // eslint-disable-next-line prefer-promise-reject-errors
                 reject({
                   code,
                   message: response.getMessage()
@@ -708,7 +706,6 @@ export default (config) =>
                   aliasList
                 });
               } else {
-                // eslint-disable-next-line prefer-promise-reject-errors
                 reject({
                   code,
                   message: response.getMessage()
@@ -744,7 +741,6 @@ export default (config) =>
                   alias
                 });
               } else {
-                // eslint-disable-next-line prefer-promise-reject-errors
                 reject({
                   code,
                   message: response.getMessage()
@@ -777,7 +773,6 @@ export default (config) =>
                   message: response.getMessage()
                 });
               } else {
-                // eslint-disable-next-line prefer-promise-reject-errors
                 reject({
                   code,
                   message: response.getMessage()
@@ -822,7 +817,6 @@ export default (config) =>
                   toList
                 });
               } else {
-                // eslint-disable-next-line prefer-promise-reject-errors
                 reject({
                   code,
                   message: response.getMessage()
@@ -856,7 +850,6 @@ export default (config) =>
                   message: response.getMessage()
                 });
               } else {
-                // eslint-disable-next-line prefer-promise-reject-errors
                 reject({
                   code,
                   message: response.getMessage()
@@ -890,7 +883,6 @@ export default (config) =>
                   message: response.getMessage()
                 });
               } else {
-                // eslint-disable-next-line prefer-promise-reject-errors
                 reject({
                   code,
                   message: response.getMessage()

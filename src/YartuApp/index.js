@@ -15,7 +15,6 @@ import Customer from '../Customer';
 import ExternalApp from '../ExternalApp';
 
 // TODO :: Check if Vue project
-// eslint-disable-next-line import/no-unresolved, node/no-missing-import
 import { inject } from 'vue';
 
 class User {

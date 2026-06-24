@@ -1,5 +1,3 @@
-/* eslint-disable unicorn/prevent-abbreviations */
-/* eslint-disable */
 import {
   GetRecentRequest,
   GetQuotaRequest,
@@ -1352,12 +1350,7 @@ export default (config) =>
         }
 
         if (expireDate) {
-          let expireDateData = '';
-          if (expireDate?.$d) {
-            expireDateData = expireDate.format('YYYY-MM-DD HH:mm');
-          } else {
-            expireDateData = expireDate;
-          }
+          let expireDateData = expireDate?.$d ? expireDate.format('YYYY-MM-DD HH:mm') : expireDate;
           request.setExpireDate(expireDateData);
         }
 
@@ -1556,12 +1549,7 @@ export default (config) =>
         request.setPassword(uploadPointData.password);
 
         if (uploadPointData.expireDate) {
-          let expireDate = '';
-          if (uploadPointData.expireDate?.$d) {
-            expireDate = uploadPointData.expireDate.format('YYYY-MM-DD HH:mm');
-          } else {
-            expireDate = uploadPointData.expireDate;
-          }
+          let expireDate = uploadPointData.expireDate?.$d ? uploadPointData.expireDate.format('YYYY-MM-DD HH:mm') : uploadPointData.expireDate;
           request.setExpireDate(expireDate);
         }
 

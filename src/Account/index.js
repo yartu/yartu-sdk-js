@@ -959,7 +959,7 @@ export default (config) =>
     checkUserOnline = (userIdOrUsername) => {
       return new Promise((resolve, reject) => {
         const request = new CheckUserOnlineRequest();
-        if (Number.isInteger(userIdOrUsername)) {
+        if (Number.isSafeInteger(userIdOrUsername)) {
           request.setUserId(userIdOrUsername);
         } else {
           request.setUsername(userIdOrUsername);
@@ -1025,10 +1025,10 @@ export default (config) =>
         const request = new UpsertApplicationTokenRequest();
 
         request.setAction(action);
-        if(action != "create") {
-          request.setTokenId(data.id);
-        } else {
+        if(action == "create") {
           request.setTokenType(data.tokenType);
+        } else {
+          request.setTokenId(data.id);
         }
         request.setName(data.name);
         request.setPermission(data.permission);
