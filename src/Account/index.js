@@ -1026,7 +1026,7 @@ export default (config) =>
 
         request.setAction(action);
         if(action != "create") {
-          request.setTokenId = data.id;
+          request.setTokenId(data.id);
         } else {
           request.setTokenType(data.tokenType);
         }

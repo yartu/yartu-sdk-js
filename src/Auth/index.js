@@ -12,7 +12,7 @@ import {
   status_ROUTE_TO_PAYMENT
 } from '../utils/codes';
 
-import { handleError } from '../utils/helper';
+import { handleError, getDeviceId } from '../utils/helper';
 
 import {
   ChallengeRequest,
@@ -20,7 +20,8 @@ import {
   LoginRequest,
   OtpLoginRequest,
   ForcedPasswordChangeRequest,
-  CheckUserTokenRequest
+  CheckUserTokenRequest,
+  GetServicesRequest
 } from './service-pb.cjs';
 import { YAuthClient } from './service-grpc-web-pb.cjs';
 
@@ -70,7 +71,7 @@ export default (config) =>
         request.setPassword(password);
         request.setSecret(secret);
         request.setRemember(remember);
-        request.setDeviceId('df5aed00-7f89-4fb9-8efb-58add9e99323');
+        request.setDeviceId(getDeviceId());
 
         this.client.login(request, {}, (error, response) => {
           if (error) {

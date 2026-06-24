@@ -413,10 +413,12 @@ export default (config) =>
         request.setIsArchived(noteData.isArchived);
 
         const taskList = [];
-        const divDom = document.createElement('div');
-        divDom.innerHTML = noteData.content;
+        const parsedDoc = new DOMParser().parseFromString(
+          noteData.content || '',
+          'text/html'
+        );
 
-        let bindedTasks = divDom.querySelectorAll('.task');
+        let bindedTasks = parsedDoc.querySelectorAll('.task');
         for (const bindedTask of bindedTasks) {
           if (!bindedTask.attributes.random_id.nodeValue) continue;
 
@@ -463,10 +465,12 @@ export default (config) =>
               let note = null;
               if (response.hasNote()) {
                 note = response.getNote().toObject();
-                const divDom = document.createElement('div');
-                divDom.innerHTML = note.content;
+                const parsedDoc = new DOMParser().parseFromString(
+                  note.content || '',
+                  'text/html'
+                );
                 const savedTasks = note.tasksList;
-                let bindedTasks = divDom.querySelectorAll('.task');
+                let bindedTasks = parsedDoc.querySelectorAll('.task');
                 for (const bindedTask of bindedTasks) {
                   if (bindedTask.attributes.task_id.nodeValue == 0) {
                     try {
@@ -481,7 +485,7 @@ export default (config) =>
                     }
                   }
                 }
-                note.content = divDom.innerHTML;
+                note.content = parsedDoc.body.innerHTML;
               }
 
               resolve({
@@ -1047,7 +1051,7 @@ export default (config) =>
                   }
                 }
               } else {
-                const groupedTasks = dataList;
+                groupedTasks = dataList;
               }
 
               resolve({

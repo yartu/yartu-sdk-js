@@ -7,6 +7,7 @@ import {
   SaveDraftRequest,
   ChangeMessageFlagRequest,
   MoveMessageRequest,
+  DeleteMessageRequest,
   ListFolderRequest,
   UpsertFolderRequest,
   UploadAttachmentRequest,
@@ -266,7 +267,7 @@ export default (config) =>
 
     deleteMessage(emailUuidList) {
       return new Promise((resolve, reject) => {
-        const request = new MoveMessageRequest();
+        const request = new DeleteMessageRequest();
         request.setUuidList(emailUuidList);
         this.client.deleteMessage(request, this.metadata, (error, response) => {
           if (error) {

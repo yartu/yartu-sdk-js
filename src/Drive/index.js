@@ -1018,16 +1018,6 @@ export default (config) =>
     };
 
     share = (repoId, path, description, shareList) => {
-      console.log(
-        '------------------------------------------------------------------'
-      );
-      console.log('repoId:', repoId);
-      console.log('path:', path);
-      console.log('description:', description);
-      console.log('shareList:', shareList);
-      console.log(
-        '------------------------------------------------------------------'
-      );
       return new Promise((resolve, reject) => {
         const request = new ShareRequest();
         request.setRepoId(repoId);
@@ -1157,7 +1147,6 @@ export default (config) =>
             console.log(
               '@yartu/sdk/Drive deleteShare method not supports external users and Realm share features for now!'
             );
-            console.log('@yartu/sdk/Drive deleteShare: s:', s);
           }
 
           sharedList.push(shared);

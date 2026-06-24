@@ -34,4 +34,24 @@ const loadFromArray = (unmappedArray) => {
   return resp;
 };
 
-export { handleError, loadFromArray, toByte };
+// create unique device id
+const getDeviceId = () => {
+  try {
+    let deviceId = window.localStorage.getItem('yartu-device-id');
+    if (!deviceId) {
+      deviceId =
+        typeof crypto !== 'undefined' && crypto.randomUUID
+          ? crypto.randomUUID()
+          : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+      window.localStorage.setItem('yartu-device-id', deviceId);
+    }
+    return deviceId;
+  } catch {
+    // fallback
+    return typeof crypto !== 'undefined' && crypto.randomUUID
+      ? crypto.randomUUID()
+      : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+  }
+};
+
+export { handleError, loadFromArray, toByte, getDeviceId };

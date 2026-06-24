@@ -684,7 +684,7 @@ export default (config) =>
         }
 
         if (conferenceData.isGroup) {
-          sessionParticipant.setIsGroup(participant.isGroup);
+          sessionParticipant.setIsGroup(conferenceData.isGroup);
         }
 
         request.setParticipant(sessionParticipant);
