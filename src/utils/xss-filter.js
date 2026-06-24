@@ -46,7 +46,7 @@ purify.addHook('afterSanitizeAttributes', (node) => {
     if (!original) {
       return;
     }
-    node.setAttribute('data-yartu-href', original);
+    node.dataset.yartuHref = original;
 
     let href = original;
     const skipProtocols = new Set(['mailto:', 'tel:', 'fax:']);
@@ -64,7 +64,7 @@ purify.addHook('afterSanitizeAttributes', (node) => {
         href = `/#/public/url/?u=${base64Url}`;
       }
     } catch {
-      node.setAttribute('data-yartu', 'wrong-url');
+      node.dataset.yartu = 'wrong-url';
     }
 
     node.setAttribute('href', href);
@@ -79,7 +79,7 @@ purify.addHook('afterSanitizeAttributes', (node) => {
       return;
     }
     const yartuName = node.getAttribute('yartu-name');
-    node.setAttribute('data-yartu-src', original);
+    node.dataset.yartuSrc = original;
 
     let source = original;
     if (original.includes('cid:')) {

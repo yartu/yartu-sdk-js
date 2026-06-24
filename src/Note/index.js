@@ -1011,7 +1011,7 @@ export default (config) =>
                 .map((data) => data.toObject());
               if (groupBy === 'priority') {
                 for (const task of dataList) {
-                  if (!(`priority-${task.priority}` in groupedTasks)) {
+                  if (!Object.hasOwn(groupedTasks, `priority-${task.priority}`)) {
                     groupedTasks[`priority-${task.priority}`] = [];
                   }
                   groupedTasks[`priority-${task.priority}`].push(task);

@@ -33,7 +33,13 @@ export default [
       'prettier/prettier': 'off',
       'unicorn/prefer-global-this': 'off',
       'unicorn/prevent-abbreviations': 'off',
-      'unicorn/prefer-dom-node-dataset': 'off'
+      'unicorn/prefer-number-coercion': 'off',
+      'unicorn/prefer-ternary': 'off',
+      'unicorn/no-declarations-before-early-exit': 'off',
+      'unicorn/prefer-uint8array-base64': 'off',
+      'unicorn/no-top-level-side-effects': 'off',
+      'unicorn/no-top-level-assignment-in-function': 'off',
+      'unicorn/no-global-object-property-assignment': 'off'
     }
   }
 ];

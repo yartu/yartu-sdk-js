@@ -340,7 +340,7 @@ export default (config) =>
               const dataList = response
                 .getDataList()
                 .map((data) => data.toObject());
-              response.getDataList().map((data) => {
+              response.getDataList().forEach((data) => {
                 let dirent = data.toObject();
                 dirent.path = `${dirent.parentDir}${dirent.name}`;
                 if (dirent.isFile) {

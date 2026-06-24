@@ -31,6 +31,7 @@ export default (config) =>
     client = undefined;
     yartuSdk = undefined;
     shareUuid = undefined;
+    activeSearch = undefined;
 
     constructor(config) {
       this.endpoint = config.endpoint;
@@ -474,7 +475,7 @@ export default (config) =>
       request.setTextBody(data.bodyText); // text
 
       const toList = [];
-      if (!!data.to && !!data.to[Symbol.iterator]) {
+      if (Array.isArray(data.to)) {
         for (const to of data.to) {
           toList.push(to.email);
         }
@@ -482,7 +483,7 @@ export default (config) =>
       }
 
       const ccList = [];
-      if (!!data.cc && !!data.cc[Symbol.iterator]) {
+      if (Array.isArray(data.cc)) {
         for (const cc of data.cc) {
           ccList.push(cc.email);
         }
@@ -490,7 +491,7 @@ export default (config) =>
       }
 
       const bccList = [];
-      if (!!data.bcc && !!data.bcc[Symbol.iterator]) {
+      if (Array.isArray(data.bcc)) {
         for (const bcc of data.bcc) {
           bccList.push(bcc.email);
         }

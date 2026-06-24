@@ -34,6 +34,19 @@ class User {
 class YartuApp {
   grpcEndpoint = 'http://localhost:5001/';
   user = undefined;
+  Account = undefined;
+  Auth = undefined;
+  Calendar = undefined;
+  Conference = undefined;
+  Contact = undefined;
+  Drive = undefined;
+  Email = undefined;
+  Note = undefined;
+  Project = undefined;
+  Search = undefined;
+  Notification = undefined;
+  Customer = undefined;
+  ExternalApp = undefined;
 
   constructor(config) {
     this.initialize(config);
