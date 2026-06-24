@@ -68,10 +68,10 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "dompurify": "^3.4.11",
     "google-protobuf": "^3.21.4",
     "grpc-web": "^1.5.0",
-    "jwt-decode": "^3.1.2",
-    "sanitize-html": "^2.17.5"
+    "jwt-decode": "^3.1.2"
   },
   "type": "module",
   "browserslist": "> 0.25%, not dead"
