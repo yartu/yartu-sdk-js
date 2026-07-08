@@ -13,7 +13,13 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = globalThis;
+var global =
+    (typeof globalThis !== 'undefined' && globalThis) ||
+    (typeof window !== 'undefined' && window) ||
+    (typeof global !== 'undefined' && global) ||
+    (typeof self !== 'undefined' && self) ||
+    (function () { return this; }).call(null) ||
+    Function('return this')();
 
 var common_grpc_definitions_pb = require('../utils/definitions_pb.cjs');
 goog.object.extend(proto, common_grpc_definitions_pb);
@@ -899,7 +905,7 @@ end: jspb.Message.getFieldWithDefault(msg, 2, 0)
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.dateRange}
  */
 proto.yartu.dateRange.deserializeBinary = function(bytes) {
@@ -1060,7 +1066,7 @@ isYartuUser: (f = jspb.Message.getBooleanField(msg, 3)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.Attendee}
  */
 proto.yartu.Attendee.deserializeBinary = function(bytes) {
@@ -1085,11 +1091,11 @@ proto.yartu.Attendee.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setEmail(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setStatus(value);
       break;
     case 3:
@@ -1268,7 +1274,7 @@ description: jspb.Message.getFieldWithDefault(msg, 3, "")
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.Alarm}
  */
 proto.yartu.Alarm.deserializeBinary = function(bytes) {
@@ -1293,15 +1299,15 @@ proto.yartu.Alarm.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setAction(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setTrigger(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setDescription(value);
       break;
     default:
@@ -1459,7 +1465,7 @@ milliseconds: jspb.Message.getFieldWithDefault(msg, 4, 0)
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.Duration}
  */
 proto.yartu.Duration.deserializeBinary = function(bytes) {
@@ -1677,7 +1683,7 @@ username: jspb.Message.getFieldWithDefault(msg, 2, "")
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.CalendarUserShareResult}
  */
 proto.yartu.CalendarUserShareResult.deserializeBinary = function(bytes) {
@@ -1706,7 +1712,7 @@ proto.yartu.CalendarUserShareResult.deserializeBinaryFromReader = function(msg, 
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setUsername(value);
       break;
     default:
@@ -1876,7 +1882,7 @@ notesList: (f = jspb.Message.getRepeatedField(msg, 32)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.CalendarObject}
  */
 proto.yartu.CalendarObject.deserializeBinary = function(bytes) {
@@ -1909,15 +1915,15 @@ proto.yartu.CalendarObject.deserializeBinaryFromReader = function(msg, reader) {
       msg.setCalendarId(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setUri(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setUid(value);
       break;
     case 5:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setEtag(value);
       break;
     case 6:
@@ -1929,23 +1935,23 @@ proto.yartu.CalendarObject.deserializeBinaryFromReader = function(msg, reader) {
       msg.setLastoccurence(value);
       break;
     case 8:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setCalendardata(value);
       break;
     case 9:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setAccess(value);
       break;
     case 10:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setColor(value);
       break;
     case 11:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setBordercolor(value);
       break;
     case 12:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setShare(value);
       break;
     case 13:
@@ -1953,27 +1959,27 @@ proto.yartu.CalendarObject.deserializeBinaryFromReader = function(msg, reader) {
       msg.setEditable(value);
       break;
     case 14:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setSummary(value);
       break;
     case 15:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setLocation(value);
       break;
     case 16:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setDescription(value);
       break;
     case 17:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setOrganizer(value);
       break;
     case 18:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setRrule(value);
       break;
     case 19:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setFreq(value);
       break;
     case 20:
@@ -1991,7 +1997,7 @@ proto.yartu.CalendarObject.deserializeBinaryFromReader = function(msg, reader) {
       msg.addAlarm(value);
       break;
     case 23:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setSource(value);
       break;
     case 24:
@@ -2007,15 +2013,15 @@ proto.yartu.CalendarObject.deserializeBinaryFromReader = function(msg, reader) {
       msg.setStatus(value);
       break;
     case 27:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setComponenttype(value);
       break;
     case 28:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setStart(value);
       break;
     case 29:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setEnd(value);
       break;
     case 30:
@@ -2024,11 +2030,14 @@ proto.yartu.CalendarObject.deserializeBinaryFromReader = function(msg, reader) {
       msg.setDuration(value);
       break;
     case 31:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setGroupid(value);
       break;
     case 32:
-      reader.readPackableInt64Into(msg.getNotesList());
+      var values = /** @type {!Array<number>} */ (reader.isDelimited() ? reader.readPackedInt64() : [reader.readInt64()]);
+      for (var i = 0; i < values.length; i++) {
+        msg.addNotes(values[i]);
+      }
       break;
     default:
       reader.skipField();
@@ -3024,7 +3033,7 @@ id: jspb.Message.getFieldWithDefault(msg, 1, 0)
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.GetCalendarRequest}
  */
 proto.yartu.GetCalendarRequest.deserializeBinary = function(bytes) {
@@ -3156,7 +3165,7 @@ data: (f = msg.getData()) && common_grpc_definitions_pb.Calendar.toObject(includ
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.GetCalendarResponse}
  */
 proto.yartu.GetCalendarResponse.deserializeBinary = function(bytes) {
@@ -3185,7 +3194,7 @@ proto.yartu.GetCalendarResponse.deserializeBinaryFromReader = function(msg, read
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     case 3:
@@ -3390,7 +3399,7 @@ caldav: (f = jspb.Message.getBooleanField(msg, 8)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UpsertCalendarRequest}
  */
 proto.yartu.UpsertCalendarRequest.deserializeBinary = function(bytes) {
@@ -3419,11 +3428,11 @@ proto.yartu.UpsertCalendarRequest.deserializeBinaryFromReader = function(msg, re
       msg.setId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setDisplayname(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setCalendarcolor(value);
       break;
     case 4:
@@ -3431,11 +3440,11 @@ proto.yartu.UpsertCalendarRequest.deserializeBinaryFromReader = function(msg, re
       msg.setCalendarorder(value);
       break;
     case 5:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setTimezone(value);
       break;
     case 6:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setDescription(value);
       break;
     case 7:
@@ -3742,7 +3751,7 @@ message: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UpsertCalendarResponse}
  */
 proto.yartu.UpsertCalendarResponse.deserializeBinary = function(bytes) {
@@ -3771,7 +3780,7 @@ proto.yartu.UpsertCalendarResponse.deserializeBinaryFromReader = function(msg, r
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -3919,7 +3928,7 @@ id: jspb.Message.getFieldWithDefault(msg, 1, 0)
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.DeleteCalendarRequest}
  */
 proto.yartu.DeleteCalendarRequest.deserializeBinary = function(bytes) {
@@ -4050,7 +4059,7 @@ message: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.DeleteCalendarResponse}
  */
 proto.yartu.DeleteCalendarResponse.deserializeBinary = function(bytes) {
@@ -4079,7 +4088,7 @@ proto.yartu.DeleteCalendarResponse.deserializeBinaryFromReader = function(msg, r
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -4227,7 +4236,7 @@ proto.yartu.ListCalendarRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ListCalendarRequest}
  */
 proto.yartu.ListCalendarRequest.deserializeBinary = function(bytes) {
@@ -4337,7 +4346,7 @@ dataList: jspb.Message.toObjectList(msg.getDataList(),
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ListCalendarResponse}
  */
 proto.yartu.ListCalendarResponse.deserializeBinary = function(bytes) {
@@ -4527,7 +4536,7 @@ sharedList: jspb.Message.toObjectList(msg.getSharedList(),
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ShareCalendarRequest}
  */
 proto.yartu.ShareCalendarRequest.deserializeBinary = function(bytes) {
@@ -4720,7 +4729,7 @@ message: (f = jspb.Message.getField(msg, 4)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ShareCalendarResponse}
  */
 proto.yartu.ShareCalendarResponse.deserializeBinary = function(bytes) {
@@ -4759,7 +4768,7 @@ proto.yartu.ShareCalendarResponse.deserializeBinaryFromReader = function(msg, re
       msg.addError(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -5008,7 +5017,7 @@ sharedList: jspb.Message.toObjectList(msg.getSharedList(),
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UnshareCalendarRequest}
  */
 proto.yartu.UnshareCalendarRequest.deserializeBinary = function(bytes) {
@@ -5199,7 +5208,7 @@ message: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UnshareCalendarResponse}
  */
 proto.yartu.UnshareCalendarResponse.deserializeBinary = function(bytes) {
@@ -5233,7 +5242,7 @@ proto.yartu.UnshareCalendarResponse.deserializeBinaryFromReader = function(msg, 
       msg.addData(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -5428,7 +5437,7 @@ sharedCalendarId: jspb.Message.getFieldWithDefault(msg, 2, 0)
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.DeleteSharedCalendarRequest}
  */
 proto.yartu.DeleteSharedCalendarRequest.deserializeBinary = function(bytes) {
@@ -5588,7 +5597,7 @@ message: jspb.Message.getFieldWithDefault(msg, 2, "")
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.DeleteSharedCalendarResponse}
  */
 proto.yartu.DeleteSharedCalendarResponse.deserializeBinary = function(bytes) {
@@ -5617,7 +5626,7 @@ proto.yartu.DeleteSharedCalendarResponse.deserializeBinaryFromReader = function(
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -5747,7 +5756,7 @@ id: jspb.Message.getFieldWithDefault(msg, 1, 0)
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.GetCalendarObjectRequest}
  */
 proto.yartu.GetCalendarObjectRequest.deserializeBinary = function(bytes) {
@@ -5879,7 +5888,7 @@ message: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.GetCalendarObjectResponse}
  */
 proto.yartu.GetCalendarObjectResponse.deserializeBinary = function(bytes) {
@@ -5913,7 +5922,7 @@ proto.yartu.GetCalendarObjectResponse.deserializeBinaryFromReader = function(msg
       msg.setData(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -6134,7 +6143,7 @@ message: (f = jspb.Message.getField(msg, 20)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UpsertCalendarObjectRequest}
  */
 proto.yartu.UpsertCalendarObjectRequest.deserializeBinary = function(bytes) {
@@ -6167,35 +6176,35 @@ proto.yartu.UpsertCalendarObjectRequest.deserializeBinaryFromReader = function(m
       msg.setCalendarId(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setStart(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setStartTimeZone(value);
       break;
     case 5:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setEnd(value);
       break;
     case 6:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setEndTimeZone(value);
       break;
     case 7:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setSummary(value);
       break;
     case 8:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setLocation(value);
       break;
     case 9:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setDescription(value);
       break;
     case 10:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setFreq(value);
       break;
     case 11:
@@ -6225,7 +6234,7 @@ proto.yartu.UpsertCalendarObjectRequest.deserializeBinaryFromReader = function(m
       msg.setStatus(value);
       break;
     case 17:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setComponenttype(value);
       break;
     case 18:
@@ -6237,7 +6246,7 @@ proto.yartu.UpsertCalendarObjectRequest.deserializeBinaryFromReader = function(m
       msg.setSendInvite(value);
       break;
     case 20:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -6932,7 +6941,7 @@ message: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UpsertCalendarObjectResponse}
  */
 proto.yartu.UpsertCalendarObjectResponse.deserializeBinary = function(bytes) {
@@ -6961,7 +6970,7 @@ proto.yartu.UpsertCalendarObjectResponse.deserializeBinaryFromReader = function(
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -7112,7 +7121,7 @@ order: jspb.Message.getFieldWithDefault(msg, 4, 0)
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UpsertCalendarObjectDatesRequest}
  */
 proto.yartu.UpsertCalendarObjectDatesRequest.deserializeBinary = function(bytes) {
@@ -7141,11 +7150,11 @@ proto.yartu.UpsertCalendarObjectDatesRequest.deserializeBinaryFromReader = funct
       msg.setId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setStart(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setEnd(value);
       break;
     case 4:
@@ -7330,7 +7339,7 @@ message: jspb.Message.getFieldWithDefault(msg, 2, "")
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UpsertCalendarObjectDatesResponse}
  */
 proto.yartu.UpsertCalendarObjectDatesResponse.deserializeBinary = function(bytes) {
@@ -7359,7 +7368,7 @@ proto.yartu.UpsertCalendarObjectDatesResponse.deserializeBinaryFromReader = func
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -7499,7 +7508,7 @@ description: (f = jspb.Message.getField(msg, 11)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UpsertCalendarObjectSplitRequest}
  */
 proto.yartu.UpsertCalendarObjectSplitRequest.deserializeBinary = function(bytes) {
@@ -7528,27 +7537,27 @@ proto.yartu.UpsertCalendarObjectSplitRequest.deserializeBinaryFromReader = funct
       msg.setId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setSelectedDate(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setNewDateStart(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setNewDateEnd(value);
       break;
     case 5:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setUid(value);
       break;
     case 6:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setSplitMode(value);
       break;
     case 7:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setActionMode(value);
       break;
     case 8:
@@ -7556,15 +7565,15 @@ proto.yartu.UpsertCalendarObjectSplitRequest.deserializeBinaryFromReader = funct
       msg.setOrder(value);
       break;
     case 9:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setSummary(value);
       break;
     case 10:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setLocation(value);
       break;
     case 11:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setDescription(value);
       break;
     default:
@@ -7974,7 +7983,7 @@ message: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UpsertCalendarObjectSplitResponse}
  */
 proto.yartu.UpsertCalendarObjectSplitResponse.deserializeBinary = function(bytes) {
@@ -8003,7 +8012,7 @@ proto.yartu.UpsertCalendarObjectSplitResponse.deserializeBinaryFromReader = func
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -8152,7 +8161,7 @@ sendInvite: (f = jspb.Message.getBooleanField(msg, 2)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.DeleteCalendarObjectRequest}
  */
 proto.yartu.DeleteCalendarObjectRequest.deserializeBinary = function(bytes) {
@@ -8330,7 +8339,7 @@ message: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.DeleteCalendarObjectReseponse}
  */
 proto.yartu.DeleteCalendarObjectReseponse.deserializeBinary = function(bytes) {
@@ -8359,7 +8368,7 @@ proto.yartu.DeleteCalendarObjectReseponse.deserializeBinaryFromReader = function
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -8515,7 +8524,7 @@ range: (f = msg.getRange()) && proto.yartu.dateRange.toObject(includeInstance, f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ListCalendarObjectRequest}
  */
 proto.yartu.ListCalendarObjectRequest.deserializeBinary = function(bytes) {
@@ -8540,7 +8549,10 @@ proto.yartu.ListCalendarObjectRequest.deserializeBinaryFromReader = function(msg
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      reader.readPackableInt64Into(msg.getCalendarsList());
+      var values = /** @type {!Array<number>} */ (reader.isDelimited() ? reader.readPackedInt64() : [reader.readInt64()]);
+      for (var i = 0; i < values.length; i++) {
+        msg.addCalendars(values[i]);
+      }
       break;
     case 2:
       var value = new proto.yartu.dateRange;
@@ -8723,7 +8735,7 @@ message: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ListCalendarObjectResponse}
  */
 proto.yartu.ListCalendarObjectResponse.deserializeBinary = function(bytes) {
@@ -8757,7 +8769,7 @@ proto.yartu.ListCalendarObjectResponse.deserializeBinaryFromReader = function(ms
       msg.addData(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -8951,7 +8963,7 @@ id: jspb.Message.getFieldWithDefault(msg, 1, 0)
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ListCalendarSharedListRequest}
  */
 proto.yartu.ListCalendarSharedListRequest.deserializeBinary = function(bytes) {
@@ -9091,7 +9103,7 @@ message: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ListCalendarSharedListResponse}
  */
 proto.yartu.ListCalendarSharedListResponse.deserializeBinary = function(bytes) {
@@ -9125,7 +9137,7 @@ proto.yartu.ListCalendarSharedListResponse.deserializeBinaryFromReader = functio
       msg.addData(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -9320,7 +9332,7 @@ status: jspb.Message.getFieldWithDefault(msg, 2, "")
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ReplyEventRequest}
  */
 proto.yartu.ReplyEventRequest.deserializeBinary = function(bytes) {
@@ -9345,11 +9357,11 @@ proto.yartu.ReplyEventRequest.deserializeBinaryFromReader = function(msg, reader
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setUid(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setStatus(value);
       break;
     default:
@@ -9480,7 +9492,7 @@ message: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ReplyEventResponse}
  */
 proto.yartu.ReplyEventResponse.deserializeBinary = function(bytes) {
@@ -9509,7 +9521,7 @@ proto.yartu.ReplyEventResponse.deserializeBinaryFromReader = function(msg, reade
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -9659,7 +9671,7 @@ to: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.SendInviteRequest}
  */
 proto.yartu.SendInviteRequest.deserializeBinary = function(bytes) {
@@ -9688,11 +9700,11 @@ proto.yartu.SendInviteRequest.deserializeBinaryFromReader = function(msg, reader
       msg.setId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setTo(value);
       break;
     default:
@@ -9884,7 +9896,7 @@ message: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.SendInviteResponse}
  */
 proto.yartu.SendInviteResponse.deserializeBinary = function(bytes) {
@@ -9913,7 +9925,7 @@ proto.yartu.SendInviteResponse.deserializeBinaryFromReader = function(msg, reade
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:

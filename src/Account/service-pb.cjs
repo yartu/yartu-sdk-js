@@ -13,7 +13,13 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = globalThis;
+var global =
+    (typeof globalThis !== 'undefined' && globalThis) ||
+    (typeof window !== 'undefined' && window) ||
+    (typeof global !== 'undefined' && global) ||
+    (typeof self !== 'undefined' && self) ||
+    (function () { return this; }).call(null) ||
+    Function('return this')();
 
 var common_grpc_definitions_pb = require('../utils/definitions_pb.cjs');
 goog.object.extend(proto, common_grpc_definitions_pb);
@@ -1483,7 +1489,7 @@ attachmentsList: jspb.Message.toObjectList(msg.getAttachmentsList(),
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.EmailSignature}
  */
 proto.yartu.EmailSignature.deserializeBinary = function(bytes) {
@@ -1512,11 +1518,11 @@ proto.yartu.EmailSignature.deserializeBinaryFromReader = function(msg, reader) {
       msg.setId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setName(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setSignature(value);
       break;
     case 4:
@@ -1783,7 +1789,7 @@ template: jspb.Message.getFieldWithDefault(msg, 4, "")
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.EmailTemplate}
  */
 proto.yartu.EmailTemplate.deserializeBinary = function(bytes) {
@@ -1812,15 +1818,15 @@ proto.yartu.EmailTemplate.deserializeBinaryFromReader = function(msg, reader) {
       msg.setId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setName(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setSubject(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setTemplate(value);
       break;
     default:
@@ -2003,7 +2009,7 @@ order: jspb.Message.getFieldWithDefault(msg, 4, 0)
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.EmailRuleInstance}
  */
 proto.yartu.EmailRuleInstance.deserializeBinary = function(bytes) {
@@ -2028,15 +2034,15 @@ proto.yartu.EmailRuleInstance.deserializeBinaryFromReader = function(msg, reader
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setName(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setCondition(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setValue(value);
       break;
     case 4:
@@ -2222,7 +2228,7 @@ order: jspb.Message.getFieldWithDefault(msg, 3, 0)
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.EmailRuleAction}
  */
 proto.yartu.EmailRuleAction.deserializeBinary = function(bytes) {
@@ -2247,11 +2253,11 @@ proto.yartu.EmailRuleAction.deserializeBinaryFromReader = function(msg, reader) 
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setName(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setValue(value);
       break;
     case 3:
@@ -2425,7 +2431,7 @@ isActive: jspb.Message.getBooleanFieldWithDefault(msg, 7, false)
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.EmailRule}
  */
 proto.yartu.EmailRule.deserializeBinary = function(bytes) {
@@ -2454,11 +2460,11 @@ proto.yartu.EmailRule.deserializeBinaryFromReader = function(msg, reader) {
       msg.setId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setName(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setConditionType(value);
       break;
     case 4:
@@ -2773,7 +2779,7 @@ username: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.GetInfoRequest}
  */
 proto.yartu.GetInfoRequest.deserializeBinary = function(bytes) {
@@ -2798,7 +2804,7 @@ proto.yartu.GetInfoRequest.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setUsername(value);
       break;
     default:
@@ -2923,7 +2929,7 @@ realm: (f = msg.getRealm()) && common_grpc_definitions_pb.Realm.toObject(include
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.RealmManager}
  */
 proto.yartu.RealmManager.deserializeBinary = function(bytes) {
@@ -2953,7 +2959,7 @@ proto.yartu.RealmManager.deserializeBinaryFromReader = function(msg, reader) {
       msg.setUser(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setRole(value);
       break;
     case 3:
@@ -3202,7 +3208,7 @@ loginTypesList: (f = jspb.Message.getRepeatedField(msg, 23)) == null ? undefined
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.GetInfoResponse}
  */
 proto.yartu.GetInfoResponse.deserializeBinary = function(bytes) {
@@ -3231,7 +3237,7 @@ proto.yartu.GetInfoResponse.deserializeBinaryFromReader = function(msg, reader) 
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setWorkingStatus(value);
       break;
     case 3:
@@ -3240,59 +3246,59 @@ proto.yartu.GetInfoResponse.deserializeBinaryFromReader = function(msg, reader) 
       msg.setUser(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setServerType(value);
       break;
     case 5:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setPersonalPhone(value);
       break;
     case 6:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setPersonalEmail(value);
       break;
     case 7:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setSecondaryPhone(value);
       break;
     case 8:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setSecondaryEmail(value);
       break;
     case 9:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setLanguage(value);
       break;
     case 10:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setCountry(value);
       break;
     case 11:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setTimezone(value);
       break;
     case 12:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setTimeformat(value);
       break;
     case 13:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setCity(value);
       break;
     case 14:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setRoleName(value);
       break;
     case 15:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.addPermission(value);
       break;
     case 16:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     case 17:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.addNotification(value);
       break;
     case 18:
@@ -3319,7 +3325,7 @@ proto.yartu.GetInfoResponse.deserializeBinaryFromReader = function(msg, reader) 
       msg.addPaidLogs(value);
       break;
     case 23:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.addLoginTypes(value);
       break;
     default:
@@ -4173,7 +4179,7 @@ proto.yartu.GetWeatherRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.GetWeatherRequest}
  */
 proto.yartu.GetWeatherRequest.deserializeBinary = function(bytes) {
@@ -4282,7 +4288,7 @@ message: (f = jspb.Message.getField(msg, 9)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.GetWeatherResponse}
  */
 proto.yartu.GetWeatherResponse.deserializeBinary = function(bytes) {
@@ -4311,11 +4317,11 @@ proto.yartu.GetWeatherResponse.deserializeBinaryFromReader = function(msg, reade
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setCondition(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setIcon(value);
       break;
     case 4:
@@ -4335,11 +4341,11 @@ proto.yartu.GetWeatherResponse.deserializeBinaryFromReader = function(msg, reade
       msg.setPressure(value);
       break;
     case 8:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setDateAt(value);
       break;
     case 9:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -4682,7 +4688,7 @@ image: (f = jspb.Message.getField(msg, 14)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UpsertAccountRequest}
  */
 proto.yartu.UpsertAccountRequest.deserializeBinary = function(bytes) {
@@ -4707,59 +4713,59 @@ proto.yartu.UpsertAccountRequest.deserializeBinaryFromReader = function(msg, rea
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setPassword(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setOldPassword(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setWorkingStatus(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setPersonalPhone(value);
       break;
     case 5:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setPersonalEmail(value);
       break;
     case 6:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setSecondaryPhone(value);
       break;
     case 7:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setSecondaryEmail(value);
       break;
     case 8:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setLanguage(value);
       break;
     case 9:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setCountry(value);
       break;
     case 10:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setTimezone(value);
       break;
     case 11:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setTimeformat(value);
       break;
     case 12:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setCity(value);
       break;
     case 13:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.addNotification(value);
       break;
     case 14:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setImage(value);
       break;
     default:
@@ -5444,7 +5450,7 @@ newToken: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UpsertAccountResponse}
  */
 proto.yartu.UpsertAccountResponse.deserializeBinary = function(bytes) {
@@ -5473,11 +5479,11 @@ proto.yartu.UpsertAccountResponse.deserializeBinaryFromReader = function(msg, re
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setNewToken(value);
       break;
     default:
@@ -5668,7 +5674,7 @@ username: jspb.Message.getFieldWithDefault(msg, 1, "")
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.PurgeAccountRequest}
  */
 proto.yartu.PurgeAccountRequest.deserializeBinary = function(bytes) {
@@ -5693,7 +5699,7 @@ proto.yartu.PurgeAccountRequest.deserializeBinaryFromReader = function(msg, read
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setUsername(value);
       break;
     default:
@@ -5799,7 +5805,7 @@ message: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.PurgeAccountResponse}
  */
 proto.yartu.PurgeAccountResponse.deserializeBinary = function(bytes) {
@@ -5828,7 +5834,7 @@ proto.yartu.PurgeAccountResponse.deserializeBinaryFromReader = function(msg, rea
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -5976,7 +5982,7 @@ query: (f = msg.getQuery()) && common_grpc_definitions_pb.Query.toObject(include
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ListEmailSignatureRequest}
  */
 proto.yartu.ListEmailSignatureRequest.deserializeBinary = function(bytes) {
@@ -6138,7 +6144,7 @@ message: (f = jspb.Message.getField(msg, 4)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ListEmailSignatureResponse}
  */
 proto.yartu.ListEmailSignatureResponse.deserializeBinary = function(bytes) {
@@ -6177,7 +6183,7 @@ proto.yartu.ListEmailSignatureResponse.deserializeBinaryFromReader = function(ms
       msg.setPagination(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -6416,7 +6422,7 @@ id: jspb.Message.getFieldWithDefault(msg, 1, 0)
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.GetEmailSignatureRequest}
  */
 proto.yartu.GetEmailSignatureRequest.deserializeBinary = function(bytes) {
@@ -6548,7 +6554,7 @@ message: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.GetEmailSignatureResponse}
  */
 proto.yartu.GetEmailSignatureResponse.deserializeBinary = function(bytes) {
@@ -6582,7 +6588,7 @@ proto.yartu.GetEmailSignatureResponse.deserializeBinaryFromReader = function(msg
       msg.setData(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -6779,7 +6785,7 @@ isDefault: jspb.Message.getBooleanFieldWithDefault(msg, 5, false)
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UpsertEmailSignatureRequest}
  */
 proto.yartu.UpsertEmailSignatureRequest.deserializeBinary = function(bytes) {
@@ -6808,11 +6814,11 @@ proto.yartu.UpsertEmailSignatureRequest.deserializeBinaryFromReader = function(m
       msg.setId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setName(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setSignature(value);
       break;
     case 4:
@@ -7026,7 +7032,7 @@ message: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UpsertEmailSignatureResponse}
  */
 proto.yartu.UpsertEmailSignatureResponse.deserializeBinary = function(bytes) {
@@ -7055,7 +7061,7 @@ proto.yartu.UpsertEmailSignatureResponse.deserializeBinaryFromReader = function(
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -7203,7 +7209,7 @@ id: jspb.Message.getFieldWithDefault(msg, 1, 0)
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.DeleteEmailSignatureRequest}
  */
 proto.yartu.DeleteEmailSignatureRequest.deserializeBinary = function(bytes) {
@@ -7334,7 +7340,7 @@ message: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.DeleteEmailSignatureResponse}
  */
 proto.yartu.DeleteEmailSignatureResponse.deserializeBinary = function(bytes) {
@@ -7363,7 +7369,7 @@ proto.yartu.DeleteEmailSignatureResponse.deserializeBinaryFromReader = function(
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -7511,7 +7517,7 @@ query: (f = msg.getQuery()) && common_grpc_definitions_pb.Query.toObject(include
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ListEmailTemplateRequest}
  */
 proto.yartu.ListEmailTemplateRequest.deserializeBinary = function(bytes) {
@@ -7673,7 +7679,7 @@ message: (f = jspb.Message.getField(msg, 4)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ListEmailTemplateResponse}
  */
 proto.yartu.ListEmailTemplateResponse.deserializeBinary = function(bytes) {
@@ -7712,7 +7718,7 @@ proto.yartu.ListEmailTemplateResponse.deserializeBinaryFromReader = function(msg
       msg.setPagination(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -7951,7 +7957,7 @@ id: jspb.Message.getFieldWithDefault(msg, 1, 0)
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.GetEmailTemplateRequest}
  */
 proto.yartu.GetEmailTemplateRequest.deserializeBinary = function(bytes) {
@@ -8083,7 +8089,7 @@ message: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.GetEmailTemplateResponse}
  */
 proto.yartu.GetEmailTemplateResponse.deserializeBinary = function(bytes) {
@@ -8117,7 +8123,7 @@ proto.yartu.GetEmailTemplateResponse.deserializeBinaryFromReader = function(msg,
       msg.setData(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -8313,7 +8319,7 @@ template: jspb.Message.getFieldWithDefault(msg, 4, "")
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UpsertEmailTemplateRequest}
  */
 proto.yartu.UpsertEmailTemplateRequest.deserializeBinary = function(bytes) {
@@ -8342,15 +8348,15 @@ proto.yartu.UpsertEmailTemplateRequest.deserializeBinaryFromReader = function(ms
       msg.setId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setName(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setSubject(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setTemplate(value);
       break;
     default:
@@ -8531,7 +8537,7 @@ message: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UpsertEmailTemplateResponse}
  */
 proto.yartu.UpsertEmailTemplateResponse.deserializeBinary = function(bytes) {
@@ -8560,7 +8566,7 @@ proto.yartu.UpsertEmailTemplateResponse.deserializeBinaryFromReader = function(m
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -8708,7 +8714,7 @@ id: jspb.Message.getFieldWithDefault(msg, 1, 0)
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.DeleteEmailTemplateRequest}
  */
 proto.yartu.DeleteEmailTemplateRequest.deserializeBinary = function(bytes) {
@@ -8839,7 +8845,7 @@ message: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.DeleteEmailTemplateResponse}
  */
 proto.yartu.DeleteEmailTemplateResponse.deserializeBinary = function(bytes) {
@@ -8868,7 +8874,7 @@ proto.yartu.DeleteEmailTemplateResponse.deserializeBinaryFromReader = function(m
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -9016,7 +9022,7 @@ query: (f = msg.getQuery()) && common_grpc_definitions_pb.Query.toObject(include
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ListEmailRuleRequest}
  */
 proto.yartu.ListEmailRuleRequest.deserializeBinary = function(bytes) {
@@ -9178,7 +9184,7 @@ message: (f = jspb.Message.getField(msg, 4)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ListEmailRuleResponse}
  */
 proto.yartu.ListEmailRuleResponse.deserializeBinary = function(bytes) {
@@ -9217,7 +9223,7 @@ proto.yartu.ListEmailRuleResponse.deserializeBinaryFromReader = function(msg, re
       msg.setPagination(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -9456,7 +9462,7 @@ id: jspb.Message.getFieldWithDefault(msg, 1, 0)
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.GetEmailRuleRequest}
  */
 proto.yartu.GetEmailRuleRequest.deserializeBinary = function(bytes) {
@@ -9588,7 +9594,7 @@ message: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.GetEmailRuleResponse}
  */
 proto.yartu.GetEmailRuleResponse.deserializeBinary = function(bytes) {
@@ -9622,7 +9628,7 @@ proto.yartu.GetEmailRuleResponse.deserializeBinaryFromReader = function(msg, rea
       msg.setData(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -9816,7 +9822,7 @@ rule: (f = msg.getRule()) && proto.yartu.EmailRule.toObject(includeInstance, f)
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UpsertEmailRuleRequest}
  */
 proto.yartu.UpsertEmailRuleRequest.deserializeBinary = function(bytes) {
@@ -9997,7 +10003,7 @@ message: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UpsertEmailRuleResponse}
  */
 proto.yartu.UpsertEmailRuleResponse.deserializeBinary = function(bytes) {
@@ -10026,7 +10032,7 @@ proto.yartu.UpsertEmailRuleResponse.deserializeBinaryFromReader = function(msg, 
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -10174,7 +10180,7 @@ id: jspb.Message.getFieldWithDefault(msg, 1, 0)
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.DeleteEmailRuleRequest}
  */
 proto.yartu.DeleteEmailRuleRequest.deserializeBinary = function(bytes) {
@@ -10305,7 +10311,7 @@ message: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.DeleteEmailRuleResponse}
  */
 proto.yartu.DeleteEmailRuleResponse.deserializeBinary = function(bytes) {
@@ -10334,7 +10340,7 @@ proto.yartu.DeleteEmailRuleResponse.deserializeBinaryFromReader = function(msg, 
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -10482,7 +10488,7 @@ proto.yartu.GetEmailForwardingRequest.toObject = function(includeInstance, msg) 
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.GetEmailForwardingRequest}
  */
 proto.yartu.GetEmailForwardingRequest.deserializeBinary = function(bytes) {
@@ -10594,7 +10600,7 @@ message: (f = jspb.Message.getField(msg, 5)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.GetEmailForwardingResponse}
  */
 proto.yartu.GetEmailForwardingResponse.deserializeBinary = function(bytes) {
@@ -10627,7 +10633,7 @@ proto.yartu.GetEmailForwardingResponse.deserializeBinaryFromReader = function(ms
       msg.setIsActive(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.addAddress(value);
       break;
     case 4:
@@ -10635,7 +10641,7 @@ proto.yartu.GetEmailForwardingResponse.deserializeBinaryFromReader = function(ms
       msg.setKeepCopy(value);
       break;
     case 5:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -10886,7 +10892,7 @@ keepCopy: jspb.Message.getBooleanFieldWithDefault(msg, 3, false)
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.SetEmailForwardingRequest}
  */
 proto.yartu.SetEmailForwardingRequest.deserializeBinary = function(bytes) {
@@ -10915,7 +10921,7 @@ proto.yartu.SetEmailForwardingRequest.deserializeBinaryFromReader = function(msg
       msg.setIsActive(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.addAddress(value);
       break;
     case 3:
@@ -11094,7 +11100,7 @@ message: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.SetEmailForwardingResponse}
  */
 proto.yartu.SetEmailForwardingResponse.deserializeBinary = function(bytes) {
@@ -11123,7 +11129,7 @@ proto.yartu.SetEmailForwardingResponse.deserializeBinaryFromReader = function(ms
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -11271,7 +11277,7 @@ proto.yartu.GetEmailAutoReplyRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.GetEmailAutoReplyRequest}
  */
 proto.yartu.GetEmailAutoReplyRequest.deserializeBinary = function(bytes) {
@@ -11379,7 +11385,7 @@ message: (f = jspb.Message.getField(msg, 8)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.GetEmailAutoReplyResponse}
  */
 proto.yartu.GetEmailAutoReplyResponse.deserializeBinary = function(bytes) {
@@ -11412,19 +11418,19 @@ proto.yartu.GetEmailAutoReplyResponse.deserializeBinaryFromReader = function(msg
       msg.setIsActive(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setSubject(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setReplyMessage(value);
       break;
     case 5:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setStartDate(value);
       break;
     case 6:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setEndDate(value);
       break;
     case 7:
@@ -11432,7 +11438,7 @@ proto.yartu.GetEmailAutoReplyResponse.deserializeBinaryFromReader = function(msg
       msg.setDontReplyList(value);
       break;
     case 8:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -11735,7 +11741,7 @@ dontReplyList: jspb.Message.getBooleanFieldWithDefault(msg, 6, false)
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.SetEmailAutoReplyRequest}
  */
 proto.yartu.SetEmailAutoReplyRequest.deserializeBinary = function(bytes) {
@@ -11764,19 +11770,19 @@ proto.yartu.SetEmailAutoReplyRequest.deserializeBinaryFromReader = function(msg,
       msg.setIsActive(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setSubject(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setStartDate(value);
       break;
     case 5:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setEndDate(value);
       break;
     case 6:
@@ -12011,7 +12017,7 @@ message: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.SetEmailAutoReplyResponse}
  */
 proto.yartu.SetEmailAutoReplyResponse.deserializeBinary = function(bytes) {
@@ -12040,7 +12046,7 @@ proto.yartu.SetEmailAutoReplyResponse.deserializeBinaryFromReader = function(msg
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -12188,7 +12194,7 @@ proto.yartu.ListSharedMailBoxRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ListSharedMailBoxRequest}
  */
 proto.yartu.ListSharedMailBoxRequest.deserializeBinary = function(bytes) {
@@ -12296,7 +12302,7 @@ signature: jspb.Message.getFieldWithDefault(msg, 8, "")
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.SharedMailBox}
  */
 proto.yartu.SharedMailBox.deserializeBinary = function(bytes) {
@@ -12325,7 +12331,7 @@ proto.yartu.SharedMailBox.deserializeBinaryFromReader = function(msg, reader) {
       msg.setId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setUuid(value);
       break;
     case 3:
@@ -12347,11 +12353,11 @@ proto.yartu.SharedMailBox.deserializeBinaryFromReader = function(msg, reader) {
       msg.setPublic(value);
       break;
     case 7:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setPermission(value);
       break;
     case 8:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setSignature(value);
       break;
     default:
@@ -12672,7 +12678,7 @@ permission: jspb.Message.getFieldWithDefault(msg, 2, "")
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.SharedMailBoxUser}
  */
 proto.yartu.SharedMailBoxUser.deserializeBinary = function(bytes) {
@@ -12702,7 +12708,7 @@ proto.yartu.SharedMailBoxUser.deserializeBinaryFromReader = function(msg, reader
       msg.setToUser(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setPermission(value);
       break;
     default:
@@ -12862,7 +12868,7 @@ message: jspb.Message.getFieldWithDefault(msg, 3, "")
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ListSharedMailBoxResponse}
  */
 proto.yartu.ListSharedMailBoxResponse.deserializeBinary = function(bytes) {
@@ -12896,7 +12902,7 @@ proto.yartu.ListSharedMailBoxResponse.deserializeBinaryFromReader = function(msg
       msg.addData(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -13072,7 +13078,7 @@ id: jspb.Message.getFieldWithDefault(msg, 1, 0)
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.GetSharedMailBoxRequest}
  */
 proto.yartu.GetSharedMailBoxRequest.deserializeBinary = function(bytes) {
@@ -13213,7 +13219,7 @@ message: jspb.Message.getFieldWithDefault(msg, 4, "")
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.GetSharedMailBoxResponse}
  */
 proto.yartu.GetSharedMailBoxResponse.deserializeBinary = function(bytes) {
@@ -13252,7 +13258,7 @@ proto.yartu.GetSharedMailBoxResponse.deserializeBinaryFromReader = function(msg,
       msg.addUsers(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -13476,7 +13482,7 @@ uniqueId: (f = jspb.Message.getField(msg, 4)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UpsertSharedMailBoxRequest}
  */
 proto.yartu.UpsertSharedMailBoxRequest.deserializeBinary = function(bytes) {
@@ -13505,15 +13511,15 @@ proto.yartu.UpsertSharedMailBoxRequest.deserializeBinaryFromReader = function(ms
       msg.setId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setToUser(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setPermission(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setUniqueId(value);
       break;
     default:
@@ -13712,7 +13718,7 @@ message: jspb.Message.getFieldWithDefault(msg, 2, "")
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UpsertSharedMailBoxResponse}
  */
 proto.yartu.UpsertSharedMailBoxResponse.deserializeBinary = function(bytes) {
@@ -13741,7 +13747,7 @@ proto.yartu.UpsertSharedMailBoxResponse.deserializeBinaryFromReader = function(m
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -13873,7 +13879,7 @@ uniqueId: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.DeleteSharedMailBoxRequest}
  */
 proto.yartu.DeleteSharedMailBoxRequest.deserializeBinary = function(bytes) {
@@ -13902,11 +13908,11 @@ proto.yartu.DeleteSharedMailBoxRequest.deserializeBinaryFromReader = function(ms
       msg.setId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setToUser(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setUniqueId(value);
       break;
     default:
@@ -14080,7 +14086,7 @@ message: jspb.Message.getFieldWithDefault(msg, 2, "")
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.DeleteSharedMailBoxResponse}
  */
 proto.yartu.DeleteSharedMailBoxResponse.deserializeBinary = function(bytes) {
@@ -14109,7 +14115,7 @@ proto.yartu.DeleteSharedMailBoxResponse.deserializeBinaryFromReader = function(m
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -14239,7 +14245,7 @@ id: jspb.Message.getFieldWithDefault(msg, 1, 0)
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ListSharedMailBoxUsersRequest}
  */
 proto.yartu.ListSharedMailBoxUsersRequest.deserializeBinary = function(bytes) {
@@ -14379,7 +14385,7 @@ message: jspb.Message.getFieldWithDefault(msg, 3, "")
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ListSharedMailBoxUsersResponse}
  */
 proto.yartu.ListSharedMailBoxUsersResponse.deserializeBinary = function(bytes) {
@@ -14413,7 +14419,7 @@ proto.yartu.ListSharedMailBoxUsersResponse.deserializeBinaryFromReader = functio
       msg.addUsers(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -14590,7 +14596,7 @@ name: jspb.Message.getFieldWithDefault(msg, 2, "")
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UploadSignatureInlineImageRequest}
  */
 proto.yartu.UploadSignatureInlineImageRequest.deserializeBinary = function(bytes) {
@@ -14619,7 +14625,7 @@ proto.yartu.UploadSignatureInlineImageRequest.deserializeBinaryFromReader = func
       msg.setId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setName(value);
       break;
     default:
@@ -14752,7 +14758,7 @@ message: (f = jspb.Message.getField(msg, 4)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UploadSignatureInlineImageResponse}
  */
 proto.yartu.UploadSignatureInlineImageResponse.deserializeBinary = function(bytes) {
@@ -14781,7 +14787,7 @@ proto.yartu.UploadSignatureInlineImageResponse.deserializeBinaryFromReader = fun
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setToken(value);
       break;
     case 3:
@@ -14789,7 +14795,7 @@ proto.yartu.UploadSignatureInlineImageResponse.deserializeBinaryFromReader = fun
       msg.setSignatureId(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -14989,7 +14995,7 @@ contact: (f = jspb.Message.getBooleanField(msg, 3)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.GetMobileConfigRequest}
  */
 proto.yartu.GetMobileConfigRequest.deserializeBinary = function(bytes) {
@@ -15233,7 +15239,7 @@ message: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.GetMobileConfigResponse}
  */
 proto.yartu.GetMobileConfigResponse.deserializeBinary = function(bytes) {
@@ -15262,11 +15268,11 @@ proto.yartu.GetMobileConfigResponse.deserializeBinaryFromReader = function(msg, 
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setConfig(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     default:
@@ -15440,7 +15446,7 @@ username: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.CheckUserOnlineRequest}
  */
 proto.yartu.CheckUserOnlineRequest.deserializeBinary = function(bytes) {
@@ -15469,7 +15475,7 @@ proto.yartu.CheckUserOnlineRequest.deserializeBinaryFromReader = function(msg, r
       msg.setUserId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setUsername(value);
       break;
     default:
@@ -15638,7 +15644,7 @@ isOnline: jspb.Message.getBooleanFieldWithDefault(msg, 4, false)
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.CheckUserOnlineResponse}
  */
 proto.yartu.CheckUserOnlineResponse.deserializeBinary = function(bytes) {
@@ -15667,7 +15673,7 @@ proto.yartu.CheckUserOnlineResponse.deserializeBinaryFromReader = function(msg, 
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readStringRequireUtf8());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
     case 3:
