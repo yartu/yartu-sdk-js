@@ -13,13 +13,7 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global =
-    (typeof globalThis !== 'undefined' && globalThis) ||
-    (typeof window !== 'undefined' && window) ||
-    (typeof global !== 'undefined' && global) ||
-    (typeof self !== 'undefined' && self) ||
-    (function () { return this; }).call(null) ||
-    Function('return this')();
+var global = globalThis;
 
 var common_grpc_definitions_pb = require('../utils/definitions_pb.cjs');
 goog.object.extend(proto, common_grpc_definitions_pb);
@@ -1157,14 +1151,14 @@ proto.yartu.SessionParticipant.prototype.toObject = function(opt_includeInstance
  */
 proto.yartu.SessionParticipant.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    isGroup: jspb.Message.getBooleanFieldWithDefault(msg, 2, false),
-    email: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    username: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    name: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    surname: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    participantType: jspb.Message.getFieldWithDefault(msg, 7, 0),
-    isExternal: jspb.Message.getBooleanFieldWithDefault(msg, 8, false)
+id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+isGroup: jspb.Message.getBooleanFieldWithDefault(msg, 2, false),
+email: jspb.Message.getFieldWithDefault(msg, 3, ""),
+username: jspb.Message.getFieldWithDefault(msg, 4, ""),
+name: (f = jspb.Message.getField(msg, 5)) == null ? undefined : f,
+surname: (f = jspb.Message.getField(msg, 6)) == null ? undefined : f,
+participantType: jspb.Message.getFieldWithDefault(msg, 7, 0),
+isExternal: jspb.Message.getBooleanFieldWithDefault(msg, 8, false)
   };
 
   if (includeInstance) {
@@ -1177,7 +1171,7 @@ proto.yartu.SessionParticipant.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.SessionParticipant}
  */
 proto.yartu.SessionParticipant.deserializeBinary = function(bytes) {
@@ -1210,19 +1204,19 @@ proto.yartu.SessionParticipant.deserializeBinaryFromReader = function(msg, reade
       msg.setIsGroup(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setEmail(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setUsername(value);
       break;
     case 5:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setName(value);
       break;
     case 6:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setSurname(value);
       break;
     case 7:
@@ -1540,31 +1534,31 @@ proto.yartu.Session.prototype.toObject = function(opt_includeInstance) {
  */
 proto.yartu.Session.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    key: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    sessionType: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    uuid: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    name: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    owner: (f = msg.getOwner()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f),
-    startedAt: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    finishedAt: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    scheduledToStartAt: jspb.Message.getFieldWithDefault(msg, 9, ""),
-    duration: jspb.Message.getFieldWithDefault(msg, 10, 0),
-    status: jspb.Message.getFieldWithDefault(msg, 11, 0),
-    participantsCount: jspb.Message.getFieldWithDefault(msg, 12, 0),
-    recordsCount: jspb.Message.getFieldWithDefault(msg, 13, 0),
-    timezone: jspb.Message.getFieldWithDefault(msg, 14, ""),
-    isLocked: jspb.Message.getBooleanFieldWithDefault(msg, 15, false),
-    isRecording: jspb.Message.getBooleanFieldWithDefault(msg, 16, false),
-    hasPassword: jspb.Message.getBooleanFieldWithDefault(msg, 17, false),
-    isInvited: jspb.Message.getBooleanFieldWithDefault(msg, 18, false),
-    participantsList: jspb.Message.toObjectList(msg.getParticipantsList(),
+id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+key: jspb.Message.getFieldWithDefault(msg, 2, ""),
+sessionType: jspb.Message.getFieldWithDefault(msg, 3, 0),
+uuid: jspb.Message.getFieldWithDefault(msg, 4, ""),
+name: jspb.Message.getFieldWithDefault(msg, 5, ""),
+owner: (f = msg.getOwner()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f),
+startedAt: jspb.Message.getFieldWithDefault(msg, 7, ""),
+finishedAt: jspb.Message.getFieldWithDefault(msg, 8, ""),
+scheduledToStartAt: jspb.Message.getFieldWithDefault(msg, 9, ""),
+duration: jspb.Message.getFieldWithDefault(msg, 10, 0),
+status: jspb.Message.getFieldWithDefault(msg, 11, 0),
+participantsCount: jspb.Message.getFieldWithDefault(msg, 12, 0),
+recordsCount: jspb.Message.getFieldWithDefault(msg, 13, 0),
+timezone: jspb.Message.getFieldWithDefault(msg, 14, ""),
+isLocked: jspb.Message.getBooleanFieldWithDefault(msg, 15, false),
+isRecording: jspb.Message.getBooleanFieldWithDefault(msg, 16, false),
+hasPassword: jspb.Message.getBooleanFieldWithDefault(msg, 17, false),
+isInvited: jspb.Message.getBooleanFieldWithDefault(msg, 18, false),
+participantsList: jspb.Message.toObjectList(msg.getParticipantsList(),
     proto.yartu.SessionParticipant.toObject, includeInstance),
-    externalParticipantsList: (f = jspb.Message.getRepeatedField(msg, 20)) == null ? undefined : f,
-    jwt: jspb.Message.getFieldWithDefault(msg, 21, ""),
-    rrule: jspb.Message.getFieldWithDefault(msg, 22, ""),
-    reminder: jspb.Message.getFieldWithDefault(msg, 23, ""),
-    note: (f = msg.getNote()) && note_grpc_service_pb.Note.toObject(includeInstance, f)
+externalParticipantsList: (f = jspb.Message.getRepeatedField(msg, 20)) == null ? undefined : f,
+jwt: (f = jspb.Message.getField(msg, 21)) == null ? undefined : f,
+rrule: (f = jspb.Message.getField(msg, 22)) == null ? undefined : f,
+reminder: (f = jspb.Message.getField(msg, 23)) == null ? undefined : f,
+note: (f = msg.getNote()) && note_grpc_service_pb.Note.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -1577,7 +1571,7 @@ proto.yartu.Session.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.Session}
  */
 proto.yartu.Session.deserializeBinary = function(bytes) {
@@ -1606,7 +1600,7 @@ proto.yartu.Session.deserializeBinaryFromReader = function(msg, reader) {
       msg.setId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setKey(value);
       break;
     case 3:
@@ -1614,11 +1608,11 @@ proto.yartu.Session.deserializeBinaryFromReader = function(msg, reader) {
       msg.setSessionType(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setUuid(value);
       break;
     case 5:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setName(value);
       break;
     case 6:
@@ -1627,15 +1621,15 @@ proto.yartu.Session.deserializeBinaryFromReader = function(msg, reader) {
       msg.setOwner(value);
       break;
     case 7:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setStartedAt(value);
       break;
     case 8:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setFinishedAt(value);
       break;
     case 9:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setScheduledToStartAt(value);
       break;
     case 10:
@@ -1655,7 +1649,7 @@ proto.yartu.Session.deserializeBinaryFromReader = function(msg, reader) {
       msg.setRecordsCount(value);
       break;
     case 14:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setTimezone(value);
       break;
     case 15:
@@ -1680,19 +1674,19 @@ proto.yartu.Session.deserializeBinaryFromReader = function(msg, reader) {
       msg.addParticipants(value);
       break;
     case 20:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.addExternalParticipants(value);
       break;
     case 21:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setJwt(value);
       break;
     case 22:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setRrule(value);
       break;
     case 23:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setReminder(value);
       break;
     case 24:
@@ -2498,8 +2492,8 @@ proto.yartu.ListConferenceRequest.prototype.toObject = function(opt_includeInsta
  */
 proto.yartu.ListConferenceRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    query: (f = msg.getQuery()) && common_grpc_definitions_pb.Query.toObject(includeInstance, f),
-    isInvited: jspb.Message.getBooleanFieldWithDefault(msg, 2, false)
+query: (f = msg.getQuery()) && common_grpc_definitions_pb.Query.toObject(includeInstance, f),
+isInvited: jspb.Message.getBooleanFieldWithDefault(msg, 2, false)
   };
 
   if (includeInstance) {
@@ -2512,7 +2506,7 @@ proto.yartu.ListConferenceRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ListConferenceRequest}
  */
 proto.yartu.ListConferenceRequest.deserializeBinary = function(bytes) {
@@ -2686,11 +2680,11 @@ proto.yartu.ListConferenceResponse.prototype.toObject = function(opt_includeInst
  */
 proto.yartu.ListConferenceResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    sessionList: jspb.Message.toObjectList(msg.getSessionList(),
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+sessionList: jspb.Message.toObjectList(msg.getSessionList(),
     proto.yartu.Session.toObject, includeInstance),
-    message: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    pagination: (f = msg.getPagination()) && common_grpc_definitions_pb.PaginationMeta.toObject(includeInstance, f)
+message: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f,
+pagination: (f = msg.getPagination()) && common_grpc_definitions_pb.PaginationMeta.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -2703,7 +2697,7 @@ proto.yartu.ListConferenceResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ListConferenceResponse}
  */
 proto.yartu.ListConferenceResponse.deserializeBinary = function(bytes) {
@@ -2737,7 +2731,7 @@ proto.yartu.ListConferenceResponse.deserializeBinaryFromReader = function(msg, r
       msg.addSession(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     case 4:
@@ -2968,7 +2962,7 @@ proto.yartu.GetConferenceRequest.prototype.toObject = function(opt_includeInstan
  */
 proto.yartu.GetConferenceRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    uuid: jspb.Message.getFieldWithDefault(msg, 1, "")
+uuid: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -2981,7 +2975,7 @@ proto.yartu.GetConferenceRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.GetConferenceRequest}
  */
 proto.yartu.GetConferenceRequest.deserializeBinary = function(bytes) {
@@ -3006,7 +3000,7 @@ proto.yartu.GetConferenceRequest.deserializeBinaryFromReader = function(msg, rea
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setUuid(value);
       break;
     default:
@@ -3098,9 +3092,9 @@ proto.yartu.GetConferenceResponse.prototype.toObject = function(opt_includeInsta
  */
 proto.yartu.GetConferenceResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    session: (f = msg.getSession()) && proto.yartu.Session.toObject(includeInstance, f),
-    message: jspb.Message.getFieldWithDefault(msg, 3, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+session: (f = msg.getSession()) && proto.yartu.Session.toObject(includeInstance, f),
+message: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -3113,7 +3107,7 @@ proto.yartu.GetConferenceResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.GetConferenceResponse}
  */
 proto.yartu.GetConferenceResponse.deserializeBinary = function(bytes) {
@@ -3147,7 +3141,7 @@ proto.yartu.GetConferenceResponse.deserializeBinaryFromReader = function(msg, re
       msg.setSession(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -3334,17 +3328,17 @@ proto.yartu.UpsertConferenceRequest.prototype.toObject = function(opt_includeIns
  */
 proto.yartu.UpsertConferenceRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    name: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    rrule: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    scheduledToStartAt: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    duration: jspb.Message.getFieldWithDefault(msg, 5, 0),
-    timezone: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    password: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    reminderList: (f = jspb.Message.getRepeatedField(msg, 8)) == null ? undefined : f,
-    participantsList: jspb.Message.toObjectList(msg.getParticipantsList(),
+id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+name: jspb.Message.getFieldWithDefault(msg, 2, ""),
+rrule: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f,
+scheduledToStartAt: (f = jspb.Message.getField(msg, 4)) == null ? undefined : f,
+duration: (f = jspb.Message.getField(msg, 5)) == null ? undefined : f,
+timezone: (f = jspb.Message.getField(msg, 6)) == null ? undefined : f,
+password: (f = jspb.Message.getField(msg, 7)) == null ? undefined : f,
+reminderList: (f = jspb.Message.getRepeatedField(msg, 8)) == null ? undefined : f,
+participantsList: jspb.Message.toObjectList(msg.getParticipantsList(),
     proto.yartu.SessionParticipant.toObject, includeInstance),
-    clearPassword: jspb.Message.getBooleanFieldWithDefault(msg, 10, false)
+clearPassword: (f = jspb.Message.getBooleanField(msg, 10)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -3357,7 +3351,7 @@ proto.yartu.UpsertConferenceRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UpsertConferenceRequest}
  */
 proto.yartu.UpsertConferenceRequest.deserializeBinary = function(bytes) {
@@ -3386,15 +3380,15 @@ proto.yartu.UpsertConferenceRequest.deserializeBinaryFromReader = function(msg, 
       msg.setId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setName(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setRrule(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setScheduledToStartAt(value);
       break;
     case 5:
@@ -3402,15 +3396,15 @@ proto.yartu.UpsertConferenceRequest.deserializeBinaryFromReader = function(msg, 
       msg.setDuration(value);
       break;
     case 6:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setTimezone(value);
       break;
     case 7:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setPassword(value);
       break;
     case 8:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.addReminder(value);
       break;
     case 9:
@@ -3884,7 +3878,7 @@ proto.yartu.DuplicateConferenceRequest.prototype.toObject = function(opt_include
  */
 proto.yartu.DuplicateConferenceRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0)
+id: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
   if (includeInstance) {
@@ -3897,7 +3891,7 @@ proto.yartu.DuplicateConferenceRequest.toObject = function(includeInstance, msg)
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.DuplicateConferenceRequest}
  */
 proto.yartu.DuplicateConferenceRequest.deserializeBinary = function(bytes) {
@@ -4014,9 +4008,9 @@ proto.yartu.DuplicateConferenceResponse.prototype.toObject = function(opt_includ
  */
 proto.yartu.DuplicateConferenceResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    uuid: jspb.Message.getFieldWithDefault(msg, 3, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, ""),
+uuid: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -4029,7 +4023,7 @@ proto.yartu.DuplicateConferenceResponse.toObject = function(includeInstance, msg
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.DuplicateConferenceResponse}
  */
 proto.yartu.DuplicateConferenceResponse.deserializeBinary = function(bytes) {
@@ -4058,11 +4052,11 @@ proto.yartu.DuplicateConferenceResponse.deserializeBinaryFromReader = function(m
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setUuid(value);
       break;
     default:
@@ -4222,9 +4216,9 @@ proto.yartu.UpsertConferenceResponse.prototype.toObject = function(opt_includeIn
  */
 proto.yartu.UpsertConferenceResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    uuid: jspb.Message.getFieldWithDefault(msg, 3, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, ""),
+uuid: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -4237,7 +4231,7 @@ proto.yartu.UpsertConferenceResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UpsertConferenceResponse}
  */
 proto.yartu.UpsertConferenceResponse.deserializeBinary = function(bytes) {
@@ -4266,11 +4260,11 @@ proto.yartu.UpsertConferenceResponse.deserializeBinaryFromReader = function(msg,
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setUuid(value);
       break;
     default:
@@ -4425,7 +4419,7 @@ proto.yartu.UpsertInstantConferenceRequest.toObject = function(includeInstance, 
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UpsertInstantConferenceRequest}
  */
 proto.yartu.UpsertInstantConferenceRequest.deserializeBinary = function(bytes) {
@@ -4513,9 +4507,9 @@ proto.yartu.UpsertInstantConferenceResponse.prototype.toObject = function(opt_in
  */
 proto.yartu.UpsertInstantConferenceResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    session: (f = msg.getSession()) && proto.yartu.Session.toObject(includeInstance, f)
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, ""),
+session: (f = msg.getSession()) && proto.yartu.Session.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -4528,7 +4522,7 @@ proto.yartu.UpsertInstantConferenceResponse.toObject = function(includeInstance,
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UpsertInstantConferenceResponse}
  */
 proto.yartu.UpsertInstantConferenceResponse.deserializeBinary = function(bytes) {
@@ -4557,7 +4551,7 @@ proto.yartu.UpsertInstantConferenceResponse.deserializeBinaryFromReader = functi
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     case 3:
@@ -4724,7 +4718,7 @@ proto.yartu.DeleteConferenceRequest.prototype.toObject = function(opt_includeIns
  */
 proto.yartu.DeleteConferenceRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0)
+id: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
   if (includeInstance) {
@@ -4737,7 +4731,7 @@ proto.yartu.DeleteConferenceRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.DeleteConferenceRequest}
  */
 proto.yartu.DeleteConferenceRequest.deserializeBinary = function(bytes) {
@@ -4854,8 +4848,8 @@ proto.yartu.DeleteConferenceResponse.prototype.toObject = function(opt_includeIn
  */
 proto.yartu.DeleteConferenceResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -4868,7 +4862,7 @@ proto.yartu.DeleteConferenceResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.DeleteConferenceResponse}
  */
 proto.yartu.DeleteConferenceResponse.deserializeBinary = function(bytes) {
@@ -4897,7 +4891,7 @@ proto.yartu.DeleteConferenceResponse.deserializeBinaryFromReader = function(msg,
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -5014,8 +5008,8 @@ proto.yartu.StartConferenceRequest.prototype.toObject = function(opt_includeInst
  */
 proto.yartu.StartConferenceRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    uuid: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    password: jspb.Message.getFieldWithDefault(msg, 2, "")
+uuid: jspb.Message.getFieldWithDefault(msg, 1, ""),
+password: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -5028,7 +5022,7 @@ proto.yartu.StartConferenceRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.StartConferenceRequest}
  */
 proto.yartu.StartConferenceRequest.deserializeBinary = function(bytes) {
@@ -5053,11 +5047,11 @@ proto.yartu.StartConferenceRequest.deserializeBinaryFromReader = function(msg, r
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setUuid(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setPassword(value);
       break;
     default:
@@ -5192,9 +5186,9 @@ proto.yartu.StartConferenceResponse.prototype.toObject = function(opt_includeIns
  */
 proto.yartu.StartConferenceResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    key: jspb.Message.getFieldWithDefault(msg, 3, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, ""),
+key: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -5207,7 +5201,7 @@ proto.yartu.StartConferenceResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.StartConferenceResponse}
  */
 proto.yartu.StartConferenceResponse.deserializeBinary = function(bytes) {
@@ -5236,11 +5230,11 @@ proto.yartu.StartConferenceResponse.deserializeBinaryFromReader = function(msg, 
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setKey(value);
       break;
     default:
@@ -5382,7 +5376,7 @@ proto.yartu.FinishConferenceRequest.prototype.toObject = function(opt_includeIns
  */
 proto.yartu.FinishConferenceRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    uuid: jspb.Message.getFieldWithDefault(msg, 1, "")
+uuid: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -5395,7 +5389,7 @@ proto.yartu.FinishConferenceRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.FinishConferenceRequest}
  */
 proto.yartu.FinishConferenceRequest.deserializeBinary = function(bytes) {
@@ -5420,7 +5414,7 @@ proto.yartu.FinishConferenceRequest.deserializeBinaryFromReader = function(msg, 
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setUuid(value);
       break;
     default:
@@ -5512,8 +5506,8 @@ proto.yartu.FinishConferenceResponse.prototype.toObject = function(opt_includeIn
  */
 proto.yartu.FinishConferenceResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -5526,7 +5520,7 @@ proto.yartu.FinishConferenceResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.FinishConferenceResponse}
  */
 proto.yartu.FinishConferenceResponse.deserializeBinary = function(bytes) {
@@ -5555,7 +5549,7 @@ proto.yartu.FinishConferenceResponse.deserializeBinaryFromReader = function(msg,
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -5679,8 +5673,8 @@ proto.yartu.ShareConferenceRequest.prototype.toObject = function(opt_includeInst
  */
 proto.yartu.ShareConferenceRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    uuid: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    participantListList: jspb.Message.toObjectList(msg.getParticipantListList(),
+uuid: jspb.Message.getFieldWithDefault(msg, 1, ""),
+participantListList: jspb.Message.toObjectList(msg.getParticipantListList(),
     proto.yartu.SessionParticipant.toObject, includeInstance)
   };
 
@@ -5694,7 +5688,7 @@ proto.yartu.ShareConferenceRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ShareConferenceRequest}
  */
 proto.yartu.ShareConferenceRequest.deserializeBinary = function(bytes) {
@@ -5719,7 +5713,7 @@ proto.yartu.ShareConferenceRequest.deserializeBinaryFromReader = function(msg, r
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setUuid(value);
       break;
     case 2:
@@ -5862,8 +5856,8 @@ proto.yartu.ShareConferenceResponse.prototype.toObject = function(opt_includeIns
  */
 proto.yartu.ShareConferenceResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -5876,7 +5870,7 @@ proto.yartu.ShareConferenceResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ShareConferenceResponse}
  */
 proto.yartu.ShareConferenceResponse.deserializeBinary = function(bytes) {
@@ -5905,7 +5899,7 @@ proto.yartu.ShareConferenceResponse.deserializeBinaryFromReader = function(msg, 
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -6029,8 +6023,8 @@ proto.yartu.UnshareConferenceRequest.prototype.toObject = function(opt_includeIn
  */
 proto.yartu.UnshareConferenceRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    uuid: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    participantListList: jspb.Message.toObjectList(msg.getParticipantListList(),
+uuid: jspb.Message.getFieldWithDefault(msg, 1, ""),
+participantListList: jspb.Message.toObjectList(msg.getParticipantListList(),
     proto.yartu.SessionParticipant.toObject, includeInstance)
   };
 
@@ -6044,7 +6038,7 @@ proto.yartu.UnshareConferenceRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UnshareConferenceRequest}
  */
 proto.yartu.UnshareConferenceRequest.deserializeBinary = function(bytes) {
@@ -6069,7 +6063,7 @@ proto.yartu.UnshareConferenceRequest.deserializeBinaryFromReader = function(msg,
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setUuid(value);
       break;
     case 2:
@@ -6212,8 +6206,8 @@ proto.yartu.UnshareConferenceResponse.prototype.toObject = function(opt_includeI
  */
 proto.yartu.UnshareConferenceResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -6226,7 +6220,7 @@ proto.yartu.UnshareConferenceResponse.toObject = function(includeInstance, msg) 
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UnshareConferenceResponse}
  */
 proto.yartu.UnshareConferenceResponse.deserializeBinary = function(bytes) {
@@ -6255,7 +6249,7 @@ proto.yartu.UnshareConferenceResponse.deserializeBinaryFromReader = function(msg
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -6372,8 +6366,8 @@ proto.yartu.UpsertSessionParticipantRequest.prototype.toObject = function(opt_in
  */
 proto.yartu.UpsertSessionParticipantRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    sharedId: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    participantType: jspb.Message.getFieldWithDefault(msg, 2, 0)
+sharedId: jspb.Message.getFieldWithDefault(msg, 1, 0),
+participantType: jspb.Message.getFieldWithDefault(msg, 2, 0)
   };
 
   if (includeInstance) {
@@ -6386,7 +6380,7 @@ proto.yartu.UpsertSessionParticipantRequest.toObject = function(includeInstance,
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UpsertSessionParticipantRequest}
  */
 proto.yartu.UpsertSessionParticipantRequest.deserializeBinary = function(bytes) {
@@ -6532,8 +6526,8 @@ proto.yartu.UpsertSessionParticipantResponse.prototype.toObject = function(opt_i
  */
 proto.yartu.UpsertSessionParticipantResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -6546,7 +6540,7 @@ proto.yartu.UpsertSessionParticipantResponse.toObject = function(includeInstance
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UpsertSessionParticipantResponse}
  */
 proto.yartu.UpsertSessionParticipantResponse.deserializeBinary = function(bytes) {
@@ -6575,7 +6569,7 @@ proto.yartu.UpsertSessionParticipantResponse.deserializeBinaryFromReader = funct
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -6692,7 +6686,7 @@ proto.yartu.ListSessionParticipantRequest.prototype.toObject = function(opt_incl
  */
 proto.yartu.ListSessionParticipantRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    uuid: jspb.Message.getFieldWithDefault(msg, 1, "")
+uuid: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -6705,7 +6699,7 @@ proto.yartu.ListSessionParticipantRequest.toObject = function(includeInstance, m
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ListSessionParticipantRequest}
  */
 proto.yartu.ListSessionParticipantRequest.deserializeBinary = function(bytes) {
@@ -6730,7 +6724,7 @@ proto.yartu.ListSessionParticipantRequest.deserializeBinaryFromReader = function
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setUuid(value);
       break;
     default:
@@ -6829,11 +6823,11 @@ proto.yartu.ListSessionParticipantResponse.prototype.toObject = function(opt_inc
  */
 proto.yartu.ListSessionParticipantResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    participantsList: jspb.Message.toObjectList(msg.getParticipantsList(),
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, ""),
+participantsList: jspb.Message.toObjectList(msg.getParticipantsList(),
     proto.yartu.SessionParticipant.toObject, includeInstance),
-    externalParticipantsList: (f = jspb.Message.getRepeatedField(msg, 4)) == null ? undefined : f
+externalParticipantsList: (f = jspb.Message.getRepeatedField(msg, 4)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -6846,7 +6840,7 @@ proto.yartu.ListSessionParticipantResponse.toObject = function(includeInstance, 
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ListSessionParticipantResponse}
  */
 proto.yartu.ListSessionParticipantResponse.deserializeBinary = function(bytes) {
@@ -6875,7 +6869,7 @@ proto.yartu.ListSessionParticipantResponse.deserializeBinaryFromReader = functio
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     case 3:
@@ -6884,7 +6878,7 @@ proto.yartu.ListSessionParticipantResponse.deserializeBinaryFromReader = functio
       msg.addParticipants(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.addExternalParticipants(value);
       break;
     default:
@@ -7091,12 +7085,12 @@ proto.yartu.RecordFile.prototype.toObject = function(opt_includeInstance) {
  */
 proto.yartu.RecordFile.toObject = function(includeInstance, msg) {
   var f, obj = {
-    uuid: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    name: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    path: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    fileToken: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    sfId: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    size: jspb.Message.getFieldWithDefault(msg, 6, 0)
+uuid: jspb.Message.getFieldWithDefault(msg, 1, ""),
+name: jspb.Message.getFieldWithDefault(msg, 2, ""),
+path: jspb.Message.getFieldWithDefault(msg, 3, ""),
+fileToken: jspb.Message.getFieldWithDefault(msg, 4, ""),
+sfId: jspb.Message.getFieldWithDefault(msg, 5, ""),
+size: jspb.Message.getFieldWithDefault(msg, 6, 0)
   };
 
   if (includeInstance) {
@@ -7109,7 +7103,7 @@ proto.yartu.RecordFile.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.RecordFile}
  */
 proto.yartu.RecordFile.deserializeBinary = function(bytes) {
@@ -7134,23 +7128,23 @@ proto.yartu.RecordFile.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setUuid(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setName(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setPath(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setFileToken(value);
       break;
     case 5:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setSfId(value);
       break;
     case 6:
@@ -7371,14 +7365,14 @@ proto.yartu.SessionRecord.prototype.toObject = function(opt_includeInstance) {
  */
 proto.yartu.SessionRecord.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    sessionId: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    sessionUuid: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    sessionName: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    fileId: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    file: (f = msg.getFile()) && proto.yartu.RecordFile.toObject(includeInstance, f),
-    isReady: jspb.Message.getBooleanFieldWithDefault(msg, 7, false),
-    duration: jspb.Message.getFieldWithDefault(msg, 8, 0)
+id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+sessionId: jspb.Message.getFieldWithDefault(msg, 2, 0),
+sessionUuid: jspb.Message.getFieldWithDefault(msg, 3, ""),
+sessionName: jspb.Message.getFieldWithDefault(msg, 4, ""),
+fileId: jspb.Message.getFieldWithDefault(msg, 5, ""),
+file: (f = msg.getFile()) && proto.yartu.RecordFile.toObject(includeInstance, f),
+isReady: jspb.Message.getBooleanFieldWithDefault(msg, 7, false),
+duration: jspb.Message.getFieldWithDefault(msg, 8, 0)
   };
 
   if (includeInstance) {
@@ -7391,7 +7385,7 @@ proto.yartu.SessionRecord.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.SessionRecord}
  */
 proto.yartu.SessionRecord.deserializeBinary = function(bytes) {
@@ -7424,15 +7418,15 @@ proto.yartu.SessionRecord.deserializeBinaryFromReader = function(msg, reader) {
       msg.setSessionId(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setSessionUuid(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setSessionName(value);
       break;
     case 5:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setFileId(value);
       break;
     case 6:
@@ -7732,7 +7726,7 @@ proto.yartu.ListConferenceRecordsRequest.prototype.toObject = function(opt_inclu
  */
 proto.yartu.ListConferenceRecordsRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    uuid: jspb.Message.getFieldWithDefault(msg, 1, "")
+uuid: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -7745,7 +7739,7 @@ proto.yartu.ListConferenceRecordsRequest.toObject = function(includeInstance, ms
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ListConferenceRecordsRequest}
  */
 proto.yartu.ListConferenceRecordsRequest.deserializeBinary = function(bytes) {
@@ -7770,7 +7764,7 @@ proto.yartu.ListConferenceRecordsRequest.deserializeBinaryFromReader = function(
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setUuid(value);
       break;
     default:
@@ -7887,9 +7881,9 @@ proto.yartu.ListConferenceRecordsResponse.prototype.toObject = function(opt_incl
  */
 proto.yartu.ListConferenceRecordsResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    recordList: jspb.Message.toObjectList(msg.getRecordList(),
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, ""),
+recordList: jspb.Message.toObjectList(msg.getRecordList(),
     proto.yartu.SessionRecord.toObject, includeInstance)
   };
 
@@ -7903,7 +7897,7 @@ proto.yartu.ListConferenceRecordsResponse.toObject = function(includeInstance, m
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ListConferenceRecordsResponse}
  */
 proto.yartu.ListConferenceRecordsResponse.deserializeBinary = function(bytes) {
@@ -7932,7 +7926,7 @@ proto.yartu.ListConferenceRecordsResponse.deserializeBinaryFromReader = function
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     case 3:
@@ -8100,7 +8094,7 @@ proto.yartu.DeleteRecordRequest.prototype.toObject = function(opt_includeInstanc
  */
 proto.yartu.DeleteRecordRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0)
+id: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
   if (includeInstance) {
@@ -8113,7 +8107,7 @@ proto.yartu.DeleteRecordRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.DeleteRecordRequest}
  */
 proto.yartu.DeleteRecordRequest.deserializeBinary = function(bytes) {
@@ -8230,8 +8224,8 @@ proto.yartu.DeleteRecordResponse.prototype.toObject = function(opt_includeInstan
  */
 proto.yartu.DeleteRecordResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -8244,7 +8238,7 @@ proto.yartu.DeleteRecordResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.DeleteRecordResponse}
  */
 proto.yartu.DeleteRecordResponse.deserializeBinary = function(bytes) {
@@ -8273,7 +8267,7 @@ proto.yartu.DeleteRecordResponse.deserializeBinaryFromReader = function(msg, rea
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -8390,7 +8384,7 @@ proto.yartu.CheckPublicConferenceRequest.prototype.toObject = function(opt_inclu
  */
 proto.yartu.CheckPublicConferenceRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    uuid: jspb.Message.getFieldWithDefault(msg, 1, "")
+uuid: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -8403,7 +8397,7 @@ proto.yartu.CheckPublicConferenceRequest.toObject = function(includeInstance, ms
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.CheckPublicConferenceRequest}
  */
 proto.yartu.CheckPublicConferenceRequest.deserializeBinary = function(bytes) {
@@ -8428,7 +8422,7 @@ proto.yartu.CheckPublicConferenceRequest.deserializeBinaryFromReader = function(
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setUuid(value);
       break;
     default:
@@ -8520,8 +8514,8 @@ proto.yartu.CheckPublicConferenceResponse.prototype.toObject = function(opt_incl
  */
 proto.yartu.CheckPublicConferenceResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -8534,7 +8528,7 @@ proto.yartu.CheckPublicConferenceResponse.toObject = function(includeInstance, m
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.CheckPublicConferenceResponse}
  */
 proto.yartu.CheckPublicConferenceResponse.deserializeBinary = function(bytes) {
@@ -8563,7 +8557,7 @@ proto.yartu.CheckPublicConferenceResponse.deserializeBinaryFromReader = function
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -8680,8 +8674,8 @@ proto.yartu.GetPublicConferenceRequest.prototype.toObject = function(opt_include
  */
 proto.yartu.GetPublicConferenceRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    uuid: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    name: jspb.Message.getFieldWithDefault(msg, 2, "")
+uuid: jspb.Message.getFieldWithDefault(msg, 1, ""),
+name: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -8694,7 +8688,7 @@ proto.yartu.GetPublicConferenceRequest.toObject = function(includeInstance, msg)
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.GetPublicConferenceRequest}
  */
 proto.yartu.GetPublicConferenceRequest.deserializeBinary = function(bytes) {
@@ -8719,11 +8713,11 @@ proto.yartu.GetPublicConferenceRequest.deserializeBinaryFromReader = function(ms
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setUuid(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setName(value);
       break;
     default:
@@ -8840,9 +8834,9 @@ proto.yartu.GetPublicConferenceResponse.prototype.toObject = function(opt_includ
  */
 proto.yartu.GetPublicConferenceResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    session: (f = msg.getSession()) && proto.yartu.Session.toObject(includeInstance, f)
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, ""),
+session: (f = msg.getSession()) && proto.yartu.Session.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -8855,7 +8849,7 @@ proto.yartu.GetPublicConferenceResponse.toObject = function(includeInstance, msg
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.GetPublicConferenceResponse}
  */
 proto.yartu.GetPublicConferenceResponse.deserializeBinary = function(bytes) {
@@ -8884,7 +8878,7 @@ proto.yartu.GetPublicConferenceResponse.deserializeBinaryFromReader = function(m
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     case 3:
@@ -9051,8 +9045,8 @@ proto.yartu.StartPublicConferenceRequest.prototype.toObject = function(opt_inclu
  */
 proto.yartu.StartPublicConferenceRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    uuid: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    password: jspb.Message.getFieldWithDefault(msg, 2, "")
+uuid: jspb.Message.getFieldWithDefault(msg, 1, ""),
+password: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -9065,7 +9059,7 @@ proto.yartu.StartPublicConferenceRequest.toObject = function(includeInstance, ms
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.StartPublicConferenceRequest}
  */
 proto.yartu.StartPublicConferenceRequest.deserializeBinary = function(bytes) {
@@ -9090,11 +9084,11 @@ proto.yartu.StartPublicConferenceRequest.deserializeBinaryFromReader = function(
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setUuid(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setPassword(value);
       break;
     default:
@@ -9229,9 +9223,9 @@ proto.yartu.StartPublicConferenceResponse.prototype.toObject = function(opt_incl
  */
 proto.yartu.StartPublicConferenceResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    key: jspb.Message.getFieldWithDefault(msg, 3, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, ""),
+key: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -9244,7 +9238,7 @@ proto.yartu.StartPublicConferenceResponse.toObject = function(includeInstance, m
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.StartPublicConferenceResponse}
  */
 proto.yartu.StartPublicConferenceResponse.deserializeBinary = function(bytes) {
@@ -9273,11 +9267,11 @@ proto.yartu.StartPublicConferenceResponse.deserializeBinaryFromReader = function
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setKey(value);
       break;
     default:
@@ -9419,8 +9413,8 @@ proto.yartu.LockConferenceRequest.prototype.toObject = function(opt_includeInsta
  */
 proto.yartu.LockConferenceRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    uuid: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    locked: jspb.Message.getBooleanFieldWithDefault(msg, 2, false)
+uuid: jspb.Message.getFieldWithDefault(msg, 1, ""),
+locked: jspb.Message.getBooleanFieldWithDefault(msg, 2, false)
   };
 
   if (includeInstance) {
@@ -9433,7 +9427,7 @@ proto.yartu.LockConferenceRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.LockConferenceRequest}
  */
 proto.yartu.LockConferenceRequest.deserializeBinary = function(bytes) {
@@ -9458,7 +9452,7 @@ proto.yartu.LockConferenceRequest.deserializeBinaryFromReader = function(msg, re
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setUuid(value);
       break;
     case 2:
@@ -9579,8 +9573,8 @@ proto.yartu.LockConferenceResponse.prototype.toObject = function(opt_includeInst
  */
 proto.yartu.LockConferenceResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -9593,7 +9587,7 @@ proto.yartu.LockConferenceResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.LockConferenceResponse}
  */
 proto.yartu.LockConferenceResponse.deserializeBinary = function(bytes) {
@@ -9622,7 +9616,7 @@ proto.yartu.LockConferenceResponse.deserializeBinaryFromReader = function(msg, r
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -9739,7 +9733,7 @@ proto.yartu.CallYartuUserRequest.prototype.toObject = function(opt_includeInstan
  */
 proto.yartu.CallYartuUserRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    participant: (f = msg.getParticipant()) && proto.yartu.SessionParticipant.toObject(includeInstance, f)
+participant: (f = msg.getParticipant()) && proto.yartu.SessionParticipant.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -9752,7 +9746,7 @@ proto.yartu.CallYartuUserRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.CallYartuUserRequest}
  */
 proto.yartu.CallYartuUserRequest.deserializeBinary = function(bytes) {
@@ -9890,10 +9884,10 @@ proto.yartu.CallYartuUserResponse.prototype.toObject = function(opt_includeInsta
  */
 proto.yartu.CallYartuUserResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    session: (f = msg.getSession()) && proto.yartu.Session.toObject(includeInstance, f),
-    isUserOnline: jspb.Message.getBooleanFieldWithDefault(msg, 4, false)
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, ""),
+session: (f = msg.getSession()) && proto.yartu.Session.toObject(includeInstance, f),
+isUserOnline: jspb.Message.getBooleanFieldWithDefault(msg, 4, false)
   };
 
   if (includeInstance) {
@@ -9906,7 +9900,7 @@ proto.yartu.CallYartuUserResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.CallYartuUserResponse}
  */
 proto.yartu.CallYartuUserResponse.deserializeBinary = function(bytes) {
@@ -9935,7 +9929,7 @@ proto.yartu.CallYartuUserResponse.deserializeBinaryFromReader = function(msg, re
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     case 3:
@@ -10131,8 +10125,8 @@ proto.yartu.TakeCallRequest.prototype.toObject = function(opt_includeInstance) {
  */
 proto.yartu.TakeCallRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    uuid: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    status: jspb.Message.getFieldWithDefault(msg, 2, "")
+uuid: jspb.Message.getFieldWithDefault(msg, 1, ""),
+status: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -10145,7 +10139,7 @@ proto.yartu.TakeCallRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.TakeCallRequest}
  */
 proto.yartu.TakeCallRequest.deserializeBinary = function(bytes) {
@@ -10170,11 +10164,11 @@ proto.yartu.TakeCallRequest.deserializeBinaryFromReader = function(msg, reader) 
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setUuid(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setStatus(value);
       break;
     default:
@@ -10291,8 +10285,8 @@ proto.yartu.TakeCallResponse.prototype.toObject = function(opt_includeInstance) 
  */
 proto.yartu.TakeCallResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -10305,7 +10299,7 @@ proto.yartu.TakeCallResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.TakeCallResponse}
  */
 proto.yartu.TakeCallResponse.deserializeBinary = function(bytes) {
@@ -10334,7 +10328,7 @@ proto.yartu.TakeCallResponse.deserializeBinaryFromReader = function(msg, reader)
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -10469,7 +10463,7 @@ proto.yartu.CancelCallRequest.prototype.toObject = function(opt_includeInstance)
  */
 proto.yartu.CancelCallRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    uuid: jspb.Message.getFieldWithDefault(msg, 1, "")
+uuid: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -10482,7 +10476,7 @@ proto.yartu.CancelCallRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.CancelCallRequest}
  */
 proto.yartu.CancelCallRequest.deserializeBinary = function(bytes) {
@@ -10507,7 +10501,7 @@ proto.yartu.CancelCallRequest.deserializeBinaryFromReader = function(msg, reader
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setUuid(value);
       break;
     default:
@@ -10599,8 +10593,8 @@ proto.yartu.CancelCallResponse.prototype.toObject = function(opt_includeInstance
  */
 proto.yartu.CancelCallResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -10613,7 +10607,7 @@ proto.yartu.CancelCallResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.CancelCallResponse}
  */
 proto.yartu.CancelCallResponse.deserializeBinary = function(bytes) {
@@ -10642,7 +10636,7 @@ proto.yartu.CancelCallResponse.deserializeBinaryFromReader = function(msg, reade
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -10777,10 +10771,10 @@ proto.yartu.CopyConferenceRecordToDriveRequest.prototype.toObject = function(opt
  */
 proto.yartu.CopyConferenceRecordToDriveRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    sessionId: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    recordUuid: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    repoId: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    path: jspb.Message.getFieldWithDefault(msg, 4, "")
+sessionId: jspb.Message.getFieldWithDefault(msg, 1, 0),
+recordUuid: jspb.Message.getFieldWithDefault(msg, 2, ""),
+repoId: jspb.Message.getFieldWithDefault(msg, 3, ""),
+path: jspb.Message.getFieldWithDefault(msg, 4, "")
   };
 
   if (includeInstance) {
@@ -10793,7 +10787,7 @@ proto.yartu.CopyConferenceRecordToDriveRequest.toObject = function(includeInstan
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.CopyConferenceRecordToDriveRequest}
  */
 proto.yartu.CopyConferenceRecordToDriveRequest.deserializeBinary = function(bytes) {
@@ -10822,15 +10816,15 @@ proto.yartu.CopyConferenceRecordToDriveRequest.deserializeBinaryFromReader = fun
       msg.setSessionId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setRecordUuid(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setRepoId(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setPath(value);
       break;
     default:
@@ -10997,8 +10991,8 @@ proto.yartu.CopyConferenceRecordToDriveResponse.prototype.toObject = function(op
  */
 proto.yartu.CopyConferenceRecordToDriveResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -11011,7 +11005,7 @@ proto.yartu.CopyConferenceRecordToDriveResponse.toObject = function(includeInsta
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.CopyConferenceRecordToDriveResponse}
  */
 proto.yartu.CopyConferenceRecordToDriveResponse.deserializeBinary = function(bytes) {
@@ -11040,7 +11034,7 @@ proto.yartu.CopyConferenceRecordToDriveResponse.deserializeBinaryFromReader = fu
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -11175,8 +11169,8 @@ proto.yartu.ConvertToScheduledConferenceRequest.prototype.toObject = function(op
  */
 proto.yartu.ConvertToScheduledConferenceRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    uuid: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    name: jspb.Message.getFieldWithDefault(msg, 2, "")
+uuid: jspb.Message.getFieldWithDefault(msg, 1, ""),
+name: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -11189,7 +11183,7 @@ proto.yartu.ConvertToScheduledConferenceRequest.toObject = function(includeInsta
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ConvertToScheduledConferenceRequest}
  */
 proto.yartu.ConvertToScheduledConferenceRequest.deserializeBinary = function(bytes) {
@@ -11214,11 +11208,11 @@ proto.yartu.ConvertToScheduledConferenceRequest.deserializeBinaryFromReader = fu
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setUuid(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setName(value);
       break;
     default:
@@ -11335,8 +11329,8 @@ proto.yartu.ConvertToScheduledConferenceResponse.prototype.toObject = function(o
  */
 proto.yartu.ConvertToScheduledConferenceResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -11349,7 +11343,7 @@ proto.yartu.ConvertToScheduledConferenceResponse.toObject = function(includeInst
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ConvertToScheduledConferenceResponse}
  */
 proto.yartu.ConvertToScheduledConferenceResponse.deserializeBinary = function(bytes) {
@@ -11378,7 +11372,7 @@ proto.yartu.ConvertToScheduledConferenceResponse.deserializeBinaryFromReader = f
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:

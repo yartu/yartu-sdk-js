@@ -13,13 +13,7 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global =
-    (typeof globalThis !== 'undefined' && globalThis) ||
-    (typeof window !== 'undefined' && window) ||
-    (typeof global !== 'undefined' && global) ||
-    (typeof self !== 'undefined' && self) ||
-    (function () { return this; }).call(null) ||
-    Function('return this')();
+var global = globalThis;
 
 var common_grpc_definitions_pb = require('../utils/definitions_pb.cjs');
 goog.object.extend(proto, common_grpc_definitions_pb);
@@ -275,18 +269,18 @@ proto.yartu.ShareablePeople.prototype.toObject = function(opt_includeInstance) {
  */
 proto.yartu.ShareablePeople.toObject = function(includeInstance, msg) {
   var f, obj = {
-    isGroup: jspb.Message.getBooleanFieldWithDefault(msg, 1, false),
-    isContact: jspb.Message.getBooleanFieldWithDefault(msg, 2, false),
-    isYartuUser: jspb.Message.getBooleanFieldWithDefault(msg, 3, false),
-    isContactLabel: jspb.Message.getBooleanFieldWithDefault(msg, 4, false),
-    id: jspb.Message.getFieldWithDefault(msg, 5, 0),
-    photo: msg.getPhoto_asB64(),
-    name: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    surname: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    email: jspb.Message.getFieldWithDefault(msg, 9, ""),
-    text: jspb.Message.getFieldWithDefault(msg, 10, ""),
-    subtext: jspb.Message.getFieldWithDefault(msg, 11, ""),
-    color: jspb.Message.getFieldWithDefault(msg, 12, "")
+isGroup: jspb.Message.getBooleanFieldWithDefault(msg, 1, false),
+isContact: jspb.Message.getBooleanFieldWithDefault(msg, 2, false),
+isYartuUser: jspb.Message.getBooleanFieldWithDefault(msg, 3, false),
+isContactLabel: jspb.Message.getBooleanFieldWithDefault(msg, 4, false),
+id: jspb.Message.getFieldWithDefault(msg, 5, 0),
+photo: msg.getPhoto_asB64(),
+name: (f = jspb.Message.getField(msg, 7)) == null ? undefined : f,
+surname: (f = jspb.Message.getField(msg, 8)) == null ? undefined : f,
+email: (f = jspb.Message.getField(msg, 9)) == null ? undefined : f,
+text: (f = jspb.Message.getField(msg, 10)) == null ? undefined : f,
+subtext: (f = jspb.Message.getField(msg, 11)) == null ? undefined : f,
+color: (f = jspb.Message.getField(msg, 12)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -299,7 +293,7 @@ proto.yartu.ShareablePeople.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ShareablePeople}
  */
 proto.yartu.ShareablePeople.deserializeBinary = function(bytes) {
@@ -348,27 +342,27 @@ proto.yartu.ShareablePeople.deserializeBinaryFromReader = function(msg, reader) 
       msg.setPhoto(value);
       break;
     case 7:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setName(value);
       break;
     case 8:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setSurname(value);
       break;
     case 9:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setEmail(value);
       break;
     case 10:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setText(value);
       break;
     case 11:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setSubtext(value);
       break;
     case 12:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setColor(value);
       break;
     default:
@@ -885,9 +879,9 @@ proto.yartu.ShareableQuery.prototype.toObject = function(opt_includeInstance) {
  */
 proto.yartu.ShareableQuery.toObject = function(includeInstance, msg) {
   var f, obj = {
-    limit: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    order: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    includesContact: jspb.Message.getBooleanFieldWithDefault(msg, 3, false)
+limit: jspb.Message.getFieldWithDefault(msg, 1, 0),
+order: jspb.Message.getFieldWithDefault(msg, 2, ""),
+includesContact: jspb.Message.getBooleanFieldWithDefault(msg, 3, false)
   };
 
   if (includeInstance) {
@@ -900,7 +894,7 @@ proto.yartu.ShareableQuery.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ShareableQuery}
  */
 proto.yartu.ShareableQuery.deserializeBinary = function(bytes) {
@@ -929,7 +923,7 @@ proto.yartu.ShareableQuery.deserializeBinaryFromReader = function(msg, reader) {
       msg.setLimit(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setOrder(value);
       break;
     case 3:
@@ -1075,12 +1069,12 @@ proto.yartu.SearchResult.prototype.toObject = function(opt_includeInstance) {
  */
 proto.yartu.SearchResult.toObject = function(includeInstance, msg) {
   var f, obj = {
-    app: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    title: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    subtitle: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    model: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    id: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    data: (f = msg.getData()) && common_grpc_definitions_pb.JSON.toObject(includeInstance, f)
+app: jspb.Message.getFieldWithDefault(msg, 1, ""),
+title: jspb.Message.getFieldWithDefault(msg, 2, ""),
+subtitle: jspb.Message.getFieldWithDefault(msg, 3, ""),
+model: jspb.Message.getFieldWithDefault(msg, 4, ""),
+id: jspb.Message.getFieldWithDefault(msg, 5, ""),
+data: (f = msg.getData()) && common_grpc_definitions_pb.JSON.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -1093,7 +1087,7 @@ proto.yartu.SearchResult.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.SearchResult}
  */
 proto.yartu.SearchResult.deserializeBinary = function(bytes) {
@@ -1118,23 +1112,23 @@ proto.yartu.SearchResult.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setApp(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setTitle(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setSubtitle(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setModel(value);
       break;
     case 5:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setId(value);
       break;
     case 6:
@@ -1383,8 +1377,8 @@ proto.yartu.SearchFilter.prototype.toObject = function(opt_includeInstance) {
  */
 proto.yartu.SearchFilter.toObject = function(includeInstance, msg) {
   var f, obj = {
-    selector: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    valueList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f
+selector: jspb.Message.getFieldWithDefault(msg, 1, ""),
+valueList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -1397,7 +1391,7 @@ proto.yartu.SearchFilter.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.SearchFilter}
  */
 proto.yartu.SearchFilter.deserializeBinary = function(bytes) {
@@ -1422,11 +1416,11 @@ proto.yartu.SearchFilter.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setSelector(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.addValue(value);
       break;
     default:
@@ -1569,11 +1563,11 @@ proto.yartu.ListSearchShareablePeopleRequest.prototype.toObject = function(opt_i
  */
 proto.yartu.ListSearchShareablePeopleRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    search: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    typeList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f,
-    requiredFieldList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f,
-    withoutMe: jspb.Message.getBooleanFieldWithDefault(msg, 4, false),
-    query: (f = msg.getQuery()) && proto.yartu.ShareableQuery.toObject(includeInstance, f)
+search: jspb.Message.getFieldWithDefault(msg, 1, ""),
+typeList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f,
+requiredFieldList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f,
+withoutMe: (f = jspb.Message.getBooleanField(msg, 4)) == null ? undefined : f,
+query: (f = msg.getQuery()) && proto.yartu.ShareableQuery.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -1586,7 +1580,7 @@ proto.yartu.ListSearchShareablePeopleRequest.toObject = function(includeInstance
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ListSearchShareablePeopleRequest}
  */
 proto.yartu.ListSearchShareablePeopleRequest.deserializeBinary = function(bytes) {
@@ -1611,15 +1605,15 @@ proto.yartu.ListSearchShareablePeopleRequest.deserializeBinaryFromReader = funct
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setSearch(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.addType(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.addRequiredField(value);
       break;
     case 4:
@@ -1903,10 +1897,10 @@ proto.yartu.ListSearchShareablePeopleResponse.prototype.toObject = function(opt_
  */
 proto.yartu.ListSearchShareablePeopleResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    peopleList: jspb.Message.toObjectList(msg.getPeopleList(),
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+peopleList: jspb.Message.toObjectList(msg.getPeopleList(),
     proto.yartu.ShareablePeople.toObject, includeInstance),
-    message: jspb.Message.getFieldWithDefault(msg, 3, "")
+message: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -1919,7 +1913,7 @@ proto.yartu.ListSearchShareablePeopleResponse.toObject = function(includeInstanc
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ListSearchShareablePeopleResponse}
  */
 proto.yartu.ListSearchShareablePeopleResponse.deserializeBinary = function(bytes) {
@@ -1953,7 +1947,7 @@ proto.yartu.ListSearchShareablePeopleResponse.deserializeBinaryFromReader = func
       msg.addPeople(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -2141,11 +2135,11 @@ proto.yartu.ListSearchShareablePeopleBulkRequest.prototype.toObject = function(o
  */
 proto.yartu.ListSearchShareablePeopleBulkRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    searchList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
-    typeList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f,
-    requiredFieldList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f,
-    withoutMe: jspb.Message.getBooleanFieldWithDefault(msg, 4, false),
-    query: (f = msg.getQuery()) && proto.yartu.ShareableQuery.toObject(includeInstance, f)
+searchList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
+typeList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f,
+requiredFieldList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f,
+withoutMe: (f = jspb.Message.getBooleanField(msg, 4)) == null ? undefined : f,
+query: (f = msg.getQuery()) && proto.yartu.ShareableQuery.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -2158,7 +2152,7 @@ proto.yartu.ListSearchShareablePeopleBulkRequest.toObject = function(includeInst
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ListSearchShareablePeopleBulkRequest}
  */
 proto.yartu.ListSearchShareablePeopleBulkRequest.deserializeBinary = function(bytes) {
@@ -2183,15 +2177,15 @@ proto.yartu.ListSearchShareablePeopleBulkRequest.deserializeBinaryFromReader = f
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.addSearch(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.addType(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.addRequiredField(value);
       break;
     case 4:
@@ -2494,10 +2488,10 @@ proto.yartu.ListSearchShareablePeopleBulkResponse.prototype.toObject = function(
  */
 proto.yartu.ListSearchShareablePeopleBulkResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    peopleList: jspb.Message.toObjectList(msg.getPeopleList(),
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+peopleList: jspb.Message.toObjectList(msg.getPeopleList(),
     proto.yartu.ShareablePeople.toObject, includeInstance),
-    message: jspb.Message.getFieldWithDefault(msg, 3, "")
+message: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -2510,7 +2504,7 @@ proto.yartu.ListSearchShareablePeopleBulkResponse.toObject = function(includeIns
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ListSearchShareablePeopleBulkResponse}
  */
 proto.yartu.ListSearchShareablePeopleBulkResponse.deserializeBinary = function(bytes) {
@@ -2544,7 +2538,7 @@ proto.yartu.ListSearchShareablePeopleBulkResponse.deserializeBinaryFromReader = 
       msg.addPeople(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -2732,10 +2726,10 @@ proto.yartu.SearchRequest.prototype.toObject = function(opt_includeInstance) {
  */
 proto.yartu.SearchRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    query: (f = msg.getQuery()) && common_grpc_definitions_pb.Query.toObject(includeInstance, f),
-    filterList: jspb.Message.toObjectList(msg.getFilterList(),
+query: (f = msg.getQuery()) && common_grpc_definitions_pb.Query.toObject(includeInstance, f),
+filterList: jspb.Message.toObjectList(msg.getFilterList(),
     proto.yartu.SearchFilter.toObject, includeInstance),
-    appList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f
+appList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -2748,7 +2742,7 @@ proto.yartu.SearchRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.SearchRequest}
  */
 proto.yartu.SearchRequest.deserializeBinary = function(bytes) {
@@ -2783,7 +2777,7 @@ proto.yartu.SearchRequest.deserializeBinaryFromReader = function(msg, reader) {
       msg.addFilter(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.addApp(value);
       break;
     default:
@@ -2992,11 +2986,11 @@ proto.yartu.SearchResponse.prototype.toObject = function(opt_includeInstance) {
  */
 proto.yartu.SearchResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    dataList: jspb.Message.toObjectList(msg.getDataList(),
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+dataList: jspb.Message.toObjectList(msg.getDataList(),
     proto.yartu.SearchResult.toObject, includeInstance),
-    paginationMap: (f = msg.getPaginationMap()) ? f.toObject(includeInstance, proto.PaginationMeta.toObject) : [],
-    message: jspb.Message.getFieldWithDefault(msg, 4, "")
+paginationMap: (f = msg.getPaginationMap()) ? f.toObject(includeInstance, proto.PaginationMeta.toObject) : [],
+message: (f = jspb.Message.getField(msg, 4)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -3009,7 +3003,7 @@ proto.yartu.SearchResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.SearchResponse}
  */
 proto.yartu.SearchResponse.deserializeBinary = function(bytes) {
@@ -3045,11 +3039,11 @@ proto.yartu.SearchResponse.deserializeBinaryFromReader = function(msg, reader) {
     case 3:
       var value = msg.getPaginationMap();
       reader.readMessage(value, function(message, reader) {
-        jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readMessage, proto.PaginationMeta.deserializeBinaryFromReader, "", new proto.PaginationMeta());
+        jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readStringRequireUtf8, jspb.BinaryReader.prototype.readMessage, proto.PaginationMeta.deserializeBinaryFromReader, "", new proto.PaginationMeta());
          });
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -3098,7 +3092,13 @@ proto.yartu.SearchResponse.serializeBinaryToWriter = function(message, writer) {
   }
   f = message.getPaginationMap(true);
   if (f && f.getLength() > 0) {
-    f.serializeBinary(3, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeMessage, proto.PaginationMeta.serializeBinaryToWriter);
+jspb.internal.public_for_gencode.serializeMapToBinary(
+    message.getPaginationMap(true),
+    3,
+    writer,
+    jspb.BinaryWriter.prototype.writeString,
+    jspb.BinaryWriter.prototype.writeMessage,
+    proto.PaginationMeta.serializeBinaryToWriter);
   }
   f = /** @type {string} */ (jspb.Message.getField(message, 4));
   if (f != null) {

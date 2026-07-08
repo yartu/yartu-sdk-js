@@ -13,13 +13,7 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global =
-    (typeof globalThis !== 'undefined' && globalThis) ||
-    (typeof window !== 'undefined' && window) ||
-    (typeof global !== 'undefined' && global) ||
-    (typeof self !== 'undefined' && self) ||
-    (function () { return this; }).call(null) ||
-    Function('return this')();
+var global = globalThis;
 
 goog.exportSymbol('proto.AdminRole', null, global);
 goog.exportSymbol('proto.App', null, global);
@@ -606,8 +600,8 @@ proto.JSON.prototype.toObject = function(opt_includeInstance) {
  */
 proto.JSON.toObject = function(includeInstance, msg) {
   var f, obj = {
-    type: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    json: jspb.Message.getFieldWithDefault(msg, 2, "")
+type: jspb.Message.getFieldWithDefault(msg, 1, ""),
+json: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -620,7 +614,7 @@ proto.JSON.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.JSON}
  */
 proto.JSON.deserializeBinary = function(bytes) {
@@ -645,11 +639,11 @@ proto.JSON.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setType(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setJson(value);
       break;
     default:
@@ -773,12 +767,12 @@ proto.AdminRole.prototype.toObject = function(opt_includeInstance) {
  */
 proto.AdminRole.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    name: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    caption: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    permissionList: (f = jspb.Message.getRepeatedField(msg, 4)) == null ? undefined : f,
-    isDefault: jspb.Message.getBooleanFieldWithDefault(msg, 5, false),
-    isSuperuser: jspb.Message.getBooleanFieldWithDefault(msg, 6, false)
+id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+name: jspb.Message.getFieldWithDefault(msg, 2, ""),
+caption: jspb.Message.getFieldWithDefault(msg, 3, ""),
+permissionList: (f = jspb.Message.getRepeatedField(msg, 4)) == null ? undefined : f,
+isDefault: jspb.Message.getBooleanFieldWithDefault(msg, 5, false),
+isSuperuser: jspb.Message.getBooleanFieldWithDefault(msg, 6, false)
   };
 
   if (includeInstance) {
@@ -791,7 +785,7 @@ proto.AdminRole.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.AdminRole}
  */
 proto.AdminRole.deserializeBinary = function(bytes) {
@@ -820,15 +814,15 @@ proto.AdminRole.deserializeBinaryFromReader = function(msg, reader) {
       msg.setId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setName(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setCaption(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.addPermission(value);
       break;
     case 5:
@@ -1072,13 +1066,13 @@ proto.Department.prototype.toObject = function(opt_includeInstance) {
  */
 proto.Department.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    name: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    description: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    departmentType: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    parentId: jspb.Message.getFieldWithDefault(msg, 5, 0),
-    parent: (f = msg.getParent()) && proto.Department.toObject(includeInstance, f),
-    isActive: jspb.Message.getBooleanFieldWithDefault(msg, 7, false)
+id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+name: jspb.Message.getFieldWithDefault(msg, 2, ""),
+description: jspb.Message.getFieldWithDefault(msg, 3, ""),
+departmentType: jspb.Message.getFieldWithDefault(msg, 4, ""),
+parentId: jspb.Message.getFieldWithDefault(msg, 5, 0),
+parent: (f = msg.getParent()) && proto.Department.toObject(includeInstance, f),
+isActive: jspb.Message.getBooleanFieldWithDefault(msg, 7, false)
   };
 
   if (includeInstance) {
@@ -1091,7 +1085,7 @@ proto.Department.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.Department}
  */
 proto.Department.deserializeBinary = function(bytes) {
@@ -1120,15 +1114,15 @@ proto.Department.deserializeBinaryFromReader = function(msg, reader) {
       msg.setId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setName(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setDescription(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setDepartmentType(value);
       break;
     case 5:
@@ -1403,8 +1397,8 @@ proto.PaidLog.prototype.toObject = function(opt_includeInstance) {
  */
 proto.PaidLog.toObject = function(includeInstance, msg) {
   var f, obj = {
-    domain: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    logs: (f = msg.getLogs()) && proto.JSON.toObject(includeInstance, f)
+domain: jspb.Message.getFieldWithDefault(msg, 1, ""),
+logs: (f = msg.getLogs()) && proto.JSON.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -1417,7 +1411,7 @@ proto.PaidLog.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.PaidLog}
  */
 proto.PaidLog.deserializeBinary = function(bytes) {
@@ -1442,7 +1436,7 @@ proto.PaidLog.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setDomain(value);
       break;
     case 2:
@@ -1591,18 +1585,18 @@ proto.Realm.prototype.toObject = function(opt_includeInstance) {
  */
 proto.Realm.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    domain: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    hostname: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    logo: msg.getLogo_asB64(),
-    owner: jspb.Message.getFieldWithDefault(msg, 5, 0),
-    loginType: jspb.Message.getFieldWithDefault(msg, 6, 0),
-    serviceList: (f = jspb.Message.getRepeatedField(msg, 7)) == null ? undefined : f,
-    settings: (f = msg.getSettings()) && proto.JSON.toObject(includeInstance, f),
-    serviceSettings: (f = msg.getServiceSettings()) && proto.JSON.toObject(includeInstance, f),
-    aliasList: (f = jspb.Message.getRepeatedField(msg, 10)) == null ? undefined : f,
-    isDefault: jspb.Message.getBooleanFieldWithDefault(msg, 11, false),
-    isActive: jspb.Message.getBooleanFieldWithDefault(msg, 12, false)
+id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+domain: jspb.Message.getFieldWithDefault(msg, 2, ""),
+hostname: jspb.Message.getFieldWithDefault(msg, 3, ""),
+logo: msg.getLogo_asB64(),
+owner: jspb.Message.getFieldWithDefault(msg, 5, 0),
+loginType: jspb.Message.getFieldWithDefault(msg, 6, 0),
+serviceList: (f = jspb.Message.getRepeatedField(msg, 7)) == null ? undefined : f,
+settings: (f = msg.getSettings()) && proto.JSON.toObject(includeInstance, f),
+serviceSettings: (f = msg.getServiceSettings()) && proto.JSON.toObject(includeInstance, f),
+aliasList: (f = jspb.Message.getRepeatedField(msg, 10)) == null ? undefined : f,
+isDefault: jspb.Message.getBooleanFieldWithDefault(msg, 11, false),
+isActive: jspb.Message.getBooleanFieldWithDefault(msg, 12, false)
   };
 
   if (includeInstance) {
@@ -1615,7 +1609,7 @@ proto.Realm.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.Realm}
  */
 proto.Realm.deserializeBinary = function(bytes) {
@@ -1644,11 +1638,11 @@ proto.Realm.deserializeBinaryFromReader = function(msg, reader) {
       msg.setId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setDomain(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setHostname(value);
       break;
     case 4:
@@ -1664,7 +1658,7 @@ proto.Realm.deserializeBinaryFromReader = function(msg, reader) {
       msg.setLoginType(value);
       break;
     case 7:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.addService(value);
       break;
     case 8:
@@ -1678,7 +1672,7 @@ proto.Realm.deserializeBinaryFromReader = function(msg, reader) {
       msg.setServiceSettings(value);
       break;
     case 10:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.addAlias(value);
       break;
     case 11:
@@ -2173,9 +2167,9 @@ proto.EmailQuota.prototype.toObject = function(opt_includeInstance) {
  */
 proto.EmailQuota.toObject = function(includeInstance, msg) {
   var f, obj = {
-    usage: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    quota: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    messages: jspb.Message.getFieldWithDefault(msg, 3, 0)
+usage: jspb.Message.getFieldWithDefault(msg, 1, 0),
+quota: jspb.Message.getFieldWithDefault(msg, 2, 0),
+messages: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
 
   if (includeInstance) {
@@ -2188,7 +2182,7 @@ proto.EmailQuota.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.EmailQuota}
  */
 proto.EmailQuota.deserializeBinary = function(bytes) {
@@ -2363,8 +2357,8 @@ proto.DriveQuota.prototype.toObject = function(opt_includeInstance) {
  */
 proto.DriveQuota.toObject = function(includeInstance, msg) {
   var f, obj = {
-    usage: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    quota: jspb.Message.getFieldWithDefault(msg, 2, 0)
+usage: jspb.Message.getFieldWithDefault(msg, 1, 0),
+quota: jspb.Message.getFieldWithDefault(msg, 2, 0)
   };
 
   if (includeInstance) {
@@ -2377,7 +2371,7 @@ proto.DriveQuota.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.DriveQuota}
  */
 proto.DriveQuota.deserializeBinary = function(bytes) {
@@ -2530,35 +2524,35 @@ proto.User.prototype.toObject = function(opt_includeInstance) {
  */
 proto.User.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    uuid: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    username: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    name: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    surname: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    loginId: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    uniqueId: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    ldapDn: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    serviceList: (f = jspb.Message.getRepeatedField(msg, 9)) == null ? undefined : f,
-    widgetList: (f = jspb.Message.getRepeatedField(msg, 10)) == null ? undefined : f,
-    role: jspb.Message.getFieldWithDefault(msg, 11, 0),
-    realm: jspb.Message.getFieldWithDefault(msg, 12, 0),
-    department: jspb.Message.getFieldWithDefault(msg, 13, 0),
-    comment: jspb.Message.getFieldWithDefault(msg, 14, ""),
-    isActive: jspb.Message.getBooleanFieldWithDefault(msg, 15, false),
-    isPrivate: jspb.Message.getBooleanFieldWithDefault(msg, 16, false),
-    workingStatus: jspb.Message.getFieldWithDefault(msg, 17, ""),
-    lastLoginAt: jspb.Message.getFieldWithDefault(msg, 18, ""),
-    createdAt: jspb.Message.getFieldWithDefault(msg, 19, ""),
-    updatedAt: jspb.Message.getFieldWithDefault(msg, 20, ""),
-    quotas: (f = msg.getQuotas()) && proto.JSON.toObject(includeInstance, f),
-    serviceSettings: (f = msg.getServiceSettings()) && proto.JSON.toObject(includeInstance, f),
-    loginTypes: (f = msg.getLoginTypes()) && proto.JSON.toObject(includeInstance, f),
-    hasEmailQuota: jspb.Message.getBooleanFieldWithDefault(msg, 24, false),
-    emailQuota: (f = msg.getEmailQuota()) && proto.EmailQuota.toObject(includeInstance, f),
-    hasDriveQuota: jspb.Message.getBooleanFieldWithDefault(msg, 26, false),
-    driveQuota: (f = msg.getDriveQuota()) && proto.DriveQuota.toObject(includeInstance, f),
-    image: jspb.Message.getFieldWithDefault(msg, 28, ""),
-    isRealmManager: jspb.Message.getBooleanFieldWithDefault(msg, 29, false)
+id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+uuid: jspb.Message.getFieldWithDefault(msg, 2, ""),
+username: jspb.Message.getFieldWithDefault(msg, 3, ""),
+name: jspb.Message.getFieldWithDefault(msg, 4, ""),
+surname: jspb.Message.getFieldWithDefault(msg, 5, ""),
+loginId: jspb.Message.getFieldWithDefault(msg, 6, ""),
+uniqueId: jspb.Message.getFieldWithDefault(msg, 7, ""),
+ldapDn: jspb.Message.getFieldWithDefault(msg, 8, ""),
+serviceList: (f = jspb.Message.getRepeatedField(msg, 9)) == null ? undefined : f,
+widgetList: (f = jspb.Message.getRepeatedField(msg, 10)) == null ? undefined : f,
+role: (f = jspb.Message.getField(msg, 11)) == null ? undefined : f,
+realm: (f = jspb.Message.getField(msg, 12)) == null ? undefined : f,
+department: (f = jspb.Message.getField(msg, 13)) == null ? undefined : f,
+comment: (f = jspb.Message.getField(msg, 14)) == null ? undefined : f,
+isActive: jspb.Message.getBooleanFieldWithDefault(msg, 15, false),
+isPrivate: jspb.Message.getBooleanFieldWithDefault(msg, 16, false),
+workingStatus: jspb.Message.getFieldWithDefault(msg, 17, ""),
+lastLoginAt: jspb.Message.getFieldWithDefault(msg, 18, ""),
+createdAt: jspb.Message.getFieldWithDefault(msg, 19, ""),
+updatedAt: jspb.Message.getFieldWithDefault(msg, 20, ""),
+quotas: (f = msg.getQuotas()) && proto.JSON.toObject(includeInstance, f),
+serviceSettings: (f = msg.getServiceSettings()) && proto.JSON.toObject(includeInstance, f),
+loginTypes: (f = msg.getLoginTypes()) && proto.JSON.toObject(includeInstance, f),
+hasEmailQuota: (f = jspb.Message.getBooleanField(msg, 24)) == null ? undefined : f,
+emailQuota: (f = msg.getEmailQuota()) && proto.EmailQuota.toObject(includeInstance, f),
+hasDriveQuota: (f = jspb.Message.getBooleanField(msg, 26)) == null ? undefined : f,
+driveQuota: (f = msg.getDriveQuota()) && proto.DriveQuota.toObject(includeInstance, f),
+image: (f = jspb.Message.getField(msg, 28)) == null ? undefined : f,
+isRealmManager: (f = jspb.Message.getBooleanField(msg, 29)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -2571,7 +2565,7 @@ proto.User.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.User}
  */
 proto.User.deserializeBinary = function(bytes) {
@@ -2600,39 +2594,39 @@ proto.User.deserializeBinaryFromReader = function(msg, reader) {
       msg.setId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setUuid(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setUsername(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setName(value);
       break;
     case 5:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setSurname(value);
       break;
     case 6:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setLoginId(value);
       break;
     case 7:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setUniqueId(value);
       break;
     case 8:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setLdapDn(value);
       break;
     case 9:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.addService(value);
       break;
     case 10:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.addWidget(value);
       break;
     case 11:
@@ -2648,7 +2642,7 @@ proto.User.deserializeBinaryFromReader = function(msg, reader) {
       msg.setDepartment(value);
       break;
     case 14:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setComment(value);
       break;
     case 15:
@@ -2660,19 +2654,19 @@ proto.User.deserializeBinaryFromReader = function(msg, reader) {
       msg.setIsPrivate(value);
       break;
     case 17:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setWorkingStatus(value);
       break;
     case 18:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setLastLoginAt(value);
       break;
     case 19:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setCreatedAt(value);
       break;
     case 20:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setUpdatedAt(value);
       break;
     case 21:
@@ -2709,7 +2703,7 @@ proto.User.deserializeBinaryFromReader = function(msg, reader) {
       msg.setDriveQuota(value);
       break;
     case 28:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setImage(value);
       break;
     case 29:
@@ -3787,13 +3781,13 @@ proto.UserBasic.prototype.toObject = function(opt_includeInstance) {
  */
 proto.UserBasic.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    name: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    surname: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    username: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    photo: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    isActive: jspb.Message.getBooleanFieldWithDefault(msg, 6, false),
-    workingStatus: jspb.Message.getFieldWithDefault(msg, 7, "")
+id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+name: jspb.Message.getFieldWithDefault(msg, 2, ""),
+surname: jspb.Message.getFieldWithDefault(msg, 3, ""),
+username: jspb.Message.getFieldWithDefault(msg, 4, ""),
+photo: (f = jspb.Message.getField(msg, 5)) == null ? undefined : f,
+isActive: (f = jspb.Message.getBooleanField(msg, 6)) == null ? undefined : f,
+workingStatus: (f = jspb.Message.getField(msg, 7)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -3806,7 +3800,7 @@ proto.UserBasic.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.UserBasic}
  */
 proto.UserBasic.deserializeBinary = function(bytes) {
@@ -3835,19 +3829,19 @@ proto.UserBasic.deserializeBinaryFromReader = function(msg, reader) {
       msg.setId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setName(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setSurname(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setUsername(value);
       break;
     case 5:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setPhoto(value);
       break;
     case 6:
@@ -3855,7 +3849,7 @@ proto.UserBasic.deserializeBinaryFromReader = function(msg, reader) {
       msg.setIsActive(value);
       break;
     case 7:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setWorkingStatus(value);
       break;
     default:
@@ -4151,13 +4145,13 @@ proto.App.prototype.toObject = function(opt_includeInstance) {
  */
 proto.App.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    isActive: jspb.Message.getBooleanFieldWithDefault(msg, 2, false),
-    appType: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    icon: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    uuid: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    settings: (f = msg.getSettings()) && proto.JSON.toObject(includeInstance, f),
-    url: jspb.Message.getFieldWithDefault(msg, 7, "")
+name: jspb.Message.getFieldWithDefault(msg, 1, ""),
+isActive: jspb.Message.getBooleanFieldWithDefault(msg, 2, false),
+appType: jspb.Message.getFieldWithDefault(msg, 3, ""),
+icon: jspb.Message.getFieldWithDefault(msg, 4, ""),
+uuid: jspb.Message.getFieldWithDefault(msg, 5, ""),
+settings: (f = msg.getSettings()) && proto.JSON.toObject(includeInstance, f),
+url: (f = jspb.Message.getField(msg, 7)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -4170,7 +4164,7 @@ proto.App.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.App}
  */
 proto.App.deserializeBinary = function(bytes) {
@@ -4195,7 +4189,7 @@ proto.App.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setName(value);
       break;
     case 2:
@@ -4203,15 +4197,15 @@ proto.App.deserializeBinaryFromReader = function(msg, reader) {
       msg.setIsActive(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setAppType(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setIcon(value);
       break;
     case 5:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setUuid(value);
       break;
     case 6:
@@ -4220,7 +4214,7 @@ proto.App.deserializeBinaryFromReader = function(msg, reader) {
       msg.setSettings(value);
       break;
     case 7:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setUrl(value);
       break;
     default:
@@ -4500,15 +4494,15 @@ proto.Group.prototype.toObject = function(opt_includeInstance) {
  */
 proto.Group.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    name: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    realm: (f = msg.getRealm()) && proto.Realm.toObject(includeInstance, f),
-    emailAlias: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    driveId: jspb.Message.getFieldWithDefault(msg, 5, 0),
-    addressbookId: jspb.Message.getFieldWithDefault(msg, 6, 0),
-    isActive: jspb.Message.getBooleanFieldWithDefault(msg, 7, false),
-    isPrivate: jspb.Message.getBooleanFieldWithDefault(msg, 8, false),
-    usersCount: jspb.Message.getFieldWithDefault(msg, 9, 0)
+id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+name: jspb.Message.getFieldWithDefault(msg, 2, ""),
+realm: (f = msg.getRealm()) && proto.Realm.toObject(includeInstance, f),
+emailAlias: jspb.Message.getFieldWithDefault(msg, 4, ""),
+driveId: jspb.Message.getFieldWithDefault(msg, 5, 0),
+addressbookId: jspb.Message.getFieldWithDefault(msg, 6, 0),
+isActive: jspb.Message.getBooleanFieldWithDefault(msg, 7, false),
+isPrivate: jspb.Message.getBooleanFieldWithDefault(msg, 8, false),
+usersCount: jspb.Message.getFieldWithDefault(msg, 9, 0)
   };
 
   if (includeInstance) {
@@ -4521,7 +4515,7 @@ proto.Group.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.Group}
  */
 proto.Group.deserializeBinary = function(bytes) {
@@ -4550,7 +4544,7 @@ proto.Group.deserializeBinaryFromReader = function(msg, reader) {
       msg.setId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setName(value);
       break;
     case 3:
@@ -4559,7 +4553,7 @@ proto.Group.deserializeBinaryFromReader = function(msg, reader) {
       msg.setRealm(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setEmailAlias(value);
       break;
     case 5:
@@ -4891,10 +4885,10 @@ proto.GroupBasic.prototype.toObject = function(opt_includeInstance) {
  */
 proto.GroupBasic.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    name: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    emailAlias: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    isActive: jspb.Message.getBooleanFieldWithDefault(msg, 4, false)
+id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+name: jspb.Message.getFieldWithDefault(msg, 2, ""),
+emailAlias: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f,
+isActive: (f = jspb.Message.getBooleanField(msg, 4)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -4907,7 +4901,7 @@ proto.GroupBasic.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.GroupBasic}
  */
 proto.GroupBasic.deserializeBinary = function(bytes) {
@@ -4936,11 +4930,11 @@ proto.GroupBasic.deserializeBinaryFromReader = function(msg, reader) {
       msg.setId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setName(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setEmailAlias(value);
       break;
     case 4:
@@ -5147,23 +5141,23 @@ proto.GroupAdmin.prototype.toObject = function(opt_includeInstance) {
  */
 proto.GroupAdmin.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    name: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    realm: (f = msg.getRealm()) && proto.Realm.toObject(includeInstance, f),
-    realmId: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    owner: (f = msg.getOwner()) && proto.UserBasic.toObject(includeInstance, f),
-    settings: (f = msg.getSettings()) && proto.JSON.toObject(includeInstance, f),
-    hasEmailAlias: jspb.Message.getBooleanFieldWithDefault(msg, 7, false),
-    emailAlias: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    driveId: jspb.Message.getFieldWithDefault(msg, 9, 0),
-    ldapDn: jspb.Message.getFieldWithDefault(msg, 10, ""),
-    usersCount: jspb.Message.getFieldWithDefault(msg, 11, 0),
-    hasDrive: jspb.Message.getBooleanFieldWithDefault(msg, 12, false),
-    hasAddressbook: jspb.Message.getBooleanFieldWithDefault(msg, 13, false),
-    hasCalendar: jspb.Message.getBooleanFieldWithDefault(msg, 14, false),
-    hasLdap: jspb.Message.getBooleanFieldWithDefault(msg, 15, false),
-    isActive: jspb.Message.getBooleanFieldWithDefault(msg, 16, false),
-    isPrivate: jspb.Message.getBooleanFieldWithDefault(msg, 17, false)
+id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+name: jspb.Message.getFieldWithDefault(msg, 2, ""),
+realm: (f = msg.getRealm()) && proto.Realm.toObject(includeInstance, f),
+realmId: jspb.Message.getFieldWithDefault(msg, 4, 0),
+owner: (f = msg.getOwner()) && proto.UserBasic.toObject(includeInstance, f),
+settings: (f = msg.getSettings()) && proto.JSON.toObject(includeInstance, f),
+hasEmailAlias: jspb.Message.getBooleanFieldWithDefault(msg, 7, false),
+emailAlias: jspb.Message.getFieldWithDefault(msg, 8, ""),
+driveId: jspb.Message.getFieldWithDefault(msg, 9, 0),
+ldapDn: jspb.Message.getFieldWithDefault(msg, 10, ""),
+usersCount: jspb.Message.getFieldWithDefault(msg, 11, 0),
+hasDrive: jspb.Message.getBooleanFieldWithDefault(msg, 12, false),
+hasAddressbook: jspb.Message.getBooleanFieldWithDefault(msg, 13, false),
+hasCalendar: jspb.Message.getBooleanFieldWithDefault(msg, 14, false),
+hasLdap: jspb.Message.getBooleanFieldWithDefault(msg, 15, false),
+isActive: jspb.Message.getBooleanFieldWithDefault(msg, 16, false),
+isPrivate: jspb.Message.getBooleanFieldWithDefault(msg, 17, false)
   };
 
   if (includeInstance) {
@@ -5176,7 +5170,7 @@ proto.GroupAdmin.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.GroupAdmin}
  */
 proto.GroupAdmin.deserializeBinary = function(bytes) {
@@ -5205,7 +5199,7 @@ proto.GroupAdmin.deserializeBinaryFromReader = function(msg, reader) {
       msg.setId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setName(value);
       break;
     case 3:
@@ -5232,7 +5226,7 @@ proto.GroupAdmin.deserializeBinaryFromReader = function(msg, reader) {
       msg.setHasEmailAlias(value);
       break;
     case 8:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setEmailAlias(value);
       break;
     case 9:
@@ -5240,7 +5234,7 @@ proto.GroupAdmin.deserializeBinaryFromReader = function(msg, reader) {
       msg.setDriveId(value);
       break;
     case 10:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setLdapDn(value);
       break;
     case 11:
@@ -5827,7 +5821,7 @@ proto.GroupUsers.prototype.toObject = function(opt_includeInstance) {
  */
 proto.GroupUsers.toObject = function(includeInstance, msg) {
   var f, obj = {
-    usersList: jspb.Message.toObjectList(msg.getUsersList(),
+usersList: jspb.Message.toObjectList(msg.getUsersList(),
     proto.User.toObject, includeInstance)
   };
 
@@ -5841,7 +5835,7 @@ proto.GroupUsers.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.GroupUsers}
  */
 proto.GroupUsers.deserializeBinary = function(bytes) {
@@ -5987,11 +5981,11 @@ proto.Query.prototype.toObject = function(opt_includeInstance) {
  */
 proto.Query.toObject = function(includeInstance, msg) {
   var f, obj = {
-    query: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    page: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    perPage: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    sortBy: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    searchFieldsList: (f = jspb.Message.getRepeatedField(msg, 5)) == null ? undefined : f
+query: jspb.Message.getFieldWithDefault(msg, 1, ""),
+page: jspb.Message.getFieldWithDefault(msg, 2, 0),
+perPage: jspb.Message.getFieldWithDefault(msg, 3, 0),
+sortBy: jspb.Message.getFieldWithDefault(msg, 4, ""),
+searchFieldsList: (f = jspb.Message.getRepeatedField(msg, 5)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -6004,7 +5998,7 @@ proto.Query.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.Query}
  */
 proto.Query.deserializeBinary = function(bytes) {
@@ -6029,7 +6023,7 @@ proto.Query.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setQuery(value);
       break;
     case 2:
@@ -6041,11 +6035,11 @@ proto.Query.deserializeBinaryFromReader = function(msg, reader) {
       msg.setPerPage(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setSortBy(value);
       break;
     case 5:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.addSearchFields(value);
       break;
     default:
@@ -6256,10 +6250,10 @@ proto.PaginationMeta.prototype.toObject = function(opt_includeInstance) {
  */
 proto.PaginationMeta.toObject = function(includeInstance, msg) {
   var f, obj = {
-    currentPage: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    perPage: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    total: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    totalCount: jspb.Message.getFieldWithDefault(msg, 4, 0)
+currentPage: jspb.Message.getFieldWithDefault(msg, 1, 0),
+perPage: jspb.Message.getFieldWithDefault(msg, 2, 0),
+total: jspb.Message.getFieldWithDefault(msg, 3, 0),
+totalCount: jspb.Message.getFieldWithDefault(msg, 4, 0)
   };
 
   if (includeInstance) {
@@ -6272,7 +6266,7 @@ proto.PaginationMeta.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.PaginationMeta}
  */
 proto.PaginationMeta.deserializeBinary = function(bytes) {
@@ -6502,9 +6496,9 @@ proto.UserModifyMeta.prototype.toObject = function(opt_includeInstance) {
  */
 proto.UserModifyMeta.toObject = function(includeInstance, msg) {
   var f, obj = {
-    username: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    id: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    operation: jspb.Message.getFieldWithDefault(msg, 3, "")
+username: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f,
+id: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f,
+operation: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -6517,7 +6511,7 @@ proto.UserModifyMeta.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.UserModifyMeta}
  */
 proto.UserModifyMeta.deserializeBinary = function(bytes) {
@@ -6542,7 +6536,7 @@ proto.UserModifyMeta.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setUsername(value);
       break;
     case 2:
@@ -6550,7 +6544,7 @@ proto.UserModifyMeta.deserializeBinaryFromReader = function(msg, reader) {
       msg.setId(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setOperation(value);
       break;
     default:
@@ -6754,9 +6748,9 @@ proto.UserModifyResult.prototype.toObject = function(opt_includeInstance) {
  */
 proto.UserModifyResult.toObject = function(includeInstance, msg) {
   var f, obj = {
-    username: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    id: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    result: jspb.Message.getFieldWithDefault(msg, 3, "")
+username: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f,
+id: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f,
+result: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -6769,7 +6763,7 @@ proto.UserModifyResult.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.UserModifyResult}
  */
 proto.UserModifyResult.deserializeBinary = function(bytes) {
@@ -6794,7 +6788,7 @@ proto.UserModifyResult.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setUsername(value);
       break;
     case 2:
@@ -6802,7 +6796,7 @@ proto.UserModifyResult.deserializeBinaryFromReader = function(msg, reader) {
       msg.setId(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setResult(value);
       break;
     default:
@@ -6980,8 +6974,8 @@ proto.UserSharePermissionMeta.prototype.toObject = function(opt_includeInstance)
  */
 proto.UserSharePermissionMeta.toObject = function(includeInstance, msg) {
   var f, obj = {
-    userId: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    permission: jspb.Message.getFieldWithDefault(msg, 2, "")
+userId: jspb.Message.getFieldWithDefault(msg, 1, 0),
+permission: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -6994,7 +6988,7 @@ proto.UserSharePermissionMeta.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.UserSharePermissionMeta}
  */
 proto.UserSharePermissionMeta.deserializeBinary = function(bytes) {
@@ -7023,7 +7017,7 @@ proto.UserSharePermissionMeta.deserializeBinaryFromReader = function(msg, reader
       msg.setUserId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setPermission(value);
       break;
     default:
@@ -7140,9 +7134,9 @@ proto.UserSharePermissionResult.prototype.toObject = function(opt_includeInstanc
  */
 proto.UserSharePermissionResult.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    userId: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    username: jspb.Message.getFieldWithDefault(msg, 3, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+userId: jspb.Message.getFieldWithDefault(msg, 2, 0),
+username: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -7155,7 +7149,7 @@ proto.UserSharePermissionResult.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.UserSharePermissionResult}
  */
 proto.UserSharePermissionResult.deserializeBinary = function(bytes) {
@@ -7188,7 +7182,7 @@ proto.UserSharePermissionResult.deserializeBinaryFromReader = function(msg, read
       msg.setUserId(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setUsername(value);
       break;
     default:
@@ -7357,14 +7351,14 @@ proto.Shared.prototype.toObject = function(opt_includeInstance) {
  */
 proto.Shared.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    user: (f = msg.getUser()) && proto.UserBasic.toObject(includeInstance, f),
-    group: (f = msg.getGroup()) && proto.GroupBasic.toObject(includeInstance, f),
-    realm: (f = msg.getRealm()) && proto.Realm.toObject(includeInstance, f),
-    createdAt: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    updatedAt: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    permission: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    customPermissionMap: (f = msg.getCustomPermissionMap()) ? f.toObject(includeInstance, undefined) : []
+id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+user: (f = msg.getUser()) && proto.UserBasic.toObject(includeInstance, f),
+group: (f = msg.getGroup()) && proto.GroupBasic.toObject(includeInstance, f),
+realm: (f = msg.getRealm()) && proto.Realm.toObject(includeInstance, f),
+createdAt: (f = jspb.Message.getField(msg, 5)) == null ? undefined : f,
+updatedAt: (f = jspb.Message.getField(msg, 6)) == null ? undefined : f,
+permission: (f = jspb.Message.getField(msg, 7)) == null ? undefined : f,
+customPermissionMap: (f = msg.getCustomPermissionMap()) ? f.toObject(includeInstance, undefined) : []
   };
 
   if (includeInstance) {
@@ -7377,7 +7371,7 @@ proto.Shared.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.Shared}
  */
 proto.Shared.deserializeBinary = function(bytes) {
@@ -7421,21 +7415,21 @@ proto.Shared.deserializeBinaryFromReader = function(msg, reader) {
       msg.setRealm(value);
       break;
     case 5:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setCreatedAt(value);
       break;
     case 6:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setUpdatedAt(value);
       break;
     case 7:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setPermission(value);
       break;
     case 8:
       var value = msg.getCustomPermissionMap();
       reader.readMessage(value, function(message, reader) {
-        jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readBool, null, "", false);
+        jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readStringRequireUtf8, jspb.BinaryReader.prototype.readBool, null, "", false);
          });
       break;
     default:
@@ -7521,7 +7515,12 @@ proto.Shared.serializeBinaryToWriter = function(message, writer) {
   }
   f = message.getCustomPermissionMap(true);
   if (f && f.getLength() > 0) {
-    f.serializeBinary(8, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeBool);
+jspb.internal.public_for_gencode.serializeMapToBinary(
+    message.getCustomPermissionMap(true),
+    8,
+    writer,
+    jspb.BinaryWriter.prototype.writeString,
+    jspb.BinaryWriter.prototype.writeBool);
   }
 };
 
@@ -7818,10 +7817,10 @@ proto.InternalFile.prototype.toObject = function(opt_includeInstance) {
  */
 proto.InternalFile.toObject = function(includeInstance, msg) {
   var f, obj = {
-    uuid: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    name: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    path: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    size: jspb.Message.getFieldWithDefault(msg, 4, 0)
+uuid: jspb.Message.getFieldWithDefault(msg, 1, ""),
+name: jspb.Message.getFieldWithDefault(msg, 2, ""),
+path: jspb.Message.getFieldWithDefault(msg, 3, ""),
+size: jspb.Message.getFieldWithDefault(msg, 4, 0)
   };
 
   if (includeInstance) {
@@ -7834,7 +7833,7 @@ proto.InternalFile.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.InternalFile}
  */
 proto.InternalFile.deserializeBinary = function(bytes) {
@@ -7859,15 +7858,15 @@ proto.InternalFile.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setUuid(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setName(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setPath(value);
       break;
     case 4:
@@ -8045,11 +8044,11 @@ proto.MailAlias.prototype.toObject = function(opt_includeInstance) {
  */
 proto.MailAlias.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    email: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    toList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f,
-    realmId: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    isActive: jspb.Message.getBooleanFieldWithDefault(msg, 5, false)
+id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+email: jspb.Message.getFieldWithDefault(msg, 2, ""),
+toList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f,
+realmId: jspb.Message.getFieldWithDefault(msg, 4, 0),
+isActive: jspb.Message.getBooleanFieldWithDefault(msg, 5, false)
   };
 
   if (includeInstance) {
@@ -8062,7 +8061,7 @@ proto.MailAlias.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.MailAlias}
  */
 proto.MailAlias.deserializeBinary = function(bytes) {
@@ -8091,11 +8090,11 @@ proto.MailAlias.deserializeBinaryFromReader = function(msg, reader) {
       msg.setId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setEmail(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.addTo(value);
       break;
     case 4:
@@ -8314,25 +8313,25 @@ proto.Calendar.prototype.toObject = function(opt_includeInstance) {
  */
 proto.Calendar.toObject = function(includeInstance, msg) {
   var f, obj = {
-    instanceId: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    calendarId: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    uri: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    principaluri: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    access: jspb.Message.getFieldWithDefault(msg, 5, 0),
-    displayname: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    calendarorder: jspb.Message.getFieldWithDefault(msg, 7, 0),
-    calendarcolor: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    timezone: jspb.Message.getFieldWithDefault(msg, 9, ""),
-    transparent: jspb.Message.getFieldWithDefault(msg, 10, 0),
-    shareDisplayname: jspb.Message.getFieldWithDefault(msg, 11, ""),
-    shareHref: jspb.Message.getFieldWithDefault(msg, 12, ""),
-    shareInvitestatus: jspb.Message.getFieldWithDefault(msg, 13, 0),
-    caldav: jspb.Message.getBooleanFieldWithDefault(msg, 14, false),
-    isDefault: jspb.Message.getBooleanFieldWithDefault(msg, 15, false),
-    email: jspb.Message.getFieldWithDefault(msg, 16, ""),
-    permission: jspb.Message.getFieldWithDefault(msg, 17, ""),
-    owner: jspb.Message.getFieldWithDefault(msg, 18, ""),
-    isPublic: jspb.Message.getBooleanFieldWithDefault(msg, 19, false)
+instanceId: jspb.Message.getFieldWithDefault(msg, 1, 0),
+calendarId: jspb.Message.getFieldWithDefault(msg, 2, 0),
+uri: jspb.Message.getFieldWithDefault(msg, 3, ""),
+principaluri: jspb.Message.getFieldWithDefault(msg, 4, ""),
+access: jspb.Message.getFieldWithDefault(msg, 5, 0),
+displayname: jspb.Message.getFieldWithDefault(msg, 6, ""),
+calendarorder: jspb.Message.getFieldWithDefault(msg, 7, 0),
+calendarcolor: jspb.Message.getFieldWithDefault(msg, 8, ""),
+timezone: jspb.Message.getFieldWithDefault(msg, 9, ""),
+transparent: jspb.Message.getFieldWithDefault(msg, 10, 0),
+shareDisplayname: jspb.Message.getFieldWithDefault(msg, 11, ""),
+shareHref: jspb.Message.getFieldWithDefault(msg, 12, ""),
+shareInvitestatus: jspb.Message.getFieldWithDefault(msg, 13, 0),
+caldav: jspb.Message.getBooleanFieldWithDefault(msg, 14, false),
+isDefault: jspb.Message.getBooleanFieldWithDefault(msg, 15, false),
+email: jspb.Message.getFieldWithDefault(msg, 16, ""),
+permission: jspb.Message.getFieldWithDefault(msg, 17, ""),
+owner: jspb.Message.getFieldWithDefault(msg, 18, ""),
+isPublic: jspb.Message.getBooleanFieldWithDefault(msg, 19, false)
   };
 
   if (includeInstance) {
@@ -8345,7 +8344,7 @@ proto.Calendar.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.Calendar}
  */
 proto.Calendar.deserializeBinary = function(bytes) {
@@ -8378,11 +8377,11 @@ proto.Calendar.deserializeBinaryFromReader = function(msg, reader) {
       msg.setCalendarId(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setUri(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setPrincipaluri(value);
       break;
     case 5:
@@ -8390,7 +8389,7 @@ proto.Calendar.deserializeBinaryFromReader = function(msg, reader) {
       msg.setAccess(value);
       break;
     case 6:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setDisplayname(value);
       break;
     case 7:
@@ -8398,11 +8397,11 @@ proto.Calendar.deserializeBinaryFromReader = function(msg, reader) {
       msg.setCalendarorder(value);
       break;
     case 8:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setCalendarcolor(value);
       break;
     case 9:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setTimezone(value);
       break;
     case 10:
@@ -8410,11 +8409,11 @@ proto.Calendar.deserializeBinaryFromReader = function(msg, reader) {
       msg.setTransparent(value);
       break;
     case 11:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setShareDisplayname(value);
       break;
     case 12:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setShareHref(value);
       break;
     case 13:
@@ -8430,15 +8429,15 @@ proto.Calendar.deserializeBinaryFromReader = function(msg, reader) {
       msg.setIsDefault(value);
       break;
     case 16:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setEmail(value);
       break;
     case 17:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setPermission(value);
       break;
     case 18:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setOwner(value);
       break;
     case 19:
@@ -8984,18 +8983,18 @@ proto.Package.prototype.toObject = function(opt_includeInstance) {
  */
 proto.Package.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    name: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    code: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    uuid: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    features: (f = msg.getFeatures()) && proto.JSON.toObject(includeInstance, f),
-    details: (f = msg.getDetails()) && proto.JSON.toObject(includeInstance, f),
-    price: (f = msg.getPrice()) && proto.JSON.toObject(includeInstance, f),
-    isPublic: jspb.Message.getBooleanFieldWithDefault(msg, 8, false),
-    isActive: jspb.Message.getBooleanFieldWithDefault(msg, 9, false),
-    isMostPopular: jspb.Message.getBooleanFieldWithDefault(msg, 10, false),
-    minUserCount: jspb.Message.getFieldWithDefault(msg, 11, 0),
-    maxUserCount: jspb.Message.getFieldWithDefault(msg, 12, 0)
+id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+name: jspb.Message.getFieldWithDefault(msg, 2, ""),
+code: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f,
+uuid: (f = jspb.Message.getField(msg, 4)) == null ? undefined : f,
+features: (f = msg.getFeatures()) && proto.JSON.toObject(includeInstance, f),
+details: (f = msg.getDetails()) && proto.JSON.toObject(includeInstance, f),
+price: (f = msg.getPrice()) && proto.JSON.toObject(includeInstance, f),
+isPublic: (f = jspb.Message.getBooleanField(msg, 8)) == null ? undefined : f,
+isActive: (f = jspb.Message.getBooleanField(msg, 9)) == null ? undefined : f,
+isMostPopular: (f = jspb.Message.getBooleanField(msg, 10)) == null ? undefined : f,
+minUserCount: (f = jspb.Message.getField(msg, 11)) == null ? undefined : f,
+maxUserCount: (f = jspb.Message.getField(msg, 12)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -9008,7 +9007,7 @@ proto.Package.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.Package}
  */
 proto.Package.deserializeBinary = function(bytes) {
@@ -9037,15 +9036,15 @@ proto.Package.deserializeBinaryFromReader = function(msg, reader) {
       msg.setId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setName(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setCode(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setUuid(value);
       break;
     case 5:

@@ -13,13 +13,7 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global =
-    (typeof globalThis !== 'undefined' && globalThis) ||
-    (typeof window !== 'undefined' && window) ||
-    (typeof global !== 'undefined' && global) ||
-    (typeof self !== 'undefined' && self) ||
-    (function () { return this; }).call(null) ||
-    Function('return this')();
+var global = globalThis;
 
 var common_grpc_definitions_pb = require('../utils/definitions_pb.cjs');
 goog.object.extend(proto, common_grpc_definitions_pb);
@@ -1646,16 +1640,16 @@ proto.yartu.NoteMetaQuery.prototype.toObject = function(opt_includeInstance) {
  */
 proto.yartu.NoteMetaQuery.toObject = function(includeInstance, msg) {
   var f, obj = {
-    labelList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
-    noteType: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    filterType: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    isArchived: jspb.Message.getBooleanFieldWithDefault(msg, 4, false),
-    isStarred: jspb.Message.getBooleanFieldWithDefault(msg, 5, false),
-    isPinned: jspb.Message.getBooleanFieldWithDefault(msg, 6, false),
-    isSharedWithMe: jspb.Message.getBooleanFieldWithDefault(msg, 7, false),
-    isTaskCompleted: jspb.Message.getBooleanFieldWithDefault(msg, 8, false),
-    notebookList: (f = jspb.Message.getRepeatedField(msg, 9)) == null ? undefined : f,
-    hasTask: jspb.Message.getBooleanFieldWithDefault(msg, 10, false)
+labelList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
+noteType: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f,
+filterType: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f,
+isArchived: (f = jspb.Message.getBooleanField(msg, 4)) == null ? undefined : f,
+isStarred: (f = jspb.Message.getBooleanField(msg, 5)) == null ? undefined : f,
+isPinned: (f = jspb.Message.getBooleanField(msg, 6)) == null ? undefined : f,
+isSharedWithMe: (f = jspb.Message.getBooleanField(msg, 7)) == null ? undefined : f,
+isTaskCompleted: (f = jspb.Message.getBooleanField(msg, 8)) == null ? undefined : f,
+notebookList: (f = jspb.Message.getRepeatedField(msg, 9)) == null ? undefined : f,
+hasTask: (f = jspb.Message.getBooleanField(msg, 10)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -1668,7 +1662,7 @@ proto.yartu.NoteMetaQuery.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.NoteMetaQuery}
  */
 proto.yartu.NoteMetaQuery.deserializeBinary = function(bytes) {
@@ -1693,17 +1687,14 @@ proto.yartu.NoteMetaQuery.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var values = /** @type {!Array<number>} */ (reader.isDelimited() ? reader.readPackedInt64() : [reader.readInt64()]);
-      for (var i = 0; i < values.length; i++) {
-        msg.addLabel(values[i]);
-      }
+      reader.readPackableInt64Into(msg.getLabelList());
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setNoteType(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setFilterType(value);
       break;
     case 4:
@@ -1727,10 +1718,7 @@ proto.yartu.NoteMetaQuery.deserializeBinaryFromReader = function(msg, reader) {
       msg.setIsTaskCompleted(value);
       break;
     case 9:
-      var values = /** @type {!Array<number>} */ (reader.isDelimited() ? reader.readPackedInt64() : [reader.readInt64()]);
-      for (var i = 0; i < values.length; i++) {
-        msg.addNotebook(values[i]);
-      }
+      reader.readPackableInt64Into(msg.getNotebookList());
       break;
     case 10:
       var value = /** @type {boolean} */ (reader.readBool());
@@ -2239,15 +2227,15 @@ proto.yartu.TaskMetaQuery.prototype.toObject = function(opt_includeInstance) {
  */
 proto.yartu.TaskMetaQuery.toObject = function(includeInstance, msg) {
   var f, obj = {
-    noteId: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    groupBy: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    orderBy: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    filters: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    completedAt: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    deadline: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    noteType: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    notebookList: (f = jspb.Message.getRepeatedField(msg, 8)) == null ? undefined : f,
-    labelList: (f = jspb.Message.getRepeatedField(msg, 9)) == null ? undefined : f
+noteId: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f,
+groupBy: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f,
+orderBy: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f,
+filters: (f = jspb.Message.getField(msg, 4)) == null ? undefined : f,
+completedAt: (f = jspb.Message.getField(msg, 5)) == null ? undefined : f,
+deadline: (f = jspb.Message.getField(msg, 6)) == null ? undefined : f,
+noteType: (f = jspb.Message.getField(msg, 7)) == null ? undefined : f,
+notebookList: (f = jspb.Message.getRepeatedField(msg, 8)) == null ? undefined : f,
+labelList: (f = jspb.Message.getRepeatedField(msg, 9)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -2260,7 +2248,7 @@ proto.yartu.TaskMetaQuery.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.TaskMetaQuery}
  */
 proto.yartu.TaskMetaQuery.deserializeBinary = function(bytes) {
@@ -2289,40 +2277,34 @@ proto.yartu.TaskMetaQuery.deserializeBinaryFromReader = function(msg, reader) {
       msg.setNoteId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setGroupBy(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setOrderBy(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setFilters(value);
       break;
     case 5:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setCompletedAt(value);
       break;
     case 6:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setDeadline(value);
       break;
     case 7:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setNoteType(value);
       break;
     case 8:
-      var values = /** @type {!Array<number>} */ (reader.isDelimited() ? reader.readPackedInt64() : [reader.readInt64()]);
-      for (var i = 0; i < values.length; i++) {
-        msg.addNotebook(values[i]);
-      }
+      reader.readPackableInt64Into(msg.getNotebookList());
       break;
     case 9:
-      var values = /** @type {!Array<number>} */ (reader.isDelimited() ? reader.readPackedInt64() : [reader.readInt64()]);
-      for (var i = 0; i < values.length; i++) {
-        msg.addLabel(values[i]);
-      }
+      reader.readPackableInt64Into(msg.getLabelList());
       break;
     default:
       reader.skipField();
@@ -2777,10 +2759,10 @@ proto.yartu.NoteLabel.prototype.toObject = function(opt_includeInstance) {
  */
 proto.yartu.NoteLabel.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    name: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    color: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    user: (f = msg.getUser()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f)
+id: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f,
+name: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f,
+color: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f,
+user: (f = msg.getUser()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -2793,7 +2775,7 @@ proto.yartu.NoteLabel.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.NoteLabel}
  */
 proto.yartu.NoteLabel.deserializeBinary = function(bytes) {
@@ -2822,11 +2804,11 @@ proto.yartu.NoteLabel.deserializeBinaryFromReader = function(msg, reader) {
       msg.setId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setName(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setColor(value);
       break;
     case 4:
@@ -3079,15 +3061,15 @@ proto.yartu.Notebook.prototype.toObject = function(opt_includeInstance) {
  */
 proto.yartu.Notebook.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    name: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    user: (f = msg.getUser()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f),
-    sharedCount: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    createdAt: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    updatedAt: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    permission: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    isSharedWithMe: jspb.Message.getBooleanFieldWithDefault(msg, 8, false),
-    sharedList: jspb.Message.toObjectList(msg.getSharedList(),
+id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+name: jspb.Message.getFieldWithDefault(msg, 2, ""),
+user: (f = msg.getUser()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f),
+sharedCount: jspb.Message.getFieldWithDefault(msg, 4, 0),
+createdAt: jspb.Message.getFieldWithDefault(msg, 5, ""),
+updatedAt: jspb.Message.getFieldWithDefault(msg, 6, ""),
+permission: jspb.Message.getFieldWithDefault(msg, 7, ""),
+isSharedWithMe: (f = jspb.Message.getBooleanField(msg, 8)) == null ? undefined : f,
+sharedList: jspb.Message.toObjectList(msg.getSharedList(),
     common_grpc_definitions_pb.Shared.toObject, includeInstance)
   };
 
@@ -3101,7 +3083,7 @@ proto.yartu.Notebook.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.Notebook}
  */
 proto.yartu.Notebook.deserializeBinary = function(bytes) {
@@ -3130,7 +3112,7 @@ proto.yartu.Notebook.deserializeBinaryFromReader = function(msg, reader) {
       msg.setId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setName(value);
       break;
     case 3:
@@ -3143,15 +3125,15 @@ proto.yartu.Notebook.deserializeBinaryFromReader = function(msg, reader) {
       msg.setSharedCount(value);
       break;
     case 5:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setCreatedAt(value);
       break;
     case 6:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setUpdatedAt(value);
       break;
     case 7:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setPermission(value);
       break;
     case 8:
@@ -3511,19 +3493,19 @@ proto.yartu.Task.prototype.toObject = function(opt_includeInstance) {
  */
 proto.yartu.Task.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    content: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    completedAt: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    completedBy: (f = msg.getCompletedBy()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f),
-    priority: jspb.Message.getFieldWithDefault(msg, 5, 0),
-    reminder: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    deadline: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    order: jspb.Message.getFieldWithDefault(msg, 8, 0),
-    isComplete: jspb.Message.getBooleanFieldWithDefault(msg, 9, false),
-    createdAt: jspb.Message.getFieldWithDefault(msg, 10, ""),
-    updatedAt: jspb.Message.getFieldWithDefault(msg, 11, ""),
-    randomId: jspb.Message.getFieldWithDefault(msg, 12, ""),
-    noteId: jspb.Message.getFieldWithDefault(msg, 13, 0)
+id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+content: jspb.Message.getFieldWithDefault(msg, 2, ""),
+completedAt: jspb.Message.getFieldWithDefault(msg, 3, ""),
+completedBy: (f = msg.getCompletedBy()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f),
+priority: jspb.Message.getFieldWithDefault(msg, 5, 0),
+reminder: jspb.Message.getFieldWithDefault(msg, 6, ""),
+deadline: jspb.Message.getFieldWithDefault(msg, 7, ""),
+order: jspb.Message.getFieldWithDefault(msg, 8, 0),
+isComplete: jspb.Message.getBooleanFieldWithDefault(msg, 9, false),
+createdAt: jspb.Message.getFieldWithDefault(msg, 10, ""),
+updatedAt: jspb.Message.getFieldWithDefault(msg, 11, ""),
+randomId: jspb.Message.getFieldWithDefault(msg, 12, ""),
+noteId: jspb.Message.getFieldWithDefault(msg, 13, 0)
   };
 
   if (includeInstance) {
@@ -3536,7 +3518,7 @@ proto.yartu.Task.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.Task}
  */
 proto.yartu.Task.deserializeBinary = function(bytes) {
@@ -3565,11 +3547,11 @@ proto.yartu.Task.deserializeBinaryFromReader = function(msg, reader) {
       msg.setId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setContent(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setCompletedAt(value);
       break;
     case 4:
@@ -3582,11 +3564,11 @@ proto.yartu.Task.deserializeBinaryFromReader = function(msg, reader) {
       msg.setPriority(value);
       break;
     case 6:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setReminder(value);
       break;
     case 7:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setDeadline(value);
       break;
     case 8:
@@ -3598,15 +3580,15 @@ proto.yartu.Task.deserializeBinaryFromReader = function(msg, reader) {
       msg.setIsComplete(value);
       break;
     case 10:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setCreatedAt(value);
       break;
     case 11:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setUpdatedAt(value);
       break;
     case 12:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setRandomId(value);
       break;
     case 13:
@@ -4029,31 +4011,31 @@ proto.yartu.Note.prototype.toObject = function(opt_includeInstance) {
  */
 proto.yartu.Note.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    notebook: (f = msg.getNotebook()) && proto.yartu.Notebook.toObject(includeInstance, f),
-    user: (f = msg.getUser()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f),
-    title: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    content: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    snippet: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    color: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    reminder: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    isPinned: jspb.Message.getBooleanFieldWithDefault(msg, 9, false),
-    isStarred: jspb.Message.getBooleanFieldWithDefault(msg, 10, false),
-    isArchived: jspb.Message.getBooleanFieldWithDefault(msg, 11, false),
-    noteType: jspb.Message.getFieldWithDefault(msg, 12, ""),
-    modifiedBy: (f = msg.getModifiedBy()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f),
-    createdBy: (f = msg.getCreatedBy()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f),
-    conferenceSession: jspb.Message.getFieldWithDefault(msg, 15, 0),
-    labelsList: jspb.Message.toObjectList(msg.getLabelsList(),
+id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+notebook: (f = msg.getNotebook()) && proto.yartu.Notebook.toObject(includeInstance, f),
+user: (f = msg.getUser()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f),
+title: jspb.Message.getFieldWithDefault(msg, 4, ""),
+content: jspb.Message.getFieldWithDefault(msg, 5, ""),
+snippet: jspb.Message.getFieldWithDefault(msg, 6, ""),
+color: jspb.Message.getFieldWithDefault(msg, 7, ""),
+reminder: jspb.Message.getFieldWithDefault(msg, 8, ""),
+isPinned: jspb.Message.getBooleanFieldWithDefault(msg, 9, false),
+isStarred: jspb.Message.getBooleanFieldWithDefault(msg, 10, false),
+isArchived: jspb.Message.getBooleanFieldWithDefault(msg, 11, false),
+noteType: jspb.Message.getFieldWithDefault(msg, 12, ""),
+modifiedBy: (f = msg.getModifiedBy()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f),
+createdBy: (f = msg.getCreatedBy()) && common_grpc_definitions_pb.UserBasic.toObject(includeInstance, f),
+conferenceSession: (f = jspb.Message.getField(msg, 15)) == null ? undefined : f,
+labelsList: jspb.Message.toObjectList(msg.getLabelsList(),
     proto.yartu.NoteLabel.toObject, includeInstance),
-    permission: jspb.Message.getFieldWithDefault(msg, 17, ""),
-    createdAt: jspb.Message.getFieldWithDefault(msg, 18, ""),
-    updatedAt: jspb.Message.getFieldWithDefault(msg, 19, ""),
-    isSharedWithMe: jspb.Message.getBooleanFieldWithDefault(msg, 20, false),
-    tasksList: jspb.Message.toObjectList(msg.getTasksList(),
+permission: jspb.Message.getFieldWithDefault(msg, 17, ""),
+createdAt: jspb.Message.getFieldWithDefault(msg, 18, ""),
+updatedAt: jspb.Message.getFieldWithDefault(msg, 19, ""),
+isSharedWithMe: jspb.Message.getBooleanFieldWithDefault(msg, 20, false),
+tasksList: jspb.Message.toObjectList(msg.getTasksList(),
     proto.yartu.Task.toObject, includeInstance),
-    image: jspb.Message.getFieldWithDefault(msg, 22, ""),
-    eventId: jspb.Message.getFieldWithDefault(msg, 23, 0)
+image: jspb.Message.getFieldWithDefault(msg, 22, ""),
+eventId: (f = jspb.Message.getField(msg, 23)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -4066,7 +4048,7 @@ proto.yartu.Note.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.Note}
  */
 proto.yartu.Note.deserializeBinary = function(bytes) {
@@ -4105,23 +4087,23 @@ proto.yartu.Note.deserializeBinaryFromReader = function(msg, reader) {
       msg.setUser(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setTitle(value);
       break;
     case 5:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setContent(value);
       break;
     case 6:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setSnippet(value);
       break;
     case 7:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setColor(value);
       break;
     case 8:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setReminder(value);
       break;
     case 9:
@@ -4137,7 +4119,7 @@ proto.yartu.Note.deserializeBinaryFromReader = function(msg, reader) {
       msg.setIsArchived(value);
       break;
     case 12:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setNoteType(value);
       break;
     case 13:
@@ -4160,15 +4142,15 @@ proto.yartu.Note.deserializeBinaryFromReader = function(msg, reader) {
       msg.addLabels(value);
       break;
     case 17:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setPermission(value);
       break;
     case 18:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setCreatedAt(value);
       break;
     case 19:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setUpdatedAt(value);
       break;
     case 20:
@@ -4181,7 +4163,7 @@ proto.yartu.Note.deserializeBinaryFromReader = function(msg, reader) {
       msg.addTasks(value);
       break;
     case 22:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setImage(value);
       break;
     case 23:
@@ -4985,7 +4967,7 @@ proto.yartu.GetNotebookRequest.prototype.toObject = function(opt_includeInstance
  */
 proto.yartu.GetNotebookRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0)
+id: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
   if (includeInstance) {
@@ -4998,7 +4980,7 @@ proto.yartu.GetNotebookRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.GetNotebookRequest}
  */
 proto.yartu.GetNotebookRequest.deserializeBinary = function(bytes) {
@@ -5115,9 +5097,9 @@ proto.yartu.GetNotebookResponse.prototype.toObject = function(opt_includeInstanc
  */
 proto.yartu.GetNotebookResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    notebook: (f = msg.getNotebook()) && proto.yartu.Notebook.toObject(includeInstance, f),
-    message: jspb.Message.getFieldWithDefault(msg, 3, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+notebook: (f = msg.getNotebook()) && proto.yartu.Notebook.toObject(includeInstance, f),
+message: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -5130,7 +5112,7 @@ proto.yartu.GetNotebookResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.GetNotebookResponse}
  */
 proto.yartu.GetNotebookResponse.deserializeBinary = function(bytes) {
@@ -5164,7 +5146,7 @@ proto.yartu.GetNotebookResponse.deserializeBinaryFromReader = function(msg, read
       msg.setNotebook(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -5326,8 +5308,8 @@ proto.yartu.UpsertNotebookRequest.prototype.toObject = function(opt_includeInsta
  */
 proto.yartu.UpsertNotebookRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    name: jspb.Message.getFieldWithDefault(msg, 2, "")
+id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+name: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -5340,7 +5322,7 @@ proto.yartu.UpsertNotebookRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UpsertNotebookRequest}
  */
 proto.yartu.UpsertNotebookRequest.deserializeBinary = function(bytes) {
@@ -5369,7 +5351,7 @@ proto.yartu.UpsertNotebookRequest.deserializeBinaryFromReader = function(msg, re
       msg.setId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setName(value);
       break;
     default:
@@ -5486,9 +5468,9 @@ proto.yartu.UpsertNotebookResponse.prototype.toObject = function(opt_includeInst
  */
 proto.yartu.UpsertNotebookResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    notebook: (f = msg.getNotebook()) && proto.yartu.Notebook.toObject(includeInstance, f),
-    message: jspb.Message.getFieldWithDefault(msg, 3, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+notebook: (f = msg.getNotebook()) && proto.yartu.Notebook.toObject(includeInstance, f),
+message: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -5501,7 +5483,7 @@ proto.yartu.UpsertNotebookResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UpsertNotebookResponse}
  */
 proto.yartu.UpsertNotebookResponse.deserializeBinary = function(bytes) {
@@ -5535,7 +5517,7 @@ proto.yartu.UpsertNotebookResponse.deserializeBinaryFromReader = function(msg, r
       msg.setNotebook(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -5697,7 +5679,7 @@ proto.yartu.DeleteNotebookRequest.prototype.toObject = function(opt_includeInsta
  */
 proto.yartu.DeleteNotebookRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0)
+id: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
   if (includeInstance) {
@@ -5710,7 +5692,7 @@ proto.yartu.DeleteNotebookRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.DeleteNotebookRequest}
  */
 proto.yartu.DeleteNotebookRequest.deserializeBinary = function(bytes) {
@@ -5827,8 +5809,8 @@ proto.yartu.DeleteNotebookResponse.prototype.toObject = function(opt_includeInst
  */
 proto.yartu.DeleteNotebookResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -5841,7 +5823,7 @@ proto.yartu.DeleteNotebookResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.DeleteNotebookResponse}
  */
 proto.yartu.DeleteNotebookResponse.deserializeBinary = function(bytes) {
@@ -5870,7 +5852,7 @@ proto.yartu.DeleteNotebookResponse.deserializeBinaryFromReader = function(msg, r
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -5987,8 +5969,8 @@ proto.yartu.ListNotebookRequest.prototype.toObject = function(opt_includeInstanc
  */
 proto.yartu.ListNotebookRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    query: (f = msg.getQuery()) && common_grpc_definitions_pb.Query.toObject(includeInstance, f),
-    meta: (f = msg.getMeta()) && proto.yartu.NoteMetaQuery.toObject(includeInstance, f)
+query: (f = msg.getQuery()) && common_grpc_definitions_pb.Query.toObject(includeInstance, f),
+meta: (f = msg.getMeta()) && proto.yartu.NoteMetaQuery.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -6001,7 +5983,7 @@ proto.yartu.ListNotebookRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ListNotebookRequest}
  */
 proto.yartu.ListNotebookRequest.deserializeBinary = function(bytes) {
@@ -6196,11 +6178,11 @@ proto.yartu.ListNotebookResponse.prototype.toObject = function(opt_includeInstan
  */
 proto.yartu.ListNotebookResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    dataList: jspb.Message.toObjectList(msg.getDataList(),
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+dataList: jspb.Message.toObjectList(msg.getDataList(),
     proto.yartu.Notebook.toObject, includeInstance),
-    pagination: (f = msg.getPagination()) && common_grpc_definitions_pb.PaginationMeta.toObject(includeInstance, f),
-    message: jspb.Message.getFieldWithDefault(msg, 4, "")
+pagination: (f = msg.getPagination()) && common_grpc_definitions_pb.PaginationMeta.toObject(includeInstance, f),
+message: (f = jspb.Message.getField(msg, 4)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -6213,7 +6195,7 @@ proto.yartu.ListNotebookResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ListNotebookResponse}
  */
 proto.yartu.ListNotebookResponse.deserializeBinary = function(bytes) {
@@ -6252,7 +6234,7 @@ proto.yartu.ListNotebookResponse.deserializeBinaryFromReader = function(msg, rea
       msg.setPagination(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -6485,8 +6467,8 @@ proto.yartu.ShareNotebookRequest.prototype.toObject = function(opt_includeInstan
  */
 proto.yartu.ShareNotebookRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    sharedList: jspb.Message.toObjectList(msg.getSharedList(),
+id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+sharedList: jspb.Message.toObjectList(msg.getSharedList(),
     common_grpc_definitions_pb.Shared.toObject, includeInstance)
   };
 
@@ -6500,7 +6482,7 @@ proto.yartu.ShareNotebookRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ShareNotebookRequest}
  */
 proto.yartu.ShareNotebookRequest.deserializeBinary = function(bytes) {
@@ -6668,8 +6650,8 @@ proto.yartu.ShareNotebookResponse.prototype.toObject = function(opt_includeInsta
  */
 proto.yartu.ShareNotebookResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -6682,7 +6664,7 @@ proto.yartu.ShareNotebookResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ShareNotebookResponse}
  */
 proto.yartu.ShareNotebookResponse.deserializeBinary = function(bytes) {
@@ -6711,7 +6693,7 @@ proto.yartu.ShareNotebookResponse.deserializeBinaryFromReader = function(msg, re
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -6828,7 +6810,7 @@ proto.yartu.UnshareNotebookRequest.prototype.toObject = function(opt_includeInst
  */
 proto.yartu.UnshareNotebookRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0)
+id: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
   if (includeInstance) {
@@ -6841,7 +6823,7 @@ proto.yartu.UnshareNotebookRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UnshareNotebookRequest}
  */
 proto.yartu.UnshareNotebookRequest.deserializeBinary = function(bytes) {
@@ -6958,8 +6940,8 @@ proto.yartu.UnshareNotebookResponse.prototype.toObject = function(opt_includeIns
  */
 proto.yartu.UnshareNotebookResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -6972,7 +6954,7 @@ proto.yartu.UnshareNotebookResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UnshareNotebookResponse}
  */
 proto.yartu.UnshareNotebookResponse.deserializeBinary = function(bytes) {
@@ -7001,7 +6983,7 @@ proto.yartu.UnshareNotebookResponse.deserializeBinaryFromReader = function(msg, 
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -7118,8 +7100,8 @@ proto.yartu.UpsertSharedNotebookRequest.prototype.toObject = function(opt_includ
  */
 proto.yartu.UpsertSharedNotebookRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    permission: jspb.Message.getFieldWithDefault(msg, 2, "")
+id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+permission: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -7132,7 +7114,7 @@ proto.yartu.UpsertSharedNotebookRequest.toObject = function(includeInstance, msg
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UpsertSharedNotebookRequest}
  */
 proto.yartu.UpsertSharedNotebookRequest.deserializeBinary = function(bytes) {
@@ -7161,7 +7143,7 @@ proto.yartu.UpsertSharedNotebookRequest.deserializeBinaryFromReader = function(m
       msg.setId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setPermission(value);
       break;
     default:
@@ -7278,8 +7260,8 @@ proto.yartu.UpsertSharedNotebookResponse.prototype.toObject = function(opt_inclu
  */
 proto.yartu.UpsertSharedNotebookResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -7292,7 +7274,7 @@ proto.yartu.UpsertSharedNotebookResponse.toObject = function(includeInstance, ms
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UpsertSharedNotebookResponse}
  */
 proto.yartu.UpsertSharedNotebookResponse.deserializeBinary = function(bytes) {
@@ -7321,7 +7303,7 @@ proto.yartu.UpsertSharedNotebookResponse.deserializeBinaryFromReader = function(
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -7438,8 +7420,8 @@ proto.yartu.DeleteSharedNotebookRequest.prototype.toObject = function(opt_includ
  */
 proto.yartu.DeleteSharedNotebookRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    sharedNotebookId: jspb.Message.getFieldWithDefault(msg, 2, 0)
+id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+sharedNotebookId: jspb.Message.getFieldWithDefault(msg, 2, 0)
   };
 
   if (includeInstance) {
@@ -7452,7 +7434,7 @@ proto.yartu.DeleteSharedNotebookRequest.toObject = function(includeInstance, msg
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.DeleteSharedNotebookRequest}
  */
 proto.yartu.DeleteSharedNotebookRequest.deserializeBinary = function(bytes) {
@@ -7598,8 +7580,8 @@ proto.yartu.DeleteSharedNotebookResponse.prototype.toObject = function(opt_inclu
  */
 proto.yartu.DeleteSharedNotebookResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -7612,7 +7594,7 @@ proto.yartu.DeleteSharedNotebookResponse.toObject = function(includeInstance, ms
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.DeleteSharedNotebookResponse}
  */
 proto.yartu.DeleteSharedNotebookResponse.deserializeBinary = function(bytes) {
@@ -7641,7 +7623,7 @@ proto.yartu.DeleteSharedNotebookResponse.deserializeBinaryFromReader = function(
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -7758,7 +7740,7 @@ proto.yartu.ListSharedNotebookRequest.prototype.toObject = function(opt_includeI
  */
 proto.yartu.ListSharedNotebookRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0)
+id: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
   if (includeInstance) {
@@ -7771,7 +7753,7 @@ proto.yartu.ListSharedNotebookRequest.toObject = function(includeInstance, msg) 
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ListSharedNotebookRequest}
  */
 proto.yartu.ListSharedNotebookRequest.deserializeBinary = function(bytes) {
@@ -7895,9 +7877,9 @@ proto.yartu.ListSharedNotebookResponse.prototype.toObject = function(opt_include
  */
 proto.yartu.ListSharedNotebookResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    dataList: jspb.Message.toObjectList(msg.getDataList(),
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, ""),
+dataList: jspb.Message.toObjectList(msg.getDataList(),
     common_grpc_definitions_pb.Shared.toObject, includeInstance)
   };
 
@@ -7911,7 +7893,7 @@ proto.yartu.ListSharedNotebookResponse.toObject = function(includeInstance, msg)
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ListSharedNotebookResponse}
  */
 proto.yartu.ListSharedNotebookResponse.deserializeBinary = function(bytes) {
@@ -7940,7 +7922,7 @@ proto.yartu.ListSharedNotebookResponse.deserializeBinaryFromReader = function(ms
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     case 3:
@@ -8108,9 +8090,9 @@ proto.yartu.ListNoteRequest.prototype.toObject = function(opt_includeInstance) {
  */
 proto.yartu.ListNoteRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    notebookId: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    query: (f = msg.getQuery()) && common_grpc_definitions_pb.Query.toObject(includeInstance, f),
-    meta: (f = msg.getMeta()) && proto.yartu.NoteMetaQuery.toObject(includeInstance, f)
+notebookId: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f,
+query: (f = msg.getQuery()) && common_grpc_definitions_pb.Query.toObject(includeInstance, f),
+meta: (f = msg.getMeta()) && proto.yartu.NoteMetaQuery.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -8123,7 +8105,7 @@ proto.yartu.ListNoteRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ListNoteRequest}
  */
 proto.yartu.ListNoteRequest.deserializeBinary = function(bytes) {
@@ -8365,11 +8347,11 @@ proto.yartu.ListNoteResponse.prototype.toObject = function(opt_includeInstance) 
  */
 proto.yartu.ListNoteResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    dataList: jspb.Message.toObjectList(msg.getDataList(),
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+dataList: jspb.Message.toObjectList(msg.getDataList(),
     proto.yartu.Note.toObject, includeInstance),
-    pagination: (f = msg.getPagination()) && common_grpc_definitions_pb.PaginationMeta.toObject(includeInstance, f),
-    message: jspb.Message.getFieldWithDefault(msg, 4, "")
+pagination: (f = msg.getPagination()) && common_grpc_definitions_pb.PaginationMeta.toObject(includeInstance, f),
+message: jspb.Message.getFieldWithDefault(msg, 4, "")
   };
 
   if (includeInstance) {
@@ -8382,7 +8364,7 @@ proto.yartu.ListNoteResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ListNoteResponse}
  */
 proto.yartu.ListNoteResponse.deserializeBinary = function(bytes) {
@@ -8421,7 +8403,7 @@ proto.yartu.ListNoteResponse.deserializeBinaryFromReader = function(msg, reader)
       msg.setPagination(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -8629,7 +8611,7 @@ proto.yartu.GetNoteRequest.prototype.toObject = function(opt_includeInstance) {
  */
 proto.yartu.GetNoteRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0)
+id: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
   if (includeInstance) {
@@ -8642,7 +8624,7 @@ proto.yartu.GetNoteRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.GetNoteRequest}
  */
 proto.yartu.GetNoteRequest.deserializeBinary = function(bytes) {
@@ -8759,9 +8741,9 @@ proto.yartu.GetNoteResponse.prototype.toObject = function(opt_includeInstance) {
  */
 proto.yartu.GetNoteResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    data: (f = msg.getData()) && proto.yartu.Note.toObject(includeInstance, f),
-    message: jspb.Message.getFieldWithDefault(msg, 3, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+data: (f = msg.getData()) && proto.yartu.Note.toObject(includeInstance, f),
+message: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -8774,7 +8756,7 @@ proto.yartu.GetNoteResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.GetNoteResponse}
  */
 proto.yartu.GetNoteResponse.deserializeBinary = function(bytes) {
@@ -8808,7 +8790,7 @@ proto.yartu.GetNoteResponse.deserializeBinaryFromReader = function(msg, reader) 
       msg.setData(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -8977,20 +8959,20 @@ proto.yartu.UpsertNoteRequest.prototype.toObject = function(opt_includeInstance)
  */
 proto.yartu.UpsertNoteRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    notebookId: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    title: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    content: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    color: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    labelList: jspb.Message.toObjectList(msg.getLabelList(),
+id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+notebookId: jspb.Message.getFieldWithDefault(msg, 2, 0),
+title: jspb.Message.getFieldWithDefault(msg, 3, ""),
+content: jspb.Message.getFieldWithDefault(msg, 4, ""),
+color: jspb.Message.getFieldWithDefault(msg, 5, ""),
+labelList: jspb.Message.toObjectList(msg.getLabelList(),
     proto.yartu.NoteLabel.toObject, includeInstance),
-    reminder: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    isPinned: jspb.Message.getBooleanFieldWithDefault(msg, 8, false),
-    isStarred: jspb.Message.getBooleanFieldWithDefault(msg, 9, false),
-    isArchived: jspb.Message.getBooleanFieldWithDefault(msg, 10, false),
-    noteType: jspb.Message.getFieldWithDefault(msg, 11, ""),
-    conferenceSessionId: jspb.Message.getFieldWithDefault(msg, 12, 0),
-    taskList: jspb.Message.toObjectList(msg.getTaskList(),
+reminder: jspb.Message.getFieldWithDefault(msg, 7, ""),
+isPinned: jspb.Message.getBooleanFieldWithDefault(msg, 8, false),
+isStarred: jspb.Message.getBooleanFieldWithDefault(msg, 9, false),
+isArchived: jspb.Message.getBooleanFieldWithDefault(msg, 10, false),
+noteType: jspb.Message.getFieldWithDefault(msg, 11, ""),
+conferenceSessionId: jspb.Message.getFieldWithDefault(msg, 12, 0),
+taskList: jspb.Message.toObjectList(msg.getTaskList(),
     proto.yartu.Task.toObject, includeInstance)
   };
 
@@ -9004,7 +8986,7 @@ proto.yartu.UpsertNoteRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UpsertNoteRequest}
  */
 proto.yartu.UpsertNoteRequest.deserializeBinary = function(bytes) {
@@ -9037,15 +9019,15 @@ proto.yartu.UpsertNoteRequest.deserializeBinaryFromReader = function(msg, reader
       msg.setNotebookId(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setTitle(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setContent(value);
       break;
     case 5:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setColor(value);
       break;
     case 6:
@@ -9054,7 +9036,7 @@ proto.yartu.UpsertNoteRequest.deserializeBinaryFromReader = function(msg, reader
       msg.addLabel(value);
       break;
     case 7:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setReminder(value);
       break;
     case 8:
@@ -9070,7 +9052,7 @@ proto.yartu.UpsertNoteRequest.deserializeBinaryFromReader = function(msg, reader
       msg.setIsArchived(value);
       break;
     case 11:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setNoteType(value);
       break;
     case 12:
@@ -9513,9 +9495,9 @@ proto.yartu.UpsertNoteResponse.prototype.toObject = function(opt_includeInstance
  */
 proto.yartu.UpsertNoteResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    note: (f = msg.getNote()) && proto.yartu.Note.toObject(includeInstance, f),
-    message: jspb.Message.getFieldWithDefault(msg, 3, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+note: (f = msg.getNote()) && proto.yartu.Note.toObject(includeInstance, f),
+message: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -9528,7 +9510,7 @@ proto.yartu.UpsertNoteResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UpsertNoteResponse}
  */
 proto.yartu.UpsertNoteResponse.deserializeBinary = function(bytes) {
@@ -9562,7 +9544,7 @@ proto.yartu.UpsertNoteResponse.deserializeBinaryFromReader = function(msg, reade
       msg.setNote(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -9731,8 +9713,8 @@ proto.yartu.DeleteNoteRequest.prototype.toObject = function(opt_includeInstance)
  */
 proto.yartu.DeleteNoteRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    idsList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f
+id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+idsList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -9745,7 +9727,7 @@ proto.yartu.DeleteNoteRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.DeleteNoteRequest}
  */
 proto.yartu.DeleteNoteRequest.deserializeBinary = function(bytes) {
@@ -9774,10 +9756,7 @@ proto.yartu.DeleteNoteRequest.deserializeBinaryFromReader = function(msg, reader
       msg.setId(value);
       break;
     case 2:
-      var values = /** @type {!Array<number>} */ (reader.isDelimited() ? reader.readPackedInt64() : [reader.readInt64()]);
-      for (var i = 0; i < values.length; i++) {
-        msg.addIds(values[i]);
-      }
+      reader.readPackableInt64Into(msg.getIdsList());
       break;
     default:
       reader.skipField();
@@ -9912,8 +9891,8 @@ proto.yartu.DeleteNoteResponse.prototype.toObject = function(opt_includeInstance
  */
 proto.yartu.DeleteNoteResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -9926,7 +9905,7 @@ proto.yartu.DeleteNoteResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.DeleteNoteResponse}
  */
 proto.yartu.DeleteNoteResponse.deserializeBinary = function(bytes) {
@@ -9955,7 +9934,7 @@ proto.yartu.DeleteNoteResponse.deserializeBinaryFromReader = function(msg, reade
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -10072,8 +10051,8 @@ proto.yartu.RemindNoteRequest.prototype.toObject = function(opt_includeInstance)
  */
 proto.yartu.RemindNoteRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    date: jspb.Message.getFieldWithDefault(msg, 2, "")
+id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+date: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -10086,7 +10065,7 @@ proto.yartu.RemindNoteRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.RemindNoteRequest}
  */
 proto.yartu.RemindNoteRequest.deserializeBinary = function(bytes) {
@@ -10115,7 +10094,7 @@ proto.yartu.RemindNoteRequest.deserializeBinaryFromReader = function(msg, reader
       msg.setId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setDate(value);
       break;
     default:
@@ -10232,8 +10211,8 @@ proto.yartu.RemindNoteResponse.prototype.toObject = function(opt_includeInstance
  */
 proto.yartu.RemindNoteResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -10246,7 +10225,7 @@ proto.yartu.RemindNoteResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.RemindNoteResponse}
  */
 proto.yartu.RemindNoteResponse.deserializeBinary = function(bytes) {
@@ -10275,7 +10254,7 @@ proto.yartu.RemindNoteResponse.deserializeBinaryFromReader = function(msg, reade
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -10392,7 +10371,7 @@ proto.yartu.DuplicateNoteRequest.prototype.toObject = function(opt_includeInstan
  */
 proto.yartu.DuplicateNoteRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0)
+id: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
   if (includeInstance) {
@@ -10405,7 +10384,7 @@ proto.yartu.DuplicateNoteRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.DuplicateNoteRequest}
  */
 proto.yartu.DuplicateNoteRequest.deserializeBinary = function(bytes) {
@@ -10522,8 +10501,8 @@ proto.yartu.DuplicateNoteResponse.prototype.toObject = function(opt_includeInsta
  */
 proto.yartu.DuplicateNoteResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -10536,7 +10515,7 @@ proto.yartu.DuplicateNoteResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.DuplicateNoteResponse}
  */
 proto.yartu.DuplicateNoteResponse.deserializeBinary = function(bytes) {
@@ -10565,7 +10544,7 @@ proto.yartu.DuplicateNoteResponse.deserializeBinaryFromReader = function(msg, re
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -10682,8 +10661,8 @@ proto.yartu.PinNoteRequest.prototype.toObject = function(opt_includeInstance) {
  */
 proto.yartu.PinNoteRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    pinned: jspb.Message.getBooleanFieldWithDefault(msg, 2, false)
+id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+pinned: jspb.Message.getBooleanFieldWithDefault(msg, 2, false)
   };
 
   if (includeInstance) {
@@ -10696,7 +10675,7 @@ proto.yartu.PinNoteRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.PinNoteRequest}
  */
 proto.yartu.PinNoteRequest.deserializeBinary = function(bytes) {
@@ -10842,8 +10821,8 @@ proto.yartu.PinNoteResponse.prototype.toObject = function(opt_includeInstance) {
  */
 proto.yartu.PinNoteResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -10856,7 +10835,7 @@ proto.yartu.PinNoteResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.PinNoteResponse}
  */
 proto.yartu.PinNoteResponse.deserializeBinary = function(bytes) {
@@ -10885,7 +10864,7 @@ proto.yartu.PinNoteResponse.deserializeBinaryFromReader = function(msg, reader) 
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -11002,8 +10981,8 @@ proto.yartu.StarNoteRequest.prototype.toObject = function(opt_includeInstance) {
  */
 proto.yartu.StarNoteRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    isStarred: jspb.Message.getBooleanFieldWithDefault(msg, 2, false)
+id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+isStarred: jspb.Message.getBooleanFieldWithDefault(msg, 2, false)
   };
 
   if (includeInstance) {
@@ -11016,7 +10995,7 @@ proto.yartu.StarNoteRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.StarNoteRequest}
  */
 proto.yartu.StarNoteRequest.deserializeBinary = function(bytes) {
@@ -11162,8 +11141,8 @@ proto.yartu.StarNoteResponse.prototype.toObject = function(opt_includeInstance) 
  */
 proto.yartu.StarNoteResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -11176,7 +11155,7 @@ proto.yartu.StarNoteResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.StarNoteResponse}
  */
 proto.yartu.StarNoteResponse.deserializeBinary = function(bytes) {
@@ -11205,7 +11184,7 @@ proto.yartu.StarNoteResponse.deserializeBinaryFromReader = function(msg, reader)
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -11329,8 +11308,8 @@ proto.yartu.ArchiveNoteRequest.prototype.toObject = function(opt_includeInstance
  */
 proto.yartu.ArchiveNoteRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    noteIdList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
-    isArchived: jspb.Message.getBooleanFieldWithDefault(msg, 2, false)
+noteIdList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
+isArchived: jspb.Message.getBooleanFieldWithDefault(msg, 2, false)
   };
 
   if (includeInstance) {
@@ -11343,7 +11322,7 @@ proto.yartu.ArchiveNoteRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ArchiveNoteRequest}
  */
 proto.yartu.ArchiveNoteRequest.deserializeBinary = function(bytes) {
@@ -11368,10 +11347,7 @@ proto.yartu.ArchiveNoteRequest.deserializeBinaryFromReader = function(msg, reade
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var values = /** @type {!Array<number>} */ (reader.isDelimited() ? reader.readPackedInt64() : [reader.readInt64()]);
-      for (var i = 0; i < values.length; i++) {
-        msg.addNoteId(values[i]);
-      }
+      reader.readPackableInt64Into(msg.getNoteIdList());
       break;
     case 2:
       var value = /** @type {boolean} */ (reader.readBool());
@@ -11510,9 +11486,9 @@ proto.yartu.ArchiveNoteResponse.prototype.toObject = function(opt_includeInstanc
  */
 proto.yartu.ArchiveNoteResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    messages: jspb.Message.getFieldWithDefault(msg, 3, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, ""),
+messages: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -11525,7 +11501,7 @@ proto.yartu.ArchiveNoteResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ArchiveNoteResponse}
  */
 proto.yartu.ArchiveNoteResponse.deserializeBinary = function(bytes) {
@@ -11554,11 +11530,11 @@ proto.yartu.ArchiveNoteResponse.deserializeBinaryFromReader = function(msg, read
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessages(value);
       break;
     default:
@@ -11725,8 +11701,8 @@ proto.yartu.MoveNoteRequest.prototype.toObject = function(opt_includeInstance) {
  */
 proto.yartu.MoveNoteRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    noteIdsList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
-    targetNotebookId: jspb.Message.getFieldWithDefault(msg, 2, 0)
+noteIdsList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
+targetNotebookId: jspb.Message.getFieldWithDefault(msg, 2, 0)
   };
 
   if (includeInstance) {
@@ -11739,7 +11715,7 @@ proto.yartu.MoveNoteRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.MoveNoteRequest}
  */
 proto.yartu.MoveNoteRequest.deserializeBinary = function(bytes) {
@@ -11764,10 +11740,7 @@ proto.yartu.MoveNoteRequest.deserializeBinaryFromReader = function(msg, reader) 
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var values = /** @type {!Array<number>} */ (reader.isDelimited() ? reader.readPackedInt64() : [reader.readInt64()]);
-      for (var i = 0; i < values.length; i++) {
-        msg.addNoteIds(values[i]);
-      }
+      reader.readPackableInt64Into(msg.getNoteIdsList());
       break;
     case 2:
       var value = /** @type {number} */ (reader.readInt64());
@@ -11906,8 +11879,8 @@ proto.yartu.MoveNoteResponse.prototype.toObject = function(opt_includeInstance) 
  */
 proto.yartu.MoveNoteResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -11920,7 +11893,7 @@ proto.yartu.MoveNoteResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.MoveNoteResponse}
  */
 proto.yartu.MoveNoteResponse.deserializeBinary = function(bytes) {
@@ -11949,7 +11922,7 @@ proto.yartu.MoveNoteResponse.deserializeBinaryFromReader = function(msg, reader)
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -12073,8 +12046,8 @@ proto.yartu.CopyNoteRequest.prototype.toObject = function(opt_includeInstance) {
  */
 proto.yartu.CopyNoteRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    noteIdsList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
-    targetNotebookId: jspb.Message.getFieldWithDefault(msg, 2, 0)
+noteIdsList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
+targetNotebookId: jspb.Message.getFieldWithDefault(msg, 2, 0)
   };
 
   if (includeInstance) {
@@ -12087,7 +12060,7 @@ proto.yartu.CopyNoteRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.CopyNoteRequest}
  */
 proto.yartu.CopyNoteRequest.deserializeBinary = function(bytes) {
@@ -12112,10 +12085,7 @@ proto.yartu.CopyNoteRequest.deserializeBinaryFromReader = function(msg, reader) 
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var values = /** @type {!Array<number>} */ (reader.isDelimited() ? reader.readPackedInt64() : [reader.readInt64()]);
-      for (var i = 0; i < values.length; i++) {
-        msg.addNoteIds(values[i]);
-      }
+      reader.readPackableInt64Into(msg.getNoteIdsList());
       break;
     case 2:
       var value = /** @type {number} */ (reader.readInt64());
@@ -12254,8 +12224,8 @@ proto.yartu.CopyNoteResponse.prototype.toObject = function(opt_includeInstance) 
  */
 proto.yartu.CopyNoteResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -12268,7 +12238,7 @@ proto.yartu.CopyNoteResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.CopyNoteResponse}
  */
 proto.yartu.CopyNoteResponse.deserializeBinary = function(bytes) {
@@ -12297,7 +12267,7 @@ proto.yartu.CopyNoteResponse.deserializeBinaryFromReader = function(msg, reader)
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -12427,7 +12397,7 @@ proto.yartu.ListNoteLabelRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ListNoteLabelRequest}
  */
 proto.yartu.ListNoteLabelRequest.deserializeBinary = function(bytes) {
@@ -12522,10 +12492,10 @@ proto.yartu.ListNoteLabelResponse.prototype.toObject = function(opt_includeInsta
  */
 proto.yartu.ListNoteLabelResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    dataList: jspb.Message.toObjectList(msg.getDataList(),
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+dataList: jspb.Message.toObjectList(msg.getDataList(),
     proto.yartu.NoteLabel.toObject, includeInstance),
-    message: jspb.Message.getFieldWithDefault(msg, 3, "")
+message: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -12538,7 +12508,7 @@ proto.yartu.ListNoteLabelResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ListNoteLabelResponse}
  */
 proto.yartu.ListNoteLabelResponse.deserializeBinary = function(bytes) {
@@ -12572,7 +12542,7 @@ proto.yartu.ListNoteLabelResponse.deserializeBinaryFromReader = function(msg, re
       msg.addData(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -12753,10 +12723,10 @@ proto.yartu.UpsertNoteLabelRequest.prototype.toObject = function(opt_includeInst
  */
 proto.yartu.UpsertNoteLabelRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    name: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    color: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    noteId: jspb.Message.getFieldWithDefault(msg, 4, 0)
+id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+name: jspb.Message.getFieldWithDefault(msg, 2, ""),
+color: jspb.Message.getFieldWithDefault(msg, 3, ""),
+noteId: (f = jspb.Message.getField(msg, 4)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -12769,7 +12739,7 @@ proto.yartu.UpsertNoteLabelRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UpsertNoteLabelRequest}
  */
 proto.yartu.UpsertNoteLabelRequest.deserializeBinary = function(bytes) {
@@ -12798,11 +12768,11 @@ proto.yartu.UpsertNoteLabelRequest.deserializeBinaryFromReader = function(msg, r
       msg.setId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setName(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setColor(value);
       break;
     case 4:
@@ -12991,8 +12961,8 @@ proto.yartu.UpsertNoteLabelResponse.prototype.toObject = function(opt_includeIns
  */
 proto.yartu.UpsertNoteLabelResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -13005,7 +12975,7 @@ proto.yartu.UpsertNoteLabelResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UpsertNoteLabelResponse}
  */
 proto.yartu.UpsertNoteLabelResponse.deserializeBinary = function(bytes) {
@@ -13034,7 +13004,7 @@ proto.yartu.UpsertNoteLabelResponse.deserializeBinaryFromReader = function(msg, 
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -13158,8 +13128,8 @@ proto.yartu.UpsertLabelToNoteRequest.prototype.toObject = function(opt_includeIn
  */
 proto.yartu.UpsertLabelToNoteRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    noteId: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    labelsList: jspb.Message.toObjectList(msg.getLabelsList(),
+noteId: jspb.Message.getFieldWithDefault(msg, 1, 0),
+labelsList: jspb.Message.toObjectList(msg.getLabelsList(),
     proto.yartu.NoteLabel.toObject, includeInstance)
   };
 
@@ -13173,7 +13143,7 @@ proto.yartu.UpsertLabelToNoteRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UpsertLabelToNoteRequest}
  */
 proto.yartu.UpsertLabelToNoteRequest.deserializeBinary = function(bytes) {
@@ -13341,8 +13311,8 @@ proto.yartu.UpsertLabelToNoteResponse.prototype.toObject = function(opt_includeI
  */
 proto.yartu.UpsertLabelToNoteResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -13355,7 +13325,7 @@ proto.yartu.UpsertLabelToNoteResponse.toObject = function(includeInstance, msg) 
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UpsertLabelToNoteResponse}
  */
 proto.yartu.UpsertLabelToNoteResponse.deserializeBinary = function(bytes) {
@@ -13384,7 +13354,7 @@ proto.yartu.UpsertLabelToNoteResponse.deserializeBinaryFromReader = function(msg
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -13501,7 +13471,7 @@ proto.yartu.DeleteNoteLabelRequest.prototype.toObject = function(opt_includeInst
  */
 proto.yartu.DeleteNoteLabelRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0)
+id: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
   if (includeInstance) {
@@ -13514,7 +13484,7 @@ proto.yartu.DeleteNoteLabelRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.DeleteNoteLabelRequest}
  */
 proto.yartu.DeleteNoteLabelRequest.deserializeBinary = function(bytes) {
@@ -13631,8 +13601,8 @@ proto.yartu.DeleteNoteLabelResponse.prototype.toObject = function(opt_includeIns
  */
 proto.yartu.DeleteNoteLabelResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -13645,7 +13615,7 @@ proto.yartu.DeleteNoteLabelResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.DeleteNoteLabelResponse}
  */
 proto.yartu.DeleteNoteLabelResponse.deserializeBinary = function(bytes) {
@@ -13674,7 +13644,7 @@ proto.yartu.DeleteNoteLabelResponse.deserializeBinaryFromReader = function(msg, 
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -13791,8 +13761,8 @@ proto.yartu.GetTaskRequest.prototype.toObject = function(opt_includeInstance) {
  */
 proto.yartu.GetTaskRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    noteId: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    taskId: jspb.Message.getFieldWithDefault(msg, 2, 0)
+noteId: jspb.Message.getFieldWithDefault(msg, 1, 0),
+taskId: jspb.Message.getFieldWithDefault(msg, 2, 0)
   };
 
   if (includeInstance) {
@@ -13805,7 +13775,7 @@ proto.yartu.GetTaskRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.GetTaskRequest}
  */
 proto.yartu.GetTaskRequest.deserializeBinary = function(bytes) {
@@ -13951,9 +13921,9 @@ proto.yartu.GetTaskResponse.prototype.toObject = function(opt_includeInstance) {
  */
 proto.yartu.GetTaskResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    data: (f = msg.getData()) && proto.yartu.Task.toObject(includeInstance, f)
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f,
+data: (f = msg.getData()) && proto.yartu.Task.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -13966,7 +13936,7 @@ proto.yartu.GetTaskResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.GetTaskResponse}
  */
 proto.yartu.GetTaskResponse.deserializeBinary = function(bytes) {
@@ -13995,7 +13965,7 @@ proto.yartu.GetTaskResponse.deserializeBinaryFromReader = function(msg, reader) 
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     case 3:
@@ -14180,14 +14150,14 @@ proto.yartu.UpsertTaskRequest.prototype.toObject = function(opt_includeInstance)
  */
 proto.yartu.UpsertTaskRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    noteId: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    content: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    priority: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    reminder: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    deadline: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    order: jspb.Message.getFieldWithDefault(msg, 7, 0),
-    randomId: jspb.Message.getFieldWithDefault(msg, 8, "")
+id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+noteId: jspb.Message.getFieldWithDefault(msg, 2, 0),
+content: jspb.Message.getFieldWithDefault(msg, 3, ""),
+priority: jspb.Message.getFieldWithDefault(msg, 4, 0),
+reminder: jspb.Message.getFieldWithDefault(msg, 5, ""),
+deadline: jspb.Message.getFieldWithDefault(msg, 6, ""),
+order: jspb.Message.getFieldWithDefault(msg, 7, 0),
+randomId: jspb.Message.getFieldWithDefault(msg, 8, "")
   };
 
   if (includeInstance) {
@@ -14200,7 +14170,7 @@ proto.yartu.UpsertTaskRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UpsertTaskRequest}
  */
 proto.yartu.UpsertTaskRequest.deserializeBinary = function(bytes) {
@@ -14233,7 +14203,7 @@ proto.yartu.UpsertTaskRequest.deserializeBinaryFromReader = function(msg, reader
       msg.setNoteId(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setContent(value);
       break;
     case 4:
@@ -14241,11 +14211,11 @@ proto.yartu.UpsertTaskRequest.deserializeBinaryFromReader = function(msg, reader
       msg.setPriority(value);
       break;
     case 5:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setReminder(value);
       break;
     case 6:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setDeadline(value);
       break;
     case 7:
@@ -14253,7 +14223,7 @@ proto.yartu.UpsertTaskRequest.deserializeBinaryFromReader = function(msg, reader
       msg.setOrder(value);
       break;
     case 8:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setRandomId(value);
       break;
     default:
@@ -14520,9 +14490,9 @@ proto.yartu.UpsertTaskResponse.prototype.toObject = function(opt_includeInstance
  */
 proto.yartu.UpsertTaskResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    data: (f = msg.getData()) && proto.yartu.Task.toObject(includeInstance, f)
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, ""),
+data: (f = msg.getData()) && proto.yartu.Task.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -14535,7 +14505,7 @@ proto.yartu.UpsertTaskResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UpsertTaskResponse}
  */
 proto.yartu.UpsertTaskResponse.deserializeBinary = function(bytes) {
@@ -14564,7 +14534,7 @@ proto.yartu.UpsertTaskResponse.deserializeBinaryFromReader = function(msg, reade
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     case 3:
@@ -14731,7 +14701,7 @@ proto.yartu.DeleteTaskRequest.prototype.toObject = function(opt_includeInstance)
  */
 proto.yartu.DeleteTaskRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    taskId: jspb.Message.getFieldWithDefault(msg, 1, 0)
+taskId: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
   if (includeInstance) {
@@ -14744,7 +14714,7 @@ proto.yartu.DeleteTaskRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.DeleteTaskRequest}
  */
 proto.yartu.DeleteTaskRequest.deserializeBinary = function(bytes) {
@@ -14861,8 +14831,8 @@ proto.yartu.DeleteTaskResponse.prototype.toObject = function(opt_includeInstance
  */
 proto.yartu.DeleteTaskResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -14875,7 +14845,7 @@ proto.yartu.DeleteTaskResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.DeleteTaskResponse}
  */
 proto.yartu.DeleteTaskResponse.deserializeBinary = function(bytes) {
@@ -14904,7 +14874,7 @@ proto.yartu.DeleteTaskResponse.deserializeBinaryFromReader = function(msg, reade
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -15021,8 +14991,8 @@ proto.yartu.ListTaskRequest.prototype.toObject = function(opt_includeInstance) {
  */
 proto.yartu.ListTaskRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    query: (f = msg.getQuery()) && common_grpc_definitions_pb.Query.toObject(includeInstance, f),
-    meta: (f = msg.getMeta()) && proto.yartu.TaskMetaQuery.toObject(includeInstance, f)
+query: (f = msg.getQuery()) && common_grpc_definitions_pb.Query.toObject(includeInstance, f),
+meta: (f = msg.getMeta()) && proto.yartu.TaskMetaQuery.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -15035,7 +15005,7 @@ proto.yartu.ListTaskRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ListTaskRequest}
  */
 proto.yartu.ListTaskRequest.deserializeBinary = function(bytes) {
@@ -15230,9 +15200,9 @@ proto.yartu.ListTaskResponse.prototype.toObject = function(opt_includeInstance) 
  */
 proto.yartu.ListTaskResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    dataList: jspb.Message.toObjectList(msg.getDataList(),
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, ""),
+dataList: jspb.Message.toObjectList(msg.getDataList(),
     proto.yartu.Task.toObject, includeInstance)
   };
 
@@ -15246,7 +15216,7 @@ proto.yartu.ListTaskResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ListTaskResponse}
  */
 proto.yartu.ListTaskResponse.deserializeBinary = function(bytes) {
@@ -15275,7 +15245,7 @@ proto.yartu.ListTaskResponse.deserializeBinaryFromReader = function(msg, reader)
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     case 3:
@@ -15443,9 +15413,9 @@ proto.yartu.CompleteTaskRequest.prototype.toObject = function(opt_includeInstanc
  */
 proto.yartu.CompleteTaskRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    noteId: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    taskId: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    complete: jspb.Message.getBooleanFieldWithDefault(msg, 3, false)
+noteId: jspb.Message.getFieldWithDefault(msg, 1, 0),
+taskId: jspb.Message.getFieldWithDefault(msg, 2, 0),
+complete: jspb.Message.getBooleanFieldWithDefault(msg, 3, false)
   };
 
   if (includeInstance) {
@@ -15458,7 +15428,7 @@ proto.yartu.CompleteTaskRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.CompleteTaskRequest}
  */
 proto.yartu.CompleteTaskRequest.deserializeBinary = function(bytes) {
@@ -15633,9 +15603,9 @@ proto.yartu.CompleteTaskResponse.prototype.toObject = function(opt_includeInstan
  */
 proto.yartu.CompleteTaskResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    data: (f = msg.getData()) && proto.yartu.Task.toObject(includeInstance, f)
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, ""),
+data: (f = msg.getData()) && proto.yartu.Task.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -15648,7 +15618,7 @@ proto.yartu.CompleteTaskResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.CompleteTaskResponse}
  */
 proto.yartu.CompleteTaskResponse.deserializeBinary = function(bytes) {
@@ -15677,7 +15647,7 @@ proto.yartu.CompleteTaskResponse.deserializeBinaryFromReader = function(msg, rea
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     case 3:
@@ -15844,8 +15814,8 @@ proto.yartu.ConvertNoteRequest.prototype.toObject = function(opt_includeInstance
  */
 proto.yartu.ConvertNoteRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    to: jspb.Message.getFieldWithDefault(msg, 2, 0)
+id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+to: jspb.Message.getFieldWithDefault(msg, 2, 0)
   };
 
   if (includeInstance) {
@@ -15858,7 +15828,7 @@ proto.yartu.ConvertNoteRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ConvertNoteRequest}
  */
 proto.yartu.ConvertNoteRequest.deserializeBinary = function(bytes) {
@@ -16004,8 +15974,8 @@ proto.yartu.ConvertNoteResponse.prototype.toObject = function(opt_includeInstanc
  */
 proto.yartu.ConvertNoteResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -16018,7 +15988,7 @@ proto.yartu.ConvertNoteResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.ConvertNoteResponse}
  */
 proto.yartu.ConvertNoteResponse.deserializeBinary = function(bytes) {
@@ -16047,7 +16017,7 @@ proto.yartu.ConvertNoteResponse.deserializeBinaryFromReader = function(msg, read
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -16164,8 +16134,8 @@ proto.yartu.UpsertImageToNoteRequest.prototype.toObject = function(opt_includeIn
  */
 proto.yartu.UpsertImageToNoteRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    noteId: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    fileName: jspb.Message.getFieldWithDefault(msg, 2, "")
+noteId: jspb.Message.getFieldWithDefault(msg, 1, 0),
+fileName: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -16178,7 +16148,7 @@ proto.yartu.UpsertImageToNoteRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UpsertImageToNoteRequest}
  */
 proto.yartu.UpsertImageToNoteRequest.deserializeBinary = function(bytes) {
@@ -16207,7 +16177,7 @@ proto.yartu.UpsertImageToNoteRequest.deserializeBinaryFromReader = function(msg,
       msg.setNoteId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setFileName(value);
       break;
     default:
@@ -16324,9 +16294,9 @@ proto.yartu.UpsertImageToNoteResponse.prototype.toObject = function(opt_includeI
  */
 proto.yartu.UpsertImageToNoteResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    uploadToken: jspb.Message.getFieldWithDefault(msg, 3, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: jspb.Message.getFieldWithDefault(msg, 2, ""),
+uploadToken: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -16339,7 +16309,7 @@ proto.yartu.UpsertImageToNoteResponse.toObject = function(includeInstance, msg) 
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.UpsertImageToNoteResponse}
  */
 proto.yartu.UpsertImageToNoteResponse.deserializeBinary = function(bytes) {
@@ -16368,11 +16338,11 @@ proto.yartu.UpsertImageToNoteResponse.deserializeBinaryFromReader = function(msg
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setUploadToken(value);
       break;
     default:
@@ -16514,9 +16484,9 @@ proto.yartu.SaveNoteToDriveRequest.prototype.toObject = function(opt_includeInst
  */
 proto.yartu.SaveNoteToDriveRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    repoId: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    parentPath: jspb.Message.getFieldWithDefault(msg, 3, "")
+id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+repoId: jspb.Message.getFieldWithDefault(msg, 2, ""),
+parentPath: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -16529,7 +16499,7 @@ proto.yartu.SaveNoteToDriveRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.SaveNoteToDriveRequest}
  */
 proto.yartu.SaveNoteToDriveRequest.deserializeBinary = function(bytes) {
@@ -16558,11 +16528,11 @@ proto.yartu.SaveNoteToDriveRequest.deserializeBinaryFromReader = function(msg, r
       msg.setId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setRepoId(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setParentPath(value);
       break;
     default:
@@ -16704,8 +16674,8 @@ proto.yartu.SaveNoteToDriveResponse.prototype.toObject = function(opt_includeIns
  */
 proto.yartu.SaveNoteToDriveResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -16718,7 +16688,7 @@ proto.yartu.SaveNoteToDriveResponse.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.SaveNoteToDriveResponse}
  */
 proto.yartu.SaveNoteToDriveResponse.deserializeBinary = function(bytes) {
@@ -16747,7 +16717,7 @@ proto.yartu.SaveNoteToDriveResponse.deserializeBinaryFromReader = function(msg, 
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
@@ -16882,10 +16852,10 @@ proto.yartu.BindNoteWithEventRequest.prototype.toObject = function(opt_includeIn
  */
 proto.yartu.BindNoteWithEventRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    eventId: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    clear: jspb.Message.getBooleanFieldWithDefault(msg, 3, false),
-    isPublic: jspb.Message.getBooleanFieldWithDefault(msg, 4, false)
+id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+eventId: jspb.Message.getFieldWithDefault(msg, 2, 0),
+clear: jspb.Message.getBooleanFieldWithDefault(msg, 3, false),
+isPublic: jspb.Message.getBooleanFieldWithDefault(msg, 4, false)
   };
 
   if (includeInstance) {
@@ -16898,7 +16868,7 @@ proto.yartu.BindNoteWithEventRequest.toObject = function(includeInstance, msg) {
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.BindNoteWithEventRequest}
  */
 proto.yartu.BindNoteWithEventRequest.deserializeBinary = function(bytes) {
@@ -17102,8 +17072,8 @@ proto.yartu.BindNoteWithEventResponse.prototype.toObject = function(opt_includeI
  */
 proto.yartu.BindNoteWithEventResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    message: jspb.Message.getFieldWithDefault(msg, 2, "")
+code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+message: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -17116,7 +17086,7 @@ proto.yartu.BindNoteWithEventResponse.toObject = function(includeInstance, msg) 
 
 /**
  * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @param {jspb.binary.bytesource.ByteSource} bytes The bytes to deserialize.
  * @return {!proto.yartu.BindNoteWithEventResponse}
  */
 proto.yartu.BindNoteWithEventResponse.deserializeBinary = function(bytes) {
@@ -17145,7 +17115,7 @@ proto.yartu.BindNoteWithEventResponse.deserializeBinaryFromReader = function(msg
       msg.setCode(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {string} */ (reader.readStringRequireUtf8());
       msg.setMessage(value);
       break;
     default:
