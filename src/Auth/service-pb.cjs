@@ -1190,7 +1190,9 @@ password: jspb.Message.getFieldWithDefault(msg, 2, ""),
 secret: jspb.Message.getFieldWithDefault(msg, 3, ""),
 redirectTo: jspb.Message.getFieldWithDefault(msg, 4, ""),
 remember: jspb.Message.getBooleanFieldWithDefault(msg, 5, false),
-deviceId: (f = jspb.Message.getField(msg, 6)) == null ? undefined : f
+deviceId: (f = jspb.Message.getField(msg, 6)) == null ? undefined : f,
+deviceName: (f = jspb.Message.getField(msg, 7)) == null ? undefined : f,
+platform: (f = jspb.Message.getField(msg, 8)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -1250,6 +1252,14 @@ proto.yartu.LoginRequest.deserializeBinaryFromReader = function(msg, reader) {
     case 6:
       var value = /** @type {string} */ (reader.readString());
       msg.setDeviceId(value);
+      break;
+    case 7:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setDeviceName(value);
+      break;
+    case 8:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setPlatform(value);
       break;
     default:
       reader.skipField();
@@ -1319,6 +1329,20 @@ proto.yartu.LoginRequest.serializeBinaryToWriter = function(message, writer) {
   if (f != null) {
     writer.writeString(
       6,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 7));
+  if (f != null) {
+    writer.writeString(
+      7,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 8));
+  if (f != null) {
+    writer.writeString(
+      8,
       f
     );
   }
@@ -1451,6 +1475,78 @@ proto.yartu.LoginRequest.prototype.hasDeviceId = function() {
 };
 
 
+/**
+ * optional string device_name = 7;
+ * @return {string}
+ */
+proto.yartu.LoginRequest.prototype.getDeviceName = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.LoginRequest} returns this
+ */
+proto.yartu.LoginRequest.prototype.setDeviceName = function(value) {
+  return jspb.Message.setField(this, 7, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.LoginRequest} returns this
+ */
+proto.yartu.LoginRequest.prototype.clearDeviceName = function() {
+  return jspb.Message.setField(this, 7, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.LoginRequest.prototype.hasDeviceName = function() {
+  return jspb.Message.getField(this, 7) != null;
+};
+
+
+/**
+ * optional string platform = 8;
+ * @return {string}
+ */
+proto.yartu.LoginRequest.prototype.getPlatform = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.LoginRequest} returns this
+ */
+proto.yartu.LoginRequest.prototype.setPlatform = function(value) {
+  return jspb.Message.setField(this, 8, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.LoginRequest} returns this
+ */
+proto.yartu.LoginRequest.prototype.clearPlatform = function() {
+  return jspb.Message.setField(this, 8, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.LoginRequest.prototype.hasPlatform = function() {
+  return jspb.Message.getField(this, 8) != null;
+};
+
+
 
 /**
  * List of repeated fields within this message type.
@@ -1507,7 +1603,8 @@ packageId: (f = jspb.Message.getField(msg, 13)) == null ? undefined : f,
 isPaid: (f = jspb.Message.getBooleanField(msg, 14)) == null ? undefined : f,
 paidLogsList: jspb.Message.toObjectList(msg.getPaidLogsList(),
     common_grpc_definitions_pb.PaidLog.toObject, includeInstance),
-latePaymentToken: (f = jspb.Message.getField(msg, 16)) == null ? undefined : f
+latePaymentToken: (f = jspb.Message.getField(msg, 16)) == null ? undefined : f,
+clientToken: (f = jspb.Message.getField(msg, 17)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -1609,6 +1706,10 @@ proto.yartu.LoginResponse.deserializeBinaryFromReader = function(msg, reader) {
     case 16:
       var value = /** @type {string} */ (reader.readString());
       msg.setLatePaymentToken(value);
+      break;
+    case 17:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setClientToken(value);
       break;
     default:
       reader.skipField();
@@ -1750,6 +1851,13 @@ proto.yartu.LoginResponse.serializeBinaryToWriter = function(message, writer) {
   if (f != null) {
     writer.writeString(
       16,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 17));
+  if (f != null) {
+    writer.writeString(
+      17,
       f
     );
   }
@@ -2282,6 +2390,42 @@ proto.yartu.LoginResponse.prototype.clearLatePaymentToken = function() {
  */
 proto.yartu.LoginResponse.prototype.hasLatePaymentToken = function() {
   return jspb.Message.getField(this, 16) != null;
+};
+
+
+/**
+ * optional string client_token = 17;
+ * @return {string}
+ */
+proto.yartu.LoginResponse.prototype.getClientToken = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 17, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.LoginResponse} returns this
+ */
+proto.yartu.LoginResponse.prototype.setClientToken = function(value) {
+  return jspb.Message.setField(this, 17, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.LoginResponse} returns this
+ */
+proto.yartu.LoginResponse.prototype.clearClientToken = function() {
+  return jspb.Message.setField(this, 17, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.LoginResponse.prototype.hasClientToken = function() {
+  return jspb.Message.getField(this, 17) != null;
 };
 
 

@@ -64,14 +64,20 @@ export default (config) =>
       });
     };
 
-    login = (username, password, secret = '', remember = false) => {
+    login = (username, password, secret = '', remember = false, deviceInfo = {}) => {
       return new Promise((resolve, reject) => {
         const request = new LoginRequest();
         request.setUsername(username);
         request.setPassword(password);
         request.setSecret(secret);
         request.setRemember(remember);
-        request.setDeviceId(getDeviceId());
+        request.setDeviceId(deviceInfo.deviceId || getDeviceId());
+        if (deviceInfo.deviceName) {
+          request.setDeviceName(deviceInfo.deviceName);
+        }
+        if (deviceInfo.platform) {
+          request.setPlatform(deviceInfo.platform);
+        }
 
         this.client.login(request, {}, (error, response) => {
           if (error) {
@@ -108,6 +114,7 @@ export default (config) =>
                 widgets,
                 apps: apps,
                 token: token,
+                clientToken: response.getClientToken(),
                 isPaid,
                 paidLogs,
                 latePaymentToken
