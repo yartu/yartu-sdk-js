@@ -1,6 +1,7 @@
 /* global windows */
 import jwt_decode from 'jwt-decode';
 import Account from '../Account';
+import Ai from '../Ai';
 import Auth from '../Auth';
 import Calendar from '../Calendar';
 import Conference from '../Conference';
@@ -35,6 +36,7 @@ class YartuApp {
   grpcEndpoint = 'http://localhost:5001/';
   user = undefined;
   Account = undefined;
+  Ai = undefined;
   Auth = undefined;
   Calendar = undefined;
   Conference = undefined;
@@ -59,6 +61,7 @@ class YartuApp {
 
   initializeModules(config) {
     this.Account = new (Account())(config);
+    this.Ai = new (Ai())(config);
     this.Auth = new (Auth())(config);
     this.Calendar = new (Calendar())(config);
     this.Conference = new (Conference())(config);
@@ -73,6 +76,7 @@ class YartuApp {
     this.ExternalApp = new (ExternalApp())(config);
 
     this.Account.yartuSdk = this;
+    this.Ai.yartuSdk = this;
     this.Auth.yartuSdk = this;
     this.Calendar.yartuSdk = this;
     this.Conference.yartuSdk = this;
@@ -113,6 +117,7 @@ class YartuApp {
     }
 
     this.Account.metadata = { tabId, Authentication: yartu_token };
+    this.Ai.metadata = { tabId, Authentication: yartu_token };
     this.Calendar.metadata = { tabId, Authentication: yartu_token };
     this.Conference.metadata = { tabId, Authentication: yartu_token };
     this.Contact.metadata = { tabId, Authentication: yartu_token };
