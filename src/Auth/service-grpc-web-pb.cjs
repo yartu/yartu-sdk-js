@@ -625,5 +625,554 @@ proto.yartu.YAuthPromiseClient.prototype.checkUserToken =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.GetTwoFactorStatusRequest,
+ *   !proto.yartu.GetTwoFactorStatusResponse>}
+ */
+const methodDescriptor_YAuth_getTwoFactorStatus = new grpc.web.MethodDescriptor(
+  '/yartu.YAuth/getTwoFactorStatus',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.GetTwoFactorStatusRequest,
+  proto.yartu.GetTwoFactorStatusResponse,
+  /**
+   * @param {!proto.yartu.GetTwoFactorStatusRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.GetTwoFactorStatusResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.GetTwoFactorStatusRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.GetTwoFactorStatusResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.GetTwoFactorStatusResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YAuthClient.prototype.getTwoFactorStatus =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YAuth/getTwoFactorStatus',
+      request,
+      metadata || {},
+      methodDescriptor_YAuth_getTwoFactorStatus,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.GetTwoFactorStatusRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.GetTwoFactorStatusResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YAuthPromiseClient.prototype.getTwoFactorStatus =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YAuth/getTwoFactorStatus',
+      request,
+      metadata || {},
+      methodDescriptor_YAuth_getTwoFactorStatus);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.StartTwoFactorRequest,
+ *   !proto.yartu.StartTwoFactorResponse>}
+ */
+const methodDescriptor_YAuth_startTwoFactor = new grpc.web.MethodDescriptor(
+  '/yartu.YAuth/startTwoFactor',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.StartTwoFactorRequest,
+  proto.yartu.StartTwoFactorResponse,
+  /**
+   * @param {!proto.yartu.StartTwoFactorRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.StartTwoFactorResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.StartTwoFactorRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.StartTwoFactorResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.StartTwoFactorResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YAuthClient.prototype.startTwoFactor =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YAuth/startTwoFactor',
+      request,
+      metadata || {},
+      methodDescriptor_YAuth_startTwoFactor,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.StartTwoFactorRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.StartTwoFactorResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YAuthPromiseClient.prototype.startTwoFactor =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YAuth/startTwoFactor',
+      request,
+      metadata || {},
+      methodDescriptor_YAuth_startTwoFactor);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.ConfirmTwoFactorRequest,
+ *   !proto.yartu.ConfirmTwoFactorResponse>}
+ */
+const methodDescriptor_YAuth_confirmTwoFactor = new grpc.web.MethodDescriptor(
+  '/yartu.YAuth/confirmTwoFactor',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.ConfirmTwoFactorRequest,
+  proto.yartu.ConfirmTwoFactorResponse,
+  /**
+   * @param {!proto.yartu.ConfirmTwoFactorRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.ConfirmTwoFactorResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.ConfirmTwoFactorRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ConfirmTwoFactorResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ConfirmTwoFactorResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YAuthClient.prototype.confirmTwoFactor =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YAuth/confirmTwoFactor',
+      request,
+      metadata || {},
+      methodDescriptor_YAuth_confirmTwoFactor,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.ConfirmTwoFactorRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.ConfirmTwoFactorResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YAuthPromiseClient.prototype.confirmTwoFactor =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YAuth/confirmTwoFactor',
+      request,
+      metadata || {},
+      methodDescriptor_YAuth_confirmTwoFactor);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.DisableTwoFactorRequest,
+ *   !proto.yartu.DisableTwoFactorResponse>}
+ */
+const methodDescriptor_YAuth_disableTwoFactor = new grpc.web.MethodDescriptor(
+  '/yartu.YAuth/disableTwoFactor',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.DisableTwoFactorRequest,
+  proto.yartu.DisableTwoFactorResponse,
+  /**
+   * @param {!proto.yartu.DisableTwoFactorRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.DisableTwoFactorResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.DisableTwoFactorRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.DisableTwoFactorResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.DisableTwoFactorResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YAuthClient.prototype.disableTwoFactor =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YAuth/disableTwoFactor',
+      request,
+      metadata || {},
+      methodDescriptor_YAuth_disableTwoFactor,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.DisableTwoFactorRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.DisableTwoFactorResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YAuthPromiseClient.prototype.disableTwoFactor =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YAuth/disableTwoFactor',
+      request,
+      metadata || {},
+      methodDescriptor_YAuth_disableTwoFactor);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.GetAuthorizationRequestRequest,
+ *   !proto.yartu.GetAuthorizationRequestResponse>}
+ */
+const methodDescriptor_YAuth_getAuthorizationRequest = new grpc.web.MethodDescriptor(
+  '/yartu.YAuth/getAuthorizationRequest',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.GetAuthorizationRequestRequest,
+  proto.yartu.GetAuthorizationRequestResponse,
+  /**
+   * @param {!proto.yartu.GetAuthorizationRequestRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.GetAuthorizationRequestResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.GetAuthorizationRequestRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.GetAuthorizationRequestResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.GetAuthorizationRequestResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YAuthClient.prototype.getAuthorizationRequest =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YAuth/getAuthorizationRequest',
+      request,
+      metadata || {},
+      methodDescriptor_YAuth_getAuthorizationRequest,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.GetAuthorizationRequestRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.GetAuthorizationRequestResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YAuthPromiseClient.prototype.getAuthorizationRequest =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YAuth/getAuthorizationRequest',
+      request,
+      metadata || {},
+      methodDescriptor_YAuth_getAuthorizationRequest);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.ApproveAuthorizationRequest,
+ *   !proto.yartu.ApproveAuthorizationResponse>}
+ */
+const methodDescriptor_YAuth_approveAuthorization = new grpc.web.MethodDescriptor(
+  '/yartu.YAuth/approveAuthorization',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.ApproveAuthorizationRequest,
+  proto.yartu.ApproveAuthorizationResponse,
+  /**
+   * @param {!proto.yartu.ApproveAuthorizationRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.ApproveAuthorizationResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.ApproveAuthorizationRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ApproveAuthorizationResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ApproveAuthorizationResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YAuthClient.prototype.approveAuthorization =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YAuth/approveAuthorization',
+      request,
+      metadata || {},
+      methodDescriptor_YAuth_approveAuthorization,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.ApproveAuthorizationRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.ApproveAuthorizationResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YAuthPromiseClient.prototype.approveAuthorization =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YAuth/approveAuthorization',
+      request,
+      metadata || {},
+      methodDescriptor_YAuth_approveAuthorization);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.DenyAuthorizationRequest,
+ *   !proto.yartu.DenyAuthorizationResponse>}
+ */
+const methodDescriptor_YAuth_denyAuthorization = new grpc.web.MethodDescriptor(
+  '/yartu.YAuth/denyAuthorization',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.DenyAuthorizationRequest,
+  proto.yartu.DenyAuthorizationResponse,
+  /**
+   * @param {!proto.yartu.DenyAuthorizationRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.DenyAuthorizationResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.DenyAuthorizationRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.DenyAuthorizationResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.DenyAuthorizationResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YAuthClient.prototype.denyAuthorization =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YAuth/denyAuthorization',
+      request,
+      metadata || {},
+      methodDescriptor_YAuth_denyAuthorization,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.DenyAuthorizationRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.DenyAuthorizationResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YAuthPromiseClient.prototype.denyAuthorization =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YAuth/denyAuthorization',
+      request,
+      metadata || {},
+      methodDescriptor_YAuth_denyAuthorization);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.ListGrantRequest,
+ *   !proto.yartu.ListGrantResponse>}
+ */
+const methodDescriptor_YAuth_listGrant = new grpc.web.MethodDescriptor(
+  '/yartu.YAuth/listGrant',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.ListGrantRequest,
+  proto.yartu.ListGrantResponse,
+  /**
+   * @param {!proto.yartu.ListGrantRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.ListGrantResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.ListGrantRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ListGrantResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ListGrantResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YAuthClient.prototype.listGrant =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YAuth/listGrant',
+      request,
+      metadata || {},
+      methodDescriptor_YAuth_listGrant,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.ListGrantRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.ListGrantResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YAuthPromiseClient.prototype.listGrant =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YAuth/listGrant',
+      request,
+      metadata || {},
+      methodDescriptor_YAuth_listGrant);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.RevokeGrantRequest,
+ *   !proto.yartu.RevokeGrantResponse>}
+ */
+const methodDescriptor_YAuth_revokeGrant = new grpc.web.MethodDescriptor(
+  '/yartu.YAuth/revokeGrant',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.RevokeGrantRequest,
+  proto.yartu.RevokeGrantResponse,
+  /**
+   * @param {!proto.yartu.RevokeGrantRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.RevokeGrantResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.RevokeGrantRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.RevokeGrantResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.RevokeGrantResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YAuthClient.prototype.revokeGrant =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YAuth/revokeGrant',
+      request,
+      metadata || {},
+      methodDescriptor_YAuth_revokeGrant,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.RevokeGrantRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.RevokeGrantResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YAuthPromiseClient.prototype.revokeGrant =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YAuth/revokeGrant',
+      request,
+      metadata || {},
+      methodDescriptor_YAuth_revokeGrant);
+};
+
+
 module.exports = proto.yartu;
 

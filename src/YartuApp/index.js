@@ -117,6 +117,7 @@ class YartuApp {
     }
 
     this.Account.metadata = { tabId, Authentication: yartu_token };
+    this.Auth.metadata = { tabId, Authentication: yartu_token };
     this.Ai.metadata = { tabId, Authentication: yartu_token };
     this.Calendar.metadata = { tabId, Authentication: yartu_token };
     this.Conference.metadata = { tabId, Authentication: yartu_token };

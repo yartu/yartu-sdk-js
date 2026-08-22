@@ -2558,7 +2558,8 @@ emailQuota: (f = msg.getEmailQuota()) && proto.EmailQuota.toObject(includeInstan
 hasDriveQuota: (f = jspb.Message.getBooleanField(msg, 26)) == null ? undefined : f,
 driveQuota: (f = msg.getDriveQuota()) && proto.DriveQuota.toObject(includeInstance, f),
 image: (f = jspb.Message.getField(msg, 28)) == null ? undefined : f,
-isRealmManager: (f = jspb.Message.getBooleanField(msg, 29)) == null ? undefined : f
+isRealmManager: (f = jspb.Message.getBooleanField(msg, 29)) == null ? undefined : f,
+twoFactorEnabled: (f = jspb.Message.getBooleanField(msg, 30)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -2715,6 +2716,10 @@ proto.User.deserializeBinaryFromReader = function(msg, reader) {
     case 29:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setIsRealmManager(value);
+      break;
+    case 30:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setTwoFactorEnabled(value);
       break;
     default:
       reader.skipField();
@@ -2950,6 +2955,13 @@ proto.User.serializeBinaryToWriter = function(message, writer) {
   if (f != null) {
     writer.writeBool(
       29,
+      f
+    );
+  }
+  f = /** @type {boolean} */ (jspb.Message.getField(message, 30));
+  if (f != null) {
+    writer.writeBool(
+      30,
       f
     );
   }
@@ -3752,6 +3764,42 @@ proto.User.prototype.clearIsRealmManager = function() {
  */
 proto.User.prototype.hasIsRealmManager = function() {
   return jspb.Message.getField(this, 29) != null;
+};
+
+
+/**
+ * optional bool two_factor_enabled = 30;
+ * @return {boolean}
+ */
+proto.User.prototype.getTwoFactorEnabled = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 30, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.User} returns this
+ */
+proto.User.prototype.setTwoFactorEnabled = function(value) {
+  return jspb.Message.setField(this, 30, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.User} returns this
+ */
+proto.User.prototype.clearTwoFactorEnabled = function() {
+  return jspb.Message.setField(this, 30, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.User.prototype.hasTwoFactorEnabled = function() {
+  return jspb.Message.getField(this, 30) != null;
 };
 
 

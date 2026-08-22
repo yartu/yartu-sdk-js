@@ -13,28 +13,72 @@ import {
 } from '../utils/codes';
 
 import { handleError, getDeviceId } from '../utils/helper';
+import { Query } from '../utils/definitions_pb.cjs';
 
 import {
   ChallengeRequest,
   GetCapabilitiesRequest,
   LoginRequest,
   OtpLoginRequest,
+  GetTwoFactorStatusRequest,
+  StartTwoFactorRequest,
+  ConfirmTwoFactorRequest,
+  DisableTwoFactorRequest,
   ForcedPasswordChangeRequest,
   CheckUserTokenRequest,
-  GetServicesRequest
+  GetServicesRequest,
+  // Yartu as an identity provider; same service, see auth/provider/.
+  GetAuthorizationRequestRequest,
+  ApproveAuthorizationRequest,
+  DenyAuthorizationRequest,
+  ListGrantRequest,
+  RevokeGrantRequest
 } from './service-pb.cjs';
 import { YAuthClient } from './service-grpc-web-pb.cjs';
+
+const toClient = (client) => {
+  if (!client) {
+    return null;
+  }
+
+  return {
+    clientId: client.getClientId(),
+    clientName: client.getClientName(),
+    clientUri: client.getClientUri(),
+    logoUri: client.getLogoUri(),
+    clientType: client.getClientType()
+  };
+};
+
+const toApps = (appList) =>
+  appList.map((group) => ({
+    app: group.getApp(),
+    actions: group.getActionList()
+  }));
+
+const toGrant = (grant) => ({
+  id: grant.getId(),
+  client: toClient(grant.getClient()),
+  scopes: grant.getScopeList(),
+  apps: toApps(grant.getAppList()),
+  createdAt: grant.getCreatedAt(),
+  lastUsedAt: grant.getLastUsedAt()
+});
 
 export default (config) =>
   class Auth {
     endpoint = 'http://localhost:5001';
     client = undefined;
+    metadata = undefined;
     yartuSdk = undefined;
     loginStatus = 'login-needed';
 
     constructor(config) {
       this.endpoint = config.endpoint;
       this.client = new YAuthClient(this.endpoint, '', '');
+
+      const yartu_token = window.localStorage.getItem('yartu-token');
+      this.metadata = { Authentication: yartu_token };
     }
 
     getCapabilities = () => {
@@ -129,7 +173,7 @@ export default (config) =>
               resolve({
                 status: status_AUTH_TWO_FA_FORCE,
                 token: token,
-                two_fa_image: response.getOtpImage(),
+                two_fa_image: response.getTwoFaImage(),
                 latePaymentToken
               });
             } else if (code == code_AUTH_TWO_FA_NEEDED) {
@@ -225,30 +269,228 @@ export default (config) =>
       });
     };
 
-    otpLogin = (username, password, OtpToken, OtpCode, OtpType = false) => {
+    otpLogin = (otpToken, otpCode, otpType = 0) => {
       return new Promise((resolve, reject) => {
         const request = new OtpLoginRequest();
-        request.setUsername(username);
-        request.setPassword(password);
-        request.setOtpToken(OtpToken);
-        request.setOtpCode(OtpCode);
-        request.setOtpType(OtpType);
+        request.setOtpToken(otpToken);
+        request.setOtpCode(otpCode);
+        request.setOtpType(otpType);
 
-        this.client.OtpLogin(request, {}, (error, response) => {
+        this.client.otpLogin(request, {}, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+            return;
+          }
+
+          const code = response.getCode();
+          if (code != 0) {
+            reject({
+              code: code,
+              message: response.getMessage()
+            });
+            return;
+          }
+
+          const token = response.getToken();
+          const clientToken = response.getClientToken();
+
+          window.localStorage.setItem('yartu-token', token);
+          this.yartuSdk.refreshUser();
+
+          this.checkUserToken(token)
+            .then((session) => resolve({ ...session, clientToken }))
+            .catch(reject);
+        });
+      });
+    };
+
+    getTwoFactorStatus = () => {
+      return new Promise((resolve, reject) => {
+        const request = new GetTwoFactorStatusRequest();
+
+        this.client.getTwoFactorStatus(request, this.metadata, (error, response) => {
           if (error) {
             handleError(error, reject);
           } else {
             const code = response.getCode();
-            const token = response.getToken();
-
             if (code == 0) {
-              window.localStorage.setItem('yartu-token', token);
-              resolve(token);
-            } else {
-              reject({
-                code: code,
-                message: response.getMessage()
+              resolve({
+                code,
+                isEnabled: response.getIsEnabled(),
+                isAvailable: response.getIsAvailable(),
+                isRequired: response.getIsRequired()
               });
+            } else {
+              reject({ code, message: response.getMessage() });
+            }
+          }
+        });
+      });
+    };
+
+    startTwoFactor = () => {
+      return new Promise((resolve, reject) => {
+        const request = new StartTwoFactorRequest();
+
+        this.client.startTwoFactor(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code,
+                provisioningUri: response.getProvisioningUri(),
+                secret: response.getSecret()
+              });
+            } else {
+              reject({ code, message: response.getMessage() });
+            }
+          }
+        });
+      });
+    };
+
+    confirmTwoFactor = (otpCode) => {
+      return new Promise((resolve, reject) => {
+        const request = new ConfirmTwoFactorRequest();
+        request.setOtpCode(otpCode);
+
+        this.client.confirmTwoFactor(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({ code });
+            } else {
+              reject({ code, message: response.getMessage() });
+            }
+          }
+        });
+      });
+    };
+
+    disableTwoFactor = (password) => {
+      return new Promise((resolve, reject) => {
+        const request = new DisableTwoFactorRequest();
+        request.setPassword(password);
+
+        this.client.disableTwoFactor(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({ code });
+            } else {
+              reject({ code, message: response.getMessage() });
+            }
+          }
+        });
+      });
+    };
+
+    getAuthorizationRequest = (requestId) => {
+      return new Promise((resolve, reject) => {
+        const request = new GetAuthorizationRequestRequest();
+        request.setRequestId(requestId);
+
+        this.client.getAuthorizationRequest(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code === 0) {
+              resolve({
+                code,
+                client: toClient(response.getClient()),
+                scopes: response.getScopeList(),
+                apps: toApps(response.getAppList())
+              });
+            } else {
+              reject({ code, message: response.getMessage() });
+            }
+          }
+        });
+      });
+    };
+
+    approveAuthorization = (requestId, scopes = []) => {
+      return new Promise((resolve, reject) => {
+        const request = new ApproveAuthorizationRequest();
+        request.setRequestId(requestId);
+        request.setScopeList(scopes);
+
+        this.client.approveAuthorization(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code === 0) {
+              resolve({ code, redirectUrl: response.getRedirectUrl() });
+            } else {
+              reject({ code, message: response.getMessage() });
+            }
+          }
+        });
+      });
+    };
+
+    denyAuthorization = (requestId) => {
+      return new Promise((resolve, reject) => {
+        const request = new DenyAuthorizationRequest();
+        request.setRequestId(requestId);
+
+        this.client.denyAuthorization(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code === 0) {
+              resolve({ code, redirectUrl: response.getRedirectUrl() });
+            } else {
+              reject({ code, message: response.getMessage() });
+            }
+          }
+        });
+      });
+    };
+
+    listGrant = () => {
+      return new Promise((resolve, reject) => {
+        const request = new ListGrantRequest();
+        request.setQuery(new Query());
+
+        this.client.listGrant(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code === 0) {
+              resolve({ code, grants: response.getDataList().map(toGrant) });
+            } else {
+              reject({ code, message: response.getMessage() });
+            }
+          }
+        });
+      });
+    };
+
+    revokeGrant = (id) => {
+      return new Promise((resolve, reject) => {
+        const request = new RevokeGrantRequest();
+        request.setId(id);
+
+        this.client.revokeGrant(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code === 0) {
+              resolve({ code, message: response.getMessage() });
+            } else {
+              reject({ code, message: response.getMessage() });
             }
           }
         });
@@ -359,7 +601,7 @@ export default (config) =>
               resolve({
                 status: status_AUTH_TWO_FA_FORCE,
                 token: token,
-                two_fa_image: response.getOtpImage(),
+                two_fa_image: response.getTwoFaImage(),
                 latePaymentToken
               });
             } else if (code == code_AUTH_TWO_FA_NEEDED) {
