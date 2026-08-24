@@ -11,23 +11,23 @@
     "Yartu Information Technologies AS <info@yartu.io> (https://www.yartu.io)"
   ],
   "devDependencies": {
-    "@commitlint/cli": "^21.1.0",
-    "@commitlint/config-conventional": "^21.1.0",
+    "@commitlint/cli": "^21.2.2",
+    "@commitlint/config-conventional": "^21.2.2",
     "codecov": "^3.8.2",
     "cross-env": "^10.1.0",
-    "eslint": "^10.5.0",
+    "eslint": "^10.9.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-compat": "^7.0.2",
     "eslint-plugin-prettier": "^5.5.6",
     "eslint-plugin-promise": "^7.3.0",
     "eslint-plugin-unicorn": "^68.0.0",
     "fixpack": "^4.0.0",
-    "globals": "^17.7.0",
+    "globals": "^17.11.0",
     "husky": "^9.1.7",
     "jest": "^30.4.2",
-    "lint-staged": "^17.0.8",
+    "lint-staged": "^17.3.0",
     "nyc": "^18.0.0",
-    "prettier": "^3.8.4",
+    "prettier": "^3.9.6",
     "remark-cli": "^12.0.1",
     "remark-preset-github": "^4.0.4"
   },
@@ -67,7 +67,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "dompurify": "^3.4.11",
+    "dompurify": "^3.4.14",
     "google-protobuf": "^3.21.4",
     "grpc-web": "^1.5.0",
     "jwt-decode": "^3.1.2"
