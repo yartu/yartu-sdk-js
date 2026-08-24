@@ -136,11 +136,11 @@ export default (config) =>
       });
     }
 
-    startConference(conferenceUuid, passwrod = '') {
+    startConference(conferenceUuid, password = '') {
       return new Promise((resolve, reject) => {
         const request = new StartConferenceRequest();
         request.setUuid(conferenceUuid);
-        request.setPassword(passwrod);
+        request.setPassword(password);
 
         this.client.startConference(
           request,

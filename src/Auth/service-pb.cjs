@@ -2927,7 +2927,10 @@ username: jspb.Message.getFieldWithDefault(msg, 1, ""),
 password: jspb.Message.getFieldWithDefault(msg, 2, ""),
 otpToken: jspb.Message.getFieldWithDefault(msg, 3, ""),
 otpCode: jspb.Message.getFieldWithDefault(msg, 4, ""),
-otpType: jspb.Message.getFieldWithDefault(msg, 5, 0)
+otpType: jspb.Message.getFieldWithDefault(msg, 5, 0),
+deviceId: (f = jspb.Message.getField(msg, 6)) == null ? undefined : f,
+deviceName: (f = jspb.Message.getField(msg, 7)) == null ? undefined : f,
+platform: (f = jspb.Message.getField(msg, 8)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -2983,6 +2986,18 @@ proto.yartu.OtpLoginRequest.deserializeBinaryFromReader = function(msg, reader) 
     case 5:
       var value = /** @type {!proto.yartu.OtpLoginRequest.OTP_TYPE} */ (reader.readEnum());
       msg.setOtpType(value);
+      break;
+    case 6:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setDeviceId(value);
+      break;
+    case 7:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setDeviceName(value);
+      break;
+    case 8:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setPlatform(value);
       break;
     default:
       reader.skipField();
@@ -3045,6 +3060,27 @@ proto.yartu.OtpLoginRequest.serializeBinaryToWriter = function(message, writer) 
   if (f !== 0.0) {
     writer.writeEnum(
       5,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 6));
+  if (f != null) {
+    writer.writeString(
+      6,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 7));
+  if (f != null) {
+    writer.writeString(
+      7,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 8));
+  if (f != null) {
+    writer.writeString(
+      8,
       f
     );
   }
@@ -3147,6 +3183,114 @@ proto.yartu.OtpLoginRequest.prototype.getOtpType = function() {
  */
 proto.yartu.OtpLoginRequest.prototype.setOtpType = function(value) {
   return jspb.Message.setProto3EnumField(this, 5, value);
+};
+
+
+/**
+ * optional string device_id = 6;
+ * @return {string}
+ */
+proto.yartu.OtpLoginRequest.prototype.getDeviceId = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.OtpLoginRequest} returns this
+ */
+proto.yartu.OtpLoginRequest.prototype.setDeviceId = function(value) {
+  return jspb.Message.setField(this, 6, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.OtpLoginRequest} returns this
+ */
+proto.yartu.OtpLoginRequest.prototype.clearDeviceId = function() {
+  return jspb.Message.setField(this, 6, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.OtpLoginRequest.prototype.hasDeviceId = function() {
+  return jspb.Message.getField(this, 6) != null;
+};
+
+
+/**
+ * optional string device_name = 7;
+ * @return {string}
+ */
+proto.yartu.OtpLoginRequest.prototype.getDeviceName = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.OtpLoginRequest} returns this
+ */
+proto.yartu.OtpLoginRequest.prototype.setDeviceName = function(value) {
+  return jspb.Message.setField(this, 7, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.OtpLoginRequest} returns this
+ */
+proto.yartu.OtpLoginRequest.prototype.clearDeviceName = function() {
+  return jspb.Message.setField(this, 7, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.OtpLoginRequest.prototype.hasDeviceName = function() {
+  return jspb.Message.getField(this, 7) != null;
+};
+
+
+/**
+ * optional string platform = 8;
+ * @return {string}
+ */
+proto.yartu.OtpLoginRequest.prototype.getPlatform = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.OtpLoginRequest} returns this
+ */
+proto.yartu.OtpLoginRequest.prototype.setPlatform = function(value) {
+  return jspb.Message.setField(this, 8, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.OtpLoginRequest} returns this
+ */
+proto.yartu.OtpLoginRequest.prototype.clearPlatform = function() {
+  return jspb.Message.setField(this, 8, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.OtpLoginRequest.prototype.hasPlatform = function() {
+  return jspb.Message.getField(this, 8) != null;
 };
 
 
@@ -6026,7 +6170,7 @@ proto.yartu.StartTwoFactorRequest.prototype.toObject = function(opt_includeInsta
  */
 proto.yartu.StartTwoFactorRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-
+password: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -6063,6 +6207,10 @@ proto.yartu.StartTwoFactorRequest.deserializeBinaryFromReader = function(msg, re
     }
     var field = reader.getFieldNumber();
     switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setPassword(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -6092,6 +6240,49 @@ proto.yartu.StartTwoFactorRequest.prototype.serializeBinary = function() {
  */
 proto.yartu.StartTwoFactorRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = /** @type {string} */ (jspb.Message.getField(message, 1));
+  if (f != null) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string password = 1;
+ * @return {string}
+ */
+proto.yartu.StartTwoFactorRequest.prototype.getPassword = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.yartu.StartTwoFactorRequest} returns this
+ */
+proto.yartu.StartTwoFactorRequest.prototype.setPassword = function(value) {
+  return jspb.Message.setField(this, 1, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.yartu.StartTwoFactorRequest} returns this
+ */
+proto.yartu.StartTwoFactorRequest.prototype.clearPassword = function() {
+  return jspb.Message.setField(this, 1, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.yartu.StartTwoFactorRequest.prototype.hasPassword = function() {
+  return jspb.Message.getField(this, 1) != null;
 };
 
 

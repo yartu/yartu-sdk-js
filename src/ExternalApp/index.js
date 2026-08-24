@@ -7,7 +7,6 @@ export default (config) =>
     endpoint = 'http://localhost:5001';
     client = undefined;
     yartuSdk = undefined;
-    shareUuid = undefined;
 
     constructor(config) {
       this.endpoint = config.endpoint;

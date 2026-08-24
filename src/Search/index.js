@@ -14,7 +14,6 @@ export default (config) =>
   class Search {
     endpoint = 'http://localhost:5001';
     client = undefined;
-    loginStatus = 'login-needed';
 
     constructor(config) {
       this.endpoint = config.endpoint;

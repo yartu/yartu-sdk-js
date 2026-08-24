@@ -99,11 +99,6 @@ purify.addHook('afterSanitizeAttributes', (node) => {
   }
 });
 
-export const xssOptions = () => ({
-  options: { ADD_TAGS, ADD_ATTR },
-  imgInlineList: [],
-});
-
 export const sanitize = (uglyHtml, customOptions = {}, yartuAttach = {}) => {
   ctx = { imgInlineList: [], uuid: yartuAttach.uuid };
   const sanitizeResponse = purify.sanitize(uglyHtml || '', {

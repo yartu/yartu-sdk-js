@@ -4,7 +4,6 @@ import {
   status_NOT_PAID,
   code_AUTH_TWO_FA_FORCE,
   code_AUTH_TWO_FA_NEEDED,
-  status_AUTH_NEEDED,
   status_AUTH_OK,
   status_AUTH_TWO_FA_NEEDED,
   status_AUTH_TWO_FA_FORCE,
@@ -19,6 +18,7 @@ import {
   ChallengeRequest,
   GetCapabilitiesRequest,
   LoginRequest,
+  LogoutRequest,
   OtpLoginRequest,
   GetTwoFactorStatusRequest,
   StartTwoFactorRequest,
@@ -191,7 +191,7 @@ export default (config) =>
               });
             } else if (code == status_ROUTE_TO_PAYMENT) {
               resolve({
-                status: status_RESET_PASSWORD_NEEDED,
+                status: status_ROUTE_TO_PAYMENT,
                 routeToPaymentScreen: true,
                 domain,
                 packageId,
@@ -239,11 +239,11 @@ export default (config) =>
       });
     };
 
-    challenge = (username, chellengeType) => {
+    challenge = (username, challengeType) => {
       return new Promise((resolve, reject) => {
         const request = new ChallengeRequest();
         request.setUsername(username);
-        request.setType(chellengeType);
+        request.setType(challengeType);
         request.setTimestamp(Date.parse(new Date()) / 1000);
 
         this.client.challenge(request, {}, (error, response) => {
@@ -269,12 +269,19 @@ export default (config) =>
       });
     };
 
-    otpLogin = (otpToken, otpCode, otpType = 0) => {
+    otpLogin = (otpToken, otpCode, otpType = 0, deviceInfo = {}) => {
       return new Promise((resolve, reject) => {
         const request = new OtpLoginRequest();
         request.setOtpToken(otpToken);
         request.setOtpCode(otpCode);
         request.setOtpType(otpType);
+        request.setDeviceId(deviceInfo.deviceId || getDeviceId());
+        if (deviceInfo.deviceName) {
+          request.setDeviceName(deviceInfo.deviceName);
+        }
+        if (deviceInfo.platform) {
+          request.setPlatform(deviceInfo.platform);
+        }
 
         this.client.otpLogin(request, {}, (error, response) => {
           if (error) {
@@ -538,7 +545,7 @@ export default (config) =>
             return true;
           }
         } catch (error) {
-          console.log(error);
+          console.error('[auth] could not read the stored token:', error?.message || error);
         }
       }
 
@@ -619,7 +626,7 @@ export default (config) =>
               });
             } else if (code == status_ROUTE_TO_PAYMENT) {
               resolve({
-                status: status_RESET_PASSWORD_NEEDED,
+                status: status_ROUTE_TO_PAYMENT,
                 routeToPaymentScreen: true,
                 domain,
                 packageId,
@@ -638,12 +645,26 @@ export default (config) =>
       });
     };
 
-    logout = () => {
+    // cleared on sign-out except these
+    static KEEP_ON_LOGOUT = ['yartuStore-auth', 'yartu-device-id'];
+
+    clearLocalSession = () => {
       for (const storageKey of Object.keys(localStorage)) {
-        if (storageKey !== 'yartuStore-auth') {
+        if (!Auth.KEEP_ON_LOGOUT.includes(storageKey)) {
           localStorage.removeItem(storageKey);
         }
       }
       this.yartuSdk.refreshUser();
+    };
+
+    logout = () => {
+      return new Promise((resolve) => {
+        const request = new LogoutRequest();
+
+        this.client.logout(request, this.metadata, () => {
+          this.clearLocalSession();
+          resolve({ code: 0 });
+        });
+      });
     };
   };

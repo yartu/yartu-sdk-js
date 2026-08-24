@@ -85,6 +85,7 @@ class YartuApp {
     this.Email.yartuSdk = this;
     this.Note.yartuSdk = this;
     this.Project.yartuSdk = this;
+    this.Search.yartuSdk = this;
     this.ExternalApp.yartuSdk = this;
     this.Customer.yartuSdk = this;
     this.Notification.yartuSdk = this;
