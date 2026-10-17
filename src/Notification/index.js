@@ -2,11 +2,14 @@ import {
   ListNotificationRequest,
   UpsertNotificationRequest,
   ReadNotificationRequest,
-  DeleteNotificationRequest
+  DeleteNotificationRequest,
+  RegisterPushClientRequest,
+  UnregisterPushClientRequest,
+  GetPushConfigRequest
 } from './service-pb.cjs';
 
 import { YNotificationClient } from './service-grpc-web-pb.cjs';
-import { handleError } from '../utils/helper';
+import { handleError, getDeviceId } from '../utils/helper';
 
 export default (config) =>
   class Notification {
@@ -161,6 +164,109 @@ export default (config) =>
             }
           }
         );
+      });
+    }
+
+    registerPushClient({
+      kind,
+      endpoint = '',
+      p256dh = '',
+      auth = '',
+      token = '',
+      deviceId,
+      appId = 'io.yartu.suite'
+    }) {
+      return new Promise((resolve, reject) => {
+        const request = new RegisterPushClientRequest();
+        request.setKind(kind);
+        request.setEndpoint(endpoint);
+        request.setP256dh(p256dh);
+        request.setAuth(auth);
+        request.setToken(token);
+        request.setDeviceId(deviceId || getDeviceId());
+        request.setAppId(appId);
+
+        this.client.registerPushClient(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code: 0,
+                  pushkey: response.getPushkey(),
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    }
+
+    unregisterPushClient({ pushkey = '', deviceId = '' } = {}) {
+      return new Promise((resolve, reject) => {
+        const request = new UnregisterPushClientRequest();
+        request.setPushkey(pushkey);
+        request.setDeviceId(deviceId);
+
+        this.client.unregisterPushClient(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code: 0,
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    }
+
+    getPushConfig() {
+      return new Promise((resolve, reject) => {
+        const request = new GetPushConfigRequest();
+
+        this.client.getPushConfig(request, this.metadata, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+          } else {
+            const code = response.getCode();
+            if (code == 0) {
+              resolve({
+                code: 0,
+                enabled: response.getEnabled(),
+                vapidPublicKey: response.getVapidPublicKey(),
+                message: response.getMessage()
+              });
+            } else {
+              reject({
+                code: code,
+                message: response.getMessage()
+              });
+            }
+          }
+        });
       });
     }
   };
