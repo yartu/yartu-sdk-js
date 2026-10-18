@@ -12,6 +12,7 @@ import Note from '../Note';
 import Project from '../Project';
 import Search from '../Search';
 import Notification from '../Notification';
+import Chat from '../Chat';
 import Customer from '../Customer';
 import ExternalApp from '../ExternalApp';
 
@@ -47,6 +48,7 @@ class YartuApp {
   Project = undefined;
   Search = undefined;
   Notification = undefined;
+  Chat = undefined;
   Customer = undefined;
   ExternalApp = undefined;
 
@@ -72,6 +74,7 @@ class YartuApp {
     this.Project = new (Project())(config);
     this.Search = new (Search())(config);
     this.Notification = new (Notification())(config);
+    this.Chat = new (Chat())(config);
     this.Customer = new (Customer())(config);
     this.ExternalApp = new (ExternalApp())(config);
 
@@ -89,6 +92,7 @@ class YartuApp {
     this.ExternalApp.yartuSdk = this;
     this.Customer.yartuSdk = this;
     this.Notification.yartuSdk = this;
+    this.Chat.yartuSdk = this;
     this.refreshUser();
   }
 
@@ -129,6 +133,7 @@ class YartuApp {
     this.Project.metadata = { tabId, Authentication: yartu_token };
     this.Search.metadata = { tabId, Authentication: yartu_token };
     this.Notification.metadata = { tabId, Authentication: yartu_token };
+    this.Chat.metadata = { tabId, Authentication: yartu_token };
     this.Customer.metadata = { tabId, Authentication: yartu_token };
     this.ExternalApp.metadata = { tabId, Authentication: yartu_token };
   }
