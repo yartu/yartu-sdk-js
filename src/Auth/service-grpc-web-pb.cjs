@@ -323,6 +323,67 @@ proto.yartu.YAuthPromiseClient.prototype.otpLogin =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.SendOtpSmsRequest,
+ *   !proto.yartu.SendOtpSmsResponse>}
+ */
+const methodDescriptor_YAuth_sendOtpSms = new grpc.web.MethodDescriptor(
+  '/yartu.YAuth/sendOtpSms',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.SendOtpSmsRequest,
+  proto.yartu.SendOtpSmsResponse,
+  /**
+   * @param {!proto.yartu.SendOtpSmsRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.SendOtpSmsResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.SendOtpSmsRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.SendOtpSmsResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.SendOtpSmsResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YAuthClient.prototype.sendOtpSms =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YAuth/sendOtpSms',
+      request,
+      metadata || {},
+      methodDescriptor_YAuth_sendOtpSms,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.SendOtpSmsRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.SendOtpSmsResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YAuthPromiseClient.prototype.sendOtpSms =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YAuth/sendOtpSms',
+      request,
+      metadata || {},
+      methodDescriptor_YAuth_sendOtpSms);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.yartu.LogoutRequest,
  *   !proto.yartu.LogoutResponse>}
  */

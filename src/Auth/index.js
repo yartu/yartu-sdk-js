@@ -20,6 +20,7 @@ import {
   LoginRequest,
   LogoutRequest,
   OtpLoginRequest,
+  SendOtpSmsRequest,
   GetTwoFactorStatusRequest,
   StartTwoFactorRequest,
   ConfirmTwoFactorRequest,
@@ -174,12 +175,15 @@ export default (config) =>
                 status: status_AUTH_TWO_FA_FORCE,
                 token: token,
                 two_fa_image: response.getTwoFaImage(),
+                otpProvider: response.getOtpProvider(),
                 latePaymentToken
               });
             } else if (code == code_AUTH_TWO_FA_NEEDED) {
               resolve({
                 status: status_AUTH_TWO_FA_NEEDED,
                 token: token,
+                otpProvider: response.getOtpProvider(),
+                otpPhoneMask: response.getOtpPhoneMask(),
                 latePaymentToken
               });
             } else if (code == status_NOT_PAID) {
@@ -311,6 +315,38 @@ export default (config) =>
       });
     };
 
+    sendOtpSms = (otpToken, phone) => {
+      return new Promise((resolve, reject) => {
+        const request = new SendOtpSmsRequest();
+        request.setOtpToken(otpToken);
+        if (phone) {
+          request.setPhone(phone);
+        }
+
+        this.client.sendOtpSms(request, {}, (error, response) => {
+          if (error) {
+            handleError(error, reject);
+            return;
+          }
+
+          const code = response.getCode();
+          if (code == 0) {
+            resolve({
+              code,
+              phoneMask: response.getPhoneMask(),
+              retryAfter: response.getRetryAfter()
+            });
+          } else {
+            reject({
+              code,
+              message: response.getMessage(),
+              retryAfter: response.getRetryAfter()
+            });
+          }
+        });
+      });
+    };
+
     getTwoFactorStatus = () => {
       return new Promise((resolve, reject) => {
         const request = new GetTwoFactorStatusRequest();
@@ -325,7 +361,10 @@ export default (config) =>
                 code,
                 isEnabled: response.getIsEnabled(),
                 isAvailable: response.getIsAvailable(),
-                isRequired: response.getIsRequired()
+                isRequired: response.getIsRequired(),
+                provider: response.getProvider() || 'authenticator',
+                enrolledProvider: response.getEnrolledProvider(),
+                phoneMask: response.getPhoneMask()
               });
             } else {
               reject({ code, message: response.getMessage() });
@@ -335,9 +374,12 @@ export default (config) =>
       });
     };
 
-    startTwoFactor = () => {
+    startTwoFactor = (phone) => {
       return new Promise((resolve, reject) => {
         const request = new StartTwoFactorRequest();
+        if (phone) {
+          request.setPhone(phone);
+        }
 
         this.client.startTwoFactor(request, this.metadata, (error, response) => {
           if (error) {
@@ -348,10 +390,12 @@ export default (config) =>
               resolve({
                 code,
                 provisioningUri: response.getProvisioningUri(),
-                secret: response.getSecret()
+                secret: response.getSecret(),
+                phoneMask: response.getPhoneMask(),
+                retryAfter: response.getRetryAfter()
               });
             } else {
-              reject({ code, message: response.getMessage() });
+              reject({ code, message: response.getMessage(), retryAfter: response.getRetryAfter() });
             }
           }
         });
