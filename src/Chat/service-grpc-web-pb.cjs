@@ -198,5 +198,127 @@ proto.yartu.YChatPromiseClient.prototype.getChatLoginToken =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.SaveChatMediaToDriveRequest,
+ *   !proto.yartu.SaveChatMediaToDriveResponse>}
+ */
+const methodDescriptor_YChat_saveChatMediaToDrive = new grpc.web.MethodDescriptor(
+  '/yartu.YChat/saveChatMediaToDrive',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.SaveChatMediaToDriveRequest,
+  proto.yartu.SaveChatMediaToDriveResponse,
+  /**
+   * @param {!proto.yartu.SaveChatMediaToDriveRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.SaveChatMediaToDriveResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.SaveChatMediaToDriveRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.SaveChatMediaToDriveResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.SaveChatMediaToDriveResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YChatClient.prototype.saveChatMediaToDrive =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YChat/saveChatMediaToDrive',
+      request,
+      metadata || {},
+      methodDescriptor_YChat_saveChatMediaToDrive,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.SaveChatMediaToDriveRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.SaveChatMediaToDriveResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YChatPromiseClient.prototype.saveChatMediaToDrive =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YChat/saveChatMediaToDrive',
+      request,
+      metadata || {},
+      methodDescriptor_YChat_saveChatMediaToDrive);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.GrantRoomReadAccessRequest,
+ *   !proto.yartu.GrantRoomReadAccessResponse>}
+ */
+const methodDescriptor_YChat_grantRoomReadAccess = new grpc.web.MethodDescriptor(
+  '/yartu.YChat/grantRoomReadAccess',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.GrantRoomReadAccessRequest,
+  proto.yartu.GrantRoomReadAccessResponse,
+  /**
+   * @param {!proto.yartu.GrantRoomReadAccessRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.GrantRoomReadAccessResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.GrantRoomReadAccessRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.GrantRoomReadAccessResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.GrantRoomReadAccessResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YChatClient.prototype.grantRoomReadAccess =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YChat/grantRoomReadAccess',
+      request,
+      metadata || {},
+      methodDescriptor_YChat_grantRoomReadAccess,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.GrantRoomReadAccessRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.GrantRoomReadAccessResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YChatPromiseClient.prototype.grantRoomReadAccess =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YChat/grantRoomReadAccess',
+      request,
+      metadata || {},
+      methodDescriptor_YChat_grantRoomReadAccess);
+};
+
+
 module.exports = proto.yartu;
 
