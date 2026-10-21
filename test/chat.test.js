@@ -21,6 +21,11 @@ const response = (code = 0) => ({
   getServerName: () => 'example',
   getUserId: () => '@u:example',
   getPushGatewayUrl: () => 'https://push.example',
+  getBotUserId: () => '@bot:example',
+  getBotEnabled: () => true,
+  getMxid: () => '@bob:example',
+  getUuid: () => 'uuid-1',
+  getAdded: () => 2,
   getToken: () => 'jwt',
   getExpiresIn: () => 60
 });
@@ -44,6 +49,8 @@ test('getChatConfig resolves with config fields', async () => {
     serverName: 'example',
     userId: '@u:example',
     pushGatewayUrl: 'https://push.example',
+    botUserId: '@bot:example',
+    botEnabled: true,
     message: 'SUCCESS'
   });
 });
@@ -102,4 +109,43 @@ test('getChatDeviceId persists a generated id', () => {
   expect(first).toMatch(/^YARTU_.+/);
   expect(store['yartu-device-id']).toBe(first.slice('YARTU_'.length));
   expect(c.getChatDeviceId()).toBe(first);
+});
+
+test('resolveChatUser sets username and resolves mxid', async () => {
+  const c = make('resolveChatUser', response());
+  const res = await c.resolveChatUser('bob@x');
+  expect(c.client.resolveChatUser.mock.calls[0][0].getUsername()).toBe('bob@x');
+  expect(res).toEqual({ code: 0, mxid: '@bob:example', message: 'SUCCESS' });
+});
+
+test('resolveChatUser rejects with code and message', async () => {
+  const res = { ...response(404), getMessage: () => 'chat_unavailable' };
+  const c = make('resolveChatUser', res);
+  await expect(c.resolveChatUser('bob@x')).rejects.toEqual({
+    code: 404,
+    message: 'chat_unavailable'
+  });
+});
+
+test('resolveChatUser grpc error rejects through handleError', async () => {
+  const c = make('resolveChatUser', null, { code: 14, message: 'down' });
+  await expect(c.resolveChatUser('b')).rejects.toEqual({ code: 14, message: 'down' });
+});
+
+test('startRoomMeeting sets room and title and resolves', async () => {
+  const c = make('startRoomMeeting', response());
+  const res = await c.startRoomMeeting('!r', 'T');
+  const req = c.client.startRoomMeeting.mock.calls[0][0];
+  expect(req.getRoomId()).toBe('!r');
+  expect(req.getTitle()).toBe('T');
+  expect(res).toEqual({ code: 0, uuid: 'uuid-1', added: 2, message: 'SUCCESS' });
+});
+
+test('startRoomMeeting rejects with code and message', async () => {
+  const res = { ...response(403), getMessage: () => 'not_member' };
+  const c = make('startRoomMeeting', res);
+  await expect(c.startRoomMeeting('!r', 'T')).rejects.toEqual({
+    code: 403,
+    message: 'not_member'
+  });
 });

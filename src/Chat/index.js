@@ -2,7 +2,9 @@ import {
   GetChatConfigRequest,
   GetChatLoginTokenRequest,
   SaveChatMediaToDriveRequest,
-  GrantRoomReadAccessRequest
+  GrantRoomReadAccessRequest,
+  ResolveChatUserRequest,
+  StartRoomMeetingRequest
 } from './service-pb.cjs';
 
 import { YChatClient } from './service-grpc-web-pb.cjs';
@@ -43,6 +45,8 @@ export default (config) =>
                 serverName: response.getServerName(),
                 userId: response.getUserId(),
                 pushGatewayUrl: response.getPushGatewayUrl(),
+                botUserId: response.getBotUserId(),
+                botEnabled: response.getBotEnabled(),
                 message: response.getMessage()
               });
             } else {
@@ -141,6 +145,70 @@ export default (config) =>
                 resolve({
                   code: 0,
                   granted: response.getGranted(),
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    }
+
+    resolveChatUser(username) {
+      return new Promise((resolve, reject) => {
+        const request = new ResolveChatUserRequest();
+        request.setUsername(username);
+
+        this.client.resolveChatUser(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code: 0,
+                  mxid: response.getMxid(),
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    }
+
+    startRoomMeeting(roomId, title) {
+      return new Promise((resolve, reject) => {
+        const request = new StartRoomMeetingRequest();
+        request.setRoomId(roomId);
+        request.setTitle(title);
+
+        this.client.startRoomMeeting(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code: 0,
+                  uuid: response.getUuid(),
+                  added: response.getAdded(),
                   message: response.getMessage()
                 });
               } else {
