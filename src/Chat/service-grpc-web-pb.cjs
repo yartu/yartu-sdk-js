@@ -320,5 +320,127 @@ proto.yartu.YChatPromiseClient.prototype.grantRoomReadAccess =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.ResolveChatUserRequest,
+ *   !proto.yartu.ResolveChatUserResponse>}
+ */
+const methodDescriptor_YChat_resolveChatUser = new grpc.web.MethodDescriptor(
+  '/yartu.YChat/resolveChatUser',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.ResolveChatUserRequest,
+  proto.yartu.ResolveChatUserResponse,
+  /**
+   * @param {!proto.yartu.ResolveChatUserRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.ResolveChatUserResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.ResolveChatUserRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ResolveChatUserResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ResolveChatUserResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YChatClient.prototype.resolveChatUser =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YChat/resolveChatUser',
+      request,
+      metadata || {},
+      methodDescriptor_YChat_resolveChatUser,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.ResolveChatUserRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.ResolveChatUserResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YChatPromiseClient.prototype.resolveChatUser =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YChat/resolveChatUser',
+      request,
+      metadata || {},
+      methodDescriptor_YChat_resolveChatUser);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.StartRoomMeetingRequest,
+ *   !proto.yartu.StartRoomMeetingResponse>}
+ */
+const methodDescriptor_YChat_startRoomMeeting = new grpc.web.MethodDescriptor(
+  '/yartu.YChat/startRoomMeeting',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.StartRoomMeetingRequest,
+  proto.yartu.StartRoomMeetingResponse,
+  /**
+   * @param {!proto.yartu.StartRoomMeetingRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.StartRoomMeetingResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.StartRoomMeetingRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.StartRoomMeetingResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.StartRoomMeetingResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YChatClient.prototype.startRoomMeeting =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YChat/startRoomMeeting',
+      request,
+      metadata || {},
+      methodDescriptor_YChat_startRoomMeeting,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.StartRoomMeetingRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.StartRoomMeetingResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YChatPromiseClient.prototype.startRoomMeeting =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YChat/startRoomMeeting',
+      request,
+      metadata || {},
+      methodDescriptor_YChat_startRoomMeeting);
+};
+
+
 module.exports = proto.yartu;
 
