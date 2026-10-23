@@ -4,7 +4,8 @@ import {
   SaveChatMediaToDriveRequest,
   GrantRoomReadAccessRequest,
   ResolveChatUserRequest,
-  StartRoomMeetingRequest
+  StartRoomMeetingRequest,
+  ListExternalOrganizationsRequest
 } from './service-pb.cjs';
 
 import { YChatClient } from './service-grpc-web-pb.cjs';
@@ -209,6 +210,46 @@ export default (config) =>
                   code: 0,
                   uuid: response.getUuid(),
                   added: response.getAdded(),
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    }
+
+    listExternalOrganizations() {
+      return new Promise((resolve, reject) => {
+        const request = new ListExternalOrganizationsRequest();
+
+        this.client.listExternalOrganizations(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code: 0,
+                  serverName: response.getServerName(),
+                  contact: response.getContact(),
+                  realmMode: response.getRealmMode(),
+                  allowlist: response.getAllowlistList(),
+                  organizations: response.getOrganizationsList().map((o) => ({
+                    serverName: o.getServerName(),
+                    name: o.getName(),
+                    domain: o.getDomain(),
+                    status: o.getStatus(),
+                    allowed: o.getAllowed()
+                  })),
                   message: response.getMessage()
                 });
               } else {

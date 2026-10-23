@@ -149,3 +149,60 @@ test('startRoomMeeting rejects with code and message', async () => {
     message: 'not_member'
   });
 });
+
+const orgResponse = (code = 0) => ({
+  ...response(code),
+  getContact: () => 'allowlist',
+  getRealmMode: () => 'allowlist',
+  getAllowlistList: () => ['bob@org.example'],
+  getOrganizationsList: () => [
+    {
+      getServerName: () => 'org.example',
+      getName: () => 'Org',
+      getDomain: () => 'org.example',
+      getStatus: () => 'active',
+      getAllowed: () => true
+    }
+  ]
+});
+
+test('listExternalOrganizations resolves with camelCase organizations', async () => {
+  const c = make('listExternalOrganizations', orgResponse());
+  const res = await c.listExternalOrganizations();
+  expect(res).toEqual({
+    code: 0,
+    serverName: 'example',
+    contact: 'allowlist',
+    realmMode: 'allowlist',
+    allowlist: ['bob@org.example'],
+    organizations: [
+      {
+        serverName: 'org.example',
+        name: 'Org',
+        domain: 'org.example',
+        status: 'active',
+        allowed: true
+      }
+    ],
+    message: 'SUCCESS'
+  });
+});
+
+test('listExternalOrganizations rejects with code and message', async () => {
+  const c = make('listExternalOrganizations', orgResponse(403));
+  await expect(c.listExternalOrganizations()).rejects.toEqual({
+    code: 403,
+    message: 'FAIL'
+  });
+});
+
+test('listExternalOrganizations grpc error rejects through handleError', async () => {
+  const c = make('listExternalOrganizations', null, {
+    code: 14,
+    message: 'down'
+  });
+  await expect(c.listExternalOrganizations()).rejects.toEqual({
+    code: 14,
+    message: 'down'
+  });
+});

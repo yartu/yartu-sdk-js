@@ -442,5 +442,66 @@ proto.yartu.YChatPromiseClient.prototype.startRoomMeeting =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.ListExternalOrganizationsRequest,
+ *   !proto.yartu.ListExternalOrganizationsResponse>}
+ */
+const methodDescriptor_YChat_listExternalOrganizations = new grpc.web.MethodDescriptor(
+  '/yartu.YChat/listExternalOrganizations',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.ListExternalOrganizationsRequest,
+  proto.yartu.ListExternalOrganizationsResponse,
+  /**
+   * @param {!proto.yartu.ListExternalOrganizationsRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.ListExternalOrganizationsResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.ListExternalOrganizationsRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ListExternalOrganizationsResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ListExternalOrganizationsResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YChatClient.prototype.listExternalOrganizations =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YChat/listExternalOrganizations',
+      request,
+      metadata || {},
+      methodDescriptor_YChat_listExternalOrganizations,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.ListExternalOrganizationsRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.ListExternalOrganizationsResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YChatPromiseClient.prototype.listExternalOrganizations =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YChat/listExternalOrganizations',
+      request,
+      metadata || {},
+      methodDescriptor_YChat_listExternalOrganizations);
+};
+
+
 module.exports = proto.yartu;
 
