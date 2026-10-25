@@ -503,5 +503,66 @@ proto.yartu.YChatPromiseClient.prototype.listExternalOrganizations =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.yartu.ResolveExternalChatUserRequest,
+ *   !proto.yartu.ResolveExternalChatUserResponse>}
+ */
+const methodDescriptor_YChat_resolveExternalChatUser = new grpc.web.MethodDescriptor(
+  '/yartu.YChat/resolveExternalChatUser',
+  grpc.web.MethodType.UNARY,
+  proto.yartu.ResolveExternalChatUserRequest,
+  proto.yartu.ResolveExternalChatUserResponse,
+  /**
+   * @param {!proto.yartu.ResolveExternalChatUserRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.yartu.ResolveExternalChatUserResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.yartu.ResolveExternalChatUserRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.yartu.ResolveExternalChatUserResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.yartu.ResolveExternalChatUserResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.yartu.YChatClient.prototype.resolveExternalChatUser =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/yartu.YChat/resolveExternalChatUser',
+      request,
+      metadata || {},
+      methodDescriptor_YChat_resolveExternalChatUser,
+      callback);
+};
+
+
+/**
+ * @param {!proto.yartu.ResolveExternalChatUserRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.yartu.ResolveExternalChatUserResponse>}
+ *     Promise that resolves to the response
+ */
+proto.yartu.YChatPromiseClient.prototype.resolveExternalChatUser =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/yartu.YChat/resolveExternalChatUser',
+      request,
+      metadata || {},
+      methodDescriptor_YChat_resolveExternalChatUser);
+};
+
+
 module.exports = proto.yartu;
 
