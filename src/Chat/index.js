@@ -5,7 +5,8 @@ import {
   GrantRoomReadAccessRequest,
   ResolveChatUserRequest,
   StartRoomMeetingRequest,
-  ListExternalOrganizationsRequest
+  ListExternalOrganizationsRequest,
+  ResolveExternalChatUserRequest
 } from './service-pb.cjs';
 
 import { YChatClient } from './service-grpc-web-pb.cjs';
@@ -177,6 +178,39 @@ export default (config) =>
                 resolve({
                   code: 0,
                   mxid: response.getMxid(),
+                  message: response.getMessage()
+                });
+              } else {
+                reject({
+                  code: code,
+                  message: response.getMessage()
+                });
+              }
+            }
+          }
+        );
+      });
+    }
+
+    resolveExternalChatUser(address) {
+      return new Promise((resolve, reject) => {
+        const request = new ResolveExternalChatUserRequest();
+        request.setAddress(address);
+
+        this.client.resolveExternalChatUser(
+          request,
+          this.metadata,
+          (error, response) => {
+            if (error) {
+              handleError(error, reject);
+            } else {
+              const code = response.getCode();
+              if (code == 0) {
+                resolve({
+                  code: 0,
+                  userId: response.getUserId(),
+                  displayName: response.getDisplayName(),
+                  unverified: response.getUnverified(),
                   message: response.getMessage()
                 });
               } else {

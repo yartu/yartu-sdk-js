@@ -24,6 +24,8 @@ const response = (code = 0) => ({
   getBotUserId: () => '@bot:example',
   getBotEnabled: () => true,
   getMxid: () => '@bob:example',
+  getDisplayName: () => 'Bob',
+  getUnverified: () => false,
   getUuid: () => 'uuid-1',
   getAdded: () => 2,
   getToken: () => 'jwt',
@@ -130,6 +132,23 @@ test('resolveChatUser rejects with code and message', async () => {
 test('resolveChatUser grpc error rejects through handleError', async () => {
   const c = make('resolveChatUser', null, { code: 14, message: 'down' });
   await expect(c.resolveChatUser('b')).rejects.toEqual({ code: 14, message: 'down' });
+});
+
+test('resolveExternalChatUser sets address and resolves identity', async () => {
+  const c = make('resolveExternalChatUser', response());
+  const res = await c.resolveExternalChatUser('bob@ext.test');
+  expect(c.client.resolveExternalChatUser.mock.calls[0][0].getAddress()).toBe('bob@ext.test');
+  expect(res).toEqual({ code: 0, userId: '@u:example', displayName: 'Bob', unverified: false, message: 'SUCCESS' });
+});
+
+test('resolveExternalChatUser rejects with code and message', async () => {
+  const c = make('resolveExternalChatUser', response(429));
+  await expect(c.resolveExternalChatUser('b@x')).rejects.toEqual({ code: 429, message: 'FAIL' });
+});
+
+test('resolveExternalChatUser grpc error rejects through handleError', async () => {
+  const c = make('resolveExternalChatUser', null, { code: 7, message: 'denied' });
+  await expect(c.resolveExternalChatUser('b@x')).rejects.toEqual({ code: 7, message: 'denied' });
 });
 
 test('startRoomMeeting sets room and title and resolves', async () => {
