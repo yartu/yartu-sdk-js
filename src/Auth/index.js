@@ -176,6 +176,7 @@ export default (config) =>
                 token: token,
                 two_fa_image: response.getTwoFaImage(),
                 otpProvider: response.getOtpProvider(),
+                otpPhoneMask: response.getOtpPhoneMask(),
                 latePaymentToken
               });
             } else if (code == code_AUTH_TWO_FA_NEEDED) {
